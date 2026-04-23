@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: 'Outfit', sans-serif;
+    --font-sans: 'Inter', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --background: oklch(0.99 0.01 240); /* Crisp white with a hint of blue */
+    --foreground: oklch(0.15 0.02 240); /* Deep charcoal/navy */
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.15 0.02 240);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.15 0.02 240);
+    --primary: oklch(0.55 0.18 200); /* Slightly deeper cyan for legibility on white */
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.94 0.01 240); /* Soft light grey-blue */
+    --secondary-foreground: oklch(0.15 0.02 240);
+    --muted: oklch(0.94 0.01 240);
+    --muted-foreground: oklch(0.45 0.02 240);
+    --accent: oklch(0.9 0.02 240);
+    --accent-foreground: oklch(0.15 0.02 240);
+    --destructive: oklch(0.5 0.2 25);
+    --border: oklch(0.88 0.01 240);
+    --input: oklch(0.88 0.01 240);
+    --ring: oklch(0.55 0.18 200);
+    --radius: 0.5rem;
+}
+
+.dark {
+    --background: oklch(0.08 0 0);
+    --foreground: oklch(0.95 0.01 240);
+    --card: oklch(0.12 0.01 240);
+    --card-foreground: oklch(0.95 0.01 240);
+    --popover: oklch(0.12 0.01 240);
+    --popover-foreground: oklch(0.95 0.01 240);
+    --primary: oklch(0.7 0.15 200);
+    --primary-foreground: oklch(0.08 0 0);
+    --secondary: oklch(0.18 0.02 240);
+    --secondary-foreground: oklch(0.95 0.01 240);
+    --muted: oklch(0.18 0.02 240);
+    --muted-foreground: oklch(0.6 0.02 240);
+    --accent: oklch(0.22 0.03 240);
+    --accent-foreground: oklch(0.95 0.01 240);
+    --destructive: oklch(0.4 0.2 25);
+    --border: oklch(0.2 0.02 240);
+    --input: oklch(0.2 0.02 240);
+    --ring: oklch(0.7 0.15 200);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground antialiased;
+    }
+  html {
+    @apply font-sans scroll-smooth;
+    }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+.noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  opacity: 0.03;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+}
+
+/* ── Ocean loading animation ───────────────────────────── */
+@keyframes wave-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes wave-scroll-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@keyframes ship-bob {
+  0%, 100% { transform: translateY(0px)   rotate(-2deg); }
+  50%       { transform: translateY(-14px) rotate(2deg);  }
+}
+@keyframes ship-enter {
+  from { opacity: 0; transform: translateY(30px) rotate(-2deg); }
+  to   { opacity: 1; transform: translateY(0px)  rotate(-2deg); }
+}
+@keyframes loader-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes wake-trail {
+  0%   { opacity: 0.6; transform: scaleX(0); }
+  60%  { opacity: 0.4; }
+  100% { opacity: 0;   transform: scaleX(1); }
+}
+
+.animate-wave        { animation: wave-scroll 6s linear infinite; will-change: transform; }
+.animate-wave-slow   { animation: wave-scroll-reverse 10s linear infinite; will-change: transform; }
+.animate-wave-fast   { animation: wave-scroll 4s linear infinite; will-change: transform; }
+.animate-ship-bob    { animation: ship-enter 0.8s ease-out forwards, ship-bob 3s ease-in-out 0.8s infinite; }
+.animate-loader-text { animation: loader-fade-in 0.6s ease-out 0.4s both; }
+
+/* ── Background blobs ──────────────────────────────────── */
+@keyframes blob-drift {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.15) rotate(45deg); }
+}
+@keyframes blob-drift-reverse {
+  0%, 100% { transform: scale(1.15) rotate(90deg); }
+  50% { transform: scale(1) rotate(45deg); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.animate-blob {
+  animation: blob-drift 20s linear infinite;
+  will-change: transform;
+}
+.animate-blob-reverse {
+  animation: blob-drift-reverse 25s linear infinite;
+  will-change: transform;
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 30s linear infinite;
+  will-change: transform;
+}

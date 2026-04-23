@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Ocean background -->
+  <circle cx="32" cy="32" r="32" fill="oklch(0.55 0.18 200)"/>
+
+  <!-- Ship hull -->
+  <path d="M12 40 L16 48 L48 48 L52 40 Z" fill="white"/>
+
+  <!-- Ship body / cabin -->
+  <rect x="22" y="30" width="20" height="12" rx="2" fill="white"/>
+
+  <!-- Porthole -->
+  <circle cx="28" cy="36" r="2.5" fill="none" stroke="oklch(0.55 0.18 200)" stroke-width="1.5"/>
+  <circle cx="36" cy="36" r="2.5" fill="none" stroke="oklch(0.55 0.18 200)" stroke-width="1.5"/>
+
+  <!-- Mast -->
+  <rect x="31" y="10" width="2" height="22" rx="1" fill="white"/>
+
+  <!-- Sail -->
+  <path d="M33 11 L46 28 L33 28 Z" fill="white" opacity="0.92"/>
+
+  <!-- Flag -->
+  <path d="M33 10 L40 14 L33 18 Z" fill="oklch(0.7 0.15 200)"/>
+
+  <!-- Ocean wave in front -->
+  <path d="M0 50 Q8 46 16 50 Q24 54 32 50 Q40 46 48 50 Q56 54 64 50 L64 64 L0 64 Z" fill="white" opacity="0.18"/>
+</svg>

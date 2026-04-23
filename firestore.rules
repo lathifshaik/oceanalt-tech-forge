@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Leads collection: Anyone can create (to allow bot to save leads), only admins can read
+    match /leads/{leadId} {
+      allow create: if true; // In a real app, you'd validate the data structure
+      allow read: if false; // Only accessible via Firebase Console or Admin SDK for now
+    }
+  }
+}

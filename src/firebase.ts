@@ -1,12 +1,33 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { initializeApp, type FirebaseApp } from 'firebase/app';
+import { getAuth, type Auth } from 'firebase/auth';
+import { getFirestore, collection, addDoc, serverTimestamp, type Firestore } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
-import firebaseConfig from '../firebase-applet-config.json';
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
-export const auth = getAuth(app);
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+};
+
+const firebaseEnabled = Boolean(firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.appId);
+
+let app: FirebaseApp | null = null;
+let _db: Firestore | null = null;
+let _auth: Auth | null = null;
+
+if (firebaseEnabled) {
+  app = initializeApp(firebaseConfig);
+  _db = getFirestore(app, process.env.FIREBASE_FIRESTORE_DATABASE_ID || '(default)');
+  _auth = getAuth(app);
+} else if (typeof window !== 'undefined') {
+  console.warn('[Oceanalt] Firebase env vars not set — lead capture will email-only. Copy .env.example to .env and fill in FIREBASE_* values to enable Firestore writes.');
+}
+
+export const db = _db;
+export const auth = _auth;
 
 export interface LeadData {
   name?: string;
@@ -45,11 +66,12 @@ const sendEmailNotification = async (lead: LeadData) => {
 
 export const saveLead = async (lead: LeadData) => {
   try {
-    await addDoc(collection(db, 'leads'), {
-      ...lead,
-      timestamp: serverTimestamp(),
-    });
-    // Fire-and-forget — don't let email failure block the UX
+    if (_db) {
+      await addDoc(collection(_db, 'leads'), {
+        ...lead,
+        timestamp: serverTimestamp(),
+      });
+    }
     sendEmailNotification(lead).catch(() => {});
   } catch (error) {
     console.error('Error saving lead:', error);

@@ -9,7 +9,7 @@ How the firm runs day to day. Each stage names the agent in `.claude/agents/` th
 | 1. Lead in (form, chatbot, outreach) | `growth` | Lead in Firestore `leads` + inbox email | — |
 | 2. Qualify + plan fit | `client-success` | Reply within 24 h: recommended plan, what's included, 15-min call link | 24 h |
 | 3. Brief + content | `client-success` | `clients/<slug>/BRIEF.md` and `clients/<slug>/site.json` (copied from the closest `templates/*/example.json`); we write the copy | Day 0, same day as the call |
-| 4. Preview | `designer` | Built site on a private preview URL. Template adjusted to the brief: photos, accent, layout order | Within 24 h |
+| 4. Preview | `designer` | Built site on a private preview URL. The designer picks the layout, theme, hero and accent for this client (the builder refuses a combination another client has), then places photos and orders sections around what customers do first | Within 24 h |
 | 5. Approval → first charge | `client-success` | Client approves; Stripe trial ends or is ended early | — |
 | 6. Finish | `engineer` | One round of changes; payments via the client's own Stripe; bookings if Grow | Day 1–2 |
 | 7. QA | `qa` | Checklist below passes; screenshots at 390 px and 1440 px | 1 day |
@@ -46,7 +46,7 @@ Every client build and every change to this marketing site uses the installed sk
 - `design-references` for a concrete starting token set (20 DESIGN.md breakdowns: Stripe, Airbnb, Notion, Wise…). Borrow the system, never the brand.
 - `react-best-practices` (Vercel) when writing or reviewing React code
 
-Starting points: the three templates in `templates/` (`cafe`, `trades`, `studio`). See `templates/README.md` for the build command and the 1–3 day checklist. Never ship one unchanged: each client gets their own photos, words and accent colour, and sections are reordered to fit what their customers need to do first. Real photography is non-negotiable. A template without real photos looks AI-made.
+Starting points: three layouts (`cafe`, `trades`, `studio`) × seven themes × two hero styles, plus the client's own accent colour (see `templates/README.md`). We sell this as **custom design**, and it is: each client's combination is unique and enforced by the builder. See `templates/README.md` for the build command and the 1–3 day checklist. Never ship one unchanged: each client gets their own photos, words and accent colour, and sections are reordered to fit what their customers need to do first. Real photography is non-negotiable. A template without real photos looks AI-made.
 
 ## QA checklist (blocks launch)
 

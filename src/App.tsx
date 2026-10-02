@@ -9,32 +9,52 @@ const EMAIL = "hello@oceanalt.com.au";
 
 type TemplateId = "cafe" | "trades" | "studio";
 
-const WORK: { id: TemplateId; name: string; slug: string; sample: string; pitch: string; for: string }[] = [
+// Each example business shown in three of its designs. Paths match the
+// showcase list in templates/<template>/meta.json (built by `npm run templates`).
+const WORK: {
+  id: TemplateId;
+  kind: string;
+  business: string;
+  pitch: string;
+  designs: { path: string; theme: string }[];
+}[] = [
   {
     id: "cafe",
-    name: "Café",
-    slug: "little-tern-coffee",
-    sample: "Little Tern Coffee, Fremantle",
-    pitch: "Menu, opening hours and directions up front. The sign on the photo flips to OPEN or CLOSED from your real hours.",
-    for: "Cafés, bakeries, small restaurants and bars",
+    kind: "Café",
+    business: "Little Tern Coffee, Fremantle",
+    pitch: "Menu, hours and directions first. The sign on the photo flips to OPEN or CLOSED from the real opening hours.",
+    designs: [
+      { path: "little-tern-coffee", theme: "Harbour" },
+      { path: "little-tern-coffee-night", theme: "Night" },
+      { path: "little-tern-coffee-sun", theme: "Sun" },
+    ],
   },
   {
     id: "trades",
-    name: "Trades",
-    slug: "kerr-and-sons-electrical",
-    sample: "Kerr & Sons Electrical, Newcastle",
-    pitch: "Built to make the phone ring: tap-to-call everywhere, your licence front and centre, and a quote form.",
-    for: "Electricians, plumbers, builders and cleaners",
+    kind: "Electrician",
+    business: "Kerr & Sons Electrical, Newcastle",
+    pitch: "Built to make the phone ring: tap-to-call everywhere, the licence front and centre, and a quote form.",
+    designs: [
+      { path: "kerr-and-sons-electrical", theme: "Coast" },
+      { path: "kerr-and-sons-electrical-ink", theme: "Ink" },
+      { path: "kerr-and-sons-electrical-sun", theme: "Sun" },
+    ],
   },
   {
     id: "studio",
-    name: "Studio",
-    slug: "tidewater-physio-pilates",
-    sample: "Tidewater Physio & Pilates, Bulimba",
-    pitch: "Every treatment has a price and a Book button. Gift vouchers sell themselves, paid straight into your Stripe.",
-    for: "Salons, clinics, physio, Pilates and coaches",
+    kind: "Physio & Pilates",
+    business: "Tidewater Physio & Pilates, Bulimba",
+    pitch: "Every treatment has a price and a Book button. Gift vouchers flip over to show their terms and sell themselves.",
+    designs: [
+      { path: "tidewater-physio-pilates", theme: "Calm" },
+      { path: "tidewater-physio-pilates-ink", theme: "Ink" },
+      { path: "tidewater-physio-pilates-forest", theme: "Forest" },
+    ],
   },
 ];
+
+// Three different designs for the hero stack, to show the range at a glance.
+const STACK = ["little-tern-coffee", "kerr-and-sons-electrical-ink", "tidewater-physio-pilates-forest"];
 
 const PLANS = [
   {
@@ -53,7 +73,7 @@ const PLANS = [
     term: "$0 upfront · 12-month minimum",
     desc: "A custom website for a local business, designed, built, hosted and kept up to date.",
     features: [
-      "Up to 5 pages on your choice of template",
+      "Custom design, up to 5 pages",
       "We write the words; you send photos",
       "Domain, hosting and SSL",
       "Contact or quote form to your inbox",
@@ -91,15 +111,15 @@ const PROMISES: { icon: IconName; title: string; body: string }[] = [
 const FAQ: { q: string; a: string }[] = [
   {
     q: "How can it be live in 1 to 3 days?",
-    a: "We start from one of our templates instead of a blank page, and we write the words ourselves after a 15-minute call. That removes the two things that usually take weeks: designing from scratch and waiting on copy. Google Business Profile and Stripe verification are run by Google and Stripe, so those can take a little longer.",
+    a: "We don't start from a blank page. We've built our own library of layouts, design directions and components, so your design is assembled and tailored rather than drawn from nothing. We also write the words ourselves after a 15-minute call, which removes the usual weeks of waiting on copy. Google Business Profile and Stripe verification are run by Google and Stripe, so those can take a little longer.",
   },
   {
     q: "What do I need to give you?",
     a: "Fifteen minutes on the phone, your logo if you have one, a few photos, your prices and hours, and access to your domain if you already own one. No photos? We'll use your Google Business photos or source licensed ones that look local.",
   },
   {
-    q: "Will my site look like everyone else's?",
-    a: "No. The template is the structure. Your photos, words, colours and logo go on top, and the layout is adjusted to what your customers need to do first.",
+    q: "Will my site look like anyone else's?",
+    a: "No. Every site gets its own design: colours, type, layout and photography chosen for your business and your customers. We keep a register of every design we've shipped, and our build tools refuse to make a second site with the same look.",
   },
   {
     q: "How do changes work?",
@@ -184,13 +204,13 @@ function Stack() {
   return (
     <div className="stack" ref={ref}>
       <div className="stack-inner">
-        {WORK.map((w) => (
-          <a key={w.id} className="frame" href={`/work/${w.slug}/`} target="_blank" rel="noopener" aria-label={`Open the ${w.name} example`}>
+        {STACK.map((path) => (
+          <a key={path} className="frame" href={`/work/${path}/`} target="_blank" rel="noopener" aria-label="Open this example site">
             <div className="frame-bar" aria-hidden="true">
               <span /><span /><span />
-              <em>{w.slug.replace(/-/g, "")}.com.au</em>
+              <em>{path.split("-").slice(0, -1).join("") || path}.com.au</em>
             </div>
-            <img src={`/previews/${w.slug}.webp`} alt="" width={1200} height={750} />
+            <img src={`/previews/${path}.webp`} alt="" width={1200} height={750} />
           </a>
         ))}
       </div>
@@ -204,7 +224,7 @@ function Hero() {
       <div className="wrap">
         <div>
           <h1>Your website, done for you.</h1>
-          <p>We design, build and look after it for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
+          <p>Custom-designed for your business, then built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
           <div className="ctas">
             <a className="btn btn-accent" href="#start">Start my website <Icon name="arrow-right" /></a>
             <a className="btn btn-line" href="#work">See our work</a>
@@ -218,8 +238,8 @@ function Hero() {
 
 function Facts() {
   const facts: { icon: IconName; text: string }[] = [
-    { icon: "tag", text: "From $99 a month" },
-    { icon: "card", text: "$0 upfront" },
+    { icon: "sparkle", text: "Custom design, never reused" },
+    { icon: "tag", text: "From $99 a month, $0 upfront" },
     { icon: "bolt", text: "Live in 1 to 3 days" },
     { icon: "home", text: "Yours to keep after 12 months" },
   ];
@@ -234,31 +254,44 @@ function Facts() {
   );
 }
 
+function WorkCard({ w, onPick }: { w: (typeof WORK)[number]; onPick: (t: TemplateId) => void }) {
+  const [i, setI] = useState(0);
+  const d = w.designs[i];
+  return (
+    <article className="work">
+      <a className="work-img" href={`/work/${d.path}/`} target="_blank" rel="noopener" aria-label={`Open ${w.business} in the ${d.theme} design`}>
+        {w.designs.map((x, j) => (
+          <img key={x.path} src={`/previews/${x.path}.webp`} alt={j === i ? `${w.business}, ${x.theme} design` : ""} width={1200} height={750} loading="lazy" className={j === i ? "is-on" : ""} />
+        ))}
+      </a>
+      <div className="work-body">
+        <span className="sample">{w.kind}</span>
+        <h3>{w.business}</h3>
+        <p>{w.pitch}</p>
+        <div className="designs" role="group" aria-label="Designs">
+          {w.designs.map((x, j) => (
+            <button key={x.path} type="button" aria-pressed={j === i} onClick={() => setI(j)}>{x.theme}</button>
+          ))}
+        </div>
+        <div className="work-actions">
+          <a className="btn btn-line" href={`/work/${d.path}/`} target="_blank" rel="noopener">Open live site <Icon name="arrow-up-right" /></a>
+          <button className="btn btn-primary" type="button" onClick={() => onPick(w.id)}>Start a site like this</button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
   return (
     <section id="work">
       <div className="wrap">
-        <h2 className="h2">Pick a starting point</h2>
-        <p className="lede">Three templates built around how small businesses actually get customers. Yours gets your photos, words and colours, so no two sites look the same.</p>
+        <h2 className="h2">Designed for one business. Never reused.</h2>
+        <p className="lede">Every site gets its own colours, type, layout and photography. To show the range, here are three businesses, each in three different designs. Switch between them.</p>
         <div className="work-grid">
-          {WORK.map((w) => (
-            <article className="work" key={w.id}>
-              <a className="work-img" href={`/work/${w.slug}/`} target="_blank" rel="noopener" aria-label={`Open the live ${w.name} example`}>
-                <img src={`/previews/${w.slug}.webp`} alt={`${w.name} template, shown as ${w.sample}`} width={1200} height={750} loading="lazy" />
-              </a>
-              <div className="work-body">
-                <h3>{w.name}</h3>
-                <span className="sample">{w.for}</span>
-                <p>{w.pitch}</p>
-                <div className="work-actions">
-                  <a className="btn btn-line" href={`/work/${w.slug}/`} target="_blank" rel="noopener">Live example <Icon name="arrow-up-right" /></a>
-                  <button className="btn btn-primary" type="button" onClick={() => onPick(w.id)}>Start with {w.name}</button>
-                </div>
-              </div>
-            </article>
-          ))}
+          {WORK.map((w) => <WorkCard key={w.id} w={w} onPick={onPick} />)}
         </div>
-        <p className="work-note">The examples are sample businesses we made to show each template. Names and reviews are fictional.</p>
+        <p className="work-note">These are sample businesses we made to show the range; names and reviews are fictional. A real client's design is made for them and never given to anyone else.</p>
       </div>
     </section>
   );
@@ -267,7 +300,7 @@ function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
 function How() {
   const steps: { when: string; icon: IconName; title: string; body: string }[] = [
     { when: "Day 0", icon: "chat", title: "Tell us about your business", body: "A 15-minute call or the form below. Send photos if you have them. We write the words." },
-    { when: "Within 24 hours", icon: "eye", title: "See your site", body: "A private preview link to check on your phone. Ask for changes, and nothing is charged until you're happy." },
+    { when: "Within 24 hours", icon: "eye", title: "See your design", body: "A private preview link to check on your phone. Ask for changes, and nothing is charged until you're happy." },
     { when: "Day 1 to 3", icon: "send", title: "Go live, then we look after it", body: "We connect your domain, Google profile and payments. After that, just email us when something needs changing." },
   ];
   return (
@@ -391,7 +424,7 @@ function Faq() {
   );
 }
 
-const TEMPLATE_LABEL: Record<string, string> = { cafe: "Café", trades: "Trades", studio: "Studio", unsure: "Not sure yet" };
+const TEMPLATE_LABEL: Record<string, string> = { cafe: "Café, restaurant or bar", trades: "Trade or home service", studio: "Appointments (salon, clinic, studio)", unsure: "Something else" };
 const PLAN_LABEL: Record<string, string> = {
   launch: "Launch ($99/month)",
   grow: "Grow ($149/month)",
@@ -459,7 +492,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
             </div>
             <div className="row">
               <div className="field">
-                <label htmlFor="f-template">Template</label>
+                <label htmlFor="f-template">Type of business</label>
                 <select id="f-template" value={template} onChange={(e) => setTemplate(e.target.value)}>
                   {Object.entries(TEMPLATE_LABEL).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
                 </select>

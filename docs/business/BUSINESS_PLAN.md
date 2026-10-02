@@ -39,7 +39,7 @@ Small business owners tell us what they want, and we design, build, host and kee
 
 The research is consistent: what delays web projects is **waiting on the client's content**, not the build ([Forefront](https://forefrontweb.com/why-projects-stall-and-how-to-fix-them/), [Marketeam](https://marketeam.com.au/website-design/how-long-does-a-website-take-to-build)). Local competitors already ship simple sites in about 3 business days ([Between Coffees, Melbourne](https://betweencoffees.com/quick-websites)). So the promise holds if we remove the content dependency:
 
-1. **Three templates, not a blank page.** Café, Trades and Studio cover how most small businesses get customers: walk-ins, phone calls and bookings. Each client site is one `site.json` file rendered to a ~25 KB static page (`templates/README.md`).
+1. **A design system, not a blank page.** Three layouts (café, trades, studio) cover how most small businesses get customers: walk-ins, phone calls and bookings. Seven themes and two hero styles, plus each client's own accent colour, give every client a design no other client has; the builder enforces that. We sell it as custom design because it is custom design: assembled from our own parts instead of drawn from nothing. Each site is one `site.json` file rendered to a ~25 KB static page (`templates/README.md`).
 2. **We write the copy** from a 15-minute call, the client's Google Business Profile and their reviews.
 3. **Photos:** the client's own, their Google Business photos, or licensed Unsplash/Pexels as a last resort.
 4. **Excluded from the clock, and stated in the Terms:** Google Business Profile verification, Stripe account verification and domain transfers, because Google, Stripe and registrars control those.

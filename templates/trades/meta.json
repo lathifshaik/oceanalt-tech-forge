@@ -1,9 +1,6 @@
 {
   "name": "Trades",
   "for": "Plumbers, electricians, builders, cleaners, landscapers, mobile services",
-  "fonts": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
-  "themeColor": "#ffc21a",
-  "themeColorInk": "#0f1f33",
   "required": [
     "business.name",
     "business.headline",
@@ -12,5 +9,24 @@
     "hero.photo",
     "services",
     "areas"
+  ],
+  "defaultTheme": "coast",
+  "heroVariants": [
+    "split",
+    "full"
+  ],
+  "showcase": [
+    {
+      "theme": "coast",
+      "hero": "split"
+    },
+    {
+      "theme": "ink",
+      "hero": "full"
+    },
+    {
+      "theme": "sun",
+      "hero": "split"
+    }
   ]
 }

@@ -11,13 +11,14 @@
 // client-side framework: the output is one HTML file that scores well on
 // Lighthouse and costs nothing to host.
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const FX_JS = readFileSync(join(ROOT, "engine", "fx.js"), "utf8");
 const BASE_CSS = readFileSync(join(ROOT, "engine", "base.css"), "utf8");
+const THEMES = JSON.parse(readFileSync(join(ROOT, "themes", "themes.json"), "utf8"));
 const ICONS = JSON.parse(readFileSync(join(ROOT, "icons", "icons.json"), "utf8"));
 
 // ── Mustache subset ─────────────────────────────────────────────────────────
@@ -180,10 +181,48 @@ function validate(site, meta, file) {
   }
 }
 
+// ── Design: theme + hero variant + per-client accent ────────────────────────
+// site.design = { theme, hero, accent, accentDark }. Each theme is a full design
+// direction (palette for light and dark, type pairing, shape). Templates only
+// read the CSS custom properties written here, so any theme fits any template.
+
+export function resolveDesign(site, meta, sourceLabel = "site.json") {
+  const d = site.design || {};
+  const design = {
+    theme: d.theme || meta.defaultTheme,
+    hero: d.hero || meta.heroVariants[0],
+    accent: d.accent || null,
+    accentDark: d.accentDark || null,
+  };
+  const theme = THEMES[design.theme];
+  if (!theme) throw new Error(`${sourceLabel}: unknown theme "${design.theme}". Use one of: ${Object.keys(THEMES).join(", ")}.`);
+  if (!meta.heroVariants.includes(design.hero)) {
+    throw new Error(`${sourceLabel}: the ${site.template} template has hero variants ${meta.heroVariants.join(", ")}, not "${design.hero}".`);
+  }
+  const vars = (tokens, accentOverride) => {
+    const t = { ...tokens };
+    if (!t["accent-text"]) t["accent-text"] = t.accent;
+    if (accentOverride) { t.accent = accentOverride; t["accent-text"] = accentOverride; }
+    return Object.entries(t).map(([k, v]) => `--${k}:${v};`).join("");
+  };
+  const shape = `--r:${theme.shape.r};--r-img:${theme.shape.img};--r-btn:${theme.shape.btn};`;
+  const type = `--font-display:${theme.type.display},ui-sans-serif,system-ui,sans-serif;--font-body:${theme.type.body},ui-sans-serif,system-ui,sans-serif;--display-weight:${theme.type.weight};--display-tracking:${theme.type.tracking};`;
+  let themeCss = `:root{${vars(theme.light, design.accent)}${shape}${type}${theme.darkOnly ? "color-scheme:dark;" : ""}}`;
+  if (theme.dark) {
+    themeCss += `@media (prefers-color-scheme:dark){:root{${vars(theme.dark, design.accentDark || design.accent)}color-scheme:dark}}`;
+  }
+  const accent = design.accent || theme.light.accent;
+  return { design, themeCss, accent, onAccent: theme.light["on-accent"], fonts: theme.fonts };
+}
+
+// What makes a site look like itself. Two clients may never share one.
+export const fingerprint = (site, design) =>
+  [site.template, design.theme, design.hero, (design.accent || "theme-accent").toLowerCase()].join(" / ");
+
 export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   const tdir = join(ROOT, site.template || "");
   if (!site.template || !existsSync(join(tdir, "template.html"))) {
-    throw new Error(`${sourceLabel}: unknown template "${site.template}". Use one of: cafe, trades, coach, studio, shop.`);
+    throw new Error(`${sourceLabel}: unknown template "${site.template}". Use one of: cafe, trades, studio.`);
   }
   const meta = JSON.parse(readFileSync(join(tdir, "meta.json"), "utf8"));
   validate(site, meta, sourceLabel);
@@ -191,13 +230,7 @@ export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   const data = enrich(site);
   const body = render(readFileSync(join(tdir, "template.html"), "utf8"), data);
   const url = site.url || "https://example.com/";
-  const theme = site.theme || {};
-  const overrides = Object.entries(theme)
-    .filter(([k]) => !k.endsWith("Dark"))
-    .map(([k, v]) => `--${k}:${v};`).join("");
-  const darkOverrides = Object.entries(theme)
-    .filter(([k]) => k.endsWith("Dark"))
-    .map(([k, v]) => `--${k.slice(0, -4)}:${v};`).join("");
+  const { design, themeCss, accent, onAccent, fonts } = resolveDesign(site, meta, sourceLabel);
   const seo = site.seo || {};
   const title = seo.title || `${site.business.name} | ${site.business.tagline || ""}`.trim();
   const desc = seo.description || site.business.tagline || "";
@@ -215,23 +248,41 @@ export function buildSite(site, { sourceLabel = "site.json" } = {}) {
 <meta property="og:description" content="${escapeHtml(desc)}">
 <meta property="og:url" content="${escapeHtml(url)}">
 ${seo.image ? `<meta property="og:image" content="${escapeHtml(seo.image)}">` : ""}
-<meta name="theme-color" content="${escapeHtml(theme.accent || meta.themeColor)}">
-<link rel="icon" href="${favicon(data.business.initials, theme.accent || meta.themeColor, meta.themeColorInk || "#fff")}">
+<meta name="theme-color" content="${escapeHtml(accent)}">
+<link rel="icon" href="${favicon(data.business.initials, accent, onAccent)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="${meta.fonts}">
+<link rel="stylesheet" href="${fonts}">
+<style>${themeCss}</style>
 <style>${BASE_CSS}</style>
 <script type="application/ld+json">${jsonLd(site, url)}</script>
 </head>
-<body>
+<body class="theme-${design.theme} hero-${design.hero}">
 <a class="skip" href="#main">Skip to content</a>
 ${body}
-${overrides || darkOverrides ? `<style>:root{${overrides}}${darkOverrides ? `@media (prefers-color-scheme: dark){:root{${darkOverrides}}}` : ""}</style>` : ""}
 <script>${FX_JS}</script>
 </body>
 </html>
 `;
-  return { html, url };
+  return { html, url, design };
+}
+
+// No two client sites look the same: every site.json under clients/ must have a
+// unique fingerprint. Change the theme, hero or accent to resolve a clash.
+function checkUnique(file, site, design) {
+  const clientsDir = resolve(ROOT, "..", "clients");
+  const self = resolve(file);
+  if (!self.startsWith(clientsDir) || !existsSync(clientsDir)) return;
+  const mine = fingerprint(site, design);
+  for (const entry of readdirSync(clientsDir, { withFileTypes: true })) {
+    const other = join(clientsDir, entry.name, "site.json");
+    if (!entry.isDirectory() || !existsSync(other) || resolve(other) === self) continue;
+    const o = JSON.parse(readFileSync(other, "utf8"));
+    const meta = JSON.parse(readFileSync(join(ROOT, o.template, "meta.json"), "utf8"));
+    if (fingerprint(o, resolveDesign(o, meta, other).design) === mine) {
+      throw new Error(`${file} looks the same as clients/${entry.name} (${mine}).\nNo two client sites share a design: change design.theme, design.hero or design.accent.`);
+    }
+  }
 }
 
 function main() {
@@ -245,7 +296,8 @@ function main() {
   const outRoot = outIdx >= 0 ? args[outIdx + 1] : "dist-sites";
   const site = JSON.parse(readFileSync(file, "utf8"));
   const slug = site.slug || site.business.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  const { html, url } = buildSite(site, { sourceLabel: file });
+  const { html, url, design } = buildSite(site, { sourceLabel: file });
+  checkUnique(file, site, design);
   const dir = join(outRoot, slug);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, "index.html"), html);

@@ -1,8 +1,6 @@
 {
   "name": "Caf\u00e9",
   "for": "Caf\u00e9s, bakeries, small restaurants, bars",
-  "fonts": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap",
-  "themeColor": "#c2452d",
   "required": [
     "business.name",
     "business.headline",
@@ -12,5 +10,24 @@
     "business.hours",
     "hero.photo",
     "menu"
+  ],
+  "defaultTheme": "harbour",
+  "heroVariants": [
+    "full",
+    "split"
+  ],
+  "showcase": [
+    {
+      "theme": "harbour",
+      "hero": "full"
+    },
+    {
+      "theme": "night",
+      "hero": "split"
+    },
+    {
+      "theme": "sun",
+      "hero": "split"
+    }
   ]
 }

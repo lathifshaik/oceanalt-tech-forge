@@ -3,22 +3,14 @@
    it in a glass pill and a curved hand-off into the page, practitioner intro,
    treatments with times and prices that each link to booking, a 3D gift
    voucher that flips to show its terms, team, policies, hours. One light
-   typeface at large sizes; deep teal accent on cool stone. */
-:root{
-  --bg:#f5f6f4; --surface:#ebeeeb; --card:#ffffff; --ink:#1c2422; --muted:#5b6662; --line:#dde2de;
-  --accent:#2f6f6a; --on-accent:#fff;
-  --font-display:"Outfit",ui-sans-serif,system-ui,sans-serif;
-  --font-body:"Outfit",ui-sans-serif,system-ui,sans-serif;
-}
-@media (prefers-color-scheme:dark){:root{
-  --bg:#111514; --surface:#181e1c; --card:#1d2422; --ink:#e7ece9; --muted:#9daaa5; --line:#28312e;
-  --accent:#7cc2b9; --on-accent:#0b1715; color-scheme:dark}}
+   typeface at large sizes. Colours, type and shape come from the theme
+   (templates/themes); hero is "full" or "split". */
 body{font-weight:400}
-h1,h2,h3{font-weight:300;letter-spacing:-.035em}
+h1,h2,h3{font-weight:var(--display-weight);letter-spacing:var(--display-tracking)}
 
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.4rem;border-radius:999px;font-weight:500;text-decoration:none;white-space:nowrap;border:0;font:inherit;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.4rem;border-radius:var(--r-btn);font-weight:500;text-decoration:none;white-space:nowrap;border:0;font:inherit;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}
 .btn:active{transform:translateY(1px)}
-.btn-accent{background:var(--accent);color:var(--on-accent)} .btn-accent:hover{background:color-mix(in srgb,var(--accent) 86%,#000)}
+.btn-accent{background:var(--accent);color:var(--on-accent)} .btn-accent:hover{filter:brightness(.94)}
 .btn-light{background:#fff;color:#1c2422}
 .btn-line{border:1px solid var(--line);color:var(--ink);background:transparent} .btn-line:hover{border-color:var(--ink)}
 
@@ -33,7 +25,7 @@ h1,h2,h3{font-weight:300;letter-spacing:-.035em}
 
 .top{position:absolute;inset:1rem 0 auto 0;z-index:5}
 .top .wrap{display:flex;align-items:center;gap:1rem;height:4rem;padding-inline:1rem 0.5rem;border-radius:999px;background:rgb(255 255 255 / .12);border:1px solid rgb(255 255 255 / .25);backdrop-filter:blur(14px);color:#fff}
-.brand{text-decoration:none;font-weight:500;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.5rem}
+.brand{text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.5rem}
 .brand .i{width:1.4rem;height:1.4rem}
 .nav{display:flex;gap:1.6rem;margin-left:auto;font-size:.98rem}
 .nav a{text-decoration:none;opacity:.88} .nav a:hover{opacity:1}
@@ -54,14 +46,14 @@ section{padding-block:clamp(4rem,9vw,7rem)}
 
 .treat{background:var(--surface)}
 .groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:3rem}
-.group{background:var(--card);border-radius:24px;padding:clamp(1.4rem,3vw,2.2rem)}
+.group{background:var(--card);border-radius:var(--r);padding:clamp(1.4rem,3vw,2.2rem)}
 .group h3{font-size:1.6rem;margin-bottom:.5rem}
 .tx{display:grid;grid-template-columns:1fr auto;gap:.2rem 1rem;align-items:center;padding-block:1rem}
 .tx+.tx{border-top:1px solid var(--line)}
 .tx b{font-weight:500;font-size:1.08rem}
 .tx .meta{color:var(--muted);font-size:.95rem}
 .tx .price{font-weight:500;font-size:1.08rem;text-align:right}
-.tx a{grid-column:2;grid-row:2;justify-self:end;font-size:.9rem;font-weight:500;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem}
+.tx a{grid-column:2;grid-row:2;justify-self:end;font-size:.9rem;font-weight:500;color:var(--accent-text);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem}
 .tx a:hover{text-decoration:underline}
 .tx a .i{width:1rem;height:1rem}
 @media (max-width:860px){.groups{grid-template-columns:1fr}}
@@ -76,47 +68,63 @@ section{padding-block:clamp(4rem,9vw,7rem)}
 .voucher.is-flipped .voucher-inner{transform:rotateY(180deg)}
 .v-face{position:absolute;inset:0;border-radius:22px;padding:1.5rem;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;
   box-shadow:0 40px 60px -30px rgb(10 30 28 / .55)}
-.v-front{background:linear-gradient(140deg,#2f6f6a 0%,#1f4e4a 60%,#163a37 100%);color:#f2f7f5}
+.v-front{background:linear-gradient(140deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 70%,#000) 60%,color-mix(in srgb,var(--accent) 50%,#000) 100%);color:var(--on-accent)}
 .v-front::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--gx,25%) var(--gy,15%),rgb(255 255 255 / .35),transparent 45%);mix-blend-mode:soft-light}
 .v-front::before{content:"";position:absolute;right:-3rem;top:-3rem;width:11rem;height:11rem;border-radius:50%;border:1px solid rgb(255 255 255 / .2);box-shadow:0 0 0 1.5rem rgb(255 255 255 / .04),0 0 0 3rem rgb(255 255 255 / .03)}
 .v-front .v-name{font-size:1.15rem;font-weight:500;display:flex;align-items:center;gap:.5rem}
 .v-front .v-name .i{width:1.3rem;height:1.3rem}
-.v-front .v-amt{margin-top:auto;font-size:3.2rem;font-weight:300;letter-spacing:-.04em;line-height:1}
+.v-front .v-amt{margin-top:auto;font-family:var(--font-display);font-size:3.2rem;font-weight:var(--display-weight);letter-spacing:-.04em;line-height:1}
 .v-front .v-label{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:.4rem}
 .v-back{background:var(--card);color:var(--ink);transform:rotateY(180deg);border:1px solid var(--line);font-size:.95rem;gap:.5rem}
 .v-back b{font-weight:500;font-size:1.05rem}
 .v-back ul{display:grid;gap:.35rem;color:var(--muted)}
-.v-back li{display:flex;gap:.45rem;align-items:flex-start} .v-back li .i{width:1.05rem;height:1.05rem;color:var(--accent);margin-top:.2rem}
+.v-back li{display:flex;gap:.45rem;align-items:flex-start} .v-back li .i{width:1.05rem;height:1.05rem;color:var(--accent-text);margin-top:.2rem}
 @keyframes float{0%,100%{translate:0 0}50%{translate:0 -10px}}
 @media (max-width:860px){.gift .wrap{grid-template-columns:1fr}}
 
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem;margin-top:3rem}
-.member .ph{border-radius:22px;overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
+.member .ph{border-radius:var(--r-img);overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
 .member .ph img{width:100%;height:100%;object-fit:cover}
-.member h3{font-size:1.35rem;margin-top:1rem;font-weight:400}
+.member h3{font-size:1.35rem;margin-top:1rem}
 .member p{color:var(--muted);font-size:.98rem}
 
 .info{background:var(--surface)}
 .info .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
-.addr{font-size:1.5rem;font-weight:300;letter-spacing:-.02em;margin-top:1rem;max-width:22ch;line-height:1.3}
+.addr{font-family:var(--font-display);font-size:1.5rem;font-weight:var(--display-weight);letter-spacing:var(--display-tracking);margin-top:1rem;max-width:22ch;line-height:1.3}
 .contact{display:grid;gap:.6rem;margin-top:1.5rem}
 .contact a{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;width:fit-content}
-.contact a:hover{color:var(--accent)}
+.contact a:hover{color:var(--accent-text)}
 .hours{display:grid;gap:.1rem;margin-top:1.75rem}
 .hours li{display:flex;justify-content:space-between;padding:.6rem .85rem;border-radius:12px}
 .hours li.is-today{background:var(--card);font-weight:500}
 .policies{display:grid;gap:.9rem;align-content:start}
-.policies details{background:var(--card);border-radius:18px;padding:1.1rem 1.3rem}
+.policies details{background:var(--card);border-radius:var(--r);padding:1.1rem 1.3rem}
 .policies summary{cursor:pointer;font-weight:500;font-size:1.08rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
 .policies summary::-webkit-details-marker{display:none}
-.policies summary::after{content:"+";font-weight:300;font-size:1.4rem;line-height:1;color:var(--accent);transition:rotate .2s}
+.policies summary::after{content:"+";font-weight:300;font-size:1.4rem;line-height:1;color:var(--accent-text);transition:rotate .2s}
 .policies details[open] summary::after{rotate:45deg}
 .policies p{color:var(--muted);margin-top:.6rem}
 @media (max-width:860px){.info .wrap{grid-template-columns:1fr}}
 
-.cta-band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;padding:clamp(2rem,5vw,3.5rem);border-radius:28px;background:var(--accent);color:var(--on-accent)}
+.cta-band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;padding:clamp(2rem,5vw,3.5rem);border-radius:var(--r);background:var(--accent);color:var(--on-accent)}
 .cta-band h2{font-size:clamp(1.8rem,3.6vw,2.6rem);max-width:18ch}
 .cta-band .btn{background:var(--on-accent);color:var(--accent)}
+
+/* Hero variant: split. Text on the page colour, photo on the right. */
+.hero-split .top .wrap{background:color-mix(in srgb,var(--card) 82%,transparent);border-color:var(--line);color:var(--ink)}
+.hero-split .top .btn-light{background:var(--ink);color:var(--bg)}
+.hero-split .hero{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(560px,86vh,800px);align-items:stretch;background:var(--bg);color:var(--ink)}
+.hero-split .hero::after,.hero-split .curve{display:none}
+.hero-split .hero-img{position:relative;grid-area:1/2;height:100%;border-radius:0 0 0 var(--r-img)}
+.hero-split .hero .wrap{grid-area:1/1;width:auto;margin:0;align-self:center;padding:7rem clamp(1.25rem,5vw,4rem) 4rem max(1.25rem,calc((100vw - 72rem) / 2))}
+.hero-split .hero h1{font-size:clamp(2.3rem,4.4vw,3.9rem);max-width:15ch}
+.hero-split .hero p{opacity:1;color:var(--muted)}
+.hero-split .hero .btn-light{background:transparent;color:var(--ink);border:1px solid var(--line)}
+@media (max-width:860px){
+  .hero-split .hero{grid-template-columns:1fr}
+  .hero-split .hero-img{grid-area:2/1;height:auto;aspect-ratio:4/3;border-radius:0}
+  .hero-split .hero .wrap{padding:7rem 1.25rem 2.5rem}
+}
 
 footer{padding-block:2.5rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between}

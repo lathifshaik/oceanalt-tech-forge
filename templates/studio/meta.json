@@ -1,7 +1,32 @@
 {
   "name": "Studio",
   "for": "Salons, clinics, physio, pilates, massage, coaches: anyone who takes bookings",
-  "fonts": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap",
-  "themeColor": "#2f6f6a",
-  "required": ["business.name", "business.headline", "business.intro", "business.address", "business.bookingUrl", "hero.photo", "treatments"]
+  "required": [
+    "business.name",
+    "business.headline",
+    "business.intro",
+    "business.address",
+    "business.bookingUrl",
+    "hero.photo",
+    "treatments"
+  ],
+  "defaultTheme": "calm",
+  "heroVariants": [
+    "full",
+    "split"
+  ],
+  "showcase": [
+    {
+      "theme": "calm",
+      "hero": "full"
+    },
+    {
+      "theme": "ink",
+      "hero": "split"
+    },
+    {
+      "theme": "forest",
+      "hero": "full"
+    }
+  ]
 }

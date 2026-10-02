@@ -1,0 +1,16 @@
+{
+  "name": "Trades",
+  "for": "Plumbers, electricians, builders, cleaners, landscapers, mobile services",
+  "fonts": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
+  "themeColor": "#ffc21a",
+  "themeColorInk": "#0f1f33",
+  "required": [
+    "business.name",
+    "business.headline",
+    "business.intro",
+    "business.phone",
+    "hero.photo",
+    "services",
+    "areas"
+  ]
+}

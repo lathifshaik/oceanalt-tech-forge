@@ -1,0 +1,122 @@
+{
+  "template": "trades",
+  "slug": "kerr-and-sons-electrical",
+  "url": "https://kerrelectrical.example/",
+  "_note": "Sample business for the template gallery. Names, numbers, licence and reviews are fictional.",
+  "schemaType": "Electrician",
+  "business": {
+    "name": "Kerr & Sons Electrical",
+    "headline": "Local electricians who turn up when they say.",
+    "intro": "Family-run sparkies across Newcastle and Lake Macquarie. Fixed prices, agreed before we start.",
+    "phone": "0491 570 156",
+    "email": "jobs@kerrelectrical.example",
+    "hoursSummary": "Mon to Sat, 7am to 5pm. Emergencies 24/7.",
+    "serviceArea": "Newcastle & Lake Macquarie, NSW",
+    "areaServed": "Newcastle and Lake Macquarie, NSW",
+    "licence": "274118C",
+    "licenceLabel": "Licence no.",
+    "rating": "4.9 from 212 Google reviews"
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600&q=75&auto=format&fit=crop",
+    "photoAlt": "Electrician in a hard hat wiring a switchboard"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "title": "Licensed and insured",
+      "detail": "$20m public liability on every job"
+    },
+    {
+      "icon": "clock",
+      "title": "Same-day service",
+      "detail": "Most calls before 1pm are seen the same day"
+    },
+    {
+      "icon": "check-circle",
+      "title": "Fixed price first",
+      "detail": "You approve the price before work starts"
+    }
+  ],
+  "servicesIntro": "Homes, strata and small commercial. Every job is tested and certified.",
+  "services": [
+    {
+      "icon": "bolt",
+      "name": "Emergency callouts",
+      "desc": "Power out, sparking outlets or a tripping board, any hour of the day.",
+      "from": "Callout from $120"
+    },
+    {
+      "icon": "home",
+      "name": "Switchboard upgrades",
+      "desc": "Safety switches and modern boards that pass inspection."
+    },
+    {
+      "icon": "sparkle",
+      "name": "Lighting",
+      "desc": "Downlights, outdoor and feature lighting, supplied and installed."
+    },
+    {
+      "icon": "shield-check",
+      "name": "Smoke alarms",
+      "desc": "Compliant interconnected alarms for owners and landlords.",
+      "from": "From $95 per alarm"
+    },
+    {
+      "icon": "wrench",
+      "name": "EV chargers and solar",
+      "desc": "Home EV charger installs and solar battery connections."
+    }
+  ],
+  "servicesPhoto": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=1000&q=75&auto=format&fit=crop",
+  "servicesPhotoAlt": "Set of electrician's screwdrivers in a tool roll",
+  "process": [
+    {
+      "title": "Call or send a request",
+      "desc": "Tell us what's wrong. Photos help if you can send them."
+    },
+    {
+      "title": "We quote on site",
+      "desc": "A fixed price, written down, before anything is touched."
+    },
+    {
+      "title": "Done, tested, guaranteed",
+      "desc": "Every job is certified and carries a 12-month workmanship guarantee."
+    }
+  ],
+  "areasNote": "Not sure if we cover you? Call and ask. We often do.",
+  "areas": [
+    "Newcastle",
+    "Merewether",
+    "Hamilton",
+    "Adamstown",
+    "Charlestown",
+    "Belmont",
+    "Warners Bay",
+    "Toronto",
+    "Cardiff",
+    "Wallsend",
+    "Maitland",
+    "Swansea"
+  ],
+  "reviews": [
+    {
+      "quote": "Called at 7am with half the house out. Fixed by lunch, and the price matched the quote.",
+      "name": "Danielle R.",
+      "suburb": "Merewether"
+    },
+    {
+      "quote": "Upgraded our old board and explained everything before starting. Tidy work.",
+      "name": "Hamish T.",
+      "suburb": "Charlestown"
+    },
+    {
+      "quote": "On time, friendly, and they cleaned up after themselves.",
+      "name": "Leanne O.",
+      "suburb": "Warners Bay"
+    }
+  ],
+  "contact": {
+    "formAction": "https://formspree.io/f/example"
+  }
+}

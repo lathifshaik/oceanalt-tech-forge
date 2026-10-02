@@ -1,0 +1,220 @@
+<style>
+/* Café. Photo-led: full-bleed hero with the nav laid over it, a 3D shop sign that
+   flips OPEN / CLOSED from the real hours, story beside a portrait photo, priced
+   menu beside a food photo, hours and reviews. Olive + brick on cool paper. */
+:root{
+  --bg:#f3f4ef; --surface:#e8eae2; --ink:#17201a; --muted:#56605a; --line:#d5d9cd;
+  --accent:#c2452d; --on-accent:#fff; --olive:#4b5a2a; --olive-deep:#2f3a19;
+  --font-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --font-body:"Figtree",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121612; --surface:#1b211b; --ink:#ebeee6; --muted:#a3ab9f; --line:#2c342c;
+  --accent:#ec6a4c; --on-accent:#140c09; --olive:#a9b97a; color-scheme:dark}}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.35rem;border-radius:999px;font-weight:600;text-decoration:none;white-space:nowrap;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--on-accent)} .btn-primary:hover{background:color-mix(in srgb,var(--accent) 88%,#000)}
+.btn-light{background:#fff;color:#17201a} .btn-light:hover{background:#eef0ea}
+.btn-glass{background:rgb(255 255 255 / .14);color:#fff;backdrop-filter:blur(8px);border:1px solid rgb(255 255 255 / .35)}
+
+.top{position:absolute;inset:0 0 auto 0;z-index:5;color:#fff}
+.top .wrap{display:flex;align-items:center;gap:1.5rem;height:5rem}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-family:var(--font-display);font-weight:800;font-size:1.2rem;letter-spacing:-.01em}
+.mark{display:grid;place-items:center;width:2.3rem;height:2.3rem;border-radius:50%;background:#fff;color:var(--olive-deep);font-size:.8rem}
+.nav{display:flex;gap:1.75rem;margin-left:auto;font-weight:500}
+.nav a{text-decoration:none;opacity:.85} .nav a:hover{opacity:1}
+@media (max-width:760px){.nav{display:none}.top .btn{margin-left:auto;padding:.6rem 1rem}}
+
+.hero{position:relative;min-height:clamp(560px,90vh,840px);display:flex;align-items:flex-end;color:#fff;background:#1b1712;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgb(0 0 0 / .5) 0%,rgb(0 0 0 / .05) 30%,rgb(0 0 0 / .7) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-block:8rem 3.5rem}
+.hero h1{font-size:clamp(2.7rem,6.4vw,5.4rem);font-weight:800;letter-spacing:-.04em;max-width:13ch}
+.hero p{margin-top:1.1rem;font-size:1.2rem;opacity:.92;max-width:38ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+
+/* Signature: a hanging shop sign in 3D that flips to OPEN or CLOSED from the real hours. */
+.sign{position:absolute;top:5rem;right:7%;z-index:2;width:11rem;padding-top:3.2rem;perspective:700px;transform-origin:50% 0;animation:swing 4s ease-in-out infinite alternate}
+.sign::before{content:"";position:absolute;top:0;left:50%;width:7rem;height:3.35rem;transform:translateX(-50%);opacity:.85;
+  background:linear-gradient(to bottom right,transparent calc(50% - 1px),#fff 50%,transparent calc(50% + 1px)) left/50% 100% no-repeat,
+             linear-gradient(to bottom left,transparent calc(50% - 1px),#fff 50%,transparent calc(50% + 1px)) right/50% 100% no-repeat}
+.sign::after{content:"";position:absolute;top:-.25rem;left:50%;width:.6rem;height:.6rem;border-radius:50%;background:#fff;transform:translateX(-50%)}
+.sign-card{position:relative;height:5.4rem;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.3,1.6,.45,1)}
+.sign.is-closed .sign-card{transform:rotateY(180deg)}
+.sign:hover .sign-card{transform:rotateY(180deg)} .sign.is-closed:hover .sign-card{transform:rotateY(360deg)}
+.face{position:absolute;inset:0;display:grid;place-content:center;text-align:center;border-radius:12px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  box-shadow:inset 0 0 0 3px rgb(255 255 255 / .2),0 20px 34px -12px rgb(0 0 0 / .6)}
+.face small{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.face b{font-family:var(--font-display);font-weight:800;font-size:2rem;letter-spacing:.02em;line-height:1}
+.front{background:#c2452d;color:#fff}
+.back{background:#17201a;color:#f3f4ef;transform:rotateY(180deg)}
+@keyframes swing{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
+@media (max-width:860px){.sign{width:8rem;right:5%;top:4.75rem}.sign-card{height:4.5rem}.face b{font-size:1.55rem}}
+
+.facts{border-bottom:1px solid var(--line)}
+.facts ul{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;padding-block:1.4rem}
+.facts li{display:flex;align-items:center;gap:.6rem;font-weight:500}
+.facts .i{color:var(--accent)}
+
+section{padding-block:clamp(4rem,9vw,7rem)}
+.h2{font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:800;letter-spacing:-.035em}
+.lede{color:var(--muted);margin-top:.85rem;max-width:52ch;font-size:1.1rem}
+
+.story .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,7vw,7rem);align-items:center}
+.frame{border-radius:22px;overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
+.frame img{width:100%;height:100%;object-fit:cover}
+.story .body{margin-top:1.25rem;font-size:1.15rem;color:var(--muted);max-width:46ch}
+.story .meta{display:grid;gap:.6rem;margin-top:2rem;font-weight:500}
+.story .meta span{display:inline-flex;align-items:center;gap:.6rem}
+.story .meta .i{color:var(--accent)}
+@media (max-width:860px){.story .wrap{grid-template-columns:1fr}.frame{aspect-ratio:4/3}}
+
+.menu{background:var(--surface)}
+.menu-wrap{display:grid;grid-template-columns:.85fr 2fr;gap:clamp(2rem,5vw,4.5rem);margin-top:3rem;align-items:start}
+.menu-photo{position:sticky;top:2rem;border-radius:22px;overflow:hidden;aspect-ratio:3/4}
+.menu-photo img{width:100%;height:100%;object-fit:cover}
+.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 3.5rem}
+.cat h3{font-size:1.3rem;font-weight:800;color:var(--olive);margin-bottom:.75rem}
+.item{display:grid;grid-template-columns:1fr auto;gap:.15rem 1rem;padding-block:.85rem}
+.item+.item{border-top:1px dashed var(--line)}
+.item b,.item .price{font-weight:600}
+.item small{grid-column:1/-1;color:var(--muted);font-size:.95rem}
+.note{margin-top:2rem;color:var(--muted);font-size:.95rem}
+@media (max-width:960px){.menu-wrap{grid-template-columns:1fr}.menu-photo{position:static;aspect-ratio:16/9}}
+@media (max-width:640px){.menu-grid{grid-template-columns:1fr}}
+
+.visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
+.addr{font-size:1.4rem;font-family:var(--font-display);font-weight:600;margin-top:1.25rem;max-width:22ch;line-height:1.3}
+.contact{display:grid;gap:.6rem;margin-top:1.5rem}
+.contact a{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:500;width:fit-content}
+.contact a:hover{color:var(--accent)}
+.visit .btn{margin-top:1.75rem}
+.hours{display:grid;gap:.15rem;align-self:start;padding:.75rem;border-radius:18px;background:var(--surface)}
+.hours li{display:flex;justify-content:space-between;gap:1rem;padding:.7rem .9rem;border-radius:10px}
+.hours li.is-today{background:var(--bg);font-weight:600}
+.hours li.is-today .d::after{content:"Today";margin-left:.6rem;font-size:.72rem;color:var(--accent);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+@media (max-width:760px){.visit .wrap{grid-template-columns:1fr}}
+
+.reviews{border-top:1px solid var(--line)}
+.reviews .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:2.5rem 5rem;align-items:start}
+.big q{display:block;font-family:var(--font-display);font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:700;line-height:1.2;letter-spacing:-.025em}
+.who{margin-top:1rem;color:var(--muted)}
+.stars{display:flex;gap:.15rem;color:var(--accent);margin-bottom:1.1rem} .stars .i{width:1.1rem;height:1.1rem;fill:currentColor}
+.small{display:grid;gap:2rem;padding-top:.5rem}
+.small q{display:block;font-size:1.08rem}
+@media (max-width:760px){.reviews .wrap{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
+footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hover{color:var(--ink)}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#main"><span class="mark" aria-hidden="true">{{business.initials}}</span>{{business.name}}</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#menu">Menu</a><a href="#visit">Visit</a>{{#reviews}}{{#@first}}<a href="#reviews">Reviews</a>{{/@first}}{{/reviews}}
+    </nav>
+    {{#business.orderUrl}}<a class="btn btn-light" href="{{business.orderUrl}}">Order ahead</a>{{/business.orderUrl}}
+    {{^business.orderUrl}}<a class="btn btn-light" href="{{business.mapUrl}}">Get directions</a>{{/business.orderUrl}}
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <img class="hero-img" src="{{hero.photo}}" alt="{{hero.photoAlt}}" width="1800" height="1200" fetchpriority="high">
+    <div class="sign" data-sign="{{business.hoursJson}}" role="img" aria-label="Open now">
+      <div class="sign-card"><div class="face front"><small>Come in, we're</small><b>OPEN</b></div><div class="face back"><small>Sorry, we're</small><b>CLOSED</b></div></div>
+    </div>
+    <div class="wrap">
+      <h1>{{business.headline}}</h1>
+      <p>{{business.intro}}</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#menu">See the menu {{icon:arrow-right}}</a>
+        <a class="btn btn-glass" href="{{business.mapUrl}}">{{icon:pin}} {{business.suburb}}</a>
+      </div>
+    </div>
+  </div>
+
+  {{#facts}}{{#@first}}<div class="facts"><ul class="wrap">{{/@first}}<li>{{icon:@icon}} {{text}}</li>{{#@last}}</ul></div>{{/@last}}{{/facts}}
+
+  {{#story}}
+  <section class="story">
+    <div class="wrap">
+      <div class="frame"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="1125" loading="lazy"></div>
+      <div>
+        <h2 class="h2">{{title}}</h2>
+        <p class="body">{{body}}</p>
+        <div class="meta">
+          {{#business.hoursSummary}}<span>{{icon:clock}} {{business.hoursSummary}}</span>{{/business.hoursSummary}}
+          <span>{{icon:pin}} {{business.address}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/story}}
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <h2 class="h2">Menu</h2>
+      {{#menuIntro}}<p class="lede">{{menuIntro}}</p>{{/menuIntro}}
+      <div class="menu-wrap">
+        {{#menuPhoto}}<div class="menu-photo"><img src="{{menuPhoto}}" alt="{{menuPhotoAlt}}" width="900" height="1200" loading="lazy"></div>{{/menuPhoto}}
+        <div class="menu-grid">
+          {{#menu}}
+          <div class="cat">
+            <h3>{{category}}</h3>
+            <ul>
+              {{#items}}<li class="item"><b>{{name}}</b><span class="price num">{{price}}</span>{{#desc}}<small>{{desc}}</small>{{/desc}}</li>{{/items}}
+            </ul>
+          </div>
+          {{/menu}}
+        </div>
+      </div>
+      {{#menuNote}}<p class="note">{{menuNote}}</p>{{/menuNote}}
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">Come and say hello</h2>
+        <p class="addr">{{business.address}}</p>
+        <div class="contact">
+          {{#business.phone}}<a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>{{/business.phone}}
+          {{#business.email}}<a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>{{/business.email}}
+          {{#business.instagram}}<a href="https://instagram.com/{{business.instagram}}">{{icon:camera}} @{{business.instagram}}</a>{{/business.instagram}}
+        </div>
+        <a class="btn btn-primary" href="{{business.mapUrl}}">{{icon:pin}} Get directions</a>
+      </div>
+      <ul class="hours num" aria-label="Opening hours">
+        {{#business.hours}}<li data-day="{{dayIndex}}"><span class="d">{{day}}</span><span>{{#open}}{{open}} to {{close}}{{/open}}{{^open}}Closed{{/open}}</span></li>{{/business.hours}}
+      </ul>
+    </div>
+  </section>
+
+  {{#reviews}}{{#@first}}
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <figure class="big" style="margin:0">
+        <div class="stars" role="img" aria-label="5 stars">{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}</div>
+        <q>{{quote}}</q>
+        <figcaption class="who">{{name}}, {{source}}</figcaption>
+      </figure>
+      <div class="small">
+  {{/@first}}{{^@first}}
+        <figure style="margin:0"><q>{{quote}}</q><figcaption class="who">{{name}}, {{source}}</figcaption></figure>
+  {{/@first}}{{#@last}}
+      </div>
+    </div>
+  </section>
+  {{/@last}}{{/reviews}}
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; {{year}} {{business.name}}{{#business.abn}} &middot; ABN {{business.abn}}{{/business.abn}}</span>
+    <nav aria-label="Footer"><a href="#menu">Menu</a><a href="#visit">Visit</a><a href="{{business.mapUrl}}">Directions</a></nav>
+  </div>
+</footer>

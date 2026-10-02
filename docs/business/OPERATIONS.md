@@ -8,12 +8,12 @@ How the firm runs day to day. Each stage names the agent in `.claude/agents/` th
 |---|---|---|---|
 | 1. Lead in (form, chatbot, outreach) | `growth` | Lead in Firestore `leads` + inbox email | — |
 | 2. Qualify + plan fit | `client-success` | Reply within 24 h: recommended plan, what's included, 15-min call link | 24 h |
-| 3. Brief | `client-success` | `clients/<slug>/BRIEF.md` from the template below | Same day as call |
-| 4. Design preview | `designer` | Homepage design on a preview URL using the `design-taste-frontend` skill | 48–72 h |
+| 3. Brief + content | `client-success` | `clients/<slug>/BRIEF.md` and `clients/<slug>/site.json` (copied from the closest `templates/*/example.json`); we write the copy | Day 0, same day as the call |
+| 4. Preview | `designer` | Built site on a private preview URL. Template adjusted to the brief: photos, accent, layout order | Within 24 h |
 | 5. Approval → first charge | `client-success` | Client approves; Stripe trial ends or is ended early | — |
-| 6. Build | `engineer` | Full site on preview URL; payments via client's own Stripe; bookings if Grow | 5–7 days |
+| 6. Finish | `engineer` | One round of changes; payments via the client's own Stripe; bookings if Grow | Day 1–2 |
 | 7. QA | `qa` | Checklist below passes; screenshots at 390 px and 1440 px | 1 day |
-| 8. Launch | `engineer` | DNS cut-over, redirects, Google Business Profile, analytics | ~day 10 |
+| 8. Launch | `engineer` | DNS cut-over, redirects, Google Business Profile, analytics | **Day 1–3** |
 | 9. Monthly edits | `client-success` → `engineer` | Edit logged with minutes used against the cap | 2 business days |
 | 10. Monthly review | `ceo` | KPI table updated (below) | 1st of month |
 
@@ -46,7 +46,7 @@ Every client build and every change to this marketing site uses the installed sk
 - `design-references` for a concrete starting token set (20 DESIGN.md breakdowns: Stripe, Airbnb, Notion, Wise…). Borrow the system, never the brand.
 - `react-best-practices` (Vercel) when writing or reviewing React code
 
-Starting points: the 18 demo templates in `src/App.tsx` (`CafeV1–3`, `TradieV1–3`, `CoachV1–3`, `RetailV1–3`, `SmallBizV1–3`, `AIV1–3`). Never ship a template unchanged. Each client gets their own type pairing, palette and hero.
+Starting points: the three templates in `templates/` (`cafe`, `trades`, `studio`). See `templates/README.md` for the build command and the 1–3 day checklist. Never ship one unchanged: each client gets their own photos, words and accent colour, and sections are reordered to fit what their customers need to do first. Real photography is non-negotiable. A template without real photos looks AI-made.
 
 ## QA checklist (blocks launch)
 
@@ -79,15 +79,15 @@ Starting points: the 18 demo templates in `src/App.tsx` (`CafeV1–3`, `TradieV1
 
 ## Stripe setup (one-off)
 
-1. Create Products: Care (A$29/mo), Launch (A$99/mo), Grow (A$199/mo).
-2. Create a Payment Link for each. On Launch and Grow, add a **14-day free trial** so the first charge lands after design approval. End the trial early from the dashboard when the client approves sooner.
-3. Put the three links in `.env` as `STRIPE_LINK_CARE`, `STRIPE_LINK_LAUNCH`, `STRIPE_LINK_GROW` and redeploy. With no links set, the plan buttons open the brief form.
-4. Turn on the customer portal so clients can update cards and see invoices themselves.
+1. Create Products in Oceanalt's Stripe account: Care (A$29/mo), Launch (A$99/mo), Grow (A$199/mo).
+2. Create a Payment Link for each one.
+3. Send the client the link **after they approve their preview**. That's the "see it before you pay" promise. The website's plan buttons go to the start form, not to checkout.
+4. Turn on the customer portal so clients can update cards, see invoices and cancel themselves. The site promises cancellation without a phone call.
+5. Client sites that take payments use the **client's own** Stripe account. Help them create it on the kickoff call, because verification is the slowest part of a Grow launch.
 
 ## Tech debt (owner: `engineer`)
 
-1. **Gemini API key is exposed in the browser bundle** (`vite.config.ts` → `process.env.GEMINI_API_KEY`). Anyone can lift it from the JS and spend on your account. Move the call into a serverless function (Firebase Function or Cloudflare Worker) before driving traffic. Until then, keep a hard budget cap on the key.
-2. The chatbot uses `gemini-2.0-flash-exp`, an experimental model id that may be retired. Check it still responds, and move to a current stable model when the key moves server-side.
-3. `src/App.tsx` is ~4,300 lines. Split it into `src/sections/*` and `src/demos/*` before the next big design pass.
-4. Main JS bundle is ~1.1 MB. Lazy-load the demo templates.
-5. `firestore.rules` allows unvalidated `create` on `leads`. Add field and size validation.
+1. ~~Gemini API key exposed in the browser bundle.~~ Fixed: the chatbot was removed in the October 2026 rebuild. **Rotate the old key** in Google AI Studio, because it shipped in earlier deployments.
+2. ~~4,400-line `App.tsx` and 1.1 MB bundle.~~ Fixed: the new site is ~520 lines, and the initial JS is 224 KB (71 KB gzipped), with Firebase loaded only on form submit.
+3. `firestore.rules` allows unvalidated `create` on `leads`. Add field and size validation.
+4. Unused dependencies remain in `package.json` (`@google/genai`, `lenis`, `motion`, `shadcn`, `@base-ui/react`, `express`). Remove them with `npm uninstall` and commit the lockfile.

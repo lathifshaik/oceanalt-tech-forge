@@ -6,7 +6,10 @@ Oceanalt is run as a small firm of Claude agents plus the founder. It sells webs
 - `docs/business/BUSINESS_PLAN.md`: offer, pricing, unit economics, validation plan, risks
 - `docs/business/OPERATIONS.md`: client pipeline, QA checklist, edit policy, KPIs, Stripe setup, tech debt
 
-Pricing and terms appear in four places, and they must always agree: the BUSINESS_PLAN, `Pricing` in `src/App.tsx`, `SYSTEM_PROMPT` in `src/components/ChatBot.tsx`, and the Terms page in `src/App.tsx`. Change them together.
+Pricing, delivery time and terms appear in three places, and they must always agree: the BUSINESS_PLAN, `PLANS`/`FAQ` in `src/App.tsx`, and the `Terms` component in `src/App.tsx`. Change them together.
+
+## Client sites (`templates/`)
+Three templates (`cafe`, `trades`, `studio`), a zero-dependency builder, and Oceanalt's custom icon set. One `site.json` per client is rendered to a static page. `npm run templates` builds the examples into `public/work/` for the portfolio (this runs automatically before `dev` and `build`). Read `templates/README.md` before building a client site.
 
 ## The team (`.claude/agents/`)
 | Agent | Owns |
@@ -24,4 +27,4 @@ Pricing and terms appear in four places, and they must always agree: the BUSINES
 Load the right one before doing any UI work. No invented stats, testimonials or scarcity on any site we ship.
 
 ## Dev
-`npm install` · `npm run dev` (port 3000) · `npm run lint` (tsc) · `npm run build`. Copy `.env.example` to `.env`. With no Stripe links set, the plan buttons fall back to the brief form.
+`npm install` · `npm run dev` (port 3000) · `npm run lint` (tsc) · `npm run build` · `npm run site:build -- <site.json>`. Copy `.env.example` to `.env`. The site is React + plain CSS tokens (`src/index.css`), with the Geist font self-hosted. Icons come from `templates/icons/icons.json` via `src/components/Icon.tsx`. Don't use another icon library.

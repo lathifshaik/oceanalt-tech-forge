@@ -8,7 +8,7 @@ Small business owners tell us what they want, and we design, build, host and kee
 
 ## 2. Verdict
 
-**Good business, wrong price point at $30. Right at $99–$199.**
+**Good business, wrong price point at $30. Right at $99–$149.**
 
 | Question | Answer |
 |---|---|
@@ -24,7 +24,7 @@ Small business owners tell us what they want, and we design, build, host and kee
 |---|---|---|---|---|
 | **Care** | $29/mo | Month to month | Hosting, SSL, backups, updates, uptime monitoring. Edits $60 each. | Already has a site they like; post-term Launch/Grow clients |
 | **Launch** | $99/mo, $0 upfront | 12-month minimum | Custom site up to 5 pages on a template, we write the copy, domain, forms, Google Business Profile, SEO basics, 30 min edits/mo, **live in 1–3 business days** | Cafés, tradies, coaches, clinics with no site or a bad one |
-| **Grow** | $199/mo, $0 upfront | 12-month minimum | Launch + up to 12 pages, Stripe payments/deposits/small shop, bookings, gift vouchers, existing-site rebuild, 2 h edits/mo, monthly report | Businesses that take money or bookings online |
+| **Grow** | $149/mo, $0 upfront | 12-month minimum | Launch + up to 12 pages, Stripe payments/deposits/small shop, bookings, gift vouchers, existing-site rebuild, 1 h edits/mo, monthly report | Businesses that take money or bookings online |
 | One-off build | from $1,499 | 50/50 | Same as Launch, client owns it at launch | People who hate subscriptions |
 | Custom | quoted | per project | Portals, internal tools, small SaaS | Rare, high-value, take selectively |
 
@@ -44,32 +44,36 @@ The research is consistent: what delays web projects is **waiting on the client'
 3. **Photos:** the client's own, their Google Business photos, or licensed Unsplash/Pexels as a last resort.
 4. **Excluded from the clock, and stated in the Terms:** Google Business Profile verification, Stripe account verification and domain transfers, because Google, Stripe and registrars control those.
 
+### Why Grow is $149, not $199 (decided 2 October 2026)
+
+Every site starts from one of our templates rather than a from-scratch design, so a Grow build is about 6 hours, not 10. At $199 we'd be at the top of the AU done-for-you market (A1 Local from $99, help4bis $200) for a template-based site. At $149 we're below the $200 providers while including payments and bookings. A $50 step up from Launch also makes the upgrade easy to say yes to. To keep the margin, included edit time is 1 hour a month, down from 2. A truly from-scratch design is a one-off or custom project, priced separately.
+
 ## 4. Unit economics
 
 Assumptions: builder time valued at A$60/h; AI tooling (Claude Max etc.) treated as fixed overhead; hosting on Cloudflare Pages / Vercel hobby-to-pro tiers.
 
 | Per client per month | Care | Launch | Grow |
 |---|---|---|---|
-| Revenue | $29 | $99 | $199 |
+| Revenue | $29 | $99 | $149 |
 | Hosting + domain + email forwarding | ~$3 | ~$4 | ~$6 |
-| Edit labour (avg used, not cap) | ~$5 | ~$20 (20 min) | ~$60 (1 h) |
-| Stripe fees on our invoice (~1.7% + 30c) | ~$0.80 | ~$2 | ~$3.70 |
-| **Monthly contribution** | **~$20** | **~$73** | **~$129** |
-| Build cost (one-time, on templates) | ~$60 (migration) | ~$240 (4 h) | ~$600 (10 h) |
-| **Payback** | 3 months | **~3–4 months** | **~5 months** |
-| 12-month contract contribution | — | ~$636 | ~$948 |
+| Edit labour (avg used, not cap) | ~$5 | ~$20 (20 min) | ~$40 (40 min) |
+| Stripe fees on our invoice (~1.7% + 30c) | ~$0.80 | ~$2 | ~$2.80 |
+| **Monthly contribution** | **~$20** | **~$73** | **~$100** |
+| Build cost (one-time, on templates) | ~$60 (migration) | ~$240 (4 h) | ~$360 (6 h) |
+| **Payback** | 3 months | **~3–4 months** | **~3–4 months** |
+| 12-month contract contribution | — | ~$636 | ~$840 |
 
 Templates are what make the price work. Before them, a custom Launch build was about 8 hours and took 7 months to pay back. Starting from one of three templates (`templates/`), with copy written from a 15-minute call, it's about 4 hours and pays back in 3–4 months. The 12-month minimum still matters for Grow and for clients who churn early.
 
-**Lifetime value.** Assume 12-month term, then 3%/month churn (small-business typical): expected life is about 12 + 33 = 45 months. LTV contribution is roughly $73 × 45 − $240 ≈ **$3,000 per Launch client** and $129 × 45 − $600 ≈ **$5,200 per Grow client**. That supports up to ~$500 customer acquisition cost.
+**Lifetime value.** Assume 12-month term, then 3%/month churn (small-business typical): expected life is about 12 + 33 = 45 months. LTV contribution is roughly $73 × 45 − $240 ≈ **$3,000 per Launch client** and $100 × 45 − $360 ≈ **$4,100 per Grow client**. That supports up to ~$500 customer acquisition cost.
 
 **Targets**
 
 | Milestone | Clients (mix ~60% Launch / 30% Grow / 10% Care) | MRR |
 |---|---|---|
-| Ramen (covers one person part-time) | 25 | ~A$3,000 |
-| Full-time founder salary | 60 | ~A$7,500 |
-| First hire (VA / junior for edits) | 100 | ~A$12,500 |
+| Ramen (covers one person part-time) | 25 | ~A$2,700 |
+| Full-time founder salary | 60 | ~A$6,400 |
+| First hire (VA / junior for edits) | 100 | ~A$10,700 |
 
 At around 80 active clients, edit time is roughly 40 h/month. That's when you hire.
 
@@ -81,9 +85,9 @@ At around 80 active clients, edit time is roughly 40 h/month. That's when you hi
 | Shopify | ~US$29+/mo + apps + theme | Overkill for a tradie; still DIY |
 | Traditional agency | A$3k–$15k upfront + hourly edits | Upfront cost; slow; edits cost extra |
 | Pay-monthly AU competitors (A1 Local, help4bis) | A$99–$200/mo | Mostly WordPress templates; little AI; "rented site" stigma |
-| **Oceanalt** | A$29 / $99 / $199 | Live in 1–3 days, photo-led templates with a 3D signature detail each, payments and bookings built in, you keep the site |
+| **Oceanalt** | A$29 / $99 / $149 | Live in 1–3 days, photo-led templates with a 3D signature detail each, payments and bookings built in, you keep the site |
 
-**Positioning:** "Your web department for $99 a month." The edge is speed (1–3 days), design quality (real photography, one signature 3D detail per template), payments and bookings at $199, and an honest exit.
+**Positioning:** "Your web department for $99 a month." The edge is speed (1–3 days), design quality (real photography, one signature 3D detail per template), payments and bookings at $149, and an honest exit.
 
 ## 6. Validation plan (run before scaling anything)
 

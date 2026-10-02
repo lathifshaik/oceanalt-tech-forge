@@ -62,7 +62,7 @@ Starting points: the three templates in `templates/` (`cafe`, `trades`, `studio`
 ## Edit-time policy
 
 - Log every edit: `clients/<slug>/EDITS.md` with date, request, minutes.
-- Launch: 30 min/mo. Grow: 120 min/mo. No rollover.
+- Launch: 30 min/mo. Grow: 60 min/mo. No rollover.
 - If a request will clearly exceed the remaining time, or it's a new feature or page, quote it first. Never just do it and bill afterwards.
 - A client over the cap two months running should be offered an upgrade (Launch → Grow).
 
@@ -79,7 +79,7 @@ Starting points: the three templates in `templates/` (`cafe`, `trades`, `studio`
 
 ## Stripe setup (one-off)
 
-1. Create Products in Oceanalt's Stripe account: Care (A$29/mo), Launch (A$99/mo), Grow (A$199/mo).
+1. Create Products in Oceanalt's Stripe account: Care (A$29/mo), Launch (A$99/mo), Grow (A$149/mo).
 2. Create a Payment Link for each one.
 3. Send the client the link **after they approve their preview**. That's the "see it before you pay" promise. The website's plan buttons go to the start form, not to checkout.
 4. Turn on the customer portal so clients can update cards, see invoices and cancel themselves. The site promises cancellation without a phone call.

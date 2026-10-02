@@ -11,7 +11,7 @@ Intake:
 - After the call, write `clients/<slug>/BRIEF.md` using the template in OPERATIONS.md.
 
 Edit requests:
-- Check the remaining minutes in `clients/<slug>/EDITS.md` against the plan cap (Launch 30, Grow 120 per month).
+- Check the remaining minutes in `clients/<slug>/EDITS.md` against the plan cap (Launch 30, Grow 60 per month).
 - If the request is a change to existing content, route it to `engineer` and log it.
 - If it's a new feature or page, or would go over the cap, write a quote first. Never surprise a client with a bill.
 - Over the cap two months running: offer the upgrade.

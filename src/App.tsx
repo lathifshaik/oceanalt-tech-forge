@@ -66,7 +66,7 @@ const PLANS = [
   {
     id: "grow",
     name: "Grow",
-    price: "$199",
+    price: "$149",
     term: "$0 upfront · 12-month minimum",
     desc: "For businesses that take money or bookings online. Everything in Launch, plus:",
     features: [
@@ -74,7 +74,7 @@ const PLANS = [
       "Online payments, deposits or a small shop",
       "Bookings and gift vouchers",
       "Rebuild of your existing site included",
-      "2 hours of edits every month",
+      "1 hour of edits every month",
       "Monthly traffic and leads report",
     ],
     featured: false,
@@ -103,7 +103,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How do changes work?",
-    a: "Email us what you want changed: prices, photos, a new menu, a blog post. It's usually done within two business days. Launch includes 30 minutes a month and Grow includes 2 hours. Bigger additions are quoted before any work starts.",
+    a: "Email us what you want changed: prices, photos, a new menu, a blog post. It's usually done within two business days. Launch includes 30 minutes a month and Grow includes an hour. Bigger additions are quoted before any work starts.",
   },
   {
     q: "What if I want to leave?",
@@ -394,7 +394,7 @@ function Faq() {
 const TEMPLATE_LABEL: Record<string, string> = { cafe: "Café", trades: "Trades", studio: "Studio", unsure: "Not sure yet" };
 const PLAN_LABEL: Record<string, string> = {
   launch: "Launch ($99/month)",
-  grow: "Grow ($199/month)",
+  grow: "Grow ($149/month)",
   care: "Care ($29/month)",
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",

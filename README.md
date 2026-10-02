@@ -1,6 +1,6 @@
 # Oceanalt
 
-Websites for Australian small businesses, done for you: **Care $29 · Launch $99 · Grow $199 AUD/month, $0 upfront, live in 1–3 business days.** Already have a site? We rebuild it, payments included.
+Websites for Australian small businesses, done for you: **Care $29 · Launch $99 · Grow $149 AUD/month, $0 upfront, live in 1–3 business days.** Already have a site? We rebuild it, payments included.
 
 - Business plan and unit economics: [`docs/business/BUSINESS_PLAN.md`](docs/business/BUSINESS_PLAN.md)
 - How the firm operates (pipeline, QA, KPIs, Stripe setup): [`docs/business/OPERATIONS.md`](docs/business/OPERATIONS.md)

@@ -6,7 +6,7 @@ import {
   History, Hammer, MessageCircleCode, Terminal, Workflow, Wand2, Database, 
   TrendingUp, FileCheck, MessageSquareText, Gem, RefreshCcw, Search, Loader2
 } from "lucide-react";
-import { useState, useEffect, useRef, FormEvent, ReactNode, Suspense, lazy } from "react";
+import { useState, useEffect, useRef, FormEvent, ReactNode, RefObject, Suspense, lazy } from "react";
 import Lenis from "lenis";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -179,10 +179,10 @@ const ModernAIIcon = ({ className }: { className?: string }) => (
 
 const Hero = ({ onBookNow }: { onBookNow: () => void }) => {
   const stats = [
-    { label: "$1,499", sub: "STARTER SITE" },
-    { label: "~2 WKS", sub: "TURNAROUND" },
-    { label: "AU", sub: "HOSTED / OWNED" },
-    { label: "100%", sub: "IP YOURS" }
+    { label: "$99", sub: "PER MONTH" },
+    { label: "$0", sub: "UPFRONT" },
+    { label: "~10 DAYS", sub: "TO LAUNCH" },
+    { label: "100%", sub: "YOURS AFTER 12 MO" }
   ];
 
   const partners = ["CAFÉS", "TRADIES", "COACHES", "SMALL RETAIL", "INDIE SAAS", "CLINICS", "AGENCIES", "STARTUPS"];
@@ -216,12 +216,12 @@ const Hero = ({ onBookNow }: { onBookNow: () => void }) => {
               />
             </h1>
             <p className="text-xl md:text-3xl text-muted-foreground mb-16 max-w-5xl mx-auto font-medium leading-relaxed opacity-80">
-              Websites, AI chatbots and small internal tools — built end-to-end for cafés, tradies, coaches and indie SaaS. Starter sites from $1,499 AUD, delivered in about two weeks.
+              Tell us what you need. We design it, build it, host it and keep improving it, for one monthly fee. Websites from $99/month with nothing upfront. Already have a site? We'll rebuild it, payments included.
             </p>
 
             <div className="flex items-center justify-center gap-2 mb-8">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary font-bold">Milestone billing · No lock-in · Full ownership</span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary font-bold">$0 upfront · Edits every month · Keep your site</span>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-24">
@@ -269,7 +269,7 @@ const CafeV1 = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const findRef = useRef<HTMLDivElement>(null);
-  const scrollTo = (r: React.RefObject<HTMLDivElement | null>) =>
+  const scrollTo = (r: RefObject<HTMLDivElement | null>) =>
     r.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const openBooking = () => { setBooked(false); setBooking(true); };
   const menu = {
@@ -441,7 +441,7 @@ const TradieV1 = () => {
   const galleryRef = useRef<HTMLDivElement>(null);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
-  const scrollTo = (r: React.RefObject<HTMLDivElement | null>) =>
+  const scrollTo = (r: RefObject<HTMLDivElement | null>) =>
     r.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const services = [
@@ -621,7 +621,7 @@ const CoachV1 = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const storiesRef = useRef<HTMLDivElement>(null);
-  const scrollTo = (r: React.RefObject<HTMLDivElement | null>) =>
+  const scrollTo = (r: RefObject<HTMLDivElement | null>) =>
     r.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const today = new Date();
@@ -993,7 +993,7 @@ const SmallBizV1 = () => {
   const teamRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const scrollTo = (r: React.RefObject<HTMLDivElement | null>) =>
+  const scrollTo = (r: RefObject<HTMLDivElement | null>) =>
     r.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const openBooking = () => { setBooked(false); setBooking(true); };
 
@@ -2825,9 +2825,9 @@ const PrototypesSection = ({ onBookNow }: { onBookNow: () => void }) => {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="text-muted-foreground font-medium mb-6">From $1,499 — delivered in 2 weeks, owned by you forever. No lock-in.</p>
+          <p className="text-muted-foreground font-medium mb-6">From $99/month with $0 upfront. Live in about 10 days, and yours to keep after 12 months.</p>
           <Button size="lg" className="h-16 px-12 text-base font-black uppercase italic rounded-2xl shadow-xl shadow-primary/20" onClick={onBookNow}>
-            Get My Website — from $1,499 <ArrowRight className="ml-3 w-5 h-5" />
+            Get My Website — from $99/mo <ArrowRight className="ml-3 w-5 h-5" />
           </Button>
         </div>
       </div>
@@ -3010,7 +3010,7 @@ const Modernization = () => {
             <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 uppercase tracking-widest font-black italic">// WHY OCEANALT</Badge>
             <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-8">LEAN. <br/><span className="text-primary">OWNED. SHIPPED.</span></h2>
             <p className="text-xl text-muted-foreground font-medium leading-relaxed max-w-3xl mx-auto">
-              Six reasons small businesses pick Oceanalt over a traditional agency: speed, ownership and honest scope — without the retainer.
+              Six reasons small businesses pick Oceanalt over a traditional agency: speed, ownership and honest scope, for a flat monthly fee instead of a $5,000 invoice.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 items-stretch">
@@ -3035,14 +3035,14 @@ const Modernization = () => {
                 OCEANALT <br/><span className="text-primary">VS AN AGENCY</span>
               </h2>
               <p className="text-xl text-background/70 font-medium leading-relaxed mb-10">
-                Agencies sell hours and bill retainers. Oceanalt sells shipped milestones. Here's the difference for small businesses.
+                Agencies bill thousands upfront, then charge for every change. Oceanalt charges one flat monthly fee that covers the build, hosting and ongoing edits.
               </p>
             </div>
             <div className="space-y-6">
               {[
                 { label: "Delivery model", off: "Project managers + offshore", local: "One team, end-to-end" },
-                { label: "Turnaround", off: "6–12 weeks min", local: "~2 weeks for a starter site" },
-                { label: "Billing", off: "Monthly retainer", local: "Per delivered milestone" },
+                { label: "Turnaround", off: "6–12 weeks min", local: "~10 days for a starter site" },
+                { label: "Billing", off: "$3k–$15k upfront + hourly edits", local: "Flat monthly, $0 upfront" },
                 { label: "Ownership", off: "Locked to their stack", local: "Your GitHub, your accounts" }
               ].map((item, i) => (
                 <div key={i} className="grid grid-cols-3 gap-4 py-6 border-b border-background/10">
@@ -3105,12 +3105,12 @@ const Modernization = () => {
 const Testimonials = () => {
   const principles = [
     {
-      title: "Full ownership",
-      body: "Code in your GitHub. Domain, hosting, database and API keys in your accounts. The whole build is yours from day one — nothing to migrate later.",
+      title: "No hostage websites",
+      body: "Your domain and content are yours from day one. After 12 paid months the code is yours too, free. Leave whenever you like after that and take everything with you.",
     },
     {
-      title: "Milestone billing",
-      body: "Fixed scope, quoted up front, billed per delivered milestone. If a milestone isn't shipped and approved, it isn't invoiced. No monthly retainers.",
+      title: "Design first, pay second",
+      body: "You see a design preview before your first monthly charge. If it isn't right, we revise it. If it still isn't right, you walk away owing nothing.",
     },
     {
       title: "Boring, shippable tech",
@@ -3350,33 +3350,33 @@ const Process = () => {
   const steps = [
     {
       id: "STEP 01",
-      title: "DISCOVERY & SCOPING",
-      desc: "We map your workflows, audit existing tech debt, and identify AI/automation opportunities. Output: a signed tech spec with milestone breakdown and fixed milestone pricing."
+      title: "TELL US WHAT YOU NEED",
+      desc: "Fill in the brief, send your current URL, or book a 15-minute call. We confirm the plan that fits and what's included in writing."
     },
     {
       id: "STEP 02",
-      title: "ARCHITECTURE & STACK DESIGN",
-      desc: "We design the full AI stack — model selection, embedding strategy, data pipelines, API contracts, and IaC modules. Output: architecture diagram + approved tech stack."
+      title: "DESIGN PREVIEW",
+      desc: "Within a few days you see a design for your homepage. Your first month isn't charged until you approve it."
     },
     {
       id: "STEP 03",
-      title: "SPRINT BUILD",
-      desc: "2-week sprints. Each sprint ships working, tested code into a staging environment. No scope creep — changes go to backlog. You have Slack access to your architect 24/7."
+      title: "BUILD",
+      desc: "We build the full site on a private preview link: pages, forms, payments and bookings where your plan includes them. You review it on your phone."
     },
     {
       id: "STEP 04",
-      title: "CLIENT REVIEW & MILESTONE INVOICE",
-      desc: "You review the working sprint build. Once approved, we invoice for that milestone only. You never pay for work you haven't seen and signed off."
+      title: "LAUNCH",
+      desc: "Domain connected, Google Business Profile linked, analytics on. Most sites go live about 10 days after the brief."
     },
     {
       id: "STEP 05",
-      title: "PRODUCTION DEPLOY & HANDOVER",
-      desc: "Blue-green deployment. Automated rollback. Full runbook, documentation, and codebase handover. You own every line."
+      title: "MONTHLY EDITS",
+      desc: "Email a change — new prices, photos, a menu, a blog post — and it's done, usually within two business days. Edit time is included in your plan."
     },
     {
       id: "STEP 06",
-      title: "2-YEAR POST-LAUNCH SUPPORT",
-      desc: "Dedicated support channel, SLA-backed response times, proactive monitoring alerts, and quarterly performance reviews — for 2 full years, included in every engagement."
+      title: "KEEP IMPROVING",
+      desc: "Hosting, security updates and backups run in the background. Grow clients get a monthly report on traffic, leads and what to try next."
     }
   ];
 
@@ -3384,9 +3384,9 @@ const Process = () => {
     <section className="py-32 bg-primary/5 border-y border-foreground/5">
       <div className="container mx-auto px-6">
         <div className="text-center mb-24">
-          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 uppercase tracking-widest font-black italic">// DELIVERY METHODOLOGY</Badge>
+          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 uppercase tracking-widest font-black italic">// HOW IT WORKS</Badge>
           <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-8">HOW WE <span className="text-primary">SHIP</span></h2>
-          <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">A lean, milestone-gated delivery loop. You see working software at every stage. You pay per milestone. No surprises.</p>
+          <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">From brief to live site in about 10 days, then ongoing care for as long as you're with us. You see the design before you pay a cent.</p>
         </div>
         <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-8">
           {steps.map((s, i) => (
@@ -3409,165 +3409,89 @@ const Process = () => {
   );
 };
 
-const EngagementIncludes = () => {
-  const inclusions = [
-    {
-      icon: <Globe className="w-8 h-8" />,
-      title: "2-YR DOMAIN MAINTENANCE",
-      desc: "Domain registration, DNS management, and renewal handled for 2 years. No surprises."
-    },
-    {
-      icon: <Cloud className="w-8 h-8" />,
-      title: "1-YR HOSTING",
-      desc: "First year of cloud hosting (AU region) configured, monitored, and managed by us."
-    },
-    {
-      icon: <Hammer className="w-8 h-8" />,
-      title: "2-YR SUPPORT",
-      desc: "SLA-backed bug fixes, security patches, and feature tweaks for 24 months post-launch."
-    },
-    {
-      icon: <Lock className="w-8 h-8" />,
-      title: "SSL CERTIFICATE",
-      desc: "Managed Let's Encrypt or DigiCert SSL. Auto-renewal. HTTPS enforced from day one."
-    },
-    {
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "SEO FOUNDATION",
-      desc: "Technical SEO audit, GA4 setup, sitemap, robots.txt, Core Web Vitals baseline."
-    },
-    {
-      icon: <FastForward className="w-8 h-8" />,
-      title: "CDN SETUP",
-      desc: "CloudFront or Cloudflare configured for edge caching and global performance from launch."
-    },
-    {
-      icon: <BarChart3 className="w-8 h-8" />,
-      title: "MONTHLY REPORTS",
-      desc: "Uptime, performance, error rates, and SEO rankings delivered to your inbox monthly."
-    },
-    {
-      icon: <ShieldCheck className="w-8 h-8" />,
-      title: "SECURITY HARDENING",
-      desc: "OWASP Top 10 compliance, dependency scanning, secrets management, and WAF configuration."
-    }
-  ];
-
-  return (
-    <section className="py-32 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-24">
-          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 uppercase tracking-widest font-black italic">// EVERY ENGAGEMENT INCLUDES</Badge>
-          <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-8">ZERO HIDDEN <span className="text-primary">COSTS.</span></h2>
-          <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">Everything you need to go live and stay live. Bundled in, not bolted on.</p>
-        </div>
-        <div className="grid md:grid-cols-4 gap-8 items-stretch">
-          {inclusions.map((item, i) => (
-            <div key={i} className="p-8 rounded-3xl bg-secondary/10 border border-foreground/5 hover:border-primary/20 transition-all group flex flex-col items-center text-center">
-              <div className="text-primary mb-6 group-hover:scale-110 transition-transform flex justify-center">{item.icon}</div>
-              <h4 className="text-lg font-black uppercase italic tracking-tighter mb-3">{item.title}</h4>
-              <p className="text-sm text-muted-foreground font-medium leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const BillingModel = () => {
-  const billingSteps = [
-    { step: "STEP 1", title: "Agree on milestone scope & price" },
-    { step: "STEP 2", title: "We build & deploy to staging" },
-    { step: "STEP 3", title: "You review & approve" },
-    { step: "STEP 4", title: "Invoice issued. Repeat." }
-  ];
-
-  return (
-    <section className="py-32 bg-primary/5 border-y border-foreground/5">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-24 items-center">
-          <div>
-            <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 uppercase tracking-widest font-black italic">// BILLING MODEL</Badge>
-            <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-8 leading-tight">
-              PAY PER MILESTONE. <br/><span className="text-primary">NOT PER MONTH.</span>
-            </h2>
-            <p className="text-xl text-muted-foreground font-medium leading-relaxed mb-10">
-              We break every project into clearly-defined milestones. You only pay when you see working software and give the green light. No retainers. No upfront lump sums. No lock-in.
-            </p>
-          </div>
-          <div className="grid gap-4">
-            {billingSteps.map((s, i) => (
-              <div key={i} className="flex items-center gap-6 p-6 rounded-2xl bg-background border border-foreground/5">
-                <div className="w-16 h-16 rounded-xl bg-primary/10 flex-shrink-0 flex items-center justify-center text-primary font-black italic text-xs tracking-tighter">
-                  {s.step}
-                </div>
-                <h4 className="text-xl font-black uppercase italic tracking-tighter">{s.title}</h4>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+// Plan checkout links are Stripe Payment Links set via env. When a link is
+// missing, the CTA falls back to the brief form so nothing is ever a dead end.
+const PLAN_LINKS: Record<string, string | undefined> = {
+  care: process.env.STRIPE_LINK_CARE,
+  launch: process.env.STRIPE_LINK_LAUNCH,
+  grow: process.env.STRIPE_LINK_GROW,
 };
 
 const Pricing = ({ onBookNow }: { onBookNow: () => void }) => {
   const plans = [
     {
-      name: "STARTER SITE",
-      price: "$1,499",
-      sub: "AUD flat",
-      note: "One fixed price. 50% to start, 50% on launch. No monthly fees after.",
-      description: "A clean, fast website for a café, tradie, coach, or small service business that needs to stop losing jobs to Google Maps.",
+      id: "care",
+      name: "CARE",
+      price: "$29",
+      sub: "AUD / month",
+      note: "Month to month. Cancel any time.",
+      description: "Already have a site you're happy with? We move it onto fast hosting and look after it.",
       features: [
-        "Up to 5 pages (Home, About, Services, Gallery, Contact)",
-        "Mobile-first, fast-loading design",
-        "Contact form → your email",
-        "Google Maps + Analytics setup",
-        "1-year domain & hosting included",
-        "Basic SEO (titles, descriptions, sitemap)",
-        "SSL certificate",
-        "Delivered in ~2 weeks",
-        "You own the domain, the code, everything"
+        "Hosting, SSL and daily backups",
+        "Security and plugin updates",
+        "Uptime monitoring with alerts",
+        "Small text or image swaps billed at $60 each",
+        "Upgrade to Launch or Grow any time",
       ],
-      icon: <Palette className="w-6 h-6 text-primary" />
+      cta: "Look After My Site",
+      icon: <ShieldCheck className="w-6 h-6 text-primary" />,
     },
     {
-      name: "SITE + AI CHATBOT",
-      price: "$4,999",
-      sub: "AUD / first milestone",
-      note: "Typical total $8k–$15k across 2–3 milestones. Pay per delivered milestone.",
-      description: "Everything in Starter, plus an AI chatbot that qualifies leads, answers FAQs, and writes each conversation to your inbox and a database. Powered by Gemini or Claude.",
+      id: "launch",
+      name: "LAUNCH",
+      price: "$99",
+      sub: "AUD / month",
+      note: "$0 upfront. 12-month minimum, then month to month.",
+      description: "A custom website for a café, tradie, coach or local service business. Designed, built, hosted and kept up to date.",
       features: [
-        "Everything in Starter Site",
-        "AI chatbot trained on your content",
-        "Captures name, email, budget, project scope",
-        "Saves leads to Firestore + emails your inbox",
-        "Connects to your existing tools (email, CRM)",
-        "6 months of bug-fix support post-launch",
-        "All model keys, prompts and data stay in your accounts"
+        "Custom design, up to 5 pages",
+        "Domain, hosting, SSL and business email forwarding",
+        "Contact and quote forms to your inbox",
+        "Google Business Profile and Maps setup",
+        "On-page SEO and analytics",
+        "30 minutes of edits every month",
+        "Live in about 10 days",
+        "Keep the site and code after 12 months",
       ],
+      cta: "Start for $0 Upfront",
+      icon: <Palette className="w-6 h-6 text-primary" />,
+      popular: true,
+    },
+    {
+      id: "grow",
+      name: "GROW",
+      price: "$199",
+      sub: "AUD / month",
+      note: "$0 upfront. 12-month minimum, then month to month.",
+      description: "For businesses that take money online. Everything in Launch, plus payments, bookings and an AI assistant.",
+      features: [
+        "Everything in Launch, up to 12 pages",
+        "Online payments, deposits or a shop (up to 50 products)",
+        "Bookings and appointment scheduling",
+        "AI chat assistant trained on your business",
+        "Rebuild of your existing site included",
+        "2 hours of edits every month",
+        "Monthly traffic and leads report",
+      ],
+      cta: "Start for $0 Upfront",
       icon: <Bot className="w-6 h-6 text-primary" />,
-      popular: true
     },
-    {
-      name: "CUSTOM BUILD",
-      price: "LET'S",
-      sub: "TALK",
-      note: "Internal tools, dashboards, small SaaS MVPs, or anything that doesn't fit a template. Scoped honestly — only taken on if the fit is there.",
-      description: "For projects that don't fit a template. Scope is agreed together, milestones locked up front, work starts only if the fit is right.",
-      features: [
-        "Honest scoping — projects outside scope get referred",
-        "Milestone pricing agreed before work starts",
-        "No retainers, no lock-in contracts",
-        "Direct access to the builder — no account manager layer",
-        "You own the code, data, and accounts",
-        "Referral network for anything out of scope"
-      ],
-      icon: <MessageSquareText className="w-6 h-6 text-primary" />,
-      custom: true
+  ];
+
+  const handlePlan = (id: string) => {
+    const link = PLAN_LINKS[id];
+    if (link) {
+      window.open(link, "_blank", "noopener,noreferrer");
+    } else {
+      onBookNow();
     }
+  };
+
+  const rebuildSteps = [
+    { title: "Send us your URL", desc: "Tell us what works and what doesn't. A 15-minute call is enough." },
+    { title: "See the new design", desc: "A design preview within a few days. Your first month is only charged once you approve it." },
+    { title: "We rebuild and connect payments", desc: "Content, images and SEO move across. Stripe payments go straight to your own account." },
+    { title: "Switch over", desc: "Same domain, redirects in place, no downtime. Your old host can be cancelled." },
   ];
 
   return (
@@ -3575,16 +3499,16 @@ const Pricing = ({ onBookNow }: { onBookNow: () => void }) => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-24">
           <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 uppercase tracking-widest font-black italic">// PRICING</Badge>
-          <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-6">THREE <span className="text-primary">WAYS IN.</span></h2>
+          <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-6">ONE MONTHLY FEE. <span className="text-primary">ALL HANDLED.</span></h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
-            Fixed-price starter, milestone billing for bigger builds, custom scope for everything else. No retainers, no lock-in. If a milestone isn't delivered, you don't pay for it.
+            Tell us what you need and we design it, build it, host it and keep improving it. No $5,000 invoice up front, and no charge for your first month until you approve the design.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
+          {plans.map((plan) => (
             <motion.div
-              key={index}
+              key={plan.id}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -3601,94 +3525,59 @@ const Pricing = ({ onBookNow }: { onBookNow: () => void }) => {
                 <span className="text-5xl font-black tracking-tighter">{plan.price}</span>
                 <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">{plan.sub}</span>
               </div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-primary mb-6">★ BILL AS YOU GO — pay per approved milestone</p>
-              <p className="text-xs text-muted-foreground font-medium mb-8 leading-relaxed italic">{plan.note}</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-primary mb-6">{plan.note}</p>
               <p className="text-sm text-foreground font-bold mb-8 leading-relaxed">{plan.description}</p>
               <div className="space-y-4 mb-10 flex-grow">
                 {plan.features.map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div className="mt-1 w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                      {i < 4 ? <Zap size={10} strokeWidth={4} /> : <Check size={10} strokeWidth={4} />}
+                      <Check size={10} strokeWidth={4} />
                     </div>
                     <span className="text-xs font-bold text-foreground/80">{feature}</span>
                   </div>
                 ))}
               </div>
               <Button
-                className={`w-full h-16 text-lg font-black uppercase italic rounded-2xl ${plan.popular ? "bg-primary" : "bg-secondary hover:bg-secondary/80"}`}
-                onClick={onBookNow}
+                className={`w-full h-16 text-lg font-black uppercase italic rounded-2xl ${plan.popular ? "bg-primary" : "bg-foreground text-background hover:bg-foreground/85"}`}
+                onClick={() => handlePlan(plan.id)}
               >
-                {(plan as any).custom ? "Start a Conversation" : plan.name === "STARTER SITE" ? "Get My Website" : "Book a Chat"}
+                {plan.cta}
               </Button>
             </motion.div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-};
 
-const WontDo = () => {
-  const wont = [
-    {
-      label: "Enterprise / gov work",
-      detail: "SOC2, IRAP, 24/7 on-call rotations and security-cleared projects need a bigger outfit. Oceanalt will refer those out rather than take them on."
-    },
-    {
-      label: "Offshore handoffs",
-      detail: "Projects aren't subcontracted to anonymous dev shops. The same people who scope the work write the code and ship the deploy."
-    },
-    {
-      label: "Monthly retainers",
-      detail: "No lock-in. Milestone pricing is agreed up front and paid on delivery. Ongoing work after launch is scoped as a fresh milestone."
-    },
-    {
-      label: "Fine-tuning when RAG works",
-      detail: "LLM fine-tuning is expensive and rarely the right answer for small businesses. If retrieval-augmented search solves the problem in two weeks, that's what ships."
-    },
-    {
-      label: "Scope that can't be stood behind",
-      detail: "Native mobile SDKs, real-time video and research-grade ML pipelines aren't in scope. Projects like those get flagged upfront with a referral."
-    },
-    {
-      label: "Vague timelines",
-      detail: "Every engagement starts with a written milestone plan — dates, deliverables, acceptance criteria. If a milestone slips, the extra time is absorbed, not billed."
-    },
-  ];
-
-  return (
-    <section className="py-32 bg-foreground text-background relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_50%,rgba(var(--primary-rgb),0.15),transparent_60%)]" />
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-20">
-          <Badge className="mb-6 bg-background/10 text-background border-background/20 uppercase tracking-widest font-black italic">// HONESTY OVER SALES</Badge>
-          <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-[0.9] mb-6">
-            WHAT OCEANALT <br /><span className="text-primary">WON'T DO.</span>
-          </h2>
-          <p className="text-xl text-background/60 font-medium leading-relaxed">
-            Better to lose a deal than fail a client. Everything below gets turned down or referred out — so fit can be decided early.
-          </p>
+        <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto mt-6">
+          <div className="p-8 rounded-[2rem] bg-background border border-foreground/5">
+            <h4 className="text-lg font-black uppercase italic tracking-tighter mb-2">Rather own it outright?</h4>
+            <p className="text-sm text-muted-foreground font-medium leading-relaxed">One-off builds from $1,499 AUD, paid 50% to start and 50% at launch. Add Care for $29/month if you want us to keep looking after it.</p>
+          </div>
+          <div className="p-8 rounded-[2rem] bg-background border border-foreground/5">
+            <h4 className="text-lg font-black uppercase italic tracking-tighter mb-2">Need something bigger?</h4>
+            <p className="text-sm text-muted-foreground font-medium leading-relaxed">Internal tools, client portals and small SaaS products are quoted per project. <button onClick={onBookNow} className="text-primary font-bold hover:underline">Send a brief</button> and you'll get a scope and price within 24 hours.</p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {wont.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-              className="group p-8 rounded-[2rem] bg-background/5 border border-background/10 hover:border-primary/40 transition-all duration-500"
-            >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="mt-0.5 w-6 h-6 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0">
-                  <X size={12} className="text-primary" strokeWidth={3} />
-                </div>
-                <h3 className="text-lg font-black uppercase italic tracking-tighter text-background">{item.label}</h3>
+        <div id="rebuild" className="max-w-6xl mx-auto mt-24 p-10 md:p-14 rounded-[3rem] bg-foreground text-background">
+          <Badge className="mb-6 bg-background/10 text-background border-background/20 uppercase tracking-widest font-black italic">// ALREADY HAVE A WEBSITE?</Badge>
+          <h3 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-6 leading-[0.95]">WE'LL REBUILD IT. <br /><span className="text-primary">PAYMENTS INCLUDED.</span></h3>
+          <p className="text-lg text-background/60 font-medium max-w-2xl mb-12">Slow Wix site, outdated WordPress, a Shopify theme you've outgrown: we rebuild it faster and cleaner, keep your Google rankings, and wire up payments. Included in Grow at no extra cost.</p>
+          <div className="grid md:grid-cols-4 gap-6">
+            {rebuildSteps.map((s, i) => (
+              <div key={i} className="p-6 rounded-2xl bg-background/5 border border-background/10">
+                <span className="text-xs font-black text-primary tracking-widest">0{i + 1}</span>
+                <h4 className="text-base font-black uppercase italic tracking-tighter mt-2 mb-2">{s.title}</h4>
+                <p className="text-sm text-background/55 font-medium leading-relaxed">{s.desc}</p>
               </div>
-              <p className="text-background/55 font-medium text-sm leading-relaxed pl-10">{item.detail}</p>
-            </motion.div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto mt-16 text-sm text-muted-foreground font-medium leading-relaxed space-y-3">
+          <h4 className="text-xs font-black uppercase tracking-widest text-foreground">The fine print, in plain English</h4>
+          <p>Launch and Grow have a 12-month minimum because the build cost is spread across that year. After 12 months you can cancel any time and keep your site, code and domain at no charge. Cancelling earlier means paying the remaining months of the first year, or the $1,499 buyout, whichever is lower.</p>
+          <p>Edit time is for changes to existing pages: text, photos, prices, menus, new blog posts. New features or extra pages are quoted separately before any work starts. Unused edit time doesn't roll over.</p>
+          <p>Payments from your customers go straight into your own Stripe account. We never hold your money or see card details. Prices are in AUD.</p>
         </div>
       </div>
     </section>
@@ -4025,23 +3914,25 @@ const BookingPage = ({ onBack }: { onBack: () => void }) => {
                   </div>
                   <div className="space-y-3">
                     <Label className="text-[10px] font-black uppercase tracking-widest ml-1">Company</Label>
-                    <Input name="company" required placeholder="Enterprise Ltd" className="h-14 rounded-2xl bg-background border-foreground/10 focus:border-primary transition-all" />
+                    <Input name="company" required placeholder="Bondi Plumbing Co." className="h-14 rounded-2xl bg-background border-foreground/10 focus:border-primary transition-all" />
                   </div>
                 </div>
 
                 <div className="space-y-3">
                   <Label className="text-[10px] font-black uppercase tracking-widest ml-1">Work Email</Label>
-                  <Input name="email" required type="email" placeholder="john@enterprise.com.au" className="h-14 rounded-2xl bg-background border-foreground/10 focus:border-primary transition-all" />
+                  <Input name="email" required type="email" placeholder="you@yourbusiness.com.au" className="h-14 rounded-2xl bg-background border-foreground/10 focus:border-primary transition-all" />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <Label className="text-[10px] font-black uppercase tracking-widest ml-1">Project Type</Label>
                     <select name="projectType" className="w-full h-14 rounded-2xl bg-background border border-foreground/10 focus:border-primary transition-all px-4 text-sm font-medium outline-none">
-                      <option>AI / LLM Solutions</option>
-                      <option>Enterprise Infrastructure Refresh</option>
-                      <option>MVP Forge (New Product)</option>
-                      <option>Process Automation</option>
+                      <option>New website (Launch, $99/mo)</option>
+                      <option>Website with payments or bookings (Grow, $199/mo)</option>
+                      <option>Rebuild my existing website</option>
+                      <option>Hosting and care for my current site ($29/mo)</option>
+                      <option>AI chatbot or automation</option>
+                      <option>Custom app or SaaS</option>
                       <option>Other</option>
                     </select>
                   </div>
@@ -4049,8 +3940,9 @@ const BookingPage = ({ onBack }: { onBack: () => void }) => {
                     <Label className="text-[10px] font-black uppercase tracking-widest ml-1">Budget Range (AUD)</Label>
                     <select name="budget" className="w-full h-14 rounded-2xl bg-background border border-foreground/10 focus:border-primary transition-all px-4 text-sm font-medium outline-none">
                       <option value="">Select a range</option>
-                      <option>Under $2k (just need a website)</option>
-                      <option>$2k – $10k</option>
+                      <option>Monthly plan ($29–$199/mo)</option>
+                      <option>One-off build (~$1.5k–$5k)</option>
+                      <option>$5k – $10k</option>
                       <option>$10k – $25k</option>
                       <option>$25k – $50k</option>
                       <option>$50k+</option>
@@ -4338,15 +4230,15 @@ export default function App() {
                   </section>
                   <section>
                     <h2 className="text-2xl font-black uppercase italic tracking-tighter text-foreground mb-4">2. Services</h2>
-                    <p>Oceanalt provides high-performance digital infrastructure, AI engineering, and software development services. Specific project scopes are defined in individual milestone agreements.</p>
+                    <p>Oceanalt designs, builds, hosts and maintains websites and related software for small businesses, either on a monthly plan (Care, Launch or Grow) or as a one-off project. What each plan includes is listed on the pricing section of this site and confirmed in writing before work starts.</p>
                   </section>
                   <section>
                     <h2 className="text-2xl font-black uppercase italic tracking-tighter text-foreground mb-4">3. Intellectual Property</h2>
-                    <p>Upon full payment of each milestone, the client owns 100% of the intellectual property, codebase, and models developed during that milestone, unless otherwise specified in writing.</p>
+                    <p>For one-off projects, the client owns the code and content once the final invoice is paid. On Launch and Grow plans, the client owns their content and domain from day one, and ownership of the site code transfers at no charge after 12 paid months, or earlier on payment of the buyout described in section 4.</p>
                   </section>
                   <section>
                     <h2 className="text-2xl font-black uppercase italic tracking-tighter text-foreground mb-4">4. Billing and Payments</h2>
-                    <p>Oceanalt operates on a milestone-based billing model. Invoices are issued upon client approval of a working milestone build. Payments are due within the timeframe specified on the invoice.</p>
+                    <p>Monthly plans are billed in advance by card through Stripe. The first charge happens only after the client approves the design preview. Launch and Grow have a 12-month minimum term, then continue month to month and can be cancelled with 30 days' notice. Cancelling within the first 12 months costs the lesser of the remaining months in that term or a $1,499 AUD buyout, and the buyout transfers the site to the client. Care is month to month. One-off projects are billed 50% upfront and 50% at launch.</p>
                   </section>
                   <section>
                     <h2 className="text-2xl font-black uppercase italic tracking-tighter text-foreground mb-4">5. Limitation of Liability</h2>

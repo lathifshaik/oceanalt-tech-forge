@@ -1,20 +1,18 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Oceanalt
 
-# Run and deploy your AI Studio app
+Websites for Australian small businesses on a monthly plan: **Care $29 · Launch $99 · Grow $199 AUD/month, $0 upfront.** Tell us what you need and we design, build, host and keep improving it. Already have a site? We rebuild it, payments included.
 
-This contains everything you need to run your app locally.
+- Business plan and unit economics: [`docs/business/BUSINESS_PLAN.md`](docs/business/BUSINESS_PLAN.md)
+- How the firm operates (pipeline, QA, KPIs, Stripe setup): [`docs/business/OPERATIONS.md`](docs/business/OPERATIONS.md)
+- Agent team and design skills: [`CLAUDE.md`](CLAUDE.md)
 
-View your app in AI Studio: https://ai.studio/apps/2db69a5c-38db-4075-99b0-18fa0a328a0e
+## Run locally
 
-## Run Locally
+Prerequisite: Node.js 20+.
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+cp .env.example .env   # fill in Gemini, EmailJS, Firebase and (optional) Stripe Payment Links
+npm run dev            # http://localhost:3000
+npm run lint && npm run build
+```

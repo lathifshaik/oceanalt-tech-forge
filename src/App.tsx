@@ -298,7 +298,6 @@ function Hero() {
     <div className="hero">
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <a className="hero-new" href="#ai">New: AI assistants that answer your customers <Icon name="arrow-right" /></a>
           <h1>Your website, done for you.</h1>
           <p>Custom-designed, built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
           <div className="ctas">
@@ -313,14 +312,13 @@ function Hero() {
           <div><dt>$0</dt><dd>upfront, on every plan</dd></div>
           <div><dt>1-3</dt><dd>days from first call to live</dd></div>
           <div><dt>15 min</dt><dd>to reply to an enquiry, day or night</dd></div>
-          <div><dt>1 of 1</dt><dd>every design, never reused</dd></div>
         </dl>
       </div>
     </div>
   );
 }
 
-function WorkCard({ w, onPick }: { w: (typeof WORK)[number]; onPick: (t: TemplateId) => void }) {
+function WorkCard({ w }: { w: (typeof WORK)[number] }) {
   const [i, setI] = useState(0);
   const d = w.designs[i];
   return (
@@ -342,14 +340,13 @@ function WorkCard({ w, onPick }: { w: (typeof WORK)[number]; onPick: (t: Templat
               <button key={x.path} type="button" aria-pressed={j === i} onClick={() => setI(j)}>{x.theme}</button>
             ))}
           </div>
-          <button className="text-link" type="button" onClick={() => onPick(w.id)}>Start one like this <Icon name="arrow-right" /></button>
         </div>
       </div>
     </article>
   );
 }
 
-function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
+function Work() {
   const track = useRef<HTMLDivElement>(null);
   const nudge = (dir: number) => {
     const el = track.current;
@@ -370,7 +367,7 @@ function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
         </div>
       </div>
       <div className="work-track" ref={track} tabIndex={0} aria-label="Example sites">
-        {WORK.map((w) => <WorkCard key={w.id} w={w} onPick={onPick} />)}
+        {WORK.map((w) => <WorkCard key={w.id} w={w} />)}
       </div>
       <div className="wrap">
         <p className="work-note">These are sample businesses we made to show the range; names and reviews are fictional. A real client's design is made for them and never given to anyone else.</p>
@@ -745,7 +742,6 @@ export default function App() {
   const [plan, setPlan] = useState("launch");
 
   const goStart = () => document.getElementById("start")?.scrollIntoView({ behavior: "smooth" });
-  const pickTemplate = (t: TemplateId) => { setTemplate(t); goStart(); };
   const pickPlan = (p: string) => { setPlan(p); goStart(); };
 
   return (
@@ -756,7 +752,7 @@ export default function App() {
       {route === "terms" ? <Terms /> : route === "privacy" ? <Privacy /> : (
         <main id="main">
           <Hero />
-          <Work onPick={pickTemplate} />
+          <Work />
           <AiDemo onAsk={() => pickPlan("ai")} />
           <How />
           <Pricing onPlan={pickPlan} />

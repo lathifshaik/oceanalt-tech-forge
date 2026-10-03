@@ -104,3 +104,9 @@ export async function POST(request: Request) {
     return json(200, { ok: true, live: false });
   }
 }
+
+// GET /api/demo: whether live answers are on, so the page only offers free
+// text when Claude can actually answer it.
+export function GET() {
+  return json(200, { live: Boolean(process.env.ANTHROPIC_API_KEY) });
+}

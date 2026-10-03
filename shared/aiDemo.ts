@@ -127,10 +127,10 @@ You can hold a slot and send details; the clinic confirms by SMS.`,
   {
     id: "review",
     tab: "Reply to reviews",
-    icon: "star",
+    icon: "quote",
     pitch: "Drafts a thoughtful reply to every Google review, for you to approve with one tap.",
     business: { name: "Kerr & Sons Electrical", initials: "KS", kind: "Electrician, Newcastle" },
-    opener: { from: "customer", text: "★★★☆☆  \"Good work on the switchboard but the electrician was 40 minutes late and didn't call ahead.\" Sam R." },
+    opener: { from: "customer", text: "3-star Google review: \"Good work on the switchboard but the electrician was 40 minutes late and didn't call ahead.\" Sam R." },
     facts: `Kerr & Sons Electrical, family-run electricians in Newcastle and Lake Macquarie. Owner: Jim Kerr.
 Promises: fixed price agreed before work starts, 12-month workmanship guarantee, same-day service for most calls before 1pm.
 Policy: if running late, the team is meant to text the customer. Phone 0491 570 156.

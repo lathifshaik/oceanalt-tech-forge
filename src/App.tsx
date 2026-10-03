@@ -298,7 +298,7 @@ function Hero() {
     <div className="hero">
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <a className="hero-new" href="#ai"><Icon name="sparkle" /> New: AI assistants that answer your customers <Icon name="arrow-right" /></a>
+          <a className="hero-new" href="#ai">New: AI assistants that answer your customers <Icon name="arrow-right" /></a>
           <h1>Your website, done for you.</h1>
           <p>Custom-designed, built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
           <div className="ctas">

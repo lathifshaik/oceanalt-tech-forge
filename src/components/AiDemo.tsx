@@ -34,7 +34,7 @@ function Thread({ msgs }: { msgs: Msg[] }) {
     <>
       {msgs.map((m, i) => (
         <div key={i} className={`ai-msg is-${m.kind}`}>
-          {m.kind === "agent" && <span className="ai-who"><Icon name="sparkle" /> Assistant</span>}
+          {m.kind === "agent" && <span className="ai-who">Assistant</span>}
           <p>{m.text}</p>
           {m.steps && m.steps.length > 0 && (
             <ul className="ai-did">

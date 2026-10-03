@@ -46,7 +46,7 @@ Every client build and every change to this marketing site uses the installed sk
 - `design-references` for a concrete starting token set (20 DESIGN.md breakdowns: Stripe, Airbnb, Notion, Wise…). Borrow the system, never the brand.
 - `react-best-practices` (Vercel) when writing or reviewing React code
 
-Starting points: three layouts (`cafe`, `trades`, `studio`) × seven themes × two hero styles, plus the client's own accent colour (see `templates/README.md`). We sell this as **custom design**, and it is: each client's combination is unique and enforced by the builder. See `templates/README.md` for the build command and the 1–3 day checklist. Never ship one unchanged: each client gets their own photos, words and accent colour, and sections are reordered to fit what their customers need to do first. Real photography is non-negotiable. A template without real photos looks AI-made.
+Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × seven themes × two hero styles, plus the client's own accent colour (see `templates/README.md`). We sell this as **custom design**, and it is: each client's combination is unique and enforced by the builder. See `templates/README.md` for the build command and the 1–3 day checklist. Never ship one unchanged: each client gets their own photos, words and accent colour, and sections are reordered to fit what their customers need to do first. Real photography is non-negotiable. A template without real photos looks AI-made.
 
 ## QA checklist (blocks launch)
 

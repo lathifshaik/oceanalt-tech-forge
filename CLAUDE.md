@@ -9,7 +9,7 @@ Oceanalt is run as a small firm of Claude agents plus the founder. It sells webs
 Pricing, delivery time and terms appear in three places, and they must always agree: the BUSINESS_PLAN, `PLANS`/`FAQ` in `src/App.tsx`, and the `Terms` component in `src/App.tsx`. Change them together.
 
 ## Client sites (`templates/`)
-Three layouts (`cafe`, `trades`, `studio`) × seven themes (`templates/themes/themes.json`) × two hero styles, plus a per-client accent. Also a zero-dependency builder and Oceanalt's custom icon set. One `site.json` per client is rendered to a static page, and the builder refuses a design another client already has. Publicly we call this **custom design, never reused**; don't call it "templates" in client-facing copy. `npm run templates` builds the examples into `public/work/` for the portfolio (this runs automatically before `dev` and `build`). Read `templates/README.md` before building a client site.
+Five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × seven themes (`templates/themes/themes.json`) × two hero styles, plus a per-client accent. Also a zero-dependency builder and Oceanalt's custom icon set. One `site.json` per client is rendered to a static page, and the builder refuses a design another client already has. Publicly we call this **custom design, never reused**; don't call it "templates" in client-facing copy. `npm run templates` builds the examples into `public/work/` for the portfolio (this runs automatically before `dev` and `build`). Read `templates/README.md` before building a client site. Design references collected in Chrome live in `docs/design/references/` (how: `docs/design/REFERENCE_BOARDS.md`).
 
 ## The team (`.claude/agents/`)
 | Agent | Owns |

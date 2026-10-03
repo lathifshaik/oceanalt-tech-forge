@@ -4,7 +4,7 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 
 A site's look comes from three independent choices, so no two clients get the same design:
 
-1. **Layout** (`template`): `cafe`, `trades` or `studio`. This is the structure, built around how that kind of business gets customers.
+1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
 2. **Theme** (`design.theme`): one of seven complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
 3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`).
 
@@ -29,6 +29,8 @@ All theme colour pairs pass WCAG AA. The `accent-text` token exists for themes w
 | `cafe` | Cafés, bakeries, small restaurants, bars | Full-bleed photo hero; a 3D hanging sign flips to OPEN or CLOSED from the real opening hours |
 | `trades` | Electricians, plumbers, builders, cleaners, mobile services | Job photo with a 3D licence card that tilts with the pointer; sticky call bar on phones |
 | `studio` | Salons, clinics, physio, Pilates, massage, coaches | Bookable treatments with prices; a 3D gift voucher that flips to show its terms |
+| `shop` | Florists, makers, boutiques, bakeries that deliver (up to ~50 products) | Product grid where each product has its own Stripe Payment Link; a 3D delivery tag that counts down to the same-day cutoff |
+| `pro` | Accountants, lawyers, real estate, consultants | Services with fixed fees, fee list, team, FAQs; a 3D business card that flips to show contact details and a "Save contact" vCard |
 
 Each example business is built in three designs (the `showcase` list in each `meta.json`) into `public/work/` by `npm run templates`. The marketing site shows them with a design switcher.
 
@@ -50,6 +52,12 @@ The build fails with a clear list if a required field is missing (see each templ
 **Payments and bookings:** `business.bookingUrl` (Cal.com, Fresha, Square…), `gift.buyUrl` and `bookUrl` on any treatment take Stripe Payment Links created in the **client's own** Stripe account.
 
 **Forms:** `contact.formAction` takes any form endpoint (Formspree, Web3Forms, Basin). Leave it out and the page shows phone and email only.
+
+**Shop delivery:** `"delivery": { "cutoff": { "time": "1pm", "days": ["mon", "tue"] }, "facts": [...] }` turns on the countdown tag.
+
+**Save contact:** every site gets `business.vcard` (a vCard data URI) from its phone, email and address. Set `business.contactName` and `business.contactRole` to put a person on the card.
+
+**Reference boards:** to refresh a layout or add a theme, collect references first (`docs/design/REFERENCE_BOARDS.md`).
 
 ## Photos
 
@@ -76,7 +84,7 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/build.mjs`: renderer (Mustache subset), `<head>`, SEO and JSON-LD
 - `engine/build-all.mjs`: builds every example into `public/work/` for the portfolio
 - `engine/base.css`: shared reset and accessibility styles
-- `engine/fx.js`: the 3D tilt, flip, live open/closed sign and today's hours (around 2 KB, no dependencies)
-- `icons/icons.json`: Oceanalt's custom icon set (43 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
+- `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
+- `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
 - `themes/themes.json`: the seven design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

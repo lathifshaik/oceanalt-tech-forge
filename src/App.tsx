@@ -7,7 +7,7 @@ import { Icon, type IconName } from "./components/Icon";
 
 const EMAIL = "hello@oceanalt.com.au";
 
-type TemplateId = "cafe" | "trades" | "studio";
+type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
 // Each example business shown in three of its designs. Paths match the
 // showcase list in templates/<template>/meta.json (built by `npm run templates`).
@@ -49,6 +49,28 @@ const WORK: {
       { path: "tidewater-physio-pilates", theme: "Calm" },
       { path: "tidewater-physio-pilates-ink", theme: "Ink" },
       { path: "tidewater-physio-pilates-forest", theme: "Forest" },
+    ],
+  },
+  {
+    id: "shop",
+    kind: "Florist",
+    business: "Wattle & Fern, Hobart",
+    pitch: "Every bunch has its own Buy button, paid straight into the shop's Stripe. The delivery tag counts down to the same-day cutoff.",
+    designs: [
+      { path: "wattle-and-fern-florist", theme: "Sun" },
+      { path: "wattle-and-fern-florist-forest", theme: "Forest" },
+      { path: "wattle-and-fern-florist-ink", theme: "Ink" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Law firm",
+    business: "Harlow Reid Lawyers, Parramatta",
+    pitch: "Fixed fees in plain sight, the team up front, and a business card that flips over to save the firm straight to your phone.",
+    designs: [
+      { path: "harlow-reid-lawyers", theme: "Ink" },
+      { path: "harlow-reid-lawyers-calm", theme: "Calm" },
+      { path: "harlow-reid-lawyers-night", theme: "Night" },
     ],
   },
 ];
@@ -342,7 +364,7 @@ function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
     <section id="work">
       <div className="wrap">
         <h2 className="h2">Designed for one business. Never reused.</h2>
-        <p className="lede">Every site gets its own colours, type, layout and photography. To show the range, here are three businesses, each in three different designs. Switch between them.</p>
+        <p className="lede">Every site gets its own colours, type, layout and photography. To show the range, here are five businesses, each in three different designs. Switch between them.</p>
         <div className="work-grid">
           {WORK.map((w) => <WorkCard key={w.id} w={w} onPick={onPick} />)}
         </div>
@@ -479,7 +501,14 @@ function Faq() {
   );
 }
 
-const TEMPLATE_LABEL: Record<string, string> = { cafe: "Café, restaurant or bar", trades: "Trade or home service", studio: "Appointments (salon, clinic, studio)", unsure: "Something else" };
+const TEMPLATE_LABEL: Record<string, string> = {
+  cafe: "Café, restaurant or bar",
+  trades: "Trade or home service",
+  studio: "Appointments (salon, clinic, studio)",
+  shop: "Shop or online orders",
+  pro: "Professional services (accounting, legal, real estate)",
+  unsure: "Something else",
+};
 const PLAN_LABEL: Record<string, string> = {
   launch: "Launch ($99/month)",
   grow: "Grow ($149/month)",

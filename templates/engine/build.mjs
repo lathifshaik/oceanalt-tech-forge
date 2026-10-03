@@ -133,6 +133,25 @@ function enrich(site) {
   if (b.address) {
     data.business.mapUrl = b.mapUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${b.name} ${b.address}`)}`;
   }
+  // Same-day delivery cutoff for the countdown in engine/fx.js.
+  const cut = site.delivery && site.delivery.cutoff;
+  if (cut) {
+    const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const days = (cut.days || ["mon", "tue", "wed", "thu", "fri", "sat"]).map((d) => DAYS.indexOf(String(d).slice(0, 3).toLowerCase()));
+    if (days.includes(-1)) throw new Error(`delivery.cutoff.days must be day names, e.g. ["mon", "tue"]`);
+    data.delivery.cutoffJson = JSON.stringify({ time: cut.time, days });
+    data.delivery.label = data.delivery.label || "Same-day delivery";
+    data.delivery.fallback = data.delivery.fallback || `Order by ${cut.time} for same-day delivery`;
+  }
+  // A "save contact" card (vCard) as a data URI, for any template that wants one.
+  if (b.phone || b.email) {
+    const esc = (v) => String(v).replace(/[,;\\]/g, (c) => "\\" + c);
+    const vcf = ["BEGIN:VCARD", "VERSION:3.0", `FN:${esc(b.contactName || b.name)}`, `ORG:${esc(b.name)}`,
+      b.contactRole && `TITLE:${esc(b.contactRole)}`, b.phone && `TEL;TYPE=WORK,VOICE:${b.phone}`, b.email && `EMAIL:${b.email}`,
+      b.address && `ADR;TYPE=WORK:;;${esc(b.street || b.address)};${esc(b.suburb || "")};${esc(b.state || "")};${esc(b.postcode || "")};Australia`,
+      site.url && `URL:${site.url}`, "END:VCARD"].filter(Boolean).join("\r\n");
+    data.business.vcard = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcf);
+  }
   // Mark today's opening hours so templates can highlight them without JS.
   if (Array.isArray(b.hours)) {
     data.business.hours = b.hours.map((h, i) => ({ ...h, dayIndex: (i + 1) % 7 }));

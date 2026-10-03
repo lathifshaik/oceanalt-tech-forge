@@ -1,0 +1,135 @@
+{
+  "template": "pro",
+  "slug": "harlow-reid-lawyers",
+  "url": "https://harlowreid.example/",
+  "_note": "Sample business for the gallery. Names, numbers, fees and details are fictional.",
+  "schemaType": "LegalService",
+  "business": {
+    "name": "Harlow Reid Lawyers",
+    "headline": "Clear legal advice, at a price agreed upfront.",
+    "intro": "Wills, property and family law for people and small businesses in Western Sydney. Fixed fees wherever we can.",
+    "address": "Level 3, 88 George Street, Parramatta NSW 2150",
+    "street": "Level 3, 88 George Street",
+    "suburb": "Parramatta",
+    "state": "NSW",
+    "postcode": "2150",
+    "phone": "(02) 5550 2741",
+    "email": "hello@harlowreid.example",
+    "contactName": "Amira Harlow",
+    "contactRole": "Principal solicitor",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Book a free 15-minute call",
+    "disclaimer": "Sample site made by Oceanalt to show the Professional layout. Not a real law firm, and nothing here is legal advice."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=75&auto=format&fit=crop",
+    "photoAlt": "Bronze statue of Lady Justice holding scales"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "text": "Practising solicitors in NSW"
+    },
+    {
+      "icon": "tag",
+      "text": "Fixed fees on most matters"
+    },
+    {
+      "icon": "clock",
+      "text": "Reply within one business day"
+    }
+  ],
+  "servicesIntro": "Plain-English advice, and a written quote before any work starts.",
+  "services": [
+    {
+      "icon": "file",
+      "name": "Wills and estates",
+      "desc": "Wills, powers of attorney and guardianship, done properly and kept on file.",
+      "fee": "From $450"
+    },
+    {
+      "icon": "home",
+      "name": "Buying and selling property",
+      "desc": "Conveyancing for houses, units and off-the-plan purchases.",
+      "fee": "From $1,100"
+    },
+    {
+      "icon": "heart",
+      "name": "Family law",
+      "desc": "Separation, property settlements and parenting arrangements, aiming for agreement first.",
+      "fee": "First meeting $250"
+    },
+    {
+      "icon": "briefcase",
+      "name": "Small business",
+      "desc": "Leases, contracts, partnership agreements and debt recovery.",
+      "fee": "Quoted per matter"
+    }
+  ],
+  "feesIntro": "Every quote is in writing. If the scope changes, we tell you before the price does.",
+  "fees": [
+    {
+      "item": "Simple will",
+      "price": "$450",
+      "note": "Per person, includes one round of changes"
+    },
+    {
+      "item": "Couple's wills",
+      "price": "$790",
+      "note": "Mirror wills for partners"
+    },
+    {
+      "item": "Enduring power of attorney",
+      "price": "$350"
+    },
+    {
+      "item": "Conveyancing, purchase",
+      "price": "$1,100",
+      "note": "Plus searches and government fees, itemised in your quote"
+    }
+  ],
+  "team": [
+    {
+      "name": "Amira Harlow",
+      "role": "Principal solicitor",
+      "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=75&auto=format&fit=crop&crop=faces",
+      "bio": "Fifteen years in property and estates law. Speaks English and Arabic."
+    },
+    {
+      "name": "Daniel Reid",
+      "role": "Senior associate",
+      "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=75&auto=format&fit=crop&crop=faces",
+      "bio": "Family law and small business disputes, with a focus on settling early."
+    }
+  ],
+  "process": [
+    {
+      "title": "A free 15-minute call",
+      "desc": "Tell us what's happening. We'll say whether we can help and what it's likely to cost."
+    },
+    {
+      "title": "A written quote",
+      "desc": "A fixed fee or a clear estimate, with what's included and what isn't."
+    },
+    {
+      "title": "We get to work",
+      "desc": "You'll know who's handling your matter and hear from us at every step."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Is the first call really free?",
+      "a": "Yes. Fifteen minutes by phone or video, with no obligation. If we're not the right firm, we'll tell you who might be."
+    },
+    {
+      "q": "Do you do video meetings?",
+      "a": "Yes. Most of our clients never need to come in, though you're welcome to visit the Parramatta office."
+    },
+    {
+      "q": "How do I pay?",
+      "a": "Fixed-fee work is paid in two parts: half when you sign the agreement and half when it's done. You can pay by card or bank transfer."
+    }
+  ],
+  "contactTitle": "Talk to a solicitor",
+  "contactIntro": "Book a free 15-minute call, or save our details and call when it suits you."
+}

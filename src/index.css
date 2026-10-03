@@ -121,6 +121,8 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); scroll-margin-top: 5rem; }
 .work:nth-child(1) { grid-column: span 7; }
 .work:nth-child(2) { grid-column: span 5; }
 .work:nth-child(3) { grid-column: span 12; flex-direction: row; }
+.work:nth-child(4) { grid-column: span 5; }
+.work:nth-child(5) { grid-column: span 7; }
 .work:nth-child(3) .work-img { flex: 1.4; aspect-ratio: auto; min-height: 20rem; }
 .work:nth-child(3) .work-body { flex: 1; justify-content: center; }
 .work-img { display: block; aspect-ratio: 1.6; overflow: hidden; background: var(--surface); }

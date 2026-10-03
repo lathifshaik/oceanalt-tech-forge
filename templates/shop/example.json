@@ -1,0 +1,147 @@
+{
+  "template": "shop",
+  "slug": "wattle-and-fern-florist",
+  "url": "https://wattleandfern.example/",
+  "_note": "Sample business for the gallery. Names, numbers and reviews are fictional. Buy links are placeholders for Stripe Payment Links.",
+  "schemaType": "Florist",
+  "business": {
+    "name": "Wattle & Fern",
+    "headline": "Flowers that last the week, delivered today.",
+    "intro": "Seasonal bunches arranged in Hobart every morning. Order online, we deliver across the city.",
+    "address": "12 Liverpool Street, Hobart TAS 7000",
+    "street": "12 Liverpool Street",
+    "suburb": "Hobart",
+    "state": "TAS",
+    "postcode": "7000",
+    "phone": "0491 571 266",
+    "email": "hello@wattleandfern.example",
+    "instagram": "wattleandfern",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "8am",
+        "close": "5pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "8am",
+        "close": "5pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "8am",
+        "close": "5pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "8am",
+        "close": "5pm"
+      },
+      {
+        "day": "Friday",
+        "open": "8am",
+        "close": "6pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8am",
+        "close": "2pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=1400&q=75&auto=format&fit=crop",
+    "photoAlt": "A hand-tied bouquet of garden roses and greenery"
+  },
+  "delivery": {
+    "cutoff": {
+      "time": "1pm",
+      "days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat"
+      ]
+    },
+    "facts": [
+      {
+        "icon": "van",
+        "title": "Same-day delivery",
+        "detail": "Order by 1pm, Monday to Saturday"
+      },
+      {
+        "icon": "pin",
+        "title": "Across Hobart",
+        "detail": "$12 within 10 km, free over $120"
+      },
+      {
+        "icon": "gift",
+        "title": "Card included",
+        "detail": "Add your message at checkout"
+      }
+    ]
+  },
+  "shopTitle": "This week's flowers",
+  "shopIntro": "What's in season changes every week, so each bunch is a little different. Every one is arranged to order.",
+  "products": [
+    {
+      "name": "Market bunch",
+      "price": "$65",
+      "desc": "The florist's pick of what's best this morning.",
+      "photo": "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example",
+      "tag": "Most popular"
+    },
+    {
+      "name": "Tulips in a jar",
+      "price": "$55",
+      "desc": "Ten stems in a recycled glass jar you can keep.",
+      "photo": "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Red garden roses",
+      "price": "$95",
+      "desc": "Twelve fragrant garden roses, loosely wrapped.",
+      "photo": "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Single statement rose",
+      "price": "$18",
+      "desc": "One perfect long-stem rose with a handwritten card.",
+      "photo": "https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example",
+      "soldOut": true
+    }
+  ],
+  "shopNote": "Prices in AUD and include GST. Payments are processed securely by Stripe.",
+  "story": {
+    "title": "Grown nearby, arranged by hand",
+    "body": "We buy from three growers in the Huon Valley and arrange everything in the shop. Nothing is flown in, so the flowers are fresher and last longer in the vase.",
+    "photo": "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Pink tulips in a glass vase"
+  },
+  "reviews": [
+    {
+      "quote": "Ordered at 11 for my mum's birthday and they arrived before lunch. She sent me a photo, they were beautiful.",
+      "name": "Georgia L.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Still looking great ten days later. Best flowers in Hobart.",
+      "name": "Sam P.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Easy to order on my phone and the card message was handwritten.",
+      "name": "Ruth A.",
+      "source": "Google review"
+    }
+  ]
+}

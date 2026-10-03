@@ -1,8 +1,8 @@
 @import "@fontsource-variable/geist";
 
 /* Oceanalt. Design read: a premium studio site for Australian small-business
-   owners. Calm, confident, photo- and work-led. Light by default, following
-   the system theme. One accent (sea teal), one cool neutral family.
+   owners. Calm, confident, photo- and work-led. Light only, whatever the
+   visitor's system theme. One accent (sea teal), one cool neutral family.
    Shape rule: interactive = full pill, containers = 24px, media = 18px. */
 :root {
   --bg: #f5f6f4;
@@ -21,21 +21,7 @@
   --r-box: 24px;
   --r-media: 18px;
   --gutter: max(1.25rem, calc((100vw - 76rem) / 2));
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b1317;
-    --surface: #111c21;
-    --card: #15222a;
-    --ink: #e7eef0;
-    --muted: #97a8af;
-    --line: #213139;
-    --accent: #5cc3d3;
-    --accent-ink: #062027;
-    --accent-soft: #11313a;
-    --shadow: 0 0 0;
-    color-scheme: dark;
-  }
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

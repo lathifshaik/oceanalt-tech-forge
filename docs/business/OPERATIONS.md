@@ -77,6 +77,17 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
 | Avg edit minutes used, Launch | ≤ 25 | Tighten scope language in onboarding |
 | Lead → close rate | ≥ 15% of qualified calls | Rework offer or call script |
 
+## Business details and domain (one-off)
+
+- **ABN:** 65 119 854 062. Shown in the site footer, Terms, Privacy and the reply email footer. Put it on every invoice too (required on tax invoices).
+- **ABN Lookup:** on 3 October 2026 the ABN wasn't showing on ABN Lookup yet (new ABNs appear from their activation date). auDA's .com.au eligibility check uses it, so the domain stays pending until it shows.
+- **Business name:** to trade as "Oceanalt" under a sole-trader ABN, register "Oceanalt" as a business name with ASIC (business.gov.au). It also makes the .com.au name match.
+- **oceanalt.com.au, once active:**
+  1. Vercel: Project, Settings, Domains, add `oceanalt.com.au` and `www.oceanalt.com.au`, then add the DNS records Vercel shows at the registrar.
+  2. Email: set up `hello@oceanalt.com.au` (Google Workspace, Zoho or registrar forwarding). The site and Terms already use this address.
+  3. Resend: add the domain, add its DNS records (SPF, DKIM), then set `LEAD_FROM_EMAIL` to `Oceanalt <hello@oceanalt.com.au>`.
+  4. Send a test enquiry through the form.
+
 ## 15-minute reply setup (one-off)
 
 1. **Anthropic API key:** create one at console.anthropic.com and set a monthly spend limit there.

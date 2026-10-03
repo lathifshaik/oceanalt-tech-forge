@@ -7,6 +7,7 @@ import { AiDemo } from "./components/AiDemo";
 // Terms page below. Change them together.
 
 const EMAIL = "hello@oceanalt.com.au";
+const ABN = "65 119 854 062";
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
@@ -650,7 +651,7 @@ function Footer() {
     <footer className="foot">
       <div className="wrap">
         <div className="foot-row">
-          <span>© {new Date().getFullYear()} Oceanalt, Sydney</span>
+          <span>© {new Date().getFullYear()} Oceanalt, Sydney · ABN {ABN}</span>
           <nav aria-label="Footer">
             <a href="#work">Work</a>
             <a href="#pricing">Pricing</a>
@@ -682,6 +683,7 @@ function Legal({ title, children }: { title: string; children: ReactNode }) {
 function Terms() {
   return (
     <Legal title="Terms of service">
+      <p>These terms are between you and Oceanalt (ABN {ABN}), based in Sydney, Australia.</p>
       <h2>1. Services</h2>
       <p>Oceanalt designs, builds, hosts and maintains websites for small businesses, either on a monthly plan (Care, Launch or Grow) or as a one-off project. What each plan includes is listed on the pricing section of this site and confirmed in writing before work starts.</p>
       <h2>2. Delivery</h2>
@@ -706,7 +708,7 @@ function Privacy() {
   return (
     <Legal title="Privacy policy">
       <h2>1. Contact</h2>
-      <p>Oceanalt is based in Sydney, Australia. For privacy enquiries, email {EMAIL}.</p>
+      <p>Oceanalt (ABN {ABN}) is based in Sydney, Australia. For privacy enquiries, email {EMAIL}.</p>
       <h2>2. What is collected</h2>
       <p>When you send the start form, we collect your name, business name, email, and optionally your phone number, current website and message. No tracking pixels or third-party analytics are used by default.</p>
       <h2>3. Where it is stored</h2>

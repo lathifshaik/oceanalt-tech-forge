@@ -149,6 +149,7 @@ function replyEmail(lead: Lead, rec: Recommendation | null) {
   lines.push(rec
     ? `<p style="color:#6b7280;font-size:12px">This first reply was prepared by our AI assistant from what you sent us. A person reads every enquiry and will follow up the same business day.</p>`
     : `<p style="color:#6b7280;font-size:12px">A person reads every enquiry and will follow up the same business day.</p>`);
+  lines.push(`<p style="color:#6b7280;font-size:12px">Oceanalt, Sydney, Australia. ABN 65 119 854 062.</p>`);
   return lines.join("\n");
 }
 

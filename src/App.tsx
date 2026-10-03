@@ -137,15 +137,53 @@ const FAQ: { q: string; a: string }[] = [
 
 // ─── Pieces ─────────────────────────────────────────────────────────────────
 
-function Logo() {
+// Two waves drawn past the edges of the circle and clipped to it. Each path
+// repeats every 16 units, so sliding it 16 units left loops seamlessly.
+const WAVE = (y: number, amp: number) => `M-16 ${y}q4 ${-amp} 8 0` + " t8 0".repeat(7);
+
+// The waves roll for a few loops after load, then settle: motion that runs
+// forever next to content is distracting. Hovering the logo sets them rolling
+// again, faster. Uses the Web Animations API so a finished animation can be
+// replayed, and speed changes don't make the waves jump.
+const ROLL = [{ transform: "translateX(0)" }, { transform: "translateX(-16px)" }];
+
+export function LogoMark({ className = "", rolling = false }: { className?: string; rolling?: boolean }) {
+  const ref = useRef<SVGSVGElement>(null);
+  const anims = useRef<Animation[]>([]);
+  useEffect(() => {
+    const svg = ref.current;
+    if (!svg || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    anims.current = [...svg.querySelectorAll<SVGPathElement>(".wave")].map((w, i) =>
+      w.animate(ROLL, { duration: i === 0 ? 3200 : 4600, iterations: i === 0 ? 4 : 3, easing: "linear" }),
+    );
+    return () => anims.current.forEach((a) => a.cancel());
+  }, []);
+  useEffect(() => {
+    anims.current.forEach((a) => {
+      a.updatePlaybackRate(rolling ? 2.5 : 1);
+      if (rolling && a.playState === "finished") a.play();
+    });
+  }, [rolling]);
   return (
-    <a className="logo" href="#top" aria-label="Oceanalt home">
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
-        <circle cx="16" cy="16" r="13" />
-        <path d="M7 17.5c2.2-2 4.3-2 6.5 0s4.3 2 6.5 0 4.3-2 5 0" />
-        <path d="M9 22c1.8-1.4 3.6-1.4 5.4 0s3.6 1.4 5.4 0" opacity=".55" />
-      </svg>
-      oceanalt
+    <svg ref={ref} className={`mark ${className}`} viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
+      <defs>
+        <clipPath id="mark-clip"><circle cx="16" cy="16" r="12" /></clipPath>
+      </defs>
+      <circle cx="16" cy="16" r="13" />
+      <g clipPath="url(#mark-clip)">
+        <path className="wave" d={WAVE(16.5, 2.6)} />
+        <path className="wave" d={WAVE(21.5, 2)} opacity=".5" />
+      </g>
+    </svg>
+  );
+}
+
+function Logo() {
+  const [hover, setHover] = useState(false);
+  return (
+    <a className="logo" href="#top" aria-label="Oceanalt home" onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
+      <LogoMark rolling={hover} />
+      <span translate="no">oceanalt</span>
     </a>
   );
 }
@@ -159,18 +197,35 @@ function Nav() {
     io.observe(sentinel);
     return () => io.disconnect();
   }, []);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+  const links = [
+    ["#work", "Work"],
+    ["#how", "How it works"],
+    ["#pricing", "Pricing"],
+    ["#faq", "FAQ"],
+  ];
   return (
-    <header className={`nav${scrolled ? " is-scrolled" : ""}`}>
+    <header className={`nav${scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
       <div className="wrap">
         <Logo />
         <nav className="nav-links" aria-label="Main">
-          <a href="#work">Work</a>
-          <a href="#how">How it works</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
+          {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
         </nav>
         <a className="btn btn-primary" href="#start">Start my website</a>
+        <button className="menu-btn" type="button" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
+          <Icon name={open ? "plus" : "menu"} className={`i${open ? " is-x" : ""}`} />
+          <span className="sr">{open ? "Close menu" : "Open menu"}</span>
+        </button>
       </div>
+      <nav id="mobile-menu" className="mobile-menu" aria-label="Main" hidden={!open}>
+        {links.map(([href, label]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
+      </nav>
     </header>
   );
 }
@@ -210,7 +265,7 @@ function Stack() {
               <span /><span /><span />
               <em>{path.split("-").slice(0, -1).join("") || path}.com.au</em>
             </div>
-            <img src={`/previews/${path}.webp`} alt="" width={1200} height={750} />
+            <img src={`/previews/${path}.webp`} alt="" width={1200} height={750} fetchPriority="high" />
           </a>
         ))}
       </div>
@@ -487,7 +542,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
               <div className="field"><label htmlFor="f-business">Business name</label><input id="f-business" name="business" autoComplete="organization" required /></div>
             </div>
             <div className="row">
-              <div className="field"><label htmlFor="f-email">Email</label><input id="f-email" name="email" type="email" autoComplete="email" required /></div>
+              <div className="field"><label htmlFor="f-email">Email</label><input id="f-email" name="email" type="email" autoComplete="email" spellCheck={false} required /></div>
               <div className="field"><label htmlFor="f-phone">Phone <small>(optional)</small></label><input id="f-phone" name="phone" type="tel" autoComplete="tel" /></div>
             </div>
             <div className="row">
@@ -504,7 +559,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
                 </select>
               </div>
             </div>
-            <div className="field"><label htmlFor="f-website">Current website <small>(if you have one)</small></label><input id="f-website" name="website" type="url" inputMode="url" placeholder="https://" /></div>
+            <div className="field"><label htmlFor="f-website">Current website <small>(if you have one)</small></label><input id="f-website" name="website" type="text" inputMode="url" autoComplete="url" spellCheck={false} placeholder="yourbusiness.com.au…" /></div>
             <div className="field"><label htmlFor="f-message">What does your business do, and what should the site help with?</label><textarea id="f-message" name="message" rows={4} required /></div>
             {state === "error" && <p className="form-error" role="alert">That didn't send. Please try again, or email {EMAIL} directly.</p>}
             <button className="btn btn-accent" type="submit" disabled={state === "sending"}>

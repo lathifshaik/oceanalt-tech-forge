@@ -6,8 +6,8 @@ How the firm runs day to day. Each stage names the agent in `.claude/agents/` th
 
 | Stage | Owner agent | Output | Time target |
 |---|---|---|---|
-| 1. Lead in (form, chatbot, outreach) | `growth` | Lead in Firestore `leads` + inbox email | — |
-| 2. Qualify + plan fit | `client-success` | Reply within 24 h: recommended plan, what's included, 15-min call link | 24 h |
+| 1. Lead in (form, outreach) | `growth` | `api/start.ts` emails the enquirer a recommended plan + booking link and sends us the lead (fallback: Firestore + EmailJS) | **≤ 15 min, any time** |
+| 2. Qualify + plan fit | `client-success` | A person reads every enquiry and the AI's suggestion, corrects it if needed, and confirms the call | Same business day |
 | 3. Brief + content | `client-success` | `clients/<slug>/BRIEF.md` and `clients/<slug>/site.json` (copied from the closest `templates/*/example.json`); we write the copy | Day 0, same day as the call |
 | 4. Preview | `designer` | Built site on a private preview URL. The designer picks the layout, theme, hero and accent for this client (the builder refuses a combination another client has), then places photos and orders sections around what customers do first | Within 24 h |
 | 5. Approval → first charge | `client-success` | Client approves; Stripe trial ends or is ended early | — |
@@ -76,6 +76,23 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
 | Avg build hours, Launch | ≤ 6 h | Improve templates and pipeline |
 | Avg edit minutes used, Launch | ≤ 25 | Tighten scope language in onboarding |
 | Lead → close rate | ≥ 15% of qualified calls | Rework offer or call script |
+
+## 15-minute reply setup (one-off)
+
+1. **Anthropic API key:** create one at console.anthropic.com and set a monthly spend limit there.
+2. **Resend:** create an account, verify the `oceanalt.com.au` domain (DNS records), and create an API key.
+3. **Booking link:** a Cal.com, Calendly or Google Calendar link for 15-minute calls.
+4. In Vercel → Project → Settings → Environment Variables, set `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `LEAD_FROM_EMAIL`, `LEAD_NOTIFY_EMAIL` and `BOOKING_URL` (see `.env.example`), then redeploy.
+5. Test it: send the form with your own email. You should get the reply within a minute, and the lead email as well.
+
+Until this is set up, the form falls back to Firebase/EmailJS, and the site's "15 minutes" claim isn't true. **Don't ship the 15-minute copy to production before step 5 passes.**
+
+## AI add-on operations
+
+- Use the same pattern as `api/start.ts`, deployed per client: a fixed system prompt with their prices, hours and FAQs, and structured output where possible.
+- Create a separate Anthropic API key (or workspace) per client, so usage can be read per client and billed at cost.
+- Set each client's monthly usage cap in Anthropic's console to match what they agreed.
+- Bill usage monthly in arrears, at cost, converted to AUD, alongside their plan.
 
 ## Stripe setup (one-off)
 

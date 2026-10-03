@@ -152,6 +152,14 @@ const FAQ: { q: string; a: string }[] = [
     a: "After 12 months you can cancel any time from your billing page and keep the site, code and domain. Leaving earlier costs the rest of the first year or a $1,499 buyout, whichever is less, and the site is still yours.",
   },
   {
+    q: "Do you really run on AI agents?",
+    a: "Yes. AI agents research your business, draft your pages, build and test the site, and write the first reply to every enquiry. People choose your design, check every word and photo, approve every launch and talk to you on the phone. That split is why a custom site costs $99 a month instead of thousands upfront.",
+  },
+  {
+    q: "How do you reply in 15 minutes?",
+    a: "When you send the form, our AI assistant reads it and emails you straight away with a suggested plan and a link to book a call. A person reads every enquiry the same business day. It's the same assistant we can set up on your own site.",
+  },
+  {
     q: "Do you build custom apps too?",
     a: "Sometimes. Client portals, internal tools and small SaaS products are quoted per project. Send a brief and you'll get a scope and a price within 24 hours.",
   },
@@ -318,7 +326,7 @@ function Facts() {
     { icon: "sparkle", text: "Custom design, never reused" },
     { icon: "tag", text: "From $99 a month, $0 upfront" },
     { icon: "bolt", text: "Live in 1 to 3 days" },
-    { icon: "home", text: "Yours to keep after 12 months" },
+    { icon: "clock", text: "Replies in 15 minutes" },
   ];
   return (
     <div className="facts">
@@ -376,7 +384,7 @@ function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
 
 function How() {
   const steps: { when: string; icon: IconName; title: string; body: string }[] = [
-    { when: "Day 0", icon: "chat", title: "Tell us about your business", body: "A 15-minute call or the form below. Send photos if you have them. We write the words." },
+    { when: "Within 15 minutes", icon: "chat", title: "Tell us about your business", body: "Use the form below. Our AI assistant replies within minutes with a suggested plan, then we have a 15-minute call. We write the words." },
     { when: "Within 24 hours", icon: "eye", title: "See your design", body: "A private preview link to check on your phone. Ask for changes, and nothing is charged until you're happy." },
     { when: "Day 1 to 3", icon: "send", title: "Go live, then we look after it", body: "We connect your domain, Google profile and payments. After that, just email us when something needs changing." },
   ];
@@ -393,6 +401,41 @@ function How() {
             </li>
           ))}
         </ol>
+      </div>
+    </section>
+  );
+}
+
+function Agents() {
+  const agents = [
+    "Research your business, customers and competitors",
+    "Draft every page in plain English",
+    "Build, test and check the site on phones",
+    "Reply to every enquiry within minutes",
+    "Keep your site updated and monitored",
+  ];
+  const people = [
+    "Choose your design and check it against your brand",
+    "Read every word and photo before it goes live",
+    "Approve every launch",
+    "Talk to you on the phone, whenever you need",
+  ];
+  return (
+    <section className="agents">
+      <div className="wrap">
+        <h2 className="h2">Run on AI agents. Checked by people.</h2>
+        <p className="lede">Oceanalt is a small Australian studio where AI agents do the legwork. That's how a custom website costs $99 a month instead of thousands upfront, goes live in days, and you hear back in minutes.</p>
+        <div className="split">
+          <div className="col col-agents">
+            <h3><Icon name="sparkle" /> What the agents do</h3>
+            <ul>{agents.map((a) => <li key={a}><Icon name="check" /> {a}</li>)}</ul>
+          </div>
+          <div className="col">
+            <h3><Icon name="person" /> What people do</h3>
+            <ul>{people.map((p) => <li key={p}><Icon name="check" /> {p}</li>)}</ul>
+          </div>
+        </div>
+        <p className="try"><Icon name="clock" /> Try it: send the form at the bottom of this page and see how quickly you hear back.</p>
       </div>
     </section>
   );
@@ -422,6 +465,26 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
               <button className="btn btn-line" type="button" onClick={() => onPlan(p.id)}>Choose {p.name}</button>
             </div>
           ))}
+        </div>
+        <div className="ai-addon">
+          <div className="ai-head">
+            <span className="plan-badge">Add-on</span>
+            <h3>Put AI agents to work in your business</h3>
+            <p>The same agents we use, set up for you. AI usage is billed separately at cost, so you only pay for what your customers actually use.</p>
+          </div>
+          <div className="ai-grid">
+            <div>
+              <h4><Icon name="chat" /> AI assistant</h4>
+              <p className="ai-price num"><b>$39</b>/month + AI usage</p>
+              <p>Answers customer questions on your site and replies to enquiries within minutes, using your prices, hours and FAQs. Usage is usually $5 to $30 a month for a small business, and you set a monthly cap.</p>
+            </div>
+            <div>
+              <h4><Icon name="sparkle" /> Custom AI agents</h4>
+              <p className="ai-price"><b>Quoted</b> per project + AI usage</p>
+              <p>Quote follow-ups, booking reminders, review replies, sorting leads, chasing invoices. We build agents for the busywork that eats your evenings.</p>
+            </div>
+          </div>
+          <button className="btn btn-line" type="button" onClick={() => onPlan("ai")}>Ask about AI agents</button>
         </div>
         <div className="plan-extra">
           <div>
@@ -516,19 +579,40 @@ const PLAN_LABEL: Record<string, string> = {
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",
   custom: "Custom project",
+  ai: "AI assistant or custom AI agents",
   unsure: "Not sure yet",
 };
 
 function Start({ template, plan, setTemplate, setPlan }: { template: string; plan: string; setTemplate: (v: string) => void; setPlan: (v: string) => void }) {
-  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "done" | "replied" | "error">("idle");
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     setState("sending");
+    const site = String(data.get("website") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    // First choice: /api/start, where our AI assistant emails a reply within
+    // minutes (see api/start.ts). If that isn't configured, fall back to saving
+    // the lead through Firebase/EmailJS.
     try {
-      const site = String(data.get("website") || "").trim();
-      const phone = String(data.get("phone") || "").trim();
+      const res = await fetch("/api/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"), business: data.get("business"), email: data.get("email"),
+          phone, website: site, template, plan, message: data.get("message"),
+          company_site: data.get("company_site"),
+        }),
+      });
+      if (res.ok && (await res.json()).replied) {
+        setState("replied");
+        return;
+      }
+    } catch {
+      // Network error or no API in this environment: use the fallback below.
+    }
+    try {
       // Firebase is ~450 KB, so it loads only when someone actually sends the form.
       const { saveLead } = await import("./firebase");
       await saveLead({
@@ -550,19 +634,25 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
       <div className="wrap">
         <div>
           <h2 className="h2">Start your website</h2>
-          <p className="lede">Tell us a little about your business. We'll reply within one business day to book a 15-minute call.</p>
+          <p className="lede">Tell us a little about your business. You'll hear back within 15 minutes, day or night, with a suggested plan and a link to book a call.</p>
           <div className="start-aside">
             <a href={`mailto:${EMAIL}`}><Icon name="mail" /> {EMAIL}</a>
             <span><Icon name="pin" /> Based in Sydney, working Australia-wide</span>
-            <span><Icon name="clock" /> Replies within one business day</span>
+            <span><Icon name="clock" /> Replies within 15 minutes, any time</span>
           </div>
         </div>
 
-        {state === "done" ? (
+        {state === "replied" ? (
+          <div className="form-done" role="status">
+            <Icon name="mail" />
+            <h3>Check your inbox.</h3>
+            <p>Our AI assistant has already emailed you a suggested plan and a link to book a 15-minute call. A person reads every enquiry and will follow up today. If it's not there in a minute, check your spam folder.</p>
+          </div>
+        ) : state === "done" ? (
           <div className="form-done" role="status">
             <Icon name="check-circle" />
             <h3>Thanks, we've got it.</h3>
-            <p>We'll email you within one business day to book a quick call. If you have photos or a logo handy, reply to that email with them.</p>
+            <p>We'll be in touch shortly to book a quick call. If you have photos or a logo handy, reply to that email with them.</p>
           </div>
         ) : (
           <form className="form" onSubmit={submit}>
@@ -589,7 +679,8 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
               </div>
             </div>
             <div className="field"><label htmlFor="f-website">Current website <small>(if you have one)</small></label><input id="f-website" name="website" type="text" inputMode="url" autoComplete="url" spellCheck={false} placeholder="yourbusiness.com.au…" /></div>
-            <div className="field"><label htmlFor="f-message">What does your business do, and what should the site help with?</label><textarea id="f-message" name="message" rows={4} required /></div>
+            <div className="field"><label htmlFor="f-message">What does your business do, and what should the site help with?</label><textarea id="f-message" name="message" rows={4} maxLength={2000} required /></div>
+            <div className="hp" aria-hidden="true"><label htmlFor="f-company-site">Leave this empty</label><input id="f-company-site" name="company_site" tabIndex={-1} autoComplete="off" /></div>
             {state === "error" && <p className="form-error" role="alert">That didn't send. Please try again, or email {EMAIL} directly.</p>}
             <button className="btn btn-accent" type="submit" disabled={state === "sending"}>
               {state === "sending" ? "Sending…" : "Send"} <Icon name="send" />
@@ -648,7 +739,9 @@ function Terms() {
       <p>Included edit time covers changes to existing pages. New pages or features are quoted in writing before work starts. Unused edit time does not roll over.</p>
       <h2>6. Payments to the client</h2>
       <p>Where a site takes payments, they are processed by Stripe into the client's own Stripe account. Oceanalt does not hold client funds or handle card data.</p>
-      <h2>7. Limitation of liability</h2>
+      <h2>7. AI add-ons</h2>
+      <p>The AI assistant add-on costs $39 AUD a month plus AI usage. Usage is billed monthly in arrears at the AI provider's price, converted to AUD, with no markup. The client sets a monthly usage cap; when it's reached, the assistant pauses until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
+      <h2>8. Limitation of liability</h2>
       <p>To the extent permitted by the Australian Consumer Law, Oceanalt is not liable for indirect or consequential loss arising from the use of, or inability to use, the services.</p>
     </Legal>
   );
@@ -662,7 +755,7 @@ function Privacy() {
       <h2>2. What is collected</h2>
       <p>When you send the start form, we collect your name, business name, email, and optionally your phone number, current website and message. No tracking pixels or third-party analytics are used by default.</p>
       <h2>3. Where it is stored</h2>
-      <p>Submissions are stored in Google Firestore, and a copy is sent to the Oceanalt inbox via EmailJS.</p>
+      <p>Your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. These providers process the data on our behalf and don't use it to train models.</p>
       <h2>4. How it is used</h2>
       <p>Submissions are used to reply to you and scope your website. Data is not sold, shared with third parties for marketing, or used to train any model. Deletion requests are honoured.</p>
       <h2>5. Your rights under the Privacy Act 1988</h2>
@@ -708,6 +801,7 @@ export default function App() {
           <Facts />
           <Work onPick={pickTemplate} />
           <How />
+          <Agents />
           <Pricing onPlan={pickPlan} />
           <Rebuild onPlan={pickPlan} />
           <Promises />

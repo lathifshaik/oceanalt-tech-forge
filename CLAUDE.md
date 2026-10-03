@@ -11,6 +11,9 @@ Pricing (including the AI add-on), delivery time, reply time and terms appear in
 ## The 15-minute reply (`api/start.ts`)
 A Vercel function: the start form posts to it, Claude recommends a plan and layout as structured output, and Resend emails the reply to the enquirer and the lead to us. It falls back to the Firebase/EmailJS path if its env vars aren't set. Our USP is that Oceanalt runs on AI agents, checked by people, so keep that claim true: a person reads every enquiry the same business day.
 
+## The AI agent demo (`api/demo.ts`)
+The `#ai` section (`src/components/AiDemo.tsx`) is a working phone where visitors watch an agent answer customers, take bookings, reply to reviews and chase quotes, with each step listed beside it. Scenarios, facts and scripted sample answers live in `shared/aiDemo.ts`. With `ANTHROPIC_API_KEY` set, Claude answers live from that scenario's facts; otherwise the scripted answers play and the phone says "Sample". The businesses are fictional, so keep them labelled that way.
+
 ## Client sites (`templates/`)
 Five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × seven themes (`templates/themes/themes.json`) × two hero styles, plus a per-client accent. Also a zero-dependency builder and Oceanalt's custom icon set. One `site.json` per client is rendered to a static page, and the builder refuses a design another client already has. Publicly we call this **custom design, never reused**; don't call it "templates" in client-facing copy. `npm run templates` builds the examples into `public/work/` for the portfolio (this runs automatically before `dev` and `build`). Read `templates/README.md` before building a client site. Design references collected in Chrome live in `docs/design/references/` (how: `docs/design/REFERENCE_BOARDS.md`).
 

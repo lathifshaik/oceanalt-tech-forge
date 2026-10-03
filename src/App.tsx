@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Icon, type IconName } from "./components/Icon";
+import { AiDemo } from "./components/AiDemo";
 
 // ─── Content ─────────────────────────────────────────────────────────────────
 // Pricing and terms here must match docs/business/BUSINESS_PLAN.md and the
@@ -309,6 +310,7 @@ function Hero() {
     <div className="hero">
       <div className="wrap">
         <div>
+          <a className="announce" href="#ai"><span>New</span> AI agents for your business <Icon name="arrow-right" /></a>
           <h1>Your website, done for you.</h1>
           <p>Custom-designed for your business, then built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
           <div className="ctas">
@@ -407,48 +409,6 @@ function How() {
   );
 }
 
-// What we build for clients with AI. Our own 15-minute reply is the live demo.
-const AI_SERVICES: { icon: IconName; title: string; body: string; tag?: string }[] = [
-  { icon: "chat", title: "AI assistant on your website", body: "Answers customer questions day and night using your real prices, hours and FAQs, and hands anything tricky to you.", tag: "Start here" },
-  { icon: "mail", title: "Instant enquiry replies", body: "Every enquiry gets a helpful reply within minutes, even at 11pm. It's the same thing that answers our own form." },
-  { icon: "calendar", title: "Bookings and reminders", body: "Takes bookings, handles reschedules and sends reminders, so fewer no-shows and fewer phone calls." },
-  { icon: "star", title: "Review replies and follow-ups", body: "Drafts replies to your Google reviews and follows up quotes that went quiet, for you to approve." },
-  { icon: "sparkle", title: "Custom AI for your busywork", body: "Chasing invoices, sorting leads, writing job notes: if it eats your evenings, we can usually automate it." },
-];
-
-function AiForBusiness({ onAsk }: { onAsk: () => void }) {
-  return (
-    <section className="ai" id="ai">
-      <div className="wrap">
-        <h2 className="h2">AI for your business, built by us</h2>
-        <p className="lede">Beyond websites, we build practical AI tools for small businesses: tools that answer customers, take bookings and handle the admin, set up around how you work.</p>
-        <ul className="ai-grid">
-          {AI_SERVICES.map((s) => (
-            <li key={s.title}>
-              <Icon name={s.icon} />
-              {s.tag && <span className="ai-tag">{s.tag}</span>}
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </li>
-          ))}
-          <li className="ai-try">
-            <h3>See it working</h3>
-            <p>Send the form at the bottom of this page. Our own AI assistant will reply within minutes.</p>
-            <a className="link" href="#start">Try it <Icon name="arrow-right" /></a>
-          </li>
-        </ul>
-        <div className="ai-pricing">
-          <div>
-            <h3>Simple pricing</h3>
-            <p><b className="num">$39</b>/month for the AI assistant, or a fixed quote for anything custom. AI usage is billed separately at cost (usually $5 to $30 a month for a small business), and you set a monthly cap.</p>
-          </div>
-          <button className="btn btn-accent" type="button" onClick={onAsk}>Ask about AI for my business</button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
   return (
     <section id="pricing">
@@ -474,7 +434,7 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
             </div>
           ))}
         </div>
-        <p className="ai-pointer"><Icon name="sparkle" /> Want AI on your site too? See <a className="link" href="#ai">AI for your business</a>: from $39 a month.</p>
+        <p className="ai-pointer"><Icon name="sparkle" /> Want AI on your site too? See <a className="link" href="#ai">our AI agents</a>: from $39 a month.</p>
         <div className="plan-extra">
           <div>
             <h3>Rather own it outright?</h3>
@@ -789,10 +749,10 @@ export default function App() {
           <Hero />
           <Facts />
           <Work onPick={pickTemplate} />
+          <AiDemo onAsk={() => pickPlan("ai")} />
           <How />
           <Pricing onPlan={pickPlan} />
           <Rebuild onPlan={pickPlan} />
-          <AiForBusiness onAsk={() => pickPlan("ai")} />
           <Promises />
           <Faq />
           <Start template={template} plan={plan} setTemplate={setTemplate} setPlan={setPlan} />

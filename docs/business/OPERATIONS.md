@@ -89,6 +89,8 @@ Until this is set up, the form falls back to Firebase/EmailJS, and the site's "1
 
 ## AI add-on operations
 
+- **The site demo (`api/demo.ts`)** uses the same `ANTHROPIC_API_KEY`. Each live answer costs a few cents; it's rate-limited to 10 per visitor per hour, and the review and quote scenarios only accept their suggested prompts. Set a monthly spend limit on that key in Anthropic's console. Without the key, the demo plays labelled sample answers.
+
 - Use the same pattern as `api/start.ts`, deployed per client: a fixed system prompt with their prices, hours and FAQs, and structured output where possible.
 - Create a separate Anthropic API key (or workspace) per client, so usage can be read per client and billed at cost.
 - Set each client's monthly usage cap in Anthropic's console to match what they agreed.

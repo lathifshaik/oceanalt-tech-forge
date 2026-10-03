@@ -1,0 +1,258 @@
+<style>
+/* Studio. Calm and bookings-first: full-bleed photo hero with the nav laid over
+   it in a glass pill and a curved hand-off into the page, practitioner intro,
+   treatments with times and prices that each link to booking, a 3D gift
+   voucher that flips to show its terms, team, policies, hours. One light
+   typeface at large sizes. Colours, type and shape come from the theme
+   (templates/themes); hero is "full" or "split". */
+body{font-weight:400}
+h1,h2,h3{font-weight:var(--display-weight);letter-spacing:var(--display-tracking)}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.4rem;border-radius:var(--r-btn);font-weight:500;text-decoration:none;white-space:nowrap;border:0;font:inherit;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}
+.btn:active{transform:translateY(1px)}
+.btn-accent{background:var(--accent);color:var(--on-accent)} .btn-accent:hover{filter:brightness(.94)}
+.btn-light{background:#fff;color:#1c2422}
+.btn-line{border:1px solid var(--line);color:var(--ink);background:transparent} .btn-line:hover{border-color:var(--ink)}
+
+.hero{position:relative;min-height:clamp(560px,92vh,860px);display:flex;align-items:flex-end;color:#fff;background:#1c2422;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgb(10 20 18 / .35),rgb(10 20 18 / 0) 35%,rgb(10 20 18 / .55))}
+.hero .wrap{position:relative;z-index:1;padding-block:8rem 7rem}
+.hero h1{font-size:clamp(2.8rem,6.6vw,5.6rem);line-height:1;max-width:12ch}
+.hero p{margin-top:1.25rem;font-size:1.2rem;opacity:.92;max-width:36ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.curve{position:absolute;left:0;right:0;bottom:-1px;height:3.5rem;background:var(--bg);border-radius:3.5rem 3.5rem 0 0;z-index:1}
+
+.top{position:absolute;inset:1rem 0 auto 0;z-index:5}
+.top .wrap{display:flex;align-items:center;gap:1rem;height:4rem;padding-inline:1rem 0.5rem;border-radius:999px;background:rgb(255 255 255 / .12);border:1px solid rgb(255 255 255 / .25);backdrop-filter:blur(14px);color:#fff}
+.brand{text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.5rem}
+.brand .i{width:1.4rem;height:1.4rem}
+.nav{display:flex;gap:1.6rem;margin-left:auto;font-size:.98rem}
+.nav a{text-decoration:none;opacity:.88} .nav a:hover{opacity:1}
+.top .btn{padding:.7rem 1.15rem}
+@media (max-width:820px){.nav{display:none}.top .btn{margin-left:auto}}
+
+section{padding-block:clamp(4rem,9vw,7rem)}
+.h2{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.05}
+.lede{color:var(--muted);margin-top:1rem;max-width:52ch;font-size:1.12rem}
+
+.intro .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,7vw,7rem);align-items:center}
+.intro .body{margin-top:1.25rem;font-size:1.15rem;color:var(--muted);max-width:48ch}
+.creds{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.75rem}
+.creds li{padding:.45rem .9rem;border-radius:999px;border:1px solid var(--line);font-size:.92rem}
+.portrait{border-radius:999px 999px 28px 28px;overflow:hidden;aspect-ratio:3/4;background:var(--surface)}
+.portrait img{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.intro .wrap{grid-template-columns:1fr}.portrait{max-width:24rem}}
+
+.treat{background:var(--surface)}
+.groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:3rem}
+.group{background:var(--card);border-radius:var(--r);padding:clamp(1.4rem,3vw,2.2rem)}
+.group h3{font-size:1.6rem;margin-bottom:.5rem}
+.tx{display:grid;grid-template-columns:1fr auto;gap:.2rem 1rem;align-items:center;padding-block:1rem}
+.tx+.tx{border-top:1px solid var(--line)}
+.tx b{font-weight:500;font-size:1.08rem}
+.tx .meta{color:var(--muted);font-size:.95rem}
+.tx .price{font-weight:500;font-size:1.08rem;text-align:right}
+.tx a{grid-column:2;grid-row:2;justify-self:end;font-size:.9rem;font-weight:500;color:var(--accent-text);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem}
+.tx a:hover{text-decoration:underline}
+.tx a .i{width:1rem;height:1rem}
+@media (max-width:860px){.groups{grid-template-columns:1fr}}
+
+/* Signature: a gift voucher in 3D. It floats, tilts with the pointer, and flips to show the terms. */
+.gift .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,7vw,6rem);align-items:center}
+.gift-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.voucher-stage{perspective:1200px;display:grid;place-items:center;padding-block:1rem}
+.voucher{width:min(100%,26rem);aspect-ratio:1.6;transform:rotateX(calc(10deg + var(--rx,0deg))) rotateY(calc(-14deg + var(--ry,0deg)));transform-style:preserve-3d;transition:transform .8s cubic-bezier(.16,1,.3,1);animation:float 6s ease-in-out infinite}
+.voucher-stage.is-tilting .voucher{transition:transform .08s linear;animation-play-state:paused}
+.voucher-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.3,1.3,.45,1)}
+.voucher.is-flipped .voucher-inner{transform:rotateY(180deg)}
+.v-face{position:absolute;inset:0;border-radius:22px;padding:1.5rem;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;
+  box-shadow:0 40px 60px -30px rgb(10 30 28 / .55)}
+.v-front{background:linear-gradient(140deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 70%,#000) 60%,color-mix(in srgb,var(--accent) 50%,#000) 100%);color:var(--on-accent)}
+.v-front::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--gx,25%) var(--gy,15%),rgb(255 255 255 / .35),transparent 45%);mix-blend-mode:soft-light}
+.v-front::before{content:"";position:absolute;right:-3rem;top:-3rem;width:11rem;height:11rem;border-radius:50%;border:1px solid rgb(255 255 255 / .2);box-shadow:0 0 0 1.5rem rgb(255 255 255 / .04),0 0 0 3rem rgb(255 255 255 / .03)}
+.v-front .v-name{font-size:1.15rem;font-weight:500;display:flex;align-items:center;gap:.5rem}
+.v-front .v-name .i{width:1.3rem;height:1.3rem}
+.v-front .v-amt{margin-top:auto;font-family:var(--font-display);font-size:3.2rem;font-weight:var(--display-weight);letter-spacing:-.04em;line-height:1}
+.v-front .v-label{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:.4rem}
+.v-back{background:var(--card);color:var(--ink);transform:rotateY(180deg);border:1px solid var(--line);font-size:.95rem;gap:.5rem}
+.v-back b{font-weight:500;font-size:1.05rem}
+.v-back ul{display:grid;gap:.35rem;color:var(--muted)}
+.v-back li{display:flex;gap:.45rem;align-items:flex-start} .v-back li .i{width:1.05rem;height:1.05rem;color:var(--accent-text);margin-top:.2rem}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@media (max-width:860px){.gift .wrap{grid-template-columns:1fr}}
+
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem;margin-top:3rem}
+.member .ph{border-radius:var(--r-img);overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
+.member .ph img{width:100%;height:100%;object-fit:cover}
+.member h3{font-size:1.35rem;margin-top:1rem}
+.member p{color:var(--muted);font-size:.98rem}
+
+.info{background:var(--surface)}
+.info .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
+.addr{font-family:var(--font-display);font-size:1.5rem;font-weight:var(--display-weight);letter-spacing:var(--display-tracking);margin-top:1rem;max-width:22ch;line-height:1.3}
+.contact{display:grid;gap:.6rem;margin-top:1.5rem}
+.contact a{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;width:fit-content}
+.contact a:hover{color:var(--accent-text)}
+.hours{display:grid;gap:.1rem;margin-top:1.75rem}
+.hours li{display:flex;justify-content:space-between;padding:.6rem .85rem;border-radius:12px}
+.hours li.is-today{background:var(--card);font-weight:500}
+.policies{display:grid;gap:.9rem;align-content:start}
+.policies details{background:var(--card);border-radius:var(--r);padding:1.1rem 1.3rem}
+.policies summary{cursor:pointer;font-weight:500;font-size:1.08rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+.policies summary::-webkit-details-marker{display:none}
+.policies summary::after{content:"+";font-weight:300;font-size:1.4rem;line-height:1;color:var(--accent-text);transition:rotate .2s}
+.policies details[open] summary::after{rotate:45deg}
+.policies p{color:var(--muted);margin-top:.6rem}
+@media (max-width:860px){.info .wrap{grid-template-columns:1fr}}
+
+.cta-band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;padding:clamp(2rem,5vw,3.5rem);border-radius:var(--r);background:var(--accent);color:var(--on-accent)}
+.cta-band h2{font-size:clamp(1.8rem,3.6vw,2.6rem);max-width:18ch}
+.cta-band .btn{background:var(--on-accent);color:var(--accent)}
+
+/* Hero variant: split. Text on the page colour, photo on the right. */
+.hero-split .top .wrap{background:color-mix(in srgb,var(--card) 82%,transparent);border-color:var(--line);color:var(--ink)}
+.hero-split .top .btn-light{background:var(--ink);color:var(--bg)}
+.hero-split .hero{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(560px,86vh,800px);align-items:stretch;background:var(--bg);color:var(--ink)}
+.hero-split .hero::after,.hero-split .curve{display:none}
+.hero-split .hero-img{position:relative;grid-area:1/2;height:100%;border-radius:0 0 0 var(--r-img)}
+.hero-split .hero .wrap{grid-area:1/1;width:auto;margin:0;align-self:center;padding:7rem clamp(1.25rem,5vw,4rem) 4rem max(1.25rem,calc((100vw - 72rem) / 2))}
+.hero-split .hero h1{font-size:clamp(2.3rem,4.4vw,3.9rem);max-width:15ch}
+.hero-split .hero p{opacity:1;color:var(--muted)}
+.hero-split .hero .btn-light{background:transparent;color:var(--ink);border:1px solid var(--line)}
+@media (max-width:860px){
+  .hero-split .hero{grid-template-columns:1fr}
+  .hero-split .hero-img{grid-area:2/1;height:auto;aspect-ratio:4/3;border-radius:0}
+  .hero-split .hero .wrap{padding:7rem 1.25rem 2.5rem}
+}
+
+footer{padding-block:2.5rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between}
+footer a{text-decoration:none} footer a:hover{color:var(--ink)}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#main">{{icon:sparkle}} {{business.name}}</a>
+    <nav class="nav" aria-label="Main"><a href="#treatments">Treatments</a>{{#gift}}<a href="#gift">Gift vouchers</a>{{/gift}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#visit">Visit</a></nav>
+    <a class="btn btn-light" href="{{business.bookingUrl}}">Book online</a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <img class="hero-img" src="{{hero.photo}}" alt="{{hero.photoAlt}}" width="1800" height="1200" fetchpriority="high">
+    <div class="wrap">
+      <h1>{{business.headline}}</h1>
+      <p>{{business.intro}}</p>
+      <div class="ctas">
+        <a class="btn btn-accent" href="{{business.bookingUrl}}">{{icon:calendar}} Book online</a>
+        <a class="btn btn-light" href="#treatments">See treatments</a>
+      </div>
+    </div>
+    <div class="curve" aria-hidden="true"></div>
+  </div>
+
+  {{#about}}
+  <section class="intro">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">{{title}}</h2>
+        <p class="body">{{body}}</p>
+        {{#badges}}{{#@first}}<ul class="creds">{{/@first}}<li>{{.}}</li>{{#@last}}</ul>{{/@last}}{{/badges}}
+      </div>
+      {{#photo}}<div class="portrait"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="1200" loading="lazy"></div>{{/photo}}
+    </div>
+  </section>
+  {{/about}}
+
+  <section class="treat" id="treatments">
+    <div class="wrap">
+      <h2 class="h2">Treatments</h2>
+      {{#treatmentsIntro}}<p class="lede">{{treatmentsIntro}}</p>{{/treatmentsIntro}}
+      <div class="groups">
+        {{#treatments}}
+        <div class="group">
+          <h3>{{group}}</h3>
+          {{#items}}
+          <div class="tx">
+            <div><b>{{name}}</b>{{#duration}}<div class="meta">{{duration}}{{#note}} &middot; {{note}}{{/note}}</div>{{/duration}}</div>
+            <span class="price num">{{price}}</span>
+            <a href="{{#bookUrl}}{{bookUrl}}{{/bookUrl}}{{^bookUrl}}{{business.bookingUrl}}{{/bookUrl}}">Book {{icon:arrow-right}}</a>
+          </div>
+          {{/items}}
+        </div>
+        {{/treatments}}
+      </div>
+    </div>
+  </section>
+
+  {{#gift}}
+  <section class="gift" id="gift">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">{{title}}</h2>
+        <p class="lede">{{body}}</p>
+        <div class="gift-actions">
+          <a class="btn btn-accent" href="{{buyUrl}}">{{icon:gift}} Buy a voucher</a>
+          <button class="btn btn-line" type="button" data-flip-toggle="voucher" aria-expanded="false">See the terms</button>
+        </div>
+      </div>
+      <div class="voucher-stage" data-tilt="7">
+        <div class="voucher" id="voucher">
+          <div class="voucher-inner">
+            <div class="v-face v-front">
+              <span class="v-name">{{icon:sparkle}} {{business.name}}</span>
+              <span class="v-amt num">{{amount}}</span>
+              <span class="v-label">Gift voucher</span>
+            </div>
+            <div class="v-face v-back">
+              <b>How it works</b>
+              <ul>{{#terms}}<li>{{icon:check}} {{.}}</li>{{/terms}}</ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/gift}}
+
+  {{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">The team</h2><div class="team-grid">{{/@first}}
+    <figure class="member" style="margin:0">
+      {{#photo}}<div class="ph"><img src="{{photo}}" alt="{{name}}" width="800" height="1000" loading="lazy"></div>{{/photo}}
+      <h3>{{name}}</h3><p>{{role}}</p>
+    </figure>
+  {{#@last}}</div></div></section>{{/@last}}{{/team}}
+
+  <section class="info" id="visit">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">Find us</h2>
+        <p class="addr">{{business.address}}</p>
+        <div class="contact">
+          {{#business.phone}}<a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>{{/business.phone}}
+          {{#business.email}}<a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>{{/business.email}}
+          <a href="{{business.mapUrl}}">{{icon:pin}} Get directions</a>
+        </div>
+        {{#business.hours}}{{#@first}}<ul class="hours num" aria-label="Opening hours">{{/@first}}<li data-day="{{dayIndex}}"><span>{{day}}</span><span>{{#open}}{{open}} to {{close}}{{/open}}{{^open}}Closed{{/open}}</span></li>{{#@last}}</ul>{{/@last}}{{/business.hours}}
+      </div>
+      <div class="policies">
+        {{#policies}}<details{{#@first}} open{{/@first}}><summary>{{q}}</summary><p>{{a}}</p></details>{{/policies}}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>{{#closingLine}}{{closingLine}}{{/closingLine}}{{^closingLine}}Ready when you are.{{/closingLine}}</h2>
+      <a class="btn" href="{{business.bookingUrl}}">{{icon:calendar}} Book online</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; {{year}} {{business.name}}{{#business.abn}} &middot; ABN {{business.abn}}{{/business.abn}}</span>
+    <span>{{#business.instagram}}<a href="https://instagram.com/{{business.instagram}}">Instagram</a>{{/business.instagram}}</span>
+  </div>
+</footer>

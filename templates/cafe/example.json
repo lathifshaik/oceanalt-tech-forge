@@ -1,0 +1,149 @@
+{
+  "template": "cafe",
+  "slug": "little-tern-coffee",
+  "url": "https://littletern.example/",
+  "_note": "Sample business for the template gallery. Names, numbers and reviews are fictional.",
+  "business": {
+    "name": "Little Tern Coffee",
+    "headline": "Good coffee by the harbour.",
+    "intro": "Specialty espresso, toasties made to order and pastries baked here every morning.",
+    "address": "31 Tern Lane, Fremantle WA 6160",
+    "street": "31 Tern Lane",
+    "suburb": "Fremantle",
+    "state": "WA",
+    "postcode": "6160",
+    "phone": "(08) 5550 1427",
+    "email": "hello@littletern.example",
+    "instagram": "littleterncoffee",
+    "hoursSummary": "Open today from 6:30am",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "6:30am",
+        "close": "2pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "6:30am",
+        "close": "2pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "6:30am",
+        "close": "2pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "6:30am",
+        "close": "2pm"
+      },
+      {
+        "day": "Friday",
+        "open": "6:30am",
+        "close": "3pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "7am",
+        "close": "1pm"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "icon": "cup",
+      "text": "Beans roasted in Fremantle"
+    },
+    {
+      "icon": "leaf",
+      "text": "Oat, soy and almond at no extra cost"
+    },
+    {
+      "icon": "heart",
+      "text": "Dogs welcome on the deck"
+    }
+  ],
+  "menuIntro": "Everything's made here, apart from the sourdough, which comes from the bakery two doors down.",
+  "menu": [
+    {
+      "category": "Coffee",
+      "items": [
+        {
+          "name": "Espresso or long black",
+          "price": "4.50"
+        },
+        {
+          "name": "Flat white, latte or cappuccino",
+          "price": "5.20",
+          "desc": "Large +0.80"
+        },
+        {
+          "name": "Batch brew",
+          "price": "5.00",
+          "desc": "Rotating single origin, ask what's on"
+        },
+        {
+          "name": "Iced latte",
+          "price": "6.50"
+        }
+      ]
+    },
+    {
+      "category": "Food",
+      "items": [
+        {
+          "name": "Ham, cheese and mustard toastie",
+          "price": "12.00"
+        },
+        {
+          "name": "Mushroom and miso toastie (V)",
+          "price": "13.00"
+        },
+        {
+          "name": "Granola, yoghurt and poached pear",
+          "price": "15.00"
+        },
+        {
+          "name": "Almond croissant",
+          "price": "7.00",
+          "desc": "Baked here from 6am, until they're gone"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Gluten-free bread available. Tell us about any allergies when you order.",
+  "reviews": [
+    {
+      "quote": "The best flat white in Freo, and they remember your order by the second visit.",
+      "name": "Priya N.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Great toasties and a quiet deck in the morning.",
+      "name": "Tom W.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Friendly crew, quick even when it's packed.",
+      "name": "Mel K.",
+      "source": "Google review"
+    }
+  ],
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Inside the café, with the counter and hanging lights"
+  },
+  "story": {
+    "title": "Made here, every morning",
+    "body": "We open at 6:30 so the early shift and the school run can get a proper coffee. Pastries come out of our oven from six, and the toasties are made when you order.",
+    "photo": "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=1200&q=75&auto=format&fit=crop",
+    "photoAlt": "Pastry cabinet full of croissants and danishes"
+  },
+  "menuPhoto": "https://images.unsplash.com/photo-1623334044303-241021148842?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "Fresh croissants on a tray"
+}

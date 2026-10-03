@@ -1,0 +1,240 @@
+<style>
+/* Trades. Light and trust-first: split hero with a large job photo and a 3D
+   licence card overlapping it, services bento with a photo tile, process,
+   areas, reviews, quote form. The phone number is the main action and stays
+   pinned at the bottom of the screen on phones. Colours, type and shape come from
+   the theme (templates/themes); hero is "split" or "full". */
+h1,h2,h3{font-weight:var(--display-weight);letter-spacing:var(--display-tracking)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.9rem 1.35rem;border-radius:var(--r-btn);font:inherit;font-weight:700;text-decoration:none;white-space:nowrap;border:0;cursor:pointer;transition:transform .15s,filter .15s}
+.btn:active{transform:translateY(1px)}
+.btn-call{background:var(--accent);color:var(--on-accent)} .btn-call:hover{filter:brightness(.95)}
+.btn-dark{background:var(--accent-2);color:var(--on-accent-2)}
+.btn-line{border:1.5px solid var(--line);color:var(--ink);background:transparent} .btn-line:hover{border-color:var(--ink)}
+
+.top .wrap{display:flex;align-items:center;gap:1.25rem;height:4.75rem}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.1rem;letter-spacing:-.02em}
+.mark{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:calc(var(--r) * .6);background:var(--accent);color:var(--on-accent);font-size:.85rem;font-weight:800}
+.nav{display:flex;gap:1.6rem;margin-left:auto;font-weight:600;font-size:.98rem}
+.nav a{text-decoration:none;color:var(--muted)} .nav a:hover{color:var(--ink)}
+@media (max-width:760px){.nav{display:none}.top .btn{margin-left:auto;padding:.65rem 1rem}.top .btn span{display:none}}
+
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(1.5rem,4vw,3rem) clamp(3.5rem,7vw,5.5rem)}
+.pill{display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .8rem;border-radius:999px;background:var(--surface);font-weight:700;font-size:.85rem;margin-bottom:1.25rem}
+.pill .i{color:var(--accent-text);width:1.05rem;height:1.05rem;fill:currentColor}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.04}
+.hero p{margin-top:1.25rem;font-size:1.15rem;color:var(--muted);max-width:40ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.shot{position:relative;padding-bottom:3rem}
+.shot .photo{border-radius:var(--r-img);overflow:hidden;aspect-ratio:5/4;background:var(--surface)}
+.shot .photo img{width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+
+/* Signature: credentials as a physical licence card that tilts in 3D with a holographic sheen. */
+.licence{position:absolute;left:-2rem;bottom:0;width:min(20rem,78%);perspective:1000px}
+.lc{position:relative;border-radius:18px;padding:1.15rem 1.2rem 1rem;color:#0f1f33;
+  background:linear-gradient(135deg,#fdfdfb 0%,#eef2f6 55%,#dfe6ee 100%);
+  transform:rotateX(calc(8deg + var(--rx,0deg))) rotateY(calc(14deg + var(--ry,0deg)));transform-style:preserve-3d;
+  transition:transform .7s cubic-bezier(.16,1,.3,1);box-shadow:0 34px 50px -26px rgb(15 31 51 / .55),inset 0 1px 0 #fff}
+.licence.is-tilting .lc{transition:transform .08s linear}
+.lc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;mix-blend-mode:soft-light;
+  background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),#fff 0,transparent 45%),
+  linear-gradient(115deg,transparent 20%,#ffd1dc80 35%,#c3f0ff80 50%,#fff3b080 65%,transparent 80%)}
+.lc-head{display:flex;align-items:center;gap:.7rem;transform:translateZ(36px)}
+.lc-head b{display:block;font-size:.98rem;line-height:1.2}
+.lc-head small{color:#4a5a6e;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.lc-head > .i{margin-left:auto;width:1.8rem;height:1.8rem}
+.lc-foot{display:flex;justify-content:space-between;align-items:center;margin-top:.9rem;padding:.6rem .8rem;border-radius:10px;background:#0f1f33;color:#f4f6f8;transform:translateZ(28px)}
+.lc-foot small{font-size:.7rem;opacity:.75;text-transform:uppercase;letter-spacing:.06em}
+.lc-foot b{letter-spacing:.08em}
+@media (max-width:900px){.licence{left:1rem}}
+
+.trust{border-block:1px solid var(--line)}
+.trust ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;padding-block:1.75rem}
+.trust li{display:flex;gap:.8rem;align-items:flex-start;font-weight:700}
+.trust .i{width:1.6rem;height:1.6rem;color:var(--on-accent);padding:.45rem;box-sizing:content-box;border-radius:calc(var(--r) * .6);background:var(--accent)}
+.trust small{display:block;font-weight:500;color:var(--muted);font-size:.92rem;margin-top:.1rem}
+@media (max-width:760px){.trust ul{grid-template-columns:1fr}}
+
+section{padding-block:clamp(4rem,8vw,6rem)}
+.h2{font-size:clamp(2rem,4vw,2.9rem)}
+.lede{color:var(--muted);margin-top:.75rem;max-width:56ch;font-size:1.08rem}
+
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(11.5rem,auto);grid-auto-flow:dense;gap:1rem;margin-top:2.5rem}
+.svc li:first-child{grid-column:span 2}
+.svc li{background:var(--surface);border-radius:var(--r);padding:1.6rem;display:flex;flex-direction:column;gap:.55rem}
+.svc li .i{width:1.8rem;height:1.8rem;margin-bottom:auto}
+.svc li:first-child{background:var(--accent-2);color:var(--on-accent-2)}
+.svc li:first-child p{color:inherit;opacity:.8}
+.svc li:first-child .from{color:var(--accent)}
+.svc h3{font-size:1.2rem;margin-top:1.5rem} .svc p{color:var(--muted);font-size:.98rem}
+.svc .from{font-weight:800;font-size:.95rem}
+.svc .tile-photo{grid-column:3;grid-row:1/span 3;padding:0;overflow:hidden;background:none}
+.svc .tile-photo img{width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){.svc{grid-template-columns:1fr 1fr}.svc .tile-photo{grid-row:auto;grid-column:1/-1;aspect-ratio:16/9;order:-1}}
+@media (max-width:560px){.svc{grid-template-columns:1fr}.svc li:first-child{grid-column:auto}}
+
+.how{background:var(--surface)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.5rem;margin-top:2.75rem;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:.5rem;align-content:start}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--accent);color:var(--on-accent);font-weight:800;margin-bottom:.5rem}
+.steps h3{font-size:1.2rem} .steps p{color:var(--muted)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+.area .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:2rem 4rem;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem}
+.chips li{padding:.5rem .95rem;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:.95rem}
+@media (max-width:760px){.area .wrap{grid-template-columns:1fr}}
+
+.reviews{background:var(--surface)}
+.rv-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem}
+.rating{display:inline-flex;align-items:center;gap:.5rem;font-weight:700}
+.rating .i{color:var(--accent-text);fill:currentColor}
+.rv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.5rem}
+.rv figure{margin:0;display:flex;flex-direction:column;gap:1rem;padding:1.6rem;border-radius:var(--r);background:var(--bg)}
+.stars{display:flex;gap:.1rem;color:#d99a00} .stars .i{width:1rem;height:1rem;fill:currentColor}
+.rv q{font-size:1.05rem;font-weight:500} .rv figcaption{color:var(--muted);font-size:.95rem;margin-top:auto}
+@media (max-width:900px){.rv{grid-template-columns:1fr}}
+
+.quote .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
+.direct{display:grid;gap:1rem;margin-top:1.75rem}
+.direct a,.direct span{display:flex;align-items:center;gap:.75rem;text-decoration:none;font-weight:700;font-size:1.08rem}
+.direct span{font-weight:500;color:var(--muted)}
+.direct .i{width:1.4rem;height:1.4rem;padding:.6rem;box-sizing:content-box;border-radius:calc(var(--r) * .7);background:var(--surface);color:var(--ink)}
+form{display:grid;gap:1rem;background:var(--surface);border-radius:var(--r);padding:clamp(1.25rem,3vw,2rem)}
+label{display:grid;gap:.4rem;font-weight:700;font-size:.93rem}
+input,textarea{font:inherit;font-weight:500;padding:.85rem .95rem;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+input:focus,textarea:focus{outline:none;border-color:var(--ink)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+form small{color:var(--muted)}
+@media (max-width:760px){.quote .wrap,.row2{grid-template-columns:1fr}}
+
+/* Hero variant: full. The job photo fills the hero; the licence card sits on top. */
+.hero-full .hero{position:relative;overflow:hidden;color:#fff;background:#0b1522}
+.hero-full .hero .wrap{min-height:clamp(540px,80vh,760px);padding-block:4rem;align-items:end}
+.hero-full .hero .wrap > div:first-child{position:relative;z-index:1}
+.hero-full .shot{position:static;padding:0}
+.hero-full .shot .photo{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}
+.hero-full .shot .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(8 14 22 / .85),rgb(8 14 22 / .45) 55%,rgb(8 14 22 / .15))}
+.hero-full .licence{position:relative;left:auto;bottom:auto;z-index:1;width:min(20rem,100%);margin-left:auto}
+.hero-full .hero p{color:rgb(255 255 255 / .85)}
+.hero-full .pill{background:rgb(255 255 255 / .14);color:#fff}
+.hero-full .btn-line{color:#fff;border-color:rgb(255 255 255 / .45)}
+@media (max-width:900px){.hero-full .licence{margin:1rem 0 0}}
+
+footer{border-top:1px solid var(--line);padding-block:2.5rem 6rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-between}
+@media (min-width:761px){footer{padding-bottom:2.5rem}}
+.callbar{display:none}
+@media (max-width:760px){
+  .callbar{display:flex;position:fixed;inset:auto 0 0 0;z-index:5;padding:.75rem 1rem calc(.75rem + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line);gap:.6rem}
+  .callbar .btn{flex:1}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#main"><span class="mark" aria-hidden="true">{{business.initials}}</span>{{business.name}}</a>
+    <nav class="nav" aria-label="Main"><a href="#services">Services</a><a href="#areas">Areas</a><a href="#reviews">Reviews</a><a href="#quote">Free quote</a></nav>
+    <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} <span>{{business.phone}}</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        {{#business.rating}}<span class="pill">{{icon:star}} {{business.rating}}</span>{{/business.rating}}
+        <h1>{{business.headline}}</h1>
+        <p>{{business.intro}}</p>
+        <div class="ctas">
+          <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} Call {{business.phone}}</a>
+          <a class="btn btn-line" href="#quote">Get a free quote</a>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="photo"><img src="{{hero.photo}}" alt="{{hero.photoAlt}}" width="1500" height="1200" fetchpriority="high"></div>
+        {{#business.licence}}
+        <div class="licence" data-tilt="8">
+          <div class="lc">
+            <div class="lc-head"><span class="mark" aria-hidden="true">{{business.initials}}</span><div><b>{{business.name}}</b><small>Licensed &amp; insured</small></div>{{icon:shield-check}}</div>
+            <div class="lc-foot"><small>{{business.licenceLabel}}</small><b class="num">{{business.licence}}</b></div>
+          </div>
+        </div>
+        {{/business.licence}}
+      </div>
+    </div>
+  </div>
+
+  {{#credentials}}{{#@first}}<div class="trust"><ul class="wrap">{{/@first}}
+    <li>{{icon:@icon}}<div>{{title}}{{#detail}}<small>{{detail}}</small>{{/detail}}</div></li>
+  {{#@last}}</ul></div>{{/@last}}{{/credentials}}
+
+  <section id="services">
+    <div class="wrap">
+      <h2 class="h2">What we do</h2>
+      {{#servicesIntro}}<p class="lede">{{servicesIntro}}</p>{{/servicesIntro}}
+      <ul class="svc">
+        {{#services}}<li>{{icon:@icon}}<h3>{{name}}</h3><p>{{desc}}</p>{{#from}}<span class="from num">{{from}}</span>{{/from}}</li>
+        {{/services}}
+        {{#servicesPhoto}}<li class="tile-photo"><img src="{{servicesPhoto}}" alt="{{servicesPhotoAlt}}" width="900" height="1100" loading="lazy"></li>{{/servicesPhoto}}
+      </ul>
+    </div>
+  </section>
+
+  {{#process}}{{#@first}}<section class="how"><div class="wrap"><h2 class="h2">How a job works</h2><ol class="steps">{{/@first}}
+    <li><h3>{{title}}</h3><p>{{desc}}</p></li>
+  {{#@last}}</ol></div></section>{{/@last}}{{/process}}
+
+  <section class="area" id="areas">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">Where we work</h2>
+        {{#areasNote}}<p class="lede">{{areasNote}}</p>{{/areasNote}}
+      </div>
+      <ul class="chips">{{#areas}}<li>{{.}}</li>{{/areas}}</ul>
+    </div>
+  </section>
+
+  {{#reviews}}{{#@first}}<section class="reviews" id="reviews"><div class="wrap"><div class="rv-head"><h2 class="h2">What customers say</h2>{{#business.rating}}<p class="rating">{{icon:star}} {{business.rating}}</p>{{/business.rating}}</div><div class="rv">{{/@first}}
+    <figure><div class="stars" role="img" aria-label="5 stars">{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}</div><q>{{quote}}</q><figcaption>{{name}}, {{suburb}}</figcaption></figure>
+  {{#@last}}</div></div></section>{{/@last}}{{/reviews}}
+
+  <section class="quote" id="quote">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">Get a free quote</h2>
+        <p class="lede">{{#quoteNote}}{{quoteNote}}{{/quoteNote}}{{^quoteNote}}Tell us what's going on and we'll get back to you with a price.{{/quoteNote}}</p>
+        <div class="direct">
+          <a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
+          {{#business.email}}<a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>{{/business.email}}
+          {{#business.hoursSummary}}<span>{{icon:clock}} {{business.hoursSummary}}</span>{{/business.hoursSummary}}
+        </div>
+      </div>
+      {{#contact.formAction}}
+      <form action="{{contact.formAction}}" method="post">
+        <div class="row2">
+          <label for="q-name">Name<input id="q-name" name="name" autocomplete="name" required></label>
+          <label for="q-phone">Phone<input id="q-phone" name="phone" type="tel" autocomplete="tel" required></label>
+        </div>
+        <label for="q-suburb">Suburb<input id="q-suburb" name="suburb" autocomplete="address-level2"></label>
+        <label for="q-job">What do you need done?<textarea id="q-job" name="message" rows="4" required></textarea></label>
+        <button class="btn btn-dark" type="submit">Send my request</button>
+        <small>We reply within one business day. Urgent? Call instead.</small>
+      </form>
+      {{/contact.formAction}}
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; {{year}} {{business.name}}{{#business.licence}} &middot; {{business.licenceLabel}} {{business.licence}}{{/business.licence}}{{#business.abn}} &middot; ABN {{business.abn}}{{/business.abn}}</span>
+    <span>{{business.serviceArea}}</span>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} Call now</a>
+  <a class="btn btn-line" href="#quote">Free quote</a>
+</div>

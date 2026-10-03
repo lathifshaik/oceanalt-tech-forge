@@ -1,0 +1,32 @@
+{
+  "name": "Trades",
+  "for": "Plumbers, electricians, builders, cleaners, landscapers, mobile services",
+  "required": [
+    "business.name",
+    "business.headline",
+    "business.intro",
+    "business.phone",
+    "hero.photo",
+    "services",
+    "areas"
+  ],
+  "defaultTheme": "coast",
+  "heroVariants": [
+    "split",
+    "full"
+  ],
+  "showcase": [
+    {
+      "theme": "coast",
+      "hero": "split"
+    },
+    {
+      "theme": "ink",
+      "hero": "full"
+    },
+    {
+      "theme": "sun",
+      "hero": "split"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+<style>
+/* Shop. Products first: hero with a 3D delivery tag that counts down to the
+   same-day cutoff, a product grid where every product has its own Stripe
+   Payment Link (no cart to maintain), delivery facts, story, reviews, visit.
+   Colours, type and shape come from the theme; hero is "split" or "full". */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.35rem;border-radius:var(--r-btn);font-weight:600;text-decoration:none;white-space:nowrap;border:0;font:inherit;font-weight:600;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),filter .2s}
+.btn:active{transform:translateY(1px)}
+.btn-accent{background:var(--accent);color:var(--on-accent)} .btn-accent:hover{filter:brightness(.94)}
+.btn-dark{background:var(--accent-2);color:var(--on-accent-2)}
+.btn-line{background:transparent;color:inherit;border:1.5px solid var(--line)} .btn-line:hover{border-color:currentColor}
+h1,h2,h3{font-weight:var(--display-weight);letter-spacing:var(--display-tracking)}
+
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:1.5rem;height:4.5rem}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.15rem;letter-spacing:-.02em}
+.brand .i{width:1.6rem;height:1.6rem;color:var(--accent-text)}
+.nav{display:flex;gap:1.6rem;margin-left:auto;font-weight:500}
+.nav a{text-decoration:none;color:var(--muted)} .nav a:hover{color:var(--ink)}
+.top .btn{padding:.65rem 1.1rem}
+@media (max-width:760px){.nav{display:none}.top .btn{margin-left:auto}}
+
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(2rem,5vw,4rem) clamp(3rem,6vw,5rem)}
+.hero h1{font-size:clamp(2.2rem,4.4vw,3.8rem);line-height:1.04;max-width:16ch}
+.hero p{margin-top:1.2rem;font-size:1.15rem;color:var(--muted);max-width:38ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.shot{position:relative}
+.shot .photo{border-radius:var(--r-img);overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
+.shot .photo img{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.shot .photo{aspect-ratio:4/3}}
+
+/* Signature: a paper delivery tag on a string, in 3D. It tilts with the pointer
+   and counts down to today's same-day delivery cutoff. */
+.tag-wrap{position:absolute;left:-1.5rem;bottom:2rem;perspective:900px;transform-origin:85% -2rem;animation:sway 5s ease-in-out infinite alternate}
+.tag{position:relative;width:15.5rem;padding:1.1rem 1.2rem 1.1rem 2.6rem;border-radius:10px 6px 6px 10px;background:var(--card);color:var(--ink);
+  clip-path:polygon(1.2rem 0,100% 0,100% 100%,1.2rem 100%,0 50%);
+  transform:rotateX(var(--rx,0deg)) rotateY(calc(-10deg + var(--ry,0deg))) rotateZ(-4deg);transition:transform .6s cubic-bezier(.16,1,.3,1);
+  filter:drop-shadow(0 22px 26px rgb(0 0 0 / .28))}
+.tag-wrap.is-tilting .tag{transition:transform .08s linear}
+.tag::before{content:"";position:absolute;left:.85rem;top:50%;width:.7rem;height:.7rem;margin-top:-.35rem;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line)}
+.tag small{display:flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text)}
+.tag small .i{width:1rem;height:1rem}
+.tag b{display:block;margin-top:.3rem;font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:1.05rem;line-height:1.25}
+.tag-wrap.is-live small::after{content:"";width:.45rem;height:.45rem;border-radius:50%;background:var(--accent);margin-left:auto;animation:pulse 1.6s ease-in-out infinite}
+@keyframes sway{from{rotate:-1.5deg}to{rotate:1.5deg}}
+@keyframes pulse{50%{opacity:.25}}
+@media (max-width:860px){.tag-wrap{left:.75rem;bottom:.75rem}}
+
+.facts{border-block:1px solid var(--line)}
+.facts ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;padding-block:1.5rem}
+.facts li{display:flex;gap:.75rem;align-items:flex-start;font-weight:600}
+.facts .i{width:1.5rem;height:1.5rem;color:var(--accent-text)}
+.facts small{display:block;font-weight:400;color:var(--muted);font-size:.92rem}
+@media (max-width:760px){.facts ul{grid-template-columns:1fr}}
+
+section{padding-block:clamp(4rem,8vw,6.5rem)}
+.h2{font-size:clamp(2rem,4.2vw,3.1rem)}
+.lede{color:var(--muted);margin-top:.85rem;max-width:52ch;font-size:1.08rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1.5rem 1.25rem;margin-top:2.75rem}
+.product{display:flex;flex-direction:column}
+.product .ph{position:relative;border-radius:var(--r-img);overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
+.product .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.product:hover .ph img{transform:scale(1.04)}
+.product .badge{position:absolute;left:.75rem;top:.75rem;padding:.3rem .65rem;border-radius:var(--r-btn);background:var(--card);color:var(--ink);font-size:.8rem;font-weight:600}
+.product .row{display:flex;justify-content:space-between;gap:1rem;margin-top:1rem;align-items:baseline}
+.product h3{font-size:1.15rem;letter-spacing:-.01em}
+.product .price{font-weight:700}
+.product p{color:var(--muted);font-size:.95rem;margin-top:.3rem;flex:1}
+.product .btn{margin-top:1rem;width:100%}
+.product.is-sold .ph img{filter:grayscale(1) opacity(.6)}
+.product.is-sold .btn{background:var(--surface);color:var(--muted);pointer-events:none}
+.note{margin-top:2rem;color:var(--muted);font-size:.95rem}
+
+.story{background:var(--surface)}
+.story .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,7vw,6rem);align-items:center}
+.story .frame{border-radius:var(--r-img);overflow:hidden;aspect-ratio:4/5}
+.story .frame img{width:100%;height:100%;object-fit:cover}
+.story .body{margin-top:1.2rem;font-size:1.12rem;color:var(--muted);max-width:46ch}
+@media (max-width:860px){.story .wrap{grid-template-columns:1fr}.story .frame{aspect-ratio:4/3}}
+
+.rv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-top:2.5rem}
+.rv figure{margin:0;padding:1.6rem;border-radius:var(--r);background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:1rem}
+.stars{display:flex;gap:.1rem;color:var(--accent-text)} .stars .i{width:1rem;height:1rem;fill:currentColor}
+.rv figcaption{color:var(--muted);font-size:.95rem;margin-top:auto}
+@media (max-width:860px){.rv{grid-template-columns:1fr}}
+
+.visit{border-top:1px solid var(--line)}
+.visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
+.addr{font-family:var(--font-display);font-size:1.35rem;font-weight:var(--display-weight);letter-spacing:var(--display-tracking);margin-top:1rem;max-width:22ch;line-height:1.3}
+.contact{display:grid;gap:.6rem;margin-top:1.5rem}
+.contact a{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:500;width:fit-content}
+.contact a:hover{color:var(--accent-text)}
+.hours{display:grid;gap:.15rem;align-self:start;padding:.75rem;border-radius:var(--r);background:var(--surface)}
+.hours li{display:flex;justify-content:space-between;gap:1rem;padding:.65rem .9rem;border-radius:calc(var(--r) * .5)}
+.hours li.is-today{background:var(--card);font-weight:600}
+@media (max-width:760px){.visit .wrap{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between}
+footer a{text-decoration:none} footer a:hover{color:var(--ink)}
+
+/* Hero variant: full. The photo fills the hero; text and tag sit on top. */
+.hero-full .hero{position:relative;overflow:hidden;color:#fff;background:#151515}
+.hero-full .hero .wrap{min-height:clamp(540px,82vh,780px);align-items:end;padding-block:4rem}
+.hero-full .hero .wrap > div:first-child{position:relative;z-index:1}
+.hero-full .shot{position:static;align-self:end;justify-self:end}
+.hero-full .shot .photo{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}
+.hero-full .shot .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(0 0 0 / .72),rgb(0 0 0 / .3) 55%,rgb(0 0 0 / .05))}
+.hero-full .tag-wrap{position:relative;left:auto;bottom:auto;z-index:1}
+.hero-full .hero p{color:rgb(255 255 255 / .86)}
+.hero-full .hero .btn-line{color:#fff;border-color:rgb(255 255 255 / .45)}
+@media (max-width:860px){.hero-full .shot{justify-self:start}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#main">{{icon:flower}} {{business.name}}</a>
+    <nav class="nav" aria-label="Main"><a href="#shop">Shop</a><a href="#delivery">Delivery</a>{{#story}}<a href="#story">About</a>{{/story}}<a href="#visit">Visit</a></nav>
+    <a class="btn btn-accent" href="#shop">Shop now</a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>{{business.headline}}</h1>
+        <p>{{business.intro}}</p>
+        <div class="ctas">
+          <a class="btn btn-accent" href="#shop">{{icon:bag}} Shop now</a>
+          <a class="btn btn-line" href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="photo"><img src="{{hero.photo}}" alt="{{hero.photoAlt}}" width="1200" height="1500" fetchpriority="high"></div>
+        {{#delivery.cutoff}}
+        <div class="tag-wrap" data-tilt="10" data-cutoff="{{delivery.cutoffJson}}">
+          <div class="tag" role="status">
+            <small>{{icon:van}} {{delivery.label}}</small>
+            <b data-cutoff-text>{{delivery.fallback}}</b>
+          </div>
+        </div>
+        {{/delivery.cutoff}}
+      </div>
+    </div>
+  </div>
+
+  {{#delivery.facts}}{{#@first}}<div class="facts" id="delivery"><ul class="wrap">{{/@first}}
+    <li>{{icon:@icon}}<div>{{title}}{{#detail}}<small>{{detail}}</small>{{/detail}}</div></li>
+  {{#@last}}</ul></div>{{/@last}}{{/delivery.facts}}
+
+  <section id="shop">
+    <div class="wrap">
+      <h2 class="h2">{{#shopTitle}}{{shopTitle}}{{/shopTitle}}{{^shopTitle}}Shop{{/shopTitle}}</h2>
+      {{#shopIntro}}<p class="lede">{{shopIntro}}</p>{{/shopIntro}}
+      <ul class="grid">
+        {{#products}}
+        <li class="product{{#soldOut}} is-sold{{/soldOut}}">
+          <div class="ph"><img src="{{photo}}" alt="{{name}}" width="800" height="1000" loading="lazy">{{#soldOut}}<span class="badge">Sold out</span>{{/soldOut}}{{^soldOut}}{{#tag}}<span class="badge">{{tag}}</span>{{/tag}}{{/soldOut}}</div>
+          <div class="row"><h3>{{name}}</h3><span class="price num">{{price}}</span></div>
+          <p>{{desc}}</p>
+          {{^soldOut}}<a class="btn btn-dark" href="{{buyUrl}}">Buy now</a>{{/soldOut}}
+          {{#soldOut}}<span class="btn" aria-disabled="true">Sold out</span>{{/soldOut}}
+        </li>
+        {{/products}}
+      </ul>
+      {{#shopNote}}<p class="note">{{shopNote}}</p>{{/shopNote}}
+    </div>
+  </section>
+
+  {{#story}}
+  <section class="story" id="story">
+    <div class="wrap">
+      <div class="frame"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="1125" loading="lazy"></div>
+      <div><h2 class="h2">{{title}}</h2><p class="body">{{body}}</p></div>
+    </div>
+  </section>
+  {{/story}}
+
+  {{#reviews}}{{#@first}}<section><div class="wrap"><h2 class="h2">Kind words</h2><div class="rv">{{/@first}}
+    <figure><div class="stars" role="img" aria-label="5 stars">{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}</div><q>{{quote}}</q><figcaption>{{name}}, {{source}}</figcaption></figure>
+  {{#@last}}</div></div></section>{{/@last}}{{/reviews}}
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">{{#business.address}}Visit the shop{{/business.address}}{{^business.address}}Get in touch{{/business.address}}</h2>
+        {{#business.address}}<p class="addr">{{business.address}}</p>{{/business.address}}
+        <div class="contact">
+          <a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
+          {{#business.email}}<a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>{{/business.email}}
+          {{#business.instagram}}<a href="https://instagram.com/{{business.instagram}}">{{icon:camera}} @{{business.instagram}}</a>{{/business.instagram}}
+          {{#business.mapUrl}}<a href="{{business.mapUrl}}">{{icon:pin}} Get directions</a>{{/business.mapUrl}}
+        </div>
+      </div>
+      {{#business.hours}}{{#@first}}<ul class="hours num" aria-label="Opening hours">{{/@first}}<li data-day="{{dayIndex}}"><span>{{day}}</span><span>{{#open}}{{open}} to {{close}}{{/open}}{{^open}}Closed{{/open}}</span></li>{{#@last}}</ul>{{/@last}}{{/business.hours}}
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; {{year}} {{business.name}}{{#business.abn}} &middot; ABN {{business.abn}}{{/business.abn}}</span>
+    <span>Secure checkout by Stripe</span>
+  </div>
+</footer>

@@ -1,0 +1,32 @@
+{
+  "name": "Studio",
+  "for": "Salons, clinics, physio, pilates, massage, coaches: anyone who takes bookings",
+  "required": [
+    "business.name",
+    "business.headline",
+    "business.intro",
+    "business.address",
+    "business.bookingUrl",
+    "hero.photo",
+    "treatments"
+  ],
+  "defaultTheme": "calm",
+  "heroVariants": [
+    "full",
+    "split"
+  ],
+  "showcase": [
+    {
+      "theme": "calm",
+      "hero": "full"
+    },
+    {
+      "theme": "ink",
+      "hero": "split"
+    },
+    {
+      "theme": "forest",
+      "hero": "full"
+    }
+  ]
+}

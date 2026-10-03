@@ -1,0 +1,33 @@
+{
+  "name": "Caf\u00e9",
+  "for": "Caf\u00e9s, bakeries, small restaurants, bars",
+  "required": [
+    "business.name",
+    "business.headline",
+    "business.intro",
+    "business.address",
+    "business.suburb",
+    "business.hours",
+    "hero.photo",
+    "menu"
+  ],
+  "defaultTheme": "harbour",
+  "heroVariants": [
+    "full",
+    "split"
+  ],
+  "showcase": [
+    {
+      "theme": "harbour",
+      "hero": "full"
+    },
+    {
+      "theme": "night",
+      "hero": "split"
+    },
+    {
+      "theme": "sun",
+      "hero": "split"
+    }
+  ]
+}

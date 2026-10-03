@@ -1,0 +1,12 @@
+{
+  "name": "Professional",
+  "for": "Accountants, lawyers, real estate, consultants, financial planners",
+  "required": ["business.name", "business.headline", "business.intro", "business.phone", "business.email", "hero.photo", "services"],
+  "defaultTheme": "ink",
+  "heroVariants": ["split", "full"],
+  "showcase": [
+    { "theme": "ink", "hero": "split" },
+    { "theme": "calm", "hero": "full" },
+    { "theme": "night", "hero": "split" }
+  ]
+}

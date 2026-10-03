@@ -1,0 +1,164 @@
+{
+  "template": "studio",
+  "slug": "tidewater-physio-pilates",
+  "url": "https://tidewater.example/",
+  "_note": "Sample business for the template gallery. Names, numbers and details are fictional.",
+  "schemaType": "HealthAndBeautyBusiness",
+  "business": {
+    "name": "Tidewater Physio & Pilates",
+    "headline": "Move well. Feel like yourself again.",
+    "intro": "Physiotherapy and small-group clinical Pilates in Bulimba, with online booking and HICAPS on the spot.",
+    "address": "2/48 Oxford Street, Bulimba QLD 4171",
+    "street": "2/48 Oxford Street",
+    "suburb": "Bulimba",
+    "state": "QLD",
+    "postcode": "4171",
+    "phone": "(07) 5550 3812",
+    "email": "hello@tidewater.example",
+    "instagram": "tidewaterphysio",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "7am",
+        "close": "7pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "7am",
+        "close": "7pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "7am",
+        "close": "7pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "7am",
+        "close": "7pm"
+      },
+      {
+        "day": "Friday",
+        "open": "7am",
+        "close": "4pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8am",
+        "close": "12pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A woman stretching on the beach at sunset"
+  },
+  "about": {
+    "title": "Hands-on care, not a production line",
+    "body": "Every first visit is a full hour with the same physio you'll keep seeing. We work out what's going on, treat it, and give you a plan you can actually stick to.",
+    "badges": [
+      "APA member",
+      "HICAPS on site",
+      "NDIS and DVA welcome"
+    ],
+    "photo": "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Lead physiotherapist Ana Moreira"
+  },
+  "treatmentsIntro": "Health fund rebates apply to physio and clinical Pilates. Claim on the spot with HICAPS.",
+  "treatments": [
+    {
+      "group": "Physiotherapy",
+      "items": [
+        {
+          "name": "Initial consultation",
+          "duration": "60 min",
+          "price": "$120"
+        },
+        {
+          "name": "Follow-up",
+          "duration": "30 min",
+          "price": "$95"
+        },
+        {
+          "name": "Sports massage",
+          "duration": "45 min",
+          "price": "$105"
+        }
+      ]
+    },
+    {
+      "group": "Clinical Pilates",
+      "items": [
+        {
+          "name": "1:1 assessment",
+          "duration": "60 min",
+          "note": "Required first",
+          "price": "$110"
+        },
+        {
+          "name": "Small group class",
+          "duration": "55 min",
+          "note": "Max 4 people",
+          "price": "$45"
+        },
+        {
+          "name": "10-class pack",
+          "duration": "Valid 4 months",
+          "price": "$400"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give someone a better week",
+    "body": "Vouchers can be used for any treatment or class, and arrive by email straight away.",
+    "amount": "$120",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $50",
+      "Valid for 3 years",
+      "Use across any treatment or class",
+      "Delivered by email straight away"
+    ]
+  },
+  "team": [
+    {
+      "name": "Ana Moreira",
+      "role": "Lead physiotherapist",
+      "photo": "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&q=75&auto=format&fit=crop&crop=faces"
+    },
+    {
+      "name": "Jess Calloway",
+      "role": "Physiotherapist, Pilates instructor",
+      "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=75&auto=format&fit=crop&crop=faces"
+    },
+    {
+      "name": "Dr. Ravi Menon",
+      "role": "Sports physiotherapist",
+      "photo": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=75&auto=format&fit=crop&crop=faces"
+    }
+  ],
+  "policies": [
+    {
+      "q": "Do I need a referral?",
+      "a": "No. You can book directly. If you're on a GP care plan, bring the referral and we'll bulk-claim with Medicare."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free with 24 hours' notice. Later cancellations are charged 50% so we can offer the time to someone on the waitlist."
+    },
+    {
+      "q": "What should I wear?",
+      "a": "Something you can move in. For Pilates, grip socks are required; we sell them at reception for $15."
+    },
+    {
+      "q": "Parking",
+      "a": "Two-hour street parking on Oxford Street and free parking behind the building after 5pm."
+    }
+  ],
+  "closingLine": "Book your first session in under a minute."
+}

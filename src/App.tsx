@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Icon, type IconName } from "./components/Icon";
+import { AiDemo } from "./components/AiDemo";
 
 // ─── Content ─────────────────────────────────────────────────────────────────
 // Pricing and terms here must match docs/business/BUSINESS_PLAN.md and the
@@ -123,13 +124,6 @@ const PLANS = [
   },
 ];
 
-const PROMISES: { icon: IconName; title: string; body: string }[] = [
-  { icon: "eye", title: "See it before you pay", body: "You get a preview link within a day. Your first monthly charge only happens once you're happy with it." },
-  { icon: "globe", title: "Your domain, in your name", body: "We register it to you from day one. It's never held hostage, whatever happens." },
-  { icon: "home", title: "Keep the site after 12 months", body: "After a year, the site and its code are yours to keep, free. Stay on Care for $29 or take it anywhere." },
-  { icon: "card", title: "Payments go straight to you", body: "Customer payments land in your own Stripe account. We never hold your money or see card details." },
-];
-
 const FAQ: { q: string; a: string }[] = [
   {
     q: "How can it be live in 1 to 3 days?",
@@ -150,6 +144,14 @@ const FAQ: { q: string; a: string }[] = [
   {
     q: "What if I want to leave?",
     a: "After 12 months you can cancel any time from your billing page and keep the site, code and domain. Leaving earlier costs the rest of the first year or a $1,499 buyout, whichever is less, and the site is still yours.",
+  },
+  {
+    q: "Can you build AI tools for my business?",
+    a: "Yes. The most popular is an AI assistant on your website that answers customer questions and replies to enquiries within minutes, for $39 a month plus AI usage at cost. We also build custom tools for bookings, review replies, quote follow-ups and admin. Every tool hands anything it's unsure about to you.",
+  },
+  {
+    q: "How do you reply in 15 minutes?",
+    a: "When you send the form, our AI assistant reads it and emails you straight away with a suggested plan and a link to book a call. A person reads every enquiry the same business day. It's the same assistant we can set up on your own site.",
   },
   {
     q: "Do you build custom apps too?",
@@ -228,31 +230,33 @@ function Nav() {
   }, [open]);
   const links = [
     ["#work", "Work"],
+    ["#ai", "AI"],
     ["#how", "How it works"],
     ["#pricing", "Pricing"],
     ["#faq", "FAQ"],
   ];
   return (
     <header className={`nav${scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
-      <div className="wrap">
+      <div className="nav-pill">
         <Logo />
         <nav className="nav-links" aria-label="Main">
           {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
         </nav>
-        <a className="btn btn-primary" href="#start">Start my website</a>
+        <a className="btn btn-primary nav-cta" href="#start">Start my website</a>
         <button className="menu-btn" type="button" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
-          <Icon name={open ? "plus" : "menu"} className={`i${open ? " is-x" : ""}`} />
+          <span className="burger" aria-hidden="true"><i /><i /></span>
           <span className="sr">{open ? "Close menu" : "Open menu"}</span>
         </button>
       </div>
       <nav id="mobile-menu" className="mobile-menu" aria-label="Main" hidden={!open}>
-        {links.map(([href, label]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
+        {links.map(([href, label], i) => <a key={href} href={href} style={{ animationDelay: `${i * 40}ms` }} onClick={() => setOpen(false)}>{label}</a>)}
+        <a className="btn btn-primary" href="#start" onClick={() => setOpen(false)}>Start my website</a>
       </nav>
     </header>
   );
 }
 
-// The three real templates, stacked in 3D. Pointer position tilts the stack.
+// Three real client-style sites we built, stacked in 3D. Pointer position tilts the stack.
 function Stack() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -262,14 +266,12 @@ function Stack() {
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
       const y = (e.clientY - r.top) / r.height - 0.5;
-      el.style.setProperty("--ry", `${(x * 14).toFixed(2)}deg`);
-      el.style.setProperty("--rx", `${(-y * 10).toFixed(2)}deg`);
-      el.classList.add("is-tilting");
+      el.style.setProperty("--ry", `${(x * 12).toFixed(2)}deg`);
+      el.style.setProperty("--rx", `${(-y * 8).toFixed(2)}deg`);
     };
     const leave = () => {
       el.style.setProperty("--ry", "0deg");
       el.style.setProperty("--rx", "0deg");
-      el.classList.remove("is-tilting");
     };
     el.addEventListener("pointermove", move);
     el.addEventListener("pointerleave", leave);
@@ -283,10 +285,6 @@ function Stack() {
       <div className="stack-inner">
         {STACK.map((path) => (
           <a key={path} className="frame" href={`/work/${path}/`} target="_blank" rel="noopener" aria-label="Open this example site">
-            <div className="frame-bar" aria-hidden="true">
-              <span /><span /><span />
-              <em>{path.split("-").slice(0, -1).join("") || path}.com.au</em>
-            </div>
             <img src={`/previews/${path}.webp`} alt="" width={1200} height={750} fetchPriority="high" />
           </a>
         ))}
@@ -298,40 +296,29 @@ function Stack() {
 function Hero() {
   return (
     <div className="hero">
-      <div className="wrap">
-        <div>
+      <div className="wrap hero-grid">
+        <div className="hero-copy">
           <h1>Your website, done for you.</h1>
-          <p>Custom-designed for your business, then built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
+          <p>Custom-designed, built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
           <div className="ctas">
-            <a className="btn btn-accent" href="#start">Start my website <Icon name="arrow-right" /></a>
-            <a className="btn btn-line" href="#work">See our work</a>
+            <a className="btn btn-primary btn-island" href="#start">Start my website <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
+            <a className="text-link" href="#work">See our work <Icon name="arrow-right" /></a>
           </div>
         </div>
         <Stack />
+      </div>
+      <div className="wrap">
+        <dl className="proof">
+          <div><dt>$0</dt><dd>upfront, on every plan</dd></div>
+          <div><dt>1-3</dt><dd>days from first call to live</dd></div>
+          <div><dt>15 min</dt><dd>to reply to an enquiry, day or night</dd></div>
+        </dl>
       </div>
     </div>
   );
 }
 
-function Facts() {
-  const facts: { icon: IconName; text: string }[] = [
-    { icon: "sparkle", text: "Custom design, never reused" },
-    { icon: "tag", text: "From $99 a month, $0 upfront" },
-    { icon: "bolt", text: "Live in 1 to 3 days" },
-    { icon: "home", text: "Yours to keep after 12 months" },
-  ];
-  return (
-    <div className="facts">
-      <ul className="wrap">
-        {facts.map((f) => (
-          <li key={f.text}><Icon name={f.icon} /> {f.text}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function WorkCard({ w, onPick }: { w: (typeof WORK)[number]; onPick: (t: TemplateId) => void }) {
+function WorkCard({ w }: { w: (typeof WORK)[number] }) {
   const [i, setI] = useState(0);
   const d = w.designs[i];
   return (
@@ -340,34 +327,49 @@ function WorkCard({ w, onPick }: { w: (typeof WORK)[number]; onPick: (t: Templat
         {w.designs.map((x, j) => (
           <img key={x.path} src={`/previews/${x.path}.webp`} alt={j === i ? `${w.business}, ${x.theme} design` : ""} width={1200} height={750} loading="lazy" className={j === i ? "is-on" : ""} />
         ))}
+        <span className="work-open" aria-hidden="true"><Icon name="arrow-up-right" /></span>
       </a>
-      <div className="work-body">
-        <span className="sample">{w.kind}</span>
-        <h3>{w.business}</h3>
-        <p>{w.pitch}</p>
-        <div className="designs" role="group" aria-label="Designs">
-          {w.designs.map((x, j) => (
-            <button key={x.path} type="button" aria-pressed={j === i} onClick={() => setI(j)}>{x.theme}</button>
-          ))}
+      <div className="work-meta">
+        <div>
+          <h3>{w.business}</h3>
+          <p>{w.pitch}</p>
         </div>
-        <div className="work-actions">
-          <a className="btn btn-line" href={`/work/${d.path}/`} target="_blank" rel="noopener">Open live site <Icon name="arrow-up-right" /></a>
-          <button className="btn btn-primary" type="button" onClick={() => onPick(w.id)}>Start a site like this</button>
+        <div className="work-row">
+          <div className="designs" role="group" aria-label={`${w.business} designs`}>
+            {w.designs.map((x, j) => (
+              <button key={x.path} type="button" aria-pressed={j === i} onClick={() => setI(j)}>{x.theme}</button>
+            ))}
+          </div>
         </div>
       </div>
     </article>
   );
 }
 
-function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
+function Work() {
+  const track = useRef<HTMLDivElement>(null);
+  const nudge = (dir: number) => {
+    const el = track.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>(".work");
+    el.scrollBy({ left: dir * ((card?.offsetWidth ?? 600) + 24), behavior: "smooth" });
+  };
   return (
-    <section id="work">
-      <div className="wrap">
-        <h2 className="h2">Designed for one business. Never reused.</h2>
-        <p className="lede">Every site gets its own colours, type, layout and photography. To show the range, here are five businesses, each in three different designs. Switch between them.</p>
-        <div className="work-grid">
-          {WORK.map((w) => <WorkCard key={w.id} w={w} onPick={onPick} />)}
+    <section id="work" className="work-sec">
+      <div className="wrap work-head">
+        <div>
+          <h2 className="h2">Designed for one business. Never reused.</h2>
+          <p className="lede">Five sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
         </div>
+        <div className="work-nav">
+          <button type="button" onClick={() => nudge(-1)} aria-label="Previous"><Icon name="arrow-right" className="i flip" /></button>
+          <button type="button" onClick={() => nudge(1)} aria-label="Next"><Icon name="arrow-right" /></button>
+        </div>
+      </div>
+      <div className="work-track" ref={track} tabIndex={0} aria-label="Example sites">
+        {WORK.map((w) => <WorkCard key={w.id} w={w} />)}
+      </div>
+      <div className="wrap">
         <p className="work-note">These are sample businesses we made to show the range; names and reviews are fictional. A real client's design is made for them and never given to anyone else.</p>
       </div>
     </section>
@@ -375,19 +377,19 @@ function Work({ onPick }: { onPick: (t: TemplateId) => void }) {
 }
 
 function How() {
-  const steps: { when: string; icon: IconName; title: string; body: string }[] = [
-    { when: "Day 0", icon: "chat", title: "Tell us about your business", body: "A 15-minute call or the form below. Send photos if you have them. We write the words." },
-    { when: "Within 24 hours", icon: "eye", title: "See your design", body: "A private preview link to check on your phone. Ask for changes, and nothing is charged until you're happy." },
-    { when: "Day 1 to 3", icon: "send", title: "Go live, then we look after it", body: "We connect your domain, Google profile and payments. After that, just email us when something needs changing." },
+  const steps: { when: string; title: string; body: string }[] = [
+    { when: "Within 15 minutes", title: "Tell us about your business", body: "Send the form. Our AI assistant replies with a suggested plan, then we have a 15-minute call. We write the words." },
+    { when: "Within 24 hours", title: "See your design", body: "A private preview link to check on your phone. Ask for changes. Nothing is charged until you're happy." },
+    { when: "Day 1 to 3", title: "Go live, then we look after it", body: "We connect your domain, Google profile and payments. After that, just email us when something needs changing." },
   ];
   return (
     <section className="how" id="how">
       <div className="wrap">
-        <h2 className="h2">How it works</h2>
-        <ol className="steps">
+        <h2 className="h2">From hello to live in three days.</h2>
+        <ol className="how-rows">
           {steps.map((s) => (
-            <li className="step" key={s.title}>
-              <span className="when"><Icon name={s.icon} /> {s.when}</span>
+            <li key={s.title}>
+              <span className="how-when">{s.when}</span>
               <h3>{s.title}</h3>
               <p>{s.body}</p>
             </li>
@@ -400,7 +402,7 @@ function How() {
 
 function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
   return (
-    <section id="pricing">
+    <section id="pricing" className="pricing">
       <div className="wrap">
         <h2 className="h2">One monthly fee. Everything handled.</h2>
         <p className="lede">Prices in AUD. No setup fee on any plan.</p>
@@ -408,8 +410,8 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
           {PLANS.map((p) => (
             <div className={`plan${p.featured ? " is-featured" : ""}`} key={p.id}>
               <div className="plan-top">
-                <span className="plan-name">{p.name}</span>
-                {p.featured && <span className="plan-badge">Most popular</span>}
+                <h3 className="plan-name">{p.name}</h3>
+                {p.featured && <span className="plan-badge">Recommended</span>}
               </div>
               <div className="plan-price num"><b>{p.price}</b><span>/month</span></div>
               <p className="plan-term">{p.term}</p>
@@ -419,19 +421,14 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
                   <li key={f}><Icon name="check" /> {f}</li>
                 ))}
               </ul>
-              <button className="btn btn-line" type="button" onClick={() => onPlan(p.id)}>Choose {p.name}</button>
+              <button className={`btn ${p.featured ? "btn-primary" : "btn-line"}`} type="button" onClick={() => onPlan(p.id)}>Choose {p.name}</button>
             </div>
           ))}
         </div>
         <div className="plan-extra">
-          <div>
-            <h3>Rather own it outright?</h3>
-            <p>One-off builds from $1,499, paid half at the start and half at launch. Add Care for $29 a month if you'd like us to keep looking after it.</p>
-          </div>
-          <div>
-            <h3>Need something bigger?</h3>
-            <p>Client portals, internal tools and small SaaS products are quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> and you'll get a scope and price within 24 hours.</p>
-          </div>
+          <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch. Add Care for $29 a month if you'd like us to keep looking after it.</p>
+          <p><b>Need something bigger?</b> Client portals, internal tools and small SaaS products are quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
+          <p><b>AI on your site?</b> The AI assistant is $39 a month on any plan, plus AI usage at cost. <a className="link" href="#ai">See it working</a>.</p>
         </div>
       </div>
     </section>
@@ -439,22 +436,23 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
 }
 
 function Rebuild({ onPlan }: { onPlan: (plan: string) => void }) {
+  const steps = [
+    ["Send us your URL", "Tell us what works and what doesn't."],
+    ["See the new version", "A preview within a day, built from your content."],
+    ["We move everything", "Pages, images and redirects, so you keep your rankings."],
+    ["Switch with no downtime", "Same domain and email. Cancel your old host."],
+  ];
   return (
-    <section className="rebuild" style={{ paddingTop: 0 }}>
+    <section className="rebuild">
       <div className="wrap">
-        <div className="box">
-          <div>
-            <h2>Already have a website? <em>We'll rebuild it, payments included.</em></h2>
-            <p className="lede">Slow Wix site, tired WordPress, a Shopify theme you've outgrown. We rebuild it faster and cleaner, keep your Google rankings, and connect payments. It's included in Grow.</p>
-            <button className="btn btn-accent" type="button" onClick={() => onPlan("rebuild")}>Rebuild my site</button>
-          </div>
-          <ol>
-            <li><b>Send us your URL</b><span>Tell us what works and what doesn't.</span></li>
-            <li><b>See the new version</b><span>A preview within a day, built from your existing content.</span></li>
-            <li><b>We move everything across</b><span>Pages, images and redirects, so you keep your search rankings.</span></li>
-            <li><b>Switch over with no downtime</b><span>Same domain and email. Your old host can be cancelled.</span></li>
-          </ol>
+        <div className="rebuild-head">
+          <h2 className="h2">Already have a website? We'll rebuild it, payments included.</h2>
+          <p className="lede">Slow Wix site, tired WordPress, a Shopify theme you've outgrown. We rebuild it faster and cleaner and keep your Google rankings. It's included in Grow.</p>
         </div>
+        <ol className="rebuild-steps">
+          {steps.map(([t, b]) => <li key={t}><b>{t}</b><span>{b}</span></li>)}
+        </ol>
+        <button className="btn btn-line" type="button" onClick={() => onPlan("rebuild")}>Rebuild my site</button>
       </div>
     </section>
   );
@@ -462,18 +460,35 @@ function Rebuild({ onPlan }: { onPlan: (plan: string) => void }) {
 
 function Promises() {
   return (
-    <section style={{ paddingTop: 0 }}>
+    <section className="promises-sec">
       <div className="wrap">
-        <h2 className="h2">No hostage websites</h2>
+        <h2 className="h2">No hostage websites.</h2>
         <p className="lede">Pay-monthly websites have a bad name because some providers hold your domain and make leaving hard. We put these in writing instead.</p>
-        <div className="promises">
-          {PROMISES.map((p) => (
-            <div className="promise" key={p.title}>
-              <Icon name={p.icon} />
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
+        <div className="bento">
+          <div className="cell cell-preview">
+            <div>
+              <h3>See it before you pay</h3>
+              <p>A preview link within a day. Your first charge happens only once you're happy with it.</p>
             </div>
-          ))}
+            <img src="/previews/wattle-and-fern-florist.webp" alt="A preview of the Wattle & Fern florist site" width={1200} height={750} loading="lazy" />
+          </div>
+          <div className="cell">
+            <Icon name="globe" />
+            <h3>Your domain, in your name</h3>
+            <p>Registered to you from day one. Never held hostage, whatever happens.</p>
+          </div>
+          <div className="cell">
+            <Icon name="card" />
+            <h3>Payments go straight to you</h3>
+            <p>Customer payments land in your own Stripe account. We never hold your money.</p>
+          </div>
+          <div className="cell cell-keep">
+            <b className="num">12</b>
+            <div>
+              <h3>Keep the site after 12 months</h3>
+              <p>After a year, the site and its code are yours to keep, free. Stay on Care for $29 a month or take it anywhere.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -482,16 +497,16 @@ function Promises() {
 
 function Faq() {
   return (
-    <section className="faq" id="faq" style={{ paddingTop: 0 }}>
+    <section className="faq" id="faq">
       <div className="wrap">
-        <div>
+        <div className="faq-side">
           <h2 className="h2">Questions</h2>
           <p className="lede">Something else? Email <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
         </div>
         <div className="faq-list">
           {FAQ.map((f, i) => (
             <details key={f.q} open={i === 0}>
-              <summary>{f.q}</summary>
+              <summary>{f.q}<span className="faq-x" aria-hidden="true" /></summary>
               <p>{f.a}</p>
             </details>
           ))}
@@ -516,19 +531,40 @@ const PLAN_LABEL: Record<string, string> = {
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",
   custom: "Custom project",
+  ai: "AI assistant or custom AI agents",
   unsure: "Not sure yet",
 };
 
 function Start({ template, plan, setTemplate, setPlan }: { template: string; plan: string; setTemplate: (v: string) => void; setPlan: (v: string) => void }) {
-  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "done" | "replied" | "error">("idle");
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     setState("sending");
+    const site = String(data.get("website") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    // First choice: /api/start, where our AI assistant emails a reply within
+    // minutes (see api/start.ts). If that isn't configured, fall back to saving
+    // the lead through Firebase/EmailJS.
     try {
-      const site = String(data.get("website") || "").trim();
-      const phone = String(data.get("phone") || "").trim();
+      const res = await fetch("/api/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"), business: data.get("business"), email: data.get("email"),
+          phone, website: site, template, plan, message: data.get("message"),
+          company_site: data.get("company_site"),
+        }),
+      });
+      if (res.ok && (await res.json()).replied) {
+        setState("replied");
+        return;
+      }
+    } catch {
+      // Network error or no API in this environment: use the fallback below.
+    }
+    try {
       // Firebase is ~450 KB, so it loads only when someone actually sends the form.
       const { saveLead } = await import("./firebase");
       await saveLead({
@@ -549,20 +585,26 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
     <section className="start" id="start">
       <div className="wrap">
         <div>
-          <h2 className="h2">Start your website</h2>
-          <p className="lede">Tell us a little about your business. We'll reply within one business day to book a 15-minute call.</p>
+          <h2 className="h2">Start your website.</h2>
+          <p className="lede">Tell us a little about your business. You'll hear back within 15 minutes, day or night, with a suggested plan and a link to book a call.</p>
           <div className="start-aside">
             <a href={`mailto:${EMAIL}`}><Icon name="mail" /> {EMAIL}</a>
             <span><Icon name="pin" /> Based in Sydney, working Australia-wide</span>
-            <span><Icon name="clock" /> Replies within one business day</span>
+            <span><Icon name="clock" /> Replies within 15 minutes, any time</span>
           </div>
         </div>
 
-        {state === "done" ? (
+        {state === "replied" ? (
+          <div className="form-done" role="status">
+            <Icon name="mail" />
+            <h3>Check your inbox.</h3>
+            <p>Our AI assistant has already emailed you a suggested plan and a link to book a 15-minute call. A person reads every enquiry and will follow up today. If it's not there in a minute, check your spam folder.</p>
+          </div>
+        ) : state === "done" ? (
           <div className="form-done" role="status">
             <Icon name="check-circle" />
             <h3>Thanks, we've got it.</h3>
-            <p>We'll email you within one business day to book a quick call. If you have photos or a logo handy, reply to that email with them.</p>
+            <p>We'll be in touch shortly to book a quick call. If you have photos or a logo handy, reply to that email with them.</p>
           </div>
         ) : (
           <form className="form" onSubmit={submit}>
@@ -589,7 +631,8 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
               </div>
             </div>
             <div className="field"><label htmlFor="f-website">Current website <small>(if you have one)</small></label><input id="f-website" name="website" type="text" inputMode="url" autoComplete="url" spellCheck={false} placeholder="yourbusiness.com.au…" /></div>
-            <div className="field"><label htmlFor="f-message">What does your business do, and what should the site help with?</label><textarea id="f-message" name="message" rows={4} required /></div>
+            <div className="field"><label htmlFor="f-message">What does your business do, and what should the site help with?</label><textarea id="f-message" name="message" rows={4} maxLength={2000} required /></div>
+            <div className="hp" aria-hidden="true"><label htmlFor="f-company-site">Leave this empty</label><input id="f-company-site" name="company_site" tabIndex={-1} autoComplete="off" /></div>
             {state === "error" && <p className="form-error" role="alert">That didn't send. Please try again, or email {EMAIL} directly.</p>}
             <button className="btn btn-accent" type="submit" disabled={state === "sending"}>
               {state === "sending" ? "Sending…" : "Send"} <Icon name="send" />
@@ -606,14 +649,17 @@ function Footer() {
   return (
     <footer className="foot">
       <div className="wrap">
-        <span>© {new Date().getFullYear()} Oceanalt · Sydney, Australia</span>
-        <nav aria-label="Footer">
-          <a href="#work">Work</a>
-          <a href="#pricing">Pricing</a>
-          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          <a href="#/terms">Terms</a>
-          <a href="#/privacy">Privacy</a>
-        </nav>
+        <div className="foot-row">
+          <span>© {new Date().getFullYear()} Oceanalt, Sydney</span>
+          <nav aria-label="Footer">
+            <a href="#work">Work</a>
+            <a href="#pricing">Pricing</a>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <a href="#/terms">Terms</a>
+            <a href="#/privacy">Privacy</a>
+          </nav>
+        </div>
+        <p className="foot-word" aria-hidden="true" translate="no">oceanalt</p>
       </div>
     </footer>
   );
@@ -648,7 +694,9 @@ function Terms() {
       <p>Included edit time covers changes to existing pages. New pages or features are quoted in writing before work starts. Unused edit time does not roll over.</p>
       <h2>6. Payments to the client</h2>
       <p>Where a site takes payments, they are processed by Stripe into the client's own Stripe account. Oceanalt does not hold client funds or handle card data.</p>
-      <h2>7. Limitation of liability</h2>
+      <h2>7. AI add-ons</h2>
+      <p>The AI assistant add-on costs $39 AUD a month plus AI usage. Usage is billed monthly in arrears at the AI provider's price, converted to AUD, with no markup. The client sets a monthly usage cap; when it's reached, the assistant pauses until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
+      <h2>8. Limitation of liability</h2>
       <p>To the extent permitted by the Australian Consumer Law, Oceanalt is not liable for indirect or consequential loss arising from the use of, or inability to use, the services.</p>
     </Legal>
   );
@@ -662,7 +710,7 @@ function Privacy() {
       <h2>2. What is collected</h2>
       <p>When you send the start form, we collect your name, business name, email, and optionally your phone number, current website and message. No tracking pixels or third-party analytics are used by default.</p>
       <h2>3. Where it is stored</h2>
-      <p>Submissions are stored in Google Firestore, and a copy is sent to the Oceanalt inbox via EmailJS.</p>
+      <p>Your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. These providers process the data on our behalf and don't use it to train models.</p>
       <h2>4. How it is used</h2>
       <p>Submissions are used to reply to you and scope your website. Data is not sold, shared with third parties for marketing, or used to train any model. Deletion requests are honoured.</p>
       <h2>5. Your rights under the Privacy Act 1988</h2>
@@ -694,7 +742,6 @@ export default function App() {
   const [plan, setPlan] = useState("launch");
 
   const goStart = () => document.getElementById("start")?.scrollIntoView({ behavior: "smooth" });
-  const pickTemplate = (t: TemplateId) => { setTemplate(t); goStart(); };
   const pickPlan = (p: string) => { setPlan(p); goStart(); };
 
   return (
@@ -705,8 +752,8 @@ export default function App() {
       {route === "terms" ? <Terms /> : route === "privacy" ? <Privacy /> : (
         <main id="main">
           <Hero />
-          <Facts />
-          <Work onPick={pickTemplate} />
+          <Work />
+          <AiDemo onAsk={() => pickPlan("ai")} />
           <How />
           <Pricing onPlan={pickPlan} />
           <Rebuild onPlan={pickPlan} />

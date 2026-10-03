@@ -48,6 +48,25 @@ The research is consistent: what delays web projects is **waiting on the client'
 
 Every site starts from one of our templates rather than a from-scratch design, so a Grow build is about 6 hours, not 10. At $199 we'd be at the top of the AU done-for-you market (A1 Local from $99, help4bis $200) for a template-based site. At $149 we're below the $200 providers while including payments and bookings. A $50 step up from Launch also makes the upgrade easy to say yes to. To keep the margin, included edit time is 1 hour a month, down from 2. A truly from-scratch design is a one-off or custom project, priced separately.
 
+## 3c. USP: run on AI agents, checked by people
+
+Most "pay monthly" competitors are a person with WordPress. Oceanalt is a small team that runs on AI agents. Agents research the business, draft the pages, build and test the site, write the first reply to every enquiry, and keep sites updated. People choose the design, check every word and photo, approve every launch and take the phone calls. That split is the reason for all three of our promises: **$99 a month, live in 1 to 3 days, a reply in 15 minutes.**
+
+The 15-minute reply is the proof we hand every prospect. `api/start.ts` has Claude read the enquiry and email back a recommended plan and layout with a booking link, usually within a minute, any time of day. A person reads every enquiry the same business day. Prospects experience the product before they buy it.
+
+### AI add-ons (decided 3 October 2026)
+
+| Add-on | Price | What it is |
+|---|---|---|
+| AI assistant | $39/month + AI usage at cost | Answers customer questions on the client's site and replies to their enquiries within minutes, using their prices, hours and FAQs. Same pattern as our own `api/start.ts`. |
+| Custom AI agents | Quoted per project + AI usage at cost | Quote follow-ups, booking reminders, review replies, lead sorting, invoice chasing. |
+
+**Why usage is billed separately, at cost:** token costs scale with each client's traffic, and passing them through with no markup keeps the add-on honest and easy to explain. The $39 covers setup, prompt tuning and upkeep. Every client sets a monthly usage cap, so there's no bill shock.
+
+**Usage estimate** (Claude Opus 5.5 at US$4 input / US$20 output per million tokens): a typical reply is ~3,000 input and ~300 output tokens, about US$0.02 (A$0.03). A small business with 200 to 800 assistant replies a month pays roughly A$6 to A$25 in usage, which is what the "usually $5 to $30" on the site is based on. Re-check against real usage after the first three clients.
+
+**Margin:** about 1 to 2 hours to set up per client (A$60 to A$120 at our A$60/h), then ~15 minutes a month of tuning. At $39/month that pays back in 2 to 3 months, then adds ~$24/month contribution per client on top of their website plan.
+
 ## 4. Unit economics
 
 Assumptions: builder time valued at A$60/h; AI tooling (Claude Max etc.) treated as fixed overhead; hosting on Cloudflare Pages / Vercel hobby-to-pro tiers.
@@ -111,7 +130,9 @@ The site now sells the offer. The next 30 days prove someone pays for it.
 | "Hostage website" reputation | Free code/domain handover after 12 months, written in the Terms |
 | Australian Consumer Law: auto-renewal and minimum terms | Terms state the term, renewal and exit cost in plain English; the price is shown before checkout. Get a lawyer to review the Terms before client #10. |
 | GST | Register once turnover passes A$75k (≈ 65 clients). Decide then whether prices become "+GST" or inclusive. |
-| Chatbot API key exposure | **Resolved:** the browser-side Gemini chatbot was removed in the site rebuild. If a chat assistant comes back, it must run server-side. |
+| Chatbot API key exposure | **Resolved:** the browser-side Gemini chatbot was removed. AI now runs only server-side (`api/start.ts`), with keys in Vercel environment variables. |
+| 15-minute reply abused to email strangers (someone enters another person's address) | Honeypot field, per-IP rate limit, Claude's output limited to a plan, a layout and a short note, and a fixed email template. Add Cloudflare Turnstile if abuse appears. |
+| AI reply says something wrong | Claude only chooses from fixed plans and layouts, with a fixed email template. The email says an AI wrote it and a person follows up the same business day. |
 | Founder bottleneck | Agent team plus templates; first hire at ~80–100 clients |
 
 ## 8. 90-day plan

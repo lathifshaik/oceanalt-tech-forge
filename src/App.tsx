@@ -152,8 +152,8 @@ const FAQ: { q: string; a: string }[] = [
     a: "After 12 months you can cancel any time from your billing page and keep the site, code and domain. Leaving earlier costs the rest of the first year or a $1,499 buyout, whichever is less, and the site is still yours.",
   },
   {
-    q: "Do you really run on AI agents?",
-    a: "Yes. AI agents research your business, draft your pages, build and test the site, and write the first reply to every enquiry. People choose your design, check every word and photo, approve every launch and talk to you on the phone. That split is why a custom site costs $99 a month instead of thousands upfront.",
+    q: "Can you build AI tools for my business?",
+    a: "Yes. The most popular is an AI assistant on your website that answers customer questions and replies to enquiries within minutes, for $39 a month plus AI usage at cost. We also build custom tools for bookings, review replies, quote follow-ups and admin. Every tool hands anything it's unsure about to you.",
   },
   {
     q: "How do you reply in 15 minutes?",
@@ -237,6 +237,7 @@ function Nav() {
   const links = [
     ["#work", "Work"],
     ["#how", "How it works"],
+    ["#ai", "AI"],
     ["#pricing", "Pricing"],
     ["#faq", "FAQ"],
   ];
@@ -406,36 +407,43 @@ function How() {
   );
 }
 
-function Agents() {
-  const agents = [
-    "Research your business, customers and competitors",
-    "Draft every page in plain English",
-    "Build, test and check the site on phones",
-    "Reply to every enquiry within minutes",
-    "Keep your site updated and monitored",
-  ];
-  const people = [
-    "Choose your design and check it against your brand",
-    "Read every word and photo before it goes live",
-    "Approve every launch",
-    "Talk to you on the phone, whenever you need",
-  ];
+// What we build for clients with AI. Our own 15-minute reply is the live demo.
+const AI_SERVICES: { icon: IconName; title: string; body: string; tag?: string }[] = [
+  { icon: "chat", title: "AI assistant on your website", body: "Answers customer questions day and night using your real prices, hours and FAQs, and hands anything tricky to you.", tag: "Start here" },
+  { icon: "mail", title: "Instant enquiry replies", body: "Every enquiry gets a helpful reply within minutes, even at 11pm. It's the same thing that answers our own form." },
+  { icon: "calendar", title: "Bookings and reminders", body: "Takes bookings, handles reschedules and sends reminders, so fewer no-shows and fewer phone calls." },
+  { icon: "star", title: "Review replies and follow-ups", body: "Drafts replies to your Google reviews and follows up quotes that went quiet, for you to approve." },
+  { icon: "sparkle", title: "Custom AI for your busywork", body: "Chasing invoices, sorting leads, writing job notes: if it eats your evenings, we can usually automate it." },
+];
+
+function AiForBusiness({ onAsk }: { onAsk: () => void }) {
   return (
-    <section className="agents">
+    <section className="ai" id="ai">
       <div className="wrap">
-        <h2 className="h2">Run on AI agents. Checked by people.</h2>
-        <p className="lede">Oceanalt is a small Australian studio where AI agents do the legwork. That's how a custom website costs $99 a month instead of thousands upfront, goes live in days, and you hear back in minutes.</p>
-        <div className="split">
-          <div className="col col-agents">
-            <h3><Icon name="sparkle" /> What the agents do</h3>
-            <ul>{agents.map((a) => <li key={a}><Icon name="check" /> {a}</li>)}</ul>
+        <h2 className="h2">AI for your business, built by us</h2>
+        <p className="lede">Beyond websites, we build practical AI tools for small businesses: tools that answer customers, take bookings and handle the admin, set up around how you work.</p>
+        <ul className="ai-grid">
+          {AI_SERVICES.map((s) => (
+            <li key={s.title}>
+              <Icon name={s.icon} />
+              {s.tag && <span className="ai-tag">{s.tag}</span>}
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))}
+          <li className="ai-try">
+            <h3>See it working</h3>
+            <p>Send the form at the bottom of this page. Our own AI assistant will reply within minutes.</p>
+            <a className="link" href="#start">Try it <Icon name="arrow-right" /></a>
+          </li>
+        </ul>
+        <div className="ai-pricing">
+          <div>
+            <h3>Simple pricing</h3>
+            <p><b className="num">$39</b>/month for the AI assistant, or a fixed quote for anything custom. AI usage is billed separately at cost (usually $5 to $30 a month for a small business), and you set a monthly cap.</p>
           </div>
-          <div className="col">
-            <h3><Icon name="person" /> What people do</h3>
-            <ul>{people.map((p) => <li key={p}><Icon name="check" /> {p}</li>)}</ul>
-          </div>
+          <button className="btn btn-accent" type="button" onClick={onAsk}>Ask about AI for my business</button>
         </div>
-        <p className="try"><Icon name="clock" /> Try it: send the form at the bottom of this page and see how quickly you hear back.</p>
       </div>
     </section>
   );
@@ -466,26 +474,7 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
             </div>
           ))}
         </div>
-        <div className="ai-addon">
-          <div className="ai-head">
-            <span className="plan-badge">Add-on</span>
-            <h3>Put AI agents to work in your business</h3>
-            <p>The same agents we use, set up for you. AI usage is billed separately at cost, so you only pay for what your customers actually use.</p>
-          </div>
-          <div className="ai-grid">
-            <div>
-              <h4><Icon name="chat" /> AI assistant</h4>
-              <p className="ai-price num"><b>$39</b>/month + AI usage</p>
-              <p>Answers customer questions on your site and replies to enquiries within minutes, using your prices, hours and FAQs. Usage is usually $5 to $30 a month for a small business, and you set a monthly cap.</p>
-            </div>
-            <div>
-              <h4><Icon name="sparkle" /> Custom AI agents</h4>
-              <p className="ai-price"><b>Quoted</b> per project + AI usage</p>
-              <p>Quote follow-ups, booking reminders, review replies, sorting leads, chasing invoices. We build agents for the busywork that eats your evenings.</p>
-            </div>
-          </div>
-          <button className="btn btn-line" type="button" onClick={() => onPlan("ai")}>Ask about AI agents</button>
-        </div>
+        <p className="ai-pointer"><Icon name="sparkle" /> Want AI on your site too? See <a className="link" href="#ai">AI for your business</a>: from $39 a month.</p>
         <div className="plan-extra">
           <div>
             <h3>Rather own it outright?</h3>
@@ -801,9 +790,9 @@ export default function App() {
           <Facts />
           <Work onPick={pickTemplate} />
           <How />
-          <Agents />
           <Pricing onPlan={pickPlan} />
           <Rebuild onPlan={pickPlan} />
+          <AiForBusiness onAsk={() => pickPlan("ai")} />
           <Promises />
           <Faq />
           <Start template={template} plan={plan} setTemplate={setTemplate} setPlan={setPlan} />

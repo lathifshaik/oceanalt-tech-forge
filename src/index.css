@@ -183,34 +183,26 @@ section { padding-block: clamp(4.5rem, 9vw, 7.5rem); scroll-margin-top: 5rem; }
 .link:hover { text-decoration: underline; }
 @media (max-width: 960px) { .plans, .plan-extra { grid-template-columns: 1fr; } }
 
-/* Agents USP */
-.agents { background: var(--ink); color: var(--bg); }
-.agents .lede { color: color-mix(in srgb, var(--bg) 72%, transparent); }
-.agents .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 3rem; }
-.agents .col { padding: 1.75rem; border-radius: 22px; border: 1px solid color-mix(in srgb, var(--bg) 16%, transparent); }
-.agents .col-agents { background: color-mix(in srgb, var(--accent) 22%, transparent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
-.agents h3 { display: flex; align-items: center; gap: .55rem; font-size: 1.3rem; letter-spacing: -0.02em; }
-.agents ul { display: grid; gap: .7rem; margin-top: 1.25rem; }
-.agents li { display: flex; gap: .6rem; align-items: flex-start; color: color-mix(in srgb, var(--bg) 85%, transparent); }
-.agents li .i { color: var(--accent); margin-top: .2rem; }
-.agents .try { display: flex; align-items: center; gap: .6rem; margin-top: 2rem; font-weight: 600; }
-.agents .try .i { color: var(--accent); }
-@media (max-width: 760px) { .agents .split { grid-template-columns: 1fr; } }
-
-/* AI add-on */
-.ai-addon { margin-top: 1.25rem; padding: clamp(1.5rem, 3vw, 2.25rem); border-radius: 22px; background: var(--accent-soft); display: grid; gap: 1.5rem; }
-.ai-head h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-top: .75rem; }
-.ai-head p { color: var(--muted); margin-top: .5rem; max-width: 60ch; }
-.ai-head .plan-badge { display: inline-block; }
-.ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-.ai-grid > div { padding: 1.4rem; border-radius: var(--r); background: var(--card); }
-.ai-grid h4 { display: flex; align-items: center; gap: .5rem; margin: 0; font-size: 1.1rem; }
-.ai-grid h4 .i { color: var(--accent); }
-.ai-price { margin-top: .6rem; color: var(--muted); }
-.ai-price b { font-size: 1.6rem; color: var(--ink); letter-spacing: -0.03em; }
-.ai-grid p:last-child { color: var(--muted); margin-top: .5rem; font-size: .97rem; }
-.ai-addon .btn { justify-self: start; border-color: color-mix(in srgb, var(--ink) 30%, transparent); }
-@media (max-width: 760px) { .ai-grid { grid-template-columns: 1fr; } }
+/* AI for your business */
+.ai { background: var(--ink); color: var(--bg); }
+.ai .lede { color: color-mix(in srgb, var(--bg) 72%, transparent); }
+.ai-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 3rem; }
+.ai-grid li { position: relative; display: flex; flex-direction: column; gap: .5rem; padding: 1.6rem; border-radius: 20px; border: 1px solid color-mix(in srgb, var(--bg) 14%, transparent); background: color-mix(in srgb, var(--bg) 4%, transparent); }
+.ai-grid li:first-child { background: color-mix(in srgb, var(--accent) 22%, transparent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.ai-grid li > .i { width: 1.6rem; height: 1.6rem; color: var(--accent); margin-bottom: .75rem; }
+.ai-grid h3 { font-size: 1.2rem; letter-spacing: -0.02em; }
+.ai-grid p { color: color-mix(in srgb, var(--bg) 72%, transparent); font-size: .98rem; }
+.ai-tag { position: absolute; top: 1.4rem; right: 1.4rem; padding: .25rem .6rem; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: .75rem; font-weight: 600; }
+.ai-grid .ai-try { justify-content: center; border-style: dashed; background: transparent; }
+.ai-try .link { display: inline-flex; align-items: center; gap: .35rem; margin-top: .25rem; color: var(--accent); }
+.ai-pricing { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; margin-top: 1.25rem; padding: 1.6rem; border-radius: 20px; background: var(--bg); color: var(--ink); }
+.ai-pricing h3 { font-size: 1.2rem; letter-spacing: -0.02em; }
+.ai-pricing p { color: var(--muted); margin-top: .35rem; max-width: 62ch; }
+.ai-pricing b { color: var(--ink); font-size: 1.15rem; }
+.ai-pointer { display: flex; align-items: center; gap: .5rem; margin-top: 1.25rem; color: var(--muted); }
+.ai-pointer .i { color: var(--accent); }
+@media (max-width: 960px) { .ai-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .ai-grid { grid-template-columns: 1fr; } }
 
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 

@@ -1,8 +1,22 @@
 // After `vite build`: renders the home page to HTML, adds structured data and
 // writes sitemap.xml, so the page is fully readable without JavaScript.
+// If anything here fails, the build still succeeds: the site works without
+// pre-rendering (the browser renders it), so a prerender bug must never block
+// a deploy. The error is printed in full so it shows in the host's build log.
 import { readFileSync, writeFileSync, rmSync } from "node:fs";
 
 const SITE = "https://oceanalt.com.au/";
+
+function sitemap() {
+  const today = new Date().toISOString().slice(0, 10);
+  writeFileSync("dist/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>${SITE}</loc><lastmod>${today}</lastmod></url>
+</urlset>
+`);
+}
+
+async function prerender() {
 const { render, seo } = await import("../dist-ssr/entry-server.js");
 
 const plans = seo.PLANS.map((p) => ({
@@ -49,12 +63,19 @@ html = html
   .replace('<div id="root"></div>', `<div id="root">${render()}</div>`)
   .replace("</head>", `<script type="application/ld+json">${JSON.stringify(graph).replace(/</g, "\\u003c")}</script>\n  </head>`);
 writeFileSync(file, html);
+console.log(`prerender: ${Math.round(html.length / 1024)} KB index.html`);
+}
 
-const today = new Date().toISOString().slice(0, 10);
-writeFileSync("dist/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>${SITE}</loc><lastmod>${today}</lastmod></url>
-</urlset>
-`);
+try {
+  await prerender();
+} catch (error) {
+  console.warn("prerender: skipped, the site will render in the browser instead. Reason:");
+  console.warn(error);
+}
+try {
+  sitemap();
+  console.log("prerender: sitemap.xml written");
+} catch (error) {
+  console.warn("prerender: couldn't write sitemap.xml", error);
+}
 rmSync("dist-ssr", { recursive: true, force: true });
-console.log(`prerender: ${Math.round(html.length / 1024)} KB index.html, sitemap.xml written`);

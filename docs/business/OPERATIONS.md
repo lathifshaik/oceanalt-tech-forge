@@ -88,6 +88,23 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
   3. Resend: add the domain, add its DNS records (SPF, DKIM), then set `LEAD_FROM_EMAIL` to `Oceanalt <hello@oceanalt.com.au>`.
   4. Send a test enquiry through the form.
 
+## SEO
+
+On the site (done, in the build):
+- The home page is pre-rendered to HTML at build time (`scripts/prerender.mjs`), so Google and link previews see the full page without running JavaScript.
+- Title and description target "websites for Australian small businesses". One H1. Canonical URL `https://oceanalt.com.au/`.
+- Structured data (JSON-LD): ProfessionalService (Sydney NSW 2037, Australia-wide, ABN, plans and prices), WebSite and FAQPage, generated from `PLANS` and `FAQ` in `src/App.tsx`, so it can't drift from the page.
+- `sitemap.xml` written at build; `robots.txt` points to it.
+- The sample sites under `/work/` send `X-Robots-Tag: noindex` (`vercel.json`), so Google never lists the fictional businesses.
+
+Off the site (founder, once oceanalt.com.au is live):
+1. Google Search Console: add the domain (DNS TXT record), submit `https://oceanalt.com.au/sitemap.xml`.
+2. Google Business Profile: "Website designer", service-area business (hide the home address), area = Sydney plus Australia-wide. This matters more than anything on the page for local searches.
+3. Bing Webmaster Tools: import from Search Console.
+4. Same name, email and area on every listing: True Local, Yellow Pages, Hotfrog, LinkedIn page.
+5. Ask every happy client for a Google review (never offer anything in return), and put a small "Site by Oceanalt" link in their footer if they agree.
+6. One case-study page per real client once there are three, written from real numbers.
+
 ## 15-minute reply setup (one-off)
 
 1. **Anthropic API key:** create one at console.anthropic.com and set a monthly spend limit there.

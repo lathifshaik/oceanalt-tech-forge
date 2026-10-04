@@ -6,8 +6,8 @@ import { AiDemo } from "./components/AiDemo";
 // Pricing and terms here must match docs/business/BUSINESS_PLAN.md and the
 // Terms page below. Change them together.
 
-const EMAIL = "hello@oceanalt.com.au";
-const ABN = "65 119 854 062";
+export const EMAIL = "hello@oceanalt.com.au";
+export const ABN = "65 119 854 062";
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
@@ -80,7 +80,7 @@ const WORK: {
 // Three different designs for the hero stack, to show the range at a glance.
 const STACK = ["little-tern-coffee", "kerr-and-sons-electrical-ink", "tidewater-physio-pilates-forest"];
 
-const PLANS = [
+export const PLANS = [
   {
     id: "care",
     name: "Care",
@@ -125,7 +125,7 @@ const PLANS = [
   },
 ];
 
-const FAQ: { q: string; a: string }[] = [
+export const FAQ: { q: string; a: string }[] = [
   {
     q: "How can it be live in 1 to 3 days?",
     a: "We don't start from a blank page. We've built our own library of layouts, design directions and components, so your design is assembled and tailored rather than drawn from nothing. We also write the words ourselves after a 15-minute call, which removes the usual weeks of waiting on copy. Google Business Profile and Stripe verification are run by Google and Stripe, so those can take a little longer.",
@@ -300,7 +300,7 @@ function Hero() {
       <div className="wrap hero-grid">
         <div className="hero-copy">
           <h1>Your website, done for you.</h1>
-          <p>Custom-designed, built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
+          <p>Custom websites for Australian small businesses, built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
           <div className="ctas">
             <a className="btn btn-primary btn-island" href="#start">Start my website <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
             <a className="text-link" href="#work">See our work <Icon name="arrow-right" /></a>
@@ -724,7 +724,7 @@ function Privacy() {
 // ─── App ────────────────────────────────────────────────────────────────────
 
 function useRoute() {
-  const read = () => (window.location.hash.startsWith("#/") ? window.location.hash.slice(2) : "");
+  const read = () => (typeof window !== "undefined" && window.location.hash.startsWith("#/") ? window.location.hash.slice(2) : "");
   const [route, setRoute] = useState(read);
   useEffect(() => {
     const on = () => {

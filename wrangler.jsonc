@@ -1,0 +1,13 @@
+// Cloudflare Workers deploy: upload the built site in dist/ as static assets.
+// Having this file stops `wrangler deploy` from auto-configuring the project
+// (which adds @cloudflare/vite-plugin, rebuilds, and breaks the pre-render).
+// Build first with `npm run build`; this only uploads.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "oceanalt-tech-forge",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist"
+  },
+  "observability": { "enabled": true }
+}

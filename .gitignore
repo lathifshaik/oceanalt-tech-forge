@@ -9,3 +9,6 @@ coverage/
 dist-sites/
 public/work/
 dist-ssr/
+
+# Wrangler
+.wrangler/

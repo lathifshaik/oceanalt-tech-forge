@@ -88,6 +88,12 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
   3. Resend: add the domain, add its DNS records (SPF, DKIM), then set `LEAD_FROM_EMAIL` to `Oceanalt <hello@oceanalt.com.au>`.
   4. Send a test enquiry through the form.
 
+## Hosting (Cloudflare Workers)
+
+The Oceanalt site deploys from `master` on Cloudflare: build command `npm run build`, deploy command `npx wrangler deploy`. `wrangler.jsonc` uploads `dist/` as static assets; keep it in the repo, or wrangler auto-configures the project and breaks the build. `public/_headers` keeps `/work/` noindex.
+
+Not running on Cloudflare yet: the Vercel functions in `api/` (the 15-minute AI reply and the live AI demo). Until they're ported to the Worker, the form uses the Firebase/EmailJS fallback (its env vars must be set in the Cloudflare build settings, because Vite bakes them in at build time) and the demo plays its sample answers.
+
 ## SEO
 
 On the site (done, in the build):

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Icon, type IconName } from "./components/Icon";
 import { AiDemo } from "./components/AiDemo";
+import { LANDINGS } from "./seo/landing";
 
 // ─── Content ─────────────────────────────────────────────────────────────────
 // Pricing and terms here must match docs/business/BUSINESS_PLAN.md and the
@@ -517,7 +518,7 @@ function Faq() {
   );
 }
 
-const TEMPLATE_LABEL: Record<string, string> = {
+export const TEMPLATE_LABEL: Record<string, string> = {
   cafe: "Café, restaurant or bar",
   trades: "Trade or home service",
   studio: "Appointments (salon, clinic, studio)",
@@ -525,7 +526,7 @@ const TEMPLATE_LABEL: Record<string, string> = {
   pro: "Professional services (accounting, legal, real estate)",
   unsure: "Something else",
 };
-const PLAN_LABEL: Record<string, string> = {
+export const PLAN_LABEL: Record<string, string> = {
   launch: "Launch ($99/month)",
   grow: "Grow ($149/month)",
   care: "Care ($29/month)",
@@ -660,6 +661,9 @@ function Footer() {
             <a href="#/privacy">Privacy</a>
           </nav>
         </div>
+        <nav className="foot-services" aria-label="Who we build for">
+          {LANDINGS.map((l) => <a key={l.slug} href={`/${l.slug}/`}>{l.nav}</a>)}
+        </nav>
         <p className="foot-word" aria-hidden="true" translate="no">oceanalt</p>
       </div>
     </footer>
@@ -742,6 +746,11 @@ export default function App() {
   const route = useRoute();
   const [template, setTemplate] = useState("unsure");
   const [plan, setPlan] = useState("launch");
+  // Service pages link to /?plan=<id>#start so the right plan is preselected.
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search).get("plan");
+    if (p && p in PLAN_LABEL) setPlan(p);
+  }, []);
 
   const goStart = () => document.getElementById("start")?.scrollIntoView({ behavior: "smooth" });
   const pickPlan = (p: string) => { setPlan(p); goStart(); };

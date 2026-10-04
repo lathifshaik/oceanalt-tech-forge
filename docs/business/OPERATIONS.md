@@ -100,7 +100,8 @@ On the site (done, in the build):
 - The home page is pre-rendered to HTML at build time (`scripts/prerender.mjs`), so Google and link previews see the full page without running JavaScript.
 - Title and description target "websites for Australian small businesses". One H1. Canonical URL `https://oceanalt.com.au/`.
 - Structured data (JSON-LD): ProfessionalService (Sydney NSW 2037, Australia-wide, ABN, plans and prices), WebSite and FAQPage, generated from `PLANS` and `FAQ` in `src/App.tsx`, so it can't drift from the page.
-- `sitemap.xml` written at build; `robots.txt` points to it.
+- Nine service pages, one per search intent (Sydney, tradies, cafés, clinics and salons, shops, professional services, pay monthly, rebuilds, AI assistant). Content lives in `src/seo/landing.ts`, layout in `src/seo/LandingPage.tsx`; each is rendered to static HTML at `/<slug>/` with Service, BreadcrumbList and FAQPage data, and linked from every footer. To add one, add an entry to `LANDINGS`; it must be genuinely specific to that kind of business (no copy-paste suburb pages, which Google treats as doorway pages).
+- `sitemap.xml` (home plus every service page) written at build; `robots.txt` points to it.
 - The sample sites under `/work/` send `X-Robots-Tag: noindex` (`vercel.json`), so Google never lists the fictional businesses.
 
 Off the site (founder, once oceanalt.com.au is live):

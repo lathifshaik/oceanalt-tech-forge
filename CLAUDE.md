@@ -5,6 +5,8 @@ Oceanalt is run as a small firm of Claude agents plus the founder. It sells webs
 ## Source of truth
 - `docs/business/BUSINESS_PLAN.md`: offer, pricing, unit economics, validation plan, risks
 - `docs/business/OPERATIONS.md`: client pipeline, QA checklist, edit policy, KPIs, Stripe setup, tech debt
+- `docs/business/LAUNCH_PLAN.md`: the first 30 days, setup checklist and weekly rhythm
+- `docs/growth/OUTREACH.md`: outreach templates and Spam Act rules
 
 Pricing (including the AI add-on), delivery time, reply time and terms appear in four places, and they must always agree: the BUSINESS_PLAN, `PLANS`/`FAQ`/the AI add-on block in `src/App.tsx`, the `Terms` component in `src/App.tsx`, and the system prompt in `api/start.ts`. Change them together.
 

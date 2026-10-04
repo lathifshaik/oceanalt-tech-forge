@@ -80,7 +80,7 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
 ## Business details and domain (one-off)
 
 - **ABN:** 65 119 854 062. Shown in the site footer, Terms, Privacy and the reply email footer. Put it on every invoice too (required on tax invoices).
-- **ABN Lookup:** on 3 October 2026 the ABN wasn't showing on ABN Lookup yet (new ABNs appear from their activation date). auDA's .com.au eligibility check uses it, so the domain stays pending until it shows.
+- **ABN Lookup (checked 4 October 2026):** Shaik, Abdul Lathif, Individual/Sole Trader, active from 3 October 2026, not registered for GST, NSW 2037. The first .com.au attempt (Namecheap, 3 October) failed before the ABN appeared; re-register now that it shows.
 - **Business name:** to trade as "Oceanalt" under a sole-trader ABN, register "Oceanalt" as a business name with ASIC (business.gov.au). It also makes the .com.au name match.
 - **oceanalt.com.au, once active:**
   1. Vercel: Project, Settings, Domains, add `oceanalt.com.au` and `www.oceanalt.com.au`, then add the DNS records Vercel shows at the registrar.

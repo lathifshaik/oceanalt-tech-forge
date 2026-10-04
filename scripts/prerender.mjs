@@ -5,10 +5,19 @@
 // without pre-rendering (the browser renders it), so a prerender bug must never
 // block a deploy. The error is printed in full so it shows in the host's log.
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
+import { execSync } from "node:child_process";
 
 const SITE = "https://oceanalt.com.au/";
 const BUSINESS = `${SITE}#business`;
-const urls = [SITE];
+// Sitemap entries. Images are listed too, so they can show up in image search.
+const urls = [{
+  loc: SITE,
+  priority: "1.0",
+  images: [
+    { loc: `${SITE}og-image.png`, title: "Oceanalt: your website, done for you" },
+    { loc: `${SITE}ai/cafe.webp`, title: "A café after closing, its AI assistant still answering customers" },
+  ],
+}];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const ld = (data) => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
@@ -109,16 +118,35 @@ async function prerender() {
       })}\n  </head>`);
     mkdirSync(`dist/${page.slug}`, { recursive: true });
     writeFileSync(`dist/${page.slug}/index.html`, html);
-    urls.push(url);
+    urls.push({ loc: url, priority: "0.8", images: [{ loc: new URL(page.image.src, SITE).href, title: page.image.alt }] });
   }
   console.log(`prerender: ${seo.LANDINGS.length} service pages`);
 }
 
+// lastmod is the date the site's content last changed in git, not the build
+// date, so Google can trust it. Falls back to today if git isn't available.
+function lastChanged() {
+  try {
+    const d = execSync("git log -1 --format=%cs -- src shared public", { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
+  } catch {}
+  return new Date().toISOString().slice(0, 10);
+}
+
 function sitemap() {
-  const today = new Date().toISOString().slice(0, 10);
+  const lastmod = lastChanged();
+  const entry = (u) => [
+    "  <url>",
+    `    <loc>${esc(u.loc)}</loc>`,
+    `    <lastmod>${lastmod}</lastmod>`,
+    `    <changefreq>monthly</changefreq>`,
+    `    <priority>${u.priority}</priority>`,
+    ...u.images.map((i) => `    <image:image><image:loc>${esc(i.loc)}</image:loc><image:title>${esc(i.title)}</image:title></image:image>`),
+    "  </url>",
+  ].join("\n");
   writeFileSync("dist/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join("\n")}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${urls.map(entry).join("\n")}
 </urlset>
 `);
 }

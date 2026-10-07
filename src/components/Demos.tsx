@@ -153,12 +153,10 @@ const BRANDS: { name: string; file: string }[] = [
   { name: "Google Gemini", file: "googlegemini" },
   { name: "Perplexity", file: "perplexity" },
   { name: "Shopify", file: "shopify" },
-  { name: "WordPress", file: "wordpress" },
-  { name: "Squarespace", file: "squarespace" },
-  { name: "Wix", file: "wix" },
 ];
 
 // "Works with" logos, scrolling slowly. Logos only, names in alt text.
+// Only tools we actually use or connect to; no website builders.
 export function LogoWall() {
   const row = (hidden: boolean) => (
     <ul className="logos-row" aria-hidden={hidden || undefined}>
@@ -170,7 +168,7 @@ export function LogoWall() {
   return (
     <section className="logos" aria-labelledby="logos-h">
       <div className="wrap">
-        <h2 id="logos-h">Works with the tools you already use, and moves you off the ones you've outgrown.</h2>
+        <h2 id="logos-h">Works with the tools you already use.</h2>
       </div>
       <div className="logos-track">{row(false)}{row(true)}</div>
     </section>

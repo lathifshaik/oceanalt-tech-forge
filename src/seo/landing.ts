@@ -93,10 +93,10 @@ export const LANDINGS: Landing[] = [
   {
     slug: "web-apps-for-small-business",
     title: "Web Apps and Custom Software for Small Business | Oceanalt",
-    description: "Booking systems, client portals, quoting tools, dashboards and automations, built for how your small business works. Scope and price within 24 hours.",
+    description: "We make your pipeline efficient: booking systems, portals, quoting tools and automations for Aussie small businesses. Data stored in Australia.",
     nav: "Web apps and software",
     h1: "Web apps and software for small businesses",
-    intro: "If your week is lost to spreadsheets, double entry and chasing paperwork, we build the tool that takes it off your plate, shaped around how you already work.",
+    intro: "If your week is lost to spreadsheets, double entry and chasing paperwork, we make your pipeline efficient, from first enquiry to paid invoice, with tools shaped around how you already work.",
     image: { src: "/ai/tools.webp", alt: "A roll of well-used tools" },
     includes: [
       "Booking and scheduling systems that fit your services",
@@ -104,7 +104,8 @@ export const LANDINGS: Landing[] = [
       "Quoting, job and invoicing tools for trades and services",
       "Dashboards that pull your numbers into one place",
       "Automations that link the apps you already use",
-      "Hosting, backups and support after launch",
+      "Hosted on Cloudflare and AWS, with your data stored in Australia",
+      "Backups and support after launch",
     ],
     sections: [
       { h2: "How a project works", body: [

@@ -100,6 +100,16 @@ Stack, per client:
 
 Pricing check: $149/month covers setup and upkeep; the number (~$5-10/month) is included; call minutes are billed at cost. Review real per-minute costs after the first 3 clients.
 
+## Client hosting and data in Australia (owner: `engineer`)
+
+We tell clients their sites run on Cloudflare and AWS and their customers' data stays in Australia. Keep that true on every build:
+
+- **Sites:** static files on Cloudflare (Workers static assets or Pages).
+- **Apps, databases, files, form submissions, bookings:** AWS **ap-southeast-2 (Sydney)** only, including backups. No US-region buckets or databases for client data.
+- **Third-party tools** (booking systems, CRMs) the client picks: note where they store data in the client's brief, and tell the client if it's overseas.
+- **AI features:** list every AI and telephony provider for that client in their brief and Privacy wording, and only use providers and settings that don't train on client data (API terms or zero-retention modes).
+- **Our own site:** enquiries currently go through Anthropic and Resend (US) or the Firebase fallback; our Privacy page says so. If we move the fallback, put Firestore in australia-southeast1 (Sydney).
+
 ## Hosting (Cloudflare Workers)
 
 The Oceanalt site deploys from `master` on Cloudflare: build command `npm run build`, deploy command `npx wrangler deploy`. `wrangler.jsonc` uploads `dist/` as static assets; keep it in the repo, or wrangler auto-configures the project and breaks the build. `public/_headers` keeps `/work/` noindex.

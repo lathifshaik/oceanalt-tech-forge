@@ -160,6 +160,10 @@ export const FAQ: { q: string; a: string }[] = [
     a: "Nobody can guarantee it, and be wary of anyone who does. What we do is give AI search tools what they look for: clear, consistent details about your business on your website, your Google Business Profile and the directories they read, written so they can be quoted. It's part of every website plan.",
   },
   {
+    q: "Where is my data kept?",
+    a: "Your site and apps run on Cloudflare and AWS, and your customers' details, bookings and files are stored in Australia, in Sydney. AI features use specialist providers, some overseas; we tell you exactly which ones, and only use providers that don't train on your data.",
+  },
+  {
     q: "How do you reply in 15 minutes?",
     a: "When you send the form, our AI assistant reads it and emails you straight away with a suggested plan and a link to book a call. A person reads every enquiry the same business day. It's the same assistant we can set up on your own site.",
   },
@@ -358,7 +362,7 @@ function Services({ onPlan }: { onPlan: (plan: string) => void }) {
             <img src="/ai/tools.webp" alt="A roll of well-used tools" width={1000} height={563} loading="lazy" />
             <div className="svc-copy">
               <h3>Less admin, more evenings back</h3>
-              <p>Web apps and automations built around how you already work: bookings, quotes, invoices and job notes that flow between your apps, without typing the same thing in three places.</p>
+              <p>We make your pipeline efficient, from first enquiry to paid invoice: web apps and automations that move bookings, quotes, invoices and job notes between your apps, so nobody types the same thing three times.</p>
               <p className="svc-price"><b>Web apps and workflows</b> quoted per project, within 24 hours</p>
               <button className="text-link" type="button" onClick={() => onPlan("custom")}>Send a brief <Icon name="arrow-right" /></button>
             </div>
@@ -513,13 +517,15 @@ function Promises() {
   return (
     <section className="promises-sec">
       <div className="wrap">
-        <h2 className="h2">No hostage websites.</h2>
-        <p className="lede">Pay-monthly websites have a bad name because some providers hold your domain and make leaving hard. We put these in writing instead.</p>
+        <h2 className="h2">No hostage websites. No surprises.</h2>
+        <p className="lede">Some providers hold your domain, make leaving hard or won't say where your data lives. We put these in writing instead.</p>
         <ul className="promises">
           <li><b>See it before you pay</b><span>A preview link within a day. Your first charge happens only once you're happy with it.</span></li>
           <li><b>Your domain, in your name</b><span>Registered to you from day one. Never held hostage, whatever happens.</span></li>
           <li><b>Payments go straight to you</b><span>Customer payments land in your own Stripe account. We never hold your money.</span></li>
           <li><b>Keep the site after 12 months</b><span>After a year, the site and its code are yours to keep, free. Stay on Care for $29 a month or take it anywhere.</span></li>
+          <li><b>Your data stays in Australia</b><span>Your customers' details, bookings and files are stored in Sydney. If you use our AI, we tell you which providers process it, and we only use ones that don't train on your data.</span></li>
+          <li><b>Fast and safe, on Cloudflare and AWS</b><span>Sites and apps run on Cloudflare's network and AWS, with SSL, daily backups and uptime monitoring included.</span></li>
         </ul>
       </div>
     </section>
@@ -747,7 +753,8 @@ function Privacy() {
       <h2>2. What is collected</h2>
       <p>When you send the start form, we collect your name, business name, email, and optionally your phone number, current website and message. No tracking pixels or third-party analytics are used by default.</p>
       <h2>3. Where it is stored</h2>
-      <p>Your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. For clients using our AI concierge, calls are carried by a telephony provider and processed by a voice AI provider to answer and summarise them, and summaries are sent by WhatsApp, SMS or email. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. These providers process the data on our behalf and don't use it to train models.</p>
+      <p>This website is hosted on Cloudflare. When you send the start form, your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. Some of these providers are overseas, mainly in the United States. They process the data on our behalf and don't use it to train models.</p>
+      <p>For our clients: their websites and apps are hosted on Cloudflare and AWS, and their customers' data (form submissions, bookings, files and databases) is stored in Australia, in AWS's Sydney region. AI features, such as the chat assistant and the AI concierge, send conversation or call content to AI and telephony providers that may be overseas; we tell each client which providers are used, and only use providers that don't train on their data. Call summaries are sent by WhatsApp, SMS or email.</p>
       <h2>4. How it is used</h2>
       <p>Submissions are used to reply to you and scope your website. Data is not sold, shared with third parties for marketing, or used to train any model. Deletion requests are honoured.</p>
       <h2>5. Your rights under the Privacy Act 1988</h2>

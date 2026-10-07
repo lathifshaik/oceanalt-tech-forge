@@ -219,7 +219,7 @@ function CallStory() {
     <div className="call" ref={ref}>
       <div className="call-phone" aria-label="Sample phone call">
         <div className="call-top">
-          <span className={`call-av${ringing ? " is-ringing" : ""}`}><Icon name="phone" /></span>
+          <span className={`call-av${ringing ? " is-ringing" : ""}`} aria-hidden="true">M</span>
           <div>
             <b>{step < 1 && step >= 0 ? "Incoming call" : step >= 7 ? "Call ended, 1:12" : step < 0 ? "Kerr & Sons line" : "Answered by your concierge"}</b>
             <small>Mel, 0412 ••• 318</small>
@@ -229,15 +229,27 @@ function CallStory() {
         <ol className="call-lines" aria-live="polite">
           {CALL.map((l, i) => (
             <li key={i} className={`is-${l.who}${shown(i + 2) ? " is-on" : ""}`}>
-              <span>{l.who === "agent" ? "Concierge" : "Mel"}</span>
-              <p>{l.text}</p>
+              <span className="call-face" aria-hidden="true">{l.who === "agent" ? <i className="call-orb" /> : "M"}</span>
+              <div>
+                <span>{l.who === "agent" ? "Your concierge" : "Mel"}</span>
+                <p>{l.text}</p>
+              </div>
             </li>
           ))}
         </ol>
       </div>
 
       <div className="call-out">
-        <p className="call-when">11:42am. Jim's up a ladder in Charlestown and can't pick up.</p>
+        <div className="call-owner">
+          <img src="/ai/sparky.webp" alt="" width={1000} height={667} />
+          <div>
+            <b>Jim Kerr, up a ladder in Charlestown</b>
+            <small>11:42am. Phone's in the ute.</small>
+          </div>
+          <span className={`call-state${shown(8) ? " is-done" : step >= 1 ? " is-live" : ""}`}>
+            {shown(8) ? "Job booked" : step >= 1 ? "Concierge has it" : step === 0 ? "Phone ringing" : "On the tools"}
+          </span>
+        </div>
         <div className={`call-msg${shown(8) ? " is-on" : ""}`}>
           <span className="call-chan">WhatsApp</span>
           <b>New job booked by your concierge</b>
@@ -252,6 +264,7 @@ function CallStory() {
           <span className="call-chan">Email</span>
           <b>Call summary: Mel, Merewether, booked today 2 to 4pm</b>
         </div>
+        <p className={`call-value${shown(9) ? " is-on" : ""}`}>Job booked while Jim kept working. Without it, Mel would have rung the next sparky on Google.</p>
         <button type="button" className="text-link call-replay" onClick={play} disabled={playing}>
           {playing ? "Playing…" : "Play the call again"} <Icon name="arrow-right" />
         </button>

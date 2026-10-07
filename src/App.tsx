@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Icon, type IconName } from "./components/Icon";
 import { AiDemo } from "./components/AiDemo";
+import { BookPayDemo, LogoWall, PipelineDemo } from "./components/Demos";
 import { LANDINGS } from "./seo/landing";
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -158,6 +159,10 @@ export const FAQ: { q: string; a: string }[] = [
   {
     q: "Will my business show up in ChatGPT and Google's AI answers?",
     a: "Nobody can guarantee it, and be wary of anyone who does. What we do is give AI search tools what they look for: clear, consistent details about your business on your website, your Google Business Profile and the directories they read, written so they can be quoted. It's part of every website plan.",
+  },
+  {
+    q: "How do my customers pay?",
+    a: "Through Stripe, straight into your own account. Customers can pay by card, Apple Pay, Google Pay, Afterpay or bank transfer, for a deposit when they book or the full amount up front. Bookings, payments and reminders are part of the Grow plan, and Stripe's standard fees apply to each payment.",
   },
   {
     q: "Where is my data kept?",
@@ -338,7 +343,7 @@ function Services({ onPlan }: { onPlan: (plan: string) => void }) {
   return (
     <section className="services" id="services">
       <div className="wrap">
-        <h2 className="h2">Three ways we make running your business easier.</h2>
+        <h2 className="h2">Four ways we make running your business easier.</h2>
         <div className="svc">
           <article className="svc-cell svc-presence">
             <div className="svc-copy">
@@ -359,12 +364,21 @@ function Services({ onPlan }: { onPlan: (plan: string) => void }) {
             </div>
           </article>
           <article className="svc-cell svc-photo">
-            <img src="/ai/tools.webp" alt="A roll of well-used tools" width={1000} height={563} loading="lazy" />
+            <div className="svc-demo"><PipelineDemo /></div>
             <div className="svc-copy">
               <h3>Less admin, more evenings back</h3>
               <p>We make your pipeline efficient, from first enquiry to paid invoice: web apps and automations that move bookings, quotes, invoices and job notes between your apps, so nobody types the same thing three times.</p>
               <p className="svc-price"><b>Web apps and workflows</b> quoted per project, within 24 hours</p>
               <button className="text-link" type="button" onClick={() => onPlan("custom")}>Send a brief <Icon name="arrow-right" /></button>
+            </div>
+          </article>
+          <article className="svc-cell svc-presence svc-pay">
+            <div className="svc-demo"><BookPayDemo /></div>
+            <div className="svc-copy">
+              <h3>Get paid without the chasing</h3>
+              <p>Customers book and pay in one go, a deposit or the full amount, on whatever they like to pay with. Money lands in your own Stripe account, and a deposit on the line means fewer no-shows.</p>
+              <p className="svc-price"><b>Payments and bookings</b> included in Grow, $149 a month</p>
+              <button className="text-link" type="button" onClick={() => onPlan("grow")}>Start taking payments <Icon name="arrow-right" /></button>
             </div>
           </article>
         </div>
@@ -802,6 +816,7 @@ export default function App() {
         <main id="main">
           <Hero />
           <Services onPlan={pickPlan} />
+          <LogoWall />
           <Work />
           <AiDemo onAsk={() => pickPlan("ai")} onCall={() => pickPlan("concierge")} />
           <How />

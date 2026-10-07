@@ -26,6 +26,38 @@ export type Landing = {
 
 export const LANDINGS: Landing[] = [
   {
+    slug: "online-payments-and-bookings",
+    title: "Online Bookings and Payments with Stripe | Oceanalt",
+    description: "Let customers book and pay in one go, by card, Apple Pay, Google Pay, Afterpay or bank transfer, straight into your Stripe account. Included in Grow, $149 a month.",
+    nav: "Payments and bookings",
+    h1: "Get paid without the chasing",
+    intro: "Customers pick a time, pay a deposit or the full amount, and get a confirmation, all in a minute on their phone. You get the booking and the money, without a single phone call or invoice.",
+    image: { src: "/ai/physio.webp", alt: "A client stretching by the water at sunset after a session" },
+    example: { path: "tidewater-physio-pilates", label: "a sample clinic with online booking" },
+    includes: [
+      "Card, Apple Pay, Google Pay, Afterpay and bank transfer, through Stripe",
+      "Deposits or full payment when they book",
+      "Booking and confirmation in one step, with reminders before the day",
+      "Money paid straight into your own Stripe account",
+      "Gift vouchers and packages sold online",
+      "Refunds and changes handled from your Stripe dashboard",
+    ],
+    sections: [
+      { h2: "Fewer no-shows, less chasing", body: [
+        "When someone has paid a deposit, they turn up or they reschedule. When they've paid in full, there's no invoice to send and nothing to chase.",
+      ] },
+      { h2: "Your money, your account", body: [
+        "Payments go straight into your own Stripe account, and Stripe pays them into your bank. We never hold your money or see card details. Stripe charges its standard fee on each payment; there's no extra fee from us.",
+      ] },
+    ],
+    faq: [
+      { q: "Do I need a Stripe account?", a: "Yes, in your business name. It takes about 10 minutes with your ABN and bank details, and we help you set it up on the call." },
+      { q: "Can customers pay later with Afterpay?", a: "Yes, Afterpay can be switched on in Stripe, so customers can split a payment while you're paid up front, less Afterpay's fee." },
+      { q: "Which plan includes this?", a: "Online payments, bookings and gift vouchers are part of Grow, $149 a month with nothing upfront." },
+    ],
+    plan: "grow",
+  },
+  {
     slug: "ai-concierge",
     title: "AI Concierge for Small Business, Australia | Oceanalt",
     description: "An AI concierge that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. $149 a month.",

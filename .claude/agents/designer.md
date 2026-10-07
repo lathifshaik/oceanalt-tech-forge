@@ -13,3 +13,4 @@ Always:
 5. Mobile first: design at 390 px, then scale up. The main call to action must be visible without scrolling.
 6. Write real copy from the brief. No lorem ipsum, no invented stats or testimonials.
 7. Finish with screenshots at 390 px and 1440 px and a short note explaining the direction you chose.
+- We sell experiences, not deliverables: lead with what changes for the owner and their customers (found first, fewer calls, evenings back), then name the product. Oceanalt sells digital presence, web apps and software, and AI agents with equal weight.

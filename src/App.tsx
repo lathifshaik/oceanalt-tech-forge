@@ -156,8 +156,8 @@ export const FAQ: { q: string; a: string }[] = [
     a: "When you send the form, our AI assistant reads it and emails you straight away with a suggested plan and a link to book a call. A person reads every enquiry the same business day. It's the same assistant we can set up on your own site.",
   },
   {
-    q: "Do you build custom apps too?",
-    a: "Sometimes. Client portals, internal tools and small SaaS products are quoted per project. Send a brief and you'll get a scope and a price within 24 hours.",
+    q: "What kind of web apps and software do you build?",
+    a: "Tools that take admin off your plate: booking systems, client portals, quoting and job tools, dashboards, and automations that connect the apps you already use. Each project is quoted on its own. Send a brief and you'll get a scope and a price within 24 hours.",
   },
 ];
 
@@ -231,9 +231,9 @@ function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
   const links = [
+    ["#services", "Services"],
     ["#work", "Work"],
     ["#ai", "AI"],
-    ["#how", "How it works"],
     ["#pricing", "Pricing"],
     ["#faq", "FAQ"],
   ];
@@ -244,7 +244,7 @@ function Nav() {
         <nav className="nav-links" aria-label="Main">
           {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
         </nav>
-        <a className="btn btn-primary nav-cta" href="#start">Start my website</a>
+        <a className="btn btn-primary nav-cta" href="#start">Start a project</a>
         <button className="menu-btn" type="button" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
           <span className="burger" aria-hidden="true"><i /><i /></span>
           <span className="sr">{open ? "Close menu" : "Open menu"}</span>
@@ -252,7 +252,7 @@ function Nav() {
       </div>
       <nav id="mobile-menu" className="mobile-menu" aria-label="Main" hidden={!open}>
         {links.map(([href, label], i) => <a key={href} href={href} style={{ animationDelay: `${i * 40}ms` }} onClick={() => setOpen(false)}>{label}</a>)}
-        <a className="btn btn-primary" href="#start" onClick={() => setOpen(false)}>Start my website</a>
+        <a className="btn btn-primary" href="#start" onClick={() => setOpen(false)}>Start a project</a>
       </nav>
     </header>
   );
@@ -300,10 +300,10 @@ function Hero() {
     <div className="hero">
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <h1>Your website, done for you.</h1>
-          <p>Custom websites for Australian small businesses, built and looked after for one monthly fee. Nothing upfront, live in 1 to 3 days.</p>
+          <h1><span>More customers.</span> <span>Less admin.</span></h1>
+          <p>Websites, web apps and AI agents for small businesses, designed, built and looked after for you.</p>
           <div className="ctas">
-            <a className="btn btn-primary btn-island" href="#start">Start my website <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
+            <a className="btn btn-primary btn-island" href="#start">Start a project <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
             <a className="text-link" href="#work">See our work <Icon name="arrow-right" /></a>
           </div>
         </div>
@@ -311,12 +311,53 @@ function Hero() {
       </div>
       <div className="wrap">
         <dl className="proof">
-          <div><dt>$0</dt><dd>upfront, on every plan</dd></div>
-          <div><dt>1-3</dt><dd>days from first call to live</dd></div>
+          <div><dt>$0</dt><dd>upfront on website plans</dd></div>
+          <div><dt>1-3</dt><dd>days from first call to a live website</dd></div>
           <div><dt>15 min</dt><dd>to reply to an enquiry, day or night</dd></div>
         </dl>
       </div>
     </div>
+  );
+}
+
+// What we sell, equal weight: digital presence, web apps and software, AI.
+// Copy leads with what it's like for the owner and their customers.
+function Services({ onPlan }: { onPlan: (plan: string) => void }) {
+  return (
+    <section className="services" id="services">
+      <div className="wrap">
+        <h2 className="h2">Three ways we make running your business easier.</h2>
+        <div className="svc">
+          <article className="svc-cell svc-presence">
+            <div className="svc-copy">
+              <h3>Be the business people find first</h3>
+              <p>A website made for you, your Google profile set up properly, and search, reviews and socials working together, so the next customer finds you before anyone else.</p>
+              <p className="svc-price"><b>Digital presence</b> from $99 a month, nothing upfront</p>
+              <a className="text-link" href="#work">See websites we've designed <Icon name="arrow-right" /></a>
+            </div>
+            <img src="/previews/little-tern-coffee.webp" alt="A website we designed for a sample café" width={1200} height={750} loading="lazy" />
+          </article>
+          <article className="svc-cell svc-photo">
+            <img src="/ai/tools.webp" alt="A roll of well-used tools" width={1000} height={563} loading="lazy" />
+            <div className="svc-copy">
+              <h3>Run the business, not the paperwork</h3>
+              <p>Web apps and software built around how you work: booking systems, client portals, quoting and job tools, dashboards, and automations that link the apps you already use.</p>
+              <p className="svc-price"><b>Web apps and software</b> quoted per project, within 24 hours</p>
+              <button className="text-link" type="button" onClick={() => onPlan("custom")}>Send a brief <Icon name="arrow-right" /></button>
+            </div>
+          </article>
+          <article className="svc-cell svc-photo">
+            <img src="/ai/bakery.webp" alt="A café's pastry cabinet" width={1000} height={668} loading="lazy" />
+            <div className="svc-copy">
+              <h3>Answers at 9pm, while you rest</h3>
+              <p>AI agents that reply to customers, take booking requests, draft review replies and chase quotes, from your real information. You approve anything that matters.</p>
+              <p className="svc-price"><b>AI assistant</b> $39 a month plus usage at cost</p>
+              <a className="text-link" href="#ai">Try the demo <Icon name="arrow-right" /></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -406,8 +447,8 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
   return (
     <section id="pricing" className="pricing">
       <div className="wrap">
-        <h2 className="h2">One monthly fee. Everything handled.</h2>
-        <p className="lede">Prices in AUD. No setup fee on any plan.</p>
+        <h2 className="h2">Your website and Google presence, one monthly fee.</h2>
+        <p className="lede">Design, hosting, your Google profile and changes, all included. Prices in AUD, no setup fee.</p>
         <div className="plans">
           {PLANS.map((p) => (
             <div className={`plan${p.featured ? " is-featured" : ""}`} key={p.id}>
@@ -429,7 +470,7 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
         </div>
         <div className="plan-extra">
           <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch. Add Care for $29 a month if you'd like us to keep looking after it.</p>
-          <p><b>Need something bigger?</b> Client portals, internal tools and small SaaS products are quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
+          <p><b>Web apps and software?</b> Booking systems, client portals, quoting tools and automations are quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
           <p><b>AI on your site?</b> The AI assistant is $39 a month on any plan, plus AI usage at cost. <a className="link" href="#ai">See it working</a>.</p>
         </div>
       </div>
@@ -466,32 +507,12 @@ function Promises() {
       <div className="wrap">
         <h2 className="h2">No hostage websites.</h2>
         <p className="lede">Pay-monthly websites have a bad name because some providers hold your domain and make leaving hard. We put these in writing instead.</p>
-        <div className="bento">
-          <div className="cell cell-preview">
-            <div>
-              <h3>See it before you pay</h3>
-              <p>A preview link within a day. Your first charge happens only once you're happy with it.</p>
-            </div>
-            <img src="/previews/wattle-and-fern-florist.webp" alt="A preview of the Wattle & Fern florist site" width={1200} height={750} loading="lazy" />
-          </div>
-          <div className="cell">
-            <Icon name="globe" />
-            <h3>Your domain, in your name</h3>
-            <p>Registered to you from day one. Never held hostage, whatever happens.</p>
-          </div>
-          <div className="cell">
-            <Icon name="card" />
-            <h3>Payments go straight to you</h3>
-            <p>Customer payments land in your own Stripe account. We never hold your money.</p>
-          </div>
-          <div className="cell cell-keep">
-            <b className="num">12</b>
-            <div>
-              <h3>Keep the site after 12 months</h3>
-              <p>After a year, the site and its code are yours to keep, free. Stay on Care for $29 a month or take it anywhere.</p>
-            </div>
-          </div>
-        </div>
+        <ul className="promises">
+          <li><b>See it before you pay</b><span>A preview link within a day. Your first charge happens only once you're happy with it.</span></li>
+          <li><b>Your domain, in your name</b><span>Registered to you from day one. Never held hostage, whatever happens.</span></li>
+          <li><b>Payments go straight to you</b><span>Customer payments land in your own Stripe account. We never hold your money.</span></li>
+          <li><b>Keep the site after 12 months</b><span>After a year, the site and its code are yours to keep, free. Stay on Care for $29 a month or take it anywhere.</span></li>
+        </ul>
       </div>
     </section>
   );
@@ -532,7 +553,7 @@ export const PLAN_LABEL: Record<string, string> = {
   care: "Care ($29/month)",
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",
-  custom: "Custom project",
+  custom: "Web app or custom software",
   ai: "AI assistant or custom AI agents",
   unsure: "Not sure yet",
 };
@@ -587,7 +608,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
     <section className="start" id="start">
       <div className="wrap">
         <div>
-          <h2 className="h2">Start your website.</h2>
+          <h2 className="h2">Start your project.</h2>
           <p className="lede">Tell us a little about your business. You'll hear back within 15 minutes, day or night, with a suggested plan and a link to book a call.</p>
           <div className="start-aside">
             <a href={`mailto:${EMAIL}`}><Icon name="mail" /> {EMAIL}</a>
@@ -633,7 +654,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
               </div>
             </div>
             <div className="field"><label htmlFor="f-website">Current website <small>(if you have one)</small></label><input id="f-website" name="website" type="text" inputMode="url" autoComplete="url" spellCheck={false} placeholder="yourbusiness.com.au…" /></div>
-            <div className="field"><label htmlFor="f-message">What does your business do, and what should the site help with?</label><textarea id="f-message" name="message" rows={4} maxLength={2000} required /></div>
+            <div className="field"><label htmlFor="f-message">What does your business do, and what do you need?</label><textarea id="f-message" name="message" rows={4} maxLength={2000} required /></div>
             <div className="hp" aria-hidden="true"><label htmlFor="f-company-site">Leave this empty</label><input id="f-company-site" name="company_site" tabIndex={-1} autoComplete="off" /></div>
             {state === "error" && <p className="form-error" role="alert">That didn't send. Please try again, or email {EMAIL} directly.</p>}
             <button className="btn btn-accent" type="submit" disabled={state === "sending"}>
@@ -763,6 +784,7 @@ export default function App() {
       {route === "terms" ? <Terms /> : route === "privacy" ? <Privacy /> : (
         <main id="main">
           <Hero />
+          <Services onPlan={pickPlan} />
           <Work />
           <AiDemo onAsk={() => pickPlan("ai")} />
           <How />

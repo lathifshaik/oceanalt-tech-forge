@@ -21,10 +21,74 @@ export type Landing = {
   sections: { h2: string; body: string[] }[];
   faq: { q: string; a: string }[];
   /** Plan to preselect in the start form. */
-  plan: "launch" | "grow" | "care" | "rebuild" | "ai";
+  plan: "launch" | "grow" | "care" | "rebuild" | "ai" | "custom";
 };
 
 export const LANDINGS: Landing[] = [
+  {
+    slug: "web-apps-for-small-business",
+    title: "Web Apps and Custom Software for Small Business | Oceanalt",
+    description: "Booking systems, client portals, quoting tools, dashboards and automations, built for how your small business works. Scope and price within 24 hours.",
+    nav: "Web apps and software",
+    h1: "Web apps and software for small businesses",
+    intro: "If your week is lost to spreadsheets, double entry and chasing paperwork, we build the tool that takes it off your plate, shaped around how you already work.",
+    image: { src: "/ai/tools.webp", alt: "A roll of well-used tools" },
+    includes: [
+      "Booking and scheduling systems that fit your services",
+      "Client portals for documents, approvals and updates",
+      "Quoting, job and invoicing tools for trades and services",
+      "Dashboards that pull your numbers into one place",
+      "Automations that link the apps you already use",
+      "Hosting, backups and support after launch",
+    ],
+    sections: [
+      { h2: "How a project works", body: [
+        "Send a short brief: what takes too long, what you use now, and who would use the new tool. Within 24 hours you get a written scope and a fixed price.",
+        "We build in small steps and show you working versions early, so you're never paying for something you haven't seen. After launch we host it, back it up and keep it running.",
+      ] },
+      { h2: "Built for small teams", body: [
+        "No enterprise software and no long manuals. Each tool does the few things your business needs, works on a phone, and connects to what you already use, like your calendar, accounting software or payments.",
+      ] },
+    ],
+    faq: [
+      { q: "What does a web app cost?", a: "It depends on what it does, so every project gets a fixed quote after a short brief. You'll have the scope and price within 24 hours." },
+      { q: "Can it connect to the software we already use?", a: "Usually, yes. Most calendars, accounting tools, payment providers and email services can be connected. We confirm this in the scope before you commit." },
+      { q: "Can AI be part of it?", a: "Yes. An AI agent can answer questions, sort enquiries, draft replies or chase follow-ups inside the tool, with you approving anything that matters." },
+    ],
+    plan: "custom",
+  },
+  {
+    slug: "digital-presence-for-small-business",
+    title: "Digital Presence for Small Business: Website, Google, SEO | Oceanalt",
+    description: "A website, Google Business Profile, local SEO and reviews working together, so customers find you first. Done for you from $99 a month, nothing upfront.",
+    nav: "Digital presence",
+    h1: "Be the business people find first",
+    intro: "Most customers meet you online before they ever call. We make that first impression easy and convincing: a website made for you, your Google profile set up properly, and everything kept up to date.",
+    image: { src: "/previews/little-tern-coffee-sun.webp", alt: "A website we designed for a sample café" },
+    example: { path: "little-tern-coffee-sun", label: "a sample café" },
+    includes: [
+      "A website designed for your business, never reused",
+      "Google Business Profile set up and linked to your site",
+      "Your services, areas and hours marked up for Google",
+      "Reviews linked from your site, and a simple way to ask for more",
+      "Your social accounts connected and consistent",
+      "Changes by email, usually done within two business days",
+    ],
+    sections: [
+      { h2: "Everything telling the same story", body: [
+        "Customers check your website, your Google listing and your socials, often in that order. When your hours, services and photos match everywhere, they trust you faster and call sooner.",
+      ] },
+      { h2: "Kept current for you", body: [
+        "New prices, holiday hours, a new service: email us and it's updated everywhere we manage. Launch includes 30 minutes of changes a month; Grow includes an hour.",
+      ] },
+    ],
+    faq: [
+      { q: "Do you run our social media?", a: "We set up and connect your accounts and keep your details consistent. We don't post content for you yet." },
+      { q: "How long until we show up on Google?", a: "Your Google Business Profile can appear within days of verification. Ranking in regular search results usually takes a few months and depends on your area and competition." },
+      { q: "What does it cost?", a: "Launch is $99 a month and Grow $149 a month, with nothing upfront and a 12-month minimum. After 12 months the site is yours to keep." },
+    ],
+    plan: "launch",
+  },
   {
     slug: "website-design-sydney",
     title: "Website Design Sydney for Small Businesses | Oceanalt",

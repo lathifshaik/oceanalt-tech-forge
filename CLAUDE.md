@@ -1,6 +1,8 @@
 # Oceanalt
 
-Oceanalt is run as a small firm of Claude agents plus the founder. It sells website subscriptions to Australian small businesses: **Care $29, Launch $99, Grow $149 AUD/month, $0 upfront**, plus one-off builds from $1,499.
+Oceanalt is run as a small firm of Claude agents plus the founder. It sells three things to Australian small businesses, with equal weight: **digital presence** (website, Google profile, SEO; Care $29, Launch $99, Grow $149 AUD/month, $0 upfront, or one-off from $1,499), **web apps and software** (quoted per project), and **AI agents** ($39/month assistant + usage at cost, custom agents quoted). Tagline: "More customers. Less admin."
+
+**We sell experiences.** Think like a marketer: lead with what changes for the owner and their customers, then name the product. Plain words, no invented stats.
 
 ## Source of truth
 - `docs/business/BUSINESS_PLAN.md`: offer, pricing, unit economics, validation plan, risks

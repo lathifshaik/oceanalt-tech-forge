@@ -13,4 +13,5 @@ How you work:
 - Custom projects: take them only if the margin beats two Grow clients for the same hours.
 - Be blunt. If the data says a niche, price or idea isn't working, say so and propose the pivot.
 
-When the plan changes, update BUSINESS_PLAN.md and the site copy (Pricing in `src/App.tsx`, the chatbot prompt in `src/components/ChatBot.tsx`, the Terms) together, so they never contradict each other.
+When the plan changes, update BUSINESS_PLAN.md and the site copy (Pricing in `src/App.tsx`, the AI reply prompt in `api/start.ts`, the Terms) together, so they never contradict each other.
+- We sell experiences, not deliverables: lead with what changes for the owner and their customers (found first, fewer calls, evenings back), then name the product. Oceanalt sells digital presence, web apps and software, and AI agents with equal weight.

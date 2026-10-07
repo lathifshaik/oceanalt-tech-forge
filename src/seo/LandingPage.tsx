@@ -6,6 +6,7 @@ import { LANDINGS, type Landing } from "./landing";
 // No JavaScript runs on these pages, so everything here is plain links.
 export function LandingPage({ page }: { page: Landing }) {
   const start = `/?plan=${page.plan}#start`;
+  const cta = page.plan === "custom" ? "Send a brief" : page.plan === "ai" ? "Ask about AI" : "Start my website";
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
@@ -18,7 +19,7 @@ export function LandingPage({ page }: { page: Landing }) {
             <a href="/#how">How it works</a>
             <a href="/#pricing">Pricing</a>
           </nav>
-          <a className="btn btn-primary nav-cta lp-nav-cta" href={start}>Start my website</a>
+          <a className="btn btn-primary nav-cta lp-nav-cta" href={start}>{cta}</a>
         </div>
       </header>
 
@@ -32,7 +33,7 @@ export function LandingPage({ page }: { page: Landing }) {
               <h1>{page.h1}</h1>
               <p>{page.intro}</p>
               <div className="ctas">
-                <a className="btn btn-primary btn-island" href={start}>Start my website <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
+                <a className="btn btn-primary btn-island" href={start}>{cta} <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
                 {page.example && <a className="text-link" href={`/work/${page.example.path}/`}>See {page.example.label} <Icon name="arrow-right" /></a>}
               </div>
             </div>
@@ -92,7 +93,7 @@ export function LandingPage({ page }: { page: Landing }) {
           <div className="wrap">
             <h2 className="h2">Tell us about your business.</h2>
             <p className="lede">A short form. You'll hear back within 15 minutes with a suggested plan, and nothing is charged until you've seen your site.</p>
-            <a className="btn btn-primary btn-island" href={start}>Start my website <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
+            <a className="btn btn-primary btn-island" href={start}>{cta} <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
           </div>
         </section>
       </main>

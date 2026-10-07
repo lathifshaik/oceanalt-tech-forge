@@ -1,10 +1,16 @@
-# Oceanalt business plan: website subscriptions for small businesses
+# Oceanalt business plan: websites, web apps and AI for small businesses
 
 _Last reviewed: 2 October 2026 (second pass: 1–3 day delivery, template system, site rebuild). Owner: CEO agent + founder._
 
 ## 1. The idea in one line
 
-Small business owners tell us what they want, and we design, build, host and keep improving their website for one monthly fee with $0 upfront, **live in 1–3 business days**. If they already have a site, we rebuild it, payments included.
+**More customers, less admin.** Small business owners tell us what they want, and we design, build and look after it. Three services, given equal weight (positioning set by the founder, 7 October 2026):
+
+1. **Digital presence** (monthly plans, below): website, Google Business Profile, local SEO, reviews and socials. $0 upfront, **live in 1–3 business days**; existing sites rebuilt, payments included.
+2. **Web apps and software** (quoted per project, scope and price within 24 hours): booking systems, client portals, quoting and job tools, dashboards, automations.
+3. **AI agents**: the AI assistant ($39/month + usage at cost) and custom agents (quoted).
+
+**We sell experiences, not deliverables.** Every page, email and pitch leads with what changes for the owner and their customers (found first, fewer phone calls, evenings back), then names the product. Same customers as before: Australian small businesses. Same prices.
 
 ## 2. Verdict
 

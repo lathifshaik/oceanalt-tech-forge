@@ -309,7 +309,7 @@ function Hero() {
       <div className="wrap hero-grid">
         <div className="hero-copy">
           <h1><span>More customers.</span> <span>Less admin.</span></h1>
-          <p>Websites, AI receptionists and smart tools for Aussie small businesses. Built and looked after from Sydney.</p>
+          <p>From the corner café to the tradie's ute: we get you found, answer your phone and sort the admin.</p>
           <div className="ctas">
             <a className="btn btn-primary btn-island" href="#start">Start a project <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
             <a className="text-link" href="#work">See our work <Icon name="arrow-right" /></a>

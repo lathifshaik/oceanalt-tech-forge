@@ -2,7 +2,7 @@
 
 Oceanalt is run as a small firm of Claude agents plus the founder. It sells three things to Australian small businesses, with equal weight: **digital presence** (website, Google profile, SEO; Care $29, Launch $99, Grow $149 AUD/month, $0 upfront, or one-off from $1,499), **web apps and software** (quoted per project), and **AI agents** ($39/month assistant + usage at cost, custom agents quoted). Tagline: "More customers. Less admin."
 
-What we sell, in the owner's words: **get found** (website, Google Business Profile, SEO, showing up in AI search), **never miss a call** (AI receptionist $149/month with a local number + call time at cost; website chat assistant $39/month), **less admin** (web apps and workflow automation, quoted per project).
+What we sell, in the owner's words: **get found** (website, Google Business Profile, SEO, showing up in AI search), **never miss a call** (AI concierge $149/month with a local number + call time at cost; website chat assistant $39/month), **less admin** (web apps and workflow automation, quoted per project).
 
 **We sell a story, to Australians.** Think like a marketer: lead with the moment the owner recognises ("you're up a ladder and the phone rings"), then what changes, then the product. Write the way Aussie small-business owners talk: plain, direct, a bit dry, Australian spelling, no hype or American sales talk, local words where they fit naturally (tradie, sparky, arvo, on the tools) but never forced. Aussies trust straight answers: show prices, say what's not included, never promise rankings or invent stats.
 

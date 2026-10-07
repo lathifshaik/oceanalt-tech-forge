@@ -167,13 +167,13 @@ function Demo({ onAsk }: { onAsk: () => void }) {
   );
 }
 
-// The phone story: a tradie up a ladder, a customer calls, the AI receptionist
+// The phone story: a tradie up a ladder, a customer calls, the AI concierge
 // answers and books the job, and the owner gets the summary on WhatsApp and
 // email. Rendered complete (server and no-JS); in the browser it resets and
 // plays once when scrolled into view. Reduced motion shows the final state.
 type Line = { who: "agent" | "caller"; text: string };
 const CALL: Line[] = [
-  { who: "agent", text: "Kerr & Sons Electrical, you're speaking with Jim's AI assistant. How can I help?" },
+  { who: "agent", text: "Kerr & Sons Electrical, you're speaking with Jim's AI concierge. How can I help?" },
   { who: "caller", text: "Hi, a power point in my kitchen is sparking. Can someone come out today?" },
   { who: "agent", text: "Sorry to hear that. Switch it off at the switchboard and don't use it for now. We can have an electrician there between 2 and 4 this arvo. Does that suit?" },
   { who: "caller", text: "Yes please. 14 Ridge Street, Merewether." },
@@ -221,7 +221,7 @@ function CallStory() {
         <div className="call-top">
           <span className={`call-av${ringing ? " is-ringing" : ""}`}><Icon name="phone" /></span>
           <div>
-            <b>{step < 1 && step >= 0 ? "Incoming call" : step >= 7 ? "Call ended, 1:12" : step < 0 ? "Kerr & Sons line" : "Answered by your assistant"}</b>
+            <b>{step < 1 && step >= 0 ? "Incoming call" : step >= 7 ? "Call ended, 1:12" : step < 0 ? "Kerr & Sons line" : "Answered by your concierge"}</b>
             <small>Mel, 0412 ••• 318</small>
           </div>
           {live && <span className="call-wave" aria-hidden="true"><i /><i /><i /><i /><i /></span>}
@@ -229,7 +229,7 @@ function CallStory() {
         <ol className="call-lines" aria-live="polite">
           {CALL.map((l, i) => (
             <li key={i} className={`is-${l.who}${shown(i + 2) ? " is-on" : ""}`}>
-              <span>{l.who === "agent" ? "Assistant" : "Mel"}</span>
+              <span>{l.who === "agent" ? "Concierge" : "Mel"}</span>
               <p>{l.text}</p>
             </li>
           ))}
@@ -240,7 +240,7 @@ function CallStory() {
         <p className="call-when">11:42am. Jim's up a ladder in Charlestown and can't pick up.</p>
         <div className={`call-msg${shown(8) ? " is-on" : ""}`}>
           <span className="call-chan">WhatsApp</span>
-          <b>New job booked by your assistant</b>
+          <b>New job booked by your concierge</b>
           <ul>
             <li>Mel, 0412 ••• 318</li>
             <li>Sparking power point in the kitchen. Told to switch it off at the board.</li>
@@ -272,13 +272,13 @@ export function AiDemo({ onAsk, onCall }: { onAsk: () => void; onCall: () => voi
         <CallStory />
 
         <ul className="call-facts">
-          <li><b>Keep your number</b><span>Calls you can't pick up, or after hours, divert to your assistant. Or we give you a new local number.</span></li>
+          <li><b>Keep your number</b><span>Calls you can't pick up, or after hours, divert to your concierge. Or we give you a new local number.</span></li>
           <li><b>Sounds like a person</b><span>A natural Australian voice that knows your services, prices, hours and areas. It books, quotes ranges and takes messages.</span></li>
           <li><b>You get it straight away</b><span>A summary on WhatsApp, text or email after every call, with the recording and transcript if you want them.</span></li>
         </ul>
         <div className="call-price">
-          <p><b>AI receptionist</b> $149 a month with a local number, plus call time at cost. You set a monthly cap.</p>
-          <button className="btn btn-primary ai-ask" type="button" onClick={onCall}>Set up my receptionist <span className="ai-ask-i"><Icon name="arrow-up-right" /></span></button>
+          <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost. You set a monthly cap.</p>
+          <button className="btn btn-primary ai-ask" type="button" onClick={onCall}>Set up my concierge <span className="ai-ask-i"><Icon name="arrow-up-right" /></span></button>
         </div>
 
         <Demo onAsk={onAsk} />

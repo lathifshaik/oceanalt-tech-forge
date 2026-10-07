@@ -88,7 +88,7 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
   3. Resend: add the domain, add its DNS records (SPF, DKIM), then set `LEAD_FROM_EMAIL` to `Oceanalt <hello@oceanalt.com.au>`.
   4. Send a test enquiry through the form.
 
-## AI receptionist delivery (owner: `engineer`)
+## AI concierge delivery (owner: `engineer`)
 
 Stack, per client:
 1. **Number:** an Australian local number from Twilio (needs the client's business address for the regulatory bundle), or the client keeps their number and sets "divert on no answer / busy / after hours" to it with their carrier.

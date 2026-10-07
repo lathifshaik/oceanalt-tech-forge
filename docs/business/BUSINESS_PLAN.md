@@ -8,9 +8,9 @@ _Last reviewed: 2 October 2026 (second pass: 1–3 day delivery, template system
 
 1. **Digital presence** (monthly plans, below): website, Google Business Profile, local SEO, reviews and socials. $0 upfront, **live in 1–3 business days**; existing sites rebuilt, payments included.
 2. **Web apps and software** (quoted per project, scope and price within 24 hours): booking systems, client portals, quoting and job tools, dashboards, automations.
-3. **AI agents**: the **AI receptionist** ($149/month including one Australian number, plus call time at cost, client-set cap): answers the business phone when the owner can't (diverted missed or after-hours calls, or a new local number), books, takes messages and sends a summary by WhatsApp, SMS or email. Also the website chat assistant ($39/month + usage at cost) and custom agents (quoted).
+3. **AI agents**: the **AI concierge** ($149/month including one Australian number, plus call time at cost, client-set cap): answers the business phone when the owner can't (diverted missed or after-hours calls, or a new local number), books, takes messages and sends a summary by WhatsApp, SMS or email. Also the website chat assistant ($39/month + usage at cost) and custom agents (quoted).
 
-Added 7 October 2026 (founder): AI receptionist, workflow automation, and "show up in AI search" (ChatGPT, Gemini, Google AI Overviews) as part of digital presence. We never promise rankings or AI mentions.
+Added 7 October 2026 (founder): AI concierge, workflow automation, and "show up in AI search" (ChatGPT, Gemini, Google AI Overviews) as part of digital presence. We never promise rankings or AI mentions.
 
 **We sell experiences, not deliverables.** Every page, email and pitch leads with what changes for the owner and their customers (found first, fewer phone calls, evenings back), then names the product. Same customers as before: Australian small businesses. Same prices.
 

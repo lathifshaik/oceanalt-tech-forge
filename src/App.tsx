@@ -149,11 +149,11 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Can you build AI tools for my business?",
-    a: "Yes. An AI receptionist that answers your phone ($149 a month plus call time at cost), a chat assistant on your website that answers questions and replies to enquiries ($39 a month plus usage at cost), and custom agents for bookings, review replies, quote follow-ups and admin. Every one hands anything it's unsure about to you.",
+    a: "Yes. An AI concierge that answers your phone ($149 a month plus call time at cost), a chat assistant on your website that answers questions and replies to enquiries ($39 a month plus usage at cost), and custom agents for bookings, review replies, quote follow-ups and admin. Every one hands anything it's unsure about to you.",
   },
   {
-    q: "How does the AI receptionist work?",
-    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your assistant, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap.",
+    q: "How does the AI concierge work?",
+    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap.",
   },
   {
     q: "Will my business show up in ChatGPT and Google's AI answers?",
@@ -349,8 +349,8 @@ function Services({ onPlan }: { onPlan: (plan: string) => void }) {
             <img src="/ai/cafe.webp" alt="A café after closing, its sign still lit" width={1400} height={925} loading="lazy" />
             <div className="svc-copy">
               <h3>Never miss another call</h3>
-              <p>Your own AI receptionist picks up when you can't, takes bookings and messages in a natural Aussie voice, and sends you the details on WhatsApp or email. A chat assistant can do the same on your website.</p>
-              <p className="svc-price"><b>AI receptionist</b> $149 a month plus call time at cost</p>
+              <p>Your own AI concierge answers when you can't, looks after every caller in a natural Aussie voice, books them in and sends you the details on WhatsApp or email. It can look after your website chat too.</p>
+              <p className="svc-price"><b>AI concierge</b> $149 a month plus call time at cost</p>
               <a className="text-link" href="#ai">Hear how a call goes <Icon name="arrow-right" /></a>
             </div>
           </article>
@@ -479,7 +479,7 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
         <div className="plan-extra">
           <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch. Add Care for $29 a month if you'd like us to keep looking after it.</p>
           <p><b>Web apps and software?</b> Booking systems, client portals, quoting tools and automations are quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
-          <p><b>AI that answers for you?</b> The AI receptionist is $149 a month with a local number, plus call time at cost. A chat assistant for your website is $39 a month plus usage. <a className="link" href="#ai">See a call</a>.</p>
+          <p><b>AI that answers for you?</b> The AI concierge is $149 a month with a local number, plus call time at cost. A chat assistant for your website is $39 a month plus usage. <a className="link" href="#ai">See a call</a>.</p>
         </div>
       </div>
     </section>
@@ -562,7 +562,7 @@ export const PLAN_LABEL: Record<string, string> = {
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",
   custom: "Web app or custom software",
-  receptionist: "AI receptionist (answers your phone)",
+  concierge: "AI concierge (answers your phone)",
   ai: "AI chat assistant or custom AI agents",
   unsure: "Not sure yet",
 };
@@ -731,8 +731,8 @@ function Terms() {
       <h2>6. Payments to the client</h2>
       <p>Where a site takes payments, they are processed by Stripe into the client's own Stripe account. Oceanalt does not hold client funds or handle card data.</p>
       <h2>7. AI add-ons</h2>
-      <p>The AI chat assistant costs $39 AUD a month plus AI usage. The AI receptionist costs $149 AUD a month, including one Australian phone number, plus call time. Usage and call time are billed monthly in arrears at the providers' prices, converted to AUD, with no markup. The client sets a monthly cap; when it's reached, the assistant pauses (calls go to voicemail or the client's own number) until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
-      <p>The AI receptionist tells every caller they're speaking with an AI assistant and, where calls are recorded, that the call may be recorded. The client provides the information it answers from and is responsible for keeping it accurate.</p>
+      <p>The AI chat assistant costs $39 AUD a month plus AI usage. The AI concierge costs $149 AUD a month, including one Australian phone number, plus call time. Usage and call time are billed monthly in arrears at the providers' prices, converted to AUD, with no markup. The client sets a monthly cap; when it's reached, the assistant pauses (calls go to voicemail or the client's own number) until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
+      <p>The AI concierge tells every caller they're speaking with an AI assistant and, where calls are recorded, that the call may be recorded. The client provides the information it answers from and is responsible for keeping it accurate.</p>
       <h2>8. Limitation of liability</h2>
       <p>To the extent permitted by the Australian Consumer Law, Oceanalt is not liable for indirect or consequential loss arising from the use of, or inability to use, the services.</p>
     </Legal>
@@ -747,7 +747,7 @@ function Privacy() {
       <h2>2. What is collected</h2>
       <p>When you send the start form, we collect your name, business name, email, and optionally your phone number, current website and message. No tracking pixels or third-party analytics are used by default.</p>
       <h2>3. Where it is stored</h2>
-      <p>Your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. For clients using our AI receptionist, calls are carried by a telephony provider and processed by a voice AI provider to answer and summarise them, and summaries are sent by WhatsApp, SMS or email. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. These providers process the data on our behalf and don't use it to train models.</p>
+      <p>Your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. For clients using our AI concierge, calls are carried by a telephony provider and processed by a voice AI provider to answer and summarise them, and summaries are sent by WhatsApp, SMS or email. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. These providers process the data on our behalf and don't use it to train models.</p>
       <h2>4. How it is used</h2>
       <p>Submissions are used to reply to you and scope your website. Data is not sold, shared with third parties for marketing, or used to train any model. Deletion requests are honoured.</p>
       <h2>5. Your rights under the Privacy Act 1988</h2>
@@ -796,7 +796,7 @@ export default function App() {
           <Hero />
           <Services onPlan={pickPlan} />
           <Work />
-          <AiDemo onAsk={() => pickPlan("ai")} onCall={() => pickPlan("receptionist")} />
+          <AiDemo onAsk={() => pickPlan("ai")} onCall={() => pickPlan("concierge")} />
           <How />
           <Pricing onPlan={pickPlan} />
           <Rebuild onPlan={pickPlan} />

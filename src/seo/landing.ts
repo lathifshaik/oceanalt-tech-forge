@@ -21,34 +21,34 @@ export type Landing = {
   sections: { h2: string; body: string[] }[];
   faq: { q: string; a: string }[];
   /** Plan to preselect in the start form. */
-  plan: "launch" | "grow" | "care" | "rebuild" | "ai" | "custom" | "receptionist";
+  plan: "launch" | "grow" | "care" | "rebuild" | "ai" | "custom" | "concierge";
 };
 
 export const LANDINGS: Landing[] = [
   {
-    slug: "ai-receptionist",
-    title: "AI Receptionist for Small Business, Australia | Oceanalt",
-    description: "An AI receptionist that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. $149 a month.",
-    nav: "AI receptionist",
+    slug: "ai-concierge",
+    title: "AI Concierge for Small Business, Australia | Oceanalt",
+    description: "An AI concierge that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. $149 a month.",
+    nav: "AI concierge",
     h1: "Never miss another call",
-    intro: "You're up a ladder, with a client, or it's 8pm. The phone rings anyway. Your AI receptionist picks up, sorts out what the caller needs, and sends you the details before you've climbed down.",
+    intro: "You're up a ladder, with a client, or it's 8pm. The phone rings anyway. Your AI concierge picks up, looks after the caller, and sends you the details before you've climbed down.",
     image: { src: "/ai/sparky.webp", alt: "An electrician working on a switchboard" },
     includes: [
-      "Keep your number: calls you can't take, or after-hours calls, divert to your assistant",
+      "Keep your number: calls you can't take, or after-hours calls, divert to your concierge",
       "Or a new local Australian number, included",
-      "A natural Australian voice that tells callers it's an AI assistant",
+      "A natural Australian voice that tells callers it's an AI concierge",
       "Knows your services, prices, hours and areas, and books into your calendar",
       "A summary on WhatsApp, text or email after every call",
       "Urgent calls put straight through to your mobile, if you want",
     ],
     sections: [
       { h2: "What a call sounds like", body: [
-        "\"Kerr & Sons Electrical, you're speaking with Jim's AI assistant. How can I help?\" The caller explains the job, the assistant asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
+        "\"Kerr & Sons Electrical, you're speaking with Jim's AI concierge. How can I help?\" The caller explains the job, the concierge asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
         "If it's something it can't handle, it takes a proper message and tells the caller you'll ring back, so nobody hangs up and calls the next business on Google.",
       ] },
       { h2: "What it costs", body: [
         "$149 a month, including one local Australian number, plus call time at cost with no markup. You set a monthly cap, so there's never a surprise bill.",
-        "Setup takes a 15-minute call: we ask the questions a new receptionist would, then test it with you before it answers a real customer.",
+        "Setup takes a 15-minute call: we ask the questions a new concierge would, then test it with you before it answers a real customer.",
       ] },
     ],
     faq: [
@@ -56,7 +56,7 @@ export const LANDINGS: Landing[] = [
       { q: "Can it handle emergencies?", a: "You decide the rules. For example, anything urgent can be put straight through to your mobile, with a text to you at the same time." },
       { q: "Does it work with my calendar?", a: "It can book into Google Calendar, Outlook and most booking systems. If yours isn't covered, it takes the booking request and you confirm it with one tap." },
     ],
-    plan: "receptionist",
+    plan: "concierge",
   },
   {
     slug: "show-up-in-ai-search",

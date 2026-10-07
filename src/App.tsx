@@ -149,7 +149,15 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Can you build AI tools for my business?",
-    a: "Yes. The most popular is an AI assistant on your website that answers customer questions and replies to enquiries within minutes, for $39 a month plus AI usage at cost. We also build custom tools for bookings, review replies, quote follow-ups and admin. Every tool hands anything it's unsure about to you.",
+    a: "Yes. An AI receptionist that answers your phone ($149 a month plus call time at cost), a chat assistant on your website that answers questions and replies to enquiries ($39 a month plus usage at cost), and custom agents for bookings, review replies, quote follow-ups and admin. Every one hands anything it's unsure about to you.",
+  },
+  {
+    q: "How does the AI receptionist work?",
+    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your assistant, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap.",
+  },
+  {
+    q: "Will my business show up in ChatGPT and Google's AI answers?",
+    a: "Nobody can guarantee it, and be wary of anyone who does. What we do is give AI search tools what they look for: clear, consistent details about your business on your website, your Google Business Profile and the directories they read, written so they can be quoted. It's part of every website plan.",
   },
   {
     q: "How do you reply in 15 minutes?",
@@ -301,7 +309,7 @@ function Hero() {
       <div className="wrap hero-grid">
         <div className="hero-copy">
           <h1><span>More customers.</span> <span>Less admin.</span></h1>
-          <p>Websites, web apps and AI agents for small businesses, designed, built and looked after for you.</p>
+          <p>Websites, AI receptionists and smart tools for Aussie small businesses. Built and looked after from Sydney.</p>
           <div className="ctas">
             <a className="btn btn-primary btn-island" href="#start">Start a project <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
             <a className="text-link" href="#work">See our work <Icon name="arrow-right" /></a>
@@ -313,7 +321,7 @@ function Hero() {
         <dl className="proof">
           <div><dt>$0</dt><dd>upfront on website plans</dd></div>
           <div><dt>1-3</dt><dd>days from first call to a live website</dd></div>
-          <div><dt>15 min</dt><dd>to reply to an enquiry, day or night</dd></div>
+          <div><dt>24/7</dt><dd>calls and enquiries answered, if you want them</dd></div>
         </dl>
       </div>
     </div>
@@ -331,28 +339,28 @@ function Services({ onPlan }: { onPlan: (plan: string) => void }) {
           <article className="svc-cell svc-presence">
             <div className="svc-copy">
               <h3>Be the business people find first</h3>
-              <p>A website made for you, your Google profile set up properly, and search, reviews and socials working together, so the next customer finds you before anyone else.</p>
+              <p>A website made for you, your Google Business Profile done properly, and your details set up so search engines and AI answers like ChatGPT and Google's AI Overviews can find you and point people your way.</p>
               <p className="svc-price"><b>Digital presence</b> from $99 a month, nothing upfront</p>
               <a className="text-link" href="#work">See websites we've designed <Icon name="arrow-right" /></a>
             </div>
-            <img src="/previews/little-tern-coffee.webp" alt="A website we designed for a sample café" width={1200} height={750} loading="lazy" />
+            <img src="/previews/kerr-and-sons-electrical.webp" alt="A website we designed for a sample electrician" width={1200} height={750} loading="lazy" />
+          </article>
+          <article className="svc-cell svc-photo">
+            <img src="/ai/cafe.webp" alt="A café after closing, its sign still lit" width={1400} height={925} loading="lazy" />
+            <div className="svc-copy">
+              <h3>Never miss another call</h3>
+              <p>Your own AI receptionist picks up when you can't, takes bookings and messages in a natural Aussie voice, and sends you the details on WhatsApp or email. A chat assistant can do the same on your website.</p>
+              <p className="svc-price"><b>AI receptionist</b> $149 a month plus call time at cost</p>
+              <a className="text-link" href="#ai">Hear how a call goes <Icon name="arrow-right" /></a>
+            </div>
           </article>
           <article className="svc-cell svc-photo">
             <img src="/ai/tools.webp" alt="A roll of well-used tools" width={1000} height={563} loading="lazy" />
             <div className="svc-copy">
-              <h3>Run the business, not the paperwork</h3>
-              <p>Web apps and software built around how you work: booking systems, client portals, quoting and job tools, dashboards, and automations that link the apps you already use.</p>
-              <p className="svc-price"><b>Web apps and software</b> quoted per project, within 24 hours</p>
+              <h3>Less admin, more evenings back</h3>
+              <p>Web apps and automations built around how you already work: bookings, quotes, invoices and job notes that flow between your apps, without typing the same thing in three places.</p>
+              <p className="svc-price"><b>Web apps and workflows</b> quoted per project, within 24 hours</p>
               <button className="text-link" type="button" onClick={() => onPlan("custom")}>Send a brief <Icon name="arrow-right" /></button>
-            </div>
-          </article>
-          <article className="svc-cell svc-photo">
-            <img src="/ai/bakery.webp" alt="A café's pastry cabinet" width={1000} height={668} loading="lazy" />
-            <div className="svc-copy">
-              <h3>Answers at 9pm, while you rest</h3>
-              <p>AI agents that reply to customers, take booking requests, draft review replies and chase quotes, from your real information. You approve anything that matters.</p>
-              <p className="svc-price"><b>AI assistant</b> $39 a month plus usage at cost</p>
-              <a className="text-link" href="#ai">Try the demo <Icon name="arrow-right" /></a>
             </div>
           </article>
         </div>
@@ -471,7 +479,7 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
         <div className="plan-extra">
           <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch. Add Care for $29 a month if you'd like us to keep looking after it.</p>
           <p><b>Web apps and software?</b> Booking systems, client portals, quoting tools and automations are quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
-          <p><b>AI on your site?</b> The AI assistant is $39 a month on any plan, plus AI usage at cost. <a className="link" href="#ai">See it working</a>.</p>
+          <p><b>AI that answers for you?</b> The AI receptionist is $149 a month with a local number, plus call time at cost. A chat assistant for your website is $39 a month plus usage. <a className="link" href="#ai">See a call</a>.</p>
         </div>
       </div>
     </section>
@@ -554,7 +562,8 @@ export const PLAN_LABEL: Record<string, string> = {
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",
   custom: "Web app or custom software",
-  ai: "AI assistant or custom AI agents",
+  receptionist: "AI receptionist (answers your phone)",
+  ai: "AI chat assistant or custom AI agents",
   unsure: "Not sure yet",
 };
 
@@ -722,7 +731,8 @@ function Terms() {
       <h2>6. Payments to the client</h2>
       <p>Where a site takes payments, they are processed by Stripe into the client's own Stripe account. Oceanalt does not hold client funds or handle card data.</p>
       <h2>7. AI add-ons</h2>
-      <p>The AI assistant add-on costs $39 AUD a month plus AI usage. Usage is billed monthly in arrears at the AI provider's price, converted to AUD, with no markup. The client sets a monthly usage cap; when it's reached, the assistant pauses until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
+      <p>The AI chat assistant costs $39 AUD a month plus AI usage. The AI receptionist costs $149 AUD a month, including one Australian phone number, plus call time. Usage and call time are billed monthly in arrears at the providers' prices, converted to AUD, with no markup. The client sets a monthly cap; when it's reached, the assistant pauses (calls go to voicemail or the client's own number) until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
+      <p>The AI receptionist tells every caller they're speaking with an AI assistant and, where calls are recorded, that the call may be recorded. The client provides the information it answers from and is responsible for keeping it accurate.</p>
       <h2>8. Limitation of liability</h2>
       <p>To the extent permitted by the Australian Consumer Law, Oceanalt is not liable for indirect or consequential loss arising from the use of, or inability to use, the services.</p>
     </Legal>
@@ -737,7 +747,7 @@ function Privacy() {
       <h2>2. What is collected</h2>
       <p>When you send the start form, we collect your name, business name, email, and optionally your phone number, current website and message. No tracking pixels or third-party analytics are used by default.</p>
       <h2>3. Where it is stored</h2>
-      <p>Your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. These providers process the data on our behalf and don't use it to train models.</p>
+      <p>Your message is sent to Anthropic's Claude API so our AI assistant can write the first reply, and emails are delivered by Resend. For clients using our AI receptionist, calls are carried by a telephony provider and processed by a voice AI provider to answer and summarise them, and summaries are sent by WhatsApp, SMS or email. If that isn't available, submissions are stored in Google Firestore and sent to the Oceanalt inbox via EmailJS. These providers process the data on our behalf and don't use it to train models.</p>
       <h2>4. How it is used</h2>
       <p>Submissions are used to reply to you and scope your website. Data is not sold, shared with third parties for marketing, or used to train any model. Deletion requests are honoured.</p>
       <h2>5. Your rights under the Privacy Act 1988</h2>
@@ -786,7 +796,7 @@ export default function App() {
           <Hero />
           <Services onPlan={pickPlan} />
           <Work />
-          <AiDemo onAsk={() => pickPlan("ai")} />
+          <AiDemo onAsk={() => pickPlan("ai")} onCall={() => pickPlan("receptionist")} />
           <How />
           <Pricing onPlan={pickPlan} />
           <Rebuild onPlan={pickPlan} />

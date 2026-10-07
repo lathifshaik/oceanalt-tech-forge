@@ -21,10 +21,75 @@ export type Landing = {
   sections: { h2: string; body: string[] }[];
   faq: { q: string; a: string }[];
   /** Plan to preselect in the start form. */
-  plan: "launch" | "grow" | "care" | "rebuild" | "ai" | "custom";
+  plan: "launch" | "grow" | "care" | "rebuild" | "ai" | "custom" | "receptionist";
 };
 
 export const LANDINGS: Landing[] = [
+  {
+    slug: "ai-receptionist",
+    title: "AI Receptionist for Small Business, Australia | Oceanalt",
+    description: "An AI receptionist that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. $149 a month.",
+    nav: "AI receptionist",
+    h1: "Never miss another call",
+    intro: "You're up a ladder, with a client, or it's 8pm. The phone rings anyway. Your AI receptionist picks up, sorts out what the caller needs, and sends you the details before you've climbed down.",
+    image: { src: "/ai/sparky.webp", alt: "An electrician working on a switchboard" },
+    includes: [
+      "Keep your number: calls you can't take, or after-hours calls, divert to your assistant",
+      "Or a new local Australian number, included",
+      "A natural Australian voice that tells callers it's an AI assistant",
+      "Knows your services, prices, hours and areas, and books into your calendar",
+      "A summary on WhatsApp, text or email after every call",
+      "Urgent calls put straight through to your mobile, if you want",
+    ],
+    sections: [
+      { h2: "What a call sounds like", body: [
+        "\"Kerr & Sons Electrical, you're speaking with Jim's AI assistant. How can I help?\" The caller explains the job, the assistant asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
+        "If it's something it can't handle, it takes a proper message and tells the caller you'll ring back, so nobody hangs up and calls the next business on Google.",
+      ] },
+      { h2: "What it costs", body: [
+        "$149 a month, including one local Australian number, plus call time at cost with no markup. You set a monthly cap, so there's never a surprise bill.",
+        "Setup takes a 15-minute call: we ask the questions a new receptionist would, then test it with you before it answers a real customer.",
+      ] },
+    ],
+    faq: [
+      { q: "Will callers know it's AI?", a: "Yes. It says so at the start of every call. Most people just want their job booked or question answered, and it does that quickly and politely." },
+      { q: "Can it handle emergencies?", a: "You decide the rules. For example, anything urgent can be put straight through to your mobile, with a text to you at the same time." },
+      { q: "Does it work with my calendar?", a: "It can book into Google Calendar, Outlook and most booking systems. If yours isn't covered, it takes the booking request and you confirm it with one tap." },
+    ],
+    plan: "receptionist",
+  },
+  {
+    slug: "show-up-in-ai-search",
+    title: "Show Up in ChatGPT and Google AI Search | Oceanalt",
+    description: "People now ask ChatGPT and Google's AI to find a local business. We set up your website and Google profile so AI search can find and recommend you.",
+    nav: "AI search",
+    h1: "Show up when people ask AI",
+    intro: "People now ask ChatGPT, Gemini and Google's AI Overviews things like \"good electrician in Newcastle\". Those answers are built from what the web says about you. We make sure it says the right things, clearly and consistently.",
+    image: { src: "/previews/harlow-reid-lawyers-calm.webp", alt: "A website we designed for a sample law firm" },
+    example: { path: "harlow-reid-lawyers-calm", label: "a sample law firm" },
+    includes: [
+      "Your services, areas, prices and hours written as clear, quotable answers",
+      "Business details marked up so search engines and AI read them correctly",
+      "Google Business Profile complete, with the right categories and photos",
+      "The same name, address and phone on the directories AI tools read",
+      "Answers to the questions your customers actually ask, on your site",
+      "A check every few months of what AI search says about you",
+    ],
+    sections: [
+      { h2: "No tricks, no guarantees", body: [
+        "Nobody can promise an AI will recommend you, and you should be wary of anyone who does. What works is the basics done properly: a fast site with real answers, a complete Google profile, consistent details everywhere, and genuine reviews.",
+      ] },
+      { h2: "Included in every website plan", body: [
+        "Launch ($99 a month) and Grow ($149 a month) sites are built this way from day one. If you already have a site, we can audit and fix it as part of a rebuild.",
+      ] },
+    ],
+    faq: [
+      { q: "Is this different from SEO?", a: "It's the same foundations as good local SEO, with extra care that your details are clear and quotable, because AI answers summarise rather than list links." },
+      { q: "How long does it take to work?", a: "Your Google profile and site changes can be picked up within weeks. How often AI tools mention you depends on your area, competition and reviews." },
+      { q: "Can you check what ChatGPT says about my business now?", a: "Yes. Ask on the call and we'll show you what the main AI tools say about you today, and what we'd fix." },
+    ],
+    plan: "launch",
+  },
   {
     slug: "web-apps-for-small-business",
     title: "Web Apps and Custom Software for Small Business | Oceanalt",
@@ -71,6 +136,7 @@ export const LANDINGS: Landing[] = [
       "Google Business Profile set up and linked to your site",
       "Your services, areas and hours marked up for Google",
       "Reviews linked from your site, and a simple way to ask for more",
+      "Your details written so AI answers like ChatGPT and Google's AI Overviews can find and quote you",
       "Your social accounts connected and consistent",
       "Changes by email, usually done within two business days",
     ],

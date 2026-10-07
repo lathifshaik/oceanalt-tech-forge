@@ -167,36 +167,122 @@ function Demo({ onAsk }: { onAsk: () => void }) {
   );
 }
 
-export function AiDemo({ onAsk }: { onAsk: () => void }) {
-  const cafe = SCENARIOS[0].prompts[2].scripted;
+// The phone story: a tradie up a ladder, a customer calls, the AI receptionist
+// answers and books the job, and the owner gets the summary on WhatsApp and
+// email. Rendered complete (server and no-JS); in the browser it resets and
+// plays once when scrolled into view. Reduced motion shows the final state.
+type Line = { who: "agent" | "caller"; text: string };
+const CALL: Line[] = [
+  { who: "agent", text: "Kerr & Sons Electrical, you're speaking with Jim's AI assistant. How can I help?" },
+  { who: "caller", text: "Hi, a power point in my kitchen is sparking. Can someone come out today?" },
+  { who: "agent", text: "Sorry to hear that. Switch it off at the switchboard and don't use it for now. We can have an electrician there between 2 and 4 this arvo. Does that suit?" },
+  { who: "caller", text: "Yes please. 14 Ridge Street, Merewether." },
+  { who: "agent", text: "You're booked in. I'll text you to confirm 2 to 4 today. Thanks, Mel." },
+];
+// Step numbers: 0 ringing, 1 answered, 2..6 transcript lines, 7 call ended, 8 WhatsApp, 9 email.
+const FINAL = 9;
+const AT = [0, 2600, 3400, 6000, 8800, 11800, 14000, 16400, 17400, 18800];
+
+function CallStory() {
+  const [step, setStep] = useState(FINAL);
+  const [playing, setPlaying] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const timers = useRef<number[]>([]);
+
+  const play = () => {
+    timers.current.forEach(clearTimeout);
+    if (reduced()) { setStep(FINAL); return; }
+    setPlaying(true);
+    setStep(-1);
+    timers.current = AT.map((t, i) => window.setTimeout(() => {
+      setStep(i);
+      if (i === FINAL) setPlaying(false);
+    }, t + 300));
+  };
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduced()) return;
+    setStep(-1);
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { play(); io.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(el);
+    return () => { io.disconnect(); timers.current.forEach(clearTimeout); };
+  }, []);
+
+  const shown = (n: number) => step >= n;
+  const ringing = step === 0;
+  const live = step >= 1 && step < 7;
+
+  return (
+    <div className="call" ref={ref}>
+      <div className="call-phone" aria-label="Sample phone call">
+        <div className="call-top">
+          <span className={`call-av${ringing ? " is-ringing" : ""}`}><Icon name="phone" /></span>
+          <div>
+            <b>{step < 1 && step >= 0 ? "Incoming call" : step >= 7 ? "Call ended, 1:12" : step < 0 ? "Kerr & Sons line" : "Answered by your assistant"}</b>
+            <small>Mel, 0412 ••• 318</small>
+          </div>
+          {live && <span className="call-wave" aria-hidden="true"><i /><i /><i /><i /><i /></span>}
+        </div>
+        <ol className="call-lines" aria-live="polite">
+          {CALL.map((l, i) => (
+            <li key={i} className={`is-${l.who}${shown(i + 2) ? " is-on" : ""}`}>
+              <span>{l.who === "agent" ? "Assistant" : "Mel"}</span>
+              <p>{l.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div className="call-out">
+        <p className="call-when">11:42am. Jim's up a ladder in Charlestown and can't pick up.</p>
+        <div className={`call-msg${shown(8) ? " is-on" : ""}`}>
+          <span className="call-chan">WhatsApp</span>
+          <b>New job booked by your assistant</b>
+          <ul>
+            <li>Mel, 0412 ••• 318</li>
+            <li>Sparking power point in the kitchen. Told to switch it off at the board.</li>
+            <li>Today, 2 to 4pm. 14 Ridge St, Merewether</li>
+          </ul>
+          <div className="call-acts"><span>Call Mel back</span><span>Read transcript</span></div>
+        </div>
+        <div className={`call-msg call-mail${shown(9) ? " is-on" : ""}`}>
+          <span className="call-chan">Email</span>
+          <b>Call summary: Mel, Merewether, booked today 2 to 4pm</b>
+        </div>
+        <button type="button" className="text-link call-replay" onClick={play} disabled={playing}>
+          {playing ? "Playing…" : "Play the call again"} <Icon name="arrow-right" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export function AiDemo({ onAsk, onCall }: { onAsk: () => void; onCall: () => void }) {
   return (
     <section className="ai" id="ai" aria-labelledby="ai-h">
       <div className="wrap">
         <div className="ai-hero">
-          <img src="/ai/cafe.webp" alt="A café after closing, its sign still lit" width={1400} height={925} loading="lazy" />
-          <h2 id="ai-h">You've closed for the night. Your assistant hasn't.</h2>
+          <img src="/ai/sparky.webp" alt="An electrician working on a switchboard" width={1000} height={667} loading="lazy" />
+          <h2 id="ai-h">You're up a ladder. Your phone still gets answered.</h2>
         </div>
 
-        <ol className="ai-night" aria-label="One enquiry, overnight">
-          <li>
-            <time>9:47pm</time>
-            <h3>A customer asks</h3>
-            <div className="ai-msg is-out"><p>{SCENARIOS[0].prompts[2].text}</p></div>
-          </li>
-          <li className="is-now">
-            <time>9:47pm</time>
-            <h3>Your assistant answers</h3>
-            <Thread msgs={[{ kind: "agent", text: cafe.reply, steps: cafe.steps.filter((x) => x.step === "check_hours" || x.step === "notify_owner") }]} />
-          </li>
-          <li>
-            <time>7:02am</time>
-            <h3>You catch up over coffee</h3>
-            <p>One summary of the night. Anything that needs you waits for a tap.</p>
-          </li>
-        </ol>
+        <CallStory />
+
+        <ul className="call-facts">
+          <li><b>Keep your number</b><span>Calls you can't pick up, or after hours, divert to your assistant. Or we give you a new local number.</span></li>
+          <li><b>Sounds like a person</b><span>A natural Australian voice that knows your services, prices, hours and areas. It books, quotes ranges and takes messages.</span></li>
+          <li><b>You get it straight away</b><span>A summary on WhatsApp, text or email after every call, with the recording and transcript if you want them.</span></li>
+        </ul>
+        <div className="call-price">
+          <p><b>AI receptionist</b> $149 a month with a local number, plus call time at cost. You set a monthly cap.</p>
+          <button className="btn btn-primary ai-ask" type="button" onClick={onCall}>Set up my receptionist <span className="ai-ask-i"><Icon name="arrow-up-right" /></span></button>
+        </div>
 
         <Demo onAsk={onAsk} />
-        <p className="ai-note">The businesses here are samples we made up. Yours answers from your own prices, hours and policies.</p>
+        <p className="ai-note">Kerr &amp; Sons and the other businesses here are samples we made up. Yours answers from your own prices, hours and policies.</p>
       </div>
     </section>
   );

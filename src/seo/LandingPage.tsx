@@ -6,7 +6,7 @@ import { LANDINGS, type Landing } from "./landing";
 // No JavaScript runs on these pages, so everything here is plain links.
 export function LandingPage({ page }: { page: Landing }) {
   const start = `/?plan=${page.plan}#start`;
-  const cta = page.plan === "custom" ? "Send a brief" : page.plan === "ai" ? "Ask about AI" : "Start my website";
+  const cta = page.plan === "custom" ? "Send a brief" : page.plan === "ai" ? "Ask about AI" : page.plan === "receptionist" ? "Set up my receptionist" : "Start my website";
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>

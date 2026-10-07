@@ -88,6 +88,18 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
   3. Resend: add the domain, add its DNS records (SPF, DKIM), then set `LEAD_FROM_EMAIL` to `Oceanalt <hello@oceanalt.com.au>`.
   4. Send a test enquiry through the form.
 
+## AI receptionist delivery (owner: `engineer`)
+
+Stack, per client:
+1. **Number:** an Australian local number from Twilio (needs the client's business address for the regulatory bundle), or the client keeps their number and sets "divert on no answer / busy / after hours" to it with their carrier.
+2. **Voice agent:** ElevenLabs Conversational AI (Australian voice) or the OpenAI Realtime API over SIP. System prompt from the client's brief: services, prices or ranges, hours, areas, booking rules, what's urgent. It always opens by saying it's an AI assistant, and says when calls are recorded.
+3. **Actions:** booking into Google Calendar or Outlook (or a booking request the owner confirms), transfer urgent calls to the owner's mobile.
+4. **After the call:** a webhook sends the summary (caller, number, job, address, time, urgency, transcript link) to the owner by WhatsApp (WhatsApp Business Cloud API or Twilio), SMS or email (Resend).
+5. **Caps:** a monthly spend cap per client in the voice and telephony accounts; at the cap, calls fall back to voicemail or the owner's mobile.
+6. **QA before go-live:** 10 test calls covering a booking, a price question, an urgent job, an off-topic caller and a caller who wants a person.
+
+Pricing check: $149/month covers setup and upkeep; the number (~$5-10/month) is included; call minutes are billed at cost. Review real per-minute costs after the first 3 clients.
+
 ## Hosting (Cloudflare Workers)
 
 The Oceanalt site deploys from `master` on Cloudflare: build command `npm run build`, deploy command `npx wrangler deploy`. `wrangler.jsonc` uploads `dist/` as static assets; keep it in the repo, or wrangler auto-configures the project and breaks the build. `public/_headers` keeps `/work/` noindex.

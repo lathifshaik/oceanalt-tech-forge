@@ -25,6 +25,7 @@ const PLANS = {
   care: "Care, $29 a month",
   oneoff: "A one-off build, from $1,499",
   custom: "A custom web app or software project, quoted per job",
+  receptionist: "Our AI receptionist, $149 a month plus call time",
 } as const;
 
 const LAYOUTS = {
@@ -39,7 +40,7 @@ const LAYOUTS = {
 // What Claude returns. The email is built from these fields, so a reply can
 // only ever contain a plan, a layout and a short note.
 const Recommendation = z.object({
-  plan: z.enum(["launch", "grow", "care", "oneoff", "custom"]),
+  plan: z.enum(["launch", "grow", "care", "oneoff", "custom", "receptionist"]),
   layout: z.enum(["cafe", "trades", "studio", "shop", "pro", "other"]),
   note: z.string().describe("Two or three plain-English sentences to the owner about their business and why this plan fits. No prices, no promises beyond the plan."),
   questions: z.array(z.string()).describe("Up to three short questions we'd need answered to start, e.g. about photos, booking tools or their domain."),
@@ -56,14 +57,17 @@ web apps and AI tools for small businesses. Websites are on monthly plans:
 - One-off website build from $1,499.
 - Custom: web apps and software (booking systems, client portals, quoting and job tools,
   dashboards, automations), quoted per project with a scope and price within 24 hours.
-- AI assistant ($39/month plus usage at cost) and custom AI agents, quoted per project.
+- AI receptionist ($149/month with a local number, plus call time at cost): answers their phone when
+  they can't, takes bookings and messages, sends them a summary on WhatsApp, text or email.
+- AI chat assistant for their website ($39/month plus usage at cost) and custom AI agents, quoted per project.
 Layouts: cafe (cafés, restaurants, bars), trades (electricians, plumbers, builders, cleaners),
 studio (salons, clinics, physio, coaches: anything booked), shop (florists, makers, boutiques that sell online),
 pro (accountants, lawyers, real estate, consultants).
 
 Recommend one plan and one layout from what they told you. If they take payments or bookings online,
 or already have a site to rebuild, that's usually Grow. If they need software beyond a website
-(a portal, booking or job system, internal tool or automation), recommend "custom". Write the note warmly and briefly, in Australian
+(a portal, booking or job system, internal tool or automation), recommend "custom". If they mainly
+miss calls or want their phone answered, recommend "receptionist". Write the note warmly and briefly, in Australian
 English, addressed to them by first name. Don't invent facts about their business, don't quote prices
 other than the plan names, and don't promise anything the plans above don't include.
 

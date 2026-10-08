@@ -501,3 +501,9 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .work-case dl { margin-top: .5rem; display: grid; gap: .15rem; max-width: 54ch; }
 .work-case dt { font-size: .75rem; font-weight: 600; color: var(--ink); margin-top: .45rem; }
 .work-case dd { margin: 0; color: var(--muted); }
+
+.hero-note { margin-top: 1rem; font-size: .9rem; color: var(--muted); }
+.plan-not { margin-top: 1.25rem; font-size: .85rem; color: var(--muted); max-width: 70ch; }
+.founder-sec { padding-block: clamp(3rem, 7vw, 5.5rem) 0; }
+.founder { max-width: 46rem; }
+.founder p { margin-top: .9rem; font-size: 1.1rem; line-height: 1.6; color: var(--muted); }

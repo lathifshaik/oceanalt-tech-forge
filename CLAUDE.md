@@ -17,7 +17,7 @@ Every service on the site should feel like a demo: `src/components/Story.tsx` ha
 Pricing (including the AI add-on), delivery time, reply time and terms appear in four places, and they must always agree: the BUSINESS_PLAN, `PLANS`/`FAQ`/the AI add-on block in `src/App.tsx`, the `Terms` component in `src/App.tsx`, and the system prompt in `api/start.ts`. Change them together.
 
 ## The 15-minute reply (`api/start.ts`)
-A Vercel function: the start form posts to it, Claude recommends a plan and layout as structured output, and Resend emails the reply to the enquirer and the lead to us. It falls back to the Firebase/EmailJS path if its env vars aren't set. Our USP is that Oceanalt runs on AI agents, checked by people, so keep that claim true: a person reads every enquiry the same business day.
+A Vercel function: the start form posts to it, Claude recommends a plan and layout as structured output, and Resend emails the reply to the enquirer and the lead to us. It falls back to the Firebase/EmailJS path if its env vars aren't set. Our USP is that Oceanalt runs on AI agents, checked by people, so keep that claim true: a person reads every enquiry the same business day. The site only promises the 15-minute reply once this function runs on Cloudflare (where the site is hosted) and passes an end-to-end test; until then it promises a same-business-day reply from a person.
 
 ## The homepage story (`src/components/Story.tsx`)
 Hero: "Get found. Get booked. Get paid." with a phone where the day's wins arrive as notifications (concierge call, Stripe deposit, Google enquiry, Xero invoice). Then the "We work with" logo row (scrolls left to right), then one sticky scroll story in four steps, each with a small working visual: get found (a site we designed + where it shows up), never miss a call (the concierge answering Mel, then the WhatsApp to Jim), get paid (a checkout cycling Apple Pay, Google Pay, Afterpay, card into Stripe), less admin (the pipeline demo). On mobile each visual sits under its step. People are 3D avatars from Microsoft Fluent Emoji (MIT, `public/avatars/LICENSE.txt`): Jim the sparky, Mel the caller, the AI concierge (with an AI badge), customers, and the owners we work for (yoga teacher, café owner, physio, mechanic, landscaper, accountant) floating around the hero phone. Expressions come from a Fluent 3D mood badge on the avatar (`Face` with `mood`) plus expression variants (`mel-worried` → `mel-ok`, `jim-wave`): Mel is worried until the concierge books her, Jim reacts to each win. The pay step plays a real-looking sheet per method (Face ID for Apple Pay, card tap for Google Pay, four dots for Afterpay, typed card) ending in a drawn tick. The work gallery shows each sample business as a case study: owner, before, what we built (sample, no results claimed). Sample businesses only, and the page says so. Keep the page uncluttered: one idea per screen, logos instead of chips, motion that tells the story and stops for reduced motion.
@@ -35,6 +35,9 @@ Five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × seven themes (`templ
 | `growth` | Lead lists, outreach drafts, case studies, niche landing pages |
 | `client-success` | Intake, briefs, edit requests, cancellations |
 | `designer` | Design previews and redesigns, using the design skills |
+| `marketing` | Positioning, the story, homepage and landing-page copy, ad and social copy |
+| `ui-designer` | Visual design: type, colour, spacing, components, motion, avatars |
+| `ux-designer` | Page structure, journeys, CTAs, forms, navigation, accessibility |
 | `engineer` | Builds, Stripe, bookings, migrations, launches, tech debt |
 | `qa` | Launch sign-off against the QA checklist |
 

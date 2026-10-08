@@ -56,7 +56,7 @@ const WORK: {
     business: "Tidewater Physio & Pilates, Bulimba",
     owner: { face: "physio", mood: "smile" },
     problem: "Bookings came in by phone and text, and gift vouchers lived on paper.",
-    pitch: "Every treatment has a price and a Book button. Gift vouchers flip over to show their terms and sell themselves.",
+    pitch: "Every treatment has a price and a Book button. Gift vouchers can be bought online and flip over to show their terms.",
     designs: [
       { path: "tidewater-physio-pilates", theme: "Calm" },
       { path: "tidewater-physio-pilates-ink", theme: "Ink" },
@@ -128,7 +128,7 @@ export const PLANS = [
       "Contact or quote form to your inbox",
       "Google Business Profile set up",
       "30 minutes of edits every month",
-      "Live in 1 to 3 business days",
+      "Usually live in 1 to 3 business days",
     ],
     featured: true,
   },
@@ -153,15 +153,15 @@ export const PLANS = [
 export const FAQ: { q: string; a: string }[] = [
   {
     q: "How can it be live in 1 to 3 days?",
-    a: "We don't start from a blank page. We've built our own library of layouts, design directions and components, so your design is assembled and tailored rather than drawn from nothing. We also write the words ourselves after a 15-minute call, which removes the usual weeks of waiting on copy. Google Business Profile and Stripe verification are run by Google and Stripe, so those can take a little longer.",
+    a: "We don't start from a blank page. We've built our own design tools, so the time goes on your business, not on setup. We also write the words ourselves after a 15-minute call, which removes the usual weeks of waiting on copy. Google Business Profile and Stripe verification are run by Google and Stripe, so those can take a little longer.",
   },
   {
     q: "What do I need to give you?",
     a: "Fifteen minutes on the phone, your logo if you have one, a few photos, your prices and hours, and access to your domain if you already own one. No photos? We'll use your Google Business photos or source licensed ones that look local.",
   },
   {
-    q: "Already have a website. Can you rebuild it?",
-    a: "Yes. A slow or tired site gets rebuilt faster and cleaner, with your pages, images and redirects moved across so you keep your Google rankings, and payments connected. It's included in Grow.",
+    q: "I already have a website. Can you rebuild it?",
+    a: "Yes. A slow or tired site gets rebuilt faster and cleaner, with your pages and images moved across, redirects from every old address so the search traffic you have has the best chance of carrying over, and payments connected. It's included in Grow.",
   },
   {
     q: "Will my site look like anyone else's?",
@@ -189,15 +189,15 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How do my customers pay?",
-    a: "Through Stripe, straight into your own account. Customers can pay by card, Apple Pay, Google Pay, Afterpay or bank transfer, for a deposit when they book or the full amount up front. Bookings, payments and reminders are part of the Grow plan, and Stripe's standard fees apply to each payment.",
+    a: "Through Stripe, straight into your own account. Customers can pay by card, Apple Pay or Google Pay, and Afterpay where Stripe approves your business, for a deposit when they book or the full amount up front. Bookings, payments and reminders are part of the Grow plan, and Stripe's standard fees apply to each payment.",
   },
   {
     q: "Where is my data kept?",
     a: "Your site and apps run on Cloudflare and AWS, and your customers' details, bookings and files are stored in Australia, in Sydney. AI features use specialist providers, some overseas; we tell you exactly which ones, and only use providers that don't train on your data.",
   },
   {
-    q: "How do you reply in 15 minutes?",
-    a: "When you send the form, our AI assistant reads it and emails you straight away with a suggested plan and a link to book a call. A person reads every enquiry the same business day. It's the same assistant we can set up on your own site.",
+    q: "Who reads my enquiry?",
+    a: "A person, the same business day. Our AI assistant helps us prepare a suggested plan for your business, and we check it before it goes to you. It's the same kind of assistant we can set up on your own site.",
   },
   {
     q: "What kind of web apps and software do you build?",
@@ -287,7 +287,7 @@ function Nav() {
         <nav className="nav-links" aria-label="Main">
           {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
         </nav>
-        <a className="btn btn-primary nav-cta" href="#start">Start a project</a>
+        <a className="btn btn-primary nav-cta" href="#start">Get started</a>
         <button className="menu-btn" type="button" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
           <span className="burger" aria-hidden="true"><i /><i /></span>
           <span className="sr">{open ? "Close menu" : "Open menu"}</span>
@@ -295,7 +295,7 @@ function Nav() {
       </div>
       <nav id="mobile-menu" className="mobile-menu" aria-label="Main" hidden={!open}>
         {links.map(([href, label], i) => <a key={href} href={href} style={{ animationDelay: `${i * 40}ms` }} onClick={() => setOpen(false)}>{label}</a>)}
-        <a className="btn btn-primary" href="#start" onClick={() => setOpen(false)}>Start a project</a>
+        <a className="btn btn-primary" href="#start" onClick={() => setOpen(false)}>Get started</a>
       </nav>
     </header>
   );
@@ -309,9 +309,10 @@ function Hero() {
           <h1><span>Get found.</span> <span>Get booked.</span> <span>Get paid.</span></h1>
           <p>From the corner café to the tradie's ute: a website, an AI concierge and payments, all looked after for you.</p>
           <div className="ctas">
-            <a className="btn btn-primary btn-island" href="#start">Start a project <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
+            <a className="btn btn-primary btn-island" href="#start">Get started <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
             <a className="text-link" href="#story">See how it works <Icon name="arrow-right" /></a>
           </div>
+          <p className="hero-note">Websites from $99 a month. Nothing upfront, and nothing charged until you've seen your site.</p>
         </div>
         <HeroPhone />
       </div>
@@ -337,7 +338,7 @@ function WorkCard({ w }: { w: (typeof WORK)[number] }) {
             <h3>{w.business}</h3>
             <dl>
               <dt>Before</dt><dd>{w.problem}</dd>
-              <dt>What we built</dt><dd>{w.pitch}</dd>
+              <dt>What the site does</dt><dd>{w.pitch}</dd>
             </dl>
           </div>
         </div>
@@ -387,8 +388,8 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
   return (
     <section id="pricing" className="pricing">
       <div className="wrap">
-        <h2 className="h2">Simple monthly plans.</h2>
-        <p className="lede">Your website, Google profile, hosting and changes, all included. Nothing upfront, prices in AUD.</p>
+        <h2 className="h2">One price a month. Nothing upfront.</h2>
+        <p className="lede">Design, hosting and changes on one monthly bill. Prices in AUD.</p>
         <div className="plans">
           {PLANS.map((p) => (
             <div className={`plan${p.featured ? " is-featured" : ""}`} key={p.id}>
@@ -412,7 +413,9 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
           <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost. A chat assistant for your website is $39 a month.</p>
           <p><b>Web apps and automations</b> Quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
           <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch.</p>
+          <p><b>Founding clients</b> Our first 10 Launch clients pay $79 a month instead of $99, for as long as they stay on Launch. Same plan, same terms.</p>
         </div>
+        <p className="plan-not">Not included: Stripe's fee on each payment, paid ads and photo shoots. No GST is added: we're not registered for GST yet.</p>
       </div>
     </section>
   );
@@ -425,12 +428,23 @@ function Promises() {
         <h2 className="h2">Straight up, in writing.</h2>
         <p className="lede">Some providers hold your domain, make leaving hard or won't say where your data lives. Not us.</p>
         <ul className="promises">
-          <li><b>See it before you pay</b><span>A preview link within a day. Your first charge happens only once you're happy with it.</span></li>
-          <li><b>Your domain, in your name</b><span>Registered to you from day one. Never held hostage, whatever happens.</span></li>
+          <li><b>See it before you pay</b><span>A preview link before anything goes live. Your first charge happens only once you're happy with it.</span></li>
+          <li><b>Your domain, in your name</b><span>Registered to you from day one. If you leave, it goes with you.</span></li>
           <li><b>Keep the site after 12 months</b><span>After a year, the site and its code are yours to keep, free. Stay on Care for $29 a month or take it anywhere.</span></li>
-          <li><b>Your data stays in Australia</b><span>Your customers' details, bookings and files are stored in Sydney. If you use our AI, we tell you which providers process it, and we only use ones that don't train on your data.</span></li>
+          <li><b>Your customers' data, stored in Sydney</b><span>Form submissions, bookings, files and databases we build for you are stored in AWS Sydney. Some tools process data overseas, like Stripe, Google and the AI and phone providers behind the concierge. We list every one in writing before you go live.</span></li>
           <li><b>Fast and safe, on Cloudflare and AWS</b><span>SSL, daily backups and uptime monitoring included. Payments go straight to your own Stripe account; we never hold your money.</span></li>
         </ul>
+      </div>
+    </section>
+  );
+}
+
+function Founder() {
+  return (
+    <section className="founder-sec">
+      <div className="wrap founder">
+        <h2 className="h2">Who you're dealing with.</h2>
+        <p>I'm Lathif. Oceanalt is me plus a team of AI agents that do the building. A person checks every site before it goes live and reads every enquiry the same business day. Sydney-based, <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
       </div>
     </section>
   );
@@ -527,12 +541,12 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
     <section className="start" id="start">
       <div className="wrap">
         <div>
-          <h2 className="h2">Start your project.</h2>
-          <p className="lede">Tell us a little about your business. You'll hear back within 15 minutes, day or night, with a suggested plan and a link to book a call.</p>
+          <h2 className="h2">Tell us about your business.</h2>
+          <p className="lede">Tell us a little about your business. A person reads every enquiry and replies the same business day, with a suggested plan and a time for a quick call.</p>
           <div className="start-aside">
             <a href={`mailto:${EMAIL}`}><Icon name="mail" /> {EMAIL}</a>
             <span><Icon name="pin" /> Based in Sydney, working Australia-wide</span>
-            <span><Icon name="clock" /> Replies within 15 minutes, any time</span>
+            <span><Icon name="clock" /> A reply the same business day</span>
           </div>
         </div>
 
@@ -540,7 +554,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
           <div className="form-done" role="status">
             <Icon name="mail" />
             <h3>Check your inbox.</h3>
-            <p>Our AI assistant has already emailed you a suggested plan and a link to book a 15-minute call. A person reads every enquiry and will follow up today. If it's not there in a minute, check your spam folder.</p>
+            <p>Our AI assistant has already emailed you a suggested plan and a link to book a 15-minute call. A person reads every enquiry and follows up the same business day. If it's not there in a minute, check your spam folder.</p>
           </div>
         ) : state === "done" ? (
           <div className="form-done" role="status">
@@ -633,7 +647,7 @@ function Terms() {
       <h2>2. Delivery</h2>
       <p>Launch and Grow sites are usually live within 1 to 3 business days of the kickoff call, provided we have the photos, prices and domain access we ask for. Steps run by third parties, such as Google Business Profile verification, Stripe account verification and domain transfers, may take longer and are outside that timeframe.</p>
       <h2>3. Billing</h2>
-      <p>Monthly plans are billed in advance by card through Stripe. The first charge happens only after the client approves the preview. Launch and Grow have a 12-month minimum term, then continue month to month and can be cancelled with 30 days' notice. Cancelling within the first 12 months costs the lesser of the remaining months in that term or a $1,499 AUD buyout, and either way the site is transferred to the client. Care is month to month. One-off projects are billed 50% upfront and 50% at launch.</p>
+      <p>Monthly plans are billed in advance by card through Stripe. The first charge happens only after the client approves the preview. Launch and Grow have a 12-month minimum term, then continue month to month and can be cancelled with 30 days' notice. Founding clients (our first 10 on Launch) pay $79 a month instead of $99 for as long as they stay on Launch; everything else in these terms is the same. Cancelling within the first 12 months costs the lesser of the remaining months in that term or a $1,499 AUD buyout, and either way the site is transferred to the client. Care is month to month. One-off projects are billed 50% upfront and 50% at launch.</p>
       <h2>4. Ownership</h2>
       <p>The client owns their content and domain from day one; domains are registered in the client's name. On Launch and Grow, ownership of the site code transfers at no charge after 12 paid months, or earlier on payment of the buyout in section 3. For one-off projects, the client owns the code once the final invoice is paid.</p>
       <h2>5. Edits</h2>
@@ -708,8 +722,9 @@ export default function App() {
           <LogoWall />
           <Story onPlan={pickPlan} />
           <Work />
-          <Pricing onPlan={pickPlan} />
           <Promises />
+          <Pricing onPlan={pickPlan} />
+          <Founder />
           <Faq />
           <Start template={template} plan={plan} setTemplate={setTemplate} setPlan={setPlan} />
         </main>

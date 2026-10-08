@@ -92,7 +92,7 @@ export function LandingPage({ page }: { page: Landing }) {
         <section className="lp-sec lp-end">
           <div className="wrap">
             <h2 className="h2">Tell us about your business.</h2>
-            <p className="lede">A short form. You'll hear back within 15 minutes with a suggested plan, and nothing is charged until you've seen your site.</p>
+            <p className="lede">A short form. A person replies the same business day with a suggested plan, and nothing is charged until you've seen your site.</p>
             <a className="btn btn-primary btn-island" href={start}>{cta} <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
           </div>
         </section>

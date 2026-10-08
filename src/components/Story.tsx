@@ -106,7 +106,7 @@ function FoundVisual() {
         <img src="/previews/kerr-and-sons-electrical.webp" alt="A website we designed for a sample electrician" width={1200} height={750} loading="lazy" />
       </div>
       <div className="sv-where">
-        <span>Shows up on</span>
+        <span>Set up for</span>
         <img src={logo("google")} alt="Google" width={22} height={22} />
         <img src={logo("googlemaps")} alt="Google Maps" width={22} height={22} />
         <img src={logo("googlegemini")} alt="Google Gemini" width={22} height={22} />
@@ -117,9 +117,9 @@ function FoundVisual() {
 }
 
 const LINES: { who: "c" | "m"; text: string }[] = [
-  { who: "c", text: "Kerr & Sons Electrical, you're speaking with Jim's AI concierge. How can I help?" },
+  { who: "c", text: "G'day, Kerr & Sons Electrical. I'm Jim's AI concierge, and this call is recorded so Jim gets the details. How can I help?" },
   { who: "m", text: "A power point in my kitchen is sparking. Can someone come today?" },
-  { who: "c", text: "Switch it off at the board for now. We can be there between 2 and 4 this arvo. Does that suit?" },
+  { who: "c", text: "If there's smoke or flames, hang up and call triple zero. Otherwise keep clear of it. Jim can be there between 2 and 4 this arvo. Does that suit?" },
   { who: "m", text: "Perfect, 14 Ridge Street, Merewether." },
 ];
 
@@ -269,7 +269,7 @@ function PayVisual({ active }: { active: boolean }) {
         <img src={logo("googlepay")} alt="Google Pay" width={26} height={26} />
         <img src={logo("afterpay")} alt="Afterpay" width={26} height={26} />
         <img src={logo("stripe")} alt="Stripe" width={26} height={26} />
-        <span>Card and bank transfer too</span>
+        <span>Card too, straight into Stripe</span>
       </div>
     </div>
   );
@@ -284,8 +284,8 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
     {
       id: "found",
       kicker: "Get found",
-      title: "They search. You're there.",
-      body: "A website made for your business, your Google profile done properly, and your details set up so Google, Maps and AI answers point people your way.",
+      title: "Someone nearby searches 'sparky near me' tonight.",
+      body: "A website made for your business, your Google profile done properly, and your details set up so Google, Maps and AI answers have the right facts about you.",
       price: "Websites from $99 a month, nothing upfront",
       cta: <a className="text-link" href="#work">See websites we've designed <Icon name="arrow-right" /></a>,
       visual: () => <FoundVisual />,
@@ -294,15 +294,15 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
       id: "ai",
       kicker: "Never miss a call",
       title: "You're up a ladder. The phone still gets answered.",
-      body: "Your AI concierge picks up in a natural Aussie voice, sorts out what the caller needs, books the job and sends you the details on WhatsApp or email.",
-      price: "AI concierge $149 a month with a local number, plus call time",
+      body: "Your AI concierge picks up in a natural Aussie voice, sorts out what the caller needs, tells callers it's an AI, books the job and sends you the details by WhatsApp, text or email.",
+      price: "AI concierge $149 a month with a local number, plus call time at cost",
       cta: <button type="button" className="text-link" onClick={() => onPlan("concierge")}>Set up my concierge <Icon name="arrow-right" /></button>,
       visual: (a) => <CallVisual active={a} />,
     },
     {
       id: "payments",
       kicker: "Get paid",
-      title: "Booked and paid in one tap.",
+      title: "No more chasing $25 after class.",
       body: "Whether it's a sunrise yoga class or a switchboard check, customers pick a time and pay a deposit or the full amount with Apple Pay, Google Pay, Afterpay or card. It lands in your own Stripe account, and nobody chases anyone.",
       price: "Payments and bookings included in Grow, $149 a month",
       cta: <button type="button" className="text-link" onClick={() => onPlan("grow")}>Start taking payments <Icon name="arrow-right" /></button>,
@@ -311,8 +311,8 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
     {
       id: "admin",
       kicker: "Less admin",
-      title: "The paperwork sorts itself out.",
-      body: "We make your pipeline efficient, from first enquiry to paid invoice. Quotes, bookings and invoices move between your apps on their own, so nobody types anything twice.",
+      title: "It's 9pm and you're still typing up invoices.",
+      body: "We make your pipeline efficient: we connect the apps you already use, so an enquiry turns into a quote, a booking and a paid invoice without you copying it across.",
       price: "Web apps and automations, quoted within 24 hours",
       cta: <button type="button" className="text-link" onClick={() => onPlan("custom")}>Send a brief <Icon name="arrow-right" /></button>,
       visual: () => <PipelineDemo />,

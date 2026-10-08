@@ -72,7 +72,7 @@ export function PipelineDemo() {
         ))}
       </ul>
       <button type="button" className="text-link" onClick={run}>Run it again <Icon name="arrow-right" /></button>
-      <p className="demo-note">Demo with a sample business. Nobody typed anything twice.</p>
+      <p className="demo-note">Demo with a sample business.</p>
     </div>
   );
 }

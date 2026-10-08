@@ -60,7 +60,7 @@ Every site starts from one of our templates rather than a from-scratch design, s
 
 Most "pay monthly" competitors are a person with WordPress. Oceanalt is a small team that runs on AI agents. Agents research the business, draft the pages, build and test the site, write the first reply to every enquiry, and keep sites updated. People choose the design, check every word and photo, approve every launch and take the phone calls. That split is the reason for all three of our promises: **$99 a month, live in 1 to 3 days, a reply in 15 minutes.**
 
-The 15-minute reply is the proof we hand every prospect. `api/start.ts` has Claude read the enquiry and email back a recommended plan and layout with a booking link, usually within a minute, any time of day. A person reads every enquiry the same business day. Prospects experience the product before they buy it.
+The 15-minute reply is the proof we hand every prospect. `api/start.ts` has Claude read the enquiry and email back a recommended plan and layout with a booking link, usually within a minute, any time of day. A person reads every enquiry the same business day. Prospects experience the product before they buy it. **Not claimed on the public site until `api/start` runs on Cloudflare and passes an end-to-end test;** until then the site promises a reply from a person the same business day (ACL: no claim we can't deliver today).
 
 ### AI add-ons (decided 3 October 2026)
 
@@ -124,7 +124,7 @@ The site now sells the offer. The next 30 days prove someone pays for it.
 |---|---|---|
 | 1 | Set up Stripe Payment Links (Care/Launch/Grow, 14-day trial on Launch/Grow) and add them to `.env`. Deploy. | Checkout works end to end |
 | 1–2 | Build a list of 200 local businesses in 2–3 suburbs with no site, a broken site, or no online booking (Google Maps; Clay/Apollo are connected if you want to enrich) | List exists |
-| 2–3 | Outreach: walk in, call, or send a 60-second Loom of their current site next to a mock-up of the new one. Offer "Founding 10": Launch at $79/mo locked for life. | ≥20 conversations |
+| 2–3 | Outreach: walk in, call, or send a 60-second Loom of their current site next to a mock-up of the new one. Offer "Founding 10": Launch at $79/mo for as long as they stay on Launch (same 12-month minimum and buyout). Shown on the site under Pricing, in the Terms and in `api/start.ts`; remove all four once 10 have signed. | ≥20 conversations |
 | 3–4 | Close | **≥5 paying clients from 200 contacts** (2.5%) = validated. Under 2: change the niche or message, not the price. |
 
 **Kill / pivot signals:** under 2 closes from 200 contacts; average edit time over 1 h for Launch clients; more than 1 in 5 clients asking to cancel before month 6.

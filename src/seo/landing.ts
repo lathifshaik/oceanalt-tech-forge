@@ -28,14 +28,14 @@ export const LANDINGS: Landing[] = [
   {
     slug: "online-payments-and-bookings",
     title: "Online Bookings and Payments with Stripe | Oceanalt",
-    description: "Let customers book and pay in one go, by card, Apple Pay, Google Pay, Afterpay or bank transfer, straight into your Stripe account. Included in Grow, $149 a month.",
+    description: "Let customers book and pay in one go, by card, Apple Pay, Google Pay or Afterpay (where Stripe approves your business), straight into your Stripe account. Included in Grow, $149 a month.",
     nav: "Payments and bookings",
     h1: "Get paid without the chasing",
-    intro: "Customers pick a time, pay a deposit or the full amount, and get a confirmation, all in a minute on their phone. You get the booking and the money, without a single phone call or invoice.",
+    intro: "Customers pick a time, pay a deposit or the full amount, and get a confirmation, all in a minute on their phone. Instead of chasing payments by text after the job, you get the booking and the money together.",
     image: { src: "/ai/physio.webp", alt: "A client stretching by the water at sunset after a session" },
     example: { path: "tidewater-physio-pilates", label: "a sample clinic with online booking" },
     includes: [
-      "Card, Apple Pay, Google Pay, Afterpay and bank transfer, through Stripe",
+      "Card, Apple Pay and Google Pay through Stripe, plus Afterpay where Stripe approves your business",
       "Deposits or full payment when they book",
       "Booking and confirmation in one step, with reminders before the day",
       "Money paid straight into your own Stripe account",
@@ -44,7 +44,7 @@ export const LANDINGS: Landing[] = [
     ],
     sections: [
       { h2: "Fewer no-shows, less chasing", body: [
-        "When someone has paid a deposit, they turn up or they reschedule. When they've paid in full, there's no invoice to send and nothing to chase.",
+        "A deposit gives people a reason to turn up, or at least to reschedule instead of not showing. When they've paid in full, there's no invoice to send and nothing to chase.",
       ] },
       { h2: "Your money, your account", body: [
         "Payments go straight into your own Stripe account, and Stripe pays them into your bank. We never hold your money or see card details. Stripe charges its standard fee on each payment; there's no extra fee from us.",
@@ -62,7 +62,7 @@ export const LANDINGS: Landing[] = [
     title: "AI Concierge for Small Business, Australia | Oceanalt",
     description: "An AI concierge that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. $149 a month.",
     nav: "AI concierge",
-    h1: "Never miss another call",
+    h1: "Answered, even when you can't",
     intro: "You're up a ladder, with a client, or it's 8pm. The phone rings anyway. Your AI concierge picks up, looks after the caller, and sends you the details before you've climbed down.",
     image: { src: "/ai/sparky.webp", alt: "An electrician working on a switchboard" },
     includes: [
@@ -93,7 +93,7 @@ export const LANDINGS: Landing[] = [
   {
     slug: "show-up-in-ai-search",
     title: "Show Up in ChatGPT and Google AI Search | Oceanalt",
-    description: "People now ask ChatGPT and Google's AI to find a local business. We set up your website and Google profile so AI search can find and recommend you.",
+    description: "People now ask ChatGPT and Google's AI to find a local business. We set up your website and Google profile so AI search has clear, correct details about you.",
     nav: "AI search",
     h1: "Show up when people ask AI",
     intro: "People now ask ChatGPT, Gemini and Google's AI Overviews things like \"good electrician in Newcastle\". Those answers are built from what the web says about you. We make sure it says the right things, clearly and consistently.",
@@ -315,7 +315,7 @@ export const LANDINGS: Landing[] = [
     faq: [
       { q: "Which booking systems do you work with?", a: "Most of the common ones used by clinics and salons can be linked or embedded. Tell us which you use on the call and we'll confirm." },
       { q: "Can an assistant handle booking questions?", a: "Yes. Our AI assistant can answer questions, suggest times and hold a slot for you to confirm, for $39 a month plus AI usage at cost." },
-      { q: "Can you rebuild my current site?", a: "Yes. A rebuild of your existing site is included in Grow, and we keep your pages' addresses so you keep your Google rankings." },
+      { q: "Can you rebuild my current site?", a: "Yes. A rebuild of your existing site is included in Grow, and we keep your pages' addresses and redirect old links, so your search traffic has the best chance of carrying over." },
     ],
     plan: "grow",
   },
@@ -346,7 +346,7 @@ export const LANDINGS: Landing[] = [
     ],
     faq: [
       { q: "How many products can I have?", a: "The Grow plan suits a focused range of products. For a large catalogue we'll quote a custom build first." },
-      { q: "Can you move my shop from Shopify, Wix or Square?", a: "Yes. We rebuild it, move your products and set up redirects so links and search rankings carry over." },
+      { q: "Can you move my shop from Shopify, Wix or Square?", a: "Yes. We rebuild it, move your products and set up redirects so old links keep working." },
       { q: "What does it cost?", a: "Grow is $149 a month with a 12-month minimum and nothing upfront. Stripe charges its standard card fees on each sale." },
     ],
     plan: "grow",
@@ -419,16 +419,16 @@ export const LANDINGS: Landing[] = [
   {
     slug: "website-rebuild",
     title: "Website Rebuild: Move from Wix, WordPress or Squarespace | Oceanalt",
-    description: "We rebuild slow Wix, WordPress, Squarespace and Shopify sites: faster, cleaner, with payments, keeping your Google rankings. Included in Grow at $149 a month.",
+    description: "We rebuild slow Wix, WordPress, Squarespace and Shopify sites: faster, cleaner, with payments, and redirects from every old address. Included in Grow at $149 a month.",
     nav: "Website rebuild",
-    h1: "Rebuild your website, and keep your Google rankings",
-    intro: "A slow Wix site, a WordPress install nobody updates, a Squarespace theme you've outgrown. We rebuild it faster and cleaner, connect payments, and move everything across without losing your search rankings.",
+    h1: "Rebuild your website, without starting from scratch on Google",
+    intro: "A slow Wix site, a WordPress install nobody updates, a Squarespace theme you've outgrown. We rebuild it faster and cleaner, connect payments, and move everything across with redirects from every old address.",
     image: { src: "/previews/wattle-and-fern-florist-forest.webp", alt: "A website we designed for a sample florist" },
     example: { path: "wattle-and-fern-florist-forest", label: "a sample florist" },
     includes: [
       "A new design made for your business",
       "Your existing pages, words and images moved across",
-      "Redirects from every old address, so links and rankings carry over",
+      "Redirects from every old address, so old links keep working",
       "Online payments or bookings connected",
       "The switch done with no downtime, on the same domain and email",
       "Included in the Grow plan, $149 a month",
@@ -438,8 +438,8 @@ export const LANDINGS: Landing[] = [
         "Send us your current address and tell us what works and what doesn't. Within a day you get a preview of the new version, built from your existing content.",
         "Once you're happy, we move every page, set up redirects from the old addresses, and switch the domain over. Your email keeps working, and your old host can be cancelled.",
       ] },
-      { h2: "Keeping your rankings", body: [
-        "Rankings belong to your page addresses and content. We keep your best pages, redirect the rest to their closest match, and submit the new sitemap to Google so nothing gets lost in the move.",
+      { h2: "Protecting your search traffic", body: [
+        "Rankings belong to your page addresses and content. We keep your best pages, redirect the rest to their closest match, and submit the new sitemap to Google so your existing rankings have the best chance of carrying over. Nobody can promise a ranking, and we won't.",
       ] },
     ],
     faq: [

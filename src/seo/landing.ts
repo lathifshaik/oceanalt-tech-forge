@@ -478,7 +478,7 @@ export const LANDINGS: Landing[] = [
     faq: [
       { q: "Will it make things up?", a: "It's set up to answer only from your information and to say it will check with you when something isn't covered." },
       { q: "Do I need a website from you to use it?", a: "It's easiest on a site we build, but we can add it to most existing sites." },
-      { q: "Can I try it?", a: "Yes. The demo on our home page shows the assistant answering for sample businesses." },
+      { q: "Can I see it working?", a: "Yes. Our home page plays a sample call and booking, and on a 15-minute call we can set one up with your own business details to try." },
     ],
     plan: "ai",
   },

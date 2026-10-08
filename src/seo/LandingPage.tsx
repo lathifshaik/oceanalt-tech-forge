@@ -16,7 +16,7 @@ export function LandingPage({ page }: { page: Landing }) {
           <nav className="nav-links" aria-label="Main">
             <a href="/#work">Work</a>
             <a href="/#ai">AI</a>
-            <a href="/#how">How it works</a>
+            <a href="/#story">How it works</a>
             <a href="/#pricing">Pricing</a>
           </nav>
           <a className="btn btn-primary nav-cta lp-nav-cta" href={start}>{cta}</a>

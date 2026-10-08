@@ -20,65 +20,6 @@ function useInView(fn: () => void) {
   return ref;
 }
 
-const SLOTS = ["Thu 2:30pm", "Thu 4:00pm", "Fri 8:00am"];
-const METHODS: { id: string; label: string; logo?: string }[] = [
-  { id: "card", label: "Card" },
-  { id: "apple", label: "Apple Pay", logo: "applepay" },
-  { id: "google", label: "Google Pay", logo: "googlepay" },
-  { id: "afterpay", label: "Afterpay", logo: "afterpay" },
-  { id: "bank", label: "Bank transfer" },
-];
-
-// Book a time and pay a deposit, like a customer would on a client's site.
-export function BookPayDemo() {
-  const [slot, setSlot] = useState(SLOTS[0]);
-  const [method, setMethod] = useState("apple");
-  const [state, setState] = useState<"pick" | "paying" | "done">("pick");
-  const m = METHODS.find((x) => x.id === method)!;
-
-  const pay = () => {
-    setState("paying");
-    window.setTimeout(() => setState("done"), reduced() ? 0 : 1100);
-  };
-
-  return (
-    <div className="demo bp" aria-label="Booking and payment demo">
-      <div className="demo-bar"><b>Tidewater Physio</b><span>Initial consult, 60 min, $120</span></div>
-      {state !== "done" ? (
-        <div className="bp-body">
-          <p className="bp-label">Pick a time with Ana</p>
-          <div className="bp-chips" role="radiogroup" aria-label="Time">
-            {SLOTS.map((s) => (
-              <button key={s} type="button" role="radio" aria-checked={slot === s} onClick={() => setSlot(s)}>{s}</button>
-            ))}
-          </div>
-          <p className="bp-label">Pay a $30 deposit with</p>
-          <div className="bp-chips bp-methods" role="radiogroup" aria-label="Payment method">
-            {METHODS.map((x) => (
-              <button key={x.id} type="button" role="radio" aria-checked={method === x.id} onClick={() => setMethod(x.id)}>
-                {x.logo ? <img src={logo(x.logo)} alt="" width={18} height={18} /> : <Icon name={x.id === "card" ? "card" : "briefcase"} />}
-                {x.label}
-              </button>
-            ))}
-          </div>
-          <button type="button" className="btn btn-primary bp-pay" onClick={pay} disabled={state === "paying"}>
-            {state === "paying" ? "Processing…" : `Pay $30 deposit`}
-          </button>
-        </div>
-      ) : (
-        <div className="bp-body bp-done" role="status">
-          <span className="bp-tick"><Icon name="check" /></span>
-          <b>Booked and paid</b>
-          <p>{slot} with Ana. $30 deposit paid with {m.label}. Confirmation sent by text and email.</p>
-          <p className="bp-stripe"><img src={logo("stripe")} alt="" width={16} height={16} /> Paid into Tidewater's own Stripe account</p>
-          <button type="button" className="text-link" onClick={() => setState("pick")}>Try it again <Icon name="arrow-right" /></button>
-        </div>
-      )}
-      <p className="demo-note">Demo with a sample business. No money moves.</p>
-    </div>
-  );
-}
-
 const STAGES = ["Enquiry", "Quote", "Booked", "Paid"];
 const LOG: { text: string; logo: string }[] = [
   { text: "Enquiry from the website, added to your job list", logo: "gmail" },
@@ -168,7 +109,7 @@ export function LogoWall() {
   return (
     <section className="logos" aria-labelledby="logos-h">
       <div className="wrap">
-        <h2 id="logos-h">Works with the tools you already use.</h2>
+        <h2 id="logos-h">We work with</h2>
       </div>
       <div className="logos-track">{row(false)}{row(true)}</div>
     </section>

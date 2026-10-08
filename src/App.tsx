@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Icon, type IconName } from "./components/Icon";
-import { AiDemo } from "./components/AiDemo";
-import { BookPayDemo, LogoWall, PipelineDemo } from "./components/Demos";
+import { LogoWall } from "./components/Demos";
+import { HeroPhone, Story } from "./components/Story";
 import { LANDINGS } from "./seo/landing";
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -79,8 +79,6 @@ const WORK: {
   },
 ];
 
-// Three different designs for the hero stack, to show the range at a glance.
-const STACK = ["little-tern-coffee", "kerr-and-sons-electrical-ink", "tidewater-physio-pilates-forest"];
 
 export const PLANS = [
   {
@@ -135,6 +133,10 @@ export const FAQ: { q: string; a: string }[] = [
   {
     q: "What do I need to give you?",
     a: "Fifteen minutes on the phone, your logo if you have one, a few photos, your prices and hours, and access to your domain if you already own one. No photos? We'll use your Google Business photos or source licensed ones that look local.",
+  },
+  {
+    q: "Already have a website. Can you rebuild it?",
+    a: "Yes. A slow or tired site gets rebuilt faster and cleaner, with your pages, images and redirects moved across so you keep your Google rankings, and payments connected. It's included in Grow.",
   },
   {
     q: "Will my site look like anyone else's?",
@@ -248,9 +250,8 @@ function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
   const links = [
-    ["#services", "Services"],
+    ["#story", "How it works"],
     ["#work", "Work"],
-    ["#ai", "AI"],
     ["#pricing", "Pricing"],
     ["#faq", "FAQ"],
   ];
@@ -275,115 +276,21 @@ function Nav() {
   );
 }
 
-// Three real client-style sites we built, stacked in 3D. Pointer position tilts the stack.
-function Stack() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const move = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      el.style.setProperty("--ry", `${(x * 12).toFixed(2)}deg`);
-      el.style.setProperty("--rx", `${(-y * 8).toFixed(2)}deg`);
-    };
-    const leave = () => {
-      el.style.setProperty("--ry", "0deg");
-      el.style.setProperty("--rx", "0deg");
-    };
-    el.addEventListener("pointermove", move);
-    el.addEventListener("pointerleave", leave);
-    return () => {
-      el.removeEventListener("pointermove", move);
-      el.removeEventListener("pointerleave", leave);
-    };
-  }, []);
-  return (
-    <div className="stack" ref={ref}>
-      <div className="stack-inner">
-        {STACK.map((path) => (
-          <a key={path} className="frame" href={`/work/${path}/`} target="_blank" rel="noopener" aria-label="Open this example site">
-            <img src={`/previews/${path}.webp`} alt="" width={1200} height={750} fetchPriority="high" />
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function Hero() {
   return (
     <div className="hero">
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <h1><span>More customers.</span> <span>Less admin.</span></h1>
-          <p>From the corner café to the tradie's ute: we get you found, answer your phone and sort the admin.</p>
+          <h1><span>Get found.</span> <span>Get booked.</span> <span>Get paid.</span></h1>
+          <p>From the corner café to the tradie's ute: a website, an AI concierge and payments, all looked after for you.</p>
           <div className="ctas">
             <a className="btn btn-primary btn-island" href="#start">Start a project <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
-            <a className="text-link" href="#work">See our work <Icon name="arrow-right" /></a>
+            <a className="text-link" href="#story">See how it works <Icon name="arrow-right" /></a>
           </div>
         </div>
-        <Stack />
-      </div>
-      <div className="wrap">
-        <dl className="proof">
-          <div><dt>$0</dt><dd>upfront on website plans</dd></div>
-          <div><dt>1-3</dt><dd>days from first call to a live website</dd></div>
-          <div><dt>24/7</dt><dd>calls and enquiries answered, if you want them</dd></div>
-        </dl>
+        <HeroPhone />
       </div>
     </div>
-  );
-}
-
-// What we sell, equal weight: digital presence, web apps and software, AI.
-// Copy leads with what it's like for the owner and their customers.
-function Services({ onPlan }: { onPlan: (plan: string) => void }) {
-  return (
-    <section className="services" id="services">
-      <div className="wrap">
-        <h2 className="h2">Four ways we make running your business easier.</h2>
-        <div className="svc">
-          <article className="svc-cell svc-presence">
-            <div className="svc-copy">
-              <h3>Be the business people find first</h3>
-              <p>A website made for you, your Google Business Profile done properly, and your details set up so search engines and AI answers like ChatGPT and Google's AI Overviews can find you and point people your way.</p>
-              <p className="svc-price"><b>Digital presence</b> from $99 a month, nothing upfront</p>
-              <a className="text-link" href="#work">See websites we've designed <Icon name="arrow-right" /></a>
-            </div>
-            <img src="/previews/kerr-and-sons-electrical.webp" alt="A website we designed for a sample electrician" width={1200} height={750} loading="lazy" />
-          </article>
-          <article className="svc-cell svc-photo">
-            <img src="/ai/cafe.webp" alt="A café after closing, its sign still lit" width={1400} height={925} loading="lazy" />
-            <div className="svc-copy">
-              <h3>Never miss another call</h3>
-              <p>Your own AI concierge answers when you can't, looks after every caller in a natural Aussie voice, books them in and sends you the details on WhatsApp or email. It can look after your website chat too.</p>
-              <p className="svc-price"><b>AI concierge</b> $149 a month plus call time at cost</p>
-              <a className="text-link" href="#ai">Hear how a call goes <Icon name="arrow-right" /></a>
-            </div>
-          </article>
-          <article className="svc-cell svc-photo">
-            <div className="svc-demo"><PipelineDemo /></div>
-            <div className="svc-copy">
-              <h3>Less admin, more evenings back</h3>
-              <p>We make your pipeline efficient, from first enquiry to paid invoice: web apps and automations that move bookings, quotes, invoices and job notes between your apps, so nobody types the same thing three times.</p>
-              <p className="svc-price"><b>Web apps and workflows</b> quoted per project, within 24 hours</p>
-              <button className="text-link" type="button" onClick={() => onPlan("custom")}>Send a brief <Icon name="arrow-right" /></button>
-            </div>
-          </article>
-          <article className="svc-cell svc-presence svc-pay">
-            <div className="svc-demo"><BookPayDemo /></div>
-            <div className="svc-copy">
-              <h3>Get paid without the chasing</h3>
-              <p>Customers book and pay in one go, a deposit or the full amount, on whatever they like to pay with. Money lands in your own Stripe account, and a deposit on the line means fewer no-shows.</p>
-              <p className="svc-price"><b>Payments and bookings</b> included in Grow, $149 a month</p>
-              <button className="text-link" type="button" onClick={() => onPlan("grow")}>Start taking payments <Icon name="arrow-right" /></button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -445,36 +352,12 @@ function Work() {
   );
 }
 
-function How() {
-  const steps: { when: string; title: string; body: string }[] = [
-    { when: "Within 15 minutes", title: "Tell us about your business", body: "Send the form. Our AI assistant replies with a suggested plan, then we have a 15-minute call. We write the words." },
-    { when: "Within 24 hours", title: "See your design", body: "A private preview link to check on your phone. Ask for changes. Nothing is charged until you're happy." },
-    { when: "Day 1 to 3", title: "Go live, then we look after it", body: "We connect your domain, Google profile and payments. After that, just email us when something needs changing." },
-  ];
-  return (
-    <section className="how" id="how">
-      <div className="wrap">
-        <h2 className="h2">From hello to live in three days.</h2>
-        <ol className="how-rows">
-          {steps.map((s) => (
-            <li key={s.title}>
-              <span className="how-when">{s.when}</span>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
 function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
   return (
     <section id="pricing" className="pricing">
       <div className="wrap">
-        <h2 className="h2">Your website and Google presence, one monthly fee.</h2>
-        <p className="lede">Design, hosting, your Google profile and changes, all included. Prices in AUD, no setup fee.</p>
+        <h2 className="h2">Simple monthly plans.</h2>
+        <p className="lede">Your website, Google profile, hosting and changes, all included. Nothing upfront, prices in AUD.</p>
         <div className="plans">
           {PLANS.map((p) => (
             <div className={`plan${p.featured ? " is-featured" : ""}`} key={p.id}>
@@ -495,33 +378,10 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
           ))}
         </div>
         <div className="plan-extra">
-          <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch. Add Care for $29 a month if you'd like us to keep looking after it.</p>
-          <p><b>Web apps and software?</b> Booking systems, client portals, quoting tools and automations are quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
-          <p><b>AI that answers for you?</b> The AI concierge is $149 a month with a local number, plus call time at cost. A chat assistant for your website is $39 a month plus usage. <a className="link" href="#ai">See a call</a>.</p>
+          <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost. A chat assistant for your website is $39 a month.</p>
+          <p><b>Web apps and automations</b> Quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
+          <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch.</p>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Rebuild({ onPlan }: { onPlan: (plan: string) => void }) {
-  const steps = [
-    ["Send us your URL", "Tell us what works and what doesn't."],
-    ["See the new version", "A preview within a day, built from your content."],
-    ["We move everything", "Pages, images and redirects, so you keep your rankings."],
-    ["Switch with no downtime", "Same domain and email. Cancel your old host."],
-  ];
-  return (
-    <section className="rebuild">
-      <div className="wrap">
-        <div className="rebuild-head">
-          <h2 className="h2">Already have a website? We'll rebuild it, payments included.</h2>
-          <p className="lede">Slow Wix site, tired WordPress, a Shopify theme you've outgrown. We rebuild it faster and cleaner and keep your Google rankings. It's included in Grow.</p>
-        </div>
-        <ol className="rebuild-steps">
-          {steps.map(([t, b]) => <li key={t}><b>{t}</b><span>{b}</span></li>)}
-        </ol>
-        <button className="btn btn-line" type="button" onClick={() => onPlan("rebuild")}>Rebuild my site</button>
       </div>
     </section>
   );
@@ -531,15 +391,14 @@ function Promises() {
   return (
     <section className="promises-sec">
       <div className="wrap">
-        <h2 className="h2">No hostage websites. No surprises.</h2>
-        <p className="lede">Some providers hold your domain, make leaving hard or won't say where your data lives. We put these in writing instead.</p>
+        <h2 className="h2">Straight up, in writing.</h2>
+        <p className="lede">Some providers hold your domain, make leaving hard or won't say where your data lives. Not us.</p>
         <ul className="promises">
           <li><b>See it before you pay</b><span>A preview link within a day. Your first charge happens only once you're happy with it.</span></li>
           <li><b>Your domain, in your name</b><span>Registered to you from day one. Never held hostage, whatever happens.</span></li>
-          <li><b>Payments go straight to you</b><span>Customer payments land in your own Stripe account. We never hold your money.</span></li>
           <li><b>Keep the site after 12 months</b><span>After a year, the site and its code are yours to keep, free. Stay on Care for $29 a month or take it anywhere.</span></li>
           <li><b>Your data stays in Australia</b><span>Your customers' details, bookings and files are stored in Sydney. If you use our AI, we tell you which providers process it, and we only use ones that don't train on your data.</span></li>
-          <li><b>Fast and safe, on Cloudflare and AWS</b><span>Sites and apps run on Cloudflare's network and AWS, with SSL, daily backups and uptime monitoring included.</span></li>
+          <li><b>Fast and safe, on Cloudflare and AWS</b><span>SSL, daily backups and uptime monitoring included. Payments go straight to your own Stripe account; we never hold your money.</span></li>
         </ul>
       </div>
     </section>
@@ -815,13 +674,10 @@ export default function App() {
       {route === "terms" ? <Terms /> : route === "privacy" ? <Privacy /> : (
         <main id="main">
           <Hero />
-          <Services onPlan={pickPlan} />
           <LogoWall />
+          <Story onPlan={pickPlan} />
           <Work />
-          <AiDemo onAsk={() => pickPlan("ai")} onCall={() => pickPlan("concierge")} />
-          <How />
           <Pricing onPlan={pickPlan} />
-          <Rebuild onPlan={pickPlan} />
           <Promises />
           <Faq />
           <Start template={template} plan={plan} setTemplate={setTemplate} setPlan={setPlan} />

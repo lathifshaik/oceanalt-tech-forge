@@ -10,15 +10,31 @@ import { PipelineDemo } from "./Demos";
 
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const logo = (name: string) => `/logos/${name}.svg`;
+// 3D people from Microsoft Fluent Emoji (MIT, see public/avatars/LICENSE.txt).
+const face = (name: string) => `/avatars/${name}.webp`;
+
+function Face({ who, label, className = "" }: { who: string; label?: string; className?: string }) {
+  return <img className={`face ${className}`} src={face(who)} alt={label ?? ""} width={160} height={160} loading="lazy" />;
+}
 
 /* ─── Hero phone ─────────────────────────────────────────────────────────── */
 
-type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; title: string; body: string; time: string };
+type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; who: string; title: string; body: string; time: string };
 const NOTES: Note[] = [
-  { app: "Your concierge", icon: "phone", title: "Call answered, job booked", body: "Mel, Merewether. Sparking power point, today 2 to 4pm.", time: "11:42" },
-  { app: "Stripe", logo: "stripe", title: "Deposit paid, $30", body: "Thu 2:30pm with Ana. Paid with Apple Pay.", time: "11:58" },
-  { app: "Google", logo: "google", title: "New enquiry from your website", body: "Found you on Google Maps. Wants a quote for an EV charger.", time: "12:15" },
-  { app: "Xero", logo: "xero", title: "Invoice paid", body: "Priya N., $2,380. Matched and reconciled.", time: "12:31" },
+  { app: "Your concierge", icon: "phone", who: "mel", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
+  { app: "Stripe", logo: "stripe", who: "sam", title: "Sam paid a $30 deposit", body: "Switchboard check, Thu 8am. Paid with Apple Pay.", time: "11:58" },
+  { app: "Google", logo: "google", who: "tom", title: "Tom found you on Google Maps", body: "Wants a quote for an EV charger in Adamstown.", time: "12:15" },
+  { app: "Xero", logo: "xero", who: "priya", title: "Priya paid her invoice", body: "$2,380, matched and reconciled in Xero.", time: "12:31" },
+];
+
+// The kinds of owners we work for, floating around the phone.
+const ORBIT = [
+  { who: "yoga", label: "Yoga teacher" },
+  { who: "cafe", label: "Café owner" },
+  { who: "physio", label: "Physio" },
+  { who: "mechanic", label: "Mechanic" },
+  { who: "landscaper", label: "Landscaper" },
+  { who: "accountant", label: "Accountant" },
 ];
 
 export function HeroPhone() {
@@ -34,13 +50,22 @@ export function HeroPhone() {
 
   return (
     <div className="hp-scene" aria-hidden="true">
+      {ORBIT.map((o, i) => (
+        <span key={o.who} className={`hp-orbit o${i + 1}`} title={o.label} style={{ animationDelay: `${0.4 + i * 0.12}s` }}>
+          <Face who={o.who} />
+        </span>
+      ))}
       <img className="hp-site" src="/previews/kerr-and-sons-electrical.webp" alt="" width={1200} height={750} fetchPriority="high" />
       <div className="hp-phone">
         <div className="hp-island" />
-        <p className="hp-time">Tuesday</p>
+        <div className="hp-owner">
+          <Face who="jim" className="hp-jim" />
+          <p><b>Jim's phone</b><span>Tuesday, on the tools</span></p>
+        </div>
         <ul className="hp-notes">
           {shown.map(({ i, note }, k) => (
             <li key={i} className={`hp-note is-${k}`}>
+              <Face who={note.who} className="hp-face" />
               <span className="hp-app">
                 {note.logo ? <img src={logo(note.logo)} alt="" width={16} height={16} /> : <Icon name={note.icon ?? "phone"} />}
                 {note.app}
@@ -97,19 +122,22 @@ function CallVisual({ active }: { active: boolean }) {
     <div className="sv sv-call">
       <div className="sv-callcard">
         <div className="sv-caller">
-          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}>M</span>
+          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}><Face who="mel" label="Mel, the caller" /></span>
           <div><b>{step === 0 ? "Mel is calling" : "Answered by your concierge"}</b><small>Jim's up a ladder in Charlestown</small></div>
           {step > 0 && step < 5 && <span className="sv-wave"><i /><i /><i /><i /></span>}
         </div>
         <ol className="sv-lines">
           {LINES.map((l, i) => (
-            <li key={i} className={`is-${l.who}${step > i ? " is-on" : ""}`}><p>{l.text}</p></li>
+            <li key={i} className={`is-${l.who}${step > i ? " is-on" : ""}`}>
+              <span className={`sv-facewrap${l.who === "c" ? " is-ai" : ""}`}><Face who={l.who === "c" ? "concierge" : "mel"} className="sv-face" /></span>
+              <div><span>{l.who === "c" ? "AI concierge" : "Mel"}</span><p>{l.text}</p></div>
+            </li>
           ))}
         </ol>
       </div>
       <div className={`sv-wa${step >= 5 ? " is-on" : ""}`}>
-        <img src={logo("whatsapp")} alt="" width={20} height={20} />
-        <div><b>New job booked</b><span>Mel, Merewether. Today 2 to 4pm. Told to switch it off at the board.</span></div>
+        <span className="sv-wa-who"><Face who="jim" label="Jim" /><img src={logo("whatsapp")} alt="" width={18} height={18} /></span>
+        <div><b>To Jim: new job booked</b><span>Mel, Merewether. Today 2 to 4pm. Told to switch it off at the board.</span></div>
       </div>
     </div>
   );
@@ -146,8 +174,11 @@ function PayVisual({ active }: { active: boolean }) {
   return (
     <div className="sv sv-pay">
       <div className="sv-checkout">
-        <div className="sv-co-top"><b>Tidewater Physio</b><span>Initial consult, Thu 2:30pm with Ana</span></div>
-        <div className="sv-co-amt"><span>Deposit</span><b className="num">$30.00</b></div>
+        <div className="sv-co-top">
+          <Face who="yoga" className="sv-co-face" />
+          <div><b>Saltwater Yoga</b><span>Sunrise flow, Sat 7am with Ana</span></div>
+        </div>
+        <div className="sv-co-amt"><span>Class</span><b className="num">$25.00</b></div>
         <div className={`sv-co-btn is-${phase}`}>
           {phase === "paid" ? (
             <><Icon name="check" /> Paid with {m.name}</>
@@ -198,7 +229,7 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
       id: "payments",
       kicker: "Get paid",
       title: "Booked and paid in one tap.",
-      body: "Customers pick a time and pay a deposit or the full amount with Apple Pay, Google Pay, Afterpay or card. It lands in your own Stripe account, and nobody chases anyone.",
+      body: "Whether it's a sunrise yoga class or a switchboard check, customers pick a time and pay a deposit or the full amount with Apple Pay, Google Pay, Afterpay or card. It lands in your own Stripe account, and nobody chases anyone.",
       price: "Payments and bookings included in Grow, $149 a month",
       cta: <button type="button" className="text-link" onClick={() => onPlan("grow")}>Start taking payments <Icon name="arrow-right" /></button>,
       visual: (a) => <PayVisual active={a} />,
@@ -247,7 +278,7 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
             ))}
           </div>
         </div>
-        <p className="story-note">Kerr &amp; Sons and Tidewater Physio are sample businesses we made up to show how it works.</p>
+        <p className="story-note">Kerr &amp; Sons and Saltwater Yoga are sample businesses we made up to show how it works.</p>
       </div>
     </section>
   );

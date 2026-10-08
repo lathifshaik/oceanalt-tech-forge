@@ -161,7 +161,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does the AI concierge work?",
-    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap.",
+    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap. There's a 3-month minimum, and your first charge waits until it's passed our test calls and you've rung it yourself. Call time is at cost with no markup; our estimate is about 20 to 30 cents a minute, and we confirm the real rate before you go live.",
   },
   {
     q: "How do my customers pay?",
@@ -201,7 +201,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Who reads my enquiry?",
-    a: "A person, the same business day. Our AI assistant helps us prepare a suggested plan for your business, and we check it before it goes to you. It's the same kind of assistant we can set up on your own site.",
+    a: "A person, the same business day. Our AI assistant may email you a suggested plan within minutes, and it says it's an AI. A person reads every enquiry and follows up the same business day. It's the same kind of assistant we can set up on your own site.",
   },
 ];
 
@@ -409,7 +409,7 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
           ))}
         </div>
         <div className="plan-extra">
-          <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost. A chat assistant for your website is $39 a month.</p>
+          <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost (our estimate: about 20 to 30 cents a minute) up to a monthly cap you set. 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it. A chat assistant for your website is $39 a month.</p>
           <p><b>Web apps and automations</b> Quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
           <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch.</p>
           <p><b>Founding clients</b> Our first 10 Launch clients pay $79 a month instead of $99, for as long as they stay on Launch. Same plan, same terms.</p>
@@ -531,7 +531,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
         <div>
           <h2 className="h2">Tell us about your business.</h2>
           <p className="lede">Tell us a little about your business. A person reads every enquiry and replies the same business day, with a suggested plan and a time for a quick call.</p>
-          <p className="start-founder">I'm Lathif. Oceanalt is me plus a team of AI agents that do the building. I check every site before it goes live and read every enquiry myself. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
+          <p className="start-founder">Oceanalt is a small Sydney business that runs on AI agents, checked by a person. The agents draft and build. A person checks every site before it goes live and reads every enquiry the same business day. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
           <div className="start-aside">
             <a href={`mailto:${EMAIL}`}><Icon name="mail" /> {EMAIL}</a>
             <span><Icon name="pin" /> Based in Sydney, working Australia-wide</span>
@@ -589,7 +589,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
             <button className="btn btn-accent" type="submit" disabled={state === "sending"}>
               {state === "sending" ? "Sending…" : "Send it through"} <Icon name="send" />
             </button>
-            <p className="form-note">Nothing is charged until you've seen and approved your site.</p>
+            <p className="form-note">Nothing is charged until you've seen it working and you're happy with it.</p>
           </form>
         )}
       </div>
@@ -639,7 +639,7 @@ function Terms() {
     <Legal title="Terms of service">
       <p>These terms are between you and Oceanalt (ABN {ABN}), based in Sydney, Australia.</p>
       <h2>1. Services</h2>
-      <p>Oceanalt designs, builds, hosts and maintains websites for small businesses, either on a monthly plan (Care, Launch or Grow) or as a one-off project. What each plan includes is listed on the pricing section of this site and confirmed in writing before work starts.</p>
+      <p>Oceanalt designs, builds, hosts and maintains websites, web apps and AI agents for small businesses, on a monthly plan (Care, Launch or Grow, plus AI add-ons) or as a quoted project. What each plan includes is listed on the pricing section of this site and confirmed in writing before work starts.</p>
       <h2>2. Delivery</h2>
       <p>Launch and Grow sites are usually live within 1 to 3 business days of the kickoff call, provided we have the photos, prices and domain access we ask for. Steps run by third parties, such as Google Business Profile verification, Stripe account verification and domain transfers, may take longer and are outside that timeframe.</p>
       <h2>3. Billing</h2>
@@ -652,6 +652,7 @@ function Terms() {
       <p>Where a site takes payments, they are processed by Stripe into the client's own Stripe account. Oceanalt does not hold client funds or handle card data.</p>
       <h2>7. AI add-ons</h2>
       <p>The AI chat assistant costs $39 AUD a month plus AI usage. The AI concierge costs $149 AUD a month, including one Australian phone number, plus call time. Usage and call time are billed monthly in arrears at the providers' prices, converted to AUD, with no markup. The client sets a monthly cap; when it's reached, the assistant pauses (calls go to voicemail or the client's own number) until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
+      <p>The AI concierge has a 3-month minimum term, then continues month to month with 30 days' notice. Its first charge happens only after it passes our test calls and the client approves it. Cancelling within the first 3 months costs the remaining months of that term. A number we supplied can be transferred to the client on request.</p>
       <p>The AI concierge tells every caller they're speaking with an AI assistant and, where calls are recorded, that the call may be recorded. The client provides the information it answers from and is responsible for keeping it accurate.</p>
       <h2>8. Limitation of liability</h2>
       <p>To the extent permitted by the Australian Consumer Law, Oceanalt is not liable for indirect or consequential loss arising from the use of, or inability to use, the services.</p>

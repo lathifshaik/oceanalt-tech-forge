@@ -19,7 +19,7 @@ Subject: I made a website for {business}
 >
 > Interested? Just reply "yes" and I'll sort the rest. If not, no worries, ignore this and I'll take it down.
 >
-> Lathif
+> Oceanalt
 > Oceanalt, Sydney. ABN 65 119 854 062
 > Reply "stop" and I won't contact you again.
 
@@ -33,18 +33,18 @@ Subject: Re: I made a website for {business}
 >
 > Happy to change anything. Reply "yes" if you want it, or "stop" and I won't message again.
 >
-> Lathif, Oceanalt
+> Oceanalt, Sydney
 
 That's the last message. No third follow-up.
 
 ## SMS (under 300 characters, 2 texts)
 
-> Hi {name}, Lathif from Oceanalt here. I made a free preview website for {business}: {link} If you want it live, just reply YES. $79/mo, nothing upfront. Not interested? Reply STOP. ABN 65 119 854 062
+> Hi {name}, it's Oceanalt, a small web studio in Sydney. I made a free preview website for {business}: {link} If you want it live, just reply YES. $79/mo, nothing upfront. Not interested? Reply STOP. ABN 65 119 854 062
 
 ## Facebook or Instagram message
 
 > Hi! I made a website for {business}, no strings attached: {link}
-> If you want it live, just reply "yes" and I'll sort everything. If not, all good. Lathif, Oceanalt (Sydney)
+> If you want it live, just reply "yes" and I'll sort everything. If not, all good. Oceanalt (Sydney)
 
 ## When they reply
 

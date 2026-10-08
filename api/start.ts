@@ -57,7 +57,8 @@ web apps and AI tools for small businesses. Websites are on monthly plans:
 - One-off website build from $1,499.
 - Custom: web apps and software (booking systems, client portals, quoting and job tools,
   dashboards, automations), quoted per project with a scope and price within 24 hours.
-- AI concierge ($149/month with a local number, plus call time at cost): answers their phone when
+- AI concierge ($149/month with a local number, plus call time at cost, estimated at about 20 to 30 cents a minute;
+  3-month minimum; first charge only after test calls pass and they approve): answers their phone when
   they can't, takes bookings and messages, sends them a summary on WhatsApp, text or email.
 - AI chat assistant for their website ($39/month plus usage at cost) and custom AI agents, quoted per project.
 Layouts: cafe (cafés, restaurants, bars), trades (electricians, plumbers, builders, cleaners),
@@ -152,7 +153,7 @@ function replyEmail(lead: Lead, rec: Recommendation | null) {
   lines.push(booking
     ? `<p><a href="${esc(booking)}">Book a free 15-minute call</a> whenever suits you, or just reply to this email.</p>`
     : `<p>Reply to this email with a good time for a 15-minute call.</p>`);
-  lines.push(`<p>Nothing is charged until you've seen your site and you're happy with it.</p>`);
+  lines.push(`<p>Nothing is charged until you've seen it working and you're happy with it.</p>`);
   lines.push(`<p>The Oceanalt team</p>`);
   lines.push(rec
     ? `<p style="color:#6b7280;font-size:12px">This first reply was prepared by our AI assistant from what you sent us. A person reads every enquiry and will follow up the same business day.</p>`

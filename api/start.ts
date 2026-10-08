@@ -57,7 +57,7 @@ web apps and AI tools for small businesses. Websites are on monthly plans:
 - One-off website build from $1,499.
 - Custom: web apps and software (booking systems, client portals, quoting and job tools,
   dashboards, automations), quoted per project with a scope and price within 24 hours.
-- AI concierge ($149/month with a local number, plus call time at cost, estimated at about 20 to 30 cents a minute;
+- AI concierge ($149/month with a local number, plus call time at cost, estimated at about 15 to 20 cents a minute;
   3-month minimum; first charge only after test calls pass and they approve): answers their phone when
   they can't, takes bookings and messages, sends them a summary on WhatsApp, text or email.
 - AI chat assistant for their website ($39/month plus usage at cost) and custom AI agents, quoted per project.

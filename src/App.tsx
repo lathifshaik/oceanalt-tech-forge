@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Icon, type IconName } from "./components/Icon";
 import { LogoWall } from "./components/Demos";
-import { Face, HeroPhone, Story, type Mood } from "./components/Story";
+import { Face, HeroPhone, Story } from "./components/Story";
 import { LANDINGS } from "./seo/landing";
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -19,7 +19,7 @@ const WORK: {
   id: TemplateId;
   kind: string;
   business: string;
-  owner: { face: string; mood: Mood };
+  owner: { face: string };
   problem: string;
   pitch: string;
   designs: { path: string; theme: string }[];
@@ -28,7 +28,7 @@ const WORK: {
     id: "cafe",
     kind: "Café",
     business: "Little Tern Coffee, Fremantle",
-    owner: { face: "cafe", mood: "beaming" },
+    owner: { face: "cafe" },
     problem: "People kept ringing to ask if they were open yet.",
     pitch: "Menu, hours and directions first. The sign on the photo flips to OPEN or CLOSED from the real opening hours.",
     designs: [
@@ -41,7 +41,7 @@ const WORK: {
     id: "trades",
     kind: "Electrician",
     business: "Kerr & Sons Electrical, Newcastle",
-    owner: { face: "jim", mood: "grin" },
+    owner: { face: "jim" },
     problem: "Jobs went to whoever picked up first, and Jim's usually up a ladder.",
     pitch: "Built to make the phone ring: tap-to-call everywhere, the licence front and centre, and a quote form.",
     designs: [
@@ -54,7 +54,7 @@ const WORK: {
     id: "studio",
     kind: "Physio & Pilates",
     business: "Tidewater Physio & Pilates, Bulimba",
-    owner: { face: "physio", mood: "smile" },
+    owner: { face: "physio" },
     problem: "Bookings came in by phone and text, and gift vouchers lived on paper.",
     pitch: "Every treatment has a price and a Book button. Gift vouchers can be bought online and flip over to show their terms.",
     designs: [
@@ -67,7 +67,7 @@ const WORK: {
     id: "studio",
     kind: "Yoga studio",
     business: "Saltwater Yoga, Cronulla",
-    owner: { face: "yoga", mood: "relieved" },
+    owner: { face: "yoga" },
     problem: "Ana was taking class bookings in Instagram DMs and chasing $25 payments after class.",
     pitch: "Every class has a time, a price and a Book button. People pay with Apple Pay or Google Pay before they've rolled out their mat.",
     designs: [
@@ -80,7 +80,7 @@ const WORK: {
     id: "shop",
     kind: "Florist",
     business: "Wattle & Fern, Hobart",
-    owner: { face: "landscaper", mood: "relieved" },
+    owner: { face: "landscaper" },
     problem: "Orders came through Instagram DMs, paid by bank transfer, chased by hand.",
     pitch: "Every bunch has its own Buy button, paid straight into the shop's Stripe. The delivery tag counts down to the same-day cutoff.",
     designs: [
@@ -93,7 +93,7 @@ const WORK: {
     id: "pro",
     kind: "Law firm",
     business: "Harlow Reid Lawyers, Parramatta",
-    owner: { face: "accountant", mood: "nerd" },
+    owner: { face: "accountant" },
     problem: "People didn't call because they couldn't tell what anything would cost.",
     pitch: "Fixed fees in plain sight, the team up front, and a business card that flips over to save the firm straight to your phone.",
     designs: [
@@ -161,7 +161,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does the AI concierge work?",
-    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap. There's a 3-month minimum, and your first charge waits until it's passed our test calls and you've rung it yourself. Call time is at cost with no markup; our estimate is about 20 to 30 cents a minute, and we confirm the real rate before you go live.",
+    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap. There's a 3-month minimum, and your first charge waits until it's passed our test calls and you've rung it yourself. Call time is at cost with no markup; our estimate is about 15 to 20 cents a minute, a bit more for any part of a call we put through to your mobile, and we confirm the real rate before you go live.",
   },
   {
     q: "How do my customers pay?",
@@ -332,7 +332,7 @@ function WorkCard({ w }: { w: (typeof WORK)[number] }) {
       </a>
       <div className="work-meta">
         <div className="work-case">
-          <Face who={w.owner.face} mood={w.owner.mood} className="work-face" />
+          <Face who={w.owner.face} className="work-face" />
           <div>
             <h3>{w.business}</h3>
             <dl>
@@ -409,7 +409,7 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
           ))}
         </div>
         <div className="plan-extra">
-          <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost (our estimate: about 20 to 30 cents a minute) up to a monthly cap you set. 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it. A chat assistant for your website is $39 a month.</p>
+          <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost (our estimate: about 15 to 20 cents a minute, so 200 minutes is roughly $30 to $40) up to a monthly cap you set. 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it. A chat assistant for your website is $39 a month.</p>
           <p><b>Web apps and automations</b> Quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
           <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch.</p>
           <p><b>Founding clients</b> Our first 10 Launch clients pay $79 a month instead of $99, for as long as they stay on Launch. Same plan, same terms.</p>

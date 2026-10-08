@@ -15,24 +15,22 @@ const face = (name: string) => `/avatars/${name}.webp`;
 
 // A person, plus an optional 3D expression that pops in beside them when it
 // changes (worried, relieved, grinning...), so you can read how they feel.
-export type Mood = "worried" | "anxious" | "relieved" | "grin" | "party" | "smile" | "thinking" | "wink" | "beaming" | "nerd" | "starstruck";
-export function Face({ who, mood, label, className = "" }: { who: string; mood?: Mood; label?: string; className?: string }) {
+export function Face({ who, label, className = "" }: { who: string; label?: string; className?: string }) {
   return (
     <span className={`face ${className}`}>
       <img key={who} className="face-img" src={face(who)} alt={label ?? ""} width={160} height={160} loading="lazy" />
-      {mood && <img key={mood} className="face-mood" src={face(`mood-${mood}`)} alt="" width={96} height={96} loading="lazy" />}
     </span>
   );
 }
 
 /* ─── Hero phone ─────────────────────────────────────────────────────────── */
 
-type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; who: string; mood: Mood; title: string; body: string; time: string };
+type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; who: string; title: string; body: string; time: string };
 const NOTES: Note[] = [
-  { app: "Your concierge", icon: "phone", who: "mel-ok", mood: "relieved", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
-  { app: "Stripe", logo: "stripe", who: "sam", mood: "smile", title: "Sam paid a $30 deposit", body: "Switchboard check, Thu 8am. Paid with Apple Pay.", time: "11:58" },
-  { app: "Google", logo: "google", who: "tom", mood: "grin", title: "Tom found you on Google Maps", body: "Wants a quote for an EV charger in Adamstown.", time: "12:15" },
-  { app: "Xero", logo: "xero", who: "priya", mood: "beaming", title: "Priya paid her invoice", body: "$2,380, matched and reconciled in Xero.", time: "12:31" },
+  { app: "Your concierge", icon: "phone", who: "mel-ok", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
+  { app: "Stripe", logo: "stripe", who: "sam", title: "Sam paid a $30 deposit", body: "Switchboard check, Thu 8am. Paid with Apple Pay.", time: "11:58" },
+  { app: "Google", logo: "google", who: "tom", title: "Tom found you on Google Maps", body: "Wants a quote for an EV charger in Adamstown.", time: "12:15" },
+  { app: "Xero", logo: "xero", who: "priya", title: "Priya paid her invoice", body: "$2,380, matched and reconciled in Xero.", time: "12:31" },
 ];
 
 // The kinds of owners we work for, floating around the phone.
@@ -48,16 +46,17 @@ const ORBIT: { who: string; label: string }[] = [
 export function HeroPhone() {
   // Index of the newest notification shown; the one before it sits below.
   const [n, setN] = useState(2);
-  const [jim, setJim] = useState<Mood | undefined>("grin");
+  // Jim waves for a moment when a new win lands.
+  const [wave, setWave] = useState(false);
   useEffect(() => {
     if (reduced()) return;
     setN(0);
-    setJim(undefined);
+    setWave(false);
     const off: number[] = [];
     const t = window.setInterval(() => {
       setN((x) => x + 1);
-      setJim(["grin", "party", "beaming", "starstruck"][Math.floor(Math.random() * 4)] as Mood);
-      off.push(window.setTimeout(() => setJim(undefined), 1500));
+      setWave(true);
+      off.push(window.setTimeout(() => setWave(false), 1500));
     }, 2600);
     return () => { window.clearInterval(t); off.forEach(clearTimeout); };
   }, []);
@@ -77,14 +76,14 @@ export function HeroPhone() {
       <div className="hp-phone">
         <div className="hp-island" />
         <div className="hp-owner">
-          <Face who="jim" mood={jim} className="hp-jim" />
+          <Face who={wave ? "jim-wave" : "jim"} className="hp-jim" />
           <p><b>Jim's phone</b><span>Tuesday, on the tools</span></p>
         </div>
         <p className="hp-clock num">{NOTES[n % NOTES.length].time}</p>
         <ul className="hp-notes">
           {shown.map(({ i, note }, k) => (
             <li key={i} className={`hp-note is-${k}`}>
-              <Face who={note.who} mood={k === 0 ? note.mood : undefined} className="hp-face" />
+              <Face who={note.who} className="hp-face" />
               <span className="hp-app">
                 {note.logo ? <img src={logo(note.logo)} alt="" width={16} height={16} /> : <Icon name={note.icon ?? "phone"} />}
                 {note.app}
@@ -141,7 +140,7 @@ function CallVisual({ active }: { active: boolean }) {
     <div className="sv sv-call">
       <div className="sv-callcard">
         <div className="sv-caller">
-          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}><Face who={step >= 4 ? "mel-ok" : "mel-worried"} mood={step >= 4 ? "relieved" : "worried"} label="Mel, the caller" /></span>
+          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}><Face who={step >= 4 ? "mel-ok" : "mel-worried"} label="Mel, the caller" /></span>
           <div><b>{step === 0 ? "Mel is calling" : "Answered by your concierge"}</b><small>Jim's up a ladder in Charlestown</small></div>
           {step > 0 && step < 5 && <span className="sv-wave"><i /><i /><i /><i /></span>}
         </div>
@@ -155,7 +154,7 @@ function CallVisual({ active }: { active: boolean }) {
         </ol>
       </div>
       <div className={`sv-wa${step >= 5 ? " is-on" : ""}`}>
-        <span className="sv-wa-who"><Face who={step >= 5 ? "jim-wave" : "jim"} mood={step >= 5 ? "party" : undefined} label="Jim" /><img className="sv-wa-logo" src={logo("whatsapp")} alt="" width={18} height={18} /></span>
+        <span className="sv-wa-who"><Face who={step >= 5 ? "jim-wave" : "jim"} label="Jim" /><img className="sv-wa-logo" src={logo("whatsapp")} alt="" width={18} height={18} /></span>
         <div><b>To Jim: new job booked</b><span>Mel, Merewether. Today 2 to 4pm. Told to switch it off at the board.</span></div>
       </div>
     </div>
@@ -254,7 +253,7 @@ function PayVisual({ active }: { active: boolean }) {
     <div className="sv sv-pay">
       <div className={`sv-checkout${phase === "sheet" || phase === "auth" || phase === "done" ? " is-sheet" : ""}`}>
         <div className="sv-co-top">
-          <Face who="yoga" mood={paid ? "starstruck" : "smile"} className="sv-co-face" />
+          <Face who="yoga" className="sv-co-face" />
           <div><b>Saltwater Yoga</b><span>Sunrise flow, Sat 7am with Ana</span></div>
         </div>
         <div className="sv-co-amt"><span>Class</span><b className="num">$25.00</b></div>

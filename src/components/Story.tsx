@@ -63,8 +63,9 @@ const SCENES: Scene[] = [
 
 // One person in two poses (hand down, hand up), played as a short flipbook so
 // they actually wave. Give it a new `key` to wave again.
-// People with a hand-made frame-by-frame wave (a strip of frames in play order).
-const SPRITES: Record<string, number> = { jim: 13 };
+// People with a hand-made frame-by-frame wave (a strip of frames in play order,
+// made with scripts/make-wave-strip.py from the sheets in docs/design/avatars/).
+const SPRITES: Record<string, number> = { jim: 20 };
 
 export function Wave({ who, on, loop = false, className = "", label }: { who: string; on: boolean; loop?: boolean; className?: string; label?: string }) {
   const frames = SPRITES[who];
@@ -72,7 +73,7 @@ export function Wave({ who, on, loop = false, className = "", label }: { who: st
     return (
       <span
         className={`face sprite${on ? " is-on" : ""}${loop ? " is-loop" : ""} ${className}`}
-        style={{ backgroundImage: `url(${face(`${who}-wave-strip`)})`, backgroundSize: `${frames * 100}% 100%`, animationTimingFunction: `steps(${frames}, jump-none)` }}
+        style={{ backgroundImage: `url(${face(`${who}-strip`)})`, backgroundSize: `${frames * 100}% 100%`, animationTimingFunction: `steps(${frames}, jump-none)` }}
         role={label ? "img" : undefined}
         aria-label={label}
       />

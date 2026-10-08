@@ -638,7 +638,7 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 
 /* Hand-made wave: a strip of frames played in order, then back to rest. */
 .sprite { display: block; aspect-ratio: 1; background-repeat: no-repeat; background-position: 0 0; }
-.sprite.is-on { animation: sprite 1.3s both; }
+.sprite.is-on { animation: sprite 2s both; }
 .sprite.is-loop { animation-iteration-count: infinite; animation-delay: .3s; }
 @keyframes sprite { from { background-position: 0 0; } to { background-position: 100% 0; } }
 .sv-lines li.sv-ringing { display: flex; align-items: center; gap: .5rem; margin: auto; max-width: none; color: var(--muted); font-size: .9rem; }

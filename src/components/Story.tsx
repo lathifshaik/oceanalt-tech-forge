@@ -36,13 +36,13 @@ const NOTES: Note[] = [
 ];
 
 // The kinds of owners we work for, floating around the phone.
-const ORBIT: { who: string; label: string; mood: Mood }[] = [
-  { who: "yoga", label: "Yoga teacher", mood: "relieved" },
-  { who: "cafe", label: "Café owner", mood: "beaming" },
-  { who: "physio", label: "Physio", mood: "smile" },
-  { who: "mechanic", label: "Mechanic", mood: "wink" },
-  { who: "landscaper", label: "Landscaper", mood: "grin" },
-  { who: "accountant", label: "Accountant", mood: "nerd" },
+const ORBIT: { who: string; label: string }[] = [
+  { who: "yoga", label: "Yoga teacher" },
+  { who: "cafe", label: "Café owner" },
+  { who: "physio", label: "Physio" },
+  { who: "mechanic", label: "Mechanic" },
+  { who: "landscaper", label: "Landscaper" },
+  { who: "accountant", label: "Accountant" },
 ];
 
 export function HeroPhone() {
@@ -67,7 +67,7 @@ export function HeroPhone() {
     <div className="hp-scene" aria-hidden="true">
       {ORBIT.map((o, i) => (
         <span key={o.who} className={`hp-orbit o${i + 1}`} title={o.label} style={{ animationDelay: `${0.4 + i * 0.12}s` }}>
-          <Face who={o.who} mood={o.mood} />
+          <Face who={o.who} />
         </span>
       ))}
       <img className="hp-site" src="/previews/kerr-and-sons-electrical.webp" alt="" width={1200} height={750} fetchPriority="high" />
@@ -77,10 +77,11 @@ export function HeroPhone() {
           <Face who="jim" mood={jim} className="hp-jim" />
           <p><b>Jim's phone</b><span>Tuesday, on the tools</span></p>
         </div>
+        <p className="hp-clock num">{NOTES[n % NOTES.length].time}</p>
         <ul className="hp-notes">
           {shown.map(({ i, note }, k) => (
             <li key={i} className={`hp-note is-${k}`}>
-              <Face who={note.who} mood={note.mood} className="hp-face" />
+              <Face who={note.who} mood={k === 0 ? note.mood : undefined} className="hp-face" />
               <span className="hp-app">
                 {note.logo ? <img src={logo(note.logo)} alt="" width={16} height={16} /> : <Icon name={note.icon ?? "phone"} />}
                 {note.app}
@@ -195,7 +196,7 @@ function Sheet({ m, phase }: { m: (typeof PAY)[number]; phase: Phase }) {
     <div className={`sv-sheet is-${m.id}${phase === "sheet" || auth || done ? " is-open" : ""}`}>
       <div className="sv-sheet-top">
         {m.logo ? <img src={logo(m.logo)} alt="" width={40} height={40} /> : <Icon name="card" />}
-        <span>Saltwater Yoga</span>
+        <span>{m.id === "apple" ? "Pay Saltwater Yoga" : m.id === "afterpay" ? "Pay in 4 at Saltwater Yoga" : m.id === "card" ? "Card payment" : "Saltwater Yoga"}<small>Sunrise flow, Sat 7am</small></span>
         <b className="num">$25.00</b>
       </div>
       {done ? (
@@ -248,7 +249,7 @@ function PayVisual({ active }: { active: boolean }) {
 
   return (
     <div className="sv sv-pay">
-      <div className="sv-checkout">
+      <div className={`sv-checkout${phase === "sheet" || phase === "auth" || phase === "done" ? " is-sheet" : ""}`}>
         <div className="sv-co-top">
           <Face who="yoga" mood={paid ? "starstruck" : "smile"} className="sv-co-face" />
           <div><b>Saltwater Yoga</b><span>Sunrise flow, Sat 7am with Ana</span></div>
@@ -320,6 +321,16 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
   ];
 
   const [active, setActive] = useState(0);
+  // Only the visible copy of each visual animates: the sticky stage on wide
+  // screens, the inline one under each step on phones.
+  const [wide, setWide] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 900px)");
+    const on = () => setWide(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
   const refs = useRef<(HTMLElement | null)[]>([]);
   useEffect(() => {
     const io = new IntersectionObserver((entries) => {
@@ -342,13 +353,13 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
                 <p>{s.body}</p>
                 <p className="story-price">{s.price}</p>
                 {s.cta}
-                <div className="story-inline">{s.visual(i === active)}</div>
+                <div className="story-inline">{s.visual(i === active && !wide)}</div>
               </li>
             ))}
           </ol>
           <div className="story-stage" aria-hidden="true">
             {steps.map((s, i) => (
-              <div key={s.id} className={`story-pane${i === active ? " is-on" : ""}`}>{s.visual(i === active)}</div>
+              <div key={s.id} className={`story-pane${i === active ? " is-on" : ""}`}>{s.visual(i === active && wide)}</div>
             ))}
           </div>
         </div>

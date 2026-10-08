@@ -152,12 +152,20 @@ export const PLANS = [
 
 export const FAQ: { q: string; a: string }[] = [
   {
+    q: "What if I want to leave?",
+    a: "After 12 months you can cancel any time from your billing page and keep the site, code and domain. Leaving earlier costs the rest of the first year or a $1,499 buyout, whichever is less, and the site is still yours.",
+  },
+  {
     q: "How can it be live in 1 to 3 days?",
     a: "We don't start from a blank page. We've built our own design tools, so the time goes on your business, not on setup. We also write the words ourselves after a 15-minute call, which removes the usual weeks of waiting on copy. Google Business Profile and Stripe verification are run by Google and Stripe, so those can take a little longer.",
   },
   {
-    q: "What do I need to give you?",
-    a: "Fifteen minutes on the phone, your logo if you have one, a few photos, your prices and hours, and access to your domain if you already own one. No photos? We'll use your Google Business photos or source licensed ones that look local.",
+    q: "How does the AI concierge work?",
+    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap.",
+  },
+  {
+    q: "How do my customers pay?",
+    a: "Through Stripe, straight into your own account. Customers can pay by card, Apple Pay or Google Pay, and Afterpay where Stripe approves your business, for a deposit when they book or the full amount up front. Bookings, payments and reminders are part of the Grow plan, and Stripe's standard fees apply to each payment.",
   },
   {
     q: "I already have a website. Can you rebuild it?",
@@ -172,24 +180,20 @@ export const FAQ: { q: string; a: string }[] = [
     a: "Email us what you want changed: prices, photos, a new menu, a blog post. It's usually done within two business days. Launch includes 30 minutes a month and Grow includes an hour. Bigger additions are quoted before any work starts.",
   },
   {
-    q: "What if I want to leave?",
-    a: "After 12 months you can cancel any time from your billing page and keep the site, code and domain. Leaving earlier costs the rest of the first year or a $1,499 buyout, whichever is less, and the site is still yours.",
-  },
-  {
-    q: "Can you build AI tools for my business?",
-    a: "Yes. An AI concierge that answers your phone ($149 a month plus call time at cost), a chat assistant on your website that answers questions and replies to enquiries ($39 a month plus usage at cost), and custom agents for bookings, review replies, quote follow-ups and admin. Every one hands anything it's unsure about to you.",
-  },
-  {
-    q: "How does the AI concierge work?",
-    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap.",
+    q: "What do I need to give you?",
+    a: "Fifteen minutes on the phone, your logo if you have one, a few photos, your prices and hours, and access to your domain if you already own one. No photos? We'll use your Google Business photos or source licensed ones that look local.",
   },
   {
     q: "Will my business show up in ChatGPT and Google's AI answers?",
     a: "Nobody can guarantee it, and be wary of anyone who does. What we do is give AI search tools what they look for: clear, consistent details about your business on your website, your Google Business Profile and the directories they read, written so they can be quoted. It's part of every website plan.",
   },
   {
-    q: "How do my customers pay?",
-    a: "Through Stripe, straight into your own account. Customers can pay by card, Apple Pay or Google Pay, and Afterpay where Stripe approves your business, for a deposit when they book or the full amount up front. Bookings, payments and reminders are part of the Grow plan, and Stripe's standard fees apply to each payment.",
+    q: "Can you build AI tools for my business?",
+    a: "Yes. An AI concierge that answers your phone ($149 a month plus call time at cost), a chat assistant on your website that answers questions and replies to enquiries ($39 a month plus usage at cost), and custom agents for bookings, review replies, quote follow-ups and admin. Every one hands anything it's unsure about to you.",
+  },
+  {
+    q: "What kind of web apps and software do you build?",
+    a: "Tools that take admin off your plate: booking systems, client portals, quoting and job tools, dashboards, and automations that connect the apps you already use. Each project is quoted on its own. Send a brief and you'll get a scope and a price within 24 hours.",
   },
   {
     q: "Where is my data kept?",
@@ -198,10 +202,6 @@ export const FAQ: { q: string; a: string }[] = [
   {
     q: "Who reads my enquiry?",
     a: "A person, the same business day. Our AI assistant helps us prepare a suggested plan for your business, and we check it before it goes to you. It's the same kind of assistant we can set up on your own site.",
-  },
-  {
-    q: "What kind of web apps and software do you build?",
-    a: "Tools that take admin off your plate: booking systems, client portals, quoting and job tools, dashboards, and automations that connect the apps you already use. Each project is quoted on its own. Send a brief and you'll get a scope and a price within 24 hours.",
   },
 ];
 
@@ -312,7 +312,6 @@ function Hero() {
             <a className="btn btn-primary btn-island" href="#start">Get started <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
             <a className="text-link" href="#story">See how it works <Icon name="arrow-right" /></a>
           </div>
-          <p className="hero-note">Websites from $99 a month. Nothing upfront, and nothing charged until you've seen your site.</p>
         </div>
         <HeroPhone />
       </div>
@@ -439,17 +438,6 @@ function Promises() {
   );
 }
 
-function Founder() {
-  return (
-    <section className="founder-sec">
-      <div className="wrap founder">
-        <h2 className="h2">Who you're dealing with.</h2>
-        <p>I'm Lathif. Oceanalt is me plus a team of AI agents that do the building. A person checks every site before it goes live and reads every enquiry the same business day. Sydney-based, <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
-      </div>
-    </section>
-  );
-}
-
 function Faq() {
   return (
     <section className="faq" id="faq">
@@ -486,8 +474,8 @@ export const PLAN_LABEL: Record<string, string> = {
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",
   custom: "Web app or custom software",
-  concierge: "AI concierge (answers your phone)",
-  ai: "AI chat assistant or custom AI agents",
+  concierge: "AI concierge ($149/month + call time)",
+  ai: "Chat assistant ($39/month + usage) or custom AI",
   unsure: "Not sure yet",
 };
 
@@ -543,6 +531,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
         <div>
           <h2 className="h2">Tell us about your business.</h2>
           <p className="lede">Tell us a little about your business. A person reads every enquiry and replies the same business day, with a suggested plan and a time for a quick call.</p>
+          <p className="start-founder">I'm Lathif. Oceanalt is me plus a team of AI agents that do the building. I check every site before it goes live and read every enquiry myself. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
           <div className="start-aside">
             <a href={`mailto:${EMAIL}`}><Icon name="mail" /> {EMAIL}</a>
             <span><Icon name="pin" /> Based in Sydney, working Australia-wide</span>
@@ -560,10 +549,11 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
           <div className="form-done" role="status">
             <Icon name="check-circle" />
             <h3>Thanks, we've got it.</h3>
-            <p>We'll be in touch shortly to book a quick call. If you have photos or a logo handy, reply to that email with them.</p>
+            <p>A person will reply the same business day from {EMAIL}, with a suggested plan and a time for a quick call. If you have photos or a logo handy, send them along when you reply.</p>
           </div>
         ) : (
           <form className="form" onSubmit={submit}>
+            {plan !== "unsure" && <p className="form-picked">You picked <b>{PLAN_LABEL[plan]}</b>. You can change it below.</p>}
             <div className="row">
               <div className="field"><label htmlFor="f-name">Your name</label><input id="f-name" name="name" autoComplete="name" required /></div>
               <div className="field"><label htmlFor="f-business">Business name</label><input id="f-business" name="business" autoComplete="organization" required /></div>
@@ -580,9 +570,15 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
                 </select>
               </div>
               <div className="field">
-                <label htmlFor="f-plan">Plan</label>
+                <label htmlFor="f-plan">What are you after?</label>
                 <select id="f-plan" value={plan} onChange={(e) => setPlan(e.target.value)}>
-                  {Object.entries(PLAN_LABEL).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+                  <option value="unsure">{PLAN_LABEL.unsure}</option>
+                  <optgroup label="Websites">
+                    {["launch", "grow", "care", "rebuild", "oneoff"].map((v) => <option key={v} value={v}>{PLAN_LABEL[v]}</option>)}
+                  </optgroup>
+                  <optgroup label="AI and software">
+                    {["concierge", "ai", "custom"].map((v) => <option key={v} value={v}>{PLAN_LABEL[v]}</option>)}
+                  </optgroup>
                 </select>
               </div>
             </div>
@@ -591,7 +587,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
             <div className="hp" aria-hidden="true"><label htmlFor="f-company-site">Leave this empty</label><input id="f-company-site" name="company_site" tabIndex={-1} autoComplete="off" /></div>
             {state === "error" && <p className="form-error" role="alert">That didn't send. Please try again, or email {EMAIL} directly.</p>}
             <button className="btn btn-accent" type="submit" disabled={state === "sending"}>
-              {state === "sending" ? "Sending…" : "Send"} <Icon name="send" />
+              {state === "sending" ? "Sending…" : "Send it through"} <Icon name="send" />
             </button>
             <p className="form-note">Nothing is charged until you've seen and approved your site.</p>
           </form>
@@ -701,7 +697,7 @@ function useRoute() {
 export default function App() {
   const route = useRoute();
   const [template, setTemplate] = useState("unsure");
-  const [plan, setPlan] = useState("launch");
+  const [plan, setPlan] = useState("unsure");
   // Service pages link to /?plan=<id>#start so the right plan is preselected.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search).get("plan");
@@ -709,7 +705,11 @@ export default function App() {
   }, []);
 
   const goStart = () => document.getElementById("start")?.scrollIntoView({ behavior: "smooth" });
-  const pickPlan = (p: string) => { setPlan(p); goStart(); };
+  const pickPlan = (p: string) => {
+    setPlan(p);
+    goStart();
+    window.setTimeout(() => document.getElementById("f-name")?.focus({ preventScroll: true }), 700);
+  };
 
   return (
     <>
@@ -724,7 +724,6 @@ export default function App() {
           <Work />
           <Promises />
           <Pricing onPlan={pickPlan} />
-          <Founder />
           <Faq />
           <Start template={template} plan={plan} setTemplate={setTemplate} setPlan={setPlan} />
         </main>

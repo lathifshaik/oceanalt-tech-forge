@@ -43,7 +43,7 @@ export function LandingPage({ page }: { page: Landing }) {
 
         <section className="lp-sec">
           <div className="wrap">
-            <h2 className="h2">What your site includes</h2>
+            <h2 className="h2">{page.plan === "concierge" ? "What your concierge does" : page.plan === "custom" ? "What we build" : page.plan === "ai" ? "What your assistant does" : "What your site includes"}</h2>
             <ul className="lp-includes">
               {page.includes.map((x) => <li key={x}><Icon name="check" /> {x}</li>)}
             </ul>

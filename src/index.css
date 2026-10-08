@@ -507,3 +507,39 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .founder-sec { padding-block: clamp(3rem, 7vw, 5.5rem) 0; }
 .founder { max-width: 46rem; }
 .founder p { margin-top: .9rem; font-size: 1.1rem; line-height: 1.6; color: var(--muted); }
+
+/* Review pass (design): calmer hero, clearer checkout, aligned FAQ. */
+.hp-clock { margin-top: .9rem; text-align: center; font-size: 3.2rem; font-weight: 600; letter-spacing: -.05em; line-height: 1; color: #0b1a22; }
+.pl-ghost { opacity: .45; box-shadow: 0 0 0 1px var(--line); animation: none; }
+.pl-cols li { min-height: 0; }
+.sv-checkout::after { content: ""; position: absolute; inset: 0; background: rgb(var(--shadow) / .16); opacity: 0; transition: opacity .4s var(--ease); pointer-events: none; }
+.sv-checkout.is-sheet::after { opacity: 1; }
+.sv-checkout .sv-sheet { z-index: 1; }
+.sv-checkout.is-sheet .sv-co-amt { opacity: 0; transition: opacity .3s var(--ease); }
+.sv-sheet-top span { display: grid; gap: .1rem; font-weight: 600; }
+.sv-sheet-top small { font-size: .75rem; font-weight: 400; color: #5b6b70; }
+@media (max-width: 899px) {
+  .sv-sheet { bottom: .4rem; padding-bottom: 1rem; }
+  .sv-sheet-auth { min-height: 5.2rem; }
+}
+.sv-lines p { max-width: fit-content; }
+.sv-lines .is-m p { margin-left: auto; }
+.story-steps > li:first-child { min-height: 60vh; }
+.faq .wrap { max-width: var(--wrap, 76rem); }
+.faq-list { max-width: 56rem; }
+.logos-row img { width: auto; height: 1.75rem; max-width: 5.5rem; object-fit: contain; }
+.nav-pill { background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); }
+.work-meta h3 { font-size: 1.25rem; }
+.work-case dd { font-size: .98rem; }
+.work-case dt { font-size: .75rem; font-weight: 600; color: var(--muted); text-transform: none; }
+.work-row { margin-top: .6rem; }
+.start-founder { margin-top: 1.25rem; max-width: 34rem; color: var(--ink); line-height: 1.6; }
+.form-picked { padding: .7rem .9rem; border-radius: 12px; background: var(--accent-soft); font-size: .92rem; }
+/* Tap targets (WCAG 2.2): inline links and toggles at least 44px tall on touch. */
+@media (pointer: coarse) {
+  .text-link, .designs button, .foot a, .start-aside a { min-height: 44px; display: inline-flex; align-items: center; }
+}
+@media (max-width: 860px) {
+  .nav.is-scrolled .nav-cta { display: inline-flex; margin-left: auto; padding: .55rem 1rem; }
+  .nav.is-scrolled .menu-btn { margin-left: .5rem; }
+}

@@ -21,6 +21,13 @@ function useInView(fn: () => void) {
 }
 
 const STAGES = ["Enquiry", "Quote", "Booked", "Paid"];
+// Other sample jobs already in each column, muted so Priya's card stands out.
+const GHOSTS: { name: string; job: string }[] = [
+  { name: "Dave K., Adamstown", job: "Smoke alarms" },
+  { name: "Lena M., Hamilton", job: "Downlights" },
+  { name: "Raj P., Kotara", job: "Ceiling fans" },
+  { name: "Sue T., Cardiff", job: "Safety switch" },
+];
 const LOG: { text: string; logo: string }[] = [
   { text: "Enquiry from the website, added to your job list", logo: "gmail" },
   { text: "Quote sent from your template, opened twice", logo: "gmail" },
@@ -54,6 +61,7 @@ export function PipelineDemo() {
         {STAGES.map((s, i) => (
           <li key={s} className={i === stage ? "is-here" : i < stage ? "is-past" : ""}>
             <span>{s}</span>
+            <div className="pl-card pl-ghost" aria-hidden="true"><b>{GHOSTS[i].name}</b><small>{GHOSTS[i].job}</small></div>
             {i === stage && (
               <div className="pl-card">
                 <b>Priya N., Merewether</b>

@@ -72,7 +72,7 @@ export function PipelineDemo() {
           </li>
         ))}
       </ol>
-      <ul className="pl-log" aria-live="polite">
+      <ul className="pl-log">
         {LOG.map((l, i) => (
           <li key={l.text} className={i <= stage ? "is-on" : ""}>
             <img src={logo(l.logo)} alt="" width={16} height={16} /> {l.text}

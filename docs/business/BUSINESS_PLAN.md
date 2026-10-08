@@ -40,7 +40,7 @@ Added 7 October 2026 (founder): AI concierge, workflow automation, and "show up 
 - **12-month minimum** spreads the build cost. Without it, a client who cancels in month 2 is a loss.
 - **First charge after design approval** (Stripe 14-day trial on the Payment Link) is the trust hook that makes $0 upfront believable.
 - **You keep the site after 12 months / $1,499 buyout** kills the "hostage website" objection, which is the #1 complaint about this model online. It also caps your liability in an ACL dispute.
-- **Edit caps** (30 min / 2 h) stop $99 clients from consuming $500 of labour. New features are quoted separately.
+- **Edit caps** (30 min on Launch / 1 h on Grow) stop $99 clients from consuming $500 of labour. New features are quoted separately.
 - **Payments go to the client's own Stripe account.** We never touch card data or customer funds, so no PCI scope and no trust-account issues.
 
 ## 3b. Delivery: why 1–3 days is a safe promise
@@ -58,7 +58,7 @@ Every site starts from one of our templates rather than a from-scratch design, s
 
 ## 3c. USP: run on AI agents, checked by people
 
-Most "pay monthly" competitors are a person with WordPress. Oceanalt is a small team that runs on AI agents. Agents research the business, draft the pages, build and test the site, write the first reply to every enquiry, and keep sites updated. People choose the design, check every word and photo, approve every launch and take the phone calls. That split is the reason for all three of our promises: **$99 a month, live in 1 to 3 days, a reply in 15 minutes.**
+Most "pay monthly" competitors are a person with WordPress. Oceanalt is a small business that runs on AI agents, checked by a person. Agents research the business, draft the pages, build and test the site, write the first reply to every enquiry, and keep sites updated. A person chooses the design, checks every word and photo, approves every launch and takes the phone calls. That split is the reason for all three of our promises: **$99 a month, usually live in 1 to 3 days, and a reply from a person the same business day** (the 15-minute AI reply comes back once `api/start` runs on Cloudflare).
 
 The 15-minute reply is the proof we hand every prospect. `api/start.ts` has Claude read the enquiry and email back a recommended plan and layout with a booking link, usually within a minute, any time of day. A person reads every enquiry the same business day. Prospects experience the product before they buy it. **Not claimed on the public site until `api/start` runs on Cloudflare and passes an end-to-end test;** until then the site promises a reply from a person the same business day (ACL: no claim we can't deliver today).
 

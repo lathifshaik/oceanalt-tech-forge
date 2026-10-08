@@ -251,8 +251,8 @@ export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   const url = site.url || "https://example.com/";
   const { design, themeCss, accent, onAccent, fonts } = resolveDesign(site, meta, sourceLabel);
   const seo = site.seo || {};
-  const title = seo.title || `${site.business.name} | ${site.business.tagline || ""}`.trim();
-  const desc = seo.description || site.business.tagline || "";
+  const title = seo.title || (site.business.tagline ? `${site.business.name} | ${site.business.tagline}` : `${site.business.name}, ${site.business.suburb || ""}`.replace(/, $/, ""));
+  const desc = seo.description || site.business.tagline || site.business.intro || "";
 
   const html = `<!doctype html>
 <html lang="en-AU">

@@ -359,9 +359,11 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
               </li>
             ))}
           </ol>
-          <div className="story-stage" aria-hidden="true">
+          {/* Only one copy of each visual is ever displayed (this stage on wide
+              screens, the inline one on phones), and panes not on screen are inert. */}
+          <div className="story-stage">
             {steps.map((s, i) => (
-              <div key={s.id} className={`story-pane${i === active ? " is-on" : ""}`}>{s.visual(i === active && wide)}</div>
+              <div key={s.id} className={`story-pane${i === active ? " is-on" : ""}`} inert={i !== active}>{s.visual(i === active && wide)}</div>
             ))}
           </div>
         </div>

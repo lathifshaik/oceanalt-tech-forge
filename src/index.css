@@ -579,3 +579,8 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
   .hp-orbit.o3 { top: 66%; }
 }
 .hp-phone { aspect-ratio: 9 / 15; top: 20%; }
+
+/* Very narrow phones: keep the menu button on screen and full size. */
+.menu-btn { flex-shrink: 0; }
+@media (max-width: 379px) { .nav.is-scrolled .nav-cta { display: none; } .nav.is-scrolled .menu-btn { margin-left: auto; } }
+.plan-extra .link { min-height: 44px; }

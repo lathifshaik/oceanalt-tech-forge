@@ -28,7 +28,7 @@ export const LANDINGS: Landing[] = [
   {
     slug: "online-payments-and-bookings",
     title: "Online Bookings and Payments with Stripe | Oceanalt",
-    description: "Let customers book and pay in one go, by card, Apple Pay, Google Pay or Afterpay (where Stripe approves your business), straight into your Stripe account. Included in Grow, $149 a month.",
+    description: "Let customers book and pay in one go, by card, Apple Pay, Google Pay or Afterpay (where Stripe approves your business), straight into your Stripe account. Included in Grow, $149 a month, 3-month minimum.",
     nav: "Payments and bookings",
     h1: "Get paid without the chasing",
     intro: "Customers pick a time, pay a deposit or the full amount, and get a confirmation, all in a minute on their phone. Instead of chasing payments by text after the job, you get the booking and the money together.",
@@ -75,11 +75,11 @@ export const LANDINGS: Landing[] = [
     ],
     sections: [
       { h2: "What a call sounds like", body: [
-        "\"Kerr & Sons Electrical, you're speaking with Jim's AI concierge. How can I help?\" The caller explains the job, the concierge asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
+        "\"G'day, Kerr & Sons Electrical. I'm Jim's AI concierge, and this call is recorded so Jim gets the details. How can I help?\" The caller explains the job, the concierge asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
         "If it's something it can't handle, it takes a proper message and tells the caller you'll ring back, so nobody hangs up and calls the next business on Google.",
       ] },
       { h2: "What it costs", body: [
-        "$149 a month, including one local Australian number, plus call time at cost with no markup. You set a monthly cap, so there's never a surprise bill.",
+        "$149 a month, including one local Australian number, plus call time at cost with no markup (our estimate: about 15 to 20 cents a minute, so 200 minutes is roughly $30 to $40). You set a monthly cap, so there's never a surprise bill. There's a 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it.",
         "Setup takes a 15-minute call: we ask the questions a new concierge would, then test it with you before it answers a real customer.",
       ] },
     ],

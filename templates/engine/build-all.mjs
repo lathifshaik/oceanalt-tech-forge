@@ -23,6 +23,14 @@ for (const t of readdirSync(ROOT, { withFileTypes: true })) {
   }
 }
 
+// Gallery builds are samples: say so on the page, keep them out of search, and
+// drop the LocalBusiness schema so a made-up business isn't published as real.
+const SAMPLE_BAR = `<style>@media (max-width:760px){body:has(.callbar) #oc-sample{bottom:88px}}</style><a id="oc-sample" href="/#work" style="position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;padding:10px 18px;border-radius:999px;background:#0b1a22;color:#fff;font:600 14px/1.2 system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.45);white-space:nowrap">Sample design by Oceanalt. Back to the site</a>`;
+const sample = (html) => html
+  .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, "")
+  .replace("<head>", '<head>\n<meta name="robots" content="noindex, nofollow">')
+  .replace("</body>", `${SAMPLE_BAR}\n</body>`);
+
 for (const { t, example } of examples) {
   const { showcase, ...site } = JSON.parse(readFileSync(example, "utf8"));
   const meta = JSON.parse(readFileSync(join(ROOT, t.name, "meta.json"), "utf8"));
@@ -34,7 +42,7 @@ for (const { t, example } of examples) {
       { sourceLabel: `${example} (${v.theme}/${v.hero})` },
     );
     mkdirSync(join(OUT, path), { recursive: true });
-    writeFileSync(join(OUT, path, "index.html"), html);
+    writeFileSync(join(OUT, path, "index.html"), sample(html));
     console.log(`work/${path}/ (${t.name}, ${v.theme}, ${v.hero} hero)`);
     return { path, theme: v.theme, themeName: themes[v.theme].name, hero: v.hero };
   });

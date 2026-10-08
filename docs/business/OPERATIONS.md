@@ -92,7 +92,7 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
 
 Stack, per client:
 1. **Number:** an Australian local number from Twilio (needs the client's business address for the regulatory bundle), or the client keeps their number and sets "divert on no answer / busy / after hours" to it with their carrier.
-2. **Voice agent:** ElevenLabs Conversational AI (Australian voice) or the OpenAI Realtime API over SIP. System prompt from the client's brief: services, prices or ranges, hours, areas, booking rules, what's urgent. It always opens by saying it's an AI assistant, and says when calls are recorded.
+2. **Voice agent:** ElevenLabs Conversational AI (Australian voice) or the OpenAI Realtime API over SIP. System prompt from the client's brief: services, prices or ranges, hours, areas, booking rules, what's urgent. It always opens by saying it's the owner's AI agent and that the call is recorded (every call is recorded; this can't be switched off). Get a lawyer's check of the greeting against NSW surveillance law before the first client.
 3. **Actions:** booking into Google Calendar or Outlook (or a booking request the owner confirms), transfer urgent calls to the owner's mobile.
 4. **After the call:** a webhook sends the summary (caller, number, job, address, time, urgency, transcript link) to the owner by WhatsApp (WhatsApp Business Cloud API or Twilio), SMS or email (Resend).
 5. **Caps:** a monthly spend cap per client in the voice and telephony accounts; at the cap, calls fall back to voicemail or the owner's mobile.

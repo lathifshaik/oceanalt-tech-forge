@@ -647,3 +647,27 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .sv-wa-only { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: #e7f8ee; }
 .sv-wa-only img { width: 1.5rem; height: 1.5rem; }
 .work-case:not(:has(.work-face)) { grid-template-columns: 1fr; }
+
+/* The call as a transcript (competitor pattern: transcript plus what the agent
+   did). Plain lines, the one being said highlighted, action rows as pills. */
+.sv-callcard { border-radius: 24px; }
+.sv-lines { display: grid; align-content: start; gap: .3rem; height: auto; min-height: 31rem; padding: .9rem; -webkit-mask-image: none; mask-image: none; }
+.sv-lines .sv-line { display: grid; grid-template-columns: 1fr; gap: .15rem; justify-self: stretch; max-width: none; padding: .55rem .75rem; border-radius: 12px; transition: background-color .2s var(--ease); animation: rise .36s var(--ease) both; }
+.sv-lines .sv-line p { padding: 0; border-radius: 0; background: none; box-shadow: none; font-size: .9rem; line-height: 1.5; color: var(--ink); }
+.sv-lines.is-live .sv-line:not(.is-now) p { color: var(--muted); }
+.sv-lines .sv-line.is-now { background: var(--accent-soft); }
+.sv-who { font-size: .72rem; font-weight: 600; color: var(--muted); }
+.sv-line.is-c .sv-who { color: var(--accent); }
+.sv-act { justify-self: start; display: inline-flex; align-items: center; gap: .35rem; margin-top: .35rem; padding: .2rem .65rem; border: 1px solid var(--line); border-radius: 999px; background: var(--card); font-size: .78rem; font-weight: 500; color: var(--ink); animation: rise .36s var(--ease) .3s both; }
+.sv-act .i { width: 14px; height: 14px; color: var(--accent); }
+.sv-wa time { margin-left: auto; align-self: flex-start; font-size: .75rem; color: var(--muted); }
+.story-terms { margin-top: -.35rem; font-size: .88rem; color: var(--muted); }
+@media (max-width: 899px) { .sv-lines { min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .sv-lines .sv-line, .sv-act { animation: none; } }
+.sv-lines .sv-line.is-m, .sv-lines .sv-line.is-m p { justify-self: stretch; margin-left: 0; text-align: left; }
+@media (min-width: 900px) {
+  .sv-lines { display: flex; flex-direction: column; justify-content: flex-end; gap: .15rem; height: 23rem; min-height: 0; overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 22%); mask-image: linear-gradient(transparent, #000 22%); }
+  .sv-lines .sv-line { flex: none; padding: .45rem .7rem; }
+  .sv-lines .sv-line p { font-size: .88rem; }
+}
+.sv-lines .sv-line.is-now p { box-shadow: none; }

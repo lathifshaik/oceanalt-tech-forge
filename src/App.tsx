@@ -160,7 +160,15 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does the AI concierge work?",
-    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. It's $149 a month with the number included, plus call time at cost, and you set a monthly cap. There's a 3-month minimum, and your first charge waits until it's passed our test calls and you've rung it yourself. Call time is at cost with no markup; our estimate is about 15 to 20 cents a minute, a bit more for any part of a call we put through to your mobile, and we confirm the real rate before you go live.",
+    a: "Keep your number and divert calls you can't pick up, or after-hours calls, to your concierge, or we give you a new local number. It answers in a natural Australian voice, knows your services, prices, hours and areas, takes bookings and messages, and sends you a summary on WhatsApp, text or email after every call. You pick what counts as urgent, and urgent calls can come straight through to your mobile.",
+  },
+  {
+    q: "What does the AI concierge cost?",
+    a: "$149 a month, including one local Australian number, plus call time at cost with no markup. Our estimate is about 15 to 20 cents a minute, so a 3-minute call costs about 45 to 60 cents. You set a monthly cap. There's a 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it.",
+  },
+  {
+    q: "Does it tell callers it's AI?",
+    a: "Yes. Every call starts with it saying it's your AI agent and that the call is recorded, and that can't be switched off. If a caller asks for a person, it takes a message or puts them through to you, whichever you choose.",
   },
   {
     q: "How do my customers pay?",
@@ -652,7 +660,7 @@ function Terms() {
       <h2>7. AI add-ons</h2>
       <p>The AI chat assistant costs $39 AUD a month plus AI usage. The AI concierge costs $149 AUD a month, including one Australian phone number, plus call time. Usage and call time are billed monthly in arrears at the providers' prices, converted to AUD, with no markup. The client sets a monthly cap; when it's reached, the assistant pauses (calls go to voicemail or the client's own number) until the next month or until the cap is raised. Custom AI agents are quoted in writing, with usage billed the same way.</p>
       <p>The AI concierge has a 3-month minimum term, then continues month to month with 30 days' notice. Its first charge happens only after it passes our test calls and the client approves it. Cancelling within the first 3 months costs the remaining months of that term. A number we supplied can be transferred to the client on request.</p>
-      <p>The AI concierge tells every caller they're speaking with an AI assistant and, where calls are recorded, that the call may be recorded. The client provides the information it answers from and is responsible for keeping it accurate.</p>
+      <p>The AI concierge opens every call by telling the caller it's an AI agent and that the call is recorded. This can't be switched off. The client provides the information it answers from and is responsible for keeping it accurate.</p>
       <h2>8. Limitation of liability</h2>
       <p>To the extent permitted by the Australian Consumer Law, Oceanalt is not liable for indirect or consequential loss arising from the use of, or inability to use, the services.</p>
     </Legal>

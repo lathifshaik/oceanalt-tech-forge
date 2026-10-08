@@ -21,7 +21,7 @@ Everything the AI concierge needs to answer a client's phone. `client-success` f
 | When it answers | Every call / only calls you miss / after hours / weekends |
 | Rings before it picks up (if diverting) | e.g. 4 rings |
 | Voice | Female or male Australian voice |
-| Opening line | "G'day, you're through to [business]. I'm [owner]'s AI assistant, and this call is recorded. How can I help?" (the AI and recording notice can't be removed) |
+| Opening line | "G'day, you're through to [business]. I'm [owner]'s AI agent, and this call is recorded. How can I help?" (the AI and recording notice can't be removed) |
 
 ## 3. What it can talk about
 

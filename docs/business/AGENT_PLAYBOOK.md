@@ -79,4 +79,4 @@ Agents draft, build, check and recommend. **The founder approves anything that l
 - Prices, terms, delivery time and reply time match in the business plan, the site, the Terms and `api/start.ts`.
 - No invented stats, testimonials or scarcity. Sample businesses are labelled as samples. Never promise rankings.
 - Client data stays in AWS Sydney; overseas processors are listed in writing.
-- The concierge always says it's an AI assistant and that the call is recorded, and never gives safety or technical advice beyond "call triple zero".
+- The concierge always opens by saying it's the owner's AI agent and that the call is recorded, and never gives safety or technical advice beyond "call triple zero".

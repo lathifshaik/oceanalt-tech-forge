@@ -60,26 +60,26 @@ export const LANDINGS: Landing[] = [
   {
     slug: "ai-concierge",
     title: "AI Concierge for Small Business, Australia | Oceanalt",
-    description: "An AI concierge that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. $149 a month.",
+    description: "An AI concierge that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. An AI receptionist for small business, $149 a month.",
     nav: "AI concierge",
     h1: "Answered, even when you can't",
-    intro: "You're up a ladder, with a client, or it's 8pm. The phone rings anyway. Your AI concierge picks up, looks after the caller, and sends you the details before you've climbed down.",
+    intro: "You're up a ladder, with a client, or it's 8pm. The phone rings anyway. Your AI concierge answers, says up front that it's an AI agent and the call is recorded, books the job or takes a message, and sends you the details. Urgent calls can come straight through to your mobile, if you want.",
     image: { src: "/ai/sparky.webp", alt: "An electrician working on a switchboard" },
     includes: [
       "Keep your number: calls you can't take, or after-hours calls, divert to your concierge",
       "Or a new local Australian number, included",
-      "A natural Australian voice that tells callers it's an AI concierge",
+      "A natural Australian voice that tells callers up front it's an AI agent and the call is recorded",
       "Knows your services, prices, hours and areas, and books into your calendar",
       "A summary on WhatsApp, text or email after every call",
       "Urgent calls put straight through to your mobile, if you want",
     ],
     sections: [
       { h2: "What a call sounds like", body: [
-        "\"G'day, Kerr & Sons Electrical. I'm Jim's AI concierge, and this call is recorded so Jim gets the details. How can I help?\" The caller explains the job, the concierge asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
+        "\"G'day, you're through to Kerr & Sons. I'm Jim's AI agent, and this call is recorded. How can I help?\" The caller explains the job, the concierge asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
         "If it's something it can't handle, it takes a proper message and tells the caller you'll ring back, so nobody hangs up and calls the next business on Google.",
       ] },
       { h2: "What it costs", body: [
-        "$149 a month, including one local Australian number, plus call time at cost with no markup (our estimate: about 15 to 20 cents a minute, so 200 minutes is roughly $30 to $40). You set a monthly cap, so there's never a surprise bill. There's a 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it.",
+        "$149 a month, including one local Australian number, plus call time at cost with no markup (our estimate: about 15 to 20 cents a minute, so a 3-minute call is about 45 to 60 cents, and 200 minutes is roughly $30 to $40). You set a monthly cap, so there's never a surprise bill. There's a 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it.",
         "Setup takes a 15-minute call: we ask the questions a new concierge would, then test it with you before it answers a real customer.",
       ] },
     ],

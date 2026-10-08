@@ -167,71 +167,63 @@ function FoundVisual() {
   );
 }
 
-// A sample call, read like a real one: each line waits for the last to be
-// said, the person talking is highlighted, and the next speaker "types" first.
-const LINES: { who: "c" | "m"; text: string }[] = [
-  { who: "c", text: "G'day, you're through to Kerr & Sons. I'm Jim's AI assistant, and this call is recorded. How can I help?" },
+// A sample call, read like a real one: lines appear at reading pace, the line
+// being said is highlighted, and what the agent does shows as an action row.
+type Act = { icon: "pin" | "calendar" | "send"; text: string };
+const LINES: { who: "c" | "m"; text: string; act?: Act }[] = [
+  { who: "c", text: "G'day, you're through to Kerr & Sons. I'm Jim's AI agent, and this call is recorded. How can I help?" },
   { who: "m", text: "Hi. A power point in my kitchen's sparking. Can someone come out today?" },
-  { who: "c", text: "If there's smoke or flames, hang up and call triple zero. Otherwise, keep clear of it." },
-  { who: "m", text: "No smoke. I'm staying well away from it." },
-  { who: "c", text: "Good. Jim can be there between 2 and 4 this arvo. What's the address?" },
-  { who: "m", text: "That suits. It's Mel, 14 Ridge Street, Merewether." },
-  { who: "c", text: "14 Ridge Street, Merewether, between 2 and 4 today. Jim's got it now. Thanks, Mel." },
+  { who: "c", text: "If there's smoke, flames or a burning smell, hang up and call triple zero. Otherwise, keep clear of it." },
+  { who: "m", text: "No smoke, no smell. I'm keeping well away from it." },
+  { who: "c", text: "Good. Jim can be there between 2 and 4 this arvo. What's your name and address?" },
+  { who: "m", text: "It's Mel, 14 Ridge Street, Merewether.", act: { icon: "pin", text: "Address saved" } },
+  { who: "c", text: "That's Mel, 14 Ridge Street, Merewether, between 2 and 4 today. Jim's got the details now.", act: { icon: "calendar", text: "Booked today, 2 to 4pm" } },
+  { who: "m", text: "Perfect. Thanks.", act: { icon: "send", text: "Sent to Jim" } },
 ];
-const DONE = LINES.length + 1; // ringing is 0, lines are 1..n, then the WhatsApp
+const DONE = LINES.length + 1; // 0 is the call coming in, lines are 1..n, then the summary
+const BOOKED = 7; // Mel relaxes once the job is booked
 
 function CallVisual({ active }: { active: boolean }) {
-  // `step` lines have been said; `typing` shows who's about to speak.
   const [step, setStep] = useState(DONE);
-  const [typing, setTyping] = useState(false);
   useEffect(() => {
     if (!active || reduced()) return;
     const timers: number[] = [];
     let at = 1200;
     setStep(0);
-    setTyping(false);
     LINES.forEach((l, i) => {
-      timers.push(window.setTimeout(() => setTyping(true), at));
-      at += 700;
-      timers.push(window.setTimeout(() => { setTyping(false); setStep(i + 1); }, at));
-      at += Math.max(1500, l.text.length * 38); // time to read it
+      timers.push(window.setTimeout(() => setStep(i + 1), at));
+      at += Math.max(1600, l.text.length * 40); // time to read it
     });
-    timers.push(window.setTimeout(() => setStep(DONE), at));
+    timers.push(window.setTimeout(() => setStep(DONE), at + 600));
     return () => timers.forEach(clearTimeout);
   }, [active]);
 
   const said = Math.min(step, LINES.length);
-  const next = LINES[said];
-  const melOk = said >= 6;
-  const speaking = typing ? next?.who : step > 0 && step <= LINES.length ? LINES[said - 1].who : undefined;
+  const live = step > 0 && step <= LINES.length;
+  const melOk = said >= BOOKED;
 
   return (
     <div className="sv sv-call">
       <div className="sv-callcard">
         <div className="sv-caller">
-          <span className={`sv-av${step === 0 ? " is-ringing" : ""}${speaking === "m" ? " is-speaking" : ""}`}><Face who={melOk ? "mel-ok" : "mel-worried"} label="Mel, the caller" /></span>
-          <div><b>{step === 0 ? "Mel is calling" : step >= DONE ? "Call ended, job booked" : "Answered by Jim's AI concierge"}</b><small>{step >= DONE ? "Sent to Jim on WhatsApp" : "Jim's up a ladder in Adamstown"}</small></div>
-          <span className={`sv-av sv-av-ai${speaking === "c" ? " is-speaking" : ""}`}><span className="sv-facewrap is-ai"><Face who="concierge" label="The AI concierge" /></span></span>
+          <span className="sv-av"><Face who={melOk ? "mel-ok" : "mel-worried"} label="Mel, the caller" /></span>
+          <div><b>{step === 0 ? "Mel is calling Kerr & Sons" : step >= DONE ? "Call ended, job booked" : "On the call: Mel and Jim's AI agent"}</b><small>{step >= DONE ? "Sent to Jim on WhatsApp" : "Jim's up a ladder in Adamstown"}</small></div>
+          <span className="sv-av sv-av-ai"><span className="sv-facewrap is-ai"><Face who="concierge" label="Jim's AI agent" /></span></span>
         </div>
-        <ol className="sv-lines" aria-live="off">
-          {said === 0 && !typing && <li className="sv-ringing"><Icon name="phone" /> Ringing. Your concierge picks up on the second ring.</li>}
+        <ol className={`sv-lines${live ? " is-live" : ""}`}>
           {LINES.slice(0, said).map((l, i) => (
-            <li key={i} className={`is-${l.who}${i === said - 1 && step <= LINES.length ? " is-now" : ""}`}>
-              <span className={`sv-facewrap${l.who === "c" ? " is-ai" : ""}`}><Face who={l.who === "c" ? "concierge" : i < 5 ? "mel-worried" : "mel-ok"} className="sv-face" /></span>
-              <div><span>{l.who === "c" ? "AI concierge" : "Mel"}</span><p>{l.text}</p></div>
+            <li key={i} className={`sv-line is-${l.who}${live && i === said - 1 ? " is-now" : ""}`}>
+              <span className="sv-who">{l.who === "c" ? "Jim's AI agent" : "Mel"}</span>
+              <p>{l.text}</p>
+              {l.act && <span className="sv-act"><Icon name={l.act.icon} /> {l.act.text}</span>}
             </li>
           ))}
-          {typing && next && (
-            <li className={`is-${next.who} is-typing`}>
-              <span className={`sv-facewrap${next.who === "c" ? " is-ai" : ""}`}><Face who={next.who === "c" ? "concierge" : melOk ? "mel-ok" : "mel-worried"} className="sv-face" /></span>
-              <div><span>{next.who === "c" ? "AI concierge" : "Mel"}</span><p className="sv-dots"><i /><i /><i /></p></div>
-            </li>
-          )}
         </ol>
       </div>
       <div className={`sv-wa${step >= DONE ? " is-on" : ""}`}>
         <span className="sv-wa-who sv-wa-only"><img src={logo("whatsapp")} alt="WhatsApp" width={28} height={28} /></span>
-        <div><b>To Jim: new job booked</b><span>Mel, 14 Ridge St, Merewether. Sparking power point. Today 2 to 4pm.</span></div>
+        <div><b>To Jim: new job booked</b><span>Mel, 14 Ridge St, Merewether. Kitchen power point sparking, no smoke. Booked today 2 to 4pm.</span></div>
+        <time>now</time>
       </div>
     </div>
   );
@@ -356,7 +348,7 @@ function PayVisual({ active }: { active: boolean }) {
 
 /* ─── The story ──────────────────────────────────────────────────────────── */
 
-type StepDef = { id: string; kicker: string; title: string; body: string; price: string; cta: ReactNode; visual: (active: boolean) => ReactNode };
+type StepDef = { id: string; kicker: string; title: string; body: string; price: string; terms?: string; cta: ReactNode; visual: (active: boolean) => ReactNode };
 
 export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
   const steps: StepDef[] = [
@@ -371,10 +363,11 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
     },
     {
       id: "ai",
-      kicker: "Never miss a call",
-      title: "You're up a ladder. The phone still gets answered.",
-      body: "Your AI concierge picks up in a natural Aussie voice, sorts out what the caller needs, tells callers it's an AI, books the job and sends you the details by WhatsApp, text or email.",
-      price: "AI concierge $149 a month with a local number, plus call time at cost",
+      kicker: "When you can't pick up",
+      title: "You're up a ladder and the phone rings.",
+      body: "Your AI concierge answers in an Australian voice and tells the caller up front that it's AI and the call is recorded. It books the job or takes a proper message, then sends you the details by WhatsApp, text or email. If it's urgent, it can put the call straight through to your mobile, if you want.",
+      price: "AI concierge $149 a month with a local number, plus call time at cost (our estimate: about 45 to 60 cents for a 3-minute call).",
+      terms: "3-month minimum. Nothing is charged until it passes our test calls and you're happy with it.",
       cta: <button type="button" className="text-link" onClick={() => onPlan("concierge")}>Set up my concierge <Icon name="arrow-right" /></button>,
       visual: (a) => <CallVisual active={a} />,
     },
@@ -430,6 +423,7 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
                 <p className="story-price">{s.price}</p>
+                {s.terms && <p className="story-terms">{s.terms}</p>}
                 {s.cta}
                 <div className="story-inline">{s.visual(i === active && !wide)}</div>
               </li>

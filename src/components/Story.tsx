@@ -65,7 +65,7 @@ const SCENES: Scene[] = [
 // they actually wave. Give it a new `key` to wave again.
 // People with a hand-made frame-by-frame wave (a strip of frames in play order,
 // made with scripts/make-wave-strip.py from the sheets in docs/design/avatars/).
-const SPRITES: Record<string, number> = { jim: 20 };
+const SPRITES: Record<string, number> = { jim: 14 };
 
 export function Wave({ who, on, loop = false, className = "", label }: { who: string; on: boolean; loop?: boolean; className?: string; label?: string }) {
   const frames = SPRITES[who];

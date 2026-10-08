@@ -46,7 +46,7 @@ const ORBIT: { who: string; label: string }[] = [
 ];
 
 export function HeroPhone() {
-  // Index of the newest notification shown; the three before it stack below.
+  // Index of the newest notification shown; the one before it sits below.
   const [n, setN] = useState(2);
   const [jim, setJim] = useState<Mood | undefined>("grin");
   useEffect(() => {
@@ -61,7 +61,7 @@ export function HeroPhone() {
     }, 2600);
     return () => { window.clearInterval(t); off.forEach(clearTimeout); };
   }, []);
-  const shown = [0, 1, 2].map((k) => n - k).filter((i) => i >= 0).map((i) => ({ i, note: NOTES[i % NOTES.length] }));
+  const shown = [0, 1].map((k) => n - k).filter((i) => i >= 0).map((i) => ({ i, note: NOTES[i % NOTES.length] }));
 
   return (
     <div className="hp-scene" aria-hidden="true">
@@ -70,7 +70,10 @@ export function HeroPhone() {
           <Face who={o.who} />
         </span>
       ))}
-      <img className="hp-site" src="/previews/kerr-and-sons-electrical.webp" alt="" width={1200} height={750} fetchPriority="high" />
+      <div className="hp-site">
+        <div className="hp-site-bar"><i /><i /><i /><span>kerrandsons.com.au</span></div>
+        <img src="/previews/kerr-and-sons-electrical.webp" alt="" width={1200} height={750} fetchPriority="high" />
+      </div>
       <div className="hp-phone">
         <div className="hp-island" />
         <div className="hp-owner">

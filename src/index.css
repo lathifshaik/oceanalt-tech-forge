@@ -543,3 +543,41 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
   .nav.is-scrolled .nav-cta { display: inline-flex; margin-left: auto; padding: .55rem 1rem; }
   .nav.is-scrolled .menu-btn { margin-left: .5rem; }
 }
+
+/* Hero: the client's website in a browser window, their phone in front of it. */
+.hp-scene { aspect-ratio: 1 / 0.98; max-width: 40rem; }
+.hp-site { left: 0; top: 8%; width: 86%; overflow: hidden; border-radius: 16px; background: var(--card); box-shadow: 0 0 0 1px rgb(var(--shadow) / .08), 0 50px 90px -50px rgb(var(--shadow) / .55); transform: none; opacity: 1; animation: rise 1s var(--ease) both; }
+.hp-site img { display: block; width: 100%; height: auto; }
+.hp-site-bar { display: flex; align-items: center; gap: .35rem; padding: .55rem .8rem; background: var(--surface); border-bottom: 1px solid var(--line); }
+.hp-site-bar i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--line); }
+.hp-site-bar span { flex: 1; max-width: 16rem; margin-inline: auto; padding: .2rem .8rem; border-radius: 999px; background: var(--card); color: var(--muted); font-size: .72rem; text-align: center; }
+.hp-phone { right: 0; top: 22%; bottom: auto; width: 41%; aspect-ratio: 9 / 18.6; padding: .8rem .6rem; border-radius: 2.3rem; box-shadow: 0 0 0 6px #0b1a22, 0 0 0 7px rgb(255 255 255 / .25), 0 50px 80px -40px rgb(var(--shadow) / .75); z-index: 1; }
+.hp-island { width: 4.6rem; height: 1.25rem; }
+.hp-owner { margin-top: .7rem; gap: .45rem; }
+.hp-jim { width: 2.2rem; height: 2.2rem; }
+.hp-clock { margin-top: .5rem; font-size: 2.5rem; }
+.hp-notes { margin-top: .6rem; gap: .4rem; }
+.hp-note { grid-template-columns: 2rem minmax(0, 1fr); padding: .55rem .6rem; border-radius: .95rem; }
+.hp-face { width: 2rem; height: 2rem; }
+.hp-note b { font-size: .78rem; }
+.hp-body { font-size: .7rem; }
+.hp-orbit.o1 { left: -3%; top: 0; }
+.hp-orbit.o2 { left: 38%; top: -3%; }
+.hp-orbit.o3 { left: -5%; top: 58%; bottom: auto; }
+.hp-orbit.o4 { left: 30%; top: auto; bottom: 0; }
+.hp-orbit.o5 { right: auto; left: 8%; bottom: 6%; }
+.hp-orbit.o6 { right: -4%; top: 10%; }
+@media (max-width: 900px) { .hp-scene { max-width: 30rem; } }
+@media (max-width: 600px) {
+  .hp-phone { width: 46%; top: 26%; }
+  .hp-clock { font-size: 2rem; }
+  .hp-note.is-2 { display: none; }
+}
+.hp-phone { top: 16%; }
+@media (max-width: 600px) {
+  .hp-phone { width: 50%; top: 20%; padding: .7rem .5rem; }
+  .hp-note b { font-size: .72rem; }
+  .hp-body { display: none; }
+  .hp-orbit.o3 { top: 66%; }
+}
+.hp-phone { aspect-ratio: 9 / 15; top: 20%; }

@@ -28,7 +28,7 @@ const WORK: {
     id: "cafe",
     kind: "Café",
     business: "Little Tern Coffee, Fremantle",
-    owner: { face: "cafe" },
+    owner: { face: "tern" },
     problem: "People kept ringing to ask if they were open yet.",
     pitch: "Menu, hours and directions first. The sign on the photo flips to OPEN or CLOSED from the real opening hours.",
     designs: [
@@ -54,7 +54,7 @@ const WORK: {
     id: "studio",
     kind: "Physio & Pilates",
     business: "Tidewater Physio & Pilates, Bulimba",
-    owner: { face: "physio" },
+    owner: { face: "tide" },
     problem: "Bookings came in by phone and text, and gift vouchers lived on paper.",
     pitch: "Every treatment has a price and a Book button. Gift vouchers can be bought online and flip over to show their terms.",
     designs: [
@@ -67,7 +67,7 @@ const WORK: {
     id: "studio",
     kind: "Yoga studio",
     business: "Saltwater Yoga, Cronulla",
-    owner: { face: "yoga" },
+    owner: { face: "ana" },
     problem: "Ana was taking class bookings in Instagram DMs and chasing $25 payments after class.",
     pitch: "Every class has a time, a price and a Book button. People pay with Apple Pay or Google Pay before they've rolled out their mat.",
     designs: [

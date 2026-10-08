@@ -1,4 +1,4 @@
-Avatars and expression faces in this folder are from Microsoft Fluent Emoji (3D),
+jim*.webp are Oceanalt's own character (founder-made). The other avatars in this folder are from Microsoft Fluent Emoji (3D),
 https://github.com/microsoft/fluentui-emoji, used under the MIT License.
 
 MIT License. Copyright (c) Microsoft Corporation.

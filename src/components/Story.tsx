@@ -26,63 +26,109 @@ export function Face({ who, label, className = "" }: { who: string; label?: stri
 /* ─── Hero phone ─────────────────────────────────────────────────────────── */
 
 type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; who: string; title: string; body: string; time: string };
-const NOTES: Note[] = [
-  { app: "Your concierge", icon: "phone", who: "mel-ok", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
-  { app: "Stripe", logo: "stripe", who: "sam", title: "Sam paid a $30 deposit", body: "Switchboard check, Thu 8am. Paid with Apple Pay.", time: "11:58" },
-  { app: "Google", logo: "google", who: "tom", title: "Tom found you on Google Maps", body: "Wants a quote for an EV charger in Adamstown.", time: "12:15" },
-  { app: "Xero", logo: "xero", who: "priya", title: "Priya paid her invoice", body: "$2,380, matched and reconciled in Xero.", time: "12:31" },
+type Scene = { site: string; owner: string; phone: string; when: string; notes: [Note, Note] };
+
+// Four sample businesses, each with its own website, its own owner and the
+// kind of win we'd set up for them. The hero rotates through them.
+const SCENES: Scene[] = [
+  {
+    site: "little-tern-coffee", owner: "tern", phone: "Little Tern's phone", when: "Saturday, the morning rush",
+    notes: [
+      { app: "Google", logo: "google", who: "priya", title: "Priya enquired from your Google listing", body: "Wants a catering box for 20, Friday at 8am.", time: "7:48" },
+      { app: "Gmail", logo: "gmail", who: "sam", title: "Sam enquired through your website", body: "Table for 12, Sunday brunch. Is 10am free?", time: "8:15" },
+    ],
+  },
+  {
+    site: "kerr-and-sons-electrical", owner: "jim", phone: "Jim's phone", when: "Tuesday, up a ladder in Adamstown",
+    notes: [
+      { app: "Your concierge", icon: "phone", who: "mel-ok", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
+      { app: "Your concierge", icon: "phone", who: "tom", title: "Tom rang while you were driving", body: "Wants a quote for an EV charger. Prefers a text.", time: "1:20" },
+    ],
+  },
+  {
+    site: "saltwater-yoga", owner: "ana", phone: "Ana's phone", when: "Saturday, between classes",
+    notes: [
+      { app: "Stripe", logo: "stripe", who: "sam", title: "Sam booked and paid $25", body: "Sunrise flow, next Sat 7am. Paid with Apple Pay.", time: "8:31" },
+      { app: "Stripe", logo: "stripe", who: "priya", title: "Priya bought a 10-class pack", body: "$240, paid with Afterpay. Lands in your Stripe.", time: "8:34" },
+    ],
+  },
+  {
+    site: "tidewater-physio-pilates", owner: "tide", phone: "Tidewater's phone", when: "Thursday, back-to-back patients",
+    notes: [
+      { app: "Google Calendar", logo: "googlecalendar", who: "tom", title: "Tom booked a Pilates class", body: "Thu 6pm, in your calendar. Reminder goes out Wed.", time: "10:05" },
+      { app: "Xero", logo: "xero", who: "priya", title: "Priya paid, already in Xero", body: "Initial consult, $95. Marked paid, nothing typed up.", time: "12:40" },
+    ],
+  },
 ];
 
-// The kinds of owners we work for, floating around the phone.
-const ORBIT: { who: string; label: string }[] = [
-  { who: "yoga", label: "Yoga teacher" },
-  { who: "cafe", label: "Café owner" },
-  { who: "physio", label: "Physio" },
-  { who: "mechanic", label: "Mechanic" },
-  { who: "landscaper", label: "Landscaper" },
-  { who: "accountant", label: "Accountant" },
-];
+// One person in two poses (hand down, hand up), played as a short flipbook so
+// they actually wave. Give it a new `key` to wave again.
+// People with a hand-made frame-by-frame wave (a strip of frames in play order).
+const SPRITES: Record<string, number> = { jim: 13 };
+
+export function Wave({ who, on, loop = false, className = "", label }: { who: string; on: boolean; loop?: boolean; className?: string; label?: string }) {
+  const frames = SPRITES[who];
+  if (frames) {
+    return (
+      <span
+        className={`face sprite${on ? " is-on" : ""}${loop ? " is-loop" : ""} ${className}`}
+        style={{ backgroundImage: `url(${face(`${who}-wave-strip`)})`, backgroundSize: `${frames * 100}% 100%`, animationTimingFunction: `steps(${frames}, jump-none)` }}
+        role={label ? "img" : undefined}
+        aria-label={label}
+      />
+    );
+  }
+  return (
+    <span className={`face flip${on ? " is-on" : ""}${loop ? " is-loop" : ""} ${className}`} role={label ? "img" : undefined} aria-label={label}>
+      <img className="flip-a" src={face(who)} alt="" width={160} height={160} />
+      <img className="flip-b" src={face(`${who}-wave`)} alt="" width={160} height={160} loading="lazy" />
+    </span>
+  );
+}
 
 export function HeroPhone() {
-  // Index of the newest notification shown; the one before it sits below.
-  const [n, setN] = useState(2);
-  // Jim waves for a moment when a new win lands.
-  const [wave, setWave] = useState(false);
+  // Scene on screen, and how many of its two notifications have landed.
+  // The server renders the finished first scene; the timeline starts on mount.
+  const [sc, setSc] = useState(0);
+  const [count, setCount] = useState(2);
   useEffect(() => {
     if (reduced()) return;
-    setN(0);
-    setWave(false);
-    const off: number[] = [];
-    const t = window.setInterval(() => {
-      setN((x) => x + 1);
-      setWave(true);
-      off.push(window.setTimeout(() => setWave(false), 1500));
-    }, 2600);
-    return () => { window.clearInterval(t); off.forEach(clearTimeout); };
+    const timers: number[] = [];
+    let i = 0;
+    const run = () => {
+      setSc(i % SCENES.length);
+      setCount(0);
+      timers.push(window.setTimeout(() => setCount(1), 900));
+      timers.push(window.setTimeout(() => setCount(2), 3200));
+      i += 1;
+    };
+    run();
+    const loop = window.setInterval(run, 8000);
+    return () => { window.clearInterval(loop); timers.forEach(clearTimeout); };
   }, []);
-  const shown = [0, 1].map((k) => n - k).filter((i) => i >= 0).map((i) => ({ i, note: NOTES[i % NOTES.length] }));
+  const scene = SCENES[sc];
+  const shown = scene.notes.slice(0, count).reverse();
 
   return (
     <div className="hp-scene" aria-hidden="true">
-      {ORBIT.map((o, i) => (
-        <span key={o.who} className={`hp-orbit o${i + 1}`} title={o.label} style={{ animationDelay: `${0.4 + i * 0.12}s` }}>
-          <Face who={o.who} />
-        </span>
-      ))}
       <div className="hp-site">
-        <div className="hp-site-bar"><i /><i /><i /><span>kerrandsons.com.au</span></div>
-        <img src="/previews/kerr-and-sons-electrical.webp" alt="" width={1200} height={750} fetchPriority="high" />
+        <div className="hp-site-bar"><i /><i /><i /><span>oceanalt.com.au/work/{scene.site}</span></div>
+        <div className="hp-site-shots">
+          {SCENES.map((x, i) => (
+            <img key={x.site} className={i === sc ? "is-on" : ""} src={`/previews/${x.site}.webp`} alt="" width={1200} height={750} loading={i === 0 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : undefined} />
+          ))}
+        </div>
       </div>
       <div className="hp-phone">
         <div className="hp-island" />
         <div className="hp-owner">
-          <Face who={wave ? "jim-wave" : "jim"} className="hp-jim" />
-          <p><b>Jim's phone</b><span>Tuesday, on the tools</span></p>
+          <Wave key={`${sc}-${count}`} who={scene.owner} on={count > 0} className="hp-jim" />
+          <p><b>{scene.phone}</b><span>{scene.when}</span></p>
         </div>
-        <p className="hp-clock num">{NOTES[n % NOTES.length].time}</p>
+        <p className="hp-clock num">{scene.notes[Math.max(count, 1) - 1].time}</p>
         <ul className="hp-notes">
-          {shown.map(({ i, note }, k) => (
-            <li key={i} className={`hp-note is-${k}`}>
+          {shown.map((note, k) => (
+            <li key={`${sc}-${note.title}`} className={`hp-note is-${k}`}>
               <Face who={note.who} className="hp-face" />
               <span className="hp-app">
                 {note.logo ? <img src={logo(note.logo)} alt="" width={16} height={16} /> : <Icon name={note.icon ?? "phone"} />}
@@ -119,43 +165,71 @@ function FoundVisual() {
   );
 }
 
+// A sample call, read like a real one: each line waits for the last to be
+// said, the person talking is highlighted, and the next speaker "types" first.
 const LINES: { who: "c" | "m"; text: string }[] = [
-  { who: "c", text: "G'day, Kerr & Sons Electrical. I'm Jim's AI concierge, and this call is recorded so Jim gets the details. How can I help?" },
-  { who: "m", text: "A power point in my kitchen is sparking. Can someone come today?" },
-  { who: "c", text: "If there's smoke or flames, hang up and call triple zero. Otherwise keep clear of it. Jim can be there between 2 and 4 this arvo. Does that suit?" },
-  { who: "m", text: "Perfect, 14 Ridge Street, Merewether." },
+  { who: "c", text: "G'day, you're through to Kerr & Sons. I'm Jim's AI assistant, and this call is recorded. How can I help?" },
+  { who: "m", text: "Hi. A power point in my kitchen's sparking. Can someone come out today?" },
+  { who: "c", text: "If there's smoke or flames, hang up and call triple zero. Otherwise, keep clear of it." },
+  { who: "m", text: "No smoke. I'm staying well away from it." },
+  { who: "c", text: "Good. Jim can be there between 2 and 4 this arvo. What's the address?" },
+  { who: "m", text: "That suits. It's Mel, 14 Ridge Street, Merewether." },
+  { who: "c", text: "14 Ridge Street, Merewether, between 2 and 4 today. Jim's got it now. Thanks, Mel." },
 ];
+const DONE = LINES.length + 1; // ringing is 0, lines are 1..n, then the WhatsApp
 
 function CallVisual({ active }: { active: boolean }) {
-  // Steps: 0 ringing, 1..4 lines, 5 WhatsApp to Jim. Complete when still.
-  const [step, setStep] = useState(5);
+  // `step` lines have been said; `typing` shows who's about to speak.
+  const [step, setStep] = useState(DONE);
+  const [typing, setTyping] = useState(false);
   useEffect(() => {
     if (!active || reduced()) return;
+    const timers: number[] = [];
+    let at = 1200;
     setStep(0);
-    const t = [1, 2, 3, 4, 5].map((s) => window.setTimeout(() => setStep(s), 900 + (s - 1) * 1500));
-    return () => t.forEach(clearTimeout);
+    setTyping(false);
+    LINES.forEach((l, i) => {
+      timers.push(window.setTimeout(() => setTyping(true), at));
+      at += 700;
+      timers.push(window.setTimeout(() => { setTyping(false); setStep(i + 1); }, at));
+      at += Math.max(1500, l.text.length * 38); // time to read it
+    });
+    timers.push(window.setTimeout(() => setStep(DONE), at));
+    return () => timers.forEach(clearTimeout);
   }, [active]);
+
+  const said = Math.min(step, LINES.length);
+  const next = LINES[said];
+  const melOk = said >= 6;
+  const speaking = typing ? next?.who : step > 0 && step <= LINES.length ? LINES[said - 1].who : undefined;
 
   return (
     <div className="sv sv-call">
       <div className="sv-callcard">
         <div className="sv-caller">
-          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}><Face who={step >= 4 ? "mel-ok" : "mel-worried"} label="Mel, the caller" /></span>
-          <div><b>{step === 0 ? "Mel is calling" : "Answered by your concierge"}</b><small>Jim's up a ladder in Charlestown</small></div>
-          {step > 0 && step < 5 && <span className="sv-wave"><i /><i /><i /><i /></span>}
+          <span className={`sv-av${step === 0 ? " is-ringing" : ""}${speaking === "m" ? " is-speaking" : ""}`}><Face who={melOk ? "mel-ok" : "mel-worried"} label="Mel, the caller" /></span>
+          <div><b>{step === 0 ? "Mel is calling" : step >= DONE ? "Call ended, job booked" : "Answered by Jim's AI concierge"}</b><small>{step >= DONE ? "Sent to Jim on WhatsApp" : "Jim's up a ladder in Adamstown"}</small></div>
+          <span className={`sv-av sv-av-ai${speaking === "c" ? " is-speaking" : ""}`}><span className="sv-facewrap is-ai"><Face who="concierge" label="The AI concierge" /></span></span>
         </div>
-        <ol className="sv-lines">
-          {LINES.map((l, i) => (
-            <li key={i} className={`is-${l.who}${step > i ? " is-on" : ""}`}>
-              <span className={`sv-facewrap${l.who === "c" ? " is-ai" : ""}`}><Face who={l.who === "c" ? "concierge" : i < 3 ? "mel-worried" : "mel-ok"} className="sv-face" /></span>
+        <ol className="sv-lines" aria-live="off">
+          {said === 0 && !typing && <li className="sv-ringing"><Icon name="phone" /> Ringing. Your concierge picks up on the second ring.</li>}
+          {LINES.slice(0, said).map((l, i) => (
+            <li key={i} className={`is-${l.who}${i === said - 1 && step <= LINES.length ? " is-now" : ""}`}>
+              <span className={`sv-facewrap${l.who === "c" ? " is-ai" : ""}`}><Face who={l.who === "c" ? "concierge" : i < 5 ? "mel-worried" : "mel-ok"} className="sv-face" /></span>
               <div><span>{l.who === "c" ? "AI concierge" : "Mel"}</span><p>{l.text}</p></div>
             </li>
           ))}
+          {typing && next && (
+            <li className={`is-${next.who} is-typing`}>
+              <span className={`sv-facewrap${next.who === "c" ? " is-ai" : ""}`}><Face who={next.who === "c" ? "concierge" : melOk ? "mel-ok" : "mel-worried"} className="sv-face" /></span>
+              <div><span>{next.who === "c" ? "AI concierge" : "Mel"}</span><p className="sv-dots"><i /><i /><i /></p></div>
+            </li>
+          )}
         </ol>
       </div>
-      <div className={`sv-wa${step >= 5 ? " is-on" : ""}`}>
-        <span className="sv-wa-who"><Face who={step >= 5 ? "jim-wave" : "jim"} label="Jim" /><img className="sv-wa-logo" src={logo("whatsapp")} alt="" width={18} height={18} /></span>
-        <div><b>To Jim: new job booked</b><span>Mel, Merewether. Today 2 to 4pm. Told to switch it off at the board.</span></div>
+      <div className={`sv-wa${step >= DONE ? " is-on" : ""}`}>
+        <span className="sv-wa-who"><Wave key={step >= DONE ? "on" : "off"} who="jim" on={step >= DONE} label="Jim" /><img className="sv-wa-logo" src={logo("whatsapp")} alt="" width={18} height={18} /></span>
+        <div><b>To Jim: new job booked</b><span>Mel, 14 Ridge St, Merewether. Sparking power point. Today 2 to 4pm.</span></div>
       </div>
     </div>
   );
@@ -253,7 +327,7 @@ function PayVisual({ active }: { active: boolean }) {
     <div className="sv sv-pay">
       <div className={`sv-checkout${phase === "sheet" || phase === "auth" || phase === "done" ? " is-sheet" : ""}`}>
         <div className="sv-co-top">
-          <Face who="yoga" className="sv-co-face" />
+          <Face who="ana" className="sv-co-face" />
           <div><b>Saltwater Yoga</b><span>Sunrise flow, Sat 7am with Ana</span></div>
         </div>
         <div className="sv-co-amt"><span>Class</span><b className="num">$25.00</b></div>

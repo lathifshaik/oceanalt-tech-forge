@@ -13,6 +13,8 @@ Writes public/avatars/NAME.webp (still), NAME-strip.webp (frames in play order)
 and prints the frame count for STRIPS in src/components/Story.tsx.
 """
 import argparse
+import subprocess
+import tempfile
 from collections import deque
 from pathlib import Path
 from PIL import Image
@@ -23,6 +25,8 @@ p.add_argument("--grid", default="5x4")
 p.add_argument("--order", default="all", help='"all" or e.g. 1,2,3,2,1')
 p.add_argument("--still", default="1", help="frame(s) saved as stills, e.g. 1 or 1:,11:-call")
 p.add_argument("--size", type=int, default=192)
+p.add_argument("--smooth", type=int, default=0, help="add in-between frames with ffmpeg motion interpolation, from 10 fps up to this fps (e.g. 30)")
+p.add_argument("--quality", type=int, default=86)
 a = p.parse_args()
 
 cols, rows = map(int, a.grid.split("x"))
@@ -167,11 +171,34 @@ def square(n):
     canvas.paste(f, (round(ox), round(oy)), f)
     return canvas.resize((a.size, a.size), Image.LANCZOS)
 
+def smooth(imgs):
+    """Motion-interpolate colour and alpha separately (ffmpeg's minterpolate has
+    no alpha), then put them back together."""
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        for i, im in enumerate(imgs):
+            bg = Image.new("RGBA", im.size, (238, 242, 241, 255)); bg.alpha_composite(im)
+            bg.convert("RGB").save(d / f"rgb{i:03d}.png")
+            im.getchannel("A").convert("RGB").save(d / f"a{i:03d}.png")
+        for kind in ("rgb", "a"):
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", "10", "-i", str(d / f"{kind}%03d.png"),
+                            "-vf", f"minterpolate=fps={a.smooth}:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1",
+                            "-pix_fmt", "rgb24", str(d / f"out-{kind}-%03d.png")], check=True)
+        res = []
+        for f in sorted(d.glob("out-rgb-*.png")):
+            im = Image.open(f).convert("RGBA")
+            im.putalpha(Image.open(d / f.name.replace("out-rgb-", "out-a-")).convert("L"))
+            res.append(im)
+        return res
+
 out = Path(__file__).resolve().parent.parent / "public" / "avatars"
-strip = Image.new("RGBA", (a.size * len(order), a.size), (0, 0, 0, 0))
-for k, n in enumerate(order):
-    strip.paste(square(n), (k * a.size, 0))
-strip.save(out / f"{a.name}-strip.webp", quality=86, method=6)
+seq = [square(n) for n in order]
+if a.smooth:
+    seq = smooth(seq)
+strip = Image.new("RGBA", (a.size * len(seq), a.size), (0, 0, 0, 0))
+for k, im in enumerate(seq):
+    strip.paste(im, (k * a.size, 0))
+strip.save(out / f"{a.name}-strip.webp", quality=a.quality, method=6)
 for n, suffix in stills:
     square(n).save(out / f"{a.name}{suffix}.webp", quality=88, method=6)
-print(f"{a.name}: {len(order)} frames")
+print(f"{a.name}: {len(seq)} frames -> SPRITES {{ {a.name}: {len(seq)} }}, play at {a.smooth or 10} fps")

@@ -19,7 +19,7 @@ const WORK: {
   id: TemplateId;
   kind: string;
   business: string;
-  owner: { face: string };
+  owner?: { face: string };
   problem: string;
   pitch: string;
   designs: { path: string; theme: string }[];
@@ -41,7 +41,6 @@ const WORK: {
     id: "trades",
     kind: "Electrician",
     business: "Kerr & Sons Electrical, Newcastle",
-    owner: { face: "jim" },
     problem: "Jobs went to whoever picked up first, and Jim's usually up a ladder.",
     pitch: "Built to make the phone ring: tap-to-call everywhere, the licence front and centre, and a quote form.",
     designs: [
@@ -332,7 +331,7 @@ function WorkCard({ w }: { w: (typeof WORK)[number] }) {
       </a>
       <div className="work-meta">
         <div className="work-case">
-          <Face who={w.owner.face} className="work-face" />
+          {w.owner && <Face who={w.owner.face} className="work-face" />}
           <div>
             <h3>{w.business}</h3>
             <dl>

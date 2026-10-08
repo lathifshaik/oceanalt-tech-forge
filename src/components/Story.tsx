@@ -26,7 +26,7 @@ export function Face({ who, label, className = "" }: { who: string; label?: stri
 /* ─── Hero phone ─────────────────────────────────────────────────────────── */
 
 type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; who: string; title: string; body: string; time: string };
-type Scene = { site: string; owner: string; phone: string; when: string; notes: [Note, Note] };
+type Scene = { site: string; owner?: string; phone: string; when: string; notes: [Note, Note] };
 
 // Four sample businesses, each with its own website, its own owner and the
 // kind of win we'd set up for them. The hero rotates through them.
@@ -39,7 +39,7 @@ const SCENES: Scene[] = [
     ],
   },
   {
-    site: "kerr-and-sons-electrical", owner: "jim", phone: "Jim's phone", when: "Tuesday, up a ladder in Adamstown",
+    site: "kerr-and-sons-electrical", phone: "Jim's phone", when: "Tuesday, up a ladder in Adamstown",
     notes: [
       { app: "Your concierge", icon: "phone", who: "mel-ok", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
       { app: "Your concierge", icon: "phone", who: "tom", title: "Tom rang while you were driving", body: "Wants a quote for an EV charger. Prefers a text.", time: "1:20" },
@@ -65,7 +65,8 @@ const SCENES: Scene[] = [
 // they actually wave. Give it a new `key` to wave again.
 // People with a hand-made frame-by-frame wave (a strip of frames in play order,
 // made with scripts/make-wave-strip.py from the sheets in docs/design/avatars/).
-const SPRITES: Record<string, number> = { jim: 14 };
+// Jim (docs/design/avatars/jim-sheet.png) is off the site for now (founder's call).
+const SPRITES: Record<string, number> = {};
 
 export function Wave({ who, on, loop = false, className = "", label }: { who: string; on: boolean; loop?: boolean; className?: string; label?: string }) {
   const frames = SPRITES[who];
@@ -123,7 +124,7 @@ export function HeroPhone() {
       <div className="hp-phone">
         <div className="hp-island" />
         <div className="hp-owner">
-          <Wave key={`${sc}-${count}`} who={scene.owner} on={count > 0} className="hp-jim" />
+          {scene.owner && <Wave key={`${sc}-${count}`} who={scene.owner} on={count > 0} className="hp-jim" />}
           <p><b>{scene.phone}</b><span>{scene.when}</span></p>
         </div>
         <p className="hp-clock num">{scene.notes[Math.max(count, 1) - 1].time}</p>
@@ -229,7 +230,7 @@ function CallVisual({ active }: { active: boolean }) {
         </ol>
       </div>
       <div className={`sv-wa${step >= DONE ? " is-on" : ""}`}>
-        <span className="sv-wa-who"><Wave key={step >= DONE ? "on" : "off"} who="jim" on={step >= DONE} label="Jim" /><img className="sv-wa-logo" src={logo("whatsapp")} alt="" width={18} height={18} /></span>
+        <span className="sv-wa-who sv-wa-only"><img src={logo("whatsapp")} alt="WhatsApp" width={28} height={28} /></span>
         <div><b>To Jim: new job booked</b><span>Mel, 14 Ridge St, Merewether. Sparking power point. Today 2 to 4pm.</span></div>
       </div>
     </div>

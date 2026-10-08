@@ -638,9 +638,12 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 
 /* Hand-made wave: a strip of frames played in order, then back to rest. */
 .sprite { display: block; aspect-ratio: 1; background-repeat: no-repeat; background-position: 0 0; }
-.sprite.is-on { animation: sprite 1.4s both; }
+.sprite.is-on { animation: sprite 1.63s both; }
 .sprite.is-loop { animation-iteration-count: infinite; animation-delay: .3s; }
 @keyframes sprite { from { background-position: 0 0; } to { background-position: 100% 0; } }
 .sv-lines li.sv-ringing { display: flex; align-items: center; gap: .5rem; margin: auto; max-width: none; color: var(--muted); font-size: .9rem; }
 .sv-ringing .i { width: 1rem; height: 1rem; color: var(--accent); animation: ring-shake .5s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .sprite, .sv-ringing .i { animation: none !important; } }
+.sv-wa-only { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: #e7f8ee; }
+.sv-wa-only img { width: 1.5rem; height: 1.5rem; }
+.work-case:not(:has(.work-face)) { grid-template-columns: 1fr; }

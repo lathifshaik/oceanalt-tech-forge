@@ -13,6 +13,8 @@ Every service on the site should feel like a demo: `src/components/Story.tsx` ha
 - `docs/business/OPERATIONS.md`: client pipeline, QA checklist, edit policy, KPIs, Stripe setup, tech debt
 - `docs/business/LAUNCH_PLAN.md`: the first 30 days, setup checklist and weekly rhythm
 - `docs/growth/OUTREACH.md`: outreach templates and Spam Act rules
+- `docs/business/AGENT_PLAYBOOK.md`: what every agent handles, the weekly rhythm, and what needs the founder
+- `docs/business/CONCIERGE_SETUP.md`: the form a client fills in so the AI concierge can answer their phone, plus the 10 test calls
 
 Pricing (including the AI add-on), delivery time, reply time and terms appear in four places, and they must always agree: the BUSINESS_PLAN, `PLANS`/`FAQ`/the AI add-on block in `src/App.tsx`, the `Terms` component in `src/App.tsx`, and the system prompt in `api/start.ts`. Change them together.
 

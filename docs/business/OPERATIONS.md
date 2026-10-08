@@ -6,7 +6,7 @@ How the firm runs day to day. Each stage names the agent in `.claude/agents/` th
 
 | Stage | Owner agent | Output | Time target |
 |---|---|---|---|
-| 1. Lead in (form, outreach) | `growth` | `api/start.ts` emails the enquirer a recommended plan + booking link and sends us the lead (fallback: Firestore + EmailJS) | **≤ 15 min, any time** |
+| 1. Lead in (form, outreach) | `growth` | `api/start.ts` emails the enquirer a recommended plan + booking link and sends us the lead (fallback: Firestore + EmailJS). Not running on Cloudflare yet, so the site promises a person's reply the same business day | 15 min once ported; same business day now |
 | 2. Qualify + plan fit | `client-success` | A person reads every enquiry and the AI's suggestion, corrects it if needed, and confirms the call | Same business day |
 | 3. Brief + content | `client-success` | `clients/<slug>/BRIEF.md` and `clients/<slug>/site.json` (copied from the closest `templates/*/example.json`); we write the copy | Day 0, same day as the call |
 | 4. Preview | `designer` | Built site on a private preview URL. The designer picks the layout, theme, hero and accent for this client (the builder refuses a combination another client has), then places photos and orders sections around what customers do first | Within 24 h |
@@ -96,7 +96,7 @@ Stack, per client:
 3. **Actions:** booking into Google Calendar or Outlook (or a booking request the owner confirms), transfer urgent calls to the owner's mobile.
 4. **After the call:** a webhook sends the summary (caller, number, job, address, time, urgency, transcript link) to the owner by WhatsApp (WhatsApp Business Cloud API or Twilio), SMS or email (Resend).
 5. **Caps:** a monthly spend cap per client in the voice and telephony accounts; at the cap, calls fall back to voicemail or the owner's mobile.
-6. **QA before go-live:** 10 test calls covering a booking, a price question, an urgent job, an off-topic caller and a caller who wants a person.
+6. **QA before go-live:** the 10 test calls in `CONCIERGE_SETUP.md`. The client fills in that form on the setup call.
 
 Pricing check: $149/month covers setup and upkeep; the number (~$5-10/month) is included; call minutes are billed at cost. Review real per-minute costs after the first 3 clients.
 

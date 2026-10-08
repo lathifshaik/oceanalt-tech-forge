@@ -113,11 +113,16 @@ button { font: inherit; }
 .hp-site { position: absolute; left: 0; top: 14%; width: 78%; border-radius: 14px; box-shadow: 0 0 0 1px rgb(var(--shadow) / .08), 0 40px 70px -40px rgb(var(--shadow) / .45); transform: rotate(-4deg); opacity: .92; animation: drift 1.2s var(--ease) both; }
 .hp-phone { position: absolute; right: 4%; top: 0; bottom: 0; width: min(19rem, 56%); padding: 1rem .75rem; border-radius: 2.6rem; background: linear-gradient(180deg, #e9f1f2, #f7f8f6 60%); box-shadow: 0 0 0 7px #0b1a22, 0 0 0 8px rgb(255 255 255 / .2), 0 60px 90px -50px rgb(var(--shadow) / .7); animation: rise 1s var(--ease) .15s both; overflow: hidden; }
 .hp-island { width: 5.5rem; height: 1.45rem; margin: 0 auto; border-radius: 999px; background: #0b1a22; }
-.face { display: block; object-fit: contain; animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) both, bob 4.5s ease-in-out .8s infinite; }
+.face { position: relative; display: block; }
+.face-img { display: block; width: 100%; height: 100%; object-fit: contain; animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) both, bob 4.5s ease-in-out .8s infinite; }
+.face-mood { position: absolute; right: -16%; bottom: -8%; width: 52%; height: 52%; object-fit: contain; filter: drop-shadow(0 4px 6px rgb(var(--shadow) / .25)); animation: mood .6s cubic-bezier(.34, 1.56, .64, 1) both; }
+@keyframes mood { from { opacity: 0; transform: scale(.2) rotate(-25deg); } }
 @keyframes pop { from { opacity: 0; transform: scale(.55) translateY(8px); } }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-3px) rotate(-2deg); } }
 .hp-orbit { position: absolute; z-index: 2; display: grid; place-items: center; width: 4.2rem; height: 4.2rem; border-radius: 50%; background: rgb(255 255 255 / .9); box-shadow: 0 0 0 1px rgb(var(--shadow) / .05), 0 18px 34px -18px rgb(var(--shadow) / .55); animation: pop .8s cubic-bezier(.34, 1.56, .64, 1) both, float 6s ease-in-out 1.2s infinite; }
-.hp-orbit .face { width: 3.2rem; height: 3.2rem; animation: none; }
+.hp-orbit .face { width: 3.2rem; height: 3.2rem; }
+.hp-orbit .face-img { animation: none; }
+.hp-orbit .face-mood { animation-delay: 1.2s; }
 .hp-orbit.o1 { left: -2%; top: 2%; }
 .hp-orbit.o2 { left: 30%; top: -4%; width: 3.4rem; height: 3.4rem; }
 .hp-orbit.o2 .face { width: 2.6rem; height: 2.6rem; }
@@ -198,9 +203,9 @@ button { font: inherit; }
 .sv-av .face { width: 2.6rem; height: 2.6rem; }
 .sv-av.is-ringing::before, .sv-av.is-ringing::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 2px var(--accent); animation: ring 1.2s var(--ease) infinite; }
 .sv-av.is-ringing::after { animation-delay: .4s; }
-.sv-av.is-ringing .face { animation: ring-shake .5s ease-in-out infinite; }
+.sv-av.is-ringing .face-img { animation: ring-shake .5s ease-in-out infinite; }
 @keyframes ring-shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
-.sv-lines li.is-on:last-of-type .face, .sv-lines li.is-on:has(+ li:not(.is-on)) .face { animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) both, talk .45s ease-in-out .7s 6; }
+.sv-lines li.is-on:last-of-type .face-img, .sv-lines li.is-on:has(+ li:not(.is-on)) .face-img { animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) both, talk .45s ease-in-out .7s 6; }
 @keyframes talk { 50% { transform: translateY(-2px) scale(1.06); } }
 .sv-wave { display: inline-flex; align-items: center; gap: 3px; height: 1.3rem; margin-left: auto; }
 .sv-wave i { width: 3px; height: 100%; border-radius: 2px; background: var(--accent); animation: wave .9s ease-in-out infinite; }
@@ -208,7 +213,7 @@ button { font: inherit; }
 .sv-lines { display: grid; gap: .6rem; padding: 1.1rem; min-height: 15rem; align-content: start; }
 .sv-lines li { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: .55rem; align-items: end; max-width: 90%; opacity: 0; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
 .sv-lines li.is-on { opacity: 1; transform: none; }
-.sv-lines li:not(.is-on) .face { animation: none; }
+.sv-lines li:not(.is-on) .face-img { animation: none; }
 .sv-lines p { padding: .6rem .85rem; border-radius: 16px; font-size: .9rem; line-height: 1.45; }
 .sv-lines .is-c p { background: var(--accent-soft); border-bottom-left-radius: 5px; }
 .sv-face { width: 2.2rem; height: 2.2rem; }
@@ -224,10 +229,10 @@ button { font: inherit; }
 .sv-wa.is-on { opacity: 1; transform: none; }
 .sv-wa-who { position: relative; flex: none; }
 .sv-wa-who .face { width: 2.6rem; height: 2.6rem; }
-.sv-wa-who > img:not(.face) { position: absolute; right: -4px; bottom: -2px; width: 1.1rem; height: 1.1rem; background: #fff; border-radius: 50%; }
+.sv-wa-logo, .sv-wa-who > img.sv-wa-logo { position: absolute; right: -4px; bottom: -2px; width: 1.1rem; height: 1.1rem; background: #fff; border-radius: 50%; }
 .sv-wa b { display: block; font-size: .95rem; }
 .sv-wa span { color: var(--muted); font-size: .88rem; }
-.sv-checkout { display: grid; gap: 1.1rem; padding: 1.4rem; border-radius: 22px; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 40px 70px -45px rgb(var(--shadow) / .5); }
+.sv-checkout { position: relative; overflow: hidden; display: grid; gap: 1.1rem; padding: 1.4rem; border-radius: 22px; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 40px 70px -45px rgb(var(--shadow) / .5); }
 .sv-co-top { display: flex; align-items: center; gap: .8rem; }
 .sv-co-top > div { display: grid; gap: .15rem; }
 .sv-co-top span { color: var(--muted); font-size: .9rem; }
@@ -454,3 +459,45 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* Checkout sheet: each payment method plays out like people know it */
+.sv-co-btn.is-press { animation: press .9s var(--ease) .5s both; }
+@keyframes press { 50% { transform: scale(.97); } }
+.sv-sheet { position: absolute; left: .6rem; right: .6rem; bottom: .6rem; display: grid; gap: 1rem; padding: 1.1rem 1.2rem 1.3rem; border-radius: 20px; background: #fff; color: #0b1a22; box-shadow: 0 -10px 40px -10px rgb(var(--shadow) / .35), 0 0 0 1px rgb(var(--shadow) / .06); transform: translateY(115%); transition: transform .55s cubic-bezier(.32, .72, 0, 1); }
+.sv-sheet.is-open { transform: none; }
+.sv-sheet-top { display: flex; align-items: center; gap: .7rem; padding-bottom: .8rem; border-bottom: 1px solid #e3e7e5; font-size: .9rem; }
+.sv-sheet-top img, .sv-sheet-top .i { width: 2.2rem; height: 2.2rem; }
+.sv-sheet-top b { margin-left: auto; font-size: 1.05rem; }
+.sv-sheet-auth, .sv-sheet-done { display: grid; justify-items: center; gap: .6rem; min-height: 6.4rem; align-content: center; color: #56636b; font-size: .88rem; text-align: center; }
+.sv-faceid { width: 3rem; height: 3rem; color: #0b1a22; }
+.sv-sheet-auth.is-scan .sv-faceid { color: #1a73e8; animation: scan 1.1s ease-in-out infinite; }
+@keyframes scan { 50% { transform: scale(1.08); opacity: .75; } }
+.sv-gcard { display: grid; gap: .1rem; width: 9.5rem; padding: .7rem .8rem; border-radius: 12px; background: linear-gradient(135deg, #1a73e8, #0b7285); color: #fff; text-align: left; font-size: .75rem; box-shadow: 0 10px 20px -10px rgb(26 115 232 / .7); transition: transform .3s var(--ease); }
+.sv-gcard b { font-size: .9rem; letter-spacing: .05em; }
+.sv-gcard.is-tap { animation: tap .6s var(--ease) both; }
+@keyframes tap { 50% { transform: scale(.95) translateY(2px); } }
+.sv-gbtn { position: relative; overflow: hidden; padding: .45rem 1.2rem; border-radius: 999px; background: #1a73e8; color: #fff; font-weight: 600; font-size: .85rem; }
+.sv-gbtn.is-press::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: rgb(255 255 255 / .5); transform: translate(-50%, -50%); animation: ripple .8s ease-out both; }
+@keyframes ripple { to { width: 220px; height: 220px; opacity: 0; } }
+.sv-four { display: flex; gap: .45rem; }
+.sv-four li { width: 1.6rem; height: 1.6rem; border-radius: 50%; box-shadow: inset 0 0 0 2px #b2fce4; background: #fff; }
+.sv-four li:first-child { background: #b2fce4; }
+.sv-four.is-fill li { animation: fill .4s var(--ease) both; }
+.sv-four.is-fill li:nth-child(2) { animation-delay: .25s; } .sv-four.is-fill li:nth-child(3) { animation-delay: .5s; } .sv-four.is-fill li:nth-child(4) { animation-delay: .75s; }
+@keyframes fill { to { background: #b2fce4; } }
+.sv-cardno { padding: .55rem .8rem; border-radius: 10px; box-shadow: inset 0 0 0 1.5px #dadfdc; font-size: .95rem; color: #0b1a22; }
+.sv-cardno i { display: inline-block; overflow: hidden; white-space: nowrap; font-style: normal; width: 0; vertical-align: bottom; }
+.sv-cardno.is-typed i { animation: type 1.2s steps(19) forwards; }
+@keyframes type { to { width: 19ch; } }
+.sv-sheet-done { color: #0b1a22; font-weight: 600; }
+.sv-tick { width: 3.2rem; height: 3.2rem; }
+.sv-tick circle { stroke-dasharray: 145; stroke-dashoffset: 145; animation: draw .6s var(--ease) forwards; }
+.sv-tick path { stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw .4s var(--ease) .45s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* Work cards as sample case studies: the owner, before, and what we built. */
+.work-case { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+.work-face { width: 3.25rem; height: 3.25rem; }
+.work-case dl { margin-top: .5rem; display: grid; gap: .15rem; max-width: 54ch; }
+.work-case dt { font-size: .75rem; font-weight: 600; color: var(--ink); margin-top: .45rem; }
+.work-case dd { margin: 0; color: var(--muted); }

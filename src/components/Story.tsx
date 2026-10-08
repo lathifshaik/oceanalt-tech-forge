@@ -13,38 +13,53 @@ const logo = (name: string) => `/logos/${name}.svg`;
 // 3D people from Microsoft Fluent Emoji (MIT, see public/avatars/LICENSE.txt).
 const face = (name: string) => `/avatars/${name}.webp`;
 
-function Face({ who, label, className = "" }: { who: string; label?: string; className?: string }) {
-  return <img className={`face ${className}`} src={face(who)} alt={label ?? ""} width={160} height={160} loading="lazy" />;
+// A person, plus an optional 3D expression that pops in beside them when it
+// changes (worried, relieved, grinning...), so you can read how they feel.
+export type Mood = "worried" | "anxious" | "relieved" | "grin" | "party" | "smile" | "thinking" | "wink" | "beaming" | "nerd" | "starstruck";
+export function Face({ who, mood, label, className = "" }: { who: string; mood?: Mood; label?: string; className?: string }) {
+  return (
+    <span className={`face ${className}`}>
+      <img key={who} className="face-img" src={face(who)} alt={label ?? ""} width={160} height={160} loading="lazy" />
+      {mood && <img key={mood} className="face-mood" src={face(`mood-${mood}`)} alt="" width={96} height={96} loading="lazy" />}
+    </span>
+  );
 }
 
 /* ─── Hero phone ─────────────────────────────────────────────────────────── */
 
-type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; who: string; title: string; body: string; time: string };
+type Note = { app: string; logo?: string; icon?: "phone" | "calendar"; who: string; mood: Mood; title: string; body: string; time: string };
 const NOTES: Note[] = [
-  { app: "Your concierge", icon: "phone", who: "mel", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
-  { app: "Stripe", logo: "stripe", who: "sam", title: "Sam paid a $30 deposit", body: "Switchboard check, Thu 8am. Paid with Apple Pay.", time: "11:58" },
-  { app: "Google", logo: "google", who: "tom", title: "Tom found you on Google Maps", body: "Wants a quote for an EV charger in Adamstown.", time: "12:15" },
-  { app: "Xero", logo: "xero", who: "priya", title: "Priya paid her invoice", body: "$2,380, matched and reconciled in Xero.", time: "12:31" },
+  { app: "Your concierge", icon: "phone", who: "mel-ok", mood: "relieved", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
+  { app: "Stripe", logo: "stripe", who: "sam", mood: "smile", title: "Sam paid a $30 deposit", body: "Switchboard check, Thu 8am. Paid with Apple Pay.", time: "11:58" },
+  { app: "Google", logo: "google", who: "tom", mood: "grin", title: "Tom found you on Google Maps", body: "Wants a quote for an EV charger in Adamstown.", time: "12:15" },
+  { app: "Xero", logo: "xero", who: "priya", mood: "beaming", title: "Priya paid her invoice", body: "$2,380, matched and reconciled in Xero.", time: "12:31" },
 ];
 
 // The kinds of owners we work for, floating around the phone.
-const ORBIT = [
-  { who: "yoga", label: "Yoga teacher" },
-  { who: "cafe", label: "Café owner" },
-  { who: "physio", label: "Physio" },
-  { who: "mechanic", label: "Mechanic" },
-  { who: "landscaper", label: "Landscaper" },
-  { who: "accountant", label: "Accountant" },
+const ORBIT: { who: string; label: string; mood: Mood }[] = [
+  { who: "yoga", label: "Yoga teacher", mood: "relieved" },
+  { who: "cafe", label: "Café owner", mood: "beaming" },
+  { who: "physio", label: "Physio", mood: "smile" },
+  { who: "mechanic", label: "Mechanic", mood: "wink" },
+  { who: "landscaper", label: "Landscaper", mood: "grin" },
+  { who: "accountant", label: "Accountant", mood: "nerd" },
 ];
 
 export function HeroPhone() {
   // Index of the newest notification shown; the three before it stack below.
   const [n, setN] = useState(2);
+  const [jim, setJim] = useState<Mood | undefined>("grin");
   useEffect(() => {
     if (reduced()) return;
     setN(0);
-    const t = window.setInterval(() => setN((x) => x + 1), 2600);
-    return () => window.clearInterval(t);
+    setJim(undefined);
+    const off: number[] = [];
+    const t = window.setInterval(() => {
+      setN((x) => x + 1);
+      setJim(["grin", "party", "beaming", "starstruck"][Math.floor(Math.random() * 4)] as Mood);
+      off.push(window.setTimeout(() => setJim(undefined), 1500));
+    }, 2600);
+    return () => { window.clearInterval(t); off.forEach(clearTimeout); };
   }, []);
   const shown = [0, 1, 2].map((k) => n - k).filter((i) => i >= 0).map((i) => ({ i, note: NOTES[i % NOTES.length] }));
 
@@ -52,20 +67,20 @@ export function HeroPhone() {
     <div className="hp-scene" aria-hidden="true">
       {ORBIT.map((o, i) => (
         <span key={o.who} className={`hp-orbit o${i + 1}`} title={o.label} style={{ animationDelay: `${0.4 + i * 0.12}s` }}>
-          <Face who={o.who} />
+          <Face who={o.who} mood={o.mood} />
         </span>
       ))}
       <img className="hp-site" src="/previews/kerr-and-sons-electrical.webp" alt="" width={1200} height={750} fetchPriority="high" />
       <div className="hp-phone">
         <div className="hp-island" />
         <div className="hp-owner">
-          <Face who="jim" className="hp-jim" />
+          <Face who="jim" mood={jim} className="hp-jim" />
           <p><b>Jim's phone</b><span>Tuesday, on the tools</span></p>
         </div>
         <ul className="hp-notes">
           {shown.map(({ i, note }, k) => (
             <li key={i} className={`hp-note is-${k}`}>
-              <Face who={note.who} className="hp-face" />
+              <Face who={note.who} mood={note.mood} className="hp-face" />
               <span className="hp-app">
                 {note.logo ? <img src={logo(note.logo)} alt="" width={16} height={16} /> : <Icon name={note.icon ?? "phone"} />}
                 {note.app}
@@ -122,73 +137,132 @@ function CallVisual({ active }: { active: boolean }) {
     <div className="sv sv-call">
       <div className="sv-callcard">
         <div className="sv-caller">
-          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}><Face who="mel" label="Mel, the caller" /></span>
+          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}><Face who={step >= 4 ? "mel-ok" : "mel-worried"} mood={step >= 4 ? "relieved" : "worried"} label="Mel, the caller" /></span>
           <div><b>{step === 0 ? "Mel is calling" : "Answered by your concierge"}</b><small>Jim's up a ladder in Charlestown</small></div>
           {step > 0 && step < 5 && <span className="sv-wave"><i /><i /><i /><i /></span>}
         </div>
         <ol className="sv-lines">
           {LINES.map((l, i) => (
             <li key={i} className={`is-${l.who}${step > i ? " is-on" : ""}`}>
-              <span className={`sv-facewrap${l.who === "c" ? " is-ai" : ""}`}><Face who={l.who === "c" ? "concierge" : "mel"} className="sv-face" /></span>
+              <span className={`sv-facewrap${l.who === "c" ? " is-ai" : ""}`}><Face who={l.who === "c" ? "concierge" : i < 3 ? "mel-worried" : "mel-ok"} className="sv-face" /></span>
               <div><span>{l.who === "c" ? "AI concierge" : "Mel"}</span><p>{l.text}</p></div>
             </li>
           ))}
         </ol>
       </div>
       <div className={`sv-wa${step >= 5 ? " is-on" : ""}`}>
-        <span className="sv-wa-who"><Face who="jim" label="Jim" /><img src={logo("whatsapp")} alt="" width={18} height={18} /></span>
+        <span className="sv-wa-who"><Face who={step >= 5 ? "jim-wave" : "jim"} mood={step >= 5 ? "party" : undefined} label="Jim" /><img className="sv-wa-logo" src={logo("whatsapp")} alt="" width={18} height={18} /></span>
         <div><b>To Jim: new job booked</b><span>Mel, Merewether. Today 2 to 4pm. Told to switch it off at the board.</span></div>
       </div>
     </div>
   );
 }
 
-const PAY: { name: string; logo?: string }[] = [
-  { name: "Apple Pay", logo: "applepay" },
-  { name: "Google Pay", logo: "googlepay" },
-  { name: "Afterpay", logo: "afterpay" },
-  { name: "Card" },
+// A checkout that plays each payment method the way people know it: a sheet
+// slides up (Apple Pay with Face ID, Google Pay with a card, Afterpay in four,
+// or a typed card), then a tick draws itself and the class is paid.
+type Method = "apple" | "google" | "afterpay" | "card";
+const PAY: { id: Method; name: string; logo?: string; done: string }[] = [
+  { id: "apple", name: "Apple Pay", logo: "applepay", done: "#0b1a22" },
+  { id: "google", name: "Google Pay", logo: "googlepay", done: "#1a73e8" },
+  { id: "afterpay", name: "Afterpay", logo: "afterpay", done: "#0f1c1a" },
+  { id: "card", name: "card", done: "#0b7285" },
 ];
+type Phase = "ready" | "sheet" | "auth" | "done" | "paid";
+
+function Tick({ color }: { color: string }) {
+  return (
+    <svg className="sv-tick" viewBox="0 0 52 52" aria-hidden="true">
+      <circle cx="26" cy="26" r="23" fill="none" stroke={color} strokeWidth="3" />
+      <path d="M15 27l7 7 15-16" fill="none" stroke={color} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function FaceId() {
+  return (
+    <svg className="sv-faceid" viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M4 14V9a5 5 0 0 1 5-5h5M34 4h5a5 5 0 0 1 5 5v5M44 34v5a5 5 0 0 1-5 5h-5M14 44H9a5 5 0 0 1-5-5v-5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      <path d="M17 18v4M31 18v4M24 18v9h-2M18 33c3.5 3 8.5 3 12 0" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function Sheet({ m, phase }: { m: (typeof PAY)[number]; phase: Phase }) {
+  const auth = phase === "auth";
+  const done = phase === "done";
+  return (
+    <div className={`sv-sheet is-${m.id}${phase === "sheet" || auth || done ? " is-open" : ""}`}>
+      <div className="sv-sheet-top">
+        {m.logo ? <img src={logo(m.logo)} alt="" width={40} height={40} /> : <Icon name="card" />}
+        <span>Saltwater Yoga</span>
+        <b className="num">$25.00</b>
+      </div>
+      {done ? (
+        <div className="sv-sheet-done"><Tick color={m.done} /><span>{m.id === "apple" ? "Done" : "Paid"}</span></div>
+      ) : m.id === "apple" ? (
+        <div className={`sv-sheet-auth${auth ? " is-scan" : ""}`}><FaceId /><span>{auth ? "Confirming with Face ID" : "Double-click to pay"}</span></div>
+      ) : m.id === "google" ? (
+        <div className="sv-sheet-auth">
+          <div className={`sv-gcard${auth ? " is-tap" : ""}`}><span>Visa</span><b>•••• 4242</b></div>
+          <span className={`sv-gbtn${auth ? " is-press" : ""}`}>Continue</span>
+        </div>
+      ) : m.id === "afterpay" ? (
+        <div className="sv-sheet-auth">
+          <ol className={`sv-four${auth ? " is-fill" : ""}`}><li /><li /><li /><li /></ol>
+          <span>4 payments of $6.25, interest-free</span>
+        </div>
+      ) : (
+        <div className="sv-sheet-auth">
+          <span className={`sv-cardno num${auth ? " is-typed" : ""}`}><i>4242 4242 4242 4242</i></span>
+          <span>Card details</span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function PayVisual({ active }: { active: boolean }) {
-  // Cycles through payment methods: choose, paying, paid.
   const [k, setK] = useState(0);
-  const [phase, setPhase] = useState<"ready" | "paying" | "paid">("paid");
+  const [phase, setPhase] = useState<Phase>("paid");
   useEffect(() => {
     if (!active || reduced()) return;
     let i = 0;
+    const timers: number[] = [];
+    const at = (ms: number, f: () => void) => timers.push(window.setTimeout(f, ms));
     const cycle = () => {
       setK(i % PAY.length);
       setPhase("ready");
-      timers.push(window.setTimeout(() => setPhase("paying"), 1100));
-      timers.push(window.setTimeout(() => setPhase("paid"), 2000));
+      at(900, () => setPhase("sheet"));
+      at(1700, () => setPhase("auth"));
+      at(3200, () => setPhase("done"));
+      at(4600, () => setPhase("paid"));
       i += 1;
     };
-    const timers: number[] = [];
     cycle();
-    const loop = window.setInterval(cycle, 3600);
+    const loop = window.setInterval(cycle, 6200);
     return () => { window.clearInterval(loop); timers.forEach(clearTimeout); };
   }, [active]);
   const m = PAY[k];
+  const paid = phase === "paid" || phase === "done";
 
   return (
     <div className="sv sv-pay">
       <div className="sv-checkout">
         <div className="sv-co-top">
-          <Face who="yoga" className="sv-co-face" />
+          <Face who="yoga" mood={paid ? "starstruck" : "smile"} className="sv-co-face" />
           <div><b>Saltwater Yoga</b><span>Sunrise flow, Sat 7am with Ana</span></div>
         </div>
         <div className="sv-co-amt"><span>Class</span><b className="num">$25.00</b></div>
-        <div className={`sv-co-btn is-${phase}`}>
+        <div className={`sv-co-btn is-${phase === "paid" ? "paid" : "ready"}${phase === "ready" ? " is-press" : ""}`}>
           {phase === "paid" ? (
-            <><Icon name="check" /> Paid with {m.name}</>
-          ) : phase === "paying" ? (
-            <><i className="sv-spin" /> Paying</>
+            <><Icon name="check" /> Paid with {m.name === "card" ? "card" : m.name}</>
           ) : (
             <>{m.logo ? <img src={logo(m.logo)} alt="" width={20} height={20} /> : <Icon name="card" />} Pay with {m.name}</>
           )}
         </div>
         <p className="sv-co-to"><img src={logo("stripe")} alt="" width={14} height={14} /> Paid straight into your own Stripe account</p>
+        <Sheet m={m} phase={phase} />
       </div>
       <div className="sv-methods">
         <img src={logo("applepay")} alt="Apple Pay" width={26} height={26} />

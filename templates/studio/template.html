@@ -134,7 +134,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#main">{{icon:sparkle}} {{business.name}}</a>
-    <nav class="nav" aria-label="Main"><a href="#treatments">Treatments</a>{{#gift}}<a href="#gift">Gift vouchers</a>{{/gift}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#visit">Visit</a></nav>
+    <nav class="nav" aria-label="Main"><a href="#treatments">{{#business.servicesLabel}}{{business.servicesLabel}}{{/business.servicesLabel}}{{^business.servicesLabel}}Treatments{{/business.servicesLabel}}</a>{{#gift}}<a href="#gift">Gift vouchers</a>{{/gift}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#visit">Visit</a></nav>
     <a class="btn btn-light" href="{{business.bookingUrl}}">Book online</a>
   </div>
 </header>
@@ -147,7 +147,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
       <p>{{business.intro}}</p>
       <div class="ctas">
         <a class="btn btn-accent" href="{{business.bookingUrl}}">{{icon:calendar}} Book online</a>
-        <a class="btn btn-light" href="#treatments">See treatments</a>
+        <a class="btn btn-light" href="#treatments">{{#business.servicesCta}}{{business.servicesCta}}{{/business.servicesCta}}{{^business.servicesCta}}See treatments{{/business.servicesCta}}</a>
       </div>
     </div>
     <div class="curve" aria-hidden="true"></div>
@@ -168,7 +168,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
 
   <section class="treat" id="treatments">
     <div class="wrap">
-      <h2 class="h2">Treatments</h2>
+      <h2 class="h2">{{#business.servicesLabel}}{{business.servicesLabel}}{{/business.servicesLabel}}{{^business.servicesLabel}}Treatments{{/business.servicesLabel}}</h2>
       {{#treatmentsIntro}}<p class="lede">{{treatmentsIntro}}</p>{{/treatmentsIntro}}
       <div class="groups">
         {{#treatments}}

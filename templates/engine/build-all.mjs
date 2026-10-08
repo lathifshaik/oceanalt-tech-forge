@@ -13,13 +13,21 @@ const manifest = [];
 
 const themes = JSON.parse(readFileSync(join(ROOT, "themes", "themes.json"), "utf8"));
 
+// Each layout folder has example.json, and can have more sample businesses as
+// example-<name>.json. An example may set its own "showcase" designs.
+const examples = [];
 for (const t of readdirSync(ROOT, { withFileTypes: true })) {
-  const example = join(ROOT, t.name, "example.json");
-  if (!t.isDirectory() || !existsSync(example)) continue;
-  const site = JSON.parse(readFileSync(example, "utf8"));
+  if (!t.isDirectory()) continue;
+  for (const f of readdirSync(join(ROOT, t.name)).filter((f) => /^example(-[\w-]+)?\.json$/.test(f)).sort()) {
+    examples.push({ t, example: join(ROOT, t.name, f) });
+  }
+}
+
+for (const { t, example } of examples) {
+  const { showcase, ...site } = JSON.parse(readFileSync(example, "utf8"));
   const meta = JSON.parse(readFileSync(join(ROOT, t.name, "meta.json"), "utf8"));
   // The same business in several designs, to show that no two sites look alike.
-  const variants = (meta.showcase || [{ theme: meta.defaultTheme, hero: meta.heroVariants[0] }]).map((v, i) => {
+  const variants = (showcase || meta.showcase || [{ theme: meta.defaultTheme, hero: meta.heroVariants[0] }]).map((v, i) => {
     const path = i === 0 ? site.slug : `${site.slug}-${v.theme}`;
     const { html } = buildSite(
       { ...site, design: { ...site.design, ...v }, url: `https://oceanalt.com.au/work/${path}/` },

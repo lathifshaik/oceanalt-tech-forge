@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Icon, type IconName } from "./components/Icon";
 import { LogoWall } from "./components/Demos";
-import { HeroPhone, Story } from "./components/Story";
+import { Face, HeroPhone, Story, type Mood } from "./components/Story";
 import { LANDINGS } from "./seo/landing";
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -19,6 +19,8 @@ const WORK: {
   id: TemplateId;
   kind: string;
   business: string;
+  owner: { face: string; mood: Mood };
+  problem: string;
   pitch: string;
   designs: { path: string; theme: string }[];
 }[] = [
@@ -26,6 +28,8 @@ const WORK: {
     id: "cafe",
     kind: "Café",
     business: "Little Tern Coffee, Fremantle",
+    owner: { face: "cafe", mood: "beaming" },
+    problem: "People kept ringing to ask if they were open yet.",
     pitch: "Menu, hours and directions first. The sign on the photo flips to OPEN or CLOSED from the real opening hours.",
     designs: [
       { path: "little-tern-coffee", theme: "Harbour" },
@@ -37,6 +41,8 @@ const WORK: {
     id: "trades",
     kind: "Electrician",
     business: "Kerr & Sons Electrical, Newcastle",
+    owner: { face: "jim", mood: "grin" },
+    problem: "Jobs went to whoever picked up first, and Jim's usually up a ladder.",
     pitch: "Built to make the phone ring: tap-to-call everywhere, the licence front and centre, and a quote form.",
     designs: [
       { path: "kerr-and-sons-electrical", theme: "Coast" },
@@ -48,6 +54,8 @@ const WORK: {
     id: "studio",
     kind: "Physio & Pilates",
     business: "Tidewater Physio & Pilates, Bulimba",
+    owner: { face: "physio", mood: "smile" },
+    problem: "Bookings came in by phone and text, and gift vouchers lived on paper.",
     pitch: "Every treatment has a price and a Book button. Gift vouchers flip over to show their terms and sell themselves.",
     designs: [
       { path: "tidewater-physio-pilates", theme: "Calm" },
@@ -56,9 +64,24 @@ const WORK: {
     ],
   },
   {
+    id: "studio",
+    kind: "Yoga studio",
+    business: "Saltwater Yoga, Cronulla",
+    owner: { face: "yoga", mood: "relieved" },
+    problem: "Ana was taking class bookings in Instagram DMs and chasing $25 payments after class.",
+    pitch: "Every class has a time, a price and a Book button. People pay with Apple Pay or Google Pay before they've rolled out their mat.",
+    designs: [
+      { path: "saltwater-yoga", theme: "Sun" },
+      { path: "saltwater-yoga-calm", theme: "Calm" },
+      { path: "saltwater-yoga-night", theme: "Night" },
+    ],
+  },
+  {
     id: "shop",
     kind: "Florist",
     business: "Wattle & Fern, Hobart",
+    owner: { face: "landscaper", mood: "relieved" },
+    problem: "Orders came through Instagram DMs, paid by bank transfer, chased by hand.",
     pitch: "Every bunch has its own Buy button, paid straight into the shop's Stripe. The delivery tag counts down to the same-day cutoff.",
     designs: [
       { path: "wattle-and-fern-florist", theme: "Sun" },
@@ -70,6 +93,8 @@ const WORK: {
     id: "pro",
     kind: "Law firm",
     business: "Harlow Reid Lawyers, Parramatta",
+    owner: { face: "accountant", mood: "nerd" },
+    problem: "People didn't call because they couldn't tell what anything would cost.",
     pitch: "Fixed fees in plain sight, the team up front, and a business card that flips over to save the firm straight to your phone.",
     designs: [
       { path: "harlow-reid-lawyers", theme: "Ink" },
@@ -306,9 +331,15 @@ function WorkCard({ w }: { w: (typeof WORK)[number] }) {
         <span className="work-open" aria-hidden="true"><Icon name="arrow-up-right" /></span>
       </a>
       <div className="work-meta">
-        <div>
-          <h3>{w.business}</h3>
-          <p>{w.pitch}</p>
+        <div className="work-case">
+          <Face who={w.owner.face} mood={w.owner.mood} className="work-face" />
+          <div>
+            <h3>{w.business}</h3>
+            <dl>
+              <dt>Before</dt><dd>{w.problem}</dd>
+              <dt>What we built</dt><dd>{w.pitch}</dd>
+            </dl>
+          </div>
         </div>
         <div className="work-row">
           <div className="designs" role="group" aria-label={`${w.business} designs`}>
@@ -335,7 +366,7 @@ function Work() {
       <div className="wrap work-head">
         <div>
           <h2 className="h2">Designed for one business. Never reused.</h2>
-          <p className="lede">Five sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
+          <p className="lede">Six sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
         </div>
         <div className="work-nav">
           <button type="button" onClick={() => nudge(-1)} aria-label="Previous"><Icon name="arrow-right" className="i flip" /></button>
@@ -343,7 +374,7 @@ function Work() {
         </div>
       </div>
       <div className="work-track" ref={track} tabIndex={0} aria-label="Example sites">
-        {WORK.map((w) => <WorkCard key={w.id} w={w} />)}
+        {WORK.map((w) => <WorkCard key={w.designs[0].path} w={w} />)}
       </div>
       <div className="wrap">
         <p className="work-note">These are sample businesses we made to show the range; names and reviews are fictional. A real client's design is made for them and never given to anyone else.</p>

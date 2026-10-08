@@ -1,0 +1,181 @@
+{
+  "template": "studio",
+  "slug": "saltwater-yoga",
+  "url": "https://saltwater.example/",
+  "_note": "Sample business for the template gallery. Names, numbers and details are fictional.",
+  "schemaType": "SportsActivityLocation",
+  "business": {
+    "name": "Saltwater Yoga",
+    "servicesLabel": "Classes",
+    "servicesCta": "See classes",
+    "headline": "Breathe out. The ocean's right there.",
+    "intro": "Sunrise flow on the sand and slow evening classes in our Cronulla studio. Book and pay for a class in under a minute.",
+    "address": "3/12 The Kingsway, Cronulla NSW 2230",
+    "street": "3/12 The Kingsway",
+    "suburb": "Cronulla",
+    "state": "NSW",
+    "postcode": "2230",
+    "phone": "(02) 5550 2741",
+    "email": "hello@saltwater.example",
+    "instagram": "saltwateryoga",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "6am",
+        "close": "8pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "6am",
+        "close": "8pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "6am",
+        "close": "8pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "6am",
+        "close": "8pm"
+      },
+      {
+        "day": "Friday",
+        "open": "6am",
+        "close": "6pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "6:30am",
+        "close": "12pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "7am",
+        "close": "10am"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A sunrise yoga class on the beach"
+  },
+  "about": {
+    "title": "Small classes, by the water",
+    "body": "Never more than 12 on the mat, so every class gets proper cues and adjustments. New to yoga? Start with Saturday's sunrise flow; it's gentle and the view does half the work.",
+    "badges": [
+      "Yoga Australia registered",
+      "Mats and props supplied",
+      "Beginners welcome"
+    ],
+    "photo": "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Lead teacher Ana in a pigeon pose in the studio"
+  },
+  "treatmentsIntro": "Pay as you go, or save with a class pack. Pay by card, Apple Pay, Google Pay or Afterpay when you book.",
+  "treatments": [
+    {
+      "group": "Classes",
+      "items": [
+        {
+          "name": "Sunrise flow on the beach",
+          "duration": "60 min",
+          "note": "Sat and Sun",
+          "price": "$25"
+        },
+        {
+          "name": "Vinyasa flow",
+          "duration": "60 min",
+          "price": "$28"
+        },
+        {
+          "name": "Slow evening yin",
+          "duration": "75 min",
+          "price": "$28"
+        }
+      ]
+    },
+    {
+      "group": "Packs and privates",
+      "items": [
+        {
+          "name": "10-class pack",
+          "duration": "Valid 4 months",
+          "price": "$240"
+        },
+        {
+          "name": "Unlimited month",
+          "duration": "30 days",
+          "price": "$169"
+        },
+        {
+          "name": "Private session",
+          "duration": "60 min",
+          "price": "$110"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give someone a deep breath",
+    "body": "Gift cards work for any class or pack, and arrive by email straight away.",
+    "amount": "$50",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $25",
+      "Valid for 3 years",
+      "Use on any class, pack or private",
+      "Delivered by email straight away"
+    ]
+  },
+  "team": [
+    {
+      "name": "Ana Reyes",
+      "role": "Lead teacher, 500-hour trained",
+      "photo": "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&q=75&auto=format&fit=crop&crop=faces"
+    },
+    {
+      "name": "Jess Calloway",
+      "role": "Vinyasa and yin",
+      "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=75&auto=format&fit=crop&crop=faces"
+    },
+    {
+      "name": "Ravi Menon",
+      "role": "Breathwork and privates",
+      "photo": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=75&auto=format&fit=crop&crop=faces"
+    }
+  ],
+  "policies": [
+    {
+      "q": "I've never done yoga. Which class?",
+      "a": "Saturday's sunrise flow or any slow evening yin. Tell us when you book and your teacher will keep an eye out for you."
+    },
+    {
+      "q": "What if the weather turns?",
+      "a": "Beach classes move into the studio, a two-minute walk away. We'll text you by 5:30am."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free up to 12 hours before. Later than that, the class is used from your pack."
+    },
+    {
+      "q": "What should I bring?",
+      "a": "Water and something comfy. Mats, blocks and straps are supplied."
+    }
+  ],
+  "closingLine": "Book your first class in under a minute.",
+  "showcase": [
+    {
+      "theme": "sun",
+      "hero": "full"
+    },
+    {
+      "theme": "calm",
+      "hero": "split"
+    },
+    {
+      "theme": "night",
+      "hero": "full"
+    }
+  ]
+}

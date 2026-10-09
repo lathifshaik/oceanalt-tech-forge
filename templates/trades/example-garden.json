@@ -1,0 +1,134 @@
+{
+  "template": "trades",
+  "slug": "oakleaf-gardens",
+  "url": "https://oakleafgardens.example/",
+  "_note": "Sample business for the gallery, designed in Oceanalt's poster styles. Names, numbers and reviews are fictional. The licence number is fictional.",
+  "schemaType": "HomeAndConstructionBusiness",
+  "business": {
+    "name": "Oakleaf Gardens",
+    "headline": "Gardens looked after, every season.",
+    "intro": "Landscaping, hedging and autumn clean-ups across the Blue Mountains. A fixed price before we start.",
+    "phone": "0491 576 214",
+    "email": "jobs@oakleafgardens.example",
+    "hoursSummary": "Mon to Sat, 7am to 4pm",
+    "serviceArea": "Blue Mountains, NSW",
+    "areaServed": "Blue Mountains, NSW",
+    "licence": "348921C",
+    "licenceLabel": "Licence no."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1761637822930-fb1c1a3df94d?w=1600&q=75&auto=format&fit=crop",
+    "photoAlt": "A stone garden path between clipped hedges"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "title": "Licensed and insured",
+      "detail": "Structural landscaping licence and public liability"
+    },
+    {
+      "icon": "clock",
+      "title": "Quotes within two days",
+      "detail": "We come out, measure up and price it in writing"
+    },
+    {
+      "icon": "check-circle",
+      "title": "Fixed price first",
+      "detail": "You approve the price before any work starts"
+    }
+  ],
+  "servicesIntro": "Homes, holiday rentals and small strata gardens, from Glenbrook to Mount Victoria.",
+  "services": [
+    {
+      "icon": "leaf",
+      "name": "Autumn clean-ups",
+      "desc": "Leaves raked, gutters cleared and beds mulched before winter.",
+      "from": "From $280"
+    },
+    {
+      "icon": "scissors",
+      "name": "Hedging and pruning",
+      "desc": "Hedges shaped and trees pruned, green waste taken away."
+    },
+    {
+      "icon": "sprout",
+      "name": "Garden makeovers",
+      "desc": "New beds, planting plans and natives that suit the mountains' cold."
+    },
+    {
+      "icon": "home",
+      "name": "Paths and retaining walls",
+      "desc": "Stone and sleeper walls, steps and paths, built to last."
+    },
+    {
+      "icon": "droplet",
+      "name": "Watering systems",
+      "desc": "Drip irrigation that runs itself, set up for your garden."
+    }
+  ],
+  "servicesPhoto": "https://images.unsplash.com/photo-1760370048311-2bdaa1674ee1?w=1000&q=75&auto=format&fit=crop",
+  "servicesPhotoAlt": "A tree with yellow and orange autumn leaves",
+  "process": [
+    {
+      "title": "Call or send a photo",
+      "desc": "Tell us what the garden needs. Photos help us price it faster."
+    },
+    {
+      "title": "We quote on site",
+      "desc": "A fixed price, written down, with what's included."
+    },
+    {
+      "title": "Done and tidied",
+      "desc": "We finish, clean up and take the green waste with us."
+    }
+  ],
+  "areasNote": "Not sure if we cover you? Call and ask. We often do.",
+  "areas": [
+    "Katoomba",
+    "Leura",
+    "Wentworth Falls",
+    "Blackheath",
+    "Mount Victoria",
+    "Lawson",
+    "Hazelbrook",
+    "Springwood",
+    "Faulconbridge",
+    "Blaxland",
+    "Glenbrook",
+    "Bullaburra"
+  ],
+  "reviews": [
+    {
+      "quote": "Gutters, leaves and beds all done in a day before the first frost.",
+      "name": "Fiona G.",
+      "suburb": "Leura"
+    },
+    {
+      "quote": "Rebuilt our sleeper wall and it looks better than the original.",
+      "name": "Mark H.",
+      "suburb": "Springwood"
+    },
+    {
+      "quote": "Turned up when they said and the price matched the quote.",
+      "name": "Lily C.",
+      "suburb": "Katoomba"
+    }
+  ],
+  "contact": {
+    "formAction": "https://formspree.io/f/example"
+  },
+  "showcase": [
+    {
+      "theme": "autumn",
+      "hero": "full"
+    },
+    {
+      "theme": "halftone",
+      "hero": "split"
+    },
+    {
+      "theme": "bloom",
+      "hero": "full"
+    }
+  ]
+}

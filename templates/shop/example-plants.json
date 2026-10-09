@@ -1,0 +1,152 @@
+{
+  "template": "shop",
+  "slug": "greenhouse-plant-co",
+  "url": "https://greenhouseplants.example/",
+  "_note": "Sample business for the gallery, designed in Oceanalt's poster styles. Names, numbers and reviews are fictional. Buy links are placeholders for Stripe Payment Links.",
+  "schemaType": "Store",
+  "business": {
+    "name": "Greenhouse Plant Co",
+    "headline": "Plants that suit your light, delivered.",
+    "intro": "Indoor plants, pots and potting mix in Brunswick. Tell us your window and we'll pick the plant.",
+    "address": "301 Sydney Road, Brunswick VIC 3056",
+    "street": "301 Sydney Road",
+    "suburb": "Brunswick",
+    "state": "VIC",
+    "postcode": "3056",
+    "phone": "0491 573 908",
+    "email": "hello@greenhouseplants.example",
+    "instagram": "greenhouseplantco",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "10am",
+        "close": "6pm"
+      },
+      {
+        "day": "Friday",
+        "open": "10am",
+        "close": "6pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "9am",
+        "close": "4pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "10am",
+        "close": "3pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1566836610593-62a64888a216?w=1400&q=75&auto=format&fit=crop",
+    "photoAlt": "Potted plants on a shelf by a sunny window"
+  },
+  "delivery": {
+    "cutoff": {
+      "time": "12pm",
+      "days": [
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat"
+      ]
+    },
+    "facts": [
+      {
+        "icon": "van",
+        "title": "Same-day delivery",
+        "detail": "Order by 12pm, Tuesday to Saturday"
+      },
+      {
+        "icon": "pin",
+        "title": "Inner north",
+        "detail": "$10 within 8 km, free over $100"
+      },
+      {
+        "icon": "sprout",
+        "title": "Care card included",
+        "detail": "Light, water and feeding, in plain English"
+      }
+    ]
+  },
+  "shopTitle": "In the shop this week",
+  "shopIntro": "Every plant is potted up in the shop and checked for pests before it goes out the door.",
+  "products": [
+    {
+      "name": "Monstera",
+      "price": "$65",
+      "desc": "Big split leaves, happy in bright indirect light.",
+      "photo": "https://images.unsplash.com/photo-1654701381111-387c2b090a2e?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example",
+      "tag": "Most popular"
+    },
+    {
+      "name": "Rubber plant",
+      "price": "$48",
+      "desc": "Glossy and forgiving. Good for beginners.",
+      "photo": "https://images.unsplash.com/photo-1581573429747-42f947a4e178?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Shelf trio",
+      "price": "$55",
+      "desc": "Three small plants for a shelf or a desk, our pick.",
+      "photo": "https://images.unsplash.com/photo-1572780789900-43ef70568a0f?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    }
+  ],
+  "shopNote": "Prices in AUD and include GST. Payments are processed securely by Stripe.",
+  "story": {
+    "title": "Picked for your window",
+    "body": "Most plants die from the wrong spot, not the wrong owner. Send us a photo of your window and we'll tell you what will actually grow there.",
+    "photo": "https://images.unsplash.com/photo-1572780789900-43ef70568a0f?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A potted plant on a wall shelf"
+  },
+  "reviews": [
+    {
+      "quote": "Sent them a photo of my dark lounge room and the plant they picked is thriving.",
+      "name": "Jess W.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Delivered the same afternoon, potted and watered.",
+      "name": "Arjun S.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Friendly advice and no upsell.",
+      "name": "Claire B.",
+      "source": "Google review"
+    }
+  ],
+  "showcase": [
+    {
+      "theme": "bloom",
+      "hero": "split"
+    },
+    {
+      "theme": "autumn",
+      "hero": "split"
+    },
+    {
+      "theme": "riso",
+      "hero": "split"
+    }
+  ]
+}

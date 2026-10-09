@@ -27,10 +27,6 @@
     {
       "theme": "sun",
       "hero": "split"
-    },
-    {
-      "theme": "halftone",
-      "hero": "full"
     }
   ]
 }

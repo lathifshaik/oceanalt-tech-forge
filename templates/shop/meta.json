@@ -1,35 +1,12 @@
 {
   "name": "Shop",
   "for": "Florists, makers, boutiques, bakeries that deliver: up to about 50 products",
-  "required": [
-    "business.name",
-    "business.headline",
-    "business.intro",
-    "business.phone",
-    "hero.photo",
-    "products"
-  ],
+  "required": ["business.name", "business.headline", "business.intro", "business.phone", "hero.photo", "products"],
   "defaultTheme": "sun",
-  "heroVariants": [
-    "split",
-    "full"
-  ],
+  "heroVariants": ["split", "full"],
   "showcase": [
-    {
-      "theme": "sun",
-      "hero": "split"
-    },
-    {
-      "theme": "forest",
-      "hero": "full"
-    },
-    {
-      "theme": "ink",
-      "hero": "split"
-    },
-    {
-      "theme": "bloom",
-      "hero": "split"
-    }
+    { "theme": "sun", "hero": "split" },
+    { "theme": "forest", "hero": "full" },
+    { "theme": "ink", "hero": "split" }
   ]
 }

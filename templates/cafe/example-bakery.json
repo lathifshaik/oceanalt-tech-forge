@@ -1,0 +1,160 @@
+{
+  "template": "cafe",
+  "slug": "lemon-and-rye-bakery",
+  "url": "https://lemonandrye.example/",
+  "_note": "Sample business for the gallery, designed in Oceanalt's poster styles. Names, numbers and reviews are fictional.",
+  "business": {
+    "name": "Lemon & Rye",
+    "headline": "Sourdough, still warm at seven.",
+    "intro": "A small bakery in Marrickville. Sourdough, lemon tarts and good coffee, baked here from 4am.",
+    "address": "214 Illawarra Road, Marrickville NSW 2204",
+    "street": "214 Illawarra Road",
+    "suburb": "Marrickville",
+    "state": "NSW",
+    "postcode": "2204",
+    "phone": "(02) 5550 3187",
+    "email": "hello@lemonandrye.example",
+    "instagram": "lemonandrye",
+    "hoursSummary": "Open today from 7am",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "7am",
+        "close": "2pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "7am",
+        "close": "2pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "7am",
+        "close": "2pm"
+      },
+      {
+        "day": "Friday",
+        "open": "7am",
+        "close": "2pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "7am",
+        "close": "1pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "7am",
+        "close": "12pm"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "icon": "cup",
+      "text": "Coffee from 7am"
+    },
+    {
+      "icon": "leaf",
+      "text": "Organic flour from the Riverina"
+    },
+    {
+      "icon": "heart",
+      "text": "Yesterday's loaves half price after 1pm"
+    }
+  ],
+  "menuIntro": "Bread comes out of the oven from 6am. Pastries go fast on Saturdays, so come early or order ahead.",
+  "menu": [
+    {
+      "category": "Bread",
+      "items": [
+        {
+          "name": "Country sourdough",
+          "price": "9.00"
+        },
+        {
+          "name": "Rye and caraway",
+          "price": "10.00"
+        },
+        {
+          "name": "Baguette",
+          "price": "5.50"
+        },
+        {
+          "name": "Fruit and walnut",
+          "price": "11.00",
+          "desc": "Fridays and Saturdays"
+        }
+      ]
+    },
+    {
+      "category": "Pastry and coffee",
+      "items": [
+        {
+          "name": "Lemon tart",
+          "price": "7.50",
+          "desc": "The one we're known for"
+        },
+        {
+          "name": "Cardamom bun",
+          "price": "6.00"
+        },
+        {
+          "name": "Almond croissant",
+          "price": "7.00"
+        },
+        {
+          "name": "Flat white or latte",
+          "price": "5.00"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Order whole loaves by Thursday for Saturday pick-up.",
+  "reviews": [
+    {
+      "quote": "The lemon tart is worth the queue. Sourdough's the best in the Inner West.",
+      "name": "Alice M.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Still warm when I picked it up at seven. Lovely crew.",
+      "name": "Ben T.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Pre-ordered online for a party, ready on the dot.",
+      "name": "Rosa D.",
+      "source": "Google review"
+    }
+  ],
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1579005007697-75b2fe2c88e7?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Loaves of bread on the bakery counter in the morning"
+  },
+  "story": {
+    "title": "Baked here from 4am",
+    "body": "Two bakers, one deck oven and a sourdough starter we've kept going since 2019. Everything is made in the shop, from the bread to the lemon curd.",
+    "photo": "https://images.unsplash.com/photo-1707915317302-9565553eea02?w=1200&q=75&auto=format&fit=crop",
+    "photoAlt": "A sourdough loaf cooling on a rack"
+  },
+  "menuPhoto": "https://images.unsplash.com/photo-1732565649629-eb4932a1ec09?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "A baker dusting flour on the bench",
+  "showcase": [
+    {
+      "theme": "riso",
+      "hero": "full"
+    },
+    {
+      "theme": "bloom",
+      "hero": "split"
+    },
+    {
+      "theme": "halftone",
+      "hero": "full"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "template": "pro",
+  "slug": "small-spaces-architects",
+  "url": "https://smallspaces.example/",
+  "_note": "Sample business for the gallery, designed in Oceanalt's poster styles. Names, numbers and reviews are fictional.",
+  "schemaType": "ProfessionalService",
+  "business": {
+    "name": "Small Spaces Architects",
+    "headline": "Small spaces. Big ideas.",
+    "intro": "Architects for extensions, renovations and small homes in Melbourne's inner north. A fixed fee for every stage.",
+    "address": "Studio 4, 120 Gertrude Street, Fitzroy VIC 3065",
+    "street": "Studio 4, 120 Gertrude Street",
+    "suburb": "Fitzroy",
+    "state": "VIC",
+    "postcode": "3065",
+    "phone": "(03) 5550 4412",
+    "email": "studio@smallspaces.example",
+    "contactName": "Nina Okafor",
+    "contactRole": "Principal architect",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Book a site visit",
+    "disclaimer": "Sample site made by Oceanalt to show the Professional layout. Not a real architecture practice."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1708453314185-cd9dc62b13a9?w=1400&q=75&auto=format&fit=crop",
+    "photoAlt": "A concrete staircase rising between plain white walls"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "text": "Registered architects in Victoria"
+    },
+    {
+      "icon": "tag",
+      "text": "A fixed fee for every stage"
+    },
+    {
+      "icon": "clock",
+      "text": "Reply within one business day"
+    }
+  ],
+  "servicesIntro": "Most of our work is on houses under 150 square metres, where every metre has to earn its place.",
+  "services": [
+    {
+      "icon": "home",
+      "name": "Extensions and renovations",
+      "desc": "Kitchens, living rooms and second storeys that bring in light without losing the garden.",
+      "fee": "Concept design from $3,800"
+    },
+    {
+      "icon": "file",
+      "name": "Planning permits",
+      "desc": "Drawings, reports and dealing with council until the permit's issued.",
+      "fee": "From $2,200"
+    },
+    {
+      "icon": "layout",
+      "name": "Small homes and granny flats",
+      "desc": "Backyard studios and small dwellings, designed to the new small second dwelling rules.",
+      "fee": "Quoted per project"
+    },
+    {
+      "icon": "compass",
+      "name": "Feasibility study",
+      "desc": "What you can build on your block, what it might cost and how long it takes.",
+      "fee": "$900"
+    }
+  ],
+  "feesIntro": "Fees are fixed per stage and agreed in writing. You can stop after any stage.",
+  "fees": [
+    {
+      "item": "Feasibility study",
+      "price": "$900",
+      "note": "Site visit, sketch options and a cost range"
+    },
+    {
+      "item": "Concept design",
+      "price": "$3,800",
+      "note": "Two rounds of changes included"
+    },
+    {
+      "item": "Planning permit drawings",
+      "price": "$2,200",
+      "note": "Plus council fees, itemised in your quote"
+    },
+    {
+      "item": "Construction drawings",
+      "price": "Quoted",
+      "note": "Depends on size, usually 6 to 9% of build cost"
+    }
+  ],
+  "process": [
+    {
+      "title": "A site visit",
+      "desc": "We come to you, walk the house and talk about how you live in it."
+    },
+    {
+      "title": "Options on paper",
+      "desc": "Two or three ideas with a cost range for each, before you commit to anything."
+    },
+    {
+      "title": "Permit and build",
+      "desc": "We draw it, get it approved and help you choose a builder."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Do you work outside the inner north?",
+      "a": "Yes, across Melbourne. Most of our projects are within half an hour of Fitzroy."
+    },
+    {
+      "q": "How long does a permit take?",
+      "a": "Usually three to five months, depending on the council. We tell you where it's up to every fortnight."
+    },
+    {
+      "q": "Can you work to a fixed budget?",
+      "a": "Yes. Tell us the number at the start and we design to it, with a builder's estimate before drawings are final."
+    }
+  ],
+  "contactTitle": "Talk to an architect",
+  "contactIntro": "Book a site visit, or save our details and call when it suits you.",
+  "showcase": [
+    {
+      "theme": "halftone",
+      "hero": "split"
+    },
+    {
+      "theme": "riso",
+      "hero": "full"
+    },
+    {
+      "theme": "autumn",
+      "hero": "split"
+    }
+  ]
+}

@@ -27,10 +27,6 @@
     {
       "theme": "forest",
       "hero": "full"
-    },
-    {
-      "theme": "bloom",
-      "hero": "split"
     }
   ]
 }

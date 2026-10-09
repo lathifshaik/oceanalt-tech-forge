@@ -13,7 +13,7 @@ export const ABN = "65 119 854 062";
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
-// Each example business shown in four of its designs. Paths match the
+// Each example business shown in three of its designs. Paths match the
 // showcase list in templates/<template>/meta.json (built by `npm run templates`).
 const WORK: {
   id: TemplateId;
@@ -35,7 +35,6 @@ const WORK: {
       { path: "little-tern-coffee", theme: "Harbour" },
       { path: "little-tern-coffee-night", theme: "Night" },
       { path: "little-tern-coffee-sun", theme: "Sun" },
-      { path: "little-tern-coffee-riso", theme: "Riso" },
     ],
   },
   {
@@ -48,7 +47,6 @@ const WORK: {
       { path: "kerr-and-sons-electrical", theme: "Coast" },
       { path: "kerr-and-sons-electrical-ink", theme: "Ink" },
       { path: "kerr-and-sons-electrical-sun", theme: "Sun" },
-      { path: "kerr-and-sons-electrical-halftone", theme: "Halftone" },
     ],
   },
   {
@@ -62,7 +60,6 @@ const WORK: {
       { path: "tidewater-physio-pilates", theme: "Calm" },
       { path: "tidewater-physio-pilates-ink", theme: "Ink" },
       { path: "tidewater-physio-pilates-forest", theme: "Forest" },
-      { path: "tidewater-physio-pilates-bloom", theme: "Bloom" },
     ],
   },
   {
@@ -76,7 +73,6 @@ const WORK: {
       { path: "saltwater-yoga", theme: "Sun" },
       { path: "saltwater-yoga-calm", theme: "Calm" },
       { path: "saltwater-yoga-night", theme: "Night" },
-      { path: "saltwater-yoga-autumn", theme: "Autumn" },
     ],
   },
   {
@@ -90,7 +86,6 @@ const WORK: {
       { path: "wattle-and-fern-florist", theme: "Sun" },
       { path: "wattle-and-fern-florist-forest", theme: "Forest" },
       { path: "wattle-and-fern-florist-ink", theme: "Ink" },
-      { path: "wattle-and-fern-florist-bloom", theme: "Bloom" },
     ],
   },
   {
@@ -104,7 +99,54 @@ const WORK: {
       { path: "harlow-reid-lawyers", theme: "Ink" },
       { path: "harlow-reid-lawyers-calm", theme: "Calm" },
       { path: "harlow-reid-lawyers-night", theme: "Night" },
-      { path: "harlow-reid-lawyers-riso", theme: "Riso" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Bakery",
+    business: "Lemon & Rye, Marrickville",
+    problem: "Saturday regulars rang to check if the sourdough had sold out yet.",
+    pitch: "Bread, pastries and prices up front, today's hours, and a sign that flips to OPEN or CLOSED from the real opening hours.",
+    designs: [
+      { path: "lemon-and-rye-bakery", theme: "Riso" },
+      { path: "lemon-and-rye-bakery-bloom", theme: "Bloom" },
+      { path: "lemon-and-rye-bakery-halftone", theme: "Halftone" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Architects",
+    business: "Small Spaces Architects, Fitzroy",
+    problem: "People liked the work on Instagram but couldn't tell what a project would cost.",
+    pitch: "Fixed fees per stage, a feasibility study you can book, and a site visit one tap away.",
+    designs: [
+      { path: "small-spaces-architects", theme: "Halftone" },
+      { path: "small-spaces-architects-riso", theme: "Riso" },
+      { path: "small-spaces-architects-autumn", theme: "Autumn" },
+    ],
+  },
+  {
+    id: "shop",
+    kind: "Plant shop",
+    business: "Greenhouse Plant Co, Brunswick",
+    problem: "Most sales were walk-ins, and delivery questions came in by DM.",
+    pitch: "Plants with a Buy button each, paid into the shop's Stripe, and a same-day delivery cutoff on the tag.",
+    designs: [
+      { path: "greenhouse-plant-co", theme: "Bloom" },
+      { path: "greenhouse-plant-co-autumn", theme: "Autumn" },
+      { path: "greenhouse-plant-co-riso", theme: "Riso" },
+    ],
+  },
+  {
+    id: "trades",
+    kind: "Landscaper",
+    business: "Oakleaf Gardens, Blue Mountains",
+    problem: "Autumn was flat out, and quote requests got lost in voicemail.",
+    pitch: "Services and suburbs clearly listed, the licence up front, and and a quote form that goes straight to their inbox.",
+    designs: [
+      { path: "oakleaf-gardens", theme: "Autumn" },
+      { path: "oakleaf-gardens-halftone", theme: "Halftone" },
+      { path: "oakleaf-gardens-bloom", theme: "Bloom" },
     ],
   },
 ];
@@ -379,7 +421,7 @@ function Work() {
       <div className="wrap work-head">
         <div>
           <h2 className="h2">Designed for one business. Never reused.</h2>
-          <p className="lede">Six sample businesses, each in four of its own designs. Switch between them, or open the live site.</p>
+          <p className="lede">Ten sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
         </div>
         <div className="work-nav">
           <button type="button" onClick={() => nudge(-1)} aria-label="Previous"><Icon name="arrow-right" className="i flip" /></button>

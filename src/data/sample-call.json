@@ -1,0 +1,114 @@
+{
+  "_note": "The sample call for the concierge story step. Lines are the CEO-approved script. `audio` is filled in by scripts/make-sample-call.py once a real ElevenLabs recording exists; until then the site shows no player. `say` is how the voice should pronounce a line, where it differs from the text shown.",
+  "lines": [
+    {
+      "who": "c",
+      "text": "G'day, you're through to Kerr & Sons. I'm Jim's AI agent, and this call is recorded. How can I help?",
+      "say": "Gidday, you're through to Kerr and Sons. I'm Jim's AI agent, and this call is recorded. How can I help?"
+    },
+    {
+      "who": "m",
+      "text": "Hi. A power point in my kitchen's sparking. Can someone come out today?"
+    },
+    {
+      "who": "c",
+      "text": "If there's smoke, flames or a burning smell, hang up and call triple zero. Otherwise, keep clear of it."
+    },
+    {
+      "who": "m",
+      "text": "No smoke, no smell. I'm keeping well away from it."
+    },
+    {
+      "who": "c",
+      "text": "Good. Jim can be there between 2 and 4 this arvo. What's your name and address?",
+      "say": "Good. Jim can be there between two and four this arvo. What's your name and address?"
+    },
+    {
+      "who": "m",
+      "text": "It's Mel, 14 Ridge Street, Merewether.",
+      "act": {
+        "icon": "pin",
+        "text": "Address saved"
+      },
+      "say": "It's Mel, fourteen Ridge Street, Merry-weather."
+    },
+    {
+      "who": "c",
+      "text": "That's Mel, 14 Ridge Street, Merewether, between 2 and 4 today. Jim's got the details now.",
+      "act": {
+        "icon": "calendar",
+        "text": "Booked today, 2 to 4pm"
+      },
+      "say": "That's Mel, fourteen Ridge Street, Merry-weather, between two and four today. Jim's got the details now."
+    },
+    {
+      "who": "m",
+      "text": "Perfect. Thanks.",
+      "act": {
+        "icon": "send",
+        "text": "Sent to Jim"
+      }
+    }
+  ],
+  "audio": {
+    "src": "/audio/concierge-sample.mp3",
+    "duration": 36.36,
+    "starts": [
+      0.6,
+      6.96,
+      11.55,
+      17.8,
+      21.37,
+      25.87,
+      28.88,
+      34.94
+    ],
+    "peaks": [
+      0.7,
+      0.52,
+      0.58,
+      0.71,
+      0.45,
+      0.43,
+      0.73,
+      0.67,
+      0.59,
+      0.63,
+      0.68,
+      0.68,
+      0.64,
+      0.65,
+      0.69,
+      0.67,
+      0.5,
+      0.69,
+      0.5,
+      0.79,
+      0.72,
+      0.81,
+      0.72,
+      0.67,
+      0.66,
+      0.52,
+      0.58,
+      0.62,
+      0.78,
+      0.84,
+      0.58,
+      0.84,
+      0.73,
+      0.56,
+      0.5,
+      0.58,
+      0.84,
+      0.47,
+      1.0,
+      0.84
+    ],
+    "voices": {
+      "agent": "Kokoro bf_emma",
+      "caller": "Kokoro bf_isabella"
+    },
+    "model": "kokoro-v1.0"
+  }
+}

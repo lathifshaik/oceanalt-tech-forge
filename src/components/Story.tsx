@@ -1,3 +1,4 @@
+import SAMPLE from "../data/sample-call.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Icon } from "./Icon";
 import { PipelineDemo } from "./Demos";
@@ -169,24 +170,27 @@ function FoundVisual() {
 
 // A sample call, read like a real one: lines appear at reading pace, the line
 // being said is highlighted, and what the agent does shows as an action row.
+// Lines (and, once recorded, the audio and its timings) live in
+// src/data/sample-call.json; scripts/make-sample-call.py makes the recording.
 type Act = { icon: "pin" | "calendar" | "send"; text: string };
-const LINES: { who: "c" | "m"; text: string; act?: Act }[] = [
-  { who: "c", text: "G'day, you're through to Kerr & Sons. I'm Jim's AI agent, and this call is recorded. How can I help?" },
-  { who: "m", text: "Hi. A power point in my kitchen's sparking. Can someone come out today?" },
-  { who: "c", text: "If there's smoke, flames or a burning smell, hang up and call triple zero. Otherwise, keep clear of it." },
-  { who: "m", text: "No smoke, no smell. I'm keeping well away from it." },
-  { who: "c", text: "Good. Jim can be there between 2 and 4 this arvo. What's your name and address?" },
-  { who: "m", text: "It's Mel, 14 Ridge Street, Merewether.", act: { icon: "pin", text: "Address saved" } },
-  { who: "c", text: "That's Mel, 14 Ridge Street, Merewether, between 2 and 4 today. Jim's got the details now.", act: { icon: "calendar", text: "Booked today, 2 to 4pm" } },
-  { who: "m", text: "Perfect. Thanks.", act: { icon: "send", text: "Sent to Jim" } },
-];
+type Line = { who: "c" | "m"; text: string; act?: Act };
+type SampleAudio = { src: string; duration: number; starts: number[]; peaks: number[] };
+const LINES = SAMPLE.lines as Line[];
+const AUDIO = SAMPLE.audio as SampleAudio | null;
+const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
 const DONE = LINES.length + 1; // 0 is the call coming in, lines are 1..n, then the summary
 const BOOKED = 7; // Mel relaxes once the job is booked
 
 function CallVisual({ active }: { active: boolean }) {
   const [step, setStep] = useState(DONE);
+  // Once someone presses play, the recording drives the transcript instead of the timers.
+  const [heard, setHeard] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const waveRef = useRef<HTMLDivElement>(null);
+  const raf = useRef(0);
   useEffect(() => {
-    if (!active || reduced()) return;
+    if (!active || reduced() || heard) return;
     const timers: number[] = [];
     let at = 1200;
     setStep(0);
@@ -196,7 +200,31 @@ function CallVisual({ active }: { active: boolean }) {
     });
     timers.push(window.setTimeout(() => setStep(DONE), at + 600));
     return () => timers.forEach(clearTimeout);
-  }, [active]);
+  }, [active, heard]);
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
+
+  const tick = () => {
+    const el = audioRef.current;
+    if (!el || !AUDIO) return;
+    const t = el.currentTime;
+    waveRef.current?.style.setProperty("--p", String(Math.min(1, t / AUDIO.duration)));
+    setStep(AUDIO.starts.filter((s) => s <= t).length);
+    if (!el.paused) raf.current = requestAnimationFrame(tick);
+  };
+  const toggle = () => {
+    const el = audioRef.current;
+    if (!el) return;
+    setHeard(true);
+    if (el.paused) { void el.play(); } else el.pause();
+  };
+  const seek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = audioRef.current;
+    if (!el || !AUDIO) return;
+    const box = e.currentTarget.getBoundingClientRect();
+    setHeard(true);
+    el.currentTime = ((e.clientX - box.left) / box.width) * AUDIO.duration;
+    tick();
+  };
 
   const said = Math.min(step, LINES.length);
   const live = step > 0 && step <= LINES.length;
@@ -210,6 +238,32 @@ function CallVisual({ active }: { active: boolean }) {
           <div><b>{step === 0 ? "Mel is calling Kerr & Sons" : step >= DONE ? "Call ended, job booked" : "On the call: Mel and Jim's AI agent"}</b><small>{step >= DONE ? "Sent to Jim on WhatsApp" : "Jim's up a ladder in Adamstown"}</small></div>
           <span className="sv-av sv-av-ai"><span className="sv-facewrap is-ai"><Face who="concierge" label="Jim's AI agent" /></span></span>
         </div>
+        {AUDIO && (
+          <div className="sv-player">
+            <button type="button" className="sv-play" aria-pressed={playing} aria-label={playing ? "Pause the sample call" : "Play the sample call"} onClick={toggle}>
+              <Icon name={playing ? "pause" : "play"} />
+            </button>
+            <div className="sv-player-info">
+              <b>Hear a sample call</b>
+              <small>Made-up business, AI voices for both parts. Yours would use an Australian voice. {clock(AUDIO.duration)}</small>
+              <div className="sv-wave" ref={waveRef} onClick={seek} role="slider" aria-label="Sample call position" aria-valuemin={0} aria-valuemax={Math.round(AUDIO.duration)} aria-valuenow={0}>
+                {[0, 1].map((layer) => (
+                  <span key={layer} className={layer ? "sv-wave-fill" : "sv-wave-base"}>
+                    {AUDIO.peaks.map((h, i) => <i key={i} style={{ height: `${Math.round(h * 100)}%` }} />)}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <audio
+              ref={audioRef}
+              src={AUDIO.src}
+              preload="none"
+              onPlay={() => { setPlaying(true); raf.current = requestAnimationFrame(tick); }}
+              onPause={() => setPlaying(false)}
+              onEnded={() => { setPlaying(false); setStep(DONE); waveRef.current?.style.setProperty("--p", "1"); }}
+            />
+          </div>
+        )}
         <ol className={`sv-lines${live ? " is-live" : ""}`}>
           {LINES.slice(0, said).map((l, i) => (
             <li key={i} className={`sv-line is-${l.who}${live && i === said - 1 ? " is-now" : ""}`}>

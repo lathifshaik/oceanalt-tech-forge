@@ -5,7 +5,7 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 A site's look comes from three independent choices, so no two clients get the same design:
 
 1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
-2. **Theme** (`design.theme`): one of seven complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
+2. **Theme** (`design.theme`): one of eleven complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
 3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`).
 
 On top of that come the client's own accent colour (`design.accent`, `design.accentDark`), photos, words and logo.
@@ -19,6 +19,12 @@ On top of that come the client's own accent colour (`design.accent`, `design.acc
 | `forest` | Natural. Deep green and amber, soft pill shapes |
 | `night` | Moody. Always dark, coral accent |
 | `sun` | Playful. Hot pink, wide rounded display face |
+| `riso` | Poster print. Cream paper, navy ink, tomato red, a big serif, print grain, a flat circle in the hero |
+| `halftone` | Loud print. Blue-tinted photos, hot pink, tilted condensed headlines, square corners |
+| `bloom` | Flower-shop poster. Butter, aubergine and orange, heavy italic type, a flat flower in the hero |
+| `autumn` | Seasonal poster. Cream, brick and gold, very light display type, a flat leaf shape |
+
+The four poster themes (`riso`, `halftone`, `bloom`, `autumn`) also carry their own CSS (`css` in `themes.json`): print grain, black-and-white or tinted photos, oversized headlines and one flat shape. The builder adds it after the layout's own styles.
 
 **No two sites look the same, and the builder enforces it.** Building `clients/<slug>/site.json` fails if another client already has the same layout + theme + hero + accent. When that happens, change one of them.
 
@@ -86,5 +92,5 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/base.css`: shared reset and accessibility styles
 - `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
 - `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
-- `themes/themes.json`: the seven design directions
+- `themes/themes.json`: the eleven design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

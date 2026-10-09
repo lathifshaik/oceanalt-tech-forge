@@ -231,7 +231,7 @@ export function resolveDesign(site, meta, sourceLabel = "site.json") {
     themeCss += `@media (prefers-color-scheme:dark){:root{${vars(theme.dark, design.accentDark || design.accent)}color-scheme:dark}}`;
   }
   const accent = design.accent || theme.light.accent;
-  return { design, themeCss, accent, onAccent: theme.light["on-accent"], fonts: theme.fonts };
+  return { design, themeCss, themeExtra: theme.css || "", accent, onAccent: theme.light["on-accent"], fonts: theme.fonts };
 }
 
 // What makes a site look like itself. Two clients may never share one.
@@ -249,7 +249,7 @@ export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   const data = enrich(site);
   const body = render(readFileSync(join(tdir, "template.html"), "utf8"), data);
   const url = site.url || "https://example.com/";
-  const { design, themeCss, accent, onAccent, fonts } = resolveDesign(site, meta, sourceLabel);
+  const { design, themeCss, themeExtra, accent, onAccent, fonts } = resolveDesign(site, meta, sourceLabel);
   const seo = site.seo || {};
   const title = seo.title || (site.business.tagline ? `${site.business.name} | ${site.business.tagline}` : `${site.business.name}, ${site.business.suburb || ""}`.replace(/, $/, ""));
   const desc = seo.description || site.business.tagline || site.business.intro || "";
@@ -279,6 +279,7 @@ ${seo.image ? `<meta property="og:image" content="${escapeHtml(seo.image)}">` : 
 <body class="theme-${design.theme} hero-${design.hero}">
 <a class="skip" href="#main">Skip to content</a>
 ${body}
+${themeExtra ? `<style>${themeExtra}</style>` : ""}
 <script>${FX_JS}</script>
 </body>
 </html>

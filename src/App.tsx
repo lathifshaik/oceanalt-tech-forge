@@ -13,7 +13,7 @@ export const ABN = "65 119 854 062";
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
-// Each example business shown in three of its designs. Paths match the
+// Each example business shown in four of its designs. Paths match the
 // showcase list in templates/<template>/meta.json (built by `npm run templates`).
 const WORK: {
   id: TemplateId;
@@ -35,6 +35,7 @@ const WORK: {
       { path: "little-tern-coffee", theme: "Harbour" },
       { path: "little-tern-coffee-night", theme: "Night" },
       { path: "little-tern-coffee-sun", theme: "Sun" },
+      { path: "little-tern-coffee-riso", theme: "Riso" },
     ],
   },
   {
@@ -47,6 +48,7 @@ const WORK: {
       { path: "kerr-and-sons-electrical", theme: "Coast" },
       { path: "kerr-and-sons-electrical-ink", theme: "Ink" },
       { path: "kerr-and-sons-electrical-sun", theme: "Sun" },
+      { path: "kerr-and-sons-electrical-halftone", theme: "Halftone" },
     ],
   },
   {
@@ -60,6 +62,7 @@ const WORK: {
       { path: "tidewater-physio-pilates", theme: "Calm" },
       { path: "tidewater-physio-pilates-ink", theme: "Ink" },
       { path: "tidewater-physio-pilates-forest", theme: "Forest" },
+      { path: "tidewater-physio-pilates-bloom", theme: "Bloom" },
     ],
   },
   {
@@ -73,6 +76,7 @@ const WORK: {
       { path: "saltwater-yoga", theme: "Sun" },
       { path: "saltwater-yoga-calm", theme: "Calm" },
       { path: "saltwater-yoga-night", theme: "Night" },
+      { path: "saltwater-yoga-autumn", theme: "Autumn" },
     ],
   },
   {
@@ -86,6 +90,7 @@ const WORK: {
       { path: "wattle-and-fern-florist", theme: "Sun" },
       { path: "wattle-and-fern-florist-forest", theme: "Forest" },
       { path: "wattle-and-fern-florist-ink", theme: "Ink" },
+      { path: "wattle-and-fern-florist-bloom", theme: "Bloom" },
     ],
   },
   {
@@ -99,6 +104,7 @@ const WORK: {
       { path: "harlow-reid-lawyers", theme: "Ink" },
       { path: "harlow-reid-lawyers-calm", theme: "Calm" },
       { path: "harlow-reid-lawyers-night", theme: "Night" },
+      { path: "harlow-reid-lawyers-riso", theme: "Riso" },
     ],
   },
 ];
@@ -373,7 +379,7 @@ function Work() {
       <div className="wrap work-head">
         <div>
           <h2 className="h2">Designed for one business. Never reused.</h2>
-          <p className="lede">Six sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
+          <p className="lede">Six sample businesses, each in four of its own designs. Switch between them, or open the live site.</p>
         </div>
         <div className="work-nav">
           <button type="button" onClick={() => nudge(-1)} aria-label="Previous"><Icon name="arrow-right" className="i flip" /></button>

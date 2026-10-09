@@ -176,6 +176,10 @@
     {
       "theme": "night",
       "hero": "full"
+    },
+    {
+      "theme": "autumn",
+      "hero": "split"
     }
   ]
 }

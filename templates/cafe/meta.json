@@ -1,6 +1,6 @@
 {
-  "name": "Caf\u00e9",
-  "for": "Caf\u00e9s, bakeries, small restaurants, bars",
+  "name": "Café",
+  "for": "Cafés, bakeries, small restaurants, bars",
   "required": [
     "business.name",
     "business.headline",
@@ -28,6 +28,10 @@
     {
       "theme": "sun",
       "hero": "split"
+    },
+    {
+      "theme": "riso",
+      "hero": "full"
     }
   ]
 }

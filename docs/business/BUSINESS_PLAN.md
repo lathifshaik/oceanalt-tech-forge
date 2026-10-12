@@ -6,7 +6,7 @@ _Last reviewed: 2 October 2026 (second pass: 1–3 day delivery, template system
 
 **More customers, less admin.** Small business owners tell us what they want, and we design, build and look after it. Three services, given equal weight (positioning set by the founder, 7 October 2026):
 
-1. **Digital presence** (monthly plans, below): website, Google Business Profile, local SEO, reviews and socials. $0 upfront, **live in 1–3 business days**; existing sites rebuilt, payments included.
+1. **Digital presence** (monthly plans, below): website, Google Business Profile, local SEO, reviews and socials. Month one: only the domain, at cost. **Live in 1–3 business days**; existing sites rebuilt, payments included.
 2. **Web apps and software** (quoted per project, scope and price within 24 hours): booking systems, client portals, quoting and job tools, dashboards, automations.
 3. **AI agents**: the **AI concierge** ($149/month including one Australian number, plus call time at cost, client-set cap): answers the business phone when the owner can't (diverted missed or after-hours calls, or a new local number), books, takes messages and sends a summary by WhatsApp, SMS or email. Also the website chat assistant ($39/month + usage at cost) and custom agents (quoted).
 
@@ -22,8 +22,8 @@ Added 7 October 2026 (founder): AI concierge, workflow automation, and "show up 
 |---|---|
 | Is there demand? | Yes. **44% of Australian small businesses still have no dedicated website** ([auDA Digital Lives 2026](https://files.auda.org.au/documents/2026-Digital-Lives-of-Australians-report.pdf)). Their top reasons are "too small" (44%), "too expensive" (30%) and "no time" (17%) ([GoDaddy AU study](https://www.godaddy.com/resources/au/stories/study-reveals-why-59-of-australian-small-businesses-dont-have-a-website)); $0 upfront and done-for-you answers the last two. "Pay monthly websites" is an established category in AU, UK and US. AU competitors already sell exactly this at A$99–$200/mo ([A1 Local](https://www.gappsy.com/tools/a1local/) from A$99/mo with no upfront cost; [help4bis](https://help4bis.com/pricing/) A$300 first month then A$200/mo). |
 | Is $30/month viable for a custom build? | **No.** At $30 you compete with Wix, Squarespace and Durable (A$20–$50/mo DIY), but you're selling human design and edits. A build costs 6–10 hours even with AI; at $30/mo payback is 15+ months, longer than most small businesses stay. |
-| Is $100/month viable? | **Yes.** $99/mo is the market's entry price for done-for-you. With a 12-month minimum it's a A$1,188 contract per client, and AI-assisted builds make it profitable from month 4–5. |
-| Where does $30 fit? | As **Care** ($29/mo): hosting and maintenance for sites that already exist (or that clients keep after their 12 months). Almost no labour, so the margin is high. It also catches leads you'll upsell later. |
+| Is $100/month viable? | **Yes.** $99/mo is the market's entry price for done-for-you. We now open at $69 for months 2 to 6 with a domain-only first month and a 6-month minimum (section 3c), so Launch pays back in month 7. |
+| Where does $30 fit? | As **Care** ($29/mo): hosting and maintenance for sites that already exist (or that clients keep after their 6 months). Almost no labour, so the margin is high. It also catches leads you'll upsell later. |
 | Biggest risk | Churn and scope creep, not demand. Both are solved by the term length, edit caps and ownership rules below. |
 
 ## 3. Offer and pricing (AUD)
@@ -31,15 +31,15 @@ Added 7 October 2026 (founder): AI concierge, workflow automation, and "show up 
 | Plan | Price | Term | What's included | Who it's for |
 |---|---|---|---|---|
 | **Care** | $29/mo | Month to month | Hosting, SSL, backups, updates, uptime monitoring. Edits $60 each. | Already has a site they like; post-term Launch/Grow clients |
-| **Launch** | $99/mo, $0 upfront | 12-month minimum | Custom site up to 5 pages on a template, we write the copy, domain, forms, Google Business Profile, SEO basics, 30 min edits/mo, **live in 1–3 business days** | Cafés, tradies, coaches, clinics with no site or a bad one |
-| **Grow** | $149/mo, $0 upfront | 12-month minimum | Launch + up to 12 pages, Stripe payments/deposits/small shop, bookings, gift vouchers, existing-site rebuild, 1 h edits/mo, monthly report | Businesses that take money or bookings online |
+| **Launch** | Month 1: domain only (at cost); $69/mo months 2–6; $99/mo from month 7 | 6-month minimum | Custom site up to 5 pages on a template, we write the copy, domain, forms, Google Business Profile, SEO basics, 30 min edits/mo, **live in 1–3 business days** | Cafés, tradies, coaches, clinics with no site or a bad one |
+| **Grow** | Month 1: domain only (at cost); $149/mo from month 2 | 6-month minimum | Launch + up to 12 pages, Stripe payments/deposits/small shop, bookings, gift vouchers, existing-site rebuild, 1 h edits/mo, monthly report | Businesses that take money or bookings online |
 | One-off build | from $1,499 | 50/50 | Same as Launch, client owns it at launch | People who hate subscriptions |
 | Custom | quoted | per project | Portals, internal tools, small SaaS | Rare, high-value, take selectively |
 
 **Why these rules exist:**
-- **12-month minimum** spreads the build cost. Without it, a client who cancels in month 2 is a loss.
-- **First charge after design approval** (Stripe 14-day trial on the Payment Link) is the trust hook that makes $0 upfront believable.
-- **You keep the site after 12 months / $1,499 buyout** kills the "hostage website" objection, which is the #1 complaint about this model online. It also caps your liability in an ACL dispute.
+- **6-month minimum** (decided by the founder, 12 October 2026) covers most of the build cost; see section 3c for where it leaves us.
+- **First charge after design approval** (Stripe 14-day trial on the Payment Link) is the trust hook: the first charge, for the domain only, happens after they've seen the site.
+- **You keep the site after 6 months** kills the "hostage website" objection, which is the #1 complaint about this model online. It also caps your liability in an ACL dispute.
 - **Edit caps** (30 min on Launch / 1 h on Grow) stop $99 clients from consuming $500 of labour. New features are quoted separately.
 - **Payments go to the client's own Stripe account.** We never touch card data or customer funds, so no PCI scope and no trust-account issues.
 
@@ -51,6 +51,18 @@ The research is consistent: what delays web projects is **waiting on the client'
 2. **We write the copy** from a 15-minute call, the client's Google Business Profile and their reviews.
 3. **Photos:** the client's own, their Google Business photos, or licensed Unsplash/Pexels as a last resort.
 4. **Excluded from the clock, and stated in the Terms:** Google Business Profile verification, Stripe account verification and domain transfers, because Google, Stripe and registrars control those.
+
+### 3c. Domain-only first month, $69 then $99 (founder's decision, 12 October 2026)
+
+Founders and prospects told us the hard part is trust: paying a stranger before seeing anything. So:
+
+- **Month 1:** the client pays only for their domain, at cost, and only after approving the preview. The site goes live.
+- **Launch:** $69/month for months 2 to 6, then $99/month from month 7. **Grow:** $149/month from month 2.
+- **6-month minimum** on both, then month to month with 30 days' notice. After 6 months the site and code are theirs to keep. Leaving early costs the remaining months of the term.
+- **Designed by a person**, signed off by the founder, and the founder's photo and mobile (0431 236 999) are on the site.
+- The "Founding 10" ($79/month) offer is withdrawn: $69 is lower.
+
+**Where it leaves us (Launch, same cost assumptions as section 4):** contribution is about $43/month at $69 and $73/month at $99. Six-month contribution is 5 × $43 − $4 (month 1 hosting) − $240 (build) ≈ **−$30**, so a Launch client who leaves at the 6-month mark costs us a little. We break even in month 7 and earn ~$73/month after. Grow: 5 × $100 − $6 − $360 ≈ **+$134** over 6 months. **CEO watch item:** track how many Launch clients leave at month 6; if more than 1 in 4, raise months 2–6 to $79 or the minimum to 9 months.
 
 ### Why Grow is $149, not $199 (decided 2 October 2026)
 
@@ -82,18 +94,18 @@ Assumptions: builder time valued at A$60/h; AI tooling (Claude Max etc.) treated
 
 | Per client per month | Care | Launch | Grow |
 |---|---|---|---|
-| Revenue | $29 | $99 | $149 |
+| Revenue | $29 | $99 (from month 7; $69 in months 2–6) | $149 |
 | Hosting + domain + email forwarding | ~$3 | ~$4 | ~$6 |
 | Edit labour (avg used, not cap) | ~$5 | ~$20 (20 min) | ~$40 (40 min) |
 | Stripe fees on our invoice (~1.7% + 30c) | ~$0.80 | ~$2 | ~$2.80 |
 | **Monthly contribution** | **~$20** | **~$73** | **~$100** |
 | Build cost (one-time, on templates) | ~$60 (migration) | ~$240 (4 h) | ~$360 (6 h) |
 | **Payback** | 3 months | **~3–4 months** | **~3–4 months** |
-| 12-month contract contribution | — | ~$636 | ~$840 |
+| 6-month minimum-term contribution | — | ~−$30 | ~+$134 |
 
-Templates are what make the price work. Before them, a custom Launch build was about 8 hours and took 7 months to pay back. Starting from one of three templates (`templates/`), with copy written from a 15-minute call, it's about 4 hours and pays back in 3–4 months. The 12-month minimum still matters for Grow and for clients who churn early.
+Templates are what make the price work. Before them, a custom Launch build was about 8 hours and took 7 months to pay back. Starting from one of three templates (`templates/`), with copy written from a 15-minute call, it's about 4 hours and pays back in 3–4 months. With the 6-month minimum and $69 intro months (section 3c), Launch pays back in month 7.
 
-**Lifetime value.** Assume 12-month term, then 3%/month churn (small-business typical): expected life is about 12 + 33 = 45 months. LTV contribution is roughly $73 × 45 − $240 ≈ **$3,000 per Launch client** and $100 × 45 − $360 ≈ **$4,100 per Grow client**. That supports up to ~$500 customer acquisition cost.
+**Lifetime value.** Assume a 6-month term, then 3%/month churn (small-business typical): expected life is about 6 + 33 = 39 months. LTV contribution is roughly $43 × 5 + $73 × 33 − $244 ≈ **$2,380 per Launch client** and $100 × 38 − $366 ≈ **$3,430 per Grow client**. That supports up to ~$500 customer acquisition cost.
 
 **Targets**
 
@@ -125,7 +137,7 @@ The site now sells the offer. The next 30 days prove someone pays for it.
 |---|---|---|
 | 1 | Set up Stripe Payment Links (Care/Launch/Grow, 14-day trial on Launch/Grow) and add them to `.env`. Deploy. | Checkout works end to end |
 | 1–2 | Build a list of 200 local businesses in 2–3 suburbs with no site, a broken site, or no online booking (Google Maps; Clay/Apollo are connected if you want to enrich) | List exists |
-| 2–3 | Outreach: walk in, call, or send a 60-second Loom of their current site next to a mock-up of the new one. Offer "Founding 10": Launch at $79/mo for as long as they stay on Launch (same 12-month minimum and buyout). Shown on the site under Pricing, in the Terms and in `api/start.ts`; remove all four once 10 have signed. | ≥20 conversations |
+| 2–3 | Outreach: walk in, call, or send a 60-second Loom of their current site next to a mock-up of the new one. Offer: month one is just the domain, then $69/month (section 3c). | ≥20 conversations |
 | 3–4 | Close | **≥5 paying clients from 200 contacts** (2.5%) = validated. Under 2: change the niche or message, not the price. |
 
 **Kill / pivot signals:** under 2 closes from 200 contacts; average edit time over 1 h for Launch clients; more than 1 in 5 clients asking to cancel before month 6.
@@ -134,9 +146,9 @@ The site now sells the offer. The next 30 days prove someone pays for it.
 
 | Risk | Mitigation |
 |---|---|
-| Churn after 12 months | Monthly report (Grow), proactive "here's what we changed" email, Care downgrade instead of cancel |
+| Churn after the 6-month term | Monthly report (Grow), proactive "here's what we changed" email, Care downgrade instead of cancel |
 | Scope creep | Written edit caps; anything new gets a quote before work; the client-success agent logs time per client |
-| "Hostage website" reputation | Free code/domain handover after 12 months, written in the Terms |
+| "Hostage website" reputation | Free code/domain handover after 6 months, written in the Terms |
 | Australian Consumer Law: auto-renewal and minimum terms | Terms state the term, renewal and exit cost in plain English; the price is shown before checkout. Get a lawyer to review the Terms before client #10. |
 | GST | Register once turnover passes A$75k (≈ 65 clients). Decide then whether prices become "+GST" or inclusive. |
 | Chatbot API key exposure | **Resolved:** the browser-side Gemini chatbot was removed. AI now runs only server-side (`api/start.ts`), with keys in Vercel environment variables. |

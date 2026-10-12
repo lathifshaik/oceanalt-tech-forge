@@ -155,7 +155,7 @@ Until this is set up, the form falls back to Firebase/EmailJS, and the site's "1
 
 ## Stripe setup (one-off)
 
-1. Create Products in Oceanalt's Stripe account: Care (A$29/mo), Launch (A$99/mo), Grow (A$149/mo).
+1. Create Products in Oceanalt's Stripe account: Care (A$29/mo), Launch (A$69/mo for months 2 to 6, then A$99/mo: use a Stripe subscription schedule with two phases), Grow (A$149/mo). Month one: invoice the domain at cost once the preview is approved; the subscription starts a month later.
 2. Create a Payment Link for each one.
 3. Send the client the link **after they approve their preview**. That's the "see it before you pay" promise. The website's plan buttons go to the start form, not to checkout.
 4. Turn on the customer portal so clients can update cards, see invoices and cancel themselves. The site promises cancellation without a phone call.

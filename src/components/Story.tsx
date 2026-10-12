@@ -411,7 +411,7 @@ export function Story({ onPlan }: { onPlan: (plan: string) => void }) {
       kicker: "Get found",
       title: "Someone nearby searches 'sparky near me' tonight.",
       body: "A website made for your business, your Google profile done properly, and your details set up so Google, Maps and AI answers have the right facts about you.",
-      price: "Websites from $99 a month, nothing upfront",
+      price: "Month one, just your domain. Then $69 a month, $99 from month 7",
       cta: <a className="text-link" href="#work">See websites we've designed <Icon name="arrow-right" /></a>,
       visual: () => <FoundVisual />,
     },

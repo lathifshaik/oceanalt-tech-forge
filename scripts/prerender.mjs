@@ -36,6 +36,7 @@ function business(seo) {
     logo: `${SITE}apple-touch-icon.png`,
     image: `${SITE}og-image.png`,
     email: seo.EMAIL,
+    telephone: seo.PHONE ? "+61 " + seo.PHONE.replace(/^0/, "") : undefined,
     description: "Websites, AI concierges, web apps and workflow automation for Australian small businesses, designed, built and looked after from Sydney.",
     address: { "@type": "PostalAddress", addressLocality: "Sydney", addressRegion: "NSW", postalCode: "2037", addressCountry: "AU" },
     areaServed: [{ "@type": "City", name: "Sydney" }, { "@type": "Country", name: "Australia" }],

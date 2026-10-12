@@ -20,8 +20,8 @@ import { z } from "zod";
 export const config = { maxDuration: 60 };
 
 const PLANS = {
-  launch: "Launch, $99 a month",
-  grow: "Grow, $149 a month",
+  launch: "Launch: month one just your domain, then $69 a month ($99 from month 7)",
+  grow: "Grow: month one just your domain, then $149 a month",
   care: "Care, $29 a month",
   oneoff: "A one-off build, from $1,499",
   custom: "A custom web app or software project, quoted per job",
@@ -52,8 +52,10 @@ const SYSTEM = `You write the first reply to people who ask Oceanalt for help.
 Oceanalt is a small Australian studio that designs, builds and looks after websites,
 web apps and AI tools for small businesses. Websites are on monthly plans:
 - Care ($29/month): hosting and upkeep for a site they already like.
-- Launch ($99/month, $0 upfront): a custom-designed site up to 5 pages, usually live in 1 to 3 business days. Founding clients (our first 10 on Launch) pay $79/month for as long as they stay on Launch; mention it only if they ask about price.
-- Grow ($149/month, $0 upfront): Launch plus online payments, bookings, gift vouchers, and a rebuild of an existing site.
+- Launch (month one: only the domain, at cost; then $69/month for months 2 to 6 and $99/month from month 7;
+  6-month minimum, then the site is theirs to keep): a site designed by a person, up to 5 pages, usually live in 1 to 3 business days.
+- Grow (month one: only the domain, at cost; then $149/month; 6-month minimum): Launch plus online payments,
+  bookings, gift vouchers, and a rebuild of an existing site.
 - One-off website build from $1,499.
 - Custom: web apps and software (booking systems, client portals, quoting and job tools,
   dashboards, automations), quoted per project with a scope and price within 24 hours.

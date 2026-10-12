@@ -1,6 +1,6 @@
 # Oceanalt
 
-Oceanalt is run as a small firm of Claude agents plus the founder. It sells three things to Australian small businesses, with equal weight: **digital presence** (website, Google profile, SEO; Care $29, Launch $99, Grow $149 AUD/month, $0 upfront, or one-off from $1,499), **web apps and software** (quoted per project), and **AI agents** ($39/month assistant + usage at cost, custom agents quoted). Tagline: "More customers. Less admin."
+Oceanalt is run as a small firm of Claude agents plus the founder. It sells three things to Australian small businesses, with equal weight: **digital presence** (website, Google profile, SEO; Care $29; Launch: month one just the domain at cost, then $69/month to month 6 and $99 from month 7; Grow $149; 6-month minimum, then the site is theirs; or one-off from $1,499), **web apps and software** (quoted per project), and **AI agents** ($39/month assistant + usage at cost, custom agents quoted). Tagline: "More customers. Less admin."
 
 What we sell, in the owner's words: **get found** (website, Google Business Profile, SEO, showing up in AI search), **when you can't pick up** (AI concierge $149/month with a local number + call time at cost; website chat assistant $39/month), **less admin** (we make their pipeline efficient, from first enquiry to paid invoice: web apps and workflow automation, quoted per project). Client sites and apps are hosted on Cloudflare and AWS, and client data stays in Australia (AWS Sydney); keep that true (see OPERATIONS.md).
 

@@ -15,7 +15,7 @@ Subject: I made a website for {business}
 > I came across {business} {found} and saw you don't have a website, so I made you one:
 > {link}
 >
-> If you like it, it can be live this week. As one of our first 10 clients it's $79 a month, locked in, with nothing upfront, and you don't pay anything until you're happy with it.
+> If you like it, it can be live this week. In the first month you pay only for the domain, and only once you're happy with it. Then it's $69 a month, and $99 from month 7.
 >
 > Interested? Just reply "yes" and I'll sort the rest. If not, no worries, ignore this and I'll take it down.
 >

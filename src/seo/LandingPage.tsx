@@ -1,5 +1,5 @@
 import { Icon } from "../components/Icon";
-import { ABN, EMAIL, LogoMark, PLANS } from "../App";
+import { ABN, EMAIL, LogoMark, PHONE, PHONE_HREF, PLANS } from "../App";
 import { LANDINGS, type Landing } from "./landing";
 
 // A service page, rendered to static HTML at build time (scripts/prerender.mjs).
@@ -58,7 +58,7 @@ export function LandingPage({ page }: { page: Landing }) {
                 </li>
               ))}
             </ul>
-            <p className="lp-note">Prices in AUD, nothing upfront. Launch and Grow have a 12-month minimum; after that the site is yours to keep. <a className="link" href="/#pricing">Full plan details</a>.</p>
+            <p className="lp-note">Prices in AUD. Month one, you pay only for your domain. Launch is $69 a month to month 6, then $99. Launch and Grow have a 6-month minimum; after that the site is yours to keep. <a className="link" href="/#pricing">Full plan details</a>.</p>
           </div>
         </section>
 
@@ -122,6 +122,7 @@ export function SiteFooter({ current }: { current?: string }) {
             <a href="/#work">Work</a>
             <a href="/designs/">Designs</a>
             <a href="/#pricing">Pricing</a>
+            <a href={PHONE_HREF}>{PHONE}</a>
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <a href="/#/terms">Terms</a>
             <a href="/#/privacy">Privacy</a>

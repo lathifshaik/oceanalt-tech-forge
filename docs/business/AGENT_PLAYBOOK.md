@@ -9,7 +9,7 @@ Agents draft, build, check and recommend. **The founder approves anything that l
 ## Who handles what
 
 ### `ceo`: decisions
-- **Handles:** pricing and offer changes, go/no-go on custom work, the Founding 10 offer, minimum terms, risk and legal checks on claims (ACL, Spam Act, Privacy Act, AI disclosure, call recording), the monthly KPI review and the Friday weekly numbers.
+- **Handles:** pricing and offer changes, go/no-go on custom work, the domain-only first month and $69 intro price, minimum terms, risk and legal checks on claims (ACL, Spam Act, Privacy Act, AI disclosure, call recording), the monthly KPI review and the Friday weekly numbers.
 - **Starts when:** a price, term or claim changes; a custom quote comes in; it's Friday or the 1st of the month; any agent is unsure who owns a job.
 - **Produces:** a decision with a reason, the exact wording, and updates to `BUSINESS_PLAN.md`. Prices and terms change in all four places together (see CLAUDE.md).
 - **Founder signs off:** every price, term or offer change before it goes live.

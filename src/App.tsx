@@ -10,6 +10,11 @@ import { LANDINGS } from "./seo/landing";
 
 export const EMAIL = "hello@oceanalt.com.au";
 export const ABN = "65 119 854 062";
+export const PHONE = "0431 236 999";
+export const PHONE_HREF = "tel:+61431236999";
+// The founder's photo for the "Who you'll deal with" card. Leave empty until
+// the file is in public/team/; the card shows without a photo until then.
+const FOUNDER_PHOTO = "";
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
@@ -448,9 +453,9 @@ export const PLANS = [
   {
     id: "launch",
     name: "Launch",
-    price: "$99",
-    term: "$0 upfront · 12-month minimum",
-    desc: "A custom website for a local business, designed, built, hosted and kept up to date.",
+    price: "$69",
+    term: "Month one: just your domain · $99/month from month 7 · 6-month minimum",
+    desc: "A custom website for a local business, designed by a person, built, hosted and kept up to date.",
     features: [
       "Custom design, up to 5 pages",
       "We write the words; you send photos",
@@ -466,7 +471,7 @@ export const PLANS = [
     id: "grow",
     name: "Grow",
     price: "$149",
-    term: "$0 upfront · 12-month minimum",
+    term: "Month one: just your domain · 6-month minimum",
     desc: "For businesses that take money or bookings online. Everything in Launch, plus:",
     features: [
       "Up to 12 pages",
@@ -483,7 +488,7 @@ export const PLANS = [
 export const FAQ: { q: string; a: string }[] = [
   {
     q: "What if I want to leave?",
-    a: "After 12 months you can cancel any time from your billing page and keep the site, code and domain. Leaving earlier costs the rest of the first year or a $1,499 buyout, whichever is less, and the site is still yours.",
+    a: "After 6 months you can cancel any time from your billing page and keep the site, code and domain. Leaving earlier costs the rest of those 6 months, and the site is still yours.",
   },
   {
     q: "How can it be live in 1 to 3 days?",
@@ -731,8 +736,8 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
   return (
     <section id="pricing" className="pricing">
       <div className="wrap">
-        <h2 className="h2">One price a month. Nothing upfront.</h2>
-        <p className="lede">Design, hosting and changes on one monthly bill. Prices in AUD.</p>
+        <h2 className="h2">Month one, just your domain.</h2>
+        <p className="lede">In your first month you pay only for your domain, at cost. Launch is then $69 a month until month 6 and $99 a month after that. Design, hosting and changes on one bill. Prices in AUD.</p>
         <div className="plans">
           {PLANS.map((p) => (
             <div className={`plan${p.featured ? " is-featured" : ""}`} key={p.id}>
@@ -756,7 +761,6 @@ function Pricing({ onPlan }: { onPlan: (plan: string) => void }) {
           <p><b>AI concierge</b> $149 a month with a local number, plus call time at cost (our estimate: about 15 to 20 cents a minute, so 200 minutes is roughly $30 to $40) up to a monthly cap you set. 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it. A chat assistant for your website is $39 a month.</p>
           <p><b>Web apps and automations</b> Quoted per project. <button className="link" type="button" onClick={() => onPlan("custom")}>Send a brief</button> for a scope and price within 24 hours.</p>
           <p><b>Rather own it outright?</b> One-off builds from $1,499, half at the start and half at launch.</p>
-          <p><b>Founding clients</b> Our first 10 Launch clients pay $79 a month instead of $99, for as long as they stay on Launch. Same plan, same terms.</p>
         </div>
         <p className="plan-not">Not included: Stripe's fee on each payment, paid ads and photo shoots. No GST is added: we're not registered for GST yet.</p>
       </div>
@@ -771,9 +775,10 @@ function Promises() {
         <h2 className="h2">Straight up, in writing.</h2>
         <p className="lede">Some providers hold your domain, make leaving hard or won't say where your data lives. Not us.</p>
         <ul className="promises">
+          <li><b>Designed by a person</b><span>Our tools do the heavy lifting, but a person designs your site and signs it off. Call or text {PHONE} and you'll talk to them.</span></li>
           <li><b>See it before you pay</b><span>A preview link before anything goes live. Your first charge happens only once you're happy with it.</span></li>
           <li><b>Your domain, in your name</b><span>Registered to you from day one. If you leave, it goes with you.</span></li>
-          <li><b>Keep the site after 12 months</b><span>After a year, the site and its code are yours to keep, free. Stay on Care for $29 a month or take it anywhere.</span></li>
+          <li><b>Keep the site after 6 months</b><span>After 6 paid months, the site and its code are yours to keep, free. Stay with us, move to Care for $29 a month, or take it anywhere.</span></li>
           <li><b>Your customers' data, stored in Sydney</b><span>Form submissions, bookings, files and databases we build for you are stored in AWS Sydney. Some tools process data overseas, like Stripe, Google and the AI and phone providers behind the concierge. We list every one in writing before you go live.</span></li>
           <li><b>Fast and safe, on Cloudflare and AWS</b><span>SSL, daily backups and uptime monitoring included. Payments go straight to your own Stripe account; we never hold your money.</span></li>
         </ul>
@@ -788,7 +793,7 @@ function Faq() {
       <div className="wrap">
         <div className="faq-side">
           <h2 className="h2">Questions</h2>
-          <p className="lede">Something else? Email <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
+          <p className="lede">Something else? Call or text <a className="link" href={PHONE_HREF}>{PHONE}</a>, or email <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
         </div>
         <div className="faq-list">
           {FAQ.map((f, i) => (
@@ -812,8 +817,8 @@ export const TEMPLATE_LABEL: Record<string, string> = {
   unsure: "Something else",
 };
 export const PLAN_LABEL: Record<string, string> = {
-  launch: "Launch ($99/month)",
-  grow: "Grow ($149/month)",
+  launch: "Launch (domain only in month one, then $69/month, $99 from month 7)",
+  grow: "Grow (domain only in month one, then $149/month)",
   care: "Care ($29/month)",
   rebuild: "Rebuild my existing site",
   oneoff: "One-off build (from $1,499)",
@@ -876,6 +881,14 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
           <h2 className="h2">Tell us about your business.</h2>
           <p className="lede">Tell us a little about your business. A person reads every enquiry and replies the same business day, with a suggested plan and a time for a quick call.</p>
           <p className="start-founder">Oceanalt is a small Sydney business that runs on AI agents, checked by a person. The agents draft and build. A person checks every site before it goes live and reads every enquiry the same business day. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
+          <div className="founder-card">
+            {FOUNDER_PHOTO && <img src={FOUNDER_PHOTO} alt="Oceanalt's founder at North Head, Sydney" width={160} height={160} loading="lazy" />}
+            <div>
+              <b>Who you'll deal with</b>
+              <p>Me, the founder. A person designs and signs off every site, and you can call or text me directly.</p>
+              <a className="founder-phone num" href={PHONE_HREF}><Icon name="phone" /> {PHONE}</a>
+            </div>
+          </div>
           <div className="start-aside">
             <a href={`mailto:${EMAIL}`}><Icon name="mail" /> {EMAIL}</a>
             <span><Icon name="pin" /> Based in Sydney, working Australia-wide</span>
@@ -951,6 +964,7 @@ function Footer() {
             <a href="#work">Work</a>
             <a href="/designs/">Designs</a>
             <a href="#pricing">Pricing</a>
+            <a href={PHONE_HREF}>{PHONE}</a>
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <a href="#/terms">Terms</a>
             <a href="#/privacy">Privacy</a>
@@ -988,9 +1002,9 @@ function Terms() {
       <h2>2. Delivery</h2>
       <p>Launch and Grow sites are usually live within 1 to 3 business days of the kickoff call, provided we have the photos, prices and domain access we ask for. Steps run by third parties, such as Google Business Profile verification, Stripe account verification and domain transfers, may take longer and are outside that timeframe.</p>
       <h2>3. Billing</h2>
-      <p>Monthly plans are billed in advance by card through Stripe. The first charge happens only after the client approves the preview. Launch and Grow have a 12-month minimum term, then continue month to month and can be cancelled with 30 days' notice. Founding clients (our first 10 on Launch) pay $79 a month instead of $99 for as long as they stay on Launch; everything else in these terms is the same. Cancelling within the first 12 months costs the lesser of the remaining months in that term or a $1,499 AUD buyout, and either way the site is transferred to the client. Care is month to month. One-off projects are billed 50% upfront and 50% at launch.</p>
+      <p>Monthly plans are billed in advance by card through Stripe. The first charge happens only after the client approves the preview. In the first month of Launch and Grow, the client pays only for their domain, at cost. Launch is then $69 AUD a month for months 2 to 6 and $99 AUD a month from month 7; Grow is $149 AUD a month from month 2. Launch and Grow have a 6-month minimum term, then continue month to month and can be cancelled with 30 days' notice. Cancelling within the first 6 months costs the remaining months of that term, and the site is still transferred to the client. Care is month to month. One-off projects are billed 50% upfront and 50% at launch.</p>
       <h2>4. Ownership</h2>
-      <p>The client owns their content and domain from day one; domains are registered in the client's name. On Launch and Grow, ownership of the site code transfers at no charge after 12 paid months, or earlier on payment of the buyout in section 3. For one-off projects, the client owns the code once the final invoice is paid.</p>
+      <p>The client owns their content and domain from day one; domains are registered in the client's name. On Launch and Grow, ownership of the site code transfers at no charge after the 6-month minimum term, or earlier on payment of the remaining months in section 3. For one-off projects, the client owns the code once the final invoice is paid.</p>
       <h2>5. Edits</h2>
       <p>Included edit time covers changes to existing pages. New pages or features are quoted in writing before work starts. Unused edit time does not roll over.</p>
       <h2>6. Payments to the client</h2>

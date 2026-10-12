@@ -1,0 +1,216 @@
+{
+  "template": "cafe",
+  "slug": "calaca-taqueria",
+  "url": "https://calaca.example/",
+  "_note": "Sample business for the gallery, a restaurant design. Names, numbers and details are fictional.",
+  "schemaType": "Restaurant",
+  "business": {
+    "name": "Calaca",
+    "headline": "Tacos, mezcal and a loud Friday night.",
+    "intro": "A taqueria on Brunswick Street with tortillas pressed by hand, slow-cooked fillings and a long list of mezcal.",
+    "address": "210 Brunswick Street, Fortitude Valley QLD 4006",
+    "street": "210 Brunswick Street",
+    "suburb": "Fortitude Valley",
+    "state": "QLD",
+    "postcode": "4006",
+    "phone": "(07) 5550 2093",
+    "email": "hola@calaca.example",
+    "instagram": "calacataqueria",
+    "hoursSummary": "Lunch and dinner, closed Mondays",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "11:30am",
+        "close": "10pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "11:30am",
+        "close": "10pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "11:30am",
+        "close": "10pm"
+      },
+      {
+        "day": "Friday",
+        "open": "11:30am",
+        "close": "late"
+      },
+      {
+        "day": "Saturday",
+        "open": "11:30am",
+        "close": "late"
+      },
+      {
+        "day": "Sunday",
+        "open": "11:30am",
+        "close": "9pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A row of beef tacos with onion and coriander",
+    "lineTwo": "Pressed by hand."
+  },
+  "facts": [
+    {
+      "icon": "leaf",
+      "text": "Corn tortillas pressed by hand"
+    },
+    {
+      "icon": "clock",
+      "text": "Taco Tuesday, $4 tacos"
+    },
+    {
+      "icon": "star",
+      "text": "Forty mezcals and tequilas"
+    }
+  ],
+  "dishes": {
+    "kicker": "Start here",
+    "title": "Tacos everyone orders",
+    "items": [
+      {
+        "name": "Birria",
+        "price": "$7",
+        "photo": "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Beef tacos with onion and coriander",
+        "desc": "Slow-cooked beef, consommé for dipping"
+      },
+      {
+        "name": "Pollo asado",
+        "price": "$6",
+        "photo": "https://images.unsplash.com/photo-1648437595587-e6a8b0cdf1f9?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Chicken tacos with lime",
+        "desc": "Charred chicken, salsa verde, pickled onion"
+      },
+      {
+        "name": "Hongos",
+        "price": "$6",
+        "photo": "https://images.unsplash.com/photo-1683062332605-4e1209d75346?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Tacos on a plate with a beer",
+        "desc": "Roast mushrooms, black beans, queso fresco"
+      }
+    ]
+  },
+  "story": {
+    "title": "Made the slow way",
+    "body": "The masa is ground and pressed every morning, and the birria cooks for eight hours. It's not fast food, but it comes out fast.",
+    "photo": "https://images.unsplash.com/photo-1683062332605-4e1209d75346?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Three tacos and a glass of beer"
+  },
+  "special": {
+    "kicker": "Every Tuesday",
+    "title": "Taco Tuesday, $4 tacos",
+    "body": "Every taco on the menu is $4 on Tuesdays, from 5pm till close. Margaritas are $12.",
+    "price": "$4",
+    "photo": "https://images.unsplash.com/photo-1648437595587-e6a8b0cdf1f9?w=900&q=75&auto=format&fit=crop",
+    "photoAlt": "Tacos with lime wedges"
+  },
+  "gallery": {
+    "title": "Inside Calaca",
+    "photos": [
+      {
+        "photo": "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=1200&q=75&auto=format&fit=crop",
+        "photoAlt": "Tacos in a row"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1648437595587-e6a8b0cdf1f9?w=800&q=75&auto=format&fit=crop",
+        "photoAlt": "Tacos with lime"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1683062332605-4e1209d75346?w=800&q=75&auto=format&fit=crop",
+        "photoAlt": "Tacos and a beer"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=800&q=75&auto=format&fit=crop",
+        "photoAlt": "Birria tacos close up"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1683062332605-4e1209d75346?w=800&q=75&auto=format&fit=crop",
+        "photoAlt": "A plate of tacos"
+      }
+    ]
+  },
+  "menuIntro": "Tacos come in pairs or by the one. Everything is gluten-free except the churros.",
+  "menu": [
+    {
+      "category": "Tacos",
+      "items": [
+        {
+          "name": "Birria",
+          "price": "7.00"
+        },
+        {
+          "name": "Pollo asado",
+          "price": "6.00"
+        },
+        {
+          "name": "Fish, beer-battered",
+          "price": "7.00"
+        },
+        {
+          "name": "Hongos",
+          "price": "6.00",
+          "desc": "Vegetarian"
+        }
+      ]
+    },
+    {
+      "category": "To share and drinks",
+      "items": [
+        {
+          "name": "Guacamole and chips",
+          "price": "14.00"
+        },
+        {
+          "name": "Elote, street corn",
+          "price": "9.00"
+        },
+        {
+          "name": "Churros",
+          "price": "10.00"
+        },
+        {
+          "name": "Margarita",
+          "price": "18.00"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Tell us about allergies when you order.",
+  "menuPhoto": "https://images.unsplash.com/photo-1648437595587-e6a8b0cdf1f9?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "Tacos with lime on a board",
+  "sections": [
+    "facts",
+    "dishes",
+    "story",
+    "special",
+    "menu",
+    "visit"
+  ],
+  "dishStyle": "cards",
+  "showcase": [
+    {
+      "theme": "cantina",
+      "hero": "full"
+    },
+    {
+      "theme": "trattoria",
+      "hero": "wordmark",
+      "sections": [
+        "special",
+        "gallery",
+        "menu",
+        "visit"
+      ],
+      "dishStyle": "round"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "template": "shop",
+  "slug": "ochre-skin-co",
+  "url": "https://ochreskin.example/",
+  "_note": "Sample business for the gallery, a beauty design. Names, numbers and details are fictional. Buy links are placeholders for Stripe Payment Links.",
+  "schemaType": "Store",
+  "business": {
+    "name": "Ochre Skin Co",
+    "headline": "Simple skin care, made in small batches.",
+    "intro": "Cleansers, oils and creams made in Byron Bay with short ingredient lists. Posted Australia-wide.",
+    "address": "2/14 Jonson Street, Byron Bay NSW 2481",
+    "street": "2/14 Jonson Street",
+    "suburb": "Byron Bay",
+    "state": "NSW",
+    "postcode": "2481",
+    "phone": "0491 570 316",
+    "email": "hello@ochreskin.example",
+    "instagram": "ochreskinco",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Friday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "9am",
+        "close": "4pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "10am",
+        "close": "2pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1600&q=75&auto=format&fit=crop",
+    "photoAlt": "An amber glass dropper bottle on a wooden stand"
+  },
+  "delivery": {
+    "cutoff": {
+      "time": "2pm",
+      "days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ]
+    },
+    "facts": [
+      {
+        "icon": "van",
+        "title": "Posted the same day",
+        "detail": "Order by 2pm on weekdays"
+      },
+      {
+        "icon": "pin",
+        "title": "Australia-wide",
+        "detail": "$9 flat, free over $80"
+      },
+      {
+        "icon": "leaf",
+        "title": "Short ingredient lists",
+        "detail": "Every ingredient listed on the label"
+      }
+    ]
+  },
+  "shopTitle": "The range",
+  "shopIntro": "Four products, made in batches of a hundred so nothing sits on a shelf for long.",
+  "products": [
+    {
+      "name": "Face oil",
+      "price": "$48",
+      "desc": "Jojoba and rosehip, 30 ml.",
+      "photo": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example",
+      "tag": "Most popular"
+    },
+    {
+      "name": "Day cream",
+      "price": "$42",
+      "desc": "Light and unscented, 50 ml.",
+      "photo": "https://images.unsplash.com/photo-1585945037805-5fd82c2e60b1?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Hand and body lotion",
+      "price": "$32",
+      "desc": "Macadamia oil and shea, 250 ml.",
+      "photo": "https://images.unsplash.com/photo-1619451427882-6aaaded0cc61?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Hydrating serum",
+      "price": "$45",
+      "desc": "Hyaluronic acid and aloe, 30 ml.",
+      "photo": "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    }
+  ],
+  "shopNote": "Prices in AUD and include GST. Payments are processed securely by Stripe. Patch test before first use.",
+  "story": {
+    "title": "Made two streets from the beach",
+    "body": "We make everything in our workshop behind the shop, in small batches, and print the batch date on every bottle. Come in and try anything before you buy.",
+    "photo": "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A hand holding a dropper of serum"
+  },
+  "showcase": [
+    {
+      "theme": "sage",
+      "hero": "full"
+    },
+    {
+      "theme": "blush",
+      "hero": "split"
+    }
+  ]
+}

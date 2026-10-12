@@ -156,6 +156,50 @@ section{padding-block:clamp(4rem,9vw,7rem)}
   .hero-wordmark .status{left:1.25rem;right:auto}
 }
 
+/* Restaurant sections, all optional; site.json "sections" picks which appear and in what order.
+   Signature dishes come in two styles ("dishStyle"): round plates or photo cards. */
+.kicker{font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);margin-bottom:.9rem}
+.dish-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:2rem 1.5rem;margin-top:3rem;list-style:none;padding:0}
+.dish{display:grid;gap:.4rem;align-content:start}
+.dish-img{display:block;overflow:hidden;background:var(--surface)}
+.dish-img img{width:100%;height:100%;object-fit:cover}
+.dish-txt b{display:block;font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.3rem;letter-spacing:var(--display-tracking);line-height:1.15}
+.dish-txt small{display:block;margin-top:.3rem;color:var(--muted);font-size:.95rem}
+.dish .price{font-weight:700;color:var(--accent-text)}
+.dishes-round .wrap{text-align:center}.dishes-round .lede{margin-inline:auto}
+.dishes-round .dish{justify-items:center;text-align:center}
+.dishes-round .dish-img{width:min(13rem,70%);aspect-ratio:1;border-radius:50%;margin-bottom:.8rem;box-shadow:0 30px 40px -24px rgb(0 0 0 / .55)}
+.dishes-round .dish .price{display:inline-block;margin-top:.3rem;padding:.25rem .8rem;border-radius:999px;background:var(--accent);color:var(--on-accent)}
+.dishes-cards{background:var(--surface)}
+.dishes-cards .dish{padding:.6rem .6rem 1.1rem;border-radius:var(--r);background:var(--card);grid-template-columns:1fr auto;gap:.6rem 1rem}
+.dishes-cards .dish-img{grid-column:1/-1;aspect-ratio:4/3;border-radius:calc(var(--r) * .7)}
+.dishes-cards .dish-txt{padding-left:.4rem}.dishes-cards .dish .price{padding-right:.4rem;font-size:1.1rem}
+.chef .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,7vw,6rem);align-items:center}
+.chef-img{border-radius:var(--r-img);overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
+.chef-img img{width:100%;height:100%;object-fit:cover}
+.chef .body{margin-top:1.25rem;font-size:1.15rem;color:var(--muted);max-width:46ch}
+.sig{margin-top:1.8rem;display:grid;gap:.15rem}.sig b{font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.4rem}.sig span{color:var(--muted)}
+.special{background:var(--accent);color:var(--on-accent)}
+.special .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.special .kicker{color:inherit;opacity:.8}.special .body{margin-top:1rem;font-size:1.15rem;max-width:42ch;opacity:.92}
+.special-price{display:inline-block;margin-top:1.6rem;padding:.6rem 1.2rem;border-radius:var(--r-btn);background:var(--on-accent);color:var(--accent);font-family:var(--font-display);font-size:1.8rem;line-height:1}
+.special-img{aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 10px rgb(255 255 255 / .18)}
+.special-img img{width:100%;height:100%;object-fit:cover}
+.gal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(9rem,16vw,14rem);gap:.75rem;margin-top:2.5rem;list-style:none;padding:0}
+.gal-grid li{overflow:hidden;border-radius:var(--r-img);background:var(--surface)}
+.gal-grid li:first-child{grid-column:span 2;grid-row:span 2}
+.gal-grid img{width:100%;height:100%;object-fit:cover}
+.booking{border-block:1px solid var(--line)}
+.booking .wrap{display:grid;grid-template-columns:1.2fr 1fr auto;gap:2rem 3rem;align-items:center}
+.book-list{display:grid;gap:.55rem;list-style:none;padding:0;font-weight:500}
+.book-list li{display:flex;align-items:center;gap:.55rem}.book-list .i{color:var(--accent-text)}
+@media (max-width:860px){
+  .chef .wrap,.special .wrap,.booking .wrap{grid-template-columns:1fr}
+  .chef-img{aspect-ratio:4/3}.special-img{max-width:18rem}
+  .gal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .booking .btn{justify-self:start}
+}
+
 footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
 footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hover{color:var(--ink)}
@@ -165,7 +209,7 @@ footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hov
   <div class="wrap">
     <a class="brand" href="#main"><span class="mark" aria-hidden="true">{{business.initials}}</span>{{business.name}}</a>
     <nav class="nav" aria-label="Main">
-      <a href="#menu">Menu</a><a href="#visit">Visit</a>{{#reviews}}{{#@first}}<a href="#reviews">Reviews</a>{{/@first}}{{/reviews}}
+      <a href="#menu">Menu</a>{{#booking}}<a href="#book">Book</a>{{/booking}}<a href="#visit">Visit</a>{{#reviews}}{{#@first}}<a href="#reviews">Reviews</a>{{/@first}}{{/reviews}}
     </nav>
     {{#business.orderUrl}}<a class="btn btn-light" href="{{business.orderUrl}}">Order ahead</a>{{/business.orderUrl}}
     {{^business.orderUrl}}<a class="btn btn-light" href="{{business.mapUrl}}">Get directions</a>{{/business.orderUrl}}
@@ -193,9 +237,9 @@ footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hov
     <p class="status" data-sign="{{business.hoursJson}}"><span class="o">Open now</span><span class="c">Closed now</span> &middot; {{business.hoursSummary}}</p>
   </div>
 
-  {{#facts}}{{#@first}}<div class="facts"><ul class="wrap">{{/@first}}<li>{{icon:@icon}} {{text}}</li>{{#@last}}</ul></div>{{/@last}}{{/facts}}
+  <!--s:facts-->{{#facts}}{{#@first}}<div class="facts"><ul class="wrap">{{/@first}}<li>{{icon:@icon}} {{text}}</li>{{#@last}}</ul></div>{{/@last}}{{/facts}}<!--/s:facts-->
 
-  {{#story}}
+  <!--s:story-->{{#story}}
   <section class="story">
     <div class="wrap">
       <div class="frame"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="1125" loading="lazy"></div>
@@ -209,9 +253,9 @@ footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hov
       </div>
     </div>
   </section>
-  {{/story}}
+  {{/story}}<!--/s:story-->
 
-  <section class="menu" id="menu">
+  <!--s:menu--><section class="menu" id="menu">
     <div class="wrap">
       <h2 class="h2">Menu</h2>
       {{#menuIntro}}<p class="lede">{{menuIntro}}</p>{{/menuIntro}}
@@ -230,9 +274,72 @@ footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hov
       </div>
       {{#menuNote}}<p class="note">{{menuNote}}</p>{{/menuNote}}
     </div>
-  </section>
+  </section><!--/s:menu-->
 
-  <section class="visit" id="visit">
+  <!--s:dishes-->{{#dishes}}
+  <section class="dishes dishes-{{dishStyle}}" id="dishes">
+    <div class="wrap">
+      {{#kicker}}<p class="kicker">{{kicker}}</p>{{/kicker}}
+      <h2 class="h2">{{title}}</h2>
+      {{#intro}}<p class="lede">{{intro}}</p>{{/intro}}
+      <ul class="dish-grid">
+        {{#items}}<li class="dish"><span class="dish-img"><img src="{{photo}}" alt="{{photoAlt}}" width="600" height="600" loading="lazy"></span><span class="dish-txt"><b>{{name}}</b>{{#desc}}<small>{{desc}}</small>{{/desc}}</span><span class="price num">{{price}}</span></li>{{/items}}
+      </ul>
+    </div>
+  </section>
+  {{/dishes}}<!--/s:dishes-->
+
+  <!--s:chef-->{{#chef}}
+  <section class="chef">
+    <div class="wrap">
+      <div class="chef-img"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="1100" loading="lazy"></div>
+      <div class="chef-txt">
+        <p class="kicker">{{kicker}}</p>
+        <h2 class="h2">{{title}}</h2>
+        <p class="body">{{body}}</p>
+        <p class="sig"><b>{{name}}</b> <span>{{role}}</span></p>
+      </div>
+    </div>
+  </section>
+  {{/chef}}<!--/s:chef-->
+
+  <!--s:special-->{{#special}}
+  <section class="special">
+    <div class="wrap">
+      <div class="special-txt">
+        <p class="kicker">{{kicker}}</p>
+        <h2 class="h2">{{title}}</h2>
+        <p class="body">{{body}}</p>
+        {{#price}}<p class="special-price num">{{price}}</p>{{/price}}
+      </div>
+      {{#photo}}<div class="special-img"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="900" loading="lazy"></div>{{/photo}}
+    </div>
+  </section>
+  {{/special}}<!--/s:special-->
+
+  <!--s:gallery-->{{#gallery}}
+  <section class="gallery">
+    <div class="wrap">
+      <h2 class="h2">{{title}}</h2>
+      <ul class="gal-grid">{{#photos}}<li><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="900" loading="lazy"></li>{{/photos}}</ul>
+    </div>
+  </section>
+  {{/gallery}}<!--/s:gallery-->
+
+  <!--s:booking-->{{#booking}}
+  <section class="booking" id="book">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">{{title}}</h2>
+        <p class="lede">{{body}}</p>
+      </div>
+      <ul class="book-list">{{#details}}<li>{{icon:check}} {{.}}</li>{{/details}}</ul>
+      <a class="btn btn-primary" href="{{url}}">{{icon:calendar}} {{cta}}</a>
+    </div>
+  </section>
+  {{/booking}}<!--/s:booking-->
+
+  <!--s:visit--><section class="visit" id="visit">
     <div class="wrap">
       <div>
         <h2 class="h2">Come and say hello</h2>
@@ -248,9 +355,9 @@ footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hov
         {{#business.hours}}<li data-day="{{dayIndex}}"><span class="d">{{day}}</span><span>{{#open}}{{open}} to {{close}}{{/open}}{{^open}}Closed{{/open}}</span></li>{{/business.hours}}
       </ul>
     </div>
-  </section>
+  </section><!--/s:visit-->
 
-  {{#reviews}}{{#@first}}
+  <!--s:reviews-->{{#reviews}}{{#@first}}
   <section class="reviews" id="reviews">
     <div class="wrap">
       <figure class="big" style="margin:0">
@@ -265,7 +372,7 @@ footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hov
       </div>
     </div>
   </section>
-  {{/@last}}{{/reviews}}
+  {{/@last}}{{/reviews}}<!--/s:reviews-->
 </main>
 
 <footer>

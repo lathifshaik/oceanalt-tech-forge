@@ -37,8 +37,10 @@ for (const { t, example } of examples) {
   // The same business in several designs, to show that no two sites look alike.
   const variants = (showcase || meta.showcase || [{ theme: meta.defaultTheme, hero: meta.heroVariants[0] }]).map((v, i) => {
     const path = i === 0 ? site.slug : `${site.slug}-${v.theme}`;
+    // A showcase entry can also change the page itself, e.g. its own "sections" order or "dishStyle".
+    const { theme, hero, ...page } = v;
     const { html } = buildSite(
-      { ...site, design: { ...site.design, ...v }, url: `https://oceanalt.com.au/work/${path}/` },
+      { ...site, ...page, design: { ...site.design, theme, hero }, url: `https://oceanalt.com.au/work/${path}/` },
       { sourceLabel: `${example} (${v.theme}/${v.hero})` },
     );
     mkdirSync(join(OUT, path), { recursive: true });

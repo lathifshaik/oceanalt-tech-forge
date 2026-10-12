@@ -1,0 +1,204 @@
+{
+  "template": "cafe",
+  "slug": "saltbush-norwood",
+  "url": "https://saltbush.example/",
+  "_note": "Sample business for the gallery, a restaurant design. Names, numbers and details are fictional.",
+  "schemaType": "Restaurant",
+  "business": {
+    "name": "Saltbush",
+    "headline": "An evening worth remembering.",
+    "intro": "A seven-course tasting menu built on South Australian produce, in a 30-seat dining room on The Parade.",
+    "address": "142 The Parade, Norwood SA 5067",
+    "street": "142 The Parade",
+    "suburb": "Norwood",
+    "state": "SA",
+    "postcode": "5067",
+    "phone": "(08) 5550 3184",
+    "email": "table@saltbush.example",
+    "instagram": "saltbushdining",
+    "hoursSummary": "Dinner Wednesday to Saturday, lunch Sunday",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday"
+      },
+      {
+        "day": "Wednesday",
+        "open": "6pm",
+        "close": "11pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "6pm",
+        "close": "11pm"
+      },
+      {
+        "day": "Friday",
+        "open": "6pm",
+        "close": "11pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "5:30pm",
+        "close": "11pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "12pm",
+        "close": "4pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1709548145082-04d0cde481d4?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A dimly lit dining room with set tables",
+    "lineTwo": "Seven courses, one sitting.",
+    "dish": "https://images.unsplash.com/photo-1593854989775-ae5e4d9e49e9?w=900&q=75&auto=format&fit=crop",
+    "dishAlt": "A plated course in a black bowl",
+    "cards": [
+      {
+        "icon": "calendar",
+        "title": "Bookings open six weeks ahead",
+        "detail": "Tables of two to six"
+      }
+    ],
+    "stats": [
+      {
+        "value": "7",
+        "label": "Courses on the tasting menu"
+      },
+      {
+        "value": "30",
+        "label": "Seats in the room"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "icon": "leaf",
+      "text": "Produce from within 200 km"
+    },
+    {
+      "icon": "clock",
+      "text": "One sitting a night, from 6pm"
+    },
+    {
+      "icon": "star",
+      "text": "Wine pairing from Adelaide Hills makers"
+    }
+  ],
+  "story": {
+    "title": "Cooked from what came in this morning",
+    "body": "The menu changes with what our growers and fishers bring to the back door. You'll find out what's on the plate when it arrives, and we'll happily cook around allergies with a day's notice.",
+    "photo": "https://images.unsplash.com/photo-1469234496837-d0101f54be3e?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Wine glasses on a table by the window"
+  },
+  "dishes": {
+    "kicker": "From the tasting menu",
+    "title": "A few of this season's courses",
+    "intro": "The full menu changes every few weeks. These are on right now.",
+    "items": [
+      {
+        "name": "Coorong mullet, burnt butter",
+        "price": "Course 3",
+        "photo": "https://images.unsplash.com/photo-1593854989775-ae5e4d9e49e9?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A fish course in a black bowl",
+        "desc": "Pickled saltbush, finger lime"
+      },
+      {
+        "name": "Wagyu, smoked onion",
+        "price": "Course 5",
+        "photo": "https://images.unsplash.com/photo-1689672234865-aac481f62587?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Sliced wagyu on a white plate",
+        "desc": "Black garlic, pepperberry jus"
+      },
+      {
+        "name": "Quandong, wattleseed",
+        "price": "Course 7",
+        "photo": "https://images.unsplash.com/photo-1780181612148-20a394ff0dff?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Two plated desserts on a dark table",
+        "desc": "Native fruit, wattleseed ice cream"
+      }
+    ]
+  },
+  "booking": {
+    "title": "Book a table",
+    "body": "Bookings open six weeks ahead. A $50 a head deposit holds the table and comes off the bill.",
+    "url": "https://book.example/",
+    "cta": "Book a table",
+    "details": [
+      "Tasting menu $165, wine pairing $95",
+      "Tables of two to six",
+      "Private room for up to 14"
+    ]
+  },
+  "menuIntro": "The tasting menu is the only menu at dinner. On Sundays there's a shorter four-course lunch.",
+  "menu": [
+    {
+      "category": "Dinner",
+      "items": [
+        {
+          "name": "Tasting menu, seven courses",
+          "price": "165",
+          "desc": "Wednesday to Saturday"
+        },
+        {
+          "name": "Wine pairing",
+          "price": "95"
+        },
+        {
+          "name": "Non-alcoholic pairing",
+          "price": "60"
+        }
+      ]
+    },
+    {
+      "category": "Sunday lunch",
+      "items": [
+        {
+          "name": "Four courses",
+          "price": "110"
+        },
+        {
+          "name": "Wine pairing",
+          "price": "65"
+        },
+        {
+          "name": "Children's plate",
+          "price": "35"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Dietary needs: tell us when you book and we'll plan for you.",
+  "menuPhoto": "https://images.unsplash.com/photo-1565686481561-d8ceaa689e01?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "A plated main course on a dark table",
+  "sections": [
+    "story",
+    "dishes",
+    "booking",
+    "menu",
+    "visit"
+  ],
+  "dishStyle": "round",
+  "showcase": [
+    {
+      "theme": "ember",
+      "hero": "wordmark"
+    },
+    {
+      "theme": "umami",
+      "hero": "split",
+      "sections": [
+        "dishes",
+        "menu",
+        "booking",
+        "story",
+        "visit"
+      ],
+      "dishStyle": "cards"
+    }
+  ]
+}

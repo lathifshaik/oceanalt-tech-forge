@@ -240,6 +240,21 @@ export function resolveDesign(site, meta, sourceLabel = "site.json") {
 export const fingerprint = (site, design) =>
   [site.template, design.theme, design.hero, (design.accent || "theme-accent").toLowerCase()].join(" / ");
 
+// Optional sections in a layout are marked <!--s:name-->...<!--/s:name-->. If a
+// site lists "sections", only those appear, in that order, where the first one
+// was; otherwise they keep the layout's order. The markers are always removed.
+function arrange(html, order, sourceLabel) {
+  const re = /<!--s:([\w-]+)-->([\s\S]*?)<!--\/s:\1-->/g;
+  if (!Array.isArray(order)) return html.replace(re, "$2");
+  const blocks = new Map();
+  for (const m of html.matchAll(re)) blocks.set(m[1], m[2]);
+  for (const name of order) {
+    if (!blocks.has(name)) throw new Error(`${sourceLabel}: unknown section "${name}". This layout has: ${[...blocks.keys()].join(", ")}.`);
+  }
+  let first = true;
+  return html.replace(re, () => (first ? ((first = false), order.map((n) => blocks.get(n)).join("\n")) : ""));
+}
+
 export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   const tdir = join(ROOT, site.template || "");
   if (!site.template || !existsSync(join(tdir, "template.html"))) {
@@ -249,7 +264,7 @@ export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   validate(site, meta, sourceLabel);
 
   const data = enrich(site);
-  const body = render(readFileSync(join(tdir, "template.html"), "utf8"), data);
+  const body = arrange(render(readFileSync(join(tdir, "template.html"), "utf8"), data), site.sections, sourceLabel);
   const url = site.url || "https://example.com/";
   const { design, themeCss, themeExtra, accent, onAccent, fonts } = resolveDesign(site, meta, sourceLabel);
   const seo = site.seo || {};

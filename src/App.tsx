@@ -186,6 +186,102 @@ export const WORK: {
       { path: "magnolia-newtown-orchid", theme: "Orchid, headline" },
     ],
   },
+  {
+    id: "cafe",
+    kind: "Fine dining",
+    added: "2026-10-12",
+    business: "Saltbush, Norwood",
+    problem: "Bookings came in by email and phone, and the menu changed faster than the website.",
+    pitch: "The tasting menu up front, a few of this season's courses, and booking details with the deposit spelled out.",
+    designs: [
+      { path: "saltbush-norwood", theme: "Ember" },
+      { path: "saltbush-norwood-umami", theme: "Umami" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Burger joint",
+    added: "2026-10-12",
+    business: "Big Bun, Footscray",
+    problem: "Monday deals only lived on a chalkboard, and the menu was a photo on Instagram.",
+    pitch: "Best sellers with prices, the Monday deal in big type, and the full menu one scroll down.",
+    designs: [
+      { path: "big-bun-burgers", theme: "Checker" },
+      { path: "big-bun-burgers-cantina", theme: "Cantina" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Pizzeria",
+    added: "2026-10-12",
+    business: "Nonna Pina, Leichhardt",
+    problem: "Groups rang every night to ask if they could fit, and nobody knew about Tuesday's deal.",
+    pitch: "The Tuesday special, pizzas with prices, the family story, and a booking panel for groups.",
+    designs: [
+      { path: "nonna-pina", theme: "Trattoria" },
+      { path: "nonna-pina-checker", theme: "Checker" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Taqueria",
+    added: "2026-10-12",
+    business: "Calaca, Fortitude Valley",
+    problem: "Taco Tuesday was word of mouth, and the menu was a PDF.",
+    pitch: "Tacos with prices, Taco Tuesday up top, a photo gallery and the full menu on the page.",
+    designs: [
+      { path: "calaca-taqueria", theme: "Cantina" },
+      { path: "calaca-taqueria-trattoria", theme: "Trattoria" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Sushi bar",
+    added: "2026-10-12",
+    business: "Kumo, Chatswood",
+    problem: "Twelve omakase seats a night, booked through DMs.",
+    pitch: "The chef, the lunch menu with prices, and omakase booking with the price and sittings shown.",
+    designs: [
+      { path: "kumo-sushi", theme: "Umami" },
+      { path: "kumo-sushi-ember", theme: "Ember" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Hair salon",
+    added: "2026-10-12",
+    business: "Marlo Hair, Paddington",
+    problem: "Clients asked for prices by text before every colour.",
+    pitch: "Every service priced, a free colour consult, online booking and gift cards.",
+    designs: [
+      { path: "marlo-hair", theme: "Blush" },
+      { path: "marlo-hair-ember", theme: "Ember" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Skin clinic",
+    added: "2026-10-12",
+    business: "Clearwater Skin, Bondi Junction",
+    problem: "New clients didn't know where to start, so they didn't book.",
+    pitch: "A free skin consult first, every treatment priced, and booking online.",
+    designs: [
+      { path: "clearwater-skin", theme: "Sage" },
+      { path: "clearwater-skin-ember", theme: "Ember" },
+    ],
+  },
+  {
+    id: "shop",
+    kind: "Skincare brand",
+    added: "2026-10-12",
+    business: "Ochre Skin Co, Byron Bay",
+    problem: "Sales were at the market stall and by DM, with no way to pay online.",
+    pitch: "Four products with a Buy button each, paid into Stripe, and a same-day post cutoff.",
+    designs: [
+      { path: "ochre-skin-co", theme: "Sage" },
+      { path: "ochre-skin-co-blush", theme: "Blush" },
+    ],
+  },
 ];
 
 
@@ -463,7 +559,7 @@ function Work() {
       <div className="wrap work-head">
         <div>
           <h2 className="h2">Designed for one business. Never reused.</h2>
-          <p className="lede">Twelve sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
+          <p className="lede">{WORK.length} sample businesses, each in two or three of its own designs. Switch between them, or open the live site.</p>
         </div>
         <div className="work-nav">
           <button type="button" onClick={() => nudge(-1)} aria-label="Previous"><Icon name="arrow-right" className="i flip" /></button>

@@ -1,0 +1,223 @@
+{
+  "template": "cafe",
+  "slug": "nonna-pina",
+  "url": "https://nonnapina.example/",
+  "_note": "Sample business for the gallery, a restaurant design. Names, numbers and details are fictional.",
+  "schemaType": "Restaurant",
+  "business": {
+    "name": "Nonna Pina",
+    "headline": "Wood-fired,",
+    "intro": "Neapolitan pizza from a wood-fired oven on Norton Street. Dough rested 48 hours, cooked in 90 seconds.",
+    "address": "120 Norton Street, Leichhardt NSW 2040",
+    "street": "120 Norton Street",
+    "suburb": "Leichhardt",
+    "state": "NSW",
+    "postcode": "2040",
+    "phone": "(02) 5550 4471",
+    "email": "ciao@nonnapina.example",
+    "instagram": "nonnapina",
+    "hoursSummary": "Dinner Tuesday to Sunday, lunch weekends",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "5pm",
+        "close": "10pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "5pm",
+        "close": "10pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "5pm",
+        "close": "10pm"
+      },
+      {
+        "day": "Friday",
+        "open": "5pm",
+        "close": "11pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "12pm",
+        "close": "11pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "12pm",
+        "close": "9pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1622880833523-7cf1c0bd4296?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A pizza baking in a wood-fired oven",
+    "lineTwo": "the way Nonna made it.",
+    "dish": "https://images.unsplash.com/photo-1579751626657-72bc17010498?w=900&q=75&auto=format&fit=crop",
+    "dishAlt": "A margherita pizza on a wooden board",
+    "cards": [
+      {
+        "icon": "clock",
+        "title": "Takeaway in 15 minutes",
+        "detail": "Call ahead or walk in"
+      }
+    ],
+    "stats": [
+      {
+        "value": "48 h",
+        "label": "Dough rested before it's stretched"
+      },
+      {
+        "value": "90 sec",
+        "label": "In the oven at 450 degrees"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "icon": "clock",
+      "text": "Dough rested 48 hours"
+    },
+    {
+      "icon": "leaf",
+      "text": "Gluten-free base, $4 extra"
+    },
+    {
+      "icon": "tag",
+      "text": "Tuesday: $15 margherita"
+    }
+  ],
+  "special": {
+    "kicker": "Every Tuesday",
+    "title": "Margherita night",
+    "body": "Our margherita for $15 every Tuesday, dine-in or takeaway. Bring the kids: their pizzas are half price too.",
+    "price": "$15",
+    "photo": "https://images.unsplash.com/photo-1627626775846-122b778965ae?w=900&q=75&auto=format&fit=crop",
+    "photoAlt": "A margherita pizza on a wooden table"
+  },
+  "dishes": {
+    "title": "From the oven",
+    "items": [
+      {
+        "name": "Margherita",
+        "price": "$22",
+        "photo": "https://images.unsplash.com/photo-1627626775846-122b778965ae?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A margherita pizza from above",
+        "desc": "San Marzano tomato, fior di latte, basil"
+      },
+      {
+        "name": "Diavola",
+        "price": "$26",
+        "photo": "https://images.unsplash.com/photo-1590234229790-b210b3dcd422?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A pizza in front of the fire",
+        "desc": "Hot salami, chilli, smoked mozzarella"
+      },
+      {
+        "name": "Funghi e salsiccia",
+        "price": "$27",
+        "photo": "https://images.unsplash.com/photo-1579751626657-72bc17010498?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A pizza on a wooden board",
+        "desc": "Pork and fennel sausage, mushrooms, no tomato"
+      }
+    ]
+  },
+  "story": {
+    "title": "Pina's recipe, our oven",
+    "body": "Our grandmother Pina made pizza in a Naples kitchen with no oven at all. We built the one she always wanted, and we still use her tomato sauce: tomatoes, salt, basil, nothing else.",
+    "photo": "https://images.unsplash.com/photo-1621538997517-58ce53933faa?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A pizza on the peel of a wood-fired oven"
+  },
+  "booking": {
+    "title": "Book a table",
+    "body": "Walk-ins are welcome. For groups of six or more, book so we can push tables together.",
+    "url": "https://book.example/",
+    "cta": "Book a table",
+    "details": [
+      "Groups up to 20",
+      "Kids' pizzas half price on Tuesdays",
+      "BYO wine, $5 a bottle"
+    ]
+  },
+  "menuIntro": "Neapolitan bases, soft in the middle and charred on the edge. Gluten-free bases are $4 extra.",
+  "menu": [
+    {
+      "category": "Pizza rossa",
+      "items": [
+        {
+          "name": "Margherita",
+          "price": "22"
+        },
+        {
+          "name": "Diavola",
+          "price": "26",
+          "desc": "Hot salami, chilli"
+        },
+        {
+          "name": "Capricciosa",
+          "price": "27"
+        },
+        {
+          "name": "Marinara",
+          "price": "18",
+          "desc": "No cheese, garlic, oregano"
+        }
+      ]
+    },
+    {
+      "category": "Pizza bianca and more",
+      "items": [
+        {
+          "name": "Funghi e salsiccia",
+          "price": "27"
+        },
+        {
+          "name": "Quattro formaggi",
+          "price": "26"
+        },
+        {
+          "name": "Burrata and tomatoes",
+          "price": "19"
+        },
+        {
+          "name": "Tiramisu",
+          "price": "13"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Tell us about allergies when you order.",
+  "menuPhoto": "https://images.unsplash.com/photo-1622880833523-7cf1c0bd4296?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "A pizza in the wood-fired oven",
+  "sections": [
+    "facts",
+    "special",
+    "dishes",
+    "story",
+    "menu",
+    "booking",
+    "visit"
+  ],
+  "dishStyle": "round",
+  "showcase": [
+    {
+      "theme": "trattoria",
+      "hero": "centre"
+    },
+    {
+      "theme": "checker",
+      "hero": "split",
+      "sections": [
+        "facts",
+        "dishes",
+        "menu",
+        "special",
+        "visit"
+      ],
+      "dishStyle": "cards"
+    }
+  ]
+}

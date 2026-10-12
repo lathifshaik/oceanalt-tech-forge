@@ -1,0 +1,152 @@
+{
+  "template": "studio",
+  "slug": "marlo-hair",
+  "url": "https://marlohair.example/",
+  "_note": "Sample business for the gallery, a beauty design. Names, numbers and details are fictional.",
+  "schemaType": "HairSalon",
+  "business": {
+    "name": "Marlo Hair",
+    "servicesLabel": "Services",
+    "servicesCta": "See prices",
+    "headline": "Healthy hair, cut for the way you live.",
+    "intro": "Cuts, colour and blow-dries in a calm Paddington studio. Book online in a minute, and see the price before you sit down.",
+    "address": "3/88 Given Terrace, Paddington QLD 4064",
+    "street": "3/88 Given Terrace",
+    "suburb": "Paddington",
+    "state": "QLD",
+    "postcode": "4064",
+    "phone": "(07) 5550 3317",
+    "email": "hello@marlohair.example",
+    "instagram": "marlohair",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "9am",
+        "close": "5:30pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "9am",
+        "close": "5:30pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "9am",
+        "close": "8pm"
+      },
+      {
+        "day": "Friday",
+        "open": "9am",
+        "close": "6pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8am",
+        "close": "3pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A stylist blow-drying a client's hair"
+  },
+  "about": {
+    "title": "A colour consult before every colour",
+    "body": "Fifteen minutes, free, so we can look at your hair in daylight and agree on the shade and the price before anything's mixed. Most of our regulars came in for a consult first.",
+    "badges": [
+      "Free colour consults",
+      "Vegan colour range",
+      "Late nights Thursday"
+    ],
+    "photo": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A client having her hair washed at the basin"
+  },
+  "treatmentsIntro": "Prices depend on length and who you book with. You'll see the exact price when you book. Pay by card, Apple Pay, Google Pay or Afterpay.",
+  "treatments": [
+    {
+      "group": "Cut and style",
+      "items": [
+        {
+          "name": "Women's cut and blow-dry",
+          "duration": "60 min",
+          "price": "$95"
+        },
+        {
+          "name": "Men's cut",
+          "duration": "30 min",
+          "price": "$55"
+        },
+        {
+          "name": "Blow-dry",
+          "duration": "45 min",
+          "price": "$60"
+        }
+      ]
+    },
+    {
+      "group": "Colour",
+      "items": [
+        {
+          "name": "Colour consult",
+          "duration": "15 min",
+          "price": "Free"
+        },
+        {
+          "name": "Root colour",
+          "duration": "90 min",
+          "price": "From $120"
+        },
+        {
+          "name": "Balayage",
+          "duration": "3 h",
+          "note": "Includes toner and blow-dry",
+          "price": "From $320"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give someone a good hair day",
+    "body": "Gift cards for any service, sent by email straight away.",
+    "amount": "$100",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $50",
+      "Valid for 3 years",
+      "Use on any service",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "How do I know the price?",
+      "a": "Booking online shows it. For colour, the free consult sets the price before we start."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free up to 24 hours before. After that, 50% of the service."
+    },
+    {
+      "q": "Running late?",
+      "a": "Text us. If it's more than 15 minutes we may need to shorten or move your booking."
+    }
+  ],
+  "closingLine": "Book a cut, colour or free consult in under a minute.",
+  "showcase": [
+    {
+      "theme": "blush",
+      "hero": "full"
+    },
+    {
+      "theme": "ember",
+      "hero": "split"
+    }
+  ]
+}

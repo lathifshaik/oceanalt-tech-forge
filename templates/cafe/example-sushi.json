@@ -1,0 +1,222 @@
+{
+  "template": "cafe",
+  "slug": "kumo-sushi",
+  "url": "https://kumo.example/",
+  "_note": "Sample business for the gallery, a restaurant design. Names, numbers and details are fictional.",
+  "schemaType": "Restaurant",
+  "business": {
+    "name": "Kumo",
+    "headline": "Sushi at the counter,",
+    "intro": "A twelve-seat sushi counter in Chatswood. Omakase at night, bento boxes at lunch.",
+    "address": "8 Help Street, Chatswood NSW 2067",
+    "street": "8 Help Street",
+    "suburb": "Chatswood",
+    "state": "NSW",
+    "postcode": "2067",
+    "phone": "(02) 5550 8812",
+    "email": "counter@kumo.example",
+    "instagram": "kumosushi",
+    "hoursSummary": "Lunch weekdays, dinner Tuesday to Saturday",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "11:30am",
+        "close": "2:30pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "11:30am",
+        "close": "9:30pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "11:30am",
+        "close": "9:30pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "11:30am",
+        "close": "9:30pm"
+      },
+      {
+        "day": "Friday",
+        "open": "11:30am",
+        "close": "10pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "5:30pm",
+        "close": "10pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Sushi on a slate board from above",
+    "lineTwo": "one piece at a time.",
+    "dish": "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=900&q=75&auto=format&fit=crop",
+    "dishAlt": "Nigiri on a black plate",
+    "cards": [
+      {
+        "icon": "calendar",
+        "title": "Two omakase sittings a night",
+        "detail": "6pm and 8:15pm"
+      }
+    ],
+    "stats": [
+      {
+        "value": "12",
+        "label": "Seats at the counter"
+      },
+      {
+        "value": "15",
+        "label": "Pieces in the omakase"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "icon": "star",
+      "text": "Twelve seats at the counter"
+    },
+    {
+      "icon": "clock",
+      "text": "Bento ready in 10 minutes at lunch"
+    },
+    {
+      "icon": "calendar",
+      "text": "Omakase bookings open monthly"
+    }
+  ],
+  "story": {
+    "title": "Rice first",
+    "body": "Good sushi is mostly rice. Ours is seasoned with red vinegar and kept at body temperature, and the fish comes from the Sydney Fish Market at five every morning.",
+    "photo": "https://images.unsplash.com/photo-1553621042-f6e147245754?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A wooden boat of sushi rolls"
+  },
+  "chef": {
+    "kicker": "At the counter",
+    "title": "Kenji has been cutting fish for twenty years",
+    "body": "He trained in Fukuoka and opened Kumo so he could talk to the people he's cooking for. Sit at the counter and he'll tell you where every piece came from.",
+    "name": "Kenji Mori",
+    "role": "Head chef and owner",
+    "photo": "https://images.unsplash.com/photo-1502364271109-0a9a75a2a9df?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A sushi chef preparing pieces at the counter"
+  },
+  "dishes": {
+    "title": "At lunch",
+    "intro": "Bento boxes and rolls, ready in about ten minutes.",
+    "items": [
+      {
+        "name": "Nigiri set",
+        "price": "$32",
+        "photo": "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Nigiri on a black plate",
+        "desc": "Eight pieces, the chef's pick"
+      },
+      {
+        "name": "Salmon bento",
+        "price": "$24",
+        "photo": "https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Sushi on slate",
+        "desc": "Aburi salmon, rice, pickles, miso soup"
+      },
+      {
+        "name": "Roll platter",
+        "price": "$38",
+        "photo": "https://images.unsplash.com/photo-1553621042-f6e147245754?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A boat of sushi rolls",
+        "desc": "Thirty-two pieces, to share"
+      }
+    ]
+  },
+  "booking": {
+    "title": "Book the omakase",
+    "body": "Fifteen pieces chosen by the chef, about two hours. Bookings open on the first of each month.",
+    "url": "https://book.example/",
+    "cta": "Book a seat",
+    "details": [
+      "$145 a head",
+      "6pm or 8:15pm, Tuesday to Saturday",
+      "Tell us about allergies when you book"
+    ]
+  },
+  "menuIntro": "Lunch is bento and rolls. Dinner is omakase at the counter, or a short menu at the tables.",
+  "menu": [
+    {
+      "category": "Lunch",
+      "items": [
+        {
+          "name": "Salmon bento",
+          "price": "24"
+        },
+        {
+          "name": "Chicken karaage bento",
+          "price": "22"
+        },
+        {
+          "name": "Nigiri set, 8 pieces",
+          "price": "32"
+        },
+        {
+          "name": "Hand rolls, 3",
+          "price": "18"
+        }
+      ]
+    },
+    {
+      "category": "Dinner",
+      "items": [
+        {
+          "name": "Omakase, 15 pieces",
+          "price": "145"
+        },
+        {
+          "name": "Sake pairing",
+          "price": "75"
+        },
+        {
+          "name": "Sashimi moriawase",
+          "price": "48"
+        },
+        {
+          "name": "Miso soup",
+          "price": "6"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. We can't guarantee anything is free from fish or shellfish.",
+  "menuPhoto": "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "Nigiri and chopsticks on a dark table",
+  "sections": [
+    "story",
+    "chef",
+    "dishes",
+    "booking",
+    "menu",
+    "visit"
+  ],
+  "dishStyle": "round",
+  "showcase": [
+    {
+      "theme": "umami",
+      "hero": "wordmark"
+    },
+    {
+      "theme": "ember",
+      "hero": "centre",
+      "sections": [
+        "chef",
+        "booking",
+        "dishes",
+        "menu",
+        "visit"
+      ],
+      "dishStyle": "cards"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "template": "cafe",
+  "slug": "big-bun-burgers",
+  "url": "https://bigbun.example/",
+  "_note": "Sample business for the gallery, a restaurant design. Names, numbers and details are fictional.",
+  "schemaType": "Restaurant",
+  "business": {
+    "name": "Big Bun",
+    "headline": "Smashed, stacked and on the counter fast.",
+    "intro": "Smash burgers, crinkle-cut chips and thick shakes on Barkly Street. Order ahead and skip the line.",
+    "address": "61 Barkly Street, Footscray VIC 3011",
+    "street": "61 Barkly Street",
+    "suburb": "Footscray",
+    "state": "VIC",
+    "postcode": "3011",
+    "phone": "(03) 5550 7720",
+    "email": "hey@bigbun.example",
+    "instagram": "bigbunburgers",
+    "hoursSummary": "Every day, 11am till late",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "11am",
+        "close": "9pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "11am",
+        "close": "9pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "11am",
+        "close": "9pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "11am",
+        "close": "10pm"
+      },
+      {
+        "day": "Friday",
+        "open": "11am",
+        "close": "11pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "11am",
+        "close": "11pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "11am",
+        "close": "9pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A double cheeseburger on a wooden board"
+  },
+  "facts": [
+    {
+      "icon": "clock",
+      "text": "Most orders ready in 10 minutes"
+    },
+    {
+      "icon": "leaf",
+      "text": "Vegan patty on every burger"
+    },
+    {
+      "icon": "tag",
+      "text": "Monday: $12 cheeseburger"
+    }
+  ],
+  "dishes": {
+    "kicker": "The best sellers",
+    "title": "Pick your stack",
+    "items": [
+      {
+        "name": "The Big Bun",
+        "price": "$18",
+        "photo": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A double cheeseburger",
+        "desc": "Two smashed patties, double cheese, pickles, Big Bun sauce"
+      },
+      {
+        "name": "Classic cheese",
+        "price": "$14",
+        "photo": "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A cheeseburger with pickles",
+        "desc": "One patty, cheese, onion, mustard, ketchup"
+      },
+      {
+        "name": "Build your own",
+        "price": "From $12",
+        "photo": "https://images.unsplash.com/photo-1530554764233-e79e16c91d08?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Burger ingredients stacked in the air",
+        "desc": "Pick the patty, cheese and sauces"
+      }
+    ]
+  },
+  "special": {
+    "kicker": "Every Monday",
+    "title": "$12 cheeseburger Mondays",
+    "body": "Our classic cheeseburger for $12 all day Monday, dine-in or takeaway. Add chips and a shake for $8.",
+    "price": "$12",
+    "photo": "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=900&q=75&auto=format&fit=crop",
+    "photoAlt": "A cheeseburger on a dark background"
+  },
+  "menuIntro": "Patties are smashed to order on the flat-top. Every burger comes on a toasted potato bun.",
+  "menu": [
+    {
+      "category": "Burgers",
+      "items": [
+        {
+          "name": "The Big Bun",
+          "price": "18.00",
+          "desc": "Double smash, double cheese"
+        },
+        {
+          "name": "Classic cheese",
+          "price": "14.00"
+        },
+        {
+          "name": "Hot chicken",
+          "price": "16.00",
+          "desc": "Fried thigh, hot honey, slaw"
+        },
+        {
+          "name": "Vegan smash",
+          "price": "16.00"
+        }
+      ]
+    },
+    {
+      "category": "Sides and shakes",
+      "items": [
+        {
+          "name": "Crinkle-cut chips",
+          "price": "6.00"
+        },
+        {
+          "name": "Loaded chips",
+          "price": "11.00"
+        },
+        {
+          "name": "Thick shake",
+          "price": "8.00",
+          "desc": "Vanilla, chocolate or salted caramel"
+        },
+        {
+          "name": "Soft drink",
+          "price": "4.00"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Gluten-free buns available. Tell us about allergies when you order.",
+  "menuPhoto": "https://images.unsplash.com/photo-1530554764233-e79e16c91d08?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "A burger with its ingredients floating apart",
+  "sections": [
+    "facts",
+    "dishes",
+    "special",
+    "menu",
+    "visit"
+  ],
+  "dishStyle": "cards",
+  "showcase": [
+    {
+      "theme": "checker",
+      "hero": "full"
+    },
+    {
+      "theme": "cantina",
+      "hero": "wordmark",
+      "sections": [
+        "special",
+        "dishes",
+        "menu",
+        "visit"
+      ],
+      "dishStyle": "round"
+    }
+  ]
+}

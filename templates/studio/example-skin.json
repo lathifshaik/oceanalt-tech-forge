@@ -1,0 +1,153 @@
+{
+  "template": "studio",
+  "slug": "clearwater-skin",
+  "url": "https://clearwaterskin.example/",
+  "_note": "Sample business for the gallery, a beauty design. Names, numbers and details are fictional.",
+  "schemaType": "HealthAndBeautyBusiness",
+  "business": {
+    "name": "Clearwater Skin",
+    "servicesLabel": "Treatments",
+    "servicesCta": "See treatments",
+    "headline": "Skin care that starts with a proper look.",
+    "intro": "Facials and skin treatments by qualified dermal therapists in Bondi Junction. Every first visit starts with a skin consult.",
+    "address": "Suite 4, 500 Oxford Street, Bondi Junction NSW 2022",
+    "street": "Suite 4, 500 Oxford Street",
+    "suburb": "Bondi Junction",
+    "state": "NSW",
+    "postcode": "2022",
+    "phone": "(02) 5550 9184",
+    "email": "hello@clearwaterskin.example",
+    "instagram": "clearwaterskin",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "10am",
+        "close": "6pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "10am",
+        "close": "6pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "10am",
+        "close": "7pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "10am",
+        "close": "7pm"
+      },
+      {
+        "day": "Friday",
+        "open": "9am",
+        "close": "5pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "9am",
+        "close": "3pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1552693673-1bf958298935?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A dermal therapist giving a client a facial treatment"
+  },
+  "about": {
+    "title": "Plain advice, no product push",
+    "body": "We'll tell you what your skin needs and what it doesn't. Sometimes that's a treatment plan; sometimes it's sunscreen and patience. Either way, you'll get it in writing.",
+    "badges": [
+      "Qualified dermal therapists",
+      "Written skin plan",
+      "Free 15-minute consult"
+    ],
+    "photo": "https://images.unsplash.com/photo-1643684391140-c5056cfd3436?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Close-up of a client's face after a facial"
+  },
+  "treatmentsIntro": "Every first visit includes a skin consult. Pay by card, Apple Pay, Google Pay or Afterpay when you book.",
+  "treatments": [
+    {
+      "group": "Facials",
+      "items": [
+        {
+          "name": "Skin consult",
+          "duration": "15 min",
+          "price": "Free"
+        },
+        {
+          "name": "Clearwater facial",
+          "duration": "60 min",
+          "price": "$140"
+        },
+        {
+          "name": "Express facial",
+          "duration": "30 min",
+          "price": "$80"
+        }
+      ]
+    },
+    {
+      "group": "Treatments",
+      "items": [
+        {
+          "name": "Gentle peel",
+          "duration": "45 min",
+          "price": "$160"
+        },
+        {
+          "name": "LED light therapy",
+          "duration": "30 min",
+          "price": "$70"
+        },
+        {
+          "name": "Course of 3 peels",
+          "duration": "Over 6 weeks",
+          "price": "$420"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "A facial, as a gift",
+    "body": "Gift cards for any treatment, sent by email straight away.",
+    "amount": "$140",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $50",
+      "Valid for 3 years",
+      "Use on any treatment",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "I've never had a facial. Where do I start?",
+      "a": "Book the free consult. We'll look at your skin and suggest one treatment, or none."
+    },
+    {
+      "q": "Is it suitable during pregnancy?",
+      "a": "Some treatments aren't. Tell us when you book and we'll plan around it."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free up to 24 hours before. After that, 50% of the treatment."
+    }
+  ],
+  "closingLine": "Start with a free skin consult.",
+  "showcase": [
+    {
+      "theme": "sage",
+      "hero": "split"
+    },
+    {
+      "theme": "ember",
+      "hero": "full"
+    }
+  ]
+}

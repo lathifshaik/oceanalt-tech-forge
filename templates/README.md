@@ -5,7 +5,7 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 A site's look comes from three independent choices, so no two clients get the same design:
 
 1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
-2. **Theme** (`design.theme`): one of thirteen complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
+2. **Theme** (`design.theme`): one of twenty complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
 3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`). The `cafe` layout also has two restaurant heroes: `centre` (a big centred headline with `hero.lineTwo` in italic, a round dish photo `hero.dish` rising from the bottom, and optional `hero.cards` and `hero.stats`) and `wordmark` (the business name huge, sized to fit its longest word, the headline as a tagline, and a live open or closed chip from the hours).
 
 On top of that come the client's own accent colour (`design.accent`, `design.accentDark`), photos, words and logo.
@@ -25,6 +25,13 @@ On top of that come the client's own accent colour (`design.accent`, `design.acc
 | `autumn` | Seasonal poster. Cream, brick and gold, very light display type, a flat leaf shape |
 | `paddy` | Restaurant. Cream and rice-paddy green, soft pink, Newsreader with an italic second line |
 | `orchid` | Restaurant. Blush and plum, bright pink, a soft chunky Fraunces wordmark with Oswald capitals |
+| `ember` | Fine dining. Near-black and candle gold, Cormorant serif, thin gold rules, outlined buttons (always dark) |
+| `checker` | Street-food poster. Cobalt, white and yellow, Anton capitals with a hard shadow, checkerboard strips |
+| `trattoria` | Italian. Cream, tomato and olive, Gloock with Newsreader italics, arched photos, a striped awning |
+| `cantina` | Bright and loud. Cream, chilli orange, lime and pink, Bowlby One capitals, a row of party flags |
+| `umami` | Black, rice-paper white and one red sun. Extra-wide Archivo capitals, square corners (always dark) |
+| `blush` | Beauty editorial. Powder pink and rose, Bodoni Moda with italics, arched photos |
+| `sage` | Apothecary calm. Sage, stone and oat, Instrument Serif in lower case, square photos |
 
 The four poster themes (`riso`, `halftone`, `bloom`, `autumn`) also carry their own CSS (`css` in `themes.json`): print grain, black-and-white or tinted photos, oversized headlines and one flat shape. The builder adds it after the layout's own styles.
 
@@ -55,7 +62,9 @@ The build fails with a clear list if a required field is missing (see each templ
 
 **What you get automatically:** SEO title and description, Open Graph tags, LocalBusiness JSON-LD, a favicon made from the business initials, a canonical URL, robots.txt and sitemap.xml. You also get light and dark mode, `tel:` links in international format, a Google Maps directions link, today's hours highlighted, and reduced-motion support.
 
-**Design:** `"design": { "theme": "forest", "hero": "split", "accent": "#1d6fd8", "accentDark": "#79aef0" }`. Leave it out and the layout's default theme is used. Pick the accent from the client's logo, and check it reads on the theme's background at 4.5:1.
+**Design:** `"design": { "theme": "forest", "hero": "split", "accent": "#1d6fd8", "accentDark": "#79aef0" }`. Leave it out and the layout's default theme is used.
+
+**Sections (cafe layout):** besides the menu and visit sections, a restaurant can have `dishes` (signature dishes; `dishStyle` is `round` or `cards`), `chef`, `special` (a weekly deal), `gallery` and `booking` (book a table). `"sections": ["facts", "dishes", "special", "menu", "visit"]` picks which appear and in what order; leave it out for the layout's order. A showcase entry can set its own `sections` and `dishStyle`, so one business can be shown with different pages. Pick the accent from the client's logo, and check it reads on the theme's background at 4.5:1.
 
 **Payments and bookings:** `business.bookingUrl` (Cal.com, Fresha, Square…), `gift.buyUrl` and `bookUrl` on any treatment take Stripe Payment Links created in the **client's own** Stripe account.
 
@@ -94,5 +103,5 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/base.css`: shared reset and accessibility styles
 - `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
 - `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
-- `themes/themes.json`: the thirteen design directions
+- `themes/themes.json`: the twenty design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

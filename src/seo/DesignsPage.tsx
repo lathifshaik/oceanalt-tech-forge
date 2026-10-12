@@ -10,7 +10,7 @@ import { SiteFooter, SiteHeader } from "./LandingPage";
 const CATS = [
   { id: "food", label: "Food and drink", layouts: ["cafe"] },
   { id: "trades", label: "Trades and outdoors", layouts: ["trades"] },
-  { id: "health", label: "Health and fitness", layouts: ["studio"] },
+  { id: "health", label: "Health and beauty", layouts: ["studio"] },
   { id: "shops", label: "Shops", layouts: ["shop"] },
   { id: "pro", label: "Professional services", layouts: ["pro"] },
 ];
@@ -33,7 +33,7 @@ export const DESIGNS = WORK.flatMap((w) =>
 
 export const DESIGNS_PAGE = {
   title: "Our designs: websites for Australian small businesses | Oceanalt",
-  description: `Every website design we've made so far, on sample businesses: cafés, restaurants, tradies, studios, shops and professionals. ${DESIGNS.length} designs and counting.`,
+  description: `Every website design we've made so far, on sample businesses: cafés, restaurants, salons, tradies, studios, shops and professionals. ${DESIGNS.length} designs and counting.`,
 };
 
 export function DesignsPage() {

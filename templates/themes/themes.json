@@ -514,5 +514,292 @@
       "on-accent-2": "#2b1420"
     },
     "css": "h1,h2,.h2,.wordmark,.brand{font-variation-settings:\"SOFT\" 100,\"WONK\" 0}.hero-wordmark .hero h1{font-family:\"Oswald\",sans-serif;font-weight:600}"
+  },
+  "ember": {
+    "name": "Ember",
+    "mood": "Fine dining. Near-black and candle gold, a fine serif, thin gold rules, quiet and expensive.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap",
+    "type": {
+      "display": "\"Cormorant Garamond\"",
+      "body": "\"Jost\"",
+      "weight": 500,
+      "tracking": "0em"
+    },
+    "shape": {
+      "r": "2px",
+      "img": "0px",
+      "btn": "0px"
+    },
+    "light": {
+      "bg": "#0f0d0b",
+      "surface": "#17140f",
+      "card": "#1d1914",
+      "ink": "#efe6d2",
+      "muted": "#a89c86",
+      "line": "#2c261d",
+      "accent": "#c9a25f",
+      "on-accent": "#14100a",
+      "accent-2": "#d8b878",
+      "on-accent-2": "#14100a"
+    },
+    "dark": {
+      "bg": "#0f0d0b",
+      "surface": "#17140f",
+      "card": "#1d1914",
+      "ink": "#efe6d2",
+      "muted": "#a89c86",
+      "line": "#2c261d",
+      "accent": "#c9a25f",
+      "on-accent": "#14100a",
+      "accent-2": "#d8b878",
+      "on-accent-2": "#14100a"
+    },
+    "css": ".top .nav,.top .btn,.btn{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:500}.btn-primary,.btn-accent{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.btn-primary:hover,.btn-accent:hover{background:var(--accent);color:var(--on-accent);filter:none}.top .btn-light{background:transparent;color:#efe6d2;box-shadow:inset 0 0 0 1px rgb(239 230 210 / .5)}.mark{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.hero::after{background:linear-gradient(180deg,rgb(8 6 4 / .7),rgb(8 6 4 / .35) 45%,rgb(8 6 4 / .85))}.hero h1{font-weight:500;line-height:1.02}.hero h1 em{color:var(--accent)}.h2{font-weight:500}.h2::after{content:\"\";display:block;width:3.5rem;height:1px;margin-top:1.1rem;background:var(--accent)}.hero-wordmark .wordmark{font-weight:500;letter-spacing:.06em;text-shadow:none}.hero-wordmark .hero h1{font-family:\"Jost\",sans-serif;font-weight:500;font-size:clamp(.95rem,1.6vw,1.15rem);letter-spacing:.32em}.cat h3{text-transform:uppercase;letter-spacing:.2em;font-family:\"Jost\",sans-serif;font-size:.85rem;font-weight:600}.item+.item{border-top:1px solid var(--line)}.item b{font-family:var(--font-display);font-size:1.25rem;font-weight:600}.frame,.menu-photo{box-shadow:0 0 0 1px var(--line);padding:.6rem;background:transparent}.frame img,.menu-photo img{border-radius:0}.hero-centre .hero-dish{box-shadow:0 0 0 1px var(--accent),0 0 0 10px rgb(15 13 11 / .9),0 0 0 11px var(--accent),0 40px 70px -25px #000}.hero-cards li{background:rgb(15 13 11 / .85);color:#efe6d2;border:1px solid rgb(201 162 95 / .45)}.hero-stats li:last-child{background:var(--accent);color:var(--on-accent)}.hero-wordmark .hero h1{max-width:44ch;line-height:1.6}"
+  },
+  "checker": {
+    "name": "Checker",
+    "mood": "Street-food poster. Cobalt blue, white and yellow, tall condensed capitals, a checkerboard strip.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap",
+    "type": {
+      "display": "\"Anton\"",
+      "body": "\"Archivo\"",
+      "weight": 400,
+      "tracking": "0em"
+    },
+    "shape": {
+      "r": "14px",
+      "img": "18px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#1d3fcf",
+      "surface": "#1834b0",
+      "card": "#2448e0",
+      "ink": "#ffffff",
+      "muted": "#d4dcff",
+      "line": "#3d5ce6",
+      "accent": "#ffd23f",
+      "on-accent": "#10204f",
+      "accent-2": "#ffd23f",
+      "on-accent-2": "#10204f"
+    },
+    "dark": {
+      "bg": "#14268a",
+      "surface": "#101f73",
+      "card": "#1a2f9e",
+      "ink": "#ffffff",
+      "muted": "#c3ccf5",
+      "line": "#2a3fa8",
+      "accent": "#ffd23f",
+      "on-accent": "#10204f",
+      "accent-2": "#ffd23f",
+      "on-accent-2": "#10204f"
+    },
+    "css": "h1,.h2,.wordmark,.cat h3,.addr{text-transform:uppercase}.hero h1{font-size:clamp(3.4rem,9vw,8rem);line-height:.86;max-width:12ch;text-shadow:5px 5px 0 var(--accent);color:#fff}.hero-split .hero h1{text-shadow:5px 5px 0 #0d1b66}.hero-split .hero{background:var(--bg);color:var(--ink)}.hero-split .hero p{color:var(--muted)}.hero-split .btn-glass{color:#fff;border-color:rgb(255 255 255 / .45)}.hero-split .top{color:#fff}.hero-split .top .btn-light{background:#fff;color:#10204f}.hero-split .hero-img{border-radius:0;box-shadow:inset 0 0 0 8px #fff}.h2{font-size:clamp(2.6rem,6vw,4.6rem);line-height:.92}.h2,.cat h3{color:var(--accent)}.btn{text-transform:uppercase;letter-spacing:.04em}.facts{position:relative;padding-top:30px;border:0;background:var(--surface)}.facts::before,.menu::before{content:\"\";position:absolute;left:0;right:0;top:0;height:30px;background:repeating-conic-gradient(#fff 0 25%,transparent 0 50%) 0 0/30px 30px}.menu{position:relative;padding-top:calc(clamp(4rem,9vw,7rem) + 30px)}.frame,.menu-photo{box-shadow:0 0 0 6px #fff;transform:rotate(-1.5deg)}.item+.item{border-top:2px dotted var(--line)}.price{color:var(--accent)}.hours li.is-today{background:var(--accent);color:var(--on-accent)}.hours li.is-today .d::after{color:var(--on-accent)}.hero-wordmark .wordmark{color:var(--accent);text-shadow:6px 6px 0 #10204f}.special .h2,.special .kicker{color:var(--on-accent)}.special-price{background:#10204f;color:var(--accent)}.hero h1 em{font-style:normal;color:var(--accent);text-shadow:5px 5px 0 #0d1b66}.hero-split .hero h1{font-size:clamp(3rem,6vw,5.6rem);line-height:.9}@media (max-width:760px){.top .btn{letter-spacing:0;font-size:.82rem;padding:.55rem .85rem}}"
+  },
+  "trattoria": {
+    "name": "Trattoria",
+    "mood": "Italian trattoria. Cream, tomato red and olive, a round serif with italic lines, a striped awning.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Gloock&family=Newsreader:ital,opsz,wght@1,6..72,400&family=Figtree:wght@400;500;600&display=swap",
+    "type": {
+      "display": "\"Gloock\"",
+      "body": "\"Figtree\"",
+      "weight": 400,
+      "tracking": "-0.02em"
+    },
+    "shape": {
+      "r": "14px",
+      "img": "200px 200px 14px 14px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#f6efe2",
+      "surface": "#efe3cd",
+      "card": "#fffaf0",
+      "ink": "#2a1d14",
+      "muted": "#6c5a48",
+      "line": "#e1d3ba",
+      "accent": "#c8371f",
+      "on-accent": "#ffffff",
+      "accent-2": "#4f6b2f",
+      "on-accent-2": "#ffffff"
+    },
+    "dark": {
+      "bg": "#1c1410",
+      "surface": "#251b15",
+      "card": "#2c2119",
+      "ink": "#f3e8d6",
+      "muted": "#c2b29c",
+      "line": "#3a2c22",
+      "accent": "#ef6a4f",
+      "on-accent": "#1c0d08",
+      "accent-2": "#a9c27e",
+      "on-accent-2": "#141a0c"
+    },
+    "css": ".hero h1 em,.h2 em{font-family:\"Newsreader\",serif;font-style:italic;font-weight:400}.hero-centre .hero h1 em{color:#ffd9b8}.menu{position:relative;padding-top:calc(clamp(4rem,9vw,7rem) + 30px)}.menu::before{content:\"\";position:absolute;left:0;right:0;top:0;height:36px;background:repeating-linear-gradient(90deg,var(--accent) 0 36px,var(--card) 36px 72px);-webkit-mask:linear-gradient(#000 0 0) top/100% 18px no-repeat,radial-gradient(18px at 18px 18px,#000 98%,#0000) 0 0/36px 36px repeat-x;mask:linear-gradient(#000 0 0) top/100% 18px no-repeat,radial-gradient(18px at 18px 18px,#000 98%,#0000) 0 0/36px 36px repeat-x}.cat h3{font-family:\"Newsreader\",serif;font-style:italic;font-size:1.6rem}.item+.item{border-top:1px dashed var(--line)}.price{color:var(--accent)}.hero-split .hero-img{border-radius:999px 999px 0 0;margin:2rem 2rem 0 0;height:calc(100% - 2rem)}.hero-wordmark .wordmark{color:#fff3e0;letter-spacing:-.02em;text-transform:none}.hero-wordmark .hero h1{font-family:\"Newsreader\",serif;font-style:italic;text-transform:none;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:0}.hero-wordmark .hero::after{background:radial-gradient(ellipse at center,rgb(40 14 6 / .6),rgb(40 14 6 / .35) 65%,rgb(40 14 6 / .55))}.mark{background:var(--accent);color:#fff}"
+  },
+  "cantina": {
+    "name": "Cantina",
+    "mood": "Bright and loud. Warm cream, chilli orange, lime green and pink, chunky round capitals, a row of party flags.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Bowlby+One&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap",
+    "type": {
+      "display": "\"Bowlby One\"",
+      "body": "\"DM Sans\"",
+      "weight": 400,
+      "tracking": "-0.01em"
+    },
+    "shape": {
+      "r": "20px",
+      "img": "28px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#fff4e2",
+      "surface": "#ffe6c2",
+      "card": "#fffaf2",
+      "ink": "#1e2a1a",
+      "muted": "#5b5140",
+      "line": "#f2d7ad",
+      "accent": "#ff5a1f",
+      "on-accent": "#1e1208",
+      "accent-2": "#1f8a4c",
+      "on-accent-2": "#ffffff"
+    },
+    "dark": {
+      "bg": "#1a1410",
+      "surface": "#241b14",
+      "card": "#2b2119",
+      "ink": "#fff1dc",
+      "muted": "#cdbb9f",
+      "line": "#3a2c20",
+      "accent": "#ff7a45",
+      "on-accent": "#1e1208",
+      "accent-2": "#5ccf8a",
+      "on-accent-2": "#0b1a10"
+    },
+    "css": ".hero::before{content:\"\";position:absolute;left:0;right:0;top:5rem;z-index:2;height:42px;pointer-events:none;background:repeating-linear-gradient(90deg,#ff5a1f 0 46px,#1f8a4c 46px 92px,#ff3d8b 92px 138px,#ffc93c 138px 184px);-webkit-mask:conic-gradient(from -40deg at 50% 100%,#000 80deg,#0000 0) 0 0/46px 100%;mask:conic-gradient(from -40deg at 50% 100%,#000 80deg,#0000 0) 0 0/46px 100%;filter:drop-shadow(0 6px 6px rgb(0 0 0 / .25))}.hero::after{background:linear-gradient(180deg,rgb(30 18 8 / .55),rgb(30 18 8 / .2) 40%,rgb(30 18 8 / .7))}h1,.h2,.wordmark,.cat h3{text-transform:uppercase}.hero h1{font-size:clamp(2.6rem,6vw,5rem);line-height:.92;max-width:12ch}.hero h1 em{font-style:normal;color:#ffc93c}.h2{font-size:clamp(2.2rem,5vw,3.8rem);line-height:.95}.cat h3{color:var(--accent-2)}.btn-primary{box-shadow:0 4px 0 #1e1208}.price{background:#ffc93c;color:#1e1208;padding:.05rem .55rem;border-radius:999px;height:fit-content}.frame,.menu-photo{transform:rotate(2deg);box-shadow:0 0 0 8px var(--card),0 0 0 11px var(--accent)}.hero-wordmark .wordmark{color:#ffc93c;text-shadow:5px 5px 0 #ff3d8b}.hero-wordmark .hero h1{color:#fff}.facts{background:var(--accent-2);color:#fff;border:0}.facts .i{color:#ffc93c}"
+  },
+  "umami": {
+    "name": "Umami",
+    "mood": "Black, rice-paper white and one red sun. Very wide heavy capitals, clean lines, nothing extra.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap",
+    "type": {
+      "display": "\"Archivo\"",
+      "body": "\"Archivo\"",
+      "weight": 900,
+      "tracking": "-0.01em"
+    },
+    "shape": {
+      "r": "0px",
+      "img": "0px",
+      "btn": "0px"
+    },
+    "light": {
+      "bg": "#0c0c0c",
+      "surface": "#151515",
+      "card": "#1b1b1b",
+      "ink": "#f5f1ea",
+      "muted": "#a8a39b",
+      "line": "#2a2a2a",
+      "accent": "#e63a2e",
+      "on-accent": "#ffffff",
+      "accent-2": "#f5f1ea",
+      "on-accent-2": "#0c0c0c"
+    },
+    "dark": {
+      "bg": "#0c0c0c",
+      "surface": "#151515",
+      "card": "#1b1b1b",
+      "ink": "#f5f1ea",
+      "muted": "#a8a39b",
+      "line": "#2a2a2a",
+      "accent": "#e63a2e",
+      "on-accent": "#ffffff",
+      "accent-2": "#f5f1ea",
+      "on-accent-2": "#0c0c0c"
+    },
+    "css": "h1,.h2,.wordmark,.cat h3,.brand,.face b{font-stretch:125%;text-transform:uppercase}.hero::before{content:\"\";position:absolute;right:7%;top:20%;z-index:1;width:clamp(9rem,22vw,19rem);aspect-ratio:1;border-radius:50%;background:var(--accent);pointer-events:none}.hero-wordmark .hero::before{right:auto;left:50%;top:50%;transform:translate(-50%,-62%);width:clamp(12rem,30vw,26rem);opacity:.92}.hero-wordmark .wordmark{color:#f5f1ea;text-shadow:none;position:relative}.hero::after{background:linear-gradient(180deg,rgb(0 0 0 / .55),rgb(0 0 0 / .25) 45%,rgb(0 0 0 / .8))}.hero h1{font-size:clamp(2.4rem,6.4vw,5.6rem);line-height:.9}.hero-split .hero::before{right:auto;left:52%;top:auto;bottom:10%;z-index:2}.hero-split .hero h1{max-width:12ch}.h2{line-height:.95}.btn{text-transform:uppercase;letter-spacing:.1em;font-size:.82rem}.top .btn-light{background:var(--accent);color:#fff}.cat h3{color:var(--accent);font-size:1rem;letter-spacing:.08em}.item+.item{border-top:1px solid var(--line)}.price{color:var(--accent)}.facts{border-color:var(--line)}.mark{background:var(--accent);color:#fff}"
+  },
+  "blush": {
+    "name": "Blush",
+    "mood": "Beauty editorial. Powder pink and deep rose, a high-contrast serif with italic words, arched photos.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400&family=Manrope:wght@400;500;600;700&display=swap",
+    "type": {
+      "display": "\"Bodoni Moda\"",
+      "body": "\"Manrope\"",
+      "weight": 500,
+      "tracking": "-0.02em"
+    },
+    "shape": {
+      "r": "18px",
+      "img": "999px 999px 22px 22px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#fbf1ee",
+      "surface": "#f4e1dc",
+      "card": "#fffaf8",
+      "ink": "#3a1f24",
+      "muted": "#7a5c60",
+      "line": "#ecd3cd",
+      "accent": "#b4505f",
+      "on-accent": "#ffffff",
+      "accent-2": "#e9b7b9",
+      "on-accent-2": "#3a1f24"
+    },
+    "dark": {
+      "bg": "#1d1214",
+      "surface": "#27181b",
+      "card": "#2e1d20",
+      "ink": "#f8e8e6",
+      "muted": "#cdb0b2",
+      "line": "#3c262a",
+      "accent": "#e98f9c",
+      "on-accent": "#2a1014",
+      "accent-2": "#e9b7b9",
+      "on-accent-2": "#3a1f24"
+    },
+    "css": "h1 em,.h2 em{font-style:italic;font-weight:400}.hero h1{line-height:1.02}.hero h1 em,.h2 em{color:var(--accent)}.btn,.btn-accent,.btn-primary{letter-spacing:.02em}.hero-img,.photo img,.portrait img,.ph img,.shot img,.frame img{object-position:center 30%}.h2{font-weight:500}.kicker{color:var(--accent)}.top .nav a,.top .brand{letter-spacing:.02em}.hero-full .hero h1{text-shadow:0 2px 30px rgb(0 0 0 / .45)}.hero-full .hero::after{background:linear-gradient(90deg,rgb(40 15 20 / .6),rgb(40 15 20 / .15) 65%),linear-gradient(180deg,rgb(40 15 20 / .3),transparent 30%)}.hero-full .hero h1{font-weight:600}"
+  },
+  "sage": {
+    "name": "Sage",
+    "mood": "Apothecary calm. Sage green, stone and oat, a large soft serif set in lower case, square photos, lots of air.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap",
+    "type": {
+      "display": "\"Instrument Serif\"",
+      "body": "\"Inter Tight\"",
+      "weight": 400,
+      "tracking": "-0.03em"
+    },
+    "shape": {
+      "r": "4px",
+      "img": "2px",
+      "btn": "2px"
+    },
+    "light": {
+      "bg": "#eef0e8",
+      "surface": "#e2e6da",
+      "card": "#f8f9f4",
+      "ink": "#23302a",
+      "muted": "#5e6b62",
+      "line": "#d3d9cb",
+      "accent": "#4f6b58",
+      "on-accent": "#ffffff",
+      "accent-2": "#c9b79c",
+      "on-accent-2": "#23302a"
+    },
+    "dark": {
+      "bg": "#151b17",
+      "surface": "#1c241f",
+      "card": "#222b25",
+      "ink": "#e9ede4",
+      "muted": "#aab4aa",
+      "line": "#2e3830",
+      "accent": "#a7c4ae",
+      "on-accent": "#122016",
+      "accent-2": "#c9b79c",
+      "on-accent-2": "#23302a"
+    },
+    "css": ".hero h1{font-size:clamp(3rem,8vw,7rem);line-height:.9;text-transform:lowercase;letter-spacing:-.035em}.h2{font-size:clamp(2.4rem,5vw,4rem);line-height:.95;text-transform:lowercase}.hero h1 em,.h2 em{font-style:italic}.btn,.btn-accent,.btn-primary,.btn-line,.btn-light{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:600}.top .nav a{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem}.price{font-family:var(--font-display);font-size:1.35em;font-weight:400}"
   }
 }

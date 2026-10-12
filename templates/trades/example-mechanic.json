@@ -1,0 +1,113 @@
+{
+  "template": "trades",
+  "slug": "torque-street-auto",
+  "url": "https://torquestreet.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "AutoRepair",
+  "business": {
+    "name": "Torque Street Auto",
+    "headline": "Your car, fixed right, priced first.",
+    "intro": "Logbook services, brakes, tyres and repairs in Moorabbin. We call with a price before we touch anything extra.",
+    "phone": "(03) 5550 8890",
+    "email": "workshop@torquestreet.example",
+    "hoursSummary": "Mon to Fri, 7:30am to 5:30pm",
+    "serviceArea": "Moorabbin and bayside Melbourne",
+    "areaServed": "Bayside Melbourne, VIC",
+    "licence": "LMCT 11872",
+    "licenceLabel": "Licence no."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A mechanic inspecting a car engine"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "title": "Your warranty stays intact",
+      "detail": "Logbook services to the manufacturer's schedule"
+    },
+    {
+      "icon": "phone",
+      "title": "A call before extra work",
+      "detail": "Nothing extra without your yes"
+    },
+    {
+      "icon": "clock",
+      "title": "Same-day on most services",
+      "detail": "Drop off by 9am"
+    }
+  ],
+  "servicesIntro": "Most makes and models, petrol, diesel and hybrid.",
+  "services": [
+    {
+      "icon": "wrench",
+      "name": "Logbook service",
+      "desc": "To the manufacturer's schedule, stamped in your book.",
+      "from": "From $289"
+    },
+    {
+      "icon": "shield-check",
+      "name": "Brakes",
+      "desc": "Pads, rotors and fluid, checked and quoted.",
+      "from": "From $220"
+    },
+    {
+      "icon": "van",
+      "name": "Tyres and alignment",
+      "desc": "Fitted, balanced and aligned while you wait.",
+      "from": "From $89"
+    },
+    {
+      "icon": "bolt",
+      "name": "Batteries and electrics",
+      "desc": "Tested free, replaced on the spot.",
+      "from": "From $180"
+    },
+    {
+      "icon": "check-circle",
+      "name": "Roadworthy",
+      "desc": "Certificates for sale or rego transfer.",
+      "from": "$190"
+    }
+  ],
+  "servicesPhoto": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1000&q=75&auto=format&fit=crop",
+  "servicesPhotoAlt": "Hands with a spanner on a car engine",
+  "process": [
+    {
+      "title": "Book online or call",
+      "desc": "Pick a time to drop off. Courtesy car if you need one."
+    },
+    {
+      "title": "We check and call",
+      "desc": "A price for anything extra, and nothing done without your yes."
+    },
+    {
+      "title": "Pick up and pay",
+      "desc": "Card, Apple Pay or Afterpay."
+    }
+  ],
+  "areasNote": "Free pick-up and drop-off within 5 km.",
+  "areas": [
+    "Moorabbin",
+    "Cheltenham",
+    "Bentleigh",
+    "Highett",
+    "Brighton",
+    "Hampton",
+    "Sandringham",
+    "Mentone"
+  ],
+  "contact": {
+    "formAction": "https://formspree.io/f/example"
+  },
+  "showcase": [
+    {
+      "theme": "garage",
+      "hero": "split"
+    },
+    {
+      "theme": "night",
+      "hero": "full"
+    }
+  ]
+}

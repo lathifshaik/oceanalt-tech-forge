@@ -1,0 +1,126 @@
+{
+  "template": "pro",
+  "slug": "tally-and-co",
+  "url": "https://tallyandco.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "AccountingService",
+  "business": {
+    "name": "Tally & Co Accountants",
+    "headline": "Tax and books, done on time and explained.",
+    "intro": "Accountants for sole traders, small businesses and families in Hobart. Fixed fees, agreed before we start.",
+    "address": "Level 2, 77 Collins Street, Hobart TAS 7000",
+    "street": "Level 2, 77 Collins Street",
+    "suburb": "Hobart",
+    "state": "TAS",
+    "postcode": "7000",
+    "phone": "(03) 5550 2287",
+    "email": "hello@tallyandco.example",
+    "contactName": "Sam Ortega",
+    "contactRole": "Director and registered tax agent",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Book a free first chat",
+    "disclaimer": "Sample site made by Oceanalt. Not a real accounting practice."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1790127905113-03d0929f5efe?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A vintage adding machine on a wooden desk"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "text": "Registered tax agents"
+    },
+    {
+      "icon": "tag",
+      "text": "Fixed fees, agreed up front"
+    },
+    {
+      "icon": "clock",
+      "text": "Replies within one business day"
+    }
+  ],
+  "servicesIntro": "Most of our clients are tradies, cafés and small online shops.",
+  "services": [
+    {
+      "icon": "file",
+      "name": "Tax returns",
+      "desc": "Individual, sole trader and rental property returns.",
+      "fee": "From $220"
+    },
+    {
+      "icon": "chart",
+      "name": "BAS and bookkeeping",
+      "desc": "Quarterly BAS lodged, books kept in Xero.",
+      "fee": "From $180 a quarter"
+    },
+    {
+      "icon": "briefcase",
+      "name": "Business set-up",
+      "desc": "ABN, company or trust, GST and payroll set up properly.",
+      "fee": "From $650"
+    }
+  ],
+  "feesIntro": "Fees are fixed and include GST. Many are tax deductible.",
+  "fees": [
+    {
+      "item": "Individual tax return",
+      "price": "$220",
+      "note": "Including one rental property: $330"
+    },
+    {
+      "item": "Sole trader return",
+      "price": "$450",
+      "note": "Books in good order"
+    },
+    {
+      "item": "Quarterly BAS",
+      "price": "$180",
+      "note": "Per quarter"
+    },
+    {
+      "item": "First chat",
+      "price": "Free",
+      "note": "30 minutes, in person or by video"
+    }
+  ],
+  "process": [
+    {
+      "title": "A free first chat",
+      "desc": "What you need, and a fixed fee in writing."
+    },
+    {
+      "title": "Send your paperwork",
+      "desc": "Upload it securely, or drop it in."
+    },
+    {
+      "title": "Reviewed and lodged",
+      "desc": "We explain the result before we lodge."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Can you fix last year's books?",
+      "a": "Yes. We'll quote to catch them up before we start."
+    },
+    {
+      "q": "Do you work with Xero and MYOB?",
+      "a": "Yes, both."
+    },
+    {
+      "q": "Can we meet online?",
+      "a": "Yes, anywhere in Australia."
+    }
+  ],
+  "contactTitle": "Talk to an accountant",
+  "contactIntro": "Book a free first chat, or save our details and call when it suits you.",
+  "showcase": [
+    {
+      "theme": "ledger",
+      "hero": "split"
+    },
+    {
+      "theme": "harbour",
+      "hero": "full"
+    }
+  ]
+}

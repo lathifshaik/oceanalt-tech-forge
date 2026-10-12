@@ -1,0 +1,150 @@
+{
+  "template": "studio",
+  "slug": "chalk-and-talk",
+  "url": "https://chalkandtalk.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "EducationalOrganization",
+  "business": {
+    "name": "Chalk & Talk Tutoring",
+    "servicesLabel": "Lessons",
+    "servicesCta": "See lessons",
+    "headline": "Maths and English that finally make sense.",
+    "intro": "Small-group and one-on-one tutoring in Ryde for Years 3 to 12, from teachers who explain things more than one way.",
+    "address": "2/40 Church Street, Ryde NSW 2112",
+    "street": "2/40 Church Street",
+    "suburb": "Ryde",
+    "state": "NSW",
+    "postcode": "2112",
+    "phone": "(02) 5550 7314",
+    "email": "learn@chalkandtalk.example",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "3:30pm",
+        "close": "8pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "3:30pm",
+        "close": "8pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "3:30pm",
+        "close": "8pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "3:30pm",
+        "close": "8pm"
+      },
+      {
+        "day": "Friday"
+      },
+      {
+        "day": "Saturday",
+        "open": "9am",
+        "close": "3pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1583468982228-19f19164aee2?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A tutor reading a book with a student in a library"
+  },
+  "about": {
+    "title": "A free first lesson",
+    "body": "We start with a short check of where your child is at, then a plan you can see. Progress notes come home after every lesson.",
+    "badges": [
+      "Qualified teachers",
+      "Working with Children Check",
+      "Notes after every lesson"
+    ],
+    "photo": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A student writing notes beside a laptop"
+  },
+  "treatmentsIntro": "Pay per term or per lesson. Lessons follow the NSW syllabus.",
+  "treatments": [
+    {
+      "group": "Small groups, up to 4",
+      "items": [
+        {
+          "name": "Maths, Years 3 to 6",
+          "duration": "60 min",
+          "price": "$45"
+        },
+        {
+          "name": "English, Years 3 to 6",
+          "duration": "60 min",
+          "price": "$45"
+        },
+        {
+          "name": "Maths, Years 7 to 10",
+          "duration": "60 min",
+          "price": "$50"
+        }
+      ]
+    },
+    {
+      "group": "One-on-one",
+      "items": [
+        {
+          "name": "First lesson and check",
+          "duration": "60 min",
+          "price": "Free"
+        },
+        {
+          "name": "Primary",
+          "duration": "60 min",
+          "price": "$80"
+        },
+        {
+          "name": "HSC",
+          "duration": "60 min",
+          "price": "$95"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give a term of lessons",
+    "body": "Gift cards for any lessons, sent by email straight away.",
+    "amount": "$200",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $25",
+      "Valid for 3 years",
+      "Use on anything we offer",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "How do I know it's working?",
+      "a": "Notes after each lesson, and a short check at the end of each term."
+    },
+    {
+      "q": "Missed lessons",
+      "a": "Tell us 24 hours ahead and we'll move it, free."
+    },
+    {
+      "q": "Online lessons?",
+      "a": "Yes, by video, for one-on-one lessons."
+    }
+  ],
+  "closingLine": "Book a free first lesson.",
+  "showcase": [
+    {
+      "theme": "chalk",
+      "hero": "split"
+    },
+    {
+      "theme": "riso",
+      "hero": "full"
+    }
+  ]
+}

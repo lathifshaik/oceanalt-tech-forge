@@ -1,0 +1,126 @@
+{
+  "template": "pro",
+  "slug": "little-gumnuts",
+  "url": "https://littlegumnuts.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "ChildCare",
+  "business": {
+    "name": "Little Gumnuts Early Learning",
+    "headline": "A second home for little ones.",
+    "intro": "A small early learning centre in Toowoomba for children from six weeks to school age, with a big backyard and meals cooked on site.",
+    "address": "54 Herries Street, Toowoomba QLD 4350",
+    "street": "54 Herries Street",
+    "suburb": "Toowoomba",
+    "state": "QLD",
+    "postcode": "4350",
+    "phone": "(07) 5550 9921",
+    "email": "hello@littlegumnuts.example",
+    "contactName": "Priya Nair",
+    "contactRole": "Centre director",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Book a tour",
+    "disclaimer": "Sample site made by Oceanalt. Not a real childcare centre."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1567746455504-cb3213f8f5b8?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A bright playroom with small tables, chairs and toys"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "text": "Approved for the Child Care Subsidy"
+    },
+    {
+      "icon": "heart",
+      "text": "Qualified early childhood educators"
+    },
+    {
+      "icon": "leaf",
+      "text": "Meals cooked on site every day"
+    }
+  ],
+  "servicesIntro": "Open 6:30am to 6pm, Monday to Friday, 50 weeks a year.",
+  "services": [
+    {
+      "icon": "heart",
+      "name": "Nursery",
+      "desc": "Six weeks to 2 years, in a calm room with its own sleep space.",
+      "fee": "$148 a day"
+    },
+    {
+      "icon": "sprout",
+      "name": "Toddlers",
+      "desc": "2 to 3 years, lots of outdoor play and early words.",
+      "fee": "$142 a day"
+    },
+    {
+      "icon": "pencil",
+      "name": "Kindy",
+      "desc": "3 to 5 years, a Queensland-approved kindergarten program.",
+      "fee": "$138 a day"
+    }
+  ],
+  "feesIntro": "Daily fees before the Child Care Subsidy. Most families pay much less; we'll work it out with you on the tour.",
+  "fees": [
+    {
+      "item": "Nursery, per day",
+      "price": "$148",
+      "note": "Nappies, meals and sunscreen included"
+    },
+    {
+      "item": "Toddlers, per day",
+      "price": "$142",
+      "note": "Meals included"
+    },
+    {
+      "item": "Kindy, per day",
+      "price": "$138",
+      "note": "Meals included"
+    },
+    {
+      "item": "Enrolment",
+      "price": "$0",
+      "note": "No joining fee"
+    }
+  ],
+  "process": [
+    {
+      "title": "Book a tour",
+      "desc": "Meet the educators and see the rooms, about 30 minutes."
+    },
+    {
+      "title": "Pick your days",
+      "desc": "Two days a week minimum, and we'll check your subsidy."
+    },
+    {
+      "title": "Settling-in visits",
+      "desc": "Two short free visits before the first full day."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Is there a waitlist?",
+      "a": "For the nursery, usually. Join it after your tour; it's free."
+    },
+    {
+      "q": "What do I need to bring?",
+      "a": "A hat, a water bottle and a change of clothes. We supply the rest."
+    },
+    {
+      "q": "Can I pick different days each week?",
+      "a": "Set days work best for the children, but we'll try to help."
+    }
+  ],
+  "contactTitle": "Come and see us",
+  "contactIntro": "Book a tour, or save our details and call when it suits you.",
+  "showcase": [
+    {
+      "theme": "crayon",
+      "hero": "split"
+    },
+    {
+      "theme": "bloom",
+      "hero": "full"
+    }
+  ]
+}

@@ -31,6 +31,10 @@ const sample = (html) => html
   .replace("<head>", '<head>\n<meta name="robots" content="noindex, nofollow">')
   .replace("</body>", `${SAMPLE_BAR}\n</body>`);
 
+// Every gallery design must be unique: no two may share layout, theme, hero,
+// section order and dish style. The build stops if two do.
+const seen = new Map();
+
 for (const { t, example } of examples) {
   const { showcase, ...site } = JSON.parse(readFileSync(example, "utf8"));
   const meta = JSON.parse(readFileSync(join(ROOT, t.name, "meta.json"), "utf8"));
@@ -39,6 +43,9 @@ for (const { t, example } of examples) {
     const path = i === 0 ? site.slug : `${site.slug}-${v.theme}`;
     // A showcase entry can also change the page itself, e.g. its own "sections" order or "dishStyle".
     const { theme, hero, ...page } = v;
+    const key = [t.name, theme, hero, (page.sections || site.sections || []).join(">"), page.dishStyle || site.dishStyle || ""].join("|");
+    if (seen.has(key)) throw new Error(`${example}: the ${theme}/${hero} design is the same as ${seen.get(key)}. Change the theme, hero or sections.`);
+    seen.set(key, `${site.slug} (${theme}/${hero})`);
     const { html } = buildSite(
       { ...site, ...page, design: { ...site.design, theme, hero }, url: `https://oceanalt.com.au/work/${path}/` },
       { sourceLabel: `${example} (${v.theme}/${v.hero})` },

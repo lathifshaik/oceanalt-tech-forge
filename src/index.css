@@ -314,7 +314,10 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .dz:has(#dz-trades:checked) .dz-card:not([data-cat="trades"]),
 .dz:has(#dz-health:checked) .dz-card:not([data-cat="health"]),
 .dz:has(#dz-shops:checked) .dz-card:not([data-cat="shops"]),
-.dz:has(#dz-pro:checked) .dz-card:not([data-cat="pro"]) { display: none; }
+.dz:has(#dz-pro:checked) .dz-card:not([data-cat="pro"]),
+.dz:has(#dz-fitness:checked) .dz-card:not([data-cat="fitness"]),
+.dz:has(#dz-learning:checked) .dz-card:not([data-cat="learning"]),
+.dz:has(#dz-pets:checked) .dz-card:not([data-cat="pets"]) { display: none; }
 .dz-card a { display: grid; gap: .9rem; text-decoration: none; color: inherit; }
 .dz-img { position: relative; display: block; aspect-ratio: 1.6; border-radius: var(--r-media); overflow: hidden; background: var(--surface); box-shadow: 0 0 0 1px rgb(var(--shadow) / .08); }
 .dz-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1.2s var(--ease); }

@@ -1,0 +1,153 @@
+{
+  "template": "studio",
+  "slug": "fade-and-co",
+  "url": "https://fadeandco.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "HairSalon",
+  "business": {
+    "name": "Fade & Co",
+    "servicesLabel": "Cuts",
+    "servicesCta": "See prices",
+    "headline": "Sharp cuts, no fuss, book in a minute.",
+    "intro": "A Northbridge barbershop for skin fades, beard trims and hot-towel shaves. Walk-ins welcome when a chair's free.",
+    "address": "88 James Street, Northbridge WA 6003",
+    "street": "88 James Street",
+    "suburb": "Northbridge",
+    "state": "WA",
+    "postcode": "6003",
+    "phone": "(08) 5550 2241",
+    "email": "chair@fadeandco.example",
+    "instagram": "fadeandco",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "9am",
+        "close": "6pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "9am",
+        "close": "6pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "9am",
+        "close": "8pm"
+      },
+      {
+        "day": "Friday",
+        "open": "9am",
+        "close": "7pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8am",
+        "close": "4pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "10am",
+        "close": "3pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A barber trimming a client's hair with a straight razor"
+  },
+  "about": {
+    "title": "Same barber, every time",
+    "body": "Book with the barber you like and they'll remember how you take it. Running late? Text us and we'll shuffle the chair if we can.",
+    "badges": [
+      "Walk-ins welcome",
+      "Hot-towel shaves",
+      "Kids' cuts"
+    ],
+    "photo": "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Leather barber chairs under pendant lights by a brick wall"
+  },
+  "treatmentsIntro": "Prices are the same whichever barber you book. Pay by card, Apple Pay or Google Pay.",
+  "treatments": [
+    {
+      "group": "Cuts",
+      "items": [
+        {
+          "name": "Skin fade",
+          "duration": "40 min",
+          "price": "$45"
+        },
+        {
+          "name": "Classic cut",
+          "duration": "30 min",
+          "price": "$38"
+        },
+        {
+          "name": "Kids' cut, under 12",
+          "duration": "25 min",
+          "price": "$28"
+        }
+      ]
+    },
+    {
+      "group": "Beard and shave",
+      "items": [
+        {
+          "name": "Beard trim and line-up",
+          "duration": "20 min",
+          "price": "$25"
+        },
+        {
+          "name": "Hot-towel shave",
+          "duration": "40 min",
+          "price": "$45"
+        },
+        {
+          "name": "Cut and beard",
+          "duration": "55 min",
+          "price": "$65"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "A fresh cut, as a gift",
+    "body": "Gift cards for any cut or shave, sent by email straight away.",
+    "amount": "$50",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $25",
+      "Valid for 3 years",
+      "Use on anything we offer",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "Do you take walk-ins?",
+      "a": "Yes, when a chair's free. Booking online is the only way to skip the wait."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free up to 2 hours before. After that, a $15 fee."
+    },
+    {
+      "q": "Do you cut curly or textured hair?",
+      "a": "Yes. Every barber here does."
+    }
+  ],
+  "closingLine": "Book a chair in under a minute.",
+  "showcase": [
+    {
+      "theme": "pomade",
+      "hero": "split"
+    },
+    {
+      "theme": "umami",
+      "hero": "full"
+    }
+  ]
+}

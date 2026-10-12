@@ -1,0 +1,126 @@
+{
+  "template": "pro",
+  "slug": "gable-and-co",
+  "url": "https://gableandco.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "RealEstateAgent",
+  "business": {
+    "name": "Gable & Co Property",
+    "headline": "Selling Ballarat homes, honestly.",
+    "intro": "A small agency for sales and property management in Ballarat. Straight price advice and one agent from listing to keys.",
+    "address": "12 Lydiard Street North, Ballarat VIC 3350",
+    "street": "12 Lydiard Street North",
+    "suburb": "Ballarat",
+    "state": "VIC",
+    "postcode": "3350",
+    "phone": "(03) 5550 3329",
+    "email": "hello@gableandco.example",
+    "contactName": "Tess Gable",
+    "contactRole": "Principal and licensed estate agent",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Book a free appraisal",
+    "disclaimer": "Sample site made by Oceanalt. Not a real agency."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1600732143075-4ec4f7a4d8f3?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A white weatherboard house with a garden"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "text": "Licensed estate agents in Victoria"
+    },
+    {
+      "icon": "tag",
+      "text": "Fees agreed in writing up front"
+    },
+    {
+      "icon": "person",
+      "text": "One agent, listing to keys"
+    }
+  ],
+  "servicesIntro": "Houses, units and acreage across Ballarat and the goldfields.",
+  "services": [
+    {
+      "icon": "home",
+      "name": "Selling",
+      "desc": "Price advice based on real sales nearby, marketing and open homes.",
+      "fee": "Commission agreed up front"
+    },
+    {
+      "icon": "briefcase",
+      "name": "Property management",
+      "desc": "Tenants found, rent collected, repairs handled.",
+      "fee": "From 6.6% of rent"
+    },
+    {
+      "icon": "file",
+      "name": "Free appraisal",
+      "desc": "What your home would likely sell or rent for, in writing.",
+      "fee": "Free"
+    }
+  ],
+  "feesIntro": "All fees include GST and are agreed in writing before we start.",
+  "fees": [
+    {
+      "item": "Sales commission",
+      "price": "From 1.9%",
+      "note": "Plus marketing, quoted separately"
+    },
+    {
+      "item": "Property management",
+      "price": "From 6.6%",
+      "note": "Of rent collected"
+    },
+    {
+      "item": "Letting fee",
+      "price": "1 week's rent",
+      "note": "When a new tenant signs"
+    },
+    {
+      "item": "Appraisal",
+      "price": "Free",
+      "note": "Sales or rental"
+    }
+  ],
+  "process": [
+    {
+      "title": "A free appraisal",
+      "desc": "We walk through your home and give you a price range in writing."
+    },
+    {
+      "title": "A plan and a price",
+      "desc": "Marketing, timing and fees, agreed up front."
+    },
+    {
+      "title": "Sold, and keys handed over",
+      "desc": "Weekly updates until it's done."
+    }
+  ],
+  "faq": [
+    {
+      "q": "How do you work out a price?",
+      "a": "From recent sales of similar homes nearby, which we show you."
+    },
+    {
+      "q": "Do I have to sign for long?",
+      "a": "Our selling agreements run 60 days, not 90."
+    },
+    {
+      "q": "Do you manage holiday rentals?",
+      "a": "No, long-term rentals only."
+    }
+  ],
+  "contactTitle": "Talk to Tess",
+  "contactIntro": "Book a free appraisal, or save our details and call when it suits you.",
+  "showcase": [
+    {
+      "theme": "terrace",
+      "hero": "full"
+    },
+    {
+      "theme": "forest",
+      "hero": "split"
+    }
+  ]
+}

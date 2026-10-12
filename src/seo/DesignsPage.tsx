@@ -9,10 +9,13 @@ import { SiteFooter, SiteHeader } from "./LandingPage";
 
 const CATS = [
   { id: "food", label: "Food and drink", layouts: ["cafe"] },
-  { id: "trades", label: "Trades and outdoors", layouts: ["trades"] },
+  { id: "trades", label: "Trades and home", layouts: ["trades"] },
   { id: "health", label: "Health and beauty", layouts: ["studio"] },
+  { id: "fitness", label: "Fitness", layouts: [] },
   { id: "shops", label: "Shops", layouts: ["shop"] },
   { id: "pro", label: "Professional services", layouts: ["pro"] },
+  { id: "learning", label: "Kids and learning", layouts: [] },
+  { id: "pets", label: "Pets", layouts: [] },
 ];
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -27,13 +30,14 @@ export const DESIGNS = WORK.flatMap((w) =>
     business: w.business,
     kind: w.kind,
     added: w.added,
-    cat: CATS.find((c) => c.layouts.includes(w.id))!.id,
+    // A sample can set its own group; otherwise its layout decides.
+    cat: w.group ?? CATS.find((c) => c.layouts.includes(w.id))!.id,
   })),
 ).sort((a, b) => b.added.localeCompare(a.added));
 
 export const DESIGNS_PAGE = {
   title: "Our designs: websites for Australian small businesses | Oceanalt",
-  description: `Every website design we've made so far, on sample businesses: cafés, restaurants, salons, tradies, studios, shops and professionals. ${DESIGNS.length} designs and counting.`,
+  description: `Every website design we've made so far, on sample businesses: cafés, restaurants, salons, gyms, tradies, clinics, shops and professionals. ${DESIGNS.length} designs and counting.`,
 };
 
 export function DesignsPage() {

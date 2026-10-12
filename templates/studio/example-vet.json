@@ -1,0 +1,154 @@
+{
+  "template": "studio",
+  "slug": "riverbend-vet",
+  "url": "https://riverbendvet.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "VeterinaryCare",
+  "business": {
+    "name": "Riverbend Vet",
+    "servicesLabel": "Services",
+    "servicesCta": "See fees",
+    "headline": "Gentle care for dogs, cats and the odd chook.",
+    "intro": "A small-animal vet in Penrith with fees shown up front, a quiet cat waiting room and same-day appointments when you need one.",
+    "address": "230 High Street, Penrith NSW 2750",
+    "street": "230 High Street",
+    "suburb": "Penrith",
+    "state": "NSW",
+    "postcode": "2750",
+    "phone": "(02) 5550 4402",
+    "email": "hello@riverbendvet.example",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "8am",
+        "close": "7pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "8am",
+        "close": "7pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "8am",
+        "close": "7pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "8am",
+        "close": "7pm"
+      },
+      {
+        "day": "Friday",
+        "open": "8am",
+        "close": "6pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8:30am",
+        "close": "3pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "10am",
+        "close": "1pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1770836037793-95bdbf190f71?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A vet examining a dachshund"
+  },
+  "about": {
+    "title": "Calm visits, fewer nerves",
+    "body": "Cats wait in their own quiet room, dogs get a treat at the door, and you'll get a written estimate before any procedure.",
+    "badges": [
+      "Cat-friendly waiting room",
+      "Written estimates",
+      "Same-day appointments"
+    ],
+    "photo": "https://images.unsplash.com/photo-1654895716780-b4664497420d?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A small dog being held at the clinic"
+  },
+  "treatmentsIntro": "Fees are a guide. You'll get a written estimate before any procedure.",
+  "treatments": [
+    {
+      "group": "Visits",
+      "items": [
+        {
+          "name": "Consultation",
+          "duration": "20 min",
+          "price": "$95"
+        },
+        {
+          "name": "Puppy or kitten check and vaccine",
+          "duration": "30 min",
+          "price": "$110"
+        },
+        {
+          "name": "Annual check and vaccine",
+          "duration": "20 min",
+          "price": "$135"
+        }
+      ]
+    },
+    {
+      "group": "Care",
+      "items": [
+        {
+          "name": "Desexing, cat",
+          "duration": "Day visit",
+          "price": "From $280"
+        },
+        {
+          "name": "Dental clean",
+          "duration": "Day visit",
+          "price": "From $450"
+        },
+        {
+          "name": "Microchip",
+          "duration": "10 min",
+          "price": "$60"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "For the pet lover in your life",
+    "body": "Gift cards for any visit, sent by email straight away.",
+    "amount": "$100",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $25",
+      "Valid for 3 years",
+      "Use on anything we offer",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "Is it an emergency?",
+      "a": "Call us first. After hours, we'll give you the nearest emergency vet."
+    },
+    {
+      "q": "Payment",
+      "a": "Card, Apple Pay, Google Pay, and pet insurance claims lodged for you."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free up to 2 hours before."
+    }
+  ],
+  "closingLine": "Book a visit online.",
+  "showcase": [
+    {
+      "theme": "paws",
+      "hero": "full"
+    },
+    {
+      "theme": "coast",
+      "hero": "split"
+    }
+  ]
+}

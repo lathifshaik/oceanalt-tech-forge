@@ -1,0 +1,107 @@
+{
+  "template": "trades",
+  "slug": "clean-slate-co",
+  "url": "https://cleanslate.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "HomeAndConstructionBusiness",
+  "business": {
+    "name": "Clean Slate Co",
+    "headline": "Come home to a clean house.",
+    "intro": "Regular cleans, end-of-lease and one-off spring cleans across Canberra. A fixed price before we start.",
+    "phone": "0491 577 102",
+    "email": "book@cleanslate.example",
+    "hoursSummary": "Mon to Sat, 7am to 5pm",
+    "serviceArea": "Canberra and Queanbeyan",
+    "areaServed": "Canberra, ACT",
+    "licence": "Insured to $20m",
+    "licenceLabel": "Public liability"
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1646980241033-cd7abda2ee88?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A cleaner carrying a caddy and broom up the stairs"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "title": "Police-checked cleaners",
+      "detail": "And insured for your peace of mind"
+    },
+    {
+      "icon": "tag",
+      "title": "A fixed price",
+      "detail": "Based on bedrooms and bathrooms"
+    },
+    {
+      "icon": "check-circle",
+      "title": "Bond-back guarantee",
+      "detail": "We come back free if the agent finds anything"
+    }
+  ],
+  "servicesIntro": "We bring everything: products, vacuums and mops.",
+  "services": [
+    {
+      "icon": "home",
+      "name": "Regular clean",
+      "desc": "Weekly or fortnightly, the same cleaner each time.",
+      "from": "From $140"
+    },
+    {
+      "icon": "sparkle",
+      "name": "End-of-lease clean",
+      "desc": "To the agent's checklist, with oven and windows.",
+      "from": "From $390"
+    },
+    {
+      "icon": "droplet",
+      "name": "Spring clean",
+      "desc": "Skirting boards, cupboards and the bits that get missed.",
+      "from": "From $290"
+    },
+    {
+      "icon": "briefcase",
+      "name": "Office clean",
+      "desc": "After hours, so nobody's in the way.",
+      "from": "Quoted"
+    }
+  ],
+  "servicesPhoto": "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=1000&q=75&auto=format&fit=crop",
+  "servicesPhotoAlt": "A gloved hand wiping a white surface",
+  "process": [
+    {
+      "title": "Get a price online",
+      "desc": "Tell us bedrooms, bathrooms and extras."
+    },
+    {
+      "title": "Pick a time",
+      "desc": "Mornings or afternoons, Monday to Saturday."
+    },
+    {
+      "title": "Pay after the clean",
+      "desc": "Card, Apple Pay or Google Pay, once you're happy."
+    }
+  ],
+  "areasNote": "Not sure if we cover you? Call and ask.",
+  "areas": [
+    "Belconnen",
+    "Gungahlin",
+    "Woden",
+    "Tuggeranong",
+    "Inner North",
+    "Inner South",
+    "Weston Creek",
+    "Queanbeyan"
+  ],
+  "contact": {
+    "formAction": "https://formspree.io/f/example"
+  },
+  "showcase": [
+    {
+      "theme": "fresh",
+      "hero": "full"
+    },
+    {
+      "theme": "calm",
+      "hero": "split"
+    }
+  ]
+}

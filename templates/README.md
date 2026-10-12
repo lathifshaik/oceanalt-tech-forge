@@ -5,7 +5,7 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 A site's look comes from three independent choices, so no two clients get the same design:
 
 1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
-2. **Theme** (`design.theme`): one of twenty complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
+2. **Theme** (`design.theme`): one of thirty-two complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
 3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`). The `cafe` layout also has two restaurant heroes: `centre` (a big centred headline with `hero.lineTwo` in italic, a round dish photo `hero.dish` rising from the bottom, and optional `hero.cards` and `hero.stats`) and `wordmark` (the business name huge, sized to fit its longest word, the headline as a tagline, and a live open or closed chip from the hours).
 
 On top of that come the client's own accent colour (`design.accent`, `design.accentDark`), photos, words and logo.
@@ -32,6 +32,18 @@ On top of that come the client's own accent colour (`design.accent`, `design.acc
 | `umami` | Black, rice-paper white and one red sun. Extra-wide Archivo capitals, square corners (always dark) |
 | `blush` | Beauty editorial. Powder pink and rose, Bodoni Moda with italics, arched photos |
 | `sage` | Apothecary calm. Sage, stone and oat, Instrument Serif in lower case, square photos |
+| `iron` | Gym. Black and acid lime, heavy italic condensed capitals, hazard stripes between sections (always dark) |
+| `pomade` | Barbershop. Oxblood, cream and brass, Alfa Slab One, a striped barber pole in the hero |
+| `mint` | Friendly clinic. White, mint and navy, rounded Nunito, soft blob shapes |
+| `garage` | Workshop. Hazard yellow and black, stencil capitals, hazard-tape strips |
+| `terrace` | Property. Warm white, navy and brass, Marcellus in spaced capitals, inset frames on photos |
+| `ledger` | Accounting. Ruled ledger paper, bottle green, IBM Plex Serif with monospaced figures |
+| `veil` | Weddings. Ivory and taupe, Italiana with Pinyon Script flourishes |
+| `chalk` | Tutoring. Blackboard green, chalk white, yellow highlighter, Caveat handwriting notes |
+| `crayon` | Early learning. Cream with sunny primaries, Fredoka, scalloped section edges, bubble shapes |
+| `paws` | Vet. Teal and warm sand, Lexend, a paw-print trail under headings |
+| `fresh` | Cleaning. White and electric blue, bold Plus Jakarta Sans, soap-bubble circles |
+| `cellar` | Cellar door. Burgundy and parchment, Cinzel capitals with EB Garamond |
 
 The four poster themes (`riso`, `halftone`, `bloom`, `autumn`) also carry their own CSS (`css` in `themes.json`): print grain, black-and-white or tinted photos, oversized headlines and one flat shape. The builder adds it after the layout's own styles.
 
@@ -64,7 +76,7 @@ The build fails with a clear list if a required field is missing (see each templ
 
 **Design:** `"design": { "theme": "forest", "hero": "split", "accent": "#1d6fd8", "accentDark": "#79aef0" }`. Leave it out and the layout's default theme is used.
 
-**Sections (cafe layout):** besides the menu and visit sections, a restaurant can have `dishes` (signature dishes; `dishStyle` is `round` or `cards`), `chef`, `special` (a weekly deal), `gallery` and `booking` (book a table). `"sections": ["facts", "dishes", "special", "menu", "visit"]` picks which appear and in what order; leave it out for the layout's order. A showcase entry can set its own `sections` and `dishStyle`, so one business can be shown with different pages. Pick the accent from the client's logo, and check it reads on the theme's background at 4.5:1.
+**Sections (cafe layout):** besides the menu and visit sections, a restaurant can have `dishes` (signature dishes; `dishStyle` is `round` or `cards`), `chef`, `special` (a weekly deal), `gallery` and `booking` (book a table). `"sections": ["facts", "dishes", "special", "menu", "visit"]` picks which appear and in what order; leave it out for the layout's order. A showcase entry can set its own `sections` and `dishStyle`, so one business can be shown with different pages. `npm run templates` stops if two gallery designs share the same layout, theme, hero, sections and dish style: every sample design must be unique. Pick the accent from the client's logo, and check it reads on the theme's background at 4.5:1.
 
 **Payments and bookings:** `business.bookingUrl` (Cal.com, Fresha, Square…), `gift.buyUrl` and `bookUrl` on any treatment take Stripe Payment Links created in the **client's own** Stripe account.
 
@@ -103,5 +115,5 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/base.css`: shared reset and accessibility styles
 - `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
 - `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
-- `themes/themes.json`: the twenty design directions
+- `themes/themes.json`: the thirty-two design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

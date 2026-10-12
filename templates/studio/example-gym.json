@@ -1,0 +1,155 @@
+{
+  "template": "studio",
+  "slug": "ironbark-strength",
+  "url": "https://ironbark.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "ExerciseGym",
+  "business": {
+    "name": "Ironbark Strength",
+    "servicesLabel": "Memberships",
+    "servicesCta": "See memberships",
+    "headline": "Get strong. Stay strong.",
+    "intro": "A barbell gym in Marrickville with coached classes, open gym from 5am and no lock-in contracts.",
+    "address": "17 Sydenham Road, Marrickville NSW 2204",
+    "street": "17 Sydenham Road",
+    "suburb": "Marrickville",
+    "state": "NSW",
+    "postcode": "2204",
+    "phone": "(02) 5550 1176",
+    "email": "lift@ironbark.example",
+    "instagram": "ironbarkstrength",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "5am",
+        "close": "9pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "5am",
+        "close": "9pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "5am",
+        "close": "9pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "5am",
+        "close": "9pm"
+      },
+      {
+        "day": "Friday",
+        "open": "5am",
+        "close": "8pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "7am",
+        "close": "1pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "8am",
+        "close": "12pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1689877020200-403d8542d95d?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Racks and machines on a dark gym floor"
+  },
+  "about": {
+    "title": "Coached, not crowded",
+    "body": "Every class is capped at twelve, with a coach who checks your form on every lift. New to barbells? The free intro session covers the basics before your first class.",
+    "badges": [
+      "No lock-in contracts",
+      "Free intro session",
+      "Classes capped at 12"
+    ],
+    "photo": "https://images.unsplash.com/photo-1597076537061-a6b58163aa45?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A rack of dumbbells"
+  },
+  "treatmentsIntro": "Pay weekly, cancel with seven days' notice. Pay by card, Apple Pay or Google Pay.",
+  "treatments": [
+    {
+      "group": "Memberships",
+      "items": [
+        {
+          "name": "Unlimited classes and open gym",
+          "duration": "Weekly",
+          "price": "$55"
+        },
+        {
+          "name": "Open gym only",
+          "duration": "Weekly",
+          "price": "$32"
+        },
+        {
+          "name": "10-class pass",
+          "duration": "Valid 3 months",
+          "price": "$250"
+        }
+      ]
+    },
+    {
+      "group": "Start here",
+      "items": [
+        {
+          "name": "Intro session",
+          "duration": "45 min",
+          "price": "Free"
+        },
+        {
+          "name": "Personal training",
+          "duration": "60 min",
+          "price": "$95"
+        },
+        {
+          "name": "Casual class",
+          "duration": "60 min",
+          "price": "$28"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give someone a head start",
+    "body": "Gift cards for classes or personal training, sent by email straight away.",
+    "amount": "$100",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $25",
+      "Valid for 3 years",
+      "Use on anything we offer",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "I've never lifted. Can I join?",
+      "a": "Yes. Book the free intro session and your coach will start you light."
+    },
+    {
+      "q": "Is there a contract?",
+      "a": "No. Cancel any time with seven days' notice."
+    },
+    {
+      "q": "Can I freeze my membership?",
+      "a": "Yes, up to six weeks a year, free."
+    }
+  ],
+  "closingLine": "Book your free intro session.",
+  "showcase": [
+    {
+      "theme": "iron",
+      "hero": "full"
+    },
+    {
+      "theme": "checker",
+      "hero": "split"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "template": "cafe",
+  "slug": "ridgeline-wines",
+  "url": "https://ridgeline.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "Winery",
+  "business": {
+    "name": "Ridgeline Wines",
+    "headline": "Riesling from the top of the hill.",
+    "intro": "A family cellar door in the Clare Valley. Taste six wines by the fire, stay for a cheese board, take a case home.",
+    "address": "Spring Gully Road, Watervale SA 5452",
+    "street": "Spring Gully Road",
+    "suburb": "Watervale",
+    "state": "SA",
+    "postcode": "5452",
+    "phone": "(08) 5550 4127",
+    "email": "cellar@ridgeline.example",
+    "instagram": "ridgelinewines",
+    "hoursSummary": "Thursday to Monday, 11am to 5pm",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "11am",
+        "close": "5pm"
+      },
+      {
+        "day": "Tuesday"
+      },
+      {
+        "day": "Wednesday"
+      },
+      {
+        "day": "Thursday",
+        "open": "11am",
+        "close": "5pm"
+      },
+      {
+        "day": "Friday",
+        "open": "11am",
+        "close": "5pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "10am",
+        "close": "5pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "10am",
+        "close": "5pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1734313237437-a196a0e354de?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Rows of green vines in the vineyard",
+    "lineTwo": "Poured by the people who grow it."
+  },
+  "facts": [
+    {
+      "icon": "cup",
+      "text": "Tastings $15, free with any purchase"
+    },
+    {
+      "icon": "leaf",
+      "text": "Dry-grown vines, picked by hand"
+    },
+    {
+      "icon": "van",
+      "text": "Free delivery on a dozen"
+    }
+  ],
+  "story": {
+    "title": "Four generations on one hill",
+    "body": "Our great-grandparents planted riesling here in 1931. We still pick by hand, and one of us is behind the counter every day the cellar door is open.",
+    "photo": "https://images.unsplash.com/photo-1736333568797-48339dc1b042?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Green grapes hanging on the vine"
+  },
+  "dishes": {
+    "kicker": "In the tasting",
+    "title": "This season's wines",
+    "items": [
+      {
+        "name": "Watervale riesling 2025",
+        "price": "$32",
+        "photo": "https://images.unsplash.com/photo-1734313237433-8ed0f2bdfca8?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Wine glasses on a table by the window",
+        "desc": "Lime, slate, bone dry"
+      },
+      {
+        "name": "Grenache rosé 2025",
+        "price": "$28",
+        "photo": "https://images.unsplash.com/photo-1734490037300-6ff9ffd4ed13?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Two glasses of rosé on the bar",
+        "desc": "Strawberry and a little spice"
+      },
+      {
+        "name": "Old vine shiraz 2023",
+        "price": "$45",
+        "photo": "https://images.unsplash.com/photo-1777420770982-f30ec797fd2d?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "The barrel cellar",
+        "desc": "Plum, pepper, two years in oak"
+      }
+    ]
+  },
+  "booking": {
+    "title": "Book a tasting",
+    "body": "Walk-ins are welcome. For groups of eight or more, or a seated tasting with cheese, book ahead.",
+    "url": "https://book.example/",
+    "cta": "Book a tasting",
+    "details": [
+      "Seated tasting with cheese, $35",
+      "Groups of 8 to 20",
+      "Dogs welcome on the deck"
+    ]
+  },
+  "menuIntro": "Wines by the glass and bottle, and a small menu of local cheese and charcuterie.",
+  "menu": [
+    {
+      "category": "Wines",
+      "items": [
+        {
+          "name": "Watervale riesling",
+          "price": "12 / 32"
+        },
+        {
+          "name": "Grenache rosé",
+          "price": "11 / 28"
+        },
+        {
+          "name": "Old vine shiraz",
+          "price": "15 / 45"
+        },
+        {
+          "name": "Tasting of six",
+          "price": "15",
+          "desc": "Free with any bottle"
+        }
+      ]
+    },
+    {
+      "category": "To eat",
+      "items": [
+        {
+          "name": "Cheese board for two",
+          "price": "38",
+          "desc": "Three Adelaide Hills cheeses"
+        },
+        {
+          "name": "Charcuterie",
+          "price": "32"
+        },
+        {
+          "name": "Olives and bread",
+          "price": "14"
+        },
+        {
+          "name": "Kids' platter",
+          "price": "15"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Glass / bottle. Please drink responsibly.",
+  "menuPhoto": "https://images.unsplash.com/photo-1777420770982-f30ec797fd2d?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "The barrel cellar",
+  "sections": [
+    "facts",
+    "story",
+    "dishes",
+    "booking",
+    "menu",
+    "visit"
+  ],
+  "dishStyle": "round",
+  "showcase": [
+    {
+      "theme": "cellar",
+      "hero": "wordmark"
+    },
+    {
+      "theme": "ember",
+      "hero": "full",
+      "sections": [
+        "dishes",
+        "menu",
+        "booking",
+        "visit"
+      ],
+      "dishStyle": "cards"
+    }
+  ]
+}

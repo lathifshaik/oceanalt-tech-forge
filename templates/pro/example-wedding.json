@@ -1,0 +1,126 @@
+{
+  "template": "pro",
+  "slug": "golden-hour-weddings",
+  "url": "https://goldenhour.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "ProfessionalService",
+  "business": {
+    "name": "Golden Hour Weddings",
+    "headline": "Your wedding, as it felt.",
+    "intro": "Relaxed, natural wedding photography in Margaret River and across WA. Real moments, not a list of poses.",
+    "address": "Studio 3, 101 Bussell Highway, Margaret River WA 6285",
+    "street": "Studio 3, 101 Bussell Highway",
+    "suburb": "Margaret River",
+    "state": "WA",
+    "postcode": "6285",
+    "phone": "0491 571 266",
+    "email": "hello@goldenhour.example",
+    "contactName": "Lena Hart",
+    "contactRole": "Photographer",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Check my date",
+    "disclaimer": "Sample site made by Oceanalt. Not a real photography business."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A couple standing on the shore after their wedding"
+  },
+  "credentials": [
+    {
+      "icon": "camera",
+      "text": "Ten years photographing weddings"
+    },
+    {
+      "icon": "calendar",
+      "text": "Gallery delivered in six weeks"
+    },
+    {
+      "icon": "heart",
+      "text": "Two weddings a week, at most"
+    }
+  ],
+  "servicesIntro": "Every package includes an online gallery to share and download.",
+  "services": [
+    {
+      "icon": "camera",
+      "name": "Elopements",
+      "desc": "Up to two hours, anywhere in the South West.",
+      "fee": "From $1,600"
+    },
+    {
+      "icon": "heart",
+      "name": "Full wedding day",
+      "desc": "Getting ready to the first dance, eight hours.",
+      "fee": "From $3,900"
+    },
+    {
+      "icon": "sparkle",
+      "name": "Engagement shoot",
+      "desc": "An hour at golden hour, a great warm-up for the day.",
+      "fee": "$450"
+    }
+  ],
+  "feesIntro": "A 30% deposit holds your date. The rest is due a month before.",
+  "fees": [
+    {
+      "item": "Elopement, 2 hours",
+      "price": "$1,600",
+      "note": "Around 150 edited photos"
+    },
+    {
+      "item": "Half day, 5 hours",
+      "price": "$2,800",
+      "note": "Around 400 edited photos"
+    },
+    {
+      "item": "Full day, 8 hours",
+      "price": "$3,900",
+      "note": "Around 700 edited photos"
+    },
+    {
+      "item": "Printed album",
+      "price": "From $650",
+      "note": "Linen cover, 30 pages"
+    }
+  ],
+  "process": [
+    {
+      "title": "Check your date",
+      "desc": "Tell me the date and venue and I'll reply within a day."
+    },
+    {
+      "title": "A chat and a plan",
+      "desc": "A call to talk timings, places and the people who matter."
+    },
+    {
+      "title": "Your gallery",
+      "desc": "Delivered within six weeks, to download and share."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Do you travel?",
+      "a": "Yes, anywhere in WA, and interstate for a travel fee."
+    },
+    {
+      "q": "Will you direct us?",
+      "a": "Lightly. Mostly I let things happen and help when you need it."
+    },
+    {
+      "q": "Can we get the raw files?",
+      "a": "No, but you get every good photo, edited."
+    }
+  ],
+  "contactTitle": "Check your date",
+  "contactIntro": "Send your date and venue, or save my details and call when it suits you.",
+  "showcase": [
+    {
+      "theme": "veil",
+      "hero": "full"
+    },
+    {
+      "theme": "ember",
+      "hero": "split"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 export const WORK: {
   id: TemplateId;
   kind: string;
+  group?: "food" | "trades" | "health" | "fitness" | "shops" | "pro" | "learning" | "pets"; // the Designs page filter, if not the layout's
   added: string; // when the sample went on the site (YYYY-MM-DD); the designs page shows newest first
   business: string;
   owner?: { face: string };
@@ -69,6 +70,7 @@ export const WORK: {
   {
     id: "studio",
     kind: "Yoga studio",
+    group: "fitness",
     added: "2026-10-08",
     business: "Saltwater Yoga, Cronulla",
     owner: { face: "ana" },
@@ -280,6 +282,154 @@ export const WORK: {
     designs: [
       { path: "ochre-skin-co", theme: "Sage" },
       { path: "ochre-skin-co-blush", theme: "Blush" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Gym",
+    group: "fitness",
+    added: "2026-10-12",
+    business: "Ironbark Strength, Marrickville",
+    problem: "New members asked about contracts and prices in DMs before they'd come in.",
+    pitch: "Memberships priced, no lock-in said up front, and a free intro session booked online.",
+    designs: [
+      { path: "ironbark-strength", theme: "Iron" },
+      { path: "ironbark-strength-checker", theme: "Checker" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Barber",
+    added: "2026-10-12",
+    business: "Fade & Co, Northbridge",
+    problem: "The phone rang all day with people asking if there was a chair free.",
+    pitch: "Every cut priced, online booking with the barber you like, and walk-in rules spelled out.",
+    designs: [
+      { path: "fade-and-co", theme: "Pomade" },
+      { path: "fade-and-co-umami", theme: "Umami" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Dentist",
+    added: "2026-10-12",
+    business: "Brightwater Dental, Geelong",
+    problem: "Patients rang to ask what a check-up costs before booking.",
+    pitch: "Fees shown up front, health funds explained, and check-ups booked online.",
+    designs: [
+      { path: "brightwater-dental", theme: "Mint" },
+      { path: "brightwater-dental-harbour", theme: "Harbour" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Tutor",
+    group: "learning",
+    added: "2026-10-12",
+    business: "Chalk & Talk Tutoring, Ryde",
+    problem: "Parents found them by word of mouth and asked the same questions every term.",
+    pitch: "Lessons priced by year level, a free first lesson, and booking online.",
+    designs: [
+      { path: "chalk-and-talk", theme: "Chalk" },
+      { path: "chalk-and-talk-riso", theme: "Riso" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Vet clinic",
+    group: "pets",
+    added: "2026-10-12",
+    business: "Riverbend Vet, Penrith",
+    problem: "Owners rang to ask fees, and the front desk was flat out.",
+    pitch: "Fees shown as a guide, same-day appointments booked online, and what to do in an emergency.",
+    designs: [
+      { path: "riverbend-vet", theme: "Paws" },
+      { path: "riverbend-vet-coast", theme: "Coast" },
+    ],
+  },
+  {
+    id: "trades",
+    kind: "Mechanic",
+    added: "2026-10-12",
+    business: "Torque Street Auto, Moorabbin",
+    problem: "Customers worried about surprise bills and called for prices.",
+    pitch: "Services with prices from, a promise to call before extra work, and a booking form.",
+    designs: [
+      { path: "torque-street-auto", theme: "Garage" },
+      { path: "torque-street-auto-night", theme: "Night" },
+    ],
+  },
+  {
+    id: "trades",
+    kind: "Cleaner",
+    added: "2026-10-12",
+    business: "Clean Slate Co, Canberra",
+    problem: "Quotes took a phone call each, and evenings went on back-and-forth texts.",
+    pitch: "Prices by service, suburbs covered, and a quote form that lands in their inbox.",
+    designs: [
+      { path: "clean-slate-co", theme: "Fresh" },
+      { path: "clean-slate-co-calm", theme: "Calm" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Real estate",
+    added: "2026-10-12",
+    business: "Gable & Co Property, Ballarat",
+    problem: "Sellers couldn't find fees anywhere and went to the big agencies.",
+    pitch: "Fees in a plain table, the process in three steps, and free appraisals booked online.",
+    designs: [
+      { path: "gable-and-co", theme: "Terrace" },
+      { path: "gable-and-co-forest", theme: "Forest" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Accountant",
+    added: "2026-10-12",
+    business: "Tally & Co Accountants, Hobart",
+    problem: "Tax time meant the same fee questions, fifty times over.",
+    pitch: "Fixed fees listed, what to send, and a free first chat booked online.",
+    designs: [
+      { path: "tally-and-co", theme: "Ledger" },
+      { path: "tally-and-co-harbour", theme: "Harbour" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Wedding photographer",
+    added: "2026-10-12",
+    business: "Golden Hour Weddings, Margaret River",
+    problem: "Enquiries came through Instagram with no date or venue.",
+    pitch: "Packages and prices, how the day works, and a 'check my date' button.",
+    designs: [
+      { path: "golden-hour-weddings", theme: "Veil" },
+      { path: "golden-hour-weddings-ember", theme: "Ember" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Early learning",
+    group: "learning",
+    added: "2026-10-12",
+    business: "Little Gumnuts, Toowoomba",
+    problem: "Families rang to ask about fees, rooms and waitlists.",
+    pitch: "Rooms and daily fees, the subsidy explained, and tours booked online.",
+    designs: [
+      { path: "little-gumnuts", theme: "Crayon" },
+      { path: "little-gumnuts-bloom", theme: "Bloom" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Winery",
+    added: "2026-10-12",
+    business: "Ridgeline Wines, Clare Valley",
+    problem: "Groups turned up unannounced, and the wine list was a PDF.",
+    pitch: "This season's wines with prices, cellar door hours, and tastings booked ahead.",
+    designs: [
+      { path: "ridgeline-wines", theme: "Cellar" },
+      { path: "ridgeline-wines-ember", theme: "Ember" },
     ],
   },
 ];

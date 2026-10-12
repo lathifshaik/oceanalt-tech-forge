@@ -171,11 +171,25 @@
     },
     {
       "theme": "orchid",
-      "hero": "centre"
+      "hero": "centre",
+      "sections": [
+        "facts",
+        "menu",
+        "story",
+        "reviews",
+        "visit"
+      ]
     },
     {
       "theme": "paddy",
-      "hero": "wordmark"
+      "hero": "wordmark",
+      "sections": [
+        "story",
+        "facts",
+        "menu",
+        "visit",
+        "reviews"
+      ]
     }
   ]
 }

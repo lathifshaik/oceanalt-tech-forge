@@ -1,0 +1,153 @@
+{
+  "template": "studio",
+  "slug": "brightwater-dental",
+  "url": "https://brightwaterdental.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "Dentist",
+  "business": {
+    "name": "Brightwater Dental",
+    "servicesLabel": "Treatments",
+    "servicesCta": "See fees",
+    "headline": "A dentist that explains everything first.",
+    "intro": "Check-ups, cleans and fillings in Geelong, with fees shown up front and HICAPS on the spot.",
+    "address": "Level 1, 45 Malop Street, Geelong VIC 3220",
+    "street": "Level 1, 45 Malop Street",
+    "suburb": "Geelong",
+    "state": "VIC",
+    "postcode": "3220",
+    "phone": "(03) 5550 6630",
+    "email": "hello@brightwaterdental.example",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "8am",
+        "close": "5:30pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "8am",
+        "close": "7pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "8am",
+        "close": "5:30pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "8am",
+        "close": "7pm"
+      },
+      {
+        "day": "Friday",
+        "open": "8am",
+        "close": "4pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8:30am",
+        "close": "1pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A bright, modern dental treatment room"
+  },
+  "about": {
+    "title": "Fees before treatment",
+    "body": "You'll get a written quote before any treatment beyond a check-up, with your health fund's likely rebate shown, so there are no surprises at the desk.",
+    "badges": [
+      "HICAPS on the spot",
+      "Written quotes",
+      "Late nights Tuesday and Thursday"
+    ],
+    "photo": "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A dental check-up with a mirror"
+  },
+  "treatmentsIntro": "Fees are a guide and depend on what your dentist finds. Health fund rebates are claimed on the spot.",
+  "treatments": [
+    {
+      "group": "Check-ups",
+      "items": [
+        {
+          "name": "Check-up and clean",
+          "duration": "45 min",
+          "note": "Includes two X-rays",
+          "price": "$240"
+        },
+        {
+          "name": "Child check-up",
+          "duration": "30 min",
+          "price": "$150"
+        },
+        {
+          "name": "Emergency appointment",
+          "duration": "30 min",
+          "price": "$120"
+        }
+      ]
+    },
+    {
+      "group": "Treatment",
+      "items": [
+        {
+          "name": "Small filling",
+          "duration": "30 min",
+          "price": "From $190"
+        },
+        {
+          "name": "Teeth whitening",
+          "duration": "Take-home kit",
+          "price": "$450"
+        },
+        {
+          "name": "Night guard",
+          "duration": "Two visits",
+          "price": "$520"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Book for the whole family",
+    "body": "Gift cards for any treatment, sent by email straight away.",
+    "amount": "$100",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $25",
+      "Valid for 3 years",
+      "Use on anything we offer",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "Do you take my health fund?",
+      "a": "We claim with all funds through HICAPS, so you only pay the gap."
+    },
+    {
+      "q": "I'm nervous about the dentist.",
+      "a": "Tell us when you book. We'll explain each step before we do it and you can stop at any time."
+    },
+    {
+      "q": "Do you see children?",
+      "a": "Yes, from their first tooth."
+    }
+  ],
+  "closingLine": "Book a check-up online.",
+  "showcase": [
+    {
+      "theme": "mint",
+      "hero": "full"
+    },
+    {
+      "theme": "harbour",
+      "hero": "split"
+    }
+  ]
+}

@@ -11,6 +11,10 @@ import { LANDINGS } from "./seo/landing";
 export const EMAIL = "hello@oceanalt.com.au";
 export const ABN = "65 119 854 062";
 export const PHONE = "0431 236 999";
+export const FOUNDER = "Lathif Shaik";
+// The founder's photo for the "Who you'll deal with" card. Leave empty until the
+// file is in public/team/; until then the card shows his initials.
+const FOUNDER_PHOTO = "";
 export const PHONE_HREF = "tel:+61431236999";
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
@@ -545,7 +549,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Who reads my enquiry?",
-    a: "A person, the same business day. Our AI assistant may email you a suggested plan within minutes, and it says it's an AI. A person reads every enquiry and follows up the same business day. It's the same kind of assistant we can set up on your own site.",
+    a: "Lathif, the same business day. You may get an email with a suggested plan within minutes first, then he reads every enquiry and follows up himself the same business day.",
   },
 ];
 
@@ -772,7 +776,7 @@ function Promises() {
         <h2 className="h2">Straight up, in writing.</h2>
         <p className="lede">Some providers hold your domain, make leaving hard or won't say where your data lives. Not us.</p>
         <ul className="promises">
-          <li><b>Designed by a person</b><span>Our tools do the heavy lifting, but a person designs your site and signs it off. Call or text {PHONE} and you'll talk to them.</span></li>
+          <li><b>Designed by a person</b><span>Lathif designs your site and signs it off before it goes live. Call or text {PHONE} and you'll talk to him.</span></li>
           <li><b>See it before you pay</b><span>A preview link before anything goes live. Your first charge happens only once you're happy with it.</span></li>
           <li><b>Your domain, in your name</b><span>Registered to you from day one. If you leave, it goes with you.</span></li>
           <li><b>Keep the site after 6 months</b><span>After 6 paid months, the site and its code are yours to keep, free. Stay with us, move to Care for $29 a month, or take it anywhere.</span></li>
@@ -877,14 +881,14 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
         <div>
           <h2 className="h2">Tell us about your business.</h2>
           <p className="lede">Tell us a little about your business. A person reads every enquiry and replies the same business day, with a suggested plan and a time for a quick call.</p>
-          <p className="start-founder">Oceanalt is a small Sydney web studio. A person designs and builds your site, checks every page before it goes live, and reads every enquiry the same business day. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
+          <p className="start-founder">Oceanalt is a small Sydney web studio run by Lathif Shaik. He designs your site, checks every page before it goes live, and reads every enquiry the same business day. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
           <div className="founder-card">
-            <div className="team-row">
-              <figure className="team-lead"><img src="/avatars/builder.webp" alt="" width={160} height={160} loading="lazy" /><figcaption>Your builder</figcaption></figure>
-            </div>
+            {FOUNDER_PHOTO
+              ? <img className="founder-photo" src={FOUNDER_PHOTO} alt={FOUNDER} width={160} height={160} loading="lazy" />
+              : <span className="founder-photo founder-initials" aria-hidden="true">LS</span>}
             <div>
-              <b>Who you'll deal with</b>
-              <p>A person in Sydney designs and builds your site, signs off every page and answers the phone. Our own tools make it fast; you deal with a person.</p>
+              <b>{FOUNDER}, founder</b>
+              <p>I design every site and check every page before it goes live, here in Sydney. I answer the phone too, so call or text me any time.</p>
               <a className="founder-phone num" href={PHONE_HREF}><Icon name="phone" /> {PHONE}</a>
             </div>
           </div>
@@ -899,7 +903,7 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
           <div className="form-done" role="status">
             <Icon name="mail" />
             <h3>Check your inbox.</h3>
-            <p>Our AI assistant has already emailed you a suggested plan and a link to book a 15-minute call. A person reads every enquiry and follows up the same business day. If it's not there in a minute, check your spam folder.</p>
+            <p>We've emailed you a suggested plan and a link to book a 15-minute call. Lathif reads every enquiry and follows up the same business day. If it's not there in a minute, check your spam folder.</p>
           </div>
         ) : state === "done" ? (
           <div className="form-done" role="status">
@@ -958,7 +962,7 @@ function Footer() {
     <footer className="foot">
       <div className="wrap">
         <div className="foot-row">
-          <span>© {new Date().getFullYear()} Oceanalt, Sydney · ABN {ABN}</span>
+          <span>© {new Date().getFullYear()} Oceanalt, Sydney · Run by {FOUNDER} · ABN {ABN}</span>
           <nav aria-label="Footer">
             <a href="#work">Work</a>
             <a href="/designs/">Designs</a>

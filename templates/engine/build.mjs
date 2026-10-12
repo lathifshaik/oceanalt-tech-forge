@@ -152,6 +152,8 @@ function enrich(site) {
       site.url && `URL:${site.url}`, "END:VCARD"].filter(Boolean).join("\r\n");
     data.business.vcard = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcf);
   }
+  // The longest word in the name, so a wordmark hero can size the name to fit.
+  if (b.name) data.business.nameChars = Math.max(...b.name.split(/\s+/).map((w) => [...w].length));
   // Mark today's opening hours so templates can highlight them without JS.
   if (Array.isArray(b.hours)) {
     data.business.hours = b.hours.map((h, i) => ({ ...h, dayIndex: (i + 1) % 7 }));

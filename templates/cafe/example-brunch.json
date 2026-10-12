@@ -1,0 +1,175 @@
+{
+  "template": "cafe",
+  "slug": "magnolia-newtown",
+  "url": "https://magnolia.example/",
+  "_note": "Sample business for the gallery, a restaurant design. Names, numbers and reviews are fictional.",
+  "business": {
+    "name": "Magnolia",
+    "headline": "Brunch worth the walk.",
+    "intro": "All-day brunch on King Street: burgers, eggs your way and proper coffee.",
+    "address": "402 King Street, Newtown NSW 2042",
+    "street": "402 King Street",
+    "suburb": "Newtown",
+    "state": "NSW",
+    "postcode": "2042",
+    "phone": "(02) 5550 7734",
+    "email": "hello@magnolia.example",
+    "instagram": "magnolianewtown",
+    "hoursSummary": "Every day, 7am to 3pm",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Friday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "7:30am",
+        "close": "3pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "7:30am",
+        "close": "3pm"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "icon": "cup",
+      "text": "Walk-ins welcome"
+    },
+    {
+      "icon": "calendar",
+      "text": "Book for groups of eight or more"
+    },
+    {
+      "icon": "heart",
+      "text": "Dogs welcome in the courtyard"
+    }
+  ],
+  "menuIntro": "Breakfast runs all day. Burgers from 11.",
+  "menu": [
+    {
+      "category": "Brunch",
+      "items": [
+        {
+          "name": "Eggs benedict",
+          "price": "24.00",
+          "desc": "Ham, bacon or smoked salmon"
+        },
+        {
+          "name": "Smashed avo",
+          "price": "21.00",
+          "desc": "Feta, chilli, sourdough"
+        },
+        {
+          "name": "Brioche French toast",
+          "price": "22.00"
+        },
+        {
+          "name": "Big breakfast",
+          "price": "27.00"
+        }
+      ]
+    },
+    {
+      "category": "From 11",
+      "items": [
+        {
+          "name": "Magnolia burger and fries",
+          "price": "25.00"
+        },
+        {
+          "name": "Fried chicken burger and fries",
+          "price": "24.00"
+        },
+        {
+          "name": "Halloumi burger and fries (V)",
+          "price": "23.00"
+        },
+        {
+          "name": "Flat white",
+          "price": "5.20"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. 10% surcharge on public holidays, shown on the bill.",
+  "reviews": [
+    {
+      "quote": "Worth the queue on a Saturday. The burger is ridiculous.",
+      "name": "Liam P.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Great eggs bene and they sorted a table for ten with a day's notice.",
+      "name": "Ava R.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Lovely courtyard, and the dog got a water bowl before I got a menu.",
+      "name": "Grace H.",
+      "source": "Google review"
+    }
+  ],
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1644447381290-85358ae625cb?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A table from above, covered in burgers, fries and salads",
+    "cards": [
+      {
+        "icon": "calendar",
+        "title": "Groups of eight or more",
+        "detail": "Book a table a day ahead"
+      }
+    ],
+    "stats": [
+      {
+        "value": "7am",
+        "label": "Breakfast till 3pm, every day"
+      }
+    ]
+  },
+  "story": {
+    "title": "King Street's long brunch",
+    "body": "We opened in an old corner store in 2021. The coffee's roasted in Marrickville and the bread comes from the bakery down the road.",
+    "photo": "https://images.unsplash.com/photo-1697872800493-df42d51aefa9?w=1200&q=75&auto=format&fit=crop",
+    "photoAlt": "Coffee and pastries on a café table by the window"
+  },
+  "menuPhoto": "https://images.unsplash.com/photo-1644447381290-85358ae625cb?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "Burgers and fries from above",
+  "showcase": [
+    {
+      "theme": "orchid",
+      "hero": "wordmark"
+    },
+    {
+      "theme": "paddy",
+      "hero": "wordmark"
+    },
+    {
+      "theme": "orchid",
+      "hero": "centre"
+    }
+  ]
+}

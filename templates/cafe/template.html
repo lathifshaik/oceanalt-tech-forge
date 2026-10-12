@@ -10,7 +10,7 @@
 
 .top{position:absolute;inset:0 0 auto 0;z-index:5;color:#fff}
 .top .wrap{display:flex;align-items:center;gap:1.5rem;height:5rem}
-.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.2rem;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.2rem;letter-spacing:-.01em;white-space:nowrap}
 .mark{display:grid;place-items:center;width:2.3rem;height:2.3rem;border-radius:50%;background:#fff;color:#17201a;font-size:.8rem}
 .nav{display:flex;gap:1.75rem;margin-left:auto;font-weight:500}
 .nav a{text-decoration:none;opacity:.85} .nav a:hover{opacity:1}
@@ -114,6 +114,48 @@ section{padding-block:clamp(4rem,9vw,7rem)}
   .hero-split .sign{top:auto;bottom:calc(75vw - 8rem)}
 }
 
+/* Hero "centre": a big centred headline over a scenery photo, a second line in
+   italic, a round dish photo rising from the bottom, and small info cards. */
+.wordmark,.hero-dish,.hero-cards,.hero-stats,.status{display:none}
+.hero h1 em{font-style:italic}
+.hero-centre .hero,.hero-wordmark .hero{align-items:center;justify-content:center;text-align:center;min-height:clamp(640px,100vh,920px)}
+.hero-centre .hero .wrap,.hero-wordmark .hero .wrap{display:grid;justify-items:center;padding-block:7rem 13rem}
+.hero-centre .hero p,.hero-wordmark .hero p{margin-inline:auto}
+.hero-centre .hero .ctas,.hero-wordmark .hero .ctas{justify-content:center}
+.hero-centre .hero::after{background:linear-gradient(180deg,rgb(0 0 0 / .5),rgb(0 0 0 / .32) 45%,rgb(0 0 0 / .55))}
+.hero-centre .hero h1{font-size:clamp(3rem,8.5vw,7rem);line-height:.92;max-width:none}
+.hero-centre .hero h1 em{display:block;color:var(--accent-2)}
+.hero-centre .sign,.hero-wordmark .sign{display:none}
+.hero-centre .hero-dish{display:block;position:absolute;left:50%;bottom:-9rem;z-index:2;width:min(24rem,60vw);aspect-ratio:1;border-radius:50%;object-fit:cover;transform:translateX(-50%);box-shadow:0 0 0 8px rgb(255 255 255 / .92),0 40px 70px -25px rgb(0 0 0 / .65)}
+.hero-centre .hero .wrap{padding-bottom:16rem}
+.hero-cards,.hero-stats{position:absolute;bottom:1.5rem;z-index:3;gap:.5rem;list-style:none;margin:0;padding:0;text-align:left}
+.hero-centre .hero-cards{display:grid;left:max(1.25rem,calc((100vw - 72rem) / 2))}
+.hero-centre .hero-stats{display:grid;right:max(1.25rem,calc((100vw - 72rem) / 2))}
+.hero-cards li{display:flex;align-items:center;gap:.7rem;max-width:20rem;padding:.75rem 1rem;border-radius:16px;background:rgb(255 255 255 / .94);color:#1b1b18;box-shadow:0 16px 30px -18px rgb(0 0 0 / .5)}
+.hero-cards li .i{color:var(--accent)}
+.hero-cards b,.hero-stats b{display:block;font-size:.92rem}
+.hero-cards small,.hero-stats small{display:block;font-size:.78rem;opacity:.75}
+.hero-stats li{min-width:10rem;padding:.7rem 1rem;border-radius:16px;background:rgb(18 18 14 / .72);color:#fff;backdrop-filter:blur(8px)}
+.hero-stats li:last-child{background:var(--accent-2);color:var(--on-accent-2)}
+.hero-stats b{font-family:var(--font-display);font-size:1.7rem;line-height:1}
+
+/* Hero "wordmark": the business name huge over a top-down food photo, the
+   headline as a short tagline, and a live open or closed chip. */
+.hero-wordmark .hero::after{background:radial-gradient(ellipse at center,rgb(0 0 0 / .55),rgb(0 0 0 / .3) 65%,rgb(0 0 0 / .45))}
+.hero-wordmark .wordmark{display:block;margin:0;font-family:var(--font-display);font-weight:var(--display-weight);font-size:min(15rem,17vw,calc(88vw / (var(--chars,8) * .78)));line-height:.82;letter-spacing:-.02em;text-transform:uppercase;color:var(--accent-2);text-shadow:0 6px 40px rgb(0 0 0 / .25)}
+.hero-wordmark .hero h1{margin-top:1.2rem;font-size:clamp(1.3rem,2.6vw,2rem);line-height:1.05;text-transform:uppercase;letter-spacing:.01em;max-width:22ch}
+.hero-wordmark .hero p:not(.wordmark){font-size:1.05rem}
+.hero-wordmark .hero .wrap{padding-bottom:7rem}
+.hero-wordmark .status{display:block;max-width:calc(100vw - 2.5rem);position:absolute;right:max(1.25rem,calc((100vw - 72rem) / 2));bottom:1.5rem;z-index:3;margin:0;padding:.55rem 1rem;border-radius:999px;background:rgb(18 18 14 / .7);color:#fff;font-size:.85rem;backdrop-filter:blur(8px)}
+.status .c{display:none}.status.is-closed .o{display:none}.status.is-closed .c{display:inline}
+.status::before{content:"";display:inline-block;margin-right:.45rem;vertical-align:.08em;width:.5rem;height:.5rem;border-radius:50%;background:#59d48a}.status.is-closed::before{background:#e2a83f}
+@media (max-width:760px){
+  .hero-centre .hero-cards,.hero-centre .hero-stats{display:none}
+  .hero-centre .hero .wrap{padding-bottom:12rem}
+  .hero-centre .hero-dish{bottom:-6rem}
+  .hero-wordmark .status{left:1.25rem;right:auto}
+}
+
 footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
 footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hover{color:var(--ink)}
@@ -137,13 +179,18 @@ footer nav{display:flex;gap:1.25rem} footer a{text-decoration:none} footer a:hov
       <div class="sign-card"><div class="face front"><small>Come in, we're</small><b>OPEN</b></div><div class="face back"><small>Sorry, we're</small><b>CLOSED</b></div></div>
     </div>
     <div class="wrap">
-      <h1>{{business.headline}}</h1>
+      <p class="wordmark" aria-hidden="true" style="--chars:{{business.nameChars}}">{{business.name}}</p>
+      <h1>{{business.headline}}{{#hero.lineTwo}} <em>{{hero.lineTwo}}</em>{{/hero.lineTwo}}</h1>
       <p>{{business.intro}}</p>
       <div class="ctas">
         <a class="btn btn-primary" href="#menu">See the menu {{icon:arrow-right}}</a>
         <a class="btn btn-glass" href="{{business.mapUrl}}">{{icon:pin}} {{business.suburb}}</a>
       </div>
     </div>
+    {{#hero.dish}}<img class="hero-dish" src="{{hero.dish}}" alt="{{hero.dishAlt}}" width="800" height="800">{{/hero.dish}}
+    {{#hero.cards}}{{#@first}}<ul class="hero-cards">{{/@first}}<li>{{icon:@icon}}<span><b>{{title}}</b><small>{{detail}}</small></span></li>{{#@last}}</ul>{{/@last}}{{/hero.cards}}
+    {{#hero.stats}}{{#@first}}<ul class="hero-stats">{{/@first}}<li><b class="num">{{value}}</b><small>{{label}}</small></li>{{#@last}}</ul>{{/@last}}{{/hero.stats}}
+    <p class="status" data-sign="{{business.hoursJson}}"><span class="o">Open now</span><span class="c">Closed now</span> &middot; {{business.hoursSummary}}</p>
   </div>
 
   {{#facts}}{{#@first}}<div class="facts"><ul class="wrap">{{/@first}}<li>{{icon:@icon}} {{text}}</li>{{#@last}}</ul></div>{{/@last}}{{/facts}}

@@ -1,0 +1,181 @@
+{
+  "template": "cafe",
+  "slug": "lua-kitchen",
+  "url": "https://luakitchen.example/",
+  "_note": "Sample business for the gallery, a restaurant design. Names, numbers and reviews are fictional.",
+  "business": {
+    "name": "Lúa Kitchen",
+    "headline": "Slow broth,",
+    "intro": "Vietnamese family cooking in Cabramatta. Order ahead and it's ready when you walk in.",
+    "address": "48 John Street, Cabramatta NSW 2166",
+    "street": "48 John Street",
+    "suburb": "Cabramatta",
+    "state": "NSW",
+    "postcode": "2166",
+    "phone": "(02) 5550 6218",
+    "email": "hello@luakitchen.example",
+    "instagram": "luakitchen",
+    "hoursSummary": "Lunch and dinner, closed Tuesdays",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "10:30am",
+        "close": "9pm"
+      },
+      {
+        "day": "Tuesday"
+      },
+      {
+        "day": "Wednesday",
+        "open": "10:30am",
+        "close": "9pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "10:30am",
+        "close": "9pm"
+      },
+      {
+        "day": "Friday",
+        "open": "10:30am",
+        "close": "9:30pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "10am",
+        "close": "9:30pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "10am",
+        "close": "8:30pm"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "icon": "clock",
+      "text": "Broth simmered for twelve hours"
+    },
+    {
+      "icon": "leaf",
+      "text": "Vegan pho every day"
+    },
+    {
+      "icon": "phone",
+      "text": "Call ahead and skip the queue"
+    }
+  ],
+  "menuIntro": "The broth goes on at five every morning. Everything else is cooked when you order.",
+  "menu": [
+    {
+      "category": "Pho and noodles",
+      "items": [
+        {
+          "name": "Beef pho",
+          "price": "17.50",
+          "desc": "Rare beef, brisket, twelve-hour broth"
+        },
+        {
+          "name": "Chicken pho",
+          "price": "16.50"
+        },
+        {
+          "name": "Vegan pho",
+          "price": "16.00",
+          "desc": "Mushroom and charred onion broth"
+        },
+        {
+          "name": "Bún chả",
+          "price": "19.00",
+          "desc": "Grilled pork, rice noodles, herbs"
+        }
+      ]
+    },
+    {
+      "category": "Rolls and sides",
+      "items": [
+        {
+          "name": "Fresh rice paper rolls (3)",
+          "price": "10.00"
+        },
+        {
+          "name": "Crispy spring rolls (4)",
+          "price": "9.00"
+        },
+        {
+          "name": "Bánh mì, pork or tofu",
+          "price": "11.00"
+        },
+        {
+          "name": "Vietnamese iced coffee",
+          "price": "6.00"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Tell us about allergies when you order. Gluten-free noodles on request.",
+  "reviews": [
+    {
+      "quote": "The broth tastes like it's been going all day, because it has.",
+      "name": "Hanh T.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Called ahead on my lunch break and it was on the counter when I got there.",
+      "name": "Josh M.",
+      "source": "Google review"
+    },
+    {
+      "quote": "Best vegan pho in Western Sydney.",
+      "name": "Sarah K.",
+      "source": "Google review"
+    }
+  ],
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1649531437455-c2f42105650f?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Green rice terraces in northern Vietnam",
+    "lineTwo": "quick lunch.",
+    "dish": "https://images.unsplash.com/photo-1701480253822-1842236c9a97?w=900&q=75&auto=format&fit=crop",
+    "dishAlt": "A bowl of beef pho with herbs and bean sprouts",
+    "cards": [
+      {
+        "icon": "phone",
+        "title": "Call ahead, skip the queue",
+        "detail": "It's ready when you walk in"
+      }
+    ],
+    "stats": [
+      {
+        "value": "15 min",
+        "label": "Order to hand at lunch"
+      },
+      {
+        "value": "2 min",
+        "label": "Walk from Cabramatta station"
+      }
+    ]
+  },
+  "story": {
+    "title": "A family recipe, twelve hours at a time",
+    "body": "Lúa means rice in Vietnamese. Our mum's broth recipe came with her from Huế, and we still make it the same way, starting at five every morning.",
+    "photo": "https://images.unsplash.com/photo-1705785994423-88b5fb81b297?w=1200&q=75&auto=format&fit=crop",
+    "photoAlt": "A bowl of noodles and herbs on a wooden table"
+  },
+  "menuPhoto": "https://images.unsplash.com/photo-1701480253822-1842236c9a97?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "Beef pho with fresh basil",
+  "showcase": [
+    {
+      "theme": "paddy",
+      "hero": "centre"
+    },
+    {
+      "theme": "orchid",
+      "hero": "centre"
+    },
+    {
+      "theme": "paddy",
+      "hero": "wordmark"
+    }
+  ]
+}

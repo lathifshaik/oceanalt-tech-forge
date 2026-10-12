@@ -142,11 +142,35 @@ const WORK: {
     kind: "Landscaper",
     business: "Oakleaf Gardens, Blue Mountains",
     problem: "Autumn was flat out, and quote requests got lost in voicemail.",
-    pitch: "Services and suburbs clearly listed, the licence up front, and and a quote form that goes straight to their inbox.",
+    pitch: "Services and suburbs clearly listed, the licence up front, and a quote form that goes straight to their inbox.",
     designs: [
       { path: "oakleaf-gardens", theme: "Autumn" },
       { path: "oakleaf-gardens-halftone", theme: "Halftone" },
       { path: "oakleaf-gardens-bloom", theme: "Bloom" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Vietnamese restaurant",
+    business: "Lúa Kitchen, Cabramatta",
+    problem: "The lunch queue ran out the door, and takeaway orders came in on one busy phone.",
+    pitch: "The menu with prices, a call-ahead button so lunch is ready on arrival, and today's hours with an open or closed sign.",
+    designs: [
+      { path: "lua-kitchen", theme: "Paddy" },
+      { path: "lua-kitchen-orchid", theme: "Orchid" },
+      { path: "lua-kitchen-paddy", theme: "Paddy, big name" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Brunch café",
+    business: "Magnolia, Newtown",
+    problem: "Weekend groups turned up unannounced, and the menu only lived on Instagram.",
+    pitch: "The name big enough to remember, the full menu, a live open or closed sign, and directions one tap away.",
+    designs: [
+      { path: "magnolia-newtown", theme: "Orchid" },
+      { path: "magnolia-newtown-paddy", theme: "Paddy" },
+      { path: "magnolia-newtown-orchid", theme: "Orchid, headline" },
     ],
   },
 ];
@@ -249,6 +273,10 @@ export const FAQ: { q: string; a: string }[] = [
   {
     q: "What kind of web apps and software do you build?",
     a: "Tools that take admin off your plate: booking systems, client portals, quoting and job tools, dashboards, and automations that connect the apps you already use. Each project is quoted on its own. Send a brief and you'll get a scope and a price within 24 hours.",
+  },
+  {
+    q: "Can you sort out how we run jobs?",
+    a: "Yes, we design workflows for your business. On a 15-minute call we map how a job moves now, from the first enquiry to the paid invoice, and show you where the time goes. Then we quote the fix in writing: sometimes it's one automation between apps you already use, sometimes a small web app.",
   },
   {
     q: "Where is my data kept?",
@@ -421,7 +449,7 @@ function Work() {
       <div className="wrap work-head">
         <div>
           <h2 className="h2">Designed for one business. Never reused.</h2>
-          <p className="lede">Ten sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
+          <p className="lede">Twelve sample businesses, each in three of its own designs. Switch between them, or open the live site.</p>
         </div>
         <div className="work-nav">
           <button type="button" onClick={() => nudge(-1)} aria-label="Previous"><Icon name="arrow-right" className="i flip" /></button>

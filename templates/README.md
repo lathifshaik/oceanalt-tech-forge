@@ -5,8 +5,8 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 A site's look comes from three independent choices, so no two clients get the same design:
 
 1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
-2. **Theme** (`design.theme`): one of eleven complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
-3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`).
+2. **Theme** (`design.theme`): one of thirteen complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
+3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`). The `cafe` layout also has two restaurant heroes: `centre` (a big centred headline with `hero.lineTwo` in italic, a round dish photo `hero.dish` rising from the bottom, and optional `hero.cards` and `hero.stats`) and `wordmark` (the business name huge, sized to fit its longest word, the headline as a tagline, and a live open or closed chip from the hours).
 
 On top of that come the client's own accent colour (`design.accent`, `design.accentDark`), photos, words and logo.
 
@@ -23,6 +23,8 @@ On top of that come the client's own accent colour (`design.accent`, `design.acc
 | `halftone` | Loud print. Blue-tinted photos, hot pink, tilted condensed headlines, square corners |
 | `bloom` | Flower-shop poster. Butter, aubergine and orange, heavy italic type, a flat flower in the hero |
 | `autumn` | Seasonal poster. Cream, brick and gold, very light display type, a flat leaf shape |
+| `paddy` | Restaurant. Cream and rice-paddy green, soft pink, Newsreader with an italic second line |
+| `orchid` | Restaurant. Blush and plum, bright pink, a soft chunky Fraunces wordmark with Oswald capitals |
 
 The four poster themes (`riso`, `halftone`, `bloom`, `autumn`) also carry their own CSS (`css` in `themes.json`): print grain, black-and-white or tinted photos, oversized headlines and one flat shape. The builder adds it after the layout's own styles.
 
@@ -92,5 +94,5 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/base.css`: shared reset and accessibility styles
 - `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
 - `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
-- `themes/themes.json`: the eleven design directions
+- `themes/themes.json`: the thirteen design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

@@ -9,20 +9,7 @@ export function LandingPage({ page }: { page: Landing }) {
   const cta = page.plan === "custom" ? "Send a brief" : page.plan === "ai" ? "Ask about AI" : page.plan === "concierge" ? "Set up my concierge" : "Start my website";
   return (
     <>
-      <a className="skip" href="#main">Skip to content</a>
-      <header className="nav is-scrolled">
-        <div className="nav-pill">
-          <a className="logo" href="/" aria-label="Oceanalt home"><LogoMark /><span translate="no">oceanalt</span></a>
-          <nav className="nav-links" aria-label="Main">
-            <a href="/#work">Work</a>
-            <a href="/#ai">AI</a>
-            <a href="/#story">How it works</a>
-            <a href="/#pricing">Pricing</a>
-          </nav>
-          <a className="btn btn-primary nav-cta lp-nav-cta" href={start}>{cta}</a>
-        </div>
-      </header>
-
+      <SiteHeader start={start} cta={cta} />
       <main id="main" className="lp">
         <div className="wrap">
           <nav className="lp-crumbs" aria-label="Breadcrumb">
@@ -98,24 +85,53 @@ export function LandingPage({ page }: { page: Landing }) {
         </section>
       </main>
 
-      <footer className="foot">
-        <div className="wrap">
-          <div className="foot-row">
-            <span>© {new Date().getFullYear()} Oceanalt, Sydney · ABN {ABN}</span>
-            <nav aria-label="Footer">
-              <a href="/#work">Work</a>
-              <a href="/#pricing">Pricing</a>
-              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-              <a href="/#/terms">Terms</a>
-              <a href="/#/privacy">Privacy</a>
-            </nav>
-          </div>
-          <nav className="foot-services" aria-label="Who we build for">
-            {LANDINGS.map((l) => <a key={l.slug} href={`/${l.slug}/`} aria-current={l.slug === page.slug ? "page" : undefined}>{l.nav}</a>)}
-          </nav>
-          <p className="foot-word" aria-hidden="true" translate="no">oceanalt</p>
-        </div>
-      </footer>
+      <SiteFooter current={page.slug} />
     </>
+  );
+}
+
+// The header and footer shared by the static pages (service pages and /designs/).
+export function SiteHeader({ start, cta }: { start: string; cta: string }) {
+  return (
+    <>
+      <a className="skip" href="#main">Skip to content</a>
+      <header className="nav is-scrolled">
+        <div className="nav-pill">
+          <a className="logo" href="/" aria-label="Oceanalt home"><LogoMark /><span translate="no">oceanalt</span></a>
+          <nav className="nav-links" aria-label="Main">
+            <a href="/#work">Work</a>
+            <a href="/designs/">Designs</a>
+            <a href="/#ai">AI</a>
+            <a href="/#story">How it works</a>
+            <a href="/#pricing">Pricing</a>
+          </nav>
+          <a className="btn btn-primary nav-cta lp-nav-cta" href={start}>{cta}</a>
+        </div>
+      </header>
+    </>
+  );
+}
+
+export function SiteFooter({ current }: { current?: string }) {
+  return (
+    <footer className="foot">
+      <div className="wrap">
+        <div className="foot-row">
+          <span>© {new Date().getFullYear()} Oceanalt, Sydney · ABN {ABN}</span>
+          <nav aria-label="Footer">
+            <a href="/#work">Work</a>
+            <a href="/designs/">Designs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <a href="/#/terms">Terms</a>
+            <a href="/#/privacy">Privacy</a>
+          </nav>
+        </div>
+        <nav className="foot-services" aria-label="Who we build for">
+          {LANDINGS.map((l) => <a key={l.slug} href={`/${l.slug}/`} aria-current={l.slug === current ? "page" : undefined}>{l.nav}</a>)}
+        </nav>
+        <p className="foot-word" aria-hidden="true" translate="no">oceanalt</p>
+      </div>
+    </footer>
   );
 }

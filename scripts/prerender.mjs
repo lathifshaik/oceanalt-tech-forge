@@ -67,7 +67,7 @@ function withHead(html, { title, description, url }) {
 }
 
 async function prerender() {
-  const { render, renderLanding, seo } = await import("../dist-ssr/entry-server.js");
+  const { render, renderLanding, renderDesigns, seo } = await import("../dist-ssr/entry-server.js");
   const template = readFileSync("dist/index.html", "utf8");
   if (!template.includes('<div id="root"></div>')) throw new Error("root div not found in dist/index.html");
 
@@ -121,6 +121,37 @@ async function prerender() {
     urls.push({ loc: url, priority: "0.8", images: [{ loc: new URL(page.image.src, SITE).href, title: page.image.alt }] });
   }
   console.log(`prerender: ${seo.LANDINGS.length} service pages`);
+
+  // The designs page: every sample design, newest first.
+  {
+    const url = `${SITE}designs/`;
+    const html = withHead(staticTemplate, { ...seo.DESIGNS_PAGE, url })
+      .replace('<div id="root"></div>', `<div id="root">${renderDesigns()}</div>`)
+      .replace("</head>", `${ld({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "CollectionPage",
+            "@id": `${url}#page`,
+            name: "Our designs",
+            description: seo.DESIGNS_PAGE.description,
+            url,
+            publisher: { "@id": BUSINESS },
+          },
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+              { "@type": "ListItem", position: 2, name: "Designs", item: url },
+            ],
+          },
+        ],
+      })}\n  </head>`);
+    mkdirSync("dist/designs", { recursive: true });
+    writeFileSync("dist/designs/index.html", html);
+    urls.push({ loc: url, priority: "0.8", images: seo.DESIGNS.slice(0, 12).map((d) => ({ loc: `${SITE}previews/${d.path}.webp`, title: `${d.business}, ${d.theme} design` })) });
+    console.log(`prerender: /designs/ (${seo.DESIGNS.length} designs)`);
+  }
 }
 
 // lastmod is the date the site's content last changed in git, not the build

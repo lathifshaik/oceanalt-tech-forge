@@ -15,9 +15,10 @@ type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
 // Each example business shown in three of its designs. Paths match the
 // showcase list in templates/<template>/meta.json (built by `npm run templates`).
-const WORK: {
+export const WORK: {
   id: TemplateId;
   kind: string;
+  added: string; // when the sample went on the site (YYYY-MM-DD); the designs page shows newest first
   business: string;
   owner?: { face: string };
   problem: string;
@@ -27,6 +28,7 @@ const WORK: {
   {
     id: "cafe",
     kind: "Café",
+    added: "2026-10-02",
     business: "Little Tern Coffee, Fremantle",
     owner: { face: "tern" },
     problem: "People kept ringing to ask if they were open yet.",
@@ -40,6 +42,7 @@ const WORK: {
   {
     id: "trades",
     kind: "Electrician",
+    added: "2026-10-02",
     business: "Kerr & Sons Electrical, Newcastle",
     problem: "Jobs went to whoever picked up first, and Jim's usually up a ladder.",
     pitch: "Built to make the phone ring: tap-to-call everywhere, the licence front and centre, and a quote form.",
@@ -52,6 +55,7 @@ const WORK: {
   {
     id: "studio",
     kind: "Physio & Pilates",
+    added: "2026-10-02",
     business: "Tidewater Physio & Pilates, Bulimba",
     owner: { face: "tide" },
     problem: "Bookings came in by phone and text, and gift vouchers lived on paper.",
@@ -65,6 +69,7 @@ const WORK: {
   {
     id: "studio",
     kind: "Yoga studio",
+    added: "2026-10-08",
     business: "Saltwater Yoga, Cronulla",
     owner: { face: "ana" },
     problem: "Ana was taking class bookings in Instagram DMs and chasing $25 payments after class.",
@@ -78,6 +83,7 @@ const WORK: {
   {
     id: "shop",
     kind: "Florist",
+    added: "2026-10-03",
     business: "Wattle & Fern, Hobart",
     owner: { face: "landscaper" },
     problem: "Orders came through Instagram DMs, paid by bank transfer, chased by hand.",
@@ -91,6 +97,7 @@ const WORK: {
   {
     id: "pro",
     kind: "Law firm",
+    added: "2026-10-03",
     business: "Harlow Reid Lawyers, Parramatta",
     owner: { face: "accountant" },
     problem: "People didn't call because they couldn't tell what anything would cost.",
@@ -104,6 +111,7 @@ const WORK: {
   {
     id: "cafe",
     kind: "Bakery",
+    added: "2026-10-09",
     business: "Lemon & Rye, Marrickville",
     problem: "Saturday regulars rang to check if the sourdough had sold out yet.",
     pitch: "Bread, pastries and prices up front, today's hours, and a sign that flips to OPEN or CLOSED from the real opening hours.",
@@ -116,6 +124,7 @@ const WORK: {
   {
     id: "pro",
     kind: "Architects",
+    added: "2026-10-09",
     business: "Small Spaces Architects, Fitzroy",
     problem: "People liked the work on Instagram but couldn't tell what a project would cost.",
     pitch: "Fixed fees per stage, a feasibility study you can book, and a site visit one tap away.",
@@ -128,6 +137,7 @@ const WORK: {
   {
     id: "shop",
     kind: "Plant shop",
+    added: "2026-10-09",
     business: "Greenhouse Plant Co, Brunswick",
     problem: "Most sales were walk-ins, and delivery questions came in by DM.",
     pitch: "Plants with a Buy button each, paid into the shop's Stripe, and a same-day delivery cutoff on the tag.",
@@ -140,6 +150,7 @@ const WORK: {
   {
     id: "trades",
     kind: "Landscaper",
+    added: "2026-10-09",
     business: "Oakleaf Gardens, Blue Mountains",
     problem: "Autumn was flat out, and quote requests got lost in voicemail.",
     pitch: "Services and suburbs clearly listed, the licence up front, and a quote form that goes straight to their inbox.",
@@ -152,6 +163,7 @@ const WORK: {
   {
     id: "cafe",
     kind: "Vietnamese restaurant",
+    added: "2026-10-12",
     business: "Lúa Kitchen, Cabramatta",
     problem: "The lunch queue ran out the door, and takeaway orders came in on one busy phone.",
     pitch: "The menu with prices, a call-ahead button so lunch is ready on arrival, and today's hours with an open or closed sign.",
@@ -164,6 +176,7 @@ const WORK: {
   {
     id: "cafe",
     kind: "Brunch café",
+    added: "2026-10-12",
     business: "Magnolia, Newtown",
     problem: "Weekend groups turned up unannounced, and the menu only lived on Instagram.",
     pitch: "The name big enough to remember, the full menu, a live open or closed sign, and directions one tap away.",
@@ -360,6 +373,7 @@ function Nav() {
   const links = [
     ["#story", "How it works"],
     ["#work", "Work"],
+    ["/designs/", "Designs"],
     ["#pricing", "Pricing"],
     ["#faq", "FAQ"],
   ];
@@ -461,6 +475,7 @@ function Work() {
       </div>
       <div className="wrap">
         <p className="work-note">These are sample businesses we made to show the range; names and reviews are fictional. A real client's design is made for them and never given to anyone else.</p>
+        <a className="text-link work-all" href="/designs/">See all {WORK.reduce((n, w) => n + w.designs.length, 0)} designs, newest first <Icon name="arrow-right" /></a>
       </div>
     </section>
   );
@@ -688,6 +703,7 @@ function Footer() {
           <span>© {new Date().getFullYear()} Oceanalt, Sydney · ABN {ABN}</span>
           <nav aria-label="Footer">
             <a href="#work">Work</a>
+            <a href="/designs/">Designs</a>
             <a href="#pricing">Pricing</a>
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <a href="#/terms">Terms</a>

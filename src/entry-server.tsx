@@ -6,6 +6,7 @@ import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import App, { ABN, EMAIL, FAQ, PLANS } from "./App";
 import { LANDINGS } from "./seo/landing";
 import { LandingPage } from "./seo/LandingPage";
+import { DESIGNS, DESIGNS_PAGE, DesignsPage } from "./seo/DesignsPage";
 
 export function render() {
   return renderToString(<StrictMode><App /></StrictMode>);
@@ -17,4 +18,8 @@ export function renderLanding(slug: string) {
   return renderToStaticMarkup(<LandingPage page={page} />);
 }
 
-export const seo = { ABN, EMAIL, FAQ, PLANS, LANDINGS };
+export function renderDesigns() {
+  return renderToStaticMarkup(<DesignsPage />);
+}
+
+export const seo = { ABN, EMAIL, FAQ, PLANS, LANDINGS, DESIGNS, DESIGNS_PAGE };

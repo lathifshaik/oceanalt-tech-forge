@@ -178,22 +178,6 @@ type SampleAudio = { src: string; duration: number; starts: number[]; peaks: num
 const LINES = SAMPLE.lines as Line[];
 const AUDIO = SAMPLE.audio as SampleAudio | null;
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
-// The speaking orb: our wave mark inside a glowing orb that pulses with the
-// agent's voice (read live from the audio with an AnalyserNode) and goes quiet
-// while Mel talks, so you can always tell which voice is the AI.
-const ORB_WAVE = (y: number, amp: number) => `M-16 ${y}q4 ${-amp} 8 0` + " t8 0".repeat(7);
-function OrbMark() {
-  return (
-    <svg className="sv-orb-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
-      <defs><clipPath id="orb-clip"><circle cx="16" cy="16" r="12" /></clipPath></defs>
-      <circle cx="16" cy="16" r="13" />
-      <g clipPath="url(#orb-clip)">
-        <path className="orb-w1" d={ORB_WAVE(16.5, 2.6)} />
-        <path className="orb-w2" d={ORB_WAVE(21.5, 2)} opacity=".5" />
-      </g>
-    </svg>
-  );
-}
 const DONE = LINES.length + 1; // 0 is the call coming in, lines are 1..n, then the summary
 const BOOKED = 7; // Mel relaxes once the job is booked
 
@@ -204,8 +188,6 @@ function CallVisual({ active }: { active: boolean }) {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const waveRef = useRef<HTMLDivElement>(null);
-  const orbRef = useRef<HTMLButtonElement>(null);
-  const meter = useRef<{ an: AnalyserNode; buf: Uint8Array<ArrayBuffer> } | null>(null);
   const raf = useRef(0);
   useEffect(() => {
     if (!active || reduced() || heard) return;
@@ -226,40 +208,13 @@ function CallVisual({ active }: { active: boolean }) {
     if (!el || !AUDIO) return;
     const t = el.currentTime;
     waveRef.current?.style.setProperty("--p", String(Math.min(1, t / AUDIO.duration)));
-    const n = AUDIO.starts.filter((s) => s <= t).length;
-    setStep(n);
-    // How loud the voice is right now (0 to 1), from the audio itself.
-    const orb = orbRef.current;
-    if (orb) {
-      let lvl = 0;
-      const m = meter.current;
-      if (m && !el.paused) {
-        m.an.getByteTimeDomainData(m.buf);
-        let sum = 0;
-        for (const v of m.buf) sum += (v - 128) ** 2;
-        lvl = Math.min(1, Math.sqrt(sum / m.buf.length) / 40);
-      }
-      orb.style.setProperty("--lvl", lvl.toFixed(3));
-      orb.dataset.who = n > 0 && n <= LINES.length && !el.paused ? LINES[n - 1].who : "";
-    }
+    setStep(AUDIO.starts.filter((s) => s <= t).length);
     if (!el.paused) raf.current = requestAnimationFrame(tick);
   };
   const toggle = () => {
     const el = audioRef.current;
     if (!el) return;
     setHeard(true);
-    // Hook up the level meter on the first press (browsers need a tap first).
-    if (!meter.current && !reduced() && typeof AudioContext !== "undefined") {
-      try {
-        const ctx = new AudioContext();
-        const an = ctx.createAnalyser();
-        an.fftSize = 512;
-        ctx.createMediaElementSource(el).connect(an);
-        an.connect(ctx.destination);
-        meter.current = { an, buf: new Uint8Array(an.fftSize) };
-        void ctx.resume();
-      } catch { /* no meter: the orb just stays still */ }
-    }
     if (el.paused) { void el.play(); } else el.pause();
   };
   const seek = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -285,9 +240,8 @@ function CallVisual({ active }: { active: boolean }) {
         </div>
         {AUDIO && (
           <div className="sv-player">
-            <button type="button" ref={orbRef} className={`sv-orb${playing ? " is-on" : ""}`} aria-pressed={playing} aria-label={playing ? "Pause the sample call" : "Play the sample call"} onClick={toggle}>
-              <OrbMark />
-              <span className="sv-orb-btn"><Icon name={playing ? "pause" : "play"} /></span>
+            <button type="button" className="sv-play" aria-pressed={playing} aria-label={playing ? "Pause the sample call" : "Play the sample call"} onClick={toggle}>
+              <Icon name={playing ? "pause" : "play"} />
             </button>
             <div className="sv-player-info">
               <b>Hear a sample call</b>

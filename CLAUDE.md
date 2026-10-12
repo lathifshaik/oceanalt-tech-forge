@@ -12,6 +12,7 @@ Every service on the site should feel like a demo: `src/components/Story.tsx` ha
 - `docs/business/BUSINESS_PLAN.md`: offer, pricing, unit economics, validation plan, risks
 - `docs/business/OPERATIONS.md`: client pipeline, QA checklist, edit policy, KPIs, Stripe setup, tech debt
 - `docs/business/LAUNCH_PLAN.md`: the first 30 days, setup checklist and weekly rhythm
+- `docs/business/PIPELINES.md`: how the business runs end to end: one-off setup, the sales pipeline (tracked in the founder's Notion "Sales pipeline" database), delivery, payments on the new pricing (Stripe subscription schedules), support, monthly money
 - `docs/growth/OUTREACH.md`: outreach templates and Spam Act rules
 - `docs/business/AGENT_PLAYBOOK.md`: what every agent handles, the weekly rhythm, and what needs the founder
 - `docs/business/CONCIERGE_SETUP.md`: the form a client fills in so the AI concierge can answer their phone, plus the 10 test calls

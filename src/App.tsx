@@ -12,9 +12,14 @@ export const EMAIL = "hello@oceanalt.com.au";
 export const ABN = "65 119 854 062";
 export const PHONE = "0431 236 999";
 export const PHONE_HREF = "tel:+61431236999";
-// The founder's photo for the "Who you'll deal with" card. Leave empty until
-// the file is in public/team/; the card shows without a photo until then.
-const FOUNDER_PHOTO = "";
+// "Who you'll deal with": one person (the builder) and the AI agents that work
+// with them. Fluent 3D illustrations, not photos, so nobody's presented as staff
+// we don't have.
+const TEAM = [
+  { src: "/avatars/agent-design.webp", label: "Design agent" },
+  { src: "/avatars/agent-build.webp", label: "Build agent" },
+  { src: "/avatars/concierge.webp", label: "Reply agent" },
+];
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
@@ -882,10 +887,16 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
           <p className="lede">Tell us a little about your business. A person reads every enquiry and replies the same business day, with a suggested plan and a time for a quick call.</p>
           <p className="start-founder">Oceanalt is a small Sydney business that runs on AI agents, checked by a person. The agents draft and build. A person checks every site before it goes live and reads every enquiry the same business day. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
           <div className="founder-card">
-            {FOUNDER_PHOTO && <img src={FOUNDER_PHOTO} alt="Oceanalt's founder at North Head, Sydney" width={160} height={160} loading="lazy" />}
+            <div className="team-row">
+              <figure className="team-lead"><img src="/avatars/builder.webp" alt="" width={160} height={160} loading="lazy" /><figcaption>The builder</figcaption></figure>
+              <span className="team-plus" aria-hidden="true">+</span>
+              {TEAM.map((t) => (
+                <figure key={t.src} className="team-agent"><img src={t.src} alt="" width={160} height={160} loading="lazy" /><span className="ai-tag">AI</span><figcaption>{t.label}</figcaption></figure>
+              ))}
+            </div>
             <div>
               <b>Who you'll deal with</b>
-              <p>Me, the founder. A person designs and signs off every site, and you can call or text me directly.</p>
+              <p>One person, the builder, with a team of AI agents. The agents draft, build and reply; the builder designs and signs off every site, and answers the phone.</p>
               <a className="founder-phone num" href={PHONE_HREF}><Icon name="phone" /> {PHONE}</a>
             </div>
           </div>

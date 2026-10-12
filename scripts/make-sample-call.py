@@ -2,6 +2,13 @@
 """Make the concierge sample call for the "Hear a sample call" player in the
 story (src/components/Story.tsx).
 
+Most human-sounding free option: Chatterbox (Resemble AI, MIT licence, commercial
+use allowed), seeded with a short reference clip per speaker so the agent and Mel
+sound different (we make the clips with Kokoro, so no real person is cloned):
+  pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install chatterbox-tts
+  python scripts/make-sample-call.py --engine chatterbox --agent-ref agent.wav --caller-ref caller.wav
+About 30 seconds a line on a CPU.
+
 Free, offline (Kokoro, Apache-2.0 model; kokoro-onnx, MIT). British voices,
 the closest it has to Australian:
   pip install kokoro-onnx soundfile   # in a venv
@@ -40,7 +47,9 @@ GAP = 0.45  # seconds between speakers
 PEAKS = 40  # bars in the waveform
 
 p = argparse.ArgumentParser()
-p.add_argument("--engine", choices=["elevenlabs", "kokoro"], default="elevenlabs")
+p.add_argument("--engine", choices=["elevenlabs", "kokoro", "chatterbox"], default="elevenlabs")
+p.add_argument("--agent-ref", help="chatterbox: a short WAV that sets the agent's voice")
+p.add_argument("--caller-ref", help="chatterbox: a short WAV that sets Mel's voice")
 p.add_argument("--kokoro-dir", default=".", help="folder with kokoro-v1.0.onnx and voices-v1.0.bin")
 p.add_argument("--agent", help="voice id for Jim's AI agent")
 p.add_argument("--caller", help="voice id for Mel, the caller")
@@ -72,7 +81,13 @@ if a.list:
     sys.exit()
 
 agent, caller = a.agent, a.caller
-if a.engine == "kokoro":
+if a.engine == "chatterbox":
+    from chatterbox.tts import ChatterboxTTS
+    import torchaudio
+    cbx = ChatterboxTTS.from_pretrained(device="cpu")
+    agent, caller = a.agent_ref or "", a.caller_ref or ""
+    names = {agent: "Chatterbox (agent)", caller: "Chatterbox (caller)"}
+elif a.engine == "kokoro":
     from kokoro_onnx import Kokoro
     import soundfile
     kok = Kokoro(str(Path(a.kokoro_dir) / "kokoro-v1.0.onnx"), str(Path(a.kokoro_dir) / "voices-v1.0.bin"))
@@ -112,7 +127,14 @@ with tempfile.TemporaryDirectory() as d:
         voice = agent if line["who"] == "c" else caller
         text = line.get("say", line["text"])
         raw = d / f"raw{i}"
-        if a.engine == "kokoro":
+        if a.engine == "chatterbox":
+            # The agent stays calm; Mel is more animated (she's worried).
+            wav_t = cbx.generate(text, audio_prompt_path=voice or None,
+                                 exaggeration=0.4 if line["who"] == "c" else 0.65,
+                                 cfg_weight=0.5)
+            raw = Path(str(raw) + ".wav")
+            torchaudio.save(str(raw), wav_t, cbx.sr)
+        elif a.engine == "kokoro":
             samples, rate = kok.create(text, voice=voice, speed=1.0 if line["who"] == "c" else 1.05, lang="en-gb")
             soundfile.write(str(raw) + ".wav", samples, rate)
             raw = Path(str(raw) + ".wav")
@@ -149,7 +171,7 @@ data["audio"] = {
     "starts": starts,
     "peaks": [round(0.15 + 0.85 * x / top, 2) for x in peaks],
     "voices": {"agent": names.get(agent, agent), "caller": names.get(caller, caller)},
-    "model": "kokoro-v1.0" if a.engine == "kokoro" else a.model,
+    "model": {"kokoro": "kokoro-v1.0", "chatterbox": "chatterbox"}.get(a.engine, a.model),
 }
 DATA.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 print(f"Wrote {OUT.relative_to(ROOT)} ({data['audio']['duration']}s) and the timings in {DATA.relative_to(ROOT)}")

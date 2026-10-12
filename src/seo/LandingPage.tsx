@@ -117,7 +117,7 @@ export function SiteFooter({ current }: { current?: string }) {
     <footer className="foot">
       <div className="wrap">
         <div className="foot-row">
-          <span>© {new Date().getFullYear()} Oceanalt, Sydney · Run by {FOUNDER} · ABN {ABN}</span>
+          <span>© {new Date().getFullYear()} Oceanalt, Sydney · Built by {FOUNDER} · ABN {ABN}</span>
           <nav aria-label="Footer">
             <a href="/#work">Work</a>
             <a href="/designs/">Designs</a>

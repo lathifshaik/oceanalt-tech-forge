@@ -14,7 +14,7 @@ export const PHONE = "0431 236 999";
 export const FOUNDER = "Lathif Shaik";
 // The founder's photo for the "Who you'll deal with" card. Leave empty until the
 // file is in public/team/; until then the card shows his initials.
-const FOUNDER_PHOTO = "";
+const FOUNDER_PHOTO = "/team/lathif.webp";
 export const PHONE_HREF = "tel:+61431236999";
 
 type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
@@ -881,13 +881,13 @@ function Start({ template, plan, setTemplate, setPlan }: { template: string; pla
         <div>
           <h2 className="h2">Tell us about your business.</h2>
           <p className="lede">Tell us a little about your business. A person reads every enquiry and replies the same business day, with a suggested plan and a time for a quick call.</p>
-          <p className="start-founder">Oceanalt is a small Sydney web studio run by Lathif Shaik. He designs your site, checks every page before it goes live, and reads every enquiry the same business day. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
+          <p className="start-founder">Oceanalt is a small Sydney web studio. Lathif Shaik is your builder: he designs your site, checks every page before it goes live, and reads every enquiry the same business day. <a className="link" href="https://abr.business.gov.au/ABN/View?abn=65119854062" target="_blank" rel="noopener">ABN {ABN}</a>.</p>
           <div className="founder-card">
             {FOUNDER_PHOTO
-              ? <img className="founder-photo" src={FOUNDER_PHOTO} alt={FOUNDER} width={160} height={160} loading="lazy" />
+              ? <img className="founder-photo" src={FOUNDER_PHOTO} alt={`${FOUNDER}, builder at Oceanalt, by the water in Sydney`} width={160} height={160} loading="lazy" />
               : <span className="founder-photo founder-initials" aria-hidden="true">LS</span>}
             <div>
-              <b>{FOUNDER}, founder</b>
+              <b>{FOUNDER}</b><span className="founder-role">Builder</span>
               <p>I design every site and check every page before it goes live, here in Sydney. I answer the phone too, so call or text me any time.</p>
               <a className="founder-phone num" href={PHONE_HREF}><Icon name="phone" /> {PHONE}</a>
             </div>
@@ -962,7 +962,7 @@ function Footer() {
     <footer className="foot">
       <div className="wrap">
         <div className="foot-row">
-          <span>© {new Date().getFullYear()} Oceanalt, Sydney · Run by {FOUNDER} · ABN {ABN}</span>
+          <span>© {new Date().getFullYear()} Oceanalt, Sydney · Built by {FOUNDER} · ABN {ABN}</span>
           <nav aria-label="Footer">
             <a href="#work">Work</a>
             <a href="/designs/">Designs</a>

@@ -112,7 +112,7 @@ We tell clients their sites run on Cloudflare and AWS and their customers' data 
 
 ## Hosting (Cloudflare Workers)
 
-The Oceanalt site deploys from `master` on Cloudflare: build command `npm run build`, deploy command `npx wrangler deploy`. `wrangler.jsonc` uploads `dist/` as static assets; keep it in the repo, or wrangler auto-configures the project and breaks the build. `public/_headers` keeps `/work/` noindex.
+The Oceanalt site deploys from `master` on Cloudflare (Workers Builds, connected to GitHub; no API token needed): build command `npm run build`, deploy command `npm run deploy` (`scripts/deploy.mjs` runs `npx wrangler deploy` and retries up to 3 times when Cloudflare's API returns a 5xx, as it did during their outage on 12 Oct 2026). If a build still fails on Cloudflare's side, pushing any new commit to `master` starts a fresh build. `wrangler.jsonc` uploads `dist/` as static assets; keep it in the repo, or wrangler auto-configures the project and breaks the build. `public/_headers` keeps `/work/` noindex.
 
 Not running on Cloudflare yet: the Vercel functions in `api/` (the 15-minute AI reply and the live AI demo). Until they're ported to the Worker, the form uses the Firebase/EmailJS fallback (its env vars must be set in the Cloudflare build settings, because Vite bakes them in at build time) and the demo plays its sample answers.
 

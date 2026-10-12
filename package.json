@@ -12,7 +12,8 @@
     "templates": "node templates/engine/build-all.mjs",
     "prebuild": "npm run templates",
     "predev": "npm run templates",
-    "site:build": "node templates/engine/build.mjs"
+    "site:build": "node templates/engine/build.mjs",
+    "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",

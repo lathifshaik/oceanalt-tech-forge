@@ -20,69 +20,58 @@ function useInView(fn: () => void) {
   return ref;
 }
 
-// An invoice that writes itself: each field fills in from where the details
-// already live (the website form, the calendar, the accepted quote), then the
-// customer pays, a PAID stamp lands, and it files itself in Xero.
-const FIELDS: { label: string; value: string; from: string; logo: string }[] = [
-  { label: "Bill to", value: "Priya N., Merewether NSW", from: "website form", logo: "gmail" },
-  { label: "Job", value: "EV charger and switchboard upgrade", from: "accepted quote", logo: "gmail" },
-  { label: "Done", value: "Tuesday 14 October", from: "Google Calendar", logo: "googlecalendar" },
+// One sample job, from the website form to the money in Xero, shown like a
+// delivery tracker: each stop lights up with the app that did the work.
+const STOPS: { stage: string; when: string; logo: string; app: string; title: string; detail: string }[] = [
+  { stage: "Enquiry", when: "Mon 8:12am", logo: "gmail", app: "Website form", title: "New job: EV charger and switchboard", detail: "Priya filled in your website form. The job is on your list with her address and photos, before you've had a coffee." },
+  { stage: "Quote", when: "Mon 8:40am", logo: "gmail", app: "Gmail", title: "Quote sent: $2,380", detail: "Built from your quote template and sent from your own email. You get a nudge when she opens it, and she opened it twice." },
+  { stage: "Booked", when: "Tue 14th, 9am", logo: "googlecalendar", app: "Google Calendar", title: "Booked in for Tuesday 9am", detail: "She accepted the quote and picked a time. It's in your calendar, and she gets a reminder the day before." },
+  { stage: "Paid", when: "Tue 3:05pm", logo: "stripe", app: "Stripe", title: "Paid $2,380 by card", detail: "The invoice went out when you marked the job done. She paid on her phone, and it's already reconciled in Xero." },
 ];
-const ITEMS: { item: string; price: string }[] = [
-  { item: "EV charger, supply and install", price: "$1,640" },
-  { item: "Switchboard upgrade", price: "$740" },
-];
-// 0 blank, 1-3 fields, 4-5 line items, 6 total, 7 paid, 8 filed in Xero
-const LAST = 8;
 
+// One job moving through the pipeline on its own, with what was automated.
 export function PipelineDemo() {
-  const [step, setStep] = useState(LAST);
+  const [stop, setStop] = useState(STOPS.length - 1);
   const timer = useRef<number | undefined>(undefined);
 
   const run = () => {
     if (reduced()) return;
     let i = 0;
-    setStep(0);
+    setStop(0);
     window.clearInterval(timer.current);
     timer.current = window.setInterval(() => {
       i += 1;
-      setStep(i);
-      if (i >= LAST) window.clearInterval(timer.current);
-    }, 950);
+      setStop(i);
+      if (i >= STOPS.length - 1) window.clearInterval(timer.current);
+    }, 2200);
   };
-  const ref = useInView(() => window.setTimeout(run, 600));
+  const ref = useInView(run);
   useEffect(() => () => window.clearInterval(timer.current), []);
-  const at = (n: number) => (step >= n ? " is-on" : "");
+  const now = STOPS[stop];
+  const done = stop === STOPS.length - 1;
 
   return (
-    <div className="demo inv" ref={ref} aria-label="An invoice that writes itself">
-      <div className="inv-paper">
-        <div className="inv-top">
-          <div><b>Kerr &amp; Sons Electrical</b><small>Newcastle NSW</small></div>
-          <div className="inv-no"><b>Invoice</b><small className="num">#1042</small></div>
-        </div>
-        <dl className="inv-fields">
-          {FIELDS.map((f, i) => (
-            <div key={f.label} className={`inv-row${at(i + 1)}`}>
-              <dt>{f.label}</dt>
-              <dd><span className="inv-type">{f.value}</span></dd>
-              <span className="inv-from"><img src={logo(f.logo)} alt="" width={12} height={12} /> from {f.from}</span>
-            </div>
-          ))}
-        </dl>
-        <ul className="inv-items">
-          {ITEMS.map((it, i) => (
-            <li key={it.item} className={`inv-item${at(4 + i)}`}><span className="inv-type">{it.item}</span><b className="num inv-type">{it.price}</b></li>
-          ))}
-          <li className={`inv-total${at(6)}`}><span>Total</span><b className="num inv-type">$2,380</b></li>
-        </ul>
-        <span className={`inv-stamp${at(7)}`} aria-hidden="true">Paid</span>
+    <div className="demo pl" ref={ref} aria-label="Pipeline demo">
+      <div className="pl-head">
+        <img className="pl-face" src="/avatars/people/priya.webp" alt="" width={44} height={44} />
+        <div><b>Priya N., Merewether</b><small>EV charger and switchboard, Kerr &amp; Sons</small></div>
+        <span className={`pl-status${done ? " is-done" : ""}`}>{done ? "Paid" : now.stage}</span>
       </div>
-      <div className="inv-steps">
-        <span className={`inv-chip${at(7)}`}><img src={logo("stripe")} alt="" width={16} height={16} /> Priya paid by card, Tue 3:05pm</span>
-        <span className={`inv-chip${at(8)}`}><img src={logo("xero")} alt="" width={16} height={16} /> Filed in Xero</span>
+      <ol className="pl-track" style={{ "--p": stop / (STOPS.length - 1) } as React.CSSProperties}>
+        {STOPS.map((s, i) => (
+          <li key={s.stage} className={i < stop ? "is-past" : i === stop ? "is-here" : ""}>
+            <span className="pl-dot"><img src={logo(s.logo)} alt="" width={20} height={20} /></span>
+            <b>{s.stage}</b>
+            <small className="num">{i <= stop ? s.when : ""}</small>
+          </li>
+        ))}
+      </ol>
+      <div className="pl-event" key={stop} aria-live="polite">
+        <span className="pl-app"><img src={logo(now.logo)} alt="" width={16} height={16} /> {now.app}<time className="num">{now.when}</time></span>
+        <b>{now.title}</b>
+        <p>{now.detail}</p>
+        {done && <span className="pl-xero"><img src={logo("xero")} alt="" width={16} height={16} /> Synced to Xero. Nothing typed twice.</span>}
       </div>
-      <p className={`inv-line${at(8)}`}>Nobody typed this invoice.</p>
       <button type="button" className="text-link" onClick={run}>Run it again <Icon name="arrow-right" /></button>
       <p className="demo-note">Demo with a sample business.</p>
     </div>

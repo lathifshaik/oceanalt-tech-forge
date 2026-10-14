@@ -505,20 +505,6 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .demo-note { color: var(--muted); font-size: .78rem; }
 .demo .text-link { font-size: .92rem; justify-self: start; }
 .demo img { width: 1rem; height: 1rem; flex: none; }
-.pl-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; }
-.pl-cols li { display: grid; gap: .5rem; align-content: start; min-height: 7.5rem; padding: .6rem; border-radius: 12px; background: var(--surface); }
-.pl-cols li > span { font-size: .78rem; font-weight: 650; color: var(--muted); }
-.pl-cols li.is-past > span { color: var(--accent); }
-.pl-cols li.is-here > span { color: var(--ink); }
-.pl-card { display: grid; gap: .15rem; padding: .55rem .6rem; border-radius: 10px; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 10px 20px -12px rgb(var(--shadow) / .4); animation: rise .5s var(--ease) both; }
-.pl-card b { font-size: .8rem; line-height: 1.25; }
-.pl-card small { color: var(--muted); font-size: .72rem; line-height: 1.3; }
-.pl-card em { font-style: normal; font-weight: 650; font-size: .82rem; }
-.pl-log { display: grid; gap: .35rem; }
-.pl-log li { display: flex; align-items: center; gap: .5rem; font-size: .85rem; color: var(--muted); opacity: .25; transition: opacity .5s var(--ease); }
-.pl-log li.is-on { opacity: 1; color: var(--ink); }
-@media (max-width: 520px) { .pl-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-
 /* Logo wall */
 .logos { padding-block: clamp(2.5rem, 5vw, 4rem); overflow: hidden; }
 .logos h2 { font-size: .95rem; font-weight: 600; letter-spacing: 0; color: var(--muted); text-align: center; }
@@ -604,8 +590,6 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 
 /* Review pass (design): calmer hero, clearer checkout, aligned FAQ. */
 .hp-clock { margin-top: .9rem; text-align: center; font-size: 3.2rem; font-weight: 600; letter-spacing: -.05em; line-height: 1; color: #0b1a22; }
-.pl-ghost { opacity: .45; box-shadow: 0 0 0 1px var(--line); animation: none; }
-.pl-cols li { min-height: 0; }
 .sv-checkout::after { content: ""; position: absolute; inset: 0; background: rgb(var(--shadow) / .16); opacity: 0; transition: opacity .4s var(--ease); pointer-events: none; }
 .sv-checkout.is-sheet::after { opacity: 1; }
 .sv-checkout .sv-sheet { z-index: 1; }
@@ -797,3 +781,32 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
    sticky story frame; the newest line stays in view and older lines fade off the top. */
 .story-pane .sv-lines { display: flex; flex-direction: column; justify-content: flex-end; min-height: 0; height: clamp(7rem, calc(72vh - 352px), 17rem); overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 14%); mask-image: linear-gradient(transparent, #000 14%); }
 .story-pane .sv-lines .sv-line { flex: none; }
+
+/* Less admin: one job as a delivery-style tracker (PipelineDemo in Demos.tsx). */
+.pl { display: grid; gap: 1rem; }
+.pl-head { display: flex; align-items: center; gap: .75rem; }
+.pl .pl-face { width: 44px; height: 44px; border-radius: 50%; flex: none; }
+.pl-head > div { flex: 1; min-width: 0; }
+.pl-head b { display: block; font-size: .98rem; }
+.pl-head small { display: block; color: var(--muted); font-size: .82rem; }
+.pl-status { flex: none; padding: .3rem .7rem; border-radius: 999px; background: var(--surface); font-size: .8rem; font-weight: 650; }
+.pl-status.is-done { background: #e3f6e8; color: #127a3b; }
+.pl-track { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: .25rem; }
+.pl-track::before, .pl-track::after { content: ""; position: absolute; top: calc(.25rem + 21px); left: 12.5%; height: 3px; border-radius: 3px; }
+.pl-track::before { right: 12.5%; background: var(--line); }
+.pl-track::after { width: calc(75% * var(--p, 1)); background: var(--accent); transition: width 1.2s var(--ease); }
+.pl-track li { position: relative; z-index: 1; display: grid; justify-items: center; gap: .3rem; text-align: center; }
+.pl-dot { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--card); box-shadow: 0 0 0 2px var(--line); filter: grayscale(1); opacity: .5; transition: box-shadow .4s, filter .4s, opacity .4s, transform .4s var(--ease); }
+.pl-track li.is-past .pl-dot, .pl-track li.is-here .pl-dot { filter: none; opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
+.pl-track li.is-here .pl-dot { transform: scale(1.12); box-shadow: 0 0 0 2px var(--accent), 0 0 0 7px var(--accent-soft); }
+.pl-track b { font-size: .82rem; }
+.pl-track li:not(.is-past):not(.is-here) b { color: var(--muted); }
+.pl-track small { min-height: 1.1em; font-size: .72rem; color: var(--muted); }
+.pl-event { display: grid; gap: .35rem; padding: 1rem 1.1rem; border-radius: 16px; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 24px 50px -32px rgb(var(--shadow) / .45); animation: rise .45s var(--ease) both; }
+.pl-app { display: flex; align-items: center; gap: .45rem; font-size: .78rem; font-weight: 600; color: var(--muted); }
+.pl-app time { margin-left: auto; font-weight: 500; }
+.pl-event > b { font-size: 1.05rem; }
+.pl-event p { font-size: .9rem; color: var(--muted); line-height: 1.5; }
+.pl-xero { display: inline-flex; align-items: center; gap: .45rem; width: fit-content; margin-top: .25rem; padding: .35rem .7rem; border-radius: 999px; background: #e6f6fb; font-size: .82rem; font-weight: 600; color: #0b5c73; }
+@media (max-width: 480px) { .pl-track b { font-size: .74rem; } .pl-dot { width: 38px; height: 38px; } .pl-track::before, .pl-track::after { top: calc(.25rem + 18px); } }
+.pl .pl-dot img { width: 20px; height: 20px; }

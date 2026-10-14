@@ -20,65 +20,58 @@ function useInView(fn: () => void) {
   return ref;
 }
 
-const STAGES = ["Enquiry", "Quote", "Booked", "Paid"];
-// Other sample jobs already in each column, muted so Priya's card stands out.
-const GHOSTS: { name: string; job: string }[] = [
-  { name: "Dave K., Adamstown", job: "Smoke alarms" },
-  { name: "Lena M., Hamilton", job: "Downlights" },
-  { name: "Raj P., Kotara", job: "Ceiling fans" },
-  { name: "Sue T., Cardiff", job: "Safety switch" },
-];
-const LOG: { text: string; logo: string }[] = [
-  { text: "Enquiry from the website, added to your job list", logo: "gmail" },
-  { text: "Quote sent from your template, opened twice", logo: "gmail" },
-  { text: "Job booked into Google Calendar for Tue 14th", logo: "googlecalendar" },
-  { text: "Invoice paid by card and synced to Xero", logo: "xero" },
+// One sample job, from the website form to the money in Xero, shown like a
+// delivery tracker: each stop lights up with the app that did the work.
+const STOPS: { stage: string; when: string; logo: string; app: string; title: string; detail: string }[] = [
+  { stage: "Enquiry", when: "Mon 8:12am", logo: "gmail", app: "Website form", title: "New job: EV charger and switchboard", detail: "Priya filled in your website form. The job is on your list with her address and photos, before you've had a coffee." },
+  { stage: "Quote", when: "Mon 8:40am", logo: "gmail", app: "Gmail", title: "Quote sent: $2,380", detail: "Built from your quote template and sent from your own email. You get a nudge when she opens it, and she opened it twice." },
+  { stage: "Booked", when: "Tue 14th, 9am", logo: "googlecalendar", app: "Google Calendar", title: "Booked in for Tuesday 9am", detail: "She accepted the quote and picked a time. It's in your calendar, and she gets a reminder the day before." },
+  { stage: "Paid", when: "Tue 3:05pm", logo: "stripe", app: "Stripe", title: "Paid $2,380 by card", detail: "The invoice went out when you marked the job done. She paid on her phone, and it's already reconciled in Xero." },
 ];
 
 // One job moving through the pipeline on its own, with what was automated.
 export function PipelineDemo() {
-  const [stage, setStage] = useState(STAGES.length - 1);
+  const [stop, setStop] = useState(STOPS.length - 1);
   const timer = useRef<number | undefined>(undefined);
 
   const run = () => {
     if (reduced()) return;
     let i = 0;
-    setStage(0);
+    setStop(0);
     window.clearInterval(timer.current);
     timer.current = window.setInterval(() => {
       i += 1;
-      setStage(i);
-      if (i >= STAGES.length - 1) window.clearInterval(timer.current);
-    }, 1700);
+      setStop(i);
+      if (i >= STOPS.length - 1) window.clearInterval(timer.current);
+    }, 2200);
   };
   const ref = useInView(run);
   useEffect(() => () => window.clearInterval(timer.current), []);
+  const now = STOPS[stop];
+  const done = stop === STOPS.length - 1;
 
   return (
     <div className="demo pl" ref={ref} aria-label="Pipeline demo">
-      <div className="demo-bar"><b>Kerr &amp; Sons jobs</b><span>From first enquiry to paid invoice</span></div>
-      <ol className="pl-cols">
-        {STAGES.map((s, i) => (
-          <li key={s} className={i === stage ? "is-here" : i < stage ? "is-past" : ""}>
-            <span>{s}</span>
-            <div className="pl-card pl-ghost" aria-hidden="true"><b>{GHOSTS[i].name}</b><small>{GHOSTS[i].job}</small></div>
-            {i === stage && (
-              <div className="pl-card">
-                <b>Priya N., Merewether</b>
-                <small>EV charger and switchboard</small>
-                <em className="num">$2,380</em>
-              </div>
-            )}
+      <div className="pl-head">
+        <img className="pl-face" src="/avatars/people/priya.webp" alt="" width={44} height={44} />
+        <div><b>Priya N., Merewether</b><small>EV charger and switchboard, Kerr &amp; Sons</small></div>
+        <span className={`pl-status${done ? " is-done" : ""}`}>{done ? "Paid" : now.stage}</span>
+      </div>
+      <ol className="pl-track" style={{ "--p": stop / (STOPS.length - 1) } as React.CSSProperties}>
+        {STOPS.map((s, i) => (
+          <li key={s.stage} className={i < stop ? "is-past" : i === stop ? "is-here" : ""}>
+            <span className="pl-dot"><img src={logo(s.logo)} alt="" width={20} height={20} /></span>
+            <b>{s.stage}</b>
+            <small className="num">{i <= stop ? s.when : ""}</small>
           </li>
         ))}
       </ol>
-      <ul className="pl-log">
-        {LOG.map((l, i) => (
-          <li key={l.text} className={i <= stage ? "is-on" : ""}>
-            <img src={logo(l.logo)} alt="" width={16} height={16} /> {l.text}
-          </li>
-        ))}
-      </ul>
+      <div className="pl-event" key={stop} aria-live="polite">
+        <span className="pl-app"><img src={logo(now.logo)} alt="" width={16} height={16} /> {now.app}<time className="num">{now.when}</time></span>
+        <b>{now.title}</b>
+        <p>{now.detail}</p>
+        {done && <span className="pl-xero"><img src={logo("xero")} alt="" width={16} height={16} /> Synced to Xero. Nothing typed twice.</span>}
+      </div>
       <button type="button" className="text-link" onClick={run}>Run it again <Icon name="arrow-right" /></button>
       <p className="demo-note">Demo with a sample business.</p>
     </div>

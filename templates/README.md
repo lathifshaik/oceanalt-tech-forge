@@ -5,7 +5,7 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 A site's look comes from three independent choices, so no two clients get the same design:
 
 1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
-2. **Theme** (`design.theme`): one of thirty-two complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
+2. **Theme** (`design.theme`): one of thirty-eight complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
 3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`). The `cafe` layout also has two restaurant heroes: `centre` (a big centred headline with `hero.lineTwo` in italic, a round dish photo `hero.dish` rising from the bottom, and optional `hero.cards` and `hero.stats`) and `wordmark` (the business name huge, sized to fit its longest word, the headline as a tagline, and a live open or closed chip from the hours).
 
 On top of that come the client's own accent colour (`design.accent`, `design.accentDark`), photos, words and logo.
@@ -44,6 +44,14 @@ On top of that come the client's own accent colour (`design.accent`, `design.acc
 | `paws` | Vet. Teal and warm sand, Lexend, a paw-print trail under headings |
 | `fresh` | Cleaning. White and electric blue, bold Plus Jakarta Sans, soap-bubble circles |
 | `cellar` | Cellar door. Burgundy and parchment, Cinzel capitals with EB Garamond |
+| `haven` | Warm interiors. Sun-washed cream, rust italics, Libre Caslon Display |
+| `nocturne` | After-dark beauty. Black with violet and blue glows, Playfair Display (always dark) |
+| `basalt` | Stone and water. Warm grey, light Spectral, one word glowing red, an arched photo and a red band |
+| `burst` | Adrenaline. Black, a hot-pink starburst, Archivo Black with an italic serif word, grain (always dark) |
+| `sunnyside` | Breakfast. Cobalt and yolk orange, drawn fried eggs (cafe wordmark hero), Gabarito |
+| `pirouette` | Dance poster. Pink, giant League Spartan capitals, green-tinted photos printed into the page |
+
+Any theme can use `hero.eyebrow` (a small spaced line above the headline) and `hero.accent` (a word of the headline set in the accent style); the builder adds them in every layout.
 
 The four poster themes (`riso`, `halftone`, `bloom`, `autumn`) also carry their own CSS (`css` in `themes.json`): print grain, black-and-white or tinted photos, oversized headlines and one flat shape. The builder adds it after the layout's own styles.
 
@@ -115,5 +123,5 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/base.css`: shared reset and accessibility styles
 - `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
 - `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
-- `themes/themes.json`: the thirty-two design directions
+- `themes/themes.json`: the thirty-eight design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

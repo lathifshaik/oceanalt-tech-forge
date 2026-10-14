@@ -1,0 +1,151 @@
+{
+  "template": "studio",
+  "slug": "leap-dance-studio",
+  "url": "https://leapdance.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "SportsActivityLocation",
+  "business": {
+    "name": "Leap Dance Studio",
+    "servicesLabel": "Classes",
+    "servicesCta": "See classes",
+    "headline": "Dance. No experience needed.",
+    "intro": "Contemporary, jazz and hip hop classes for adults in Newtown. Come as you are; leave a bit braver.",
+    "address": "1/77 King Street, Newtown NSW 2042",
+    "street": "1/77 King Street",
+    "suburb": "Newtown",
+    "state": "NSW",
+    "postcode": "2042",
+    "phone": "(02) 5550 9036",
+    "email": "hello@leapdance.example",
+    "instagram": "leapdancenewtown",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "5pm",
+        "close": "9pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "5pm",
+        "close": "9pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "5pm",
+        "close": "9pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "5pm",
+        "close": "9pm"
+      },
+      {
+        "day": "Friday",
+        "open": "5pm",
+        "close": "8pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "9am",
+        "close": "2pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1586211070543-61ae1ad4a665?w=1600&q=75&auto=format&fit=crop",
+    "photoAlt": "A dancer reaching upward in a white studio",
+    "eyebrow": "Contemporary / Jazz / Hip hop",
+    "accent": "Dance."
+  },
+  "about": {
+    "title": "Your first class is on us",
+    "body": "Every class starts with a slow warm-up and builds one short routine, so you can keep up even if you've never danced. Wear what you'd wear to the gym.",
+    "badges": [
+      "First class free",
+      "Beginners every night",
+      "Classes of 16 or fewer"
+    ],
+    "photo": "https://images.unsplash.com/photo-1543893424-907f9ebc6a5d?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A dancer leaping in the street"
+  },
+  "treatmentsIntro": "Book a class or a pack online. Pay by card, Apple Pay, Google Pay or Afterpay.",
+  "treatments": [
+    {
+      "group": "Classes",
+      "items": [
+        {
+          "name": "First class",
+          "duration": "60 min",
+          "price": "Free"
+        },
+        {
+          "name": "Casual class",
+          "duration": "60 min",
+          "price": "$26"
+        },
+        {
+          "name": "Beginners' 6-week course",
+          "duration": "Weekly",
+          "price": "$135"
+        }
+      ]
+    },
+    {
+      "group": "Passes",
+      "items": [
+        {
+          "name": "10-class pass",
+          "duration": "Valid 4 months",
+          "price": "$220"
+        },
+        {
+          "name": "Unlimited month",
+          "duration": "30 days",
+          "price": "$159"
+        },
+        {
+          "name": "Private lesson",
+          "duration": "60 min",
+          "price": "$95"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give someone a reason to move",
+    "body": "Gift cards for any class or pass, sent by email straight away.",
+    "amount": "$50",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $50",
+      "Valid for 3 years",
+      "Use on any booking",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "I've never danced. Which class?",
+      "a": "Any class marked Beginners, or the six-week course."
+    },
+    {
+      "q": "What do I wear?",
+      "a": "Comfy clothes and sneakers or bare feet. No dance shoes needed."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free up to 4 hours before class."
+    }
+  ],
+  "closingLine": "Book your free first class.",
+  "showcase": [
+    {
+      "theme": "pirouette",
+      "hero": "split"
+    }
+  ]
+}

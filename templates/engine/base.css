@@ -14,3 +14,8 @@ ul{margin:0;padding:0;list-style:none}
 .num{font-variant-numeric:tabular-nums}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Optional hero touches (hero.eyebrow, hero.accent in site.json). */
+.eyebrow{margin:0 0 1.1rem;font-size:.74rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;opacity:.8}
+h1 em.accent{font-style:italic;color:var(--accent-text,var(--accent))}
+@media (max-width:760px){.eyebrow{letter-spacing:.16em!important;font-size:.7rem}}

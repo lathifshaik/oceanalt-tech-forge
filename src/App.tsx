@@ -438,6 +438,74 @@ export const WORK: {
       { path: "ridgeline-wines-ember", theme: "Ember" },
     ],
   },
+  {
+    id: "pro",
+    kind: "Interior designer",
+    added: "2026-10-14",
+    business: "Willow & Arch Interiors, Bowral",
+    problem: "Clients found her through friends and had no idea what a room would cost.",
+    pitch: "Fixed design fees in a plain table, how a project runs, and home visits booked online.",
+    designs: [
+      { path: "willow-and-arch", theme: "Haven" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Make-up artist",
+    added: "2026-10-14",
+    business: "Velvet Hour, Surry Hills",
+    problem: "Brides asked for prices and dates in DMs, one message at a time.",
+    pitch: "Every service priced, trials booked online, and gift cards.",
+    designs: [
+      { path: "velvet-hour", theme: "Nocturne" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Float and massage",
+    added: "2026-10-14",
+    business: "Still Water, Fremantle",
+    problem: "First-timers rang to ask what floating is before they'd book.",
+    pitch: "A plain first-float guide, sessions priced, and booking online.",
+    designs: [
+      { path: "still-water-float", theme: "Basalt" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Skydiving",
+    group: "fitness",
+    added: "2026-10-14",
+    business: "Freefall Coast, Albion Park",
+    problem: "Gift buyers and nervous first-timers called with the same questions.",
+    pitch: "Jumps priced, what happens on the day, safety answers, and gift cards.",
+    designs: [
+      { path: "freefall-coast", theme: "Burst" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Breakfast café",
+    added: "2026-10-14",
+    business: "Sunny Side, Brunswick",
+    problem: "The menu lived on a chalkboard and a blurry Instagram post.",
+    pitch: "Breakfast with prices, opening hours with a live open sign, and directions.",
+    designs: [
+      { path: "sunny-side-brunswick", theme: "Sunnyside" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Dance studio",
+    group: "fitness",
+    added: "2026-10-14",
+    business: "Leap Dance Studio, Newtown",
+    problem: "Beginners didn't know which class to try, so they didn't come.",
+    pitch: "A free first class, classes priced, and booking online.",
+    designs: [
+      { path: "leap-dance-studio", theme: "Pirouette" },
+    ],
+  },
 ];
 
 
@@ -715,7 +783,7 @@ function Work() {
       <div className="wrap work-head">
         <div>
           <h2 className="h2">Designed for one business. Never reused.</h2>
-          <p className="lede">{WORK.length} sample businesses, each in two or three of its own designs. Switch between them, or open the live site.</p>
+          <p className="lede">{WORK.length} sample businesses, each in its own designs. Switch between them, or open the live site.</p>
         </div>
         <div className="work-nav">
           <button type="button" onClick={() => nudge(-1)} aria-label="Previous"><Icon name="arrow-right" className="i flip" /></button>

@@ -1,0 +1,164 @@
+{
+  "template": "cafe",
+  "slug": "sunny-side-brunswick",
+  "url": "https://sunnyside.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "Restaurant",
+  "business": {
+    "name": "Sunny Side",
+    "headline": "A little sunshine, served your way.",
+    "intro": "Breakfast all day on Sydney Road: eggs every way, thick toast and good coffee, from 7am till we close.",
+    "address": "288 Sydney Road, Brunswick VIC 3056",
+    "street": "288 Sydney Road",
+    "suburb": "Brunswick",
+    "state": "VIC",
+    "postcode": "3056",
+    "phone": "(03) 5550 2276",
+    "email": "hello@sunnyside.example",
+    "instagram": "sunnysidebrunswick",
+    "hoursSummary": "Every day, 7am to 3pm",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Friday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "7am",
+        "close": "3pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "7am",
+        "close": "3pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1600&q=75&auto=format&fit=crop",
+    "photoAlt": "Toast with a fried egg and tomato"
+  },
+  "facts": [
+    {
+      "icon": "clock",
+      "text": "Breakfast till close, every day"
+    },
+    {
+      "icon": "leaf",
+      "text": "Free-range eggs from Kyneton"
+    },
+    {
+      "icon": "cup",
+      "text": "Coffee from a Brunswick roaster"
+    }
+  ],
+  "dishes": {
+    "kicker": "Eggs, every way",
+    "title": "The breakfast board",
+    "items": [
+      {
+        "name": "Two eggs your way",
+        "price": "$17",
+        "photo": "https://images.unsplash.com/photo-1582169505937-b9992bd01ed9?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Two fried eggs on a black plate",
+        "desc": "Fried, poached or scrambled, on sourdough"
+      },
+      {
+        "name": "Sunny side stack",
+        "price": "$22",
+        "photo": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "Toast with a fried egg and tomato",
+        "desc": "Egg, bacon, roast tomato, hash brown"
+      },
+      {
+        "name": "Green eggs",
+        "price": "$21",
+        "photo": "https://images.unsplash.com/photo-1465014925804-7b9ede58d0d7?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A fried egg on toast with herbs",
+        "desc": "Herbs, chilli oil, feta, rye"
+      }
+    ]
+  },
+  "menuIntro": "Everything comes on sourdough unless you say otherwise. Gluten-free bread is $2 extra.",
+  "menu": [
+    {
+      "category": "Breakfast",
+      "items": [
+        {
+          "name": "Two eggs your way",
+          "price": "17.00"
+        },
+        {
+          "name": "Sunny side stack",
+          "price": "22.00"
+        },
+        {
+          "name": "Green eggs",
+          "price": "21.00"
+        },
+        {
+          "name": "Bircher muesli",
+          "price": "15.00"
+        }
+      ]
+    },
+    {
+      "category": "Sides and coffee",
+      "items": [
+        {
+          "name": "Bacon",
+          "price": "6.00"
+        },
+        {
+          "name": "Hash brown",
+          "price": "4.50"
+        },
+        {
+          "name": "Flat white",
+          "price": "5.00"
+        },
+        {
+          "name": "Fresh orange juice",
+          "price": "8.00"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Prices in AUD. Tell us about allergies when you order.",
+  "menuPhoto": "https://images.unsplash.com/photo-1582169505937-b9992bd01ed9?w=1200&q=75&auto=format&fit=crop",
+  "menuPhotoAlt": "Fried eggs on a black plate",
+  "sections": [
+    "facts",
+    "dishes",
+    "menu",
+    "visit"
+  ],
+  "dishStyle": "round",
+  "showcase": [
+    {
+      "theme": "sunnyside",
+      "hero": "wordmark"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "template": "pro",
+  "slug": "willow-and-arch",
+  "url": "https://willowandarch.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "ProfessionalService",
+  "business": {
+    "name": "Willow & Arch Interiors",
+    "headline": "Homes that breathe.",
+    "intro": "Interior design for homes in the Southern Highlands: warm timber, natural light and rooms that feel calm to come home to.",
+    "address": "Studio 2, 18 Bong Bong Street, Bowral NSW 2576",
+    "street": "Studio 2, 18 Bong Bong Street",
+    "suburb": "Bowral",
+    "state": "NSW",
+    "postcode": "2576",
+    "phone": "(02) 5550 7468",
+    "email": "studio@willowandarch.example",
+    "contactName": "Clare Moreau",
+    "contactRole": "Principal designer",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Book a home visit",
+    "disclaimer": "Sample site made by Oceanalt. Not a real interior design studio."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1788927775194-70e9b280dd79?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A sunlit living room with a daybed and an arched doorway",
+    "eyebrow": "Light / Timber / Calm",
+    "accent": "breathe."
+  },
+  "credentials": [
+    {
+      "icon": "home",
+      "text": "Whole homes or one room"
+    },
+    {
+      "icon": "tag",
+      "text": "A fixed design fee, agreed first"
+    },
+    {
+      "icon": "leaf",
+      "text": "Natural, local materials"
+    }
+  ],
+  "servicesIntro": "Most of our work is in Bowral, Mittagong and Moss Vale, from one tired lounge room to a whole renovation.",
+  "services": [
+    {
+      "icon": "home",
+      "name": "Full home design",
+      "desc": "Layout, colour, joinery, lighting and furniture, drawn and specified.",
+      "fee": "From $6,500"
+    },
+    {
+      "icon": "layout",
+      "name": "One room",
+      "desc": "A lounge, kitchen or bedroom, designed and sourced.",
+      "fee": "From $1,800"
+    },
+    {
+      "icon": "compass",
+      "name": "Colour and styling consult",
+      "desc": "Two hours in your home, with a written plan after.",
+      "fee": "$420"
+    }
+  ],
+  "feesIntro": "Fees are fixed and agreed in writing before we start. Furniture is supplied at trade price, and we show you the discount.",
+  "fees": [
+    {
+      "item": "Home visit and brief",
+      "price": "$180",
+      "note": "Comes off your design fee"
+    },
+    {
+      "item": "Styling consult",
+      "price": "$420",
+      "note": "Two hours, written plan"
+    },
+    {
+      "item": "One room",
+      "price": "From $1,800",
+      "note": "Concept, sourcing and install"
+    },
+    {
+      "item": "Full home",
+      "price": "From $6,500",
+      "note": "Staged payments"
+    }
+  ],
+  "process": [
+    {
+      "title": "A home visit",
+      "desc": "We walk through, talk about how you live, and measure up."
+    },
+    {
+      "title": "A concept",
+      "desc": "Mood boards, a floor plan and a costed list, before you commit."
+    },
+    {
+      "title": "Install day",
+      "desc": "We deliver, place and style everything, usually in one day."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Do you work outside the Southern Highlands?",
+      "a": "Yes, across NSW for full-home projects. Travel is quoted up front."
+    },
+    {
+      "q": "Can I use furniture I already have?",
+      "a": "Of course. Most of our designs keep a few loved pieces."
+    },
+    {
+      "q": "How long does a room take?",
+      "a": "About six weeks from concept to install, depending on furniture lead times."
+    }
+  ],
+  "contactTitle": "Book a home visit",
+  "contactIntro": "Or save our details and call when it suits you.",
+  "showcase": [
+    {
+      "theme": "haven",
+      "hero": "full"
+    }
+  ]
+}

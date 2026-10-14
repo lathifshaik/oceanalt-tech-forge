@@ -1,0 +1,153 @@
+{
+  "template": "studio",
+  "slug": "still-water-float",
+  "url": "https://stillwater.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "DaySpa",
+  "business": {
+    "name": "Still Water",
+    "servicesLabel": "Sessions",
+    "servicesCta": "See sessions",
+    "headline": "Float, breathe and come back lighter.",
+    "intro": "Float tanks and remedial massage in Fremantle. An hour of quiet, warm water and no phone.",
+    "address": "6 Pakenham Street, Fremantle WA 6160",
+    "street": "6 Pakenham Street",
+    "suburb": "Fremantle",
+    "state": "WA",
+    "postcode": "6160",
+    "phone": "(08) 5550 6624",
+    "email": "hello@stillwater.example",
+    "instagram": "stillwaterfloat",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "10am",
+        "close": "8pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "10am",
+        "close": "8pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "10am",
+        "close": "8pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "10am",
+        "close": "9pm"
+      },
+      {
+        "day": "Friday",
+        "open": "9am",
+        "close": "9pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8am",
+        "close": "6pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "9am",
+        "close": "5pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1776112351625-3c1dda25ca96?w=1600&q=75&auto=format&fit=crop",
+    "photoAlt": "A dark rock rising out of still water at dusk",
+    "eyebrow": "Float / Massage / Rest",
+    "accent": "lighter."
+  },
+  "about": {
+    "title": "Your first float, explained",
+    "body": "The water is skin-warm and full of Epsom salt, so you float without trying. Lights and music are yours to control, and the door never locks. Most people fall asleep the first time.",
+    "badges": [
+      "Private rooms and showers",
+      "First-float guide",
+      "Remedial rebates"
+    ],
+    "photo": "https://images.unsplash.com/photo-1787651343620-8d5303006ecb?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A massage table in a quiet treatment room"
+  },
+  "treatmentsIntro": "Book online and pay by card, Apple Pay, Google Pay or Afterpay. Remedial massage can be claimed with most health funds.",
+  "treatments": [
+    {
+      "group": "Floats",
+      "items": [
+        {
+          "name": "First float",
+          "duration": "60 min",
+          "price": "$69"
+        },
+        {
+          "name": "Float",
+          "duration": "60 min",
+          "price": "$85"
+        },
+        {
+          "name": "3-float pack",
+          "duration": "Valid 6 months",
+          "price": "$225"
+        }
+      ]
+    },
+    {
+      "group": "Massage",
+      "items": [
+        {
+          "name": "Remedial massage",
+          "duration": "60 min",
+          "price": "$115"
+        },
+        {
+          "name": "Float and massage",
+          "duration": "2 h",
+          "price": "$185"
+        },
+        {
+          "name": "Relaxation massage",
+          "duration": "60 min",
+          "price": "$105"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "An hour of quiet, as a gift",
+    "body": "Gift cards for any float or massage, sent by email straight away.",
+    "amount": "$85",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $50",
+      "Valid for 3 years",
+      "Use on any service",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "Can I float if I can't swim?",
+      "a": "Yes. The water is about 30 cm deep and you can't sink."
+    },
+    {
+      "q": "What do I bring?",
+      "a": "Nothing. Towels, earplugs and shampoo are in every room."
+    },
+    {
+      "q": "Who shouldn't float?",
+      "a": "Skip it if you're unwell, have open cuts or fresh hair colour. Pregnant? Ask us first."
+    }
+  ],
+  "closingLine": "Book your first float in under a minute.",
+  "showcase": [
+    {
+      "theme": "basalt",
+      "hero": "split"
+    }
+  ]
+}

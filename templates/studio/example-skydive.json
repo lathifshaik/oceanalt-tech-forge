@@ -1,0 +1,150 @@
+{
+  "template": "studio",
+  "slug": "freefall-coast",
+  "url": "https://freefallcoast.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "SportsActivityLocation",
+  "business": {
+    "name": "Freefall Coast",
+    "servicesLabel": "Jumps",
+    "servicesCta": "See jumps",
+    "headline": "Feel the fear. Jump anyway.",
+    "intro": "Tandem skydives over the beaches of the Illawarra, strapped to an instructor with thousands of jumps. No experience needed.",
+    "address": "Hangar 4, Airport Road, Albion Park Rail NSW 2527",
+    "street": "Hangar 4, Airport Road",
+    "suburb": "Albion Park Rail",
+    "state": "NSW",
+    "postcode": "2527",
+    "phone": "(02) 5550 4810",
+    "email": "jump@freefallcoast.example",
+    "instagram": "freefallcoast",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday"
+      },
+      {
+        "day": "Wednesday",
+        "open": "8am",
+        "close": "5pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "8am",
+        "close": "5pm"
+      },
+      {
+        "day": "Friday",
+        "open": "8am",
+        "close": "5pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "7am",
+        "close": "6pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "7am",
+        "close": "6pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1659901981145-dbc056431a8b?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Skydivers in freefall high above farmland",
+    "eyebrow": "Tandem / Coast / 15,000 ft",
+    "accent": "fear."
+  },
+  "about": {
+    "title": "Your first jump, start to finish",
+    "body": "About 20 minutes of training on the ground, a scenic flight up, up to 60 seconds of freefall, then five minutes under the parachute looking at the coast. You'll be back on the beach in about three hours.",
+    "badges": [
+      "Instructors with 1,000+ jumps",
+      "Weight limit 100 kg",
+      "Weather-proof rebooking"
+    ],
+    "photo": "https://images.unsplash.com/photo-1659221876406-31a3746f41b9?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A tandem skydiver giving a thumbs up in freefall"
+  },
+  "treatmentsIntro": "Prices per person. If the weather turns, we rebook you free. Pay by card, Apple Pay, Google Pay or Afterpay.",
+  "treatments": [
+    {
+      "group": "Tandem jumps",
+      "items": [
+        {
+          "name": "Tandem from 10,000 ft",
+          "duration": "About 3 h",
+          "price": "$329"
+        },
+        {
+          "name": "Tandem from 15,000 ft",
+          "duration": "About 3 h",
+          "price": "$399"
+        },
+        {
+          "name": "Weekday sunrise jump",
+          "duration": "About 3 h",
+          "note": "Wednesday to Friday",
+          "price": "$359"
+        }
+      ]
+    },
+    {
+      "group": "Add-ons",
+      "items": [
+        {
+          "name": "Handcam photos and video",
+          "duration": "Same day",
+          "price": "$129"
+        },
+        {
+          "name": "Outside camera flyer",
+          "duration": "Same day",
+          "price": "$199"
+        },
+        {
+          "name": "Group of 6 or more",
+          "duration": "Per person",
+          "price": "$20 off"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give someone the jump",
+    "body": "Gift cards for any jump, valid for three years, sent by email straight away.",
+    "amount": "$399",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $50",
+      "Valid for 3 years",
+      "Use on any booking",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "Is it safe?",
+      "a": "Every jump uses a dual-parachute system with an automatic backup, and every instructor is licensed with the Australian Parachute Federation."
+    },
+    {
+      "q": "Who can jump?",
+      "a": "Anyone 12 or over (under 18s need a parent), up to 100 kg. Some medical conditions need a doctor's note."
+    },
+    {
+      "q": "What if it's windy?",
+      "a": "We only jump in safe weather. If we can't fly, you rebook for free."
+    }
+  ],
+  "closingLine": "Pick a date and jump.",
+  "showcase": [
+    {
+      "theme": "burst",
+      "hero": "full"
+    }
+  ]
+}

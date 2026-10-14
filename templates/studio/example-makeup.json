@@ -1,0 +1,151 @@
+{
+  "template": "studio",
+  "slug": "velvet-hour",
+  "url": "https://velvethour.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "BeautySalon",
+  "business": {
+    "name": "Velvet Hour",
+    "servicesLabel": "Services",
+    "servicesCta": "See prices",
+    "headline": "Make-up for your biggest nights.",
+    "intro": "Bridal, event and editorial make-up in Surry Hills, or at your place. Book a trial and see the look before the day.",
+    "address": "Level 1, 412 Crown Street, Surry Hills NSW 2010",
+    "street": "Level 1, 412 Crown Street",
+    "suburb": "Surry Hills",
+    "state": "NSW",
+    "postcode": "2010",
+    "phone": "(02) 5550 3391",
+    "email": "hello@velvethour.example",
+    "instagram": "velvethourmakeup",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "10am",
+        "close": "6pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "10am",
+        "close": "6pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "10am",
+        "close": "8pm"
+      },
+      {
+        "day": "Friday",
+        "open": "9am",
+        "close": "8pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "6am",
+        "close": "6pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "7am",
+        "close": "3pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1515138692129-197a2c608cfd?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "A woman's face lit softly against a black background",
+    "eyebrow": "Bridal / Events / Editorial",
+    "accent": "biggest"
+  },
+  "about": {
+    "title": "A trial before the big day",
+    "body": "For weddings we always start with a trial, so you can see the look, wear it for a few hours and change anything. On the day, we come to you, early.",
+    "badges": [
+      "Trials for every bride",
+      "We travel to you",
+      "Lashes included"
+    ],
+    "photo": "https://images.unsplash.com/photo-1709477542149-f4e0e21d590b?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "An artist applying eye make-up with a fine brush"
+  },
+  "treatmentsIntro": "Prices are per person. Travel within 10 km of Surry Hills is free. Pay by card, Apple Pay, Google Pay or Afterpay.",
+  "treatments": [
+    {
+      "group": "Weddings",
+      "items": [
+        {
+          "name": "Bridal trial",
+          "duration": "90 min",
+          "price": "$180"
+        },
+        {
+          "name": "Bride, on the day",
+          "duration": "90 min",
+          "price": "$320"
+        },
+        {
+          "name": "Bridesmaid or mother",
+          "duration": "45 min",
+          "price": "$150"
+        }
+      ]
+    },
+    {
+      "group": "Events and lessons",
+      "items": [
+        {
+          "name": "Event make-up",
+          "duration": "60 min",
+          "price": "$140"
+        },
+        {
+          "name": "Lashes add-on",
+          "duration": "15 min",
+          "price": "$30"
+        },
+        {
+          "name": "Private lesson",
+          "duration": "90 min",
+          "price": "$190"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "A night out, made up",
+    "body": "Gift cards for any make-up service, sent by email straight away.",
+    "amount": "$140",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $50",
+      "Valid for 3 years",
+      "Use on any service",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "How early should I book a wedding?",
+      "a": "Six to twelve months ahead for spring and autumn Saturdays."
+    },
+    {
+      "q": "Do you work with sensitive skin?",
+      "a": "Yes. Tell us when you book and we'll patch test at your trial."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Free up to 48 hours before. Wedding deposits are refundable up to 60 days out."
+    }
+  ],
+  "closingLine": "Book a trial or your event in under a minute.",
+  "showcase": [
+    {
+      "theme": "nocturne",
+      "hero": "full"
+    }
+  ]
+}

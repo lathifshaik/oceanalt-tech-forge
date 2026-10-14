@@ -255,6 +255,23 @@ function arrange(html, order, sourceLabel) {
   return html.replace(re, () => (first ? ((first = false), order.map((n) => blocks.get(n)).join("\n")) : ""));
 }
 
+// Optional hero touches that work in any layout: "eyebrow" is a small spaced
+// line above the headline ("LIGHT / TIMBER / CALM"), and "accent" is one word or
+// phrase of the headline set apart in the theme's accent style.
+function headline(html, hero = {}) {
+  let done = false;
+  return html.replace(/<h1>([\s\S]*?)<\/h1>/, (m, inner) => {
+    if (done) return m;
+    done = true;
+    let h = inner;
+    if (hero.accent) {
+      const word = escapeHtml(hero.accent);
+      if (h.includes(word)) h = h.replace(word, `<em class="accent">${word}</em>`);
+    }
+    return `${hero.eyebrow ? `<p class="eyebrow">${escapeHtml(hero.eyebrow)}</p>` : ""}<h1>${h}</h1>`;
+  });
+}
+
 export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   const tdir = join(ROOT, site.template || "");
   if (!site.template || !existsSync(join(tdir, "template.html"))) {
@@ -264,7 +281,7 @@ export function buildSite(site, { sourceLabel = "site.json" } = {}) {
   validate(site, meta, sourceLabel);
 
   const data = enrich(site);
-  const body = arrange(render(readFileSync(join(tdir, "template.html"), "utf8"), data), site.sections, sourceLabel);
+  const body = headline(arrange(render(readFileSync(join(tdir, "template.html"), "utf8"), data), site.sections, sourceLabel), site.hero);
   const url = site.url || "https://example.com/";
   const { design, themeCss, themeExtra, accent, onAccent, fonts } = resolveDesign(site, meta, sourceLabel);
   const seo = site.seo || {};

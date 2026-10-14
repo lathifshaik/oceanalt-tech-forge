@@ -20,58 +20,59 @@ function useInView(fn: () => void) {
   return ref;
 }
 
-// One sample job, from the website form to the money in Xero, shown like a
-// delivery tracker: each stop lights up with the app that did the work.
-const STOPS: { stage: string; when: string; logo: string; app: string; title: string; detail: string }[] = [
-  { stage: "Enquiry", when: "Mon 8:12am", logo: "gmail", app: "Website form", title: "New job: EV charger and switchboard", detail: "Priya filled in your website form. The job is on your list with her address and photos, before you've had a coffee." },
-  { stage: "Quote", when: "Mon 8:40am", logo: "gmail", app: "Gmail", title: "Quote sent: $2,380", detail: "Built from your quote template and sent from your own email. You get a nudge when she opens it, and she opened it twice." },
-  { stage: "Booked", when: "Tue 14th, 9am", logo: "googlecalendar", app: "Google Calendar", title: "Booked in for Tuesday 9am", detail: "She accepted the quote and picked a time. It's in your calendar, and she gets a reminder the day before." },
-  { stage: "Paid", when: "Tue 3:05pm", logo: "stripe", app: "Stripe", title: "Paid $2,380 by card", detail: "The invoice went out when you marked the job done. She paid on her phone, and it's already reconciled in Xero." },
+// The 9pm to-do list for one sample job (Priya's EV charger), then each chore
+// flipping to "done on its own" with the app that does it, until nothing is
+// left to type and the clock says tools down.
+const CHORES: { old: string; auto: string; logo: string; app: string }[] = [
+  { old: "Copy Priya's details from her email into the job list", auto: "Your website form adds the job, with her address and photos", logo: "gmail", app: "Website form" },
+  { old: "Write up her quote and email it", auto: "Quote built from your template and sent from your email", logo: "gmail", app: "Gmail" },
+  { old: "Ring her to check she got it", auto: "You're told the moment she opens it", logo: "gmail", app: "Gmail" },
+  { old: "Put the job in the calendar", auto: "She picks a time and it lands in your calendar", logo: "googlecalendar", app: "Google Calendar" },
+  { old: "Type the invoice, then enter the payment in Xero", auto: "Invoice sends itself when the job's done, she pays by card, Xero updates", logo: "xero", app: "Stripe and Xero" },
 ];
 
-// One job moving through the pipeline on its own, with what was automated.
 export function PipelineDemo() {
-  const [stop, setStop] = useState(STOPS.length - 1);
+  const [done, setDone] = useState(CHORES.length);
   const timer = useRef<number | undefined>(undefined);
 
   const run = () => {
     if (reduced()) return;
     let i = 0;
-    setStop(0);
+    setDone(0);
     window.clearInterval(timer.current);
     timer.current = window.setInterval(() => {
       i += 1;
-      setStop(i);
-      if (i >= STOPS.length - 1) window.clearInterval(timer.current);
-    }, 2200);
+      setDone(i);
+      if (i >= CHORES.length) window.clearInterval(timer.current);
+    }, 1500);
   };
-  const ref = useInView(run);
+  const ref = useInView(() => window.setTimeout(run, 900));
   useEffect(() => () => window.clearInterval(timer.current), []);
-  const now = STOPS[stop];
-  const done = stop === STOPS.length - 1;
+  const left = CHORES.length - done;
+  const finished = left === 0;
 
   return (
-    <div className="demo pl" ref={ref} aria-label="Pipeline demo">
+    <div className={`demo pl${finished ? " is-done" : ""}`} ref={ref} aria-label="Less admin demo">
       <div className="pl-head">
-        <img className="pl-face" src="/avatars/people/priya.webp" alt="" width={44} height={44} />
-        <div><b>Priya N., Merewether</b><small>EV charger and switchboard, Kerr &amp; Sons</small></div>
-        <span className={`pl-status${done ? " is-done" : ""}`}>{done ? "Paid" : now.stage}</span>
+        <div>
+          <span className="pl-clock num">{finished ? "5:30pm" : "9:04pm"}</span>
+          <small>{finished ? "Tools down. Nothing left to type." : "Still at the kitchen table"}</small>
+        </div>
+        <span className="pl-count"><b className="num">{left}</b> {left === 1 ? "thing" : "things"} to type</span>
       </div>
-      <ol className="pl-track" style={{ "--p": stop / (STOPS.length - 1) } as React.CSSProperties}>
-        {STOPS.map((s, i) => (
-          <li key={s.stage} className={i < stop ? "is-past" : i === stop ? "is-here" : ""}>
-            <span className="pl-dot"><img src={logo(s.logo)} alt="" width={20} height={20} /></span>
-            <b>{s.stage}</b>
-            <small className="num">{i <= stop ? s.when : ""}</small>
+      <ul className="pl-list">
+        {CHORES.map((c, i) => (
+          <li key={c.old} className={i < done ? "is-auto" : ""}>
+            <span className="pl-mark">{i < done ? <Icon name="check" /> : <i />}</span>
+            <span className="pl-text">
+              <s>{c.old}</s>
+              <span className="pl-auto">{c.auto}</span>
+            </span>
+            <img className="pl-logo" src={logo(c.logo)} alt={c.app} width={18} height={18} />
           </li>
         ))}
-      </ol>
-      <div className="pl-event" key={stop} aria-live="polite">
-        <span className="pl-app"><img src={logo(now.logo)} alt="" width={16} height={16} /> {now.app}<time className="num">{now.when}</time></span>
-        <b>{now.title}</b>
-        <p>{now.detail}</p>
-        {done && <span className="pl-xero"><img src={logo("xero")} alt="" width={16} height={16} /> Synced to Xero. Nothing typed twice.</span>}
-      </div>
+      </ul>
+      <p className="pl-job">For one job: Priya N., Merewether, EV charger and switchboard, $2,380.</p>
       <button type="button" className="text-link" onClick={run}>Run it again <Icon name="arrow-right" /></button>
       <p className="demo-note">Demo with a sample business.</p>
     </div>

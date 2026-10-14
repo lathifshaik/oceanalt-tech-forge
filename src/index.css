@@ -782,31 +782,26 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .story-pane .sv-lines { display: flex; flex-direction: column; justify-content: flex-end; min-height: 0; height: clamp(7rem, calc(72vh - 352px), 17rem); overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 14%); mask-image: linear-gradient(transparent, #000 14%); }
 .story-pane .sv-lines .sv-line { flex: none; }
 
-/* Less admin: one job as a delivery-style tracker (PipelineDemo in Demos.tsx). */
+/* Less admin: the 9pm to-do list turning into work that does itself (PipelineDemo). */
 .pl { display: grid; gap: 1rem; }
-.pl-head { display: flex; align-items: center; gap: .75rem; }
-.pl .pl-face { width: 44px; height: 44px; border-radius: 50%; flex: none; }
-.pl-head > div { flex: 1; min-width: 0; }
-.pl-head b { display: block; font-size: .98rem; }
-.pl-head small { display: block; color: var(--muted); font-size: .82rem; }
-.pl-status { flex: none; padding: .3rem .7rem; border-radius: 999px; background: var(--surface); font-size: .8rem; font-weight: 650; }
-.pl-status.is-done { background: #e3f6e8; color: #127a3b; }
-.pl-track { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: .25rem; }
-.pl-track::before, .pl-track::after { content: ""; position: absolute; top: calc(.25rem + 21px); left: 12.5%; height: 3px; border-radius: 3px; }
-.pl-track::before { right: 12.5%; background: var(--line); }
-.pl-track::after { width: calc(75% * var(--p, 1)); background: var(--accent); transition: width 1.2s var(--ease); }
-.pl-track li { position: relative; z-index: 1; display: grid; justify-items: center; gap: .3rem; text-align: center; }
-.pl-dot { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--card); box-shadow: 0 0 0 2px var(--line); filter: grayscale(1); opacity: .5; transition: box-shadow .4s, filter .4s, opacity .4s, transform .4s var(--ease); }
-.pl-track li.is-past .pl-dot, .pl-track li.is-here .pl-dot { filter: none; opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
-.pl-track li.is-here .pl-dot { transform: scale(1.12); box-shadow: 0 0 0 2px var(--accent), 0 0 0 7px var(--accent-soft); }
-.pl-track b { font-size: .82rem; }
-.pl-track li:not(.is-past):not(.is-here) b { color: var(--muted); }
-.pl-track small { min-height: 1.1em; font-size: .72rem; color: var(--muted); }
-.pl-event { display: grid; gap: .35rem; padding: 1rem 1.1rem; border-radius: 16px; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 24px 50px -32px rgb(var(--shadow) / .45); animation: rise .45s var(--ease) both; }
-.pl-app { display: flex; align-items: center; gap: .45rem; font-size: .78rem; font-weight: 600; color: var(--muted); }
-.pl-app time { margin-left: auto; font-weight: 500; }
-.pl-event > b { font-size: 1.05rem; }
-.pl-event p { font-size: .9rem; color: var(--muted); line-height: 1.5; }
-.pl-xero { display: inline-flex; align-items: center; gap: .45rem; width: fit-content; margin-top: .25rem; padding: .35rem .7rem; border-radius: 999px; background: #e6f6fb; font-size: .82rem; font-weight: 600; color: #0b5c73; }
-@media (max-width: 480px) { .pl-track b { font-size: .74rem; } .pl-dot { width: 38px; height: 38px; } .pl-track::before, .pl-track::after { top: calc(.25rem + 18px); } }
-.pl .pl-dot img { width: 20px; height: 20px; }
+.pl-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
+.pl-clock { display: block; font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--ink); transition: color .6s; }
+.pl-head small { display: block; margin-top: .35rem; color: var(--muted); font-size: .85rem; }
+.pl-count { flex: none; padding: .35rem .75rem; border-radius: 999px; background: #fdecea; color: #a1281c; font-size: .82rem; font-weight: 600; transition: background .5s, color .5s; }
+.pl-count b { font-size: .95rem; }
+.pl.is-done .pl-count { background: #e3f6e8; color: #127a3b; }
+.pl.is-done .pl-clock { color: var(--accent); }
+.pl-list { display: grid; gap: .4rem; }
+.pl-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr) 18px; align-items: center; gap: .7rem; padding: .65rem .8rem; border-radius: 12px; background: var(--surface); transition: background .5s var(--ease); }
+.pl-mark { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; box-shadow: inset 0 0 0 1.5px var(--line); }
+.pl-mark .i { width: 14px; height: 14px; color: #fff; }
+.pl-text { display: grid; min-width: 0; }
+.pl-text s { text-decoration: none; font-size: .9rem; line-height: 1.35; color: var(--ink); transition: color .4s, font-size .4s; }
+.pl-auto { max-height: 0; overflow: hidden; opacity: 0; font-size: .86rem; line-height: 1.35; color: var(--ink); transition: max-height .5s var(--ease), opacity .5s var(--ease); }
+.pl .pl-logo { width: 18px; height: 18px; opacity: .25; filter: grayscale(1); transition: opacity .4s, filter .4s; }
+.pl-list li.is-auto { background: var(--accent-soft); }
+.pl-list li.is-auto .pl-mark { background: var(--accent); box-shadow: none; animation: pop .45s cubic-bezier(.34, 1.56, .64, 1) both; }
+.pl-list li.is-auto s { text-decoration: line-through; font-size: .78rem; color: var(--muted); }
+.pl-list li.is-auto .pl-auto { max-height: 6em; opacity: 1; }
+.pl-list li.is-auto .pl-logo { opacity: 1; filter: none; }
+.pl-job { font-size: .8rem; color: var(--muted); }

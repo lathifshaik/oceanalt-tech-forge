@@ -145,7 +145,21 @@
   "showcase": [
     {
       "theme": "pirouette",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "numbered",
+        "visit": "wide",
+        "band": "giant",
+        "heads": "rule"
+      },
+      "sections": [
+        "about",
+        "treatments",
+        "team",
+        "visit",
+        "gift",
+        "band"
+      ]
     }
   ]
 }

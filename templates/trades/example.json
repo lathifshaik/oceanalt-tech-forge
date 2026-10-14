@@ -118,5 +118,53 @@
   ],
   "contact": {
     "formAction": "https://formspree.io/f/example"
-  }
+  },
+  "showcase": [
+    {
+      "theme": "coast",
+      "hero": "split"
+    },
+    {
+      "theme": "ink",
+      "hero": "full",
+      "look": {
+        "trust": "band",
+        "services": "list",
+        "process": "big",
+        "areas": "columns",
+        "reviews": "feature",
+        "quote": "invert",
+        "heads": "rule"
+      },
+      "sections": [
+        "services",
+        "trust",
+        "reviews",
+        "process",
+        "areas",
+        "quote"
+      ]
+    },
+    {
+      "theme": "sun",
+      "hero": "split",
+      "look": {
+        "trust": "plain",
+        "services": "cards",
+        "process": "timeline",
+        "areas": "band",
+        "reviews": "wall",
+        "quote": "stack",
+        "heads": "centre"
+      },
+      "sections": [
+        "trust",
+        "process",
+        "services",
+        "reviews",
+        "areas",
+        "quote"
+      ]
+    }
+  ]
 }

@@ -122,15 +122,64 @@
   "showcase": [
     {
       "theme": "halftone",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "creds": "band",
+        "services": "rows",
+        "fees": "band",
+        "process": "big",
+        "heads": "rule"
+      },
+      "sections": [
+        "creds",
+        "process",
+        "services",
+        "fees",
+        "team",
+        "faq",
+        "contact"
+      ]
     },
     {
       "theme": "riso",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "services": "split",
+        "fees": "cards",
+        "process": "cards",
+        "faq": "split",
+        "contact": "invert"
+      },
+      "sections": [
+        "services",
+        "fees",
+        "faq",
+        "creds",
+        "team",
+        "process",
+        "contact"
+      ]
     },
     {
       "theme": "autumn",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "creds": "big",
+        "fees": "table",
+        "process": "timeline",
+        "faq": "grid",
+        "contact": "centre",
+        "heads": "centre"
+      },
+      "sections": [
+        "creds",
+        "services",
+        "team",
+        "faq",
+        "fees",
+        "process",
+        "contact"
+      ]
     }
   ]
 }

@@ -126,6 +126,91 @@ section{padding-block:clamp(4rem,9vw,7rem)}
   .hero-split .hero .wrap{padding:7rem 1.25rem 2.5rem}
 }
 
+/* Section variants (site "look"), so studios differ below the hero.
+   treatments: cards (default) | menu | tiles | numbered
+   about: split (default) | quote | banner
+   team: grid (default) | circles | strip | list
+   visit: split (default) | invert | wide
+   band: box (default) | giant | line
+   heads: left (default) | centre | rule */
+.look-treatments-menu .treat{background:var(--bg)}
+.look-treatments-menu .groups{grid-template-columns:1fr;gap:0}
+.look-treatments-menu .group{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:0 clamp(2rem,6vw,5rem);background:none;border-radius:0;border-top:1px solid var(--ink);padding:2.25rem 0}
+.look-treatments-menu .group h3{grid-row:1/span 40;font-size:clamp(1.8rem,3.6vw,2.8rem);line-height:1.05}
+.look-treatments-menu .tx{grid-column:2;grid-template-columns:1fr auto auto;padding-block:.9rem}
+.look-treatments-menu .tx b{font-size:1.15rem}
+.look-treatments-menu .tx a{grid-column:3;grid-row:1}
+@media (max-width:760px){.look-treatments-menu .group{grid-template-columns:1fr}.look-treatments-menu .group h3{grid-row:auto;margin-bottom:.5rem}.look-treatments-menu .tx{grid-column:1;grid-template-columns:1fr auto}.look-treatments-menu .tx a{grid-column:2;grid-row:2}}
+
+.look-treatments-tiles .groups{grid-template-columns:1fr;gap:3rem}
+.look-treatments-tiles .group{background:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1rem}
+.look-treatments-tiles .group h3{grid-column:1/-1;margin:0;font-size:.85rem;font-family:var(--font-body);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-text)}
+.look-treatments-tiles .tx{background:var(--card);border-radius:var(--r);padding:1.6rem;grid-template-columns:1fr;align-content:start;gap:.5rem;min-height:11rem;border:0!important}
+.look-treatments-tiles .tx .price{grid-row:1;text-align:left;font-family:var(--font-display);font-weight:var(--display-weight);font-size:2.3rem;letter-spacing:-.03em;line-height:1}
+.look-treatments-tiles .tx > div{grid-row:2}
+.look-treatments-tiles .tx a{grid-column:1;grid-row:3;justify-self:start;margin-top:.5rem}
+
+.look-treatments-numbered .treat{counter-reset:tx}
+.look-treatments-numbered .groups{grid-template-columns:1fr;gap:2.5rem}
+.look-treatments-numbered .group{background:none;padding:0}
+.look-treatments-numbered .group h3{font-size:1rem;font-family:var(--font-body);font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-bottom:.75rem}
+.look-treatments-numbered .tx{counter-increment:tx;grid-template-columns:5rem 1fr auto auto;gap:.2rem 1.5rem;padding-block:1.5rem;border-top:1px solid var(--line)}
+.look-treatments-numbered .tx::before{content:counter(tx,decimal-leading-zero);grid-row:span 2;font-family:var(--font-display);font-weight:var(--display-weight);font-size:2.6rem;line-height:1;color:var(--accent-text)}
+.look-treatments-numbered .tx b{font-size:clamp(1.3rem,2.4vw,1.75rem);font-family:var(--font-display);font-weight:var(--display-weight)}
+.look-treatments-numbered .tx .price{font-size:1.3rem}
+.look-treatments-numbered .tx a{grid-column:4;grid-row:1;padding:.55rem 1rem;border:1px solid var(--line);border-radius:var(--r-btn)}
+@media (max-width:760px){.look-treatments-numbered .tx{grid-template-columns:3rem 1fr auto}.look-treatments-numbered .tx::before{font-size:1.8rem}.look-treatments-numbered .tx a{grid-column:2/-1;grid-row:3;justify-self:start;margin-top:.5rem}}
+
+.look-about-quote .intro .wrap{grid-template-columns:1fr;justify-items:center;text-align:center;gap:2rem}
+.look-about-quote .intro .portrait{order:-1;width:9rem;aspect-ratio:1;border-radius:50%}
+.look-about-quote .intro .h2{font-family:var(--font-body);font-size:.85rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-text)}
+.look-about-quote .intro .body{margin:1.5rem auto 0;font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:clamp(1.6rem,3.3vw,2.7rem);line-height:1.22;color:var(--ink);max-width:30ch}
+.look-about-quote .intro .creds{justify-content:center}
+
+.look-about-banner .intro{position:relative;isolation:isolate;padding-block:clamp(6rem,14vw,11rem)}
+.look-about-banner .intro .wrap{display:block}
+.look-about-banner .intro .portrait{position:absolute;inset:0;z-index:-1;border-radius:0;aspect-ratio:auto;max-width:none}
+.look-about-banner .intro .wrap > div:first-child{max-width:34rem;background:var(--card);color:var(--ink);padding:clamp(1.75rem,4vw,3rem);border-radius:var(--r)}
+
+.look-team-circles #team{text-align:center}
+.look-team-circles .team-grid{grid-template-columns:repeat(auto-fit,minmax(11rem,13rem));justify-content:center;gap:2rem}
+.look-team-circles .member .ph{aspect-ratio:1;border-radius:50%}
+
+.look-team-strip .team-grid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(15rem,20rem);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.75rem}
+.look-team-strip .member{position:relative;scroll-snap-align:start;color:#fff}
+.look-team-strip .member .ph{aspect-ratio:3/4;border-radius:var(--r-img)}
+.look-team-strip .member .ph::after{content:"";position:absolute;inset:0;border-radius:var(--r-img);background:linear-gradient(180deg,transparent 55%,rgb(0 0 0 / .7))}
+.look-team-strip .member h3,.look-team-strip .member p{position:absolute;left:1.25rem;right:1.25rem;margin:0;color:#fff}
+.look-team-strip .member h3{bottom:2.6rem}
+.look-team-strip .member p{bottom:1.2rem;opacity:.85}
+
+.look-team-list .team-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:0 3rem}
+.look-team-list .member{display:grid;grid-template-columns:5.5rem 1fr;gap:0 1.25rem;align-items:center;border-top:1px solid var(--line);padding-block:1.5rem}
+.look-team-list .member .ph{grid-row:span 2;aspect-ratio:1;border-radius:50%}
+.look-team-list .member h3{margin:0;align-self:end;font-size:clamp(1.5rem,2.6vw,2.1rem)}
+.look-team-list .member p{align-self:start}
+
+.look-visit-invert .info{background:var(--ink);color:var(--bg);--card:color-mix(in srgb,var(--bg) 9%,var(--ink));--line:color-mix(in srgb,var(--bg) 20%,var(--ink));--muted:color-mix(in srgb,var(--bg) 70%,var(--ink));--accent-text:color-mix(in srgb,var(--accent) 60%,var(--bg))}
+.look-visit-invert .info .addr{font-size:clamp(1.9rem,3.6vw,3rem);max-width:16ch}
+
+.look-visit-wide .info .wrap{grid-template-columns:1fr}
+.look-visit-wide .info .hours{grid-template-columns:repeat(7,minmax(0,1fr));gap:.5rem}
+.look-visit-wide .info .hours li{flex-direction:column;gap:.35rem;padding:1rem .75rem;background:var(--card);border-radius:var(--r);font-size:.92rem}
+.look-visit-wide .info .hours li span:first-child{font-weight:600}
+.look-visit-wide .policies{grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+@media (max-width:860px){.look-visit-wide .info .hours{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.look-band-giant .cta-band{padding-bottom:0}
+.look-band-giant .cta-band .wrap{width:100%;max-width:none;border-radius:0;flex-direction:column;align-items:flex-start;padding:clamp(4rem,10vw,8rem) max(1.25rem,calc((100vw - 72rem) / 2))}
+.look-band-giant .cta-band h2{font-size:clamp(2.8rem,8.5vw,7rem);line-height:.95;max-width:13ch}
+
+.look-band-line .cta-band .wrap{background:none;color:var(--ink);border-radius:0;border-block:2px solid var(--ink);padding-inline:0}
+.look-band-line .cta-band h2{font-size:clamp(2.2rem,5vw,4rem)}
+.look-band-line .cta-band .btn{background:var(--accent);color:var(--on-accent)}
+
+.look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede{text-align:center;margin-inline:auto}
+.look-heads-rule section > .wrap > .h2{border-top:2px solid currentColor;padding-top:1.25rem}
+
 footer{padding-block:2.5rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between}
 footer a{text-decoration:none} footer a:hover{color:var(--ink)}
@@ -153,7 +238,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
     <div class="curve" aria-hidden="true"></div>
   </div>
 
-  {{#about}}
+  <!--s:about-->{{#about}}
   <section class="intro">
     <div class="wrap">
       <div>
@@ -164,9 +249,9 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
       {{#photo}}<div class="portrait"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="1200" loading="lazy"></div>{{/photo}}
     </div>
   </section>
-  {{/about}}
+  {{/about}}<!--/s:about-->
 
-  <section class="treat" id="treatments">
+  <!--s:treatments--><section class="treat" id="treatments">
     <div class="wrap">
       <h2 class="h2">{{#business.servicesLabel}}{{business.servicesLabel}}{{/business.servicesLabel}}{{^business.servicesLabel}}Treatments{{/business.servicesLabel}}</h2>
       {{#treatmentsIntro}}<p class="lede">{{treatmentsIntro}}</p>{{/treatmentsIntro}}
@@ -185,9 +270,9 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
         {{/treatments}}
       </div>
     </div>
-  </section>
+  </section><!--/s:treatments-->
 
-  {{#gift}}
+  <!--s:gift-->{{#gift}}
   <section class="gift" id="gift">
     <div class="wrap">
       <div>
@@ -215,16 +300,16 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
       </div>
     </div>
   </section>
-  {{/gift}}
+  {{/gift}}<!--/s:gift-->
 
-  {{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">The team</h2><div class="team-grid">{{/@first}}
+  <!--s:team-->{{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">The team</h2><div class="team-grid">{{/@first}}
     <figure class="member" style="margin:0">
       {{#photo}}<div class="ph"><img src="{{photo}}" alt="{{name}}" width="800" height="1000" loading="lazy"></div>{{/photo}}
       <h3>{{name}}</h3><p>{{role}}</p>
     </figure>
-  {{#@last}}</div></div></section>{{/@last}}{{/team}}
+  {{#@last}}</div></div></section>{{/@last}}{{/team}}<!--/s:team-->
 
-  <section class="info" id="visit">
+  <!--s:visit--><section class="info" id="visit">
     <div class="wrap">
       <div>
         <h2 class="h2">Find us</h2>
@@ -240,14 +325,14 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
         {{#policies}}<details{{#@first}} open{{/@first}}><summary>{{q}}</summary><p>{{a}}</p></details>{{/policies}}
       </div>
     </div>
-  </section>
+  </section><!--/s:visit-->
 
-  <section class="cta-band">
+  <!--s:band--><section class="cta-band">
     <div class="wrap">
       <h2>{{#closingLine}}{{closingLine}}{{/closingLine}}{{^closingLine}}Ready when you are.{{/closingLine}}</h2>
       <a class="btn" href="{{business.bookingUrl}}">{{icon:calendar}} Book online</a>
     </div>
-  </section>
+  </section><!--/s:band-->
 </main>
 
 <footer>

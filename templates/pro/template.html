@@ -68,6 +68,7 @@ section{padding-block:clamp(4rem,8vw,6.5rem)}
 .steps h3{font-size:1.2rem} .steps p{color:var(--muted);margin-top:.35rem}
 @media (max-width:760px){.steps{grid-template-columns:1fr}}
 
+:is(#services,#team,.steps-sec,.faq-sec) + :is(#team,.steps-sec,.faq-sec){padding-top:0}
 .faq{display:grid;gap:.6rem;margin-top:2.5rem;max-width:48rem}
 .faq details{border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.3rem;background:var(--card)}
 .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;font-weight:600;font-size:1.05rem}
@@ -98,6 +99,88 @@ section{padding-block:clamp(4rem,8vw,6.5rem)}
 .face-back a,.face-back span{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-size:.98rem}
 .face-back .i{color:var(--accent-text)}
 .face-back .save{margin-top:.5rem;font-weight:700;color:var(--accent-text)}
+
+/* Section variants (site "look"), so firms differ below the hero.
+   creds: bar (default) | band | big
+   services: grid (default) | rows | cards | split
+   fees: list (default) | table | cards | band
+   team: grid (default) | large | list
+   process: line (default) | timeline | big | cards
+   faq: stack (default) | grid | split
+   contact: card (default) | invert | centre
+   heads: left (default) | centre | rule */
+.look-creds-band .creds{background:var(--accent);color:var(--on-accent);border:0}
+.look-creds-band .creds .i{color:inherit}
+.look-creds-band .creds ul{justify-content:space-between;padding-block:1.6rem;font-size:1.08rem}
+.look-creds-big .creds ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:0;padding:0}
+.look-creds-big .creds li{flex-direction:column;align-items:flex-start;gap:1rem;padding:2rem 1.5rem;border-left:1px solid var(--line);font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:1.4rem;line-height:1.2}
+.look-creds-big .creds .i{width:2rem;height:2rem}
+@media (max-width:760px){.look-creds-big .creds li{border-left:0;border-top:1px solid var(--line);padding-inline:0}}
+
+.look-services-rows .svc{grid-template-columns:1fr;gap:0;background:none;border:0;border-radius:0;overflow:visible}
+.look-services-rows .svc li{background:none;border-top:1px solid var(--ink);padding:1.75rem 0;grid-template-columns:3rem 1fr auto;gap:.4rem 1.5rem;align-items:baseline}
+.look-services-rows .svc .i{grid-row:span 2}
+.look-services-rows .svc h3{font-size:clamp(1.5rem,3vw,2.3rem)}
+.look-services-rows .svc p{grid-column:2;max-width:52ch}
+.look-services-rows .svc .fee{grid-column:3;grid-row:1;font-size:1.05rem}
+@media (max-width:760px){.look-services-rows .svc li{grid-template-columns:2.2rem 1fr}.look-services-rows .svc .fee{grid-column:2;grid-row:auto}}
+
+.look-services-cards .svc{grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;background:none;border:0;overflow:visible}
+.look-services-cards .svc li{grid-template-columns:1fr;border-radius:var(--r);border:1px solid var(--line);padding:2rem;gap:.6rem}
+.look-services-cards .svc .i{grid-row:auto;box-sizing:border-box;width:3.2rem;height:3.2rem;padding:.75rem;border-radius:50%;background:var(--accent);color:var(--on-accent);margin:0 0 .75rem}
+.look-services-cards .svc .fee{margin-top:auto;padding-top:1rem;font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.5rem}
+
+.look-services-split #services .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:0 clamp(2rem,6vw,5rem);align-items:start}
+.look-services-split #services .h2,.look-services-split #services .lede{grid-column:1}
+.look-services-split #services .svc{grid-column:2;grid-row:1/span 3;margin-top:0;grid-template-columns:1fr}
+@media (max-width:860px){.look-services-split #services .wrap{grid-template-columns:1fr}.look-services-split #services .svc{grid-column:1;grid-row:auto;margin-top:2rem}}
+
+.look-fees-table .fees{background:var(--bg)}
+.look-fees-table .fees .wrap{grid-template-columns:1fr}
+.look-fees-table .fee-list{gap:0;border-top:2px solid var(--ink)}
+.look-fees-table .fee-list li{background:none;border-radius:0;border-bottom:1px solid var(--line);padding:1.25rem 0;grid-template-columns:1fr auto;align-items:baseline}
+.look-fees-table .fee-list b{font-size:1.15rem}
+.look-fees-table .fee-list .amt{font-size:1.7rem}
+.look-fees-table .fee-list small{grid-column:1}
+
+.look-fees-cards .fees .wrap{grid-template-columns:1fr}
+.look-fees-cards .fee-list{grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1rem}
+.look-fees-cards .fee-list li{grid-template-columns:1fr;align-content:start;padding:1.75rem;gap:.5rem}
+.look-fees-cards .fee-list .amt{order:-1;font-size:2.4rem;line-height:1;letter-spacing:-.03em}
+
+.look-fees-band .fees{background:var(--accent-2);color:var(--on-accent-2);--card:color-mix(in srgb,var(--on-accent-2) 10%,var(--accent-2));--muted:color-mix(in srgb,var(--on-accent-2) 72%,var(--accent-2))}
+
+.look-team-large .team-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:2rem}
+.look-team-large .member{grid-template-columns:1fr}
+.look-team-large .member h3{font-size:1.6rem}
+.look-team-list .team-grid{grid-template-columns:1fr;gap:0}
+.look-team-list .member{grid-template-columns:11rem 1fr;gap:2.5rem;border-top:1px solid var(--line);padding-block:2rem}
+.look-team-list .member h3{font-size:clamp(1.6rem,3vw,2.4rem)}
+.look-team-list .member p{max-width:56ch;font-size:1.05rem}
+@media (max-width:600px){.look-team-list .member{grid-template-columns:6rem 1fr;gap:1.25rem}}
+
+.look-process-timeline .steps{grid-template-columns:1fr;gap:0;max-width:44rem;margin-left:.8rem;border-left:2px solid var(--line)}
+.look-process-timeline .steps li{position:relative;border-top:0;padding:0 0 2.25rem 2.25rem}
+.look-process-timeline .steps li::before{content:counter(s);position:absolute;left:-1rem;top:-.1rem;display:grid;place-items:center;width:2rem;height:2rem;margin:0;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:.85rem}
+.look-process-big .steps li{border-top:0;padding-top:0}
+.look-process-big .steps li::before{font-size:clamp(4rem,8vw,6.5rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--accent-text);margin-bottom:.25rem}
+.look-process-cards .steps{gap:1rem}
+.look-process-cards .steps li{border:0;border-radius:var(--r);background:var(--surface);padding:2rem}
+
+.look-faq-grid .faq{max-width:none;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));align-items:start;gap:1rem}
+.look-faq-split .faq-sec .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:2rem clamp(2rem,6vw,5rem);align-items:start}
+.look-faq-split .faq{margin-top:0;max-width:none;gap:0;border-top:2px solid var(--ink)}
+.look-faq-split .faq details{border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:1.25rem 0}
+@media (max-width:860px){.look-faq-split .faq-sec .wrap{grid-template-columns:1fr}}
+
+.look-contact-invert .contact{background:var(--ink);color:var(--bg);--muted:color-mix(in srgb,var(--bg) 70%,var(--ink));--line:color-mix(in srgb,var(--bg) 28%,var(--ink))}
+.look-contact-centre .contact .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}
+.look-contact-centre .contact .lede{margin-inline:auto}
+.look-contact-centre .contact .ctas{justify-content:center}
+.look-contact-centre .card-stage{width:100%}
+
+.look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede{text-align:center;margin-inline:auto}
+.look-heads-rule section > .wrap > .h2{border-top:2px solid currentColor;padding-top:1.25rem}
 
 footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.9rem}
 footer .wrap{display:grid;gap:.5rem}
@@ -135,9 +218,9 @@ footer .wrap{display:grid;gap:.5rem}
     </div>
   </div>
 
-  {{#credentials}}{{#@first}}<div class="creds"><ul class="wrap">{{/@first}}<li>{{icon:@icon}} {{text}}</li>{{#@last}}</ul></div>{{/@last}}{{/credentials}}
+  <!--s:creds-->{{#credentials}}{{#@first}}<div class="creds"><ul class="wrap">{{/@first}}<li>{{icon:@icon}} {{text}}</li>{{#@last}}</ul></div>{{/@last}}{{/credentials}}<!--/s:creds-->
 
-  <section id="services">
+  <!--s:services--><section id="services">
     <div class="wrap">
       <h2 class="h2">{{#servicesTitle}}{{servicesTitle}}{{/servicesTitle}}{{^servicesTitle}}How we can help{{/servicesTitle}}</h2>
       {{#servicesIntro}}<p class="lede">{{servicesIntro}}</p>{{/servicesIntro}}
@@ -145,28 +228,28 @@ footer .wrap{display:grid;gap:.5rem}
         {{#services}}<li>{{icon:@icon}}<h3>{{name}}</h3><p>{{desc}}</p>{{#fee}}<span class="fee num">{{fee}}</span>{{/fee}}</li>{{/services}}
       </ul>
     </div>
-  </section>
+  </section><!--/s:services-->
 
-  {{#fees}}{{#@first}}<section class="fees" id="fees"><div class="wrap"><div><h2 class="h2">Clear fees, agreed upfront</h2>{{#feesIntro}}<p class="lede">{{feesIntro}}</p>{{/feesIntro}}</div><ul class="fee-list">{{/@first}}
+  <!--s:fees-->{{#fees}}{{#@first}}<section class="fees" id="fees"><div class="wrap"><div><h2 class="h2">Clear fees, agreed upfront</h2>{{#feesIntro}}<p class="lede">{{feesIntro}}</p>{{/feesIntro}}</div><ul class="fee-list">{{/@first}}
     <li><b>{{item}}</b><span class="amt num">{{price}}</span>{{#note}}<small>{{note}}</small>{{/note}}</li>
-  {{#@last}}</ul></div></section>{{/@last}}{{/fees}}
+  {{#@last}}</ul></div></section>{{/@last}}{{/fees}}<!--/s:fees-->
 
-  {{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">Who you'll work with</h2><div class="team-grid">{{/@first}}
+  <!--s:team-->{{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">Who you'll work with</h2><div class="team-grid">{{/@first}}
     <figure class="member" style="margin:0">
       {{#photo}}<div class="ph"><img src="{{photo}}" alt="{{name}}" width="560" height="700" loading="lazy"></div>{{/photo}}
       <figcaption><h3>{{name}}</h3><div class="role">{{role}}</div>{{#bio}}<p>{{bio}}</p>{{/bio}}</figcaption>
     </figure>
-  {{#@last}}</div></div></section>{{/@last}}{{/team}}
+  {{#@last}}</div></div></section>{{/@last}}{{/team}}<!--/s:team-->
 
-  {{#process}}{{#@first}}<section style="padding-top:0"><div class="wrap"><h2 class="h2">What happens next</h2><ol class="steps">{{/@first}}
+  <!--s:process-->{{#process}}{{#@first}}<section class="steps-sec"><div class="wrap"><h2 class="h2">What happens next</h2><ol class="steps">{{/@first}}
     <li><h3>{{title}}</h3><p>{{desc}}</p></li>
-  {{#@last}}</ol></div></section>{{/@last}}{{/process}}
+  {{#@last}}</ol></div></section>{{/@last}}{{/process}}<!--/s:process-->
 
-  {{#faq}}{{#@first}}<section style="padding-top:0"><div class="wrap"><h2 class="h2">Common questions</h2><div class="faq">{{/@first}}
+  <!--s:faq-->{{#faq}}{{#@first}}<section class="faq-sec"><div class="wrap"><h2 class="h2">Common questions</h2><div class="faq">{{/@first}}
     <details{{#@first}} open{{/@first}}><summary>{{q}}</summary><p>{{a}}</p></details>
-  {{#@last}}</div></div></section>{{/@last}}{{/faq}}
+  {{#@last}}</div></div></section>{{/@last}}{{/faq}}<!--/s:faq-->
 
-  <section class="contact" id="contact">
+  <!--s:contact--><section class="contact" id="contact">
     <div class="wrap">
       <div>
         <h2 class="h2">{{#contactTitle}}{{contactTitle}}{{/contactTitle}}{{^contactTitle}}Talk to us{{/contactTitle}}</h2>
@@ -195,7 +278,7 @@ footer .wrap{display:grid;gap:.5rem}
         </div>
       </div>
     </div>
-  </section>
+  </section><!--/s:contact-->
 </main>
 
 <footer>

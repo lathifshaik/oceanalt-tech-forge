@@ -147,7 +147,22 @@
   "showcase": [
     {
       "theme": "basalt",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "menu",
+        "about": "quote",
+        "visit": "wide",
+        "band": "giant",
+        "heads": "centre"
+      },
+      "sections": [
+        "about",
+        "gift",
+        "treatments",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

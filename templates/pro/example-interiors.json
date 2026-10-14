@@ -118,7 +118,25 @@
   "showcase": [
     {
       "theme": "haven",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "creds": "big",
+        "services": "split",
+        "fees": "table",
+        "process": "big",
+        "faq": "split",
+        "contact": "centre",
+        "heads": "rule"
+      },
+      "sections": [
+        "creds",
+        "process",
+        "services",
+        "fees",
+        "team",
+        "faq",
+        "contact"
+      ]
     }
   ]
 }

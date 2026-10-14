@@ -131,5 +131,55 @@
     }
   ],
   "contactTitle": "Talk to a solicitor",
-  "contactIntro": "Book a free 15-minute call, or save our details and call when it suits you."
+  "contactIntro": "Book a free 15-minute call, or save our details and call when it suits you.",
+  "showcase": [
+    {
+      "theme": "ink",
+      "hero": "split"
+    },
+    {
+      "theme": "calm",
+      "hero": "full",
+      "look": {
+        "creds": "big",
+        "services": "rows",
+        "fees": "table",
+        "process": "timeline",
+        "faq": "split",
+        "contact": "invert",
+        "heads": "rule"
+      },
+      "sections": [
+        "creds",
+        "process",
+        "services",
+        "fees",
+        "team",
+        "faq",
+        "contact"
+      ]
+    },
+    {
+      "theme": "night",
+      "hero": "split",
+      "look": {
+        "creds": "band",
+        "services": "cards",
+        "fees": "cards",
+        "process": "big",
+        "faq": "grid",
+        "contact": "centre",
+        "heads": "centre"
+      },
+      "sections": [
+        "services",
+        "creds",
+        "process",
+        "fees",
+        "team",
+        "faq",
+        "contact"
+      ]
+    }
+  ]
 }

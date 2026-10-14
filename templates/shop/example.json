@@ -143,5 +143,47 @@
       "name": "Ruth A.",
       "source": "Google review"
     }
+  ],
+  "showcase": [
+    {
+      "theme": "sun",
+      "hero": "split"
+    },
+    {
+      "theme": "forest",
+      "hero": "full",
+      "look": {
+        "facts": "band",
+        "products": "feature",
+        "story": "banner",
+        "reviews": "line",
+        "visit": "invert",
+        "heads": "rule"
+      },
+      "sections": [
+        "products",
+        "facts",
+        "reviews",
+        "story",
+        "visit"
+      ]
+    },
+    {
+      "theme": "ink",
+      "hero": "split",
+      "look": {
+        "products": "list",
+        "story": "quote",
+        "reviews": "feature",
+        "heads": "centre"
+      },
+      "sections": [
+        "story",
+        "products",
+        "facts",
+        "reviews",
+        "visit"
+      ]
+    }
   ]
 }

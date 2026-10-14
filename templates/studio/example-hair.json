@@ -142,11 +142,32 @@
   "showcase": [
     {
       "theme": "blush",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "menu",
+        "about": "quote",
+        "band": "giant",
+        "heads": "centre"
+      }
     },
     {
       "theme": "ember",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "numbered",
+        "about": "banner",
+        "visit": "invert",
+        "band": "line",
+        "heads": "rule"
+      },
+      "sections": [
+        "treatments",
+        "about",
+        "gift",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

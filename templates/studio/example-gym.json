@@ -145,11 +145,40 @@
   "showcase": [
     {
       "theme": "iron",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "numbered",
+        "about": "banner",
+        "visit": "invert",
+        "band": "giant",
+        "heads": "rule"
+      },
+      "sections": [
+        "treatments",
+        "about",
+        "gift",
+        "team",
+        "visit",
+        "band"
+      ]
     },
     {
       "theme": "checker",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "tiles",
+        "about": "quote",
+        "visit": "wide",
+        "band": "line"
+      },
+      "sections": [
+        "about",
+        "treatments",
+        "team",
+        "visit",
+        "gift",
+        "band"
+      ]
     }
   ]
 }

@@ -143,11 +143,32 @@
   "showcase": [
     {
       "theme": "pomade",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "menu",
+        "visit": "invert",
+        "band": "line",
+        "heads": "rule"
+      },
+      "sections": [
+        "treatments",
+        "gift",
+        "about",
+        "team",
+        "visit",
+        "band"
+      ]
     },
     {
       "theme": "umami",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "tiles",
+        "about": "banner",
+        "visit": "wide",
+        "band": "giant",
+        "heads": "centre"
+      }
     }
   ]
 }

@@ -97,11 +97,41 @@
   "showcase": [
     {
       "theme": "fresh",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "trust": "plain",
+        "services": "cards",
+        "process": "big",
+        "areas": "band",
+        "quote": "stack",
+        "heads": "centre"
+      },
+      "sections": [
+        "services",
+        "trust",
+        "reviews",
+        "process",
+        "areas",
+        "quote"
+      ]
     },
     {
       "theme": "calm",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "trust": "band",
+        "services": "list",
+        "areas": "columns",
+        "quote": "invert"
+      },
+      "sections": [
+        "services",
+        "areas",
+        "process",
+        "trust",
+        "reviews",
+        "quote"
+      ]
     }
   ]
 }

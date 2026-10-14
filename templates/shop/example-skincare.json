@@ -130,11 +130,37 @@
   "showcase": [
     {
       "theme": "sage",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "products": "row",
+        "story": "banner",
+        "heads": "centre"
+      },
+      "sections": [
+        "story",
+        "products",
+        "facts",
+        "reviews",
+        "visit"
+      ]
     },
     {
       "theme": "blush",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "facts": "band",
+        "products": "list",
+        "story": "quote",
+        "visit": "invert",
+        "heads": "rule"
+      },
+      "sections": [
+        "facts",
+        "products",
+        "reviews",
+        "story",
+        "visit"
+      ]
     }
   ]
 }

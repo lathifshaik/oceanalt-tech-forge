@@ -43,7 +43,7 @@ for (const { t, example } of examples) {
     const path = i === 0 ? site.slug : `${site.slug}-${v.theme}`;
     // A showcase entry can also change the page itself, e.g. its own "sections" order or "dishStyle".
     const { theme, hero, ...page } = v;
-    const key = [t.name, theme, hero, (page.sections || site.sections || []).join(">"), page.dishStyle || site.dishStyle || ""].join("|");
+    const key = [t.name, theme, hero, (page.sections || site.sections || []).join(">"), page.dishStyle || site.dishStyle || "", JSON.stringify(page.look || site.look || {})].join("|");
     if (seen.has(key)) throw new Error(`${example}: the ${theme}/${hero} design is the same as ${seen.get(key)}. Change the theme, hero or sections.`);
     seen.set(key, `${site.slug} (${theme}/${hero})`);
     const { html } = buildSite(

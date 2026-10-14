@@ -138,15 +138,55 @@
   "showcase": [
     {
       "theme": "bloom",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "facts": "band",
+        "products": "row",
+        "story": "quote",
+        "reviews": "line",
+        "heads": "centre"
+      },
+      "sections": [
+        "facts",
+        "products",
+        "reviews",
+        "story",
+        "visit"
+      ]
     },
     {
       "theme": "autumn",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "products": "feature",
+        "story": "banner",
+        "reviews": "feature",
+        "visit": "invert"
+      },
+      "sections": [
+        "story",
+        "products",
+        "facts",
+        "reviews",
+        "visit"
+      ]
     },
     {
       "theme": "riso",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "facts": "band",
+        "products": "list",
+        "visit": "invert",
+        "heads": "rule"
+      },
+      "sections": [
+        "products",
+        "facts",
+        "reviews",
+        "story",
+        "visit"
+      ]
     }
   ]
 }

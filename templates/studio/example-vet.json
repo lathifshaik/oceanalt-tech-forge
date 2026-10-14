@@ -144,11 +144,39 @@
   "showcase": [
     {
       "theme": "paws",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "tiles",
+        "about": "banner",
+        "band": "giant",
+        "heads": "centre"
+      },
+      "sections": [
+        "about",
+        "gift",
+        "treatments",
+        "team",
+        "visit",
+        "band"
+      ]
     },
     {
       "theme": "coast",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "numbered",
+        "about": "quote",
+        "visit": "wide",
+        "band": "line"
+      },
+      "sections": [
+        "treatments",
+        "gift",
+        "about",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

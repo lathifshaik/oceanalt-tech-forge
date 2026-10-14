@@ -103,11 +103,42 @@
   "showcase": [
     {
       "theme": "garage",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "trust": "band",
+        "services": "list",
+        "process": "big",
+        "areas": "columns",
+        "quote": "invert",
+        "heads": "rule"
+      },
+      "sections": [
+        "trust",
+        "process",
+        "services",
+        "reviews",
+        "areas",
+        "quote"
+      ]
     },
     {
       "theme": "night",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "trust": "plain",
+        "services": "cards",
+        "process": "timeline",
+        "areas": "band",
+        "quote": "stack"
+      },
+      "sections": [
+        "services",
+        "areas",
+        "process",
+        "trust",
+        "reviews",
+        "quote"
+      ]
     }
   ]
 }

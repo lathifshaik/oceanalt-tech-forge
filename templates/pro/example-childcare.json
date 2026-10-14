@@ -116,11 +116,44 @@
   "showcase": [
     {
       "theme": "crayon",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "creds": "band",
+        "services": "cards",
+        "fees": "cards",
+        "process": "cards",
+        "faq": "grid",
+        "heads": "centre"
+      },
+      "sections": [
+        "services",
+        "creds",
+        "process",
+        "fees",
+        "team",
+        "faq",
+        "contact"
+      ]
     },
     {
       "theme": "bloom",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "creds": "big",
+        "services": "rows",
+        "process": "timeline",
+        "faq": "split",
+        "contact": "invert"
+      },
+      "sections": [
+        "creds",
+        "process",
+        "services",
+        "fees",
+        "team",
+        "faq",
+        "contact"
+      ]
     }
   ]
 }

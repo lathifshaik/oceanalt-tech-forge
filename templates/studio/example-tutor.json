@@ -140,11 +140,32 @@
   "showcase": [
     {
       "theme": "chalk",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "numbered",
+        "about": "quote",
+        "visit": "wide",
+        "band": "line"
+      }
     },
     {
       "theme": "riso",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "tiles",
+        "about": "banner",
+        "visit": "invert",
+        "band": "giant",
+        "heads": "rule"
+      },
+      "sections": [
+        "treatments",
+        "about",
+        "gift",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

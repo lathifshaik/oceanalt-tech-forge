@@ -255,6 +255,13 @@ function arrange(html, order, sourceLabel) {
   return html.replace(re, () => (first ? ((first = false), order.map((n) => blocks.get(n)).join("\n")) : ""));
 }
 
+// Section variants: site.look = { treatments: "menu", team: "strip", ... }
+// becomes body classes (look-treatments-menu), and each layout styles its own
+// variants, so two sites in one layout differ below the hero, not just in it.
+function lookClasses(look = {}) {
+  return Object.entries(look).map(([k, v]) => ` look-${k}-${v}`.replace(/[^\w -]/g, "")).join("");
+}
+
 // Optional hero touches that work in any layout: "eyebrow" is a small spaced
 // line above the headline ("LIGHT / TIMBER / CALM"), and "accent" is one word or
 // phrase of the headline set apart in the theme's accent style.
@@ -310,7 +317,7 @@ ${seo.image ? `<meta property="og:image" content="${escapeHtml(seo.image)}">` : 
 <style>${BASE_CSS}</style>
 <script type="application/ld+json">${jsonLd(site, url)}</script>
 </head>
-<body class="theme-${design.theme} hero-${design.hero}">
+<body class="theme-${design.theme} hero-${design.hero}${lookClasses(site.look)}">
 <a class="skip" href="#main">Skip to content</a>
 ${body}
 ${themeExtra ? `<style>${themeExtra}</style>` : ""}

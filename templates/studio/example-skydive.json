@@ -144,7 +144,21 @@
   "showcase": [
     {
       "theme": "burst",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "tiles",
+        "about": "banner",
+        "visit": "invert",
+        "band": "giant"
+      },
+      "sections": [
+        "treatments",
+        "gift",
+        "about",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

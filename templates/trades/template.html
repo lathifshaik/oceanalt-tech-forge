@@ -122,6 +122,76 @@ form small{color:var(--muted)}
 .hero-full .btn-line{color:#fff;border-color:rgb(255 255 255 / .45)}
 @media (max-width:900px){.hero-full .licence{margin:1rem 0 0}}
 
+/* Section variants (site "look"), so trades differ below the hero.
+   trust: tiles (default) | band | plain
+   services: bento (default) | list | cards
+   process: dots (default) | big | timeline
+   areas: chips (default) | columns | band
+   reviews: cards (default) | feature | wall
+   quote: split (default) | invert | stack
+   heads: left (default) | centre | rule */
+.look-trust-band .trust{background:var(--accent-2);color:var(--on-accent-2);border:0}
+.look-trust-band .trust small{color:inherit;opacity:.75}
+.look-trust-band .trust .i{background:var(--accent);color:var(--on-accent)}
+.look-trust-plain .trust ul{text-align:center;padding-block:2.5rem}
+.look-trust-plain .trust li{flex-direction:column;align-items:center;font-family:var(--font-display);font-size:1.3rem}
+.look-trust-plain .trust .i{background:none;color:var(--accent-text);padding:0;width:2.2rem;height:2.2rem}
+
+.look-services-list .svc{grid-template-columns:1fr;grid-auto-rows:auto;gap:0}
+.look-services-list .svc li,.look-services-list .svc li:first-child{grid-column:auto;display:grid;grid-template-columns:2.5rem 1fr auto;gap:.3rem 1.25rem;align-items:baseline;background:none;color:var(--ink);border-radius:0;border-top:1px solid var(--line);padding:1.5rem 0}
+.look-services-list .svc li .i{margin:0;grid-row:span 2;color:var(--accent-text)}
+.look-services-list .svc h3{margin:0;font-size:clamp(1.35rem,2.6vw,1.9rem)}
+.look-services-list .svc p,.look-services-list .svc li:first-child p{grid-column:2;color:var(--muted);opacity:1}
+.look-services-list .svc .from,.look-services-list .svc li:first-child .from{grid-column:3;grid-row:1;color:var(--ink)}
+.look-services-list .svc .tile-photo{display:none}
+@media (max-width:560px){.look-services-list .svc li,.look-services-list .svc li:first-child{grid-template-columns:2.2rem 1fr}.look-services-list .svc .from,.look-services-list .svc li:first-child .from{grid-column:2;grid-row:auto}}
+.look-services-cards .svc{grid-template-columns:repeat(3,minmax(0,1fr))}
+.look-services-cards .svc li,.look-services-cards .svc li:first-child{grid-column:auto;background:var(--bg);color:var(--ink);border:1.5px solid var(--line)}
+.look-services-cards .svc li:first-child p{color:var(--muted);opacity:1}
+.look-services-cards .svc li:first-child .from{color:var(--ink)}
+.look-services-cards .svc li .i{width:2.8rem;height:2.8rem;padding:.6rem;box-sizing:border-box;border-radius:50%;background:var(--accent);color:var(--on-accent)}
+.look-services-cards .svc .tile-photo{grid-column:1/-1;grid-row:1;aspect-ratio:21/8;border:0}
+@media (max-width:900px){.look-services-cards .svc{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.look-services-cards .svc{grid-template-columns:1fr}}
+
+.look-process-big .how{background:var(--bg)}
+.look-process-big .steps li::before{width:auto;height:auto;background:none;border-radius:0;place-items:start;font-family:var(--font-display);font-size:clamp(4rem,8vw,6rem);line-height:1;color:var(--accent-text)}
+.look-process-big .steps li{border-top:2px solid var(--ink);padding-top:1rem}
+.look-process-timeline .steps{grid-template-columns:1fr;gap:0;max-width:44rem;margin-left:1.3rem;border-left:2px solid var(--line)}
+.look-process-timeline .steps li{position:relative;padding:0 0 2.25rem 2.5rem}
+.look-process-timeline .steps li::before{position:absolute;left:-1.35rem;top:-.25rem;margin:0}
+
+.look-areas-columns .area .wrap{grid-template-columns:1fr}
+.look-areas-columns .chips{display:block;columns:3 12rem;column-gap:2rem}
+.look-areas-columns .chips li{border:0;border-radius:0;border-bottom:1px solid var(--line);padding:.8rem 0;font-family:var(--font-display);font-size:1.25rem;break-inside:avoid}
+.look-areas-band .area{background:var(--accent);color:var(--on-accent)}
+.look-areas-band .area .lede{color:inherit;opacity:.85}
+.look-areas-band .chips li{border-color:currentColor;font-size:1.05rem}
+
+.look-reviews-feature .rv{grid-template-columns:repeat(2,minmax(0,1fr))}
+.look-reviews-feature .rv figure:first-child{grid-column:1/-1;background:none;padding:1rem 0 2rem;border-bottom:1px solid var(--line);border-radius:0}
+.look-reviews-feature .rv figure:first-child q{font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.2}
+@media (max-width:900px){.look-reviews-feature .rv{grid-template-columns:1fr}}
+.look-reviews-wall .reviews{background:var(--accent-2);color:var(--on-accent-2)}
+.look-reviews-wall .rv figure{background:color-mix(in srgb,var(--on-accent-2) 8%,var(--accent-2));color:inherit}
+.look-reviews-wall .rv figcaption{color:inherit;opacity:.7}
+.look-reviews-wall .rv figure:nth-child(2){translate:0 2rem}
+@media (max-width:900px){.look-reviews-wall .rv figure:nth-child(2){translate:none}}
+
+.look-quote-invert .quote{background:var(--accent-2);color:var(--on-accent-2)}
+.look-quote-invert .quote .lede{color:inherit;opacity:.8}
+.look-quote-invert .direct .i{background:var(--accent);color:var(--on-accent)}
+.look-quote-invert .direct span{color:inherit;opacity:.8}
+.look-quote-invert form{background:var(--bg);color:var(--ink)}
+.look-quote-stack .quote .wrap{grid-template-columns:1fr;max-width:44rem;text-align:center}
+.look-quote-stack .direct{justify-content:center;grid-auto-flow:column;grid-auto-columns:max-content;flex-wrap:wrap}
+.look-quote-stack .lede{margin-inline:auto}
+.look-quote-stack form{text-align:left}
+@media (max-width:760px){.look-quote-stack .direct{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:minmax(0,1fr);justify-content:stretch;text-align:left}}
+
+.look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede,.look-heads-centre .rv-head{text-align:center;margin-inline:auto;justify-content:center}
+.look-heads-rule section .h2{border-top:2px solid currentColor;padding-top:1.25rem}
+
 footer{border-top:1px solid var(--line);padding-block:2.5rem 6rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-between}
 @media (min-width:761px){footer{padding-bottom:2.5rem}}
@@ -166,11 +236,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
     </div>
   </div>
 
-  {{#credentials}}{{#@first}}<div class="trust"><ul class="wrap">{{/@first}}
+  <!--s:trust-->{{#credentials}}{{#@first}}<div class="trust"><ul class="wrap">{{/@first}}
     <li>{{icon:@icon}}<div>{{title}}{{#detail}}<small>{{detail}}</small>{{/detail}}</div></li>
-  {{#@last}}</ul></div>{{/@last}}{{/credentials}}
+  {{#@last}}</ul></div>{{/@last}}{{/credentials}}<!--/s:trust-->
 
-  <section id="services">
+  <!--s:services--><section id="services">
     <div class="wrap">
       <h2 class="h2">What we do</h2>
       {{#servicesIntro}}<p class="lede">{{servicesIntro}}</p>{{/servicesIntro}}
@@ -180,13 +250,13 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
         {{#servicesPhoto}}<li class="tile-photo"><img src="{{servicesPhoto}}" alt="{{servicesPhotoAlt}}" width="900" height="1100" loading="lazy"></li>{{/servicesPhoto}}
       </ul>
     </div>
-  </section>
+  </section><!--/s:services-->
 
-  {{#process}}{{#@first}}<section class="how"><div class="wrap"><h2 class="h2">How a job works</h2><ol class="steps">{{/@first}}
+  <!--s:process-->{{#process}}{{#@first}}<section class="how"><div class="wrap"><h2 class="h2">How a job works</h2><ol class="steps">{{/@first}}
     <li><h3>{{title}}</h3><p>{{desc}}</p></li>
-  {{#@last}}</ol></div></section>{{/@last}}{{/process}}
+  {{#@last}}</ol></div></section>{{/@last}}{{/process}}<!--/s:process-->
 
-  <section class="area" id="areas">
+  <!--s:areas--><section class="area" id="areas">
     <div class="wrap">
       <div>
         <h2 class="h2">Where we work</h2>
@@ -194,13 +264,13 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
       </div>
       <ul class="chips">{{#areas}}<li>{{.}}</li>{{/areas}}</ul>
     </div>
-  </section>
+  </section><!--/s:areas-->
 
-  {{#reviews}}{{#@first}}<section class="reviews" id="reviews"><div class="wrap"><div class="rv-head"><h2 class="h2">What customers say</h2>{{#business.rating}}<p class="rating">{{icon:star}} {{business.rating}}</p>{{/business.rating}}</div><div class="rv">{{/@first}}
+  <!--s:reviews-->{{#reviews}}{{#@first}}<section class="reviews" id="reviews"><div class="wrap"><div class="rv-head"><h2 class="h2">What customers say</h2>{{#business.rating}}<p class="rating">{{icon:star}} {{business.rating}}</p>{{/business.rating}}</div><div class="rv">{{/@first}}
     <figure><div class="stars" role="img" aria-label="5 stars">{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}</div><q>{{quote}}</q><figcaption>{{name}}, {{suburb}}</figcaption></figure>
-  {{#@last}}</div></div></section>{{/@last}}{{/reviews}}
+  {{#@last}}</div></div></section>{{/@last}}{{/reviews}}<!--/s:reviews-->
 
-  <section class="quote" id="quote">
+  <!--s:quote--><section class="quote" id="quote">
     <div class="wrap">
       <div>
         <h2 class="h2">Get a free quote</h2>
@@ -224,7 +294,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
       </form>
       {{/contact.formAction}}
     </div>
-  </section>
+  </section><!--/s:quote-->
 </main>
 
 <footer>

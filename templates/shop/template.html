@@ -95,6 +95,59 @@ section{padding-block:clamp(4rem,8vw,6.5rem)}
 .hours li.is-today{background:var(--card);font-weight:600}
 @media (max-width:760px){.visit .wrap{grid-template-columns:1fr}}
 
+/* Section variants (site "look"), so shops differ below the hero.
+   facts: bar (default) | band
+   products: grid (default) | feature | row | list
+   story: split (default) | banner | quote
+   reviews: cards (default) | feature | line
+   visit: split (default) | invert
+   heads: left (default) | centre | rule */
+.look-facts-band .facts{background:var(--accent-2);color:var(--on-accent-2);border:0}
+.look-facts-band .facts small{color:inherit;opacity:.75}
+.look-facts-band .facts .i{color:var(--accent)}
+
+.look-products-feature .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.look-products-feature .product:first-child{grid-column:span 2;grid-row:span 2}
+.look-products-feature .product:first-child .ph{aspect-ratio:auto;flex:1;min-height:20rem}
+.look-products-feature .product:first-child p{flex:0}
+.look-products-feature .product:first-child h3{font-size:1.6rem}
+@media (max-width:760px){.look-products-feature .grid{grid-template-columns:1fr}.look-products-feature .product:first-child{grid-column:auto;grid-row:auto}}
+.look-products-row .grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(16rem,19rem);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem}
+.look-products-row .product{scroll-snap-align:start}
+.look-products-row .product .ph{aspect-ratio:3/4;border-radius:999px 999px var(--r-img) var(--r-img)}
+.look-products-list .grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,30rem),1fr));gap:0 3rem}
+.look-products-list .product{display:grid;grid-template-columns:8.5rem 1fr;grid-template-rows:auto 1fr auto;gap:0 1.5rem;padding-block:1.5rem;border-top:1px solid var(--line)}
+.look-products-list .product .ph{grid-row:1/-1;aspect-ratio:1}
+.look-products-list .product .row{margin-top:0}
+.look-products-list .product .btn{width:auto;justify-self:start;padding:.6rem 1.1rem}
+
+.look-story-banner .story{position:relative;isolation:isolate;background:none;color:#fff;padding-block:clamp(7rem,15vw,12rem)}
+.look-story-banner .story .wrap{display:block}
+.look-story-banner .story .frame{position:absolute;inset:0;z-index:-1;border-radius:0;aspect-ratio:auto}
+.look-story-banner .story .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(0 0 0 / .7),rgb(0 0 0 / .2))}
+.look-story-banner .story .body{color:rgb(255 255 255 / .88)}
+.look-story-quote .story .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}
+.look-story-quote .story .frame{width:10rem;aspect-ratio:1;border-radius:50%}
+.look-story-quote .story .h2{font-family:var(--font-body);font-size:.85rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-text)}
+.look-story-quote .story .body{margin-inline:auto;font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.25;color:var(--ink);max-width:30ch}
+
+.look-reviews-feature .rv{grid-template-columns:repeat(2,minmax(0,1fr))}
+.look-reviews-feature .rv figure:first-child{grid-column:1/-1;background:var(--accent);color:var(--on-accent);border:0;padding:clamp(1.75rem,4vw,3rem)}
+.look-reviews-feature .rv figure:first-child q{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.3rem);line-height:1.2}
+.look-reviews-feature .rv figure:first-child .stars,.look-reviews-feature .rv figure:first-child figcaption{color:inherit}
+@media (max-width:860px){.look-reviews-feature .rv{grid-template-columns:1fr}}
+.look-reviews-line .rv{gap:0}
+.look-reviews-line .rv figure{background:none;border:0;border-radius:0;border-left:1px solid var(--line);padding:0 1.75rem}
+.look-reviews-line .rv figure:first-child{border-left:0;padding-left:0}
+.look-reviews-line .rv q{font-family:var(--font-display);font-size:1.3rem;line-height:1.3}
+@media (max-width:860px){.look-reviews-line .rv figure{border-left:0;padding:1.5rem 0;border-top:1px solid var(--line)}}
+
+.look-visit-invert .visit{background:var(--ink);color:var(--bg);border:0;--muted:color-mix(in srgb,var(--bg) 70%,var(--ink));--surface:color-mix(in srgb,var(--bg) 8%,var(--ink));--card:color-mix(in srgb,var(--bg) 16%,var(--ink));--accent-text:color-mix(in srgb,var(--accent) 60%,var(--bg))}
+.look-visit-invert .addr{font-size:clamp(1.8rem,3.4vw,2.8rem)}
+
+.look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede{text-align:center;margin-inline:auto}
+.look-heads-rule section > .wrap > .h2{border-top:2px solid currentColor;padding-top:1.25rem}
+
 footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between}
 footer a{text-decoration:none} footer a:hover{color:var(--ink)}
@@ -145,11 +198,11 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
     </div>
   </div>
 
-  {{#delivery.facts}}{{#@first}}<div class="facts" id="delivery"><ul class="wrap">{{/@first}}
+  <!--s:facts-->{{#delivery.facts}}{{#@first}}<div class="facts" id="delivery"><ul class="wrap">{{/@first}}
     <li>{{icon:@icon}}<div>{{title}}{{#detail}}<small>{{detail}}</small>{{/detail}}</div></li>
-  {{#@last}}</ul></div>{{/@last}}{{/delivery.facts}}
+  {{#@last}}</ul></div>{{/@last}}{{/delivery.facts}}<!--/s:facts-->
 
-  <section id="shop">
+  <!--s:products--><section id="shop">
     <div class="wrap">
       <h2 class="h2">{{#shopTitle}}{{shopTitle}}{{/shopTitle}}{{^shopTitle}}Shop{{/shopTitle}}</h2>
       {{#shopIntro}}<p class="lede">{{shopIntro}}</p>{{/shopIntro}}
@@ -166,22 +219,22 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
       </ul>
       {{#shopNote}}<p class="note">{{shopNote}}</p>{{/shopNote}}
     </div>
-  </section>
+  </section><!--/s:products-->
 
-  {{#story}}
+  <!--s:story-->{{#story}}
   <section class="story" id="story">
     <div class="wrap">
       <div class="frame"><img src="{{photo}}" alt="{{photoAlt}}" width="900" height="1125" loading="lazy"></div>
       <div><h2 class="h2">{{title}}</h2><p class="body">{{body}}</p></div>
     </div>
   </section>
-  {{/story}}
+  {{/story}}<!--/s:story-->
 
-  {{#reviews}}{{#@first}}<section><div class="wrap"><h2 class="h2">Kind words</h2><div class="rv">{{/@first}}
+  <!--s:reviews-->{{#reviews}}{{#@first}}<section><div class="wrap"><h2 class="h2">Kind words</h2><div class="rv">{{/@first}}
     <figure><div class="stars" role="img" aria-label="5 stars">{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}</div><q>{{quote}}</q><figcaption>{{name}}, {{source}}</figcaption></figure>
-  {{#@last}}</div></div></section>{{/@last}}{{/reviews}}
+  {{#@last}}</div></div></section>{{/@last}}{{/reviews}}<!--/s:reviews-->
 
-  <section class="visit" id="visit">
+  <!--s:visit--><section class="visit" id="visit">
     <div class="wrap">
       <div>
         <h2 class="h2">{{#business.address}}Visit the shop{{/business.address}}{{^business.address}}Get in touch{{/business.address}}</h2>
@@ -195,7 +248,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
       </div>
       {{#business.hours}}{{#@first}}<ul class="hours num" aria-label="Opening hours">{{/@first}}<li data-day="{{dayIndex}}"><span>{{day}}</span><span>{{#open}}{{open}} to {{close}}{{/open}}{{^open}}Closed{{/open}}</span></li>{{#@last}}</ul>{{/@last}}{{/business.hours}}
     </div>
-  </section>
+  </section><!--/s:visit-->
 </main>
 
 <footer>

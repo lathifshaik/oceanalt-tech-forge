@@ -120,15 +120,62 @@
   "showcase": [
     {
       "theme": "autumn",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "trust": "plain",
+        "services": "list",
+        "process": "timeline",
+        "areas": "columns",
+        "reviews": "feature",
+        "quote": "stack",
+        "heads": "centre"
+      },
+      "sections": [
+        "services",
+        "areas",
+        "process",
+        "trust",
+        "reviews",
+        "quote"
+      ]
     },
     {
       "theme": "halftone",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "trust": "band",
+        "services": "cards",
+        "process": "big",
+        "reviews": "wall",
+        "quote": "invert",
+        "heads": "rule"
+      },
+      "sections": [
+        "trust",
+        "process",
+        "services",
+        "reviews",
+        "areas",
+        "quote"
+      ]
     },
     {
       "theme": "bloom",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "process": "timeline",
+        "areas": "band",
+        "reviews": "feature",
+        "heads": "centre"
+      },
+      "sections": [
+        "services",
+        "trust",
+        "reviews",
+        "process",
+        "areas",
+        "quote"
+      ]
     }
   ]
 }

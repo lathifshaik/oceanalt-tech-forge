@@ -143,11 +143,38 @@
   "showcase": [
     {
       "theme": "sage",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "tiles",
+        "visit": "wide",
+        "heads": "centre"
+      },
+      "sections": [
+        "about",
+        "gift",
+        "treatments",
+        "team",
+        "visit",
+        "band"
+      ]
     },
     {
       "theme": "ember",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "menu",
+        "about": "banner",
+        "visit": "invert",
+        "band": "giant"
+      },
+      "sections": [
+        "treatments",
+        "gift",
+        "about",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

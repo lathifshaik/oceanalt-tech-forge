@@ -116,11 +116,34 @@
   "showcase": [
     {
       "theme": "terrace",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "creds": "band",
+        "services": "rows",
+        "fees": "band",
+        "process": "timeline",
+        "faq": "grid",
+        "contact": "invert"
+      },
+      "sections": [
+        "creds",
+        "services",
+        "team",
+        "faq",
+        "fees",
+        "process",
+        "contact"
+      ]
     },
     {
       "theme": "forest",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "services": "cards",
+        "process": "big",
+        "faq": "split",
+        "heads": "centre"
+      }
     }
   ]
 }

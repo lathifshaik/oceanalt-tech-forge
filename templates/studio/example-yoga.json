@@ -167,15 +167,51 @@
   "showcase": [
     {
       "theme": "sun",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "menu",
+        "about": "quote",
+        "heads": "centre",
+        "team": "circles"
+      }
     },
     {
       "theme": "calm",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "tiles",
+        "visit": "wide",
+        "band": "line",
+        "team": "list"
+      },
+      "sections": [
+        "about",
+        "gift",
+        "treatments",
+        "team",
+        "visit",
+        "band"
+      ]
     },
     {
       "theme": "night",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "numbered",
+        "about": "banner",
+        "visit": "invert",
+        "band": "giant",
+        "heads": "rule",
+        "team": "strip"
+      },
+      "sections": [
+        "treatments",
+        "about",
+        "gift",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

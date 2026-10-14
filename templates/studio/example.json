@@ -160,5 +160,51 @@
       "a": "Two-hour street parking on Oxford Street and free parking behind the building after 5pm."
     }
   ],
-  "closingLine": "Book your first session in under a minute."
+  "closingLine": "Book your first session in under a minute.",
+  "showcase": [
+    {
+      "theme": "calm",
+      "hero": "full"
+    },
+    {
+      "theme": "ink",
+      "hero": "split",
+      "look": {
+        "treatments": "menu",
+        "about": "quote",
+        "visit": "wide",
+        "band": "line",
+        "heads": "rule",
+        "team": "list"
+      },
+      "sections": [
+        "treatments",
+        "about",
+        "gift",
+        "team",
+        "visit",
+        "band"
+      ]
+    },
+    {
+      "theme": "forest",
+      "hero": "full",
+      "look": {
+        "treatments": "tiles",
+        "about": "banner",
+        "visit": "invert",
+        "band": "giant",
+        "heads": "centre",
+        "team": "circles"
+      },
+      "sections": [
+        "treatments",
+        "gift",
+        "about",
+        "team",
+        "visit",
+        "band"
+      ]
+    }
+  ]
 }

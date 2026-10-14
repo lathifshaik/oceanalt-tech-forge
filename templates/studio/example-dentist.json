@@ -143,11 +143,38 @@
   "showcase": [
     {
       "theme": "mint",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "tiles",
+        "about": "quote",
+        "visit": "wide",
+        "heads": "centre"
+      },
+      "sections": [
+        "about",
+        "gift",
+        "treatments",
+        "team",
+        "visit",
+        "band"
+      ]
     },
     {
       "theme": "harbour",
-      "hero": "split"
+      "hero": "split",
+      "look": {
+        "treatments": "menu",
+        "band": "line",
+        "heads": "rule"
+      },
+      "sections": [
+        "about",
+        "treatments",
+        "team",
+        "visit",
+        "gift",
+        "band"
+      ]
     }
   ]
 }

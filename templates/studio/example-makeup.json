@@ -145,7 +145,22 @@
   "showcase": [
     {
       "theme": "nocturne",
-      "hero": "full"
+      "hero": "full",
+      "look": {
+        "treatments": "numbered",
+        "about": "banner",
+        "visit": "invert",
+        "band": "line",
+        "heads": "centre"
+      },
+      "sections": [
+        "treatments",
+        "about",
+        "gift",
+        "team",
+        "visit",
+        "band"
+      ]
     }
   ]
 }

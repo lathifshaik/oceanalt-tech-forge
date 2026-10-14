@@ -151,7 +151,8 @@
         "about": "banner",
         "visit": "invert",
         "band": "giant",
-        "heads": "rule"
+        "heads": "rule",
+        "gift": "band"
       },
       "sections": [
         "treatments",
@@ -169,7 +170,8 @@
         "treatments": "tiles",
         "about": "quote",
         "visit": "wide",
-        "band": "line"
+        "band": "line",
+        "gift": "band"
       },
       "sections": [
         "about",

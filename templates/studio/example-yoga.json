@@ -172,7 +172,8 @@
         "treatments": "menu",
         "about": "quote",
         "heads": "centre",
-        "team": "circles"
+        "team": "circles",
+        "gift": "line"
       }
     },
     {
@@ -202,7 +203,8 @@
         "visit": "invert",
         "band": "giant",
         "heads": "rule",
-        "team": "strip"
+        "team": "strip",
+        "gift": "band"
       },
       "sections": [
         "treatments",

@@ -145,7 +145,8 @@
         "treatments": "numbered",
         "about": "quote",
         "visit": "wide",
-        "band": "line"
+        "band": "line",
+        "gift": "band"
       }
     },
     {
@@ -156,7 +157,8 @@
         "about": "banner",
         "visit": "invert",
         "band": "giant",
-        "heads": "rule"
+        "heads": "rule",
+        "gift": "line"
       },
       "sections": [
         "treatments",

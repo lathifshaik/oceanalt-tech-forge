@@ -151,7 +151,8 @@
         "about": "banner",
         "visit": "invert",
         "band": "line",
-        "heads": "centre"
+        "heads": "centre",
+        "gift": "band"
       },
       "sections": [
         "treatments",

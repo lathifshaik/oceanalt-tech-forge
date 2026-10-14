@@ -165,7 +165,8 @@
         "treatments": "menu",
         "about": "banner",
         "visit": "invert",
-        "band": "giant"
+        "band": "giant",
+        "gift": "line"
       },
       "sections": [
         "treatments",

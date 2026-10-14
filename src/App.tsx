@@ -66,7 +66,7 @@ export const WORK: {
     business: "Tidewater Physio & Pilates, Bulimba",
     owner: { face: "tide" },
     problem: "Bookings came in by phone and text, and gift vouchers lived on paper.",
-    pitch: "Every treatment has a price and a Book button. Gift vouchers can be bought online and flip over to show their terms.",
+    pitch: "Every treatment has a price and a Book button. Gift vouchers can be bought online, with the terms in plain view.",
     designs: [
       { path: "tidewater-physio-pilates", theme: "Calm" },
       { path: "tidewater-physio-pilates-ink", theme: "Ink" },
@@ -109,7 +109,7 @@ export const WORK: {
     business: "Harlow Reid Lawyers, Parramatta",
     owner: { face: "accountant" },
     problem: "People didn't call because they couldn't tell what anything would cost.",
-    pitch: "Fixed fees in plain sight, the team up front, and a business card that flips over to save the firm straight to your phone.",
+    pitch: "Fixed fees in plain sight, the team up front, and one tap to save the firm straight to your phone.",
     designs: [
       { path: "harlow-reid-lawyers", theme: "Ink" },
       { path: "harlow-reid-lawyers-calm", theme: "Calm" },

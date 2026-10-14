@@ -1,7 +1,7 @@
 <style>
 /* Professional. Trust and clarity: split hero with a credentials row, services
-   with fixed fees, a plain fee list, team, how it works, FAQs, and a 3D business
-   card that flips to show contact details and a "Save contact" vCard.
+   with fixed fees, a plain fee list, team, how it works, FAQs, and contact details
+   set large with a "Save contact" vCard.
    Colours, type and shape come from the theme; hero is "split" or "full". */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.35rem;border-radius:var(--r-btn);border:0;font:inherit;font-weight:600;text-decoration:none;white-space:nowrap;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),filter .2s,border-color .2s}
 .btn:active{transform:translateY(1px)}
@@ -83,104 +83,13 @@ section{padding-block:clamp(4rem,8vw,6.5rem)}
 .contact address{font-style:normal;color:var(--muted);margin-top:1.25rem}
 @media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
 
-/* Signature: a business card in 3D. It tilts with the pointer and flips to show
-   contact details and a "Save contact" link that adds the firm to your phone. */
-.card-stage{perspective:1200px;display:grid;justify-items:center;gap:1rem}
-.bcard{width:min(100%,25rem);aspect-ratio:1.75;transform:rotateX(calc(8deg + var(--rx,0deg))) rotateY(calc(-12deg + var(--ry,0deg)));transform-style:preserve-3d;transition:transform .8s cubic-bezier(.16,1,.3,1)}
-.card-stage.is-tilting .bcard{transition:transform .08s linear}
-.bcard-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.3,1.3,.45,1)}
-.bcard.is-flipped .bcard-inner{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;display:flex;flex-direction:column;padding:1.5rem 1.6rem;border-radius:calc(var(--r) * .6 + 6px);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 40px 60px -32px rgb(0 0 0 / .5),0 0 0 1px rgb(0 0 0 / .06)}
-.face-front{background:var(--accent-2);color:var(--on-accent-2)}
-.face-front .mono{background:var(--on-accent-2);color:var(--accent-2)}
-.face-front b{margin-top:auto;font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:1.5rem;line-height:1.1}
-.face-front span{opacity:.75;margin-top:.3rem;font-size:.95rem}
-.face-back{background:var(--card);color:var(--ink);transform:rotateY(180deg);gap:.5rem;justify-content:center}
-.face-back a,.face-back span{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-size:.98rem}
-.face-back .i{color:var(--accent-text)}
-.face-back .save{margin-top:.5rem;font-weight:700;color:var(--accent-text)}
-
-/* Section variants (site "look"), so firms differ below the hero.
-   creds: bar (default) | band | big
-   services: grid (default) | rows | cards | split
-   fees: list (default) | table | cards | band
-   team: grid (default) | large | list
-   process: line (default) | timeline | big | cards
-   faq: stack (default) | grid | split
-   contact: card (default) | invert | centre
-   heads: left (default) | centre | rule */
-.look-creds-band .creds{background:var(--accent);color:var(--on-accent);border:0}
-.look-creds-band .creds .i{color:inherit}
-.look-creds-band .creds ul{justify-content:space-between;padding-block:1.6rem;font-size:1.08rem}
-.look-creds-big .creds ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:0;padding:0}
-.look-creds-big .creds li{flex-direction:column;align-items:flex-start;gap:1rem;padding:2rem 1.5rem;border-left:1px solid var(--line);font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:1.4rem;line-height:1.2}
-.look-creds-big .creds .i{width:2rem;height:2rem}
-@media (max-width:760px){.look-creds-big .creds li{border-left:0;border-top:1px solid var(--line);padding-inline:0}}
-
-.look-services-rows .svc{grid-template-columns:1fr;gap:0;background:none;border:0;border-radius:0;overflow:visible}
-.look-services-rows .svc li{background:none;border-top:1px solid var(--ink);padding:1.75rem 0;grid-template-columns:3rem 1fr auto;gap:.4rem 1.5rem;align-items:baseline}
-.look-services-rows .svc .i{grid-row:span 2}
-.look-services-rows .svc h3{font-size:clamp(1.5rem,3vw,2.3rem)}
-.look-services-rows .svc p{grid-column:2;max-width:52ch}
-.look-services-rows .svc .fee{grid-column:3;grid-row:1;font-size:1.05rem}
-@media (max-width:760px){.look-services-rows .svc li{grid-template-columns:2.2rem 1fr}.look-services-rows .svc .fee{grid-column:2;grid-row:auto}}
-
-.look-services-cards .svc{grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;background:none;border:0;overflow:visible}
-.look-services-cards .svc li{grid-template-columns:1fr;border-radius:var(--r);border:1px solid var(--line);padding:2rem;gap:.6rem}
-.look-services-cards .svc .i{grid-row:auto;box-sizing:border-box;width:3.2rem;height:3.2rem;padding:.75rem;border-radius:50%;background:var(--accent);color:var(--on-accent);margin:0 0 .75rem}
-.look-services-cards .svc .fee{margin-top:auto;padding-top:1rem;font-family:var(--font-display);font-weight:var(--display-weight);font-size:1.5rem}
-
-.look-services-split #services .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:0 clamp(2rem,6vw,5rem);align-items:start}
-.look-services-split #services .h2,.look-services-split #services .lede{grid-column:1}
-.look-services-split #services .svc{grid-column:2;grid-row:1/span 3;margin-top:0;grid-template-columns:1fr}
-@media (max-width:860px){.look-services-split #services .wrap{grid-template-columns:1fr}.look-services-split #services .svc{grid-column:1;grid-row:auto;margin-top:2rem}}
-
-.look-fees-table .fees{background:var(--bg)}
-.look-fees-table .fees .wrap{grid-template-columns:1fr}
-.look-fees-table .fee-list{gap:0;border-top:2px solid var(--ink)}
-.look-fees-table .fee-list li{background:none;border-radius:0;border-bottom:1px solid var(--line);padding:1.25rem 0;grid-template-columns:1fr auto;align-items:baseline}
-.look-fees-table .fee-list b{font-size:1.15rem}
-.look-fees-table .fee-list .amt{font-size:1.7rem}
-.look-fees-table .fee-list small{grid-column:1}
-
-.look-fees-cards .fees .wrap{grid-template-columns:1fr}
-.look-fees-cards .fee-list{grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1rem}
-.look-fees-cards .fee-list li{grid-template-columns:1fr;align-content:start;padding:1.75rem;gap:.5rem}
-.look-fees-cards .fee-list .amt{order:-1;font-size:2.4rem;line-height:1;letter-spacing:-.03em}
-
-.look-fees-band .fees{background:var(--accent-2);color:var(--on-accent-2);--card:color-mix(in srgb,var(--on-accent-2) 10%,var(--accent-2));--muted:color-mix(in srgb,var(--on-accent-2) 72%,var(--accent-2))}
-
-.look-team-large .team-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:2rem}
-.look-team-large .member{grid-template-columns:1fr}
-.look-team-large .member h3{font-size:1.6rem}
-.look-team-list .team-grid{grid-template-columns:1fr;gap:0}
-.look-team-list .member{grid-template-columns:11rem 1fr;gap:2.5rem;border-top:1px solid var(--line);padding-block:2rem}
-.look-team-list .member h3{font-size:clamp(1.6rem,3vw,2.4rem)}
-.look-team-list .member p{max-width:56ch;font-size:1.05rem}
-@media (max-width:600px){.look-team-list .member{grid-template-columns:6rem 1fr;gap:1.25rem}}
-
-.look-process-timeline .steps{grid-template-columns:1fr;gap:0;max-width:44rem;margin-left:.8rem;border-left:2px solid var(--line)}
-.look-process-timeline .steps li{position:relative;border-top:0;padding:0 0 2.25rem 2.25rem}
-.look-process-timeline .steps li::before{content:counter(s);position:absolute;left:-1rem;top:-.1rem;display:grid;place-items:center;width:2rem;height:2rem;margin:0;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:.85rem}
-.look-process-big .steps li{border-top:0;padding-top:0}
-.look-process-big .steps li::before{font-size:clamp(4rem,8vw,6.5rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--accent-text);margin-bottom:.25rem}
-.look-process-cards .steps{gap:1rem}
-.look-process-cards .steps li{border:0;border-radius:var(--r);background:var(--surface);padding:2rem}
-
-.look-faq-grid .faq{max-width:none;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));align-items:start;gap:1rem}
-.look-faq-split .faq-sec .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:2rem clamp(2rem,6vw,5rem);align-items:start}
-.look-faq-split .faq{margin-top:0;max-width:none;gap:0;border-top:2px solid var(--ink)}
-.look-faq-split .faq details{border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:1.25rem 0}
-@media (max-width:860px){.look-faq-split .faq-sec .wrap{grid-template-columns:1fr}}
-
-.look-contact-invert .contact{background:var(--ink);color:var(--bg);--muted:color-mix(in srgb,var(--bg) 70%,var(--ink));--line:color-mix(in srgb,var(--bg) 28%,var(--ink))}
-.look-contact-centre .contact .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}
-.look-contact-centre .contact .lede{margin-inline:auto}
-.look-contact-centre .contact .ctas{justify-content:center}
-.look-contact-centre .card-stage{width:100%}
-
-.look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede{text-align:center;margin-inline:auto}
-.look-heads-rule section > .wrap > .h2{border-top:2px solid currentColor;padding-top:1.25rem}
+/* Contact details set large, one per line, with a "Save contact" vCard. */
+.reach{display:grid;border-top:2px solid currentColor}
+.reach a,.reach span{display:flex;align-items:center;gap:.9rem;padding-block:1.1rem;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:clamp(1.15rem,2.2vw,1.6rem);line-height:1.25;overflow-wrap:anywhere;min-width:0}
+.reach a:hover{color:var(--accent-text)}
+.reach .i{flex:none;width:1.4rem;height:1.4rem;color:var(--accent-text)}
+.reach .who{font-family:var(--font-body);font-size:.95rem;font-weight:600;letter-spacing:0;color:var(--muted)}
+.reach .save{font-family:var(--font-body);font-size:1rem;font-weight:700;color:var(--accent-text);border:0}
 
 footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.9rem}
 footer .wrap{display:grid;gap:.5rem}
@@ -257,25 +166,13 @@ footer .wrap{display:grid;gap:.5rem}
         {{#business.address}}<address>{{business.address}}</address>{{/business.address}}
         <div class="ctas">
           <a class="btn btn-accent" href="{{#business.bookingUrl}}{{business.bookingUrl}}{{/business.bookingUrl}}{{^business.bookingUrl}}{{business.phoneHref}}{{/business.bookingUrl}}">{{icon:calendar}} {{#business.ctaLabel}}{{business.ctaLabel}}{{/business.ctaLabel}}{{^business.ctaLabel}}Book a consultation{{/business.ctaLabel}}</a>
-          <button class="btn btn-line" type="button" data-flip-toggle="bcard" aria-expanded="false">Flip the card</button>
         </div>
       </div>
-      <div class="card-stage" data-tilt="8">
-        <div class="bcard" id="bcard">
-          <div class="bcard-inner">
-            <div class="face face-front">
-              <span class="mono" aria-hidden="true">{{business.initials}}</span>
-              <b>{{#business.contactName}}{{business.contactName}}{{/business.contactName}}{{^business.contactName}}{{business.name}}{{/business.contactName}}</b>
-              <span>{{#business.contactRole}}{{business.contactRole}}, {{/business.contactRole}}{{business.name}}</span>
-            </div>
-            <div class="face face-back">
-              <a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
-              <a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>
-              {{#business.address}}<span>{{icon:pin}} {{business.address}}</span>{{/business.address}}
-              <a class="save" href="{{business.vcard}}" download="{{business.name}}.vcf">{{icon:person}} Save contact</a>
-            </div>
-          </div>
-        </div>
+      <div class="reach">
+        <span class="who">{{#business.contactName}}{{business.contactName}}{{#business.contactRole}}, {{business.contactRole}}{{/business.contactRole}}{{/business.contactName}}{{^business.contactName}}{{business.name}}{{/business.contactName}}</span>
+        <a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
+        <a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>
+        <a class="save" href="{{business.vcard}}" download="{{business.name}}.vcf">{{icon:person}} Save contact to your phone</a>
       </div>
     </div>
   </section><!--/s:contact-->

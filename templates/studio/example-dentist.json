@@ -148,7 +148,8 @@
         "treatments": "tiles",
         "about": "quote",
         "visit": "wide",
-        "heads": "centre"
+        "heads": "centre",
+        "gift": "line"
       },
       "sections": [
         "about",

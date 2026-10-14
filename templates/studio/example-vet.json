@@ -149,7 +149,8 @@
         "treatments": "tiles",
         "about": "banner",
         "band": "giant",
-        "heads": "centre"
+        "heads": "centre",
+        "gift": "line"
       },
       "sections": [
         "about",

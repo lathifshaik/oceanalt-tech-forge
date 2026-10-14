@@ -148,7 +148,8 @@
         "treatments": "menu",
         "visit": "invert",
         "band": "line",
-        "heads": "rule"
+        "heads": "rule",
+        "gift": "band"
       },
       "sections": [
         "treatments",
@@ -167,7 +168,8 @@
         "about": "banner",
         "visit": "wide",
         "band": "giant",
-        "heads": "centre"
+        "heads": "centre",
+        "gift": "band"
       }
     }
   ]

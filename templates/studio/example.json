@@ -175,7 +175,8 @@
         "visit": "wide",
         "band": "line",
         "heads": "rule",
-        "team": "list"
+        "team": "list",
+        "gift": "band"
       },
       "sections": [
         "treatments",
@@ -195,7 +196,8 @@
         "visit": "invert",
         "band": "giant",
         "heads": "centre",
-        "team": "circles"
+        "team": "circles",
+        "gift": "line"
       },
       "sections": [
         "treatments",

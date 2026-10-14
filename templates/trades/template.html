@@ -1,6 +1,6 @@
 <style>
-/* Trades. Light and trust-first: split hero with a large job photo and a 3D
-   licence card overlapping it, services bento with a photo tile, process,
+/* Trades. Light and trust-first: split hero with a large job photo and the
+   licence number in plain sight, services bento with a photo tile, process,
    areas, reviews, quote form. The phone number is the main action and stays
    pinned at the bottom of the screen on phones. Colours, type and shape come from
    the theme (templates/themes); hero is "split" or "full". */
@@ -25,29 +25,17 @@ h1,h2,h3{font-weight:var(--display-weight);letter-spacing:var(--display-tracking
 .hero h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.04}
 .hero p{margin-top:1.25rem;font-size:1.15rem;color:var(--muted);max-width:40ch}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
-.shot{position:relative;padding-bottom:3rem}
+.shot{position:relative}
 .shot .photo{border-radius:var(--r-img);overflow:hidden;aspect-ratio:5/4;background:var(--surface)}
 .shot .photo img{width:100%;height:100%;object-fit:cover}
 @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
 
-/* Signature: credentials as a physical licence card that tilts in 3D with a holographic sheen. */
-.licence{position:absolute;left:-2rem;bottom:0;width:min(20rem,78%);perspective:1000px}
-.lc{position:relative;border-radius:18px;padding:1.15rem 1.2rem 1rem;color:#0f1f33;
-  background:linear-gradient(135deg,#fdfdfb 0%,#eef2f6 55%,#dfe6ee 100%);
-  transform:rotateX(calc(8deg + var(--rx,0deg))) rotateY(calc(14deg + var(--ry,0deg)));transform-style:preserve-3d;
-  transition:transform .7s cubic-bezier(.16,1,.3,1);box-shadow:0 34px 50px -26px rgb(15 31 51 / .55),inset 0 1px 0 #fff}
-.licence.is-tilting .lc{transition:transform .08s linear}
-.lc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;mix-blend-mode:soft-light;
-  background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),#fff 0,transparent 45%),
-  linear-gradient(115deg,transparent 20%,#ffd1dc80 35%,#c3f0ff80 50%,#fff3b080 65%,transparent 80%)}
-.lc-head{display:flex;align-items:center;gap:.7rem;transform:translateZ(36px)}
-.lc-head b{display:block;font-size:.98rem;line-height:1.2}
-.lc-head small{color:#4a5a6e;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.lc-head > .i{margin-left:auto;width:1.8rem;height:1.8rem}
-.lc-foot{display:flex;justify-content:space-between;align-items:center;margin-top:.9rem;padding:.6rem .8rem;border-radius:10px;background:#0f1f33;color:#f4f6f8;transform:translateZ(28px)}
-.lc-foot small{font-size:.7rem;opacity:.75;text-transform:uppercase;letter-spacing:.06em}
-.lc-foot b{letter-spacing:.08em}
-@media (max-width:900px){.licence{left:1rem}}
+/* The licence number, in plain sight under the buttons. */
+.lic{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem;margin-top:1.5rem;font-weight:700;font-size:.95rem}
+.lic .i{width:1.3rem;height:1.3rem;color:var(--accent-text)}
+.lic small{font-weight:500;color:var(--muted);font-size:.95rem}
+.hero-full .lic small{color:rgb(255 255 255 / .75)}
+.hero-full .lic .i{color:#fff}
 
 .trust{border-block:1px solid var(--line)}
 .trust ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;padding-block:1.75rem}
@@ -116,11 +104,9 @@ form small{color:var(--muted)}
 .hero-full .shot{position:static;padding:0}
 .hero-full .shot .photo{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}
 .hero-full .shot .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(8 14 22 / .85),rgb(8 14 22 / .45) 55%,rgb(8 14 22 / .15))}
-.hero-full .licence{position:relative;left:auto;bottom:auto;z-index:1;width:min(20rem,100%);margin-left:auto}
 .hero-full .hero p{color:rgb(255 255 255 / .85)}
 .hero-full .pill{background:rgb(255 255 255 / .14);color:#fff}
 .hero-full .btn-line{color:#fff;border-color:rgb(255 255 255 / .45)}
-@media (max-width:900px){.hero-full .licence{margin:1rem 0 0}}
 
 /* Section variants (site "look"), so trades differ below the hero.
    trust: tiles (default) | band | plain
@@ -192,6 +178,7 @@ form small{color:var(--muted)}
 .look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede,.look-heads-centre .rv-head{text-align:center;margin-inline:auto;justify-content:center}
 .look-heads-rule section .h2{border-top:2px solid currentColor;padding-top:1.25rem}
 
+
 footer{border-top:1px solid var(--line);padding-block:2.5rem 6rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-between}
 @media (min-width:761px){footer{padding-bottom:2.5rem}}
@@ -221,17 +208,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
           <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} Call {{business.phone}}</a>
           <a class="btn btn-line" href="#quote">Get a free quote</a>
         </div>
+        {{#business.licence}}<p class="lic">{{icon:shield-check}} Licensed and insured <small>{{business.licenceLabel}} {{business.licence}}</small></p>{{/business.licence}}
       </div>
       <div class="shot">
         <div class="photo"><img src="{{hero.photo}}" alt="{{hero.photoAlt}}" width="1500" height="1200" fetchpriority="high"></div>
-        {{#business.licence}}
-        <div class="licence" data-tilt="8">
-          <div class="lc">
-            <div class="lc-head"><span class="mark" aria-hidden="true">{{business.initials}}</span><div><b>{{business.name}}</b><small>Licensed &amp; insured</small></div>{{icon:shield-check}}</div>
-            <div class="lc-foot"><small>{{business.licenceLabel}}</small><b class="num">{{business.licence}}</b></div>
-          </div>
-        </div>
-        {{/business.licence}}
       </div>
     </div>
   </div>

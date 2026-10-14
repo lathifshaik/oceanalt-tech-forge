@@ -150,7 +150,8 @@
         "treatments": "numbered",
         "visit": "wide",
         "band": "giant",
-        "heads": "rule"
+        "heads": "rule",
+        "gift": "line"
       },
       "sections": [
         "about",

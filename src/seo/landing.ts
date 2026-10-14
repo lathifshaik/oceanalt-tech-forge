@@ -365,7 +365,7 @@ export const LANDINGS: Landing[] = [
       "Fixed fees or starting prices, if you want to show them",
       "Team profiles with photos and qualifications",
       "An enquiry or booking form that lands in your inbox",
-      "Your business card on the site, saveable to a phone",
+      "Your contact details on the site, saveable to a phone",
       "Privacy policy and the details your industry body asks for",
     ],
     sections: [

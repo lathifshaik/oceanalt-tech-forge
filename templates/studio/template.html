@@ -1,8 +1,8 @@
 <style>
 /* Studio. Calm and bookings-first: full-bleed photo hero with the nav laid over
    it in a glass pill and a curved hand-off into the page, practitioner intro,
-   treatments with times and prices that each link to booking, a 3D gift
-   voucher that flips to show its terms, team, policies, hours. One light
+   treatments with times and prices that each link to booking, gift
+   vouchers with the terms in view, team, policies, hours. One light
    typeface at large sizes. Colours, type and shape come from the theme
    (templates/themes); hero is "full" or "split". */
 body{font-weight:400}
@@ -58,28 +58,25 @@ section{padding-block:clamp(4rem,9vw,7rem)}
 .tx a .i{width:1rem;height:1rem}
 @media (max-width:860px){.groups{grid-template-columns:1fr}}
 
-/* Signature: a gift voucher in 3D. It floats, tilts with the pointer, and flips to show the terms. */
+/* Gift vouchers: the amount set big in the display face, with the terms in
+   plain view (look.gift: split (default) | band | line). */
 .gift .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,7vw,6rem);align-items:center}
 .gift-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
-.voucher-stage{perspective:1200px;display:grid;place-items:center;padding-block:1rem}
-.voucher{width:min(100%,26rem);aspect-ratio:1.6;transform:rotateX(calc(10deg + var(--rx,0deg))) rotateY(calc(-14deg + var(--ry,0deg)));transform-style:preserve-3d;transition:transform .8s cubic-bezier(.16,1,.3,1);animation:float 6s ease-in-out infinite}
-.voucher-stage.is-tilting .voucher{transition:transform .08s linear;animation-play-state:paused}
-.voucher-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.3,1.3,.45,1)}
-.voucher.is-flipped .voucher-inner{transform:rotateY(180deg)}
-.v-face{position:absolute;inset:0;border-radius:22px;padding:1.5rem;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;
-  box-shadow:0 40px 60px -30px rgb(10 30 28 / .55)}
-.v-front{background:linear-gradient(140deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 70%,#000) 60%,color-mix(in srgb,var(--accent) 50%,#000) 100%);color:var(--on-accent)}
-.v-front::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--gx,25%) var(--gy,15%),rgb(255 255 255 / .35),transparent 45%);mix-blend-mode:soft-light}
-.v-front::before{content:"";position:absolute;right:-3rem;top:-3rem;width:11rem;height:11rem;border-radius:50%;border:1px solid rgb(255 255 255 / .2);box-shadow:0 0 0 1.5rem rgb(255 255 255 / .04),0 0 0 3rem rgb(255 255 255 / .03)}
-.v-front .v-name{font-size:1.15rem;font-weight:500;display:flex;align-items:center;gap:.5rem}
-.v-front .v-name .i{width:1.3rem;height:1.3rem}
-.v-front .v-amt{margin-top:auto;font-family:var(--font-display);font-size:3.2rem;font-weight:var(--display-weight);letter-spacing:-.04em;line-height:1}
-.v-front .v-label{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:.4rem}
-.v-back{background:var(--card);color:var(--ink);transform:rotateY(180deg);border:1px solid var(--line);font-size:.95rem;gap:.5rem}
-.v-back b{font-weight:500;font-size:1.05rem}
-.v-back ul{display:grid;gap:.35rem;color:var(--muted)}
-.v-back li{display:flex;gap:.45rem;align-items:flex-start} .v-back li .i{width:1.05rem;height:1.05rem;color:var(--accent-text);margin-top:.2rem}
-@keyframes float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.g-amt{display:block;font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:-.04em;font-size:clamp(5rem,13vw,10rem);line-height:.85;color:var(--accent-text)}
+.g-label{display:block;margin-top:.9rem;font-size:.8rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.g-terms{display:grid;gap:.5rem;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--line);color:var(--muted)}
+.g-terms li{display:flex;gap:.55rem;align-items:flex-start}
+.g-terms .i{width:1.1rem;height:1.1rem;margin-top:.2rem;color:var(--accent-text);flex:none}
+.look-gift-band .gift{background:var(--accent);color:var(--on-accent);--muted:color-mix(in srgb,var(--on-accent) 78%,var(--accent));--line:color-mix(in srgb,var(--on-accent) 30%,var(--accent))}
+.look-gift-band .gift .lede{color:var(--muted)}
+.look-gift-band .g-amt,.look-gift-band .g-terms .i{color:inherit}
+.look-gift-band .gift .btn-accent{background:var(--on-accent);color:var(--accent)}
+.look-gift-line .gift .wrap{grid-template-columns:1fr;justify-items:center;text-align:center;gap:2.5rem}
+.look-gift-line .gift .lede{margin-inline:auto}
+.look-gift-line .gift-actions{justify-content:center}
+.look-gift-line .g-amt{-webkit-text-stroke:2px var(--accent-text);color:transparent}
+.look-gift-line .g-terms{grid-auto-flow:column;justify-content:center;gap:2rem;text-align:left}
+@media (max-width:760px){.look-gift-line .g-terms{grid-auto-flow:row}}
 @media (max-width:860px){.gift .wrap{grid-template-columns:1fr}}
 
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem;margin-top:3rem}
@@ -211,6 +208,7 @@ section{padding-block:clamp(4rem,9vw,7rem)}
 .look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede{text-align:center;margin-inline:auto}
 .look-heads-rule section > .wrap > .h2{border-top:2px solid currentColor;padding-top:1.25rem}
 
+
 footer{padding-block:2.5rem;color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between}
 footer a{text-decoration:none} footer a:hover{color:var(--ink)}
@@ -280,23 +278,12 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
         <p class="lede">{{body}}</p>
         <div class="gift-actions">
           <a class="btn btn-accent" href="{{buyUrl}}">{{icon:gift}} Buy a voucher</a>
-          <button class="btn btn-line" type="button" data-flip-toggle="voucher" aria-expanded="false">See the terms</button>
         </div>
       </div>
-      <div class="voucher-stage" data-tilt="7">
-        <div class="voucher" id="voucher">
-          <div class="voucher-inner">
-            <div class="v-face v-front">
-              <span class="v-name">{{icon:sparkle}} {{business.name}}</span>
-              <span class="v-amt num">{{amount}}</span>
-              <span class="v-label">Gift voucher</span>
-            </div>
-            <div class="v-face v-back">
-              <b>How it works</b>
-              <ul>{{#terms}}<li>{{icon:check}} {{.}}</li>{{/terms}}</ul>
-            </div>
-          </div>
-        </div>
+      <div class="g-card">
+        <span class="g-amt num">{{amount}}</span>
+        <span class="g-label">Gift voucher</span>
+        <ul class="g-terms">{{#terms}}<li>{{icon:check}} {{.}}</li>{{/terms}}</ul>
       </div>
     </div>
   </section>

@@ -149,7 +149,8 @@
         "treatments": "tiles",
         "about": "banner",
         "visit": "invert",
-        "band": "giant"
+        "band": "giant",
+        "gift": "band"
       },
       "sections": [
         "treatments",

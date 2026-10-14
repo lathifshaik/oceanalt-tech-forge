@@ -782,26 +782,37 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .story-pane .sv-lines { display: flex; flex-direction: column; justify-content: flex-end; min-height: 0; height: clamp(7rem, calc(72vh - 352px), 17rem); overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 14%); mask-image: linear-gradient(transparent, #000 14%); }
 .story-pane .sv-lines .sv-line { flex: none; }
 
-/* Less admin: the 9pm to-do list turning into work that does itself (PipelineDemo). */
-.pl { display: grid; gap: 1rem; }
-.pl-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
-.pl-clock { display: block; font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--ink); transition: color .6s; }
-.pl-head small { display: block; margin-top: .35rem; color: var(--muted); font-size: .85rem; }
-.pl-count { flex: none; padding: .35rem .75rem; border-radius: 999px; background: #fdecea; color: #a1281c; font-size: .82rem; font-weight: 600; transition: background .5s, color .5s; }
-.pl-count b { font-size: .95rem; }
-.pl.is-done .pl-count { background: #e3f6e8; color: #127a3b; }
-.pl.is-done .pl-clock { color: var(--accent); }
-.pl-list { display: grid; gap: .4rem; }
-.pl-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr) 18px; align-items: center; gap: .7rem; padding: .65rem .8rem; border-radius: 12px; background: var(--surface); transition: background .5s var(--ease); }
-.pl-mark { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; box-shadow: inset 0 0 0 1.5px var(--line); }
-.pl-mark .i { width: 14px; height: 14px; color: #fff; }
-.pl-text { display: grid; min-width: 0; }
-.pl-text s { text-decoration: none; font-size: .9rem; line-height: 1.35; color: var(--ink); transition: color .4s, font-size .4s; }
-.pl-auto { max-height: 0; overflow: hidden; opacity: 0; font-size: .86rem; line-height: 1.35; color: var(--ink); transition: max-height .5s var(--ease), opacity .5s var(--ease); }
-.pl .pl-logo { width: 18px; height: 18px; opacity: .25; filter: grayscale(1); transition: opacity .4s, filter .4s; }
-.pl-list li.is-auto { background: var(--accent-soft); }
-.pl-list li.is-auto .pl-mark { background: var(--accent); box-shadow: none; animation: pop .45s cubic-bezier(.34, 1.56, .64, 1) both; }
-.pl-list li.is-auto s { text-decoration: line-through; font-size: .78rem; color: var(--muted); }
-.pl-list li.is-auto .pl-auto { max-height: 6em; opacity: 1; }
-.pl-list li.is-auto .pl-logo { opacity: 1; filter: none; }
-.pl-job { font-size: .8rem; color: var(--muted); }
+/* Less admin: an invoice that writes itself (PipelineDemo in Demos.tsx). */
+.inv { display: grid; gap: .9rem; }
+.inv-paper { position: relative; padding: 1.3rem 1.4rem 1.1rem; border-radius: 6px; background: #fffdf8; color: #1d1b16; box-shadow: 0 1px 0 #e9e4d8, 0 30px 60px -36px rgb(var(--shadow) / .55), 0 0 0 1px #ece6d9; rotate: -1deg; overflow: hidden; }
+.inv-paper::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--accent); }
+.inv-top { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: .8rem; border-bottom: 1px solid #e6dfcf; }
+.inv-top b { display: block; font-size: .95rem; }
+.inv-top small { display: block; font-size: .74rem; color: #7a7466; }
+.inv-no { text-align: right; }
+.inv-no b { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; }
+.inv-fields { display: grid; gap: .5rem; padding-block: .85rem; }
+.inv-row { display: grid; grid-template-columns: 4.2rem minmax(0, 1fr); align-items: baseline; column-gap: .6rem; }
+.inv-row dt { font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #8a8374; }
+.inv-row dd { font-size: .9rem; font-weight: 500; min-height: 1.3em; }
+.inv-from { grid-column: 2; display: inline-flex; align-items: center; gap: .3rem; width: fit-content; margin-top: .15rem; padding: .1rem .45rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .68rem; font-weight: 600; opacity: 0; transform: translateY(-3px); transition: opacity .4s .5s, transform .4s .5s; }
+.inv .inv-from img { width: 12px; height: 12px; }
+.inv-items { display: grid; border-top: 1px dashed #d9d1bf; }
+.inv-items li { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; font-size: .88rem; border-bottom: 1px dashed #e6dfcf; min-height: 2.2em; }
+.inv-total { border-bottom: 0 !important; font-weight: 700; }
+.inv-total b { font-size: 1.15rem; }
+/* Typed in: each value is revealed left to right like it's being typed. */
+.inv-type { display: inline-block; clip-path: inset(0 100% 0 0); }
+.is-on .inv-type, .is-on.inv-type { animation: type .7s steps(18, end) forwards; }
+.is-on .inv-from { opacity: 1; transform: none; }
+@keyframes type { to { clip-path: inset(0 0 0 0); } }
+.inv-stamp { position: absolute; right: 38%; bottom: 2.6rem; padding: .25rem .9rem; border: 3px solid #1f8a4c; border-radius: 8px; color: #1f8a4c; font-size: 1.6rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; rotate: -12deg; opacity: 0; mix-blend-mode: multiply; }
+.inv-stamp.is-on { animation: stamp .45s cubic-bezier(.2, 1.6, .4, 1) forwards; }
+@keyframes stamp { from { opacity: 0; transform: scale(2.4); } to { opacity: .9; transform: scale(1); } }
+.inv-steps { display: flex; flex-wrap: wrap; gap: .5rem; }
+.inv-chip { display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .75rem; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--line); font-size: .82rem; font-weight: 600; opacity: .25; transition: opacity .5s var(--ease), transform .5s var(--ease); transform: translateY(4px); }
+.inv .inv-chip img { width: 16px; height: 16px; }
+.inv-chip.is-on { opacity: 1; transform: none; }
+.inv-line { font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em; opacity: 0; transition: opacity .6s var(--ease) .2s; }
+.inv-line.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .inv-type { clip-path: none; } .is-on .inv-type, .is-on.inv-type, .inv-stamp.is-on { animation: none; } .inv-stamp.is-on { opacity: .9; } .inv-from { opacity: 1; transform: none; } }

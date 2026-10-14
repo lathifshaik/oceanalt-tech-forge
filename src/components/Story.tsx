@@ -245,7 +245,7 @@ function CallVisual({ active }: { active: boolean }) {
             </button>
             <div className="sv-player-info">
               <b>Hear a sample call</b>
-              <small>Made-up business, AI voices for both parts. Yours would use an Australian voice. {clock(AUDIO.duration)}</small>
+              <small>Made-up business, Australian AI voices for both parts. {clock(AUDIO.duration)}</small>
               <div className="sv-wave" ref={waveRef} onClick={seek} role="slider" aria-label="Sample call position" aria-valuemin={0} aria-valuemax={Math.round(AUDIO.duration)} aria-valuenow={0}>
                 {[0, 1].map((layer) => (
                   <span key={layer} className={layer ? "sv-wave-fill" : "sv-wave-base"}>

@@ -170,7 +170,7 @@ type Call = {
 };
 const CALLS: Call[] = [
   {
-    id: "tradie", tab: "Sparky", business: "Kerr & Sons", what: "Sparky books an urgent job",
+    id: "tradie", tab: "Sparky", business: "Kerr & Sons", what: "sparky",
     lines: SAMPLE.lines as Line[], audio: SAMPLE.audio as SampleAudio | null,
     caller: "Mel", callerImg: "mel", agent: "Jim's AI agent", owner: "Jim", ownerImg: "jim",
     ringing: "Mel is calling Kerr & Sons", talking: "On the call: Mel and Jim's AI agent", done: "Call ended, job booked",
@@ -178,7 +178,7 @@ const CALLS: Call[] = [
     summary: { subject: "New job booked: Mel, today 2 to 4pm", body: "Mel, 14 Ridge St, Merewether. Kitchen power point sparking, no smoke. Booked today 2 to 4pm." },
   },
   {
-    id: "restaurant", tab: "Restaurant", business: "Nonna Pina", what: "Restaurant takes a booking",
+    id: "restaurant", tab: "Restaurant", business: "Nonna Pina", what: "table for 6",
     lines: SAMPLE_RESTAURANT.lines as Line[], audio: SAMPLE_RESTAURANT.audio as SampleAudio | null,
     caller: "Pauline", callerImg: "pauline", agent: "Maria's AI agent", owner: "Maria", ownerImg: "maria",
     ringing: "Pauline is calling Nonna Pina", talking: "On the call: Pauline and Maria's AI agent", done: "Call ended, table booked",
@@ -200,9 +200,15 @@ function CallVisual({ active }: { active: boolean }) {
   const [channel, setChannel] = useState<Channel>("whatsapp");
   return (
     <div className="sv sv-call">
-      <div className="sv-switch" role="tablist" aria-label="Sample calls">
+      <div className="sv-recents" role="tablist" aria-label="Sample calls">
+        <small className="sv-recents-head">Recent calls</small>
         {CALLS.map((c, i) => (
-          <button key={c.id} type="button" role="tab" aria-selected={which === i} className={which === i ? "is-on" : ""} onClick={() => setWhich(i)}>{c.tab}</button>
+          <button key={c.id} type="button" role="tab" aria-selected={which === i} className={`sv-recent${which === i ? " is-on" : ""}`} onClick={() => setWhich(i)}>
+            <img src={person(c.callerImg)} alt="" width={36} height={36} />
+            <span className="sv-recent-who"><b>{c.caller}</b><small>to {c.business} · {c.what}</small></span>
+            <span className="sv-recent-len num">{c.audio ? clock(c.audio.duration) : ""}</span>
+            <Icon name="phone" />
+          </button>
         ))}
       </div>
       <SampleCall key={CALLS[which].id} call={CALLS[which]} channel={channel} active={active} />

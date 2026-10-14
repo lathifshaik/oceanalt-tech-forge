@@ -18,6 +18,7 @@ the closest it has to Australian:
 ElevenLabs (Australian voices, needs the account's key as a secret):
   ELEVENLABS_API_KEY=... python3 scripts/make-sample-call.py            # pick voices automatically
   python3 scripts/make-sample-call.py --list                            # show Australian voices on the account
+  ... --data src/data/sample-call-restaurant.json --out public/audio/concierge-restaurant.mp3   # the restaurant call
 
 Reads the CEO-approved lines from src/data/sample-call.json, voices each one
 (the AI agent and Mel get different Australian voices), joins them with short
@@ -55,7 +56,13 @@ p.add_argument("--agent", help="voice id for Jim's AI agent")
 p.add_argument("--caller", help="voice id for Mel, the caller")
 p.add_argument("--model", default="eleven_multilingual_v2")
 p.add_argument("--list", action="store_true", help="list Australian voices and exit")
+p.add_argument("--data", help="lines JSON (default src/data/sample-call.json)")
+p.add_argument("--out", help="mp3 to write under public/ (default public/audio/concierge-sample.mp3)")
 a = p.parse_args()
+if a.data:
+    DATA = (Path.cwd() / a.data).resolve()
+if a.out:
+    OUT = (Path.cwd() / a.out).resolve()
 
 key = os.environ.get("ELEVENLABS_API_KEY")
 if a.engine == "elevenlabs" and not key:
@@ -166,7 +173,7 @@ step = max(1, len(samples) // PEAKS)
 peaks = [max(abs(x) for x in samples[i:i + step]) for i in range(0, step * PEAKS, step)]
 top = max(peaks) or 1
 data["audio"] = {
-    "src": "/audio/concierge-sample.mp3",
+    "src": "/" + str(OUT.relative_to(ROOT / "public")),
     "duration": round(dur(OUT), 2),
     "starts": starts,
     "peaks": [round(0.15 + 0.85 * x / top, 2) for x in peaks],

@@ -1,4 +1,5 @@
 import SAMPLE from "../data/sample-call.json";
+import SAMPLE_RESTAURANT from "../data/sample-call-restaurant.json";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Icon } from "./Icon";
 import { PipelineDemo } from "./Demos";
@@ -172,16 +173,54 @@ function FoundVisual() {
 // being said is highlighted, and what the agent does shows as an action row.
 // Lines (and, once recorded, the audio and its timings) live in
 // src/data/sample-call.json; scripts/make-sample-call.py makes the recording.
-type Act = { icon: "pin" | "calendar" | "send"; text: string };
+type Act = { icon: "pin" | "calendar" | "send" | "check" | "person"; text: string };
 type Line = { who: "c" | "m"; text: string; act?: Act };
 type SampleAudio = { src: string; duration: number; starts: number[]; peaks: number[] };
-const LINES = SAMPLE.lines as Line[];
-const AUDIO = SAMPLE.audio as SampleAudio | null;
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
-const DONE = LINES.length + 1; // 0 is the call coming in, lines are 1..n, then the summary
-const BOOKED = 7; // Mel relaxes once the job is booked
+
+// Two sample businesses: a sparky booking a job, and a restaurant taking a table.
+type Call = {
+  id: string; tab: string; lines: Line[]; audio: SampleAudio | null;
+  caller: string; face: (relaxed: boolean) => string; agent: string; owner: string;
+  relaxedAt: number; // the line after which the caller relaxes
+  ringing: string; talking: string; done: string; where: string; sent: string;
+  wa: { title: string; body: string };
+};
+const CALLS: Call[] = [
+  {
+    id: "tradie", tab: "Sparky", lines: SAMPLE.lines as Line[], audio: SAMPLE.audio as SampleAudio | null,
+    caller: "Mel", face: (ok) => (ok ? "mel-ok" : "mel-worried"), agent: "Jim's AI agent", owner: "Jim", relaxedAt: 7,
+    ringing: "Mel is calling Kerr & Sons", talking: "On the call: Mel and Jim's AI agent", done: "Call ended, job booked",
+    where: "Jim's up a ladder in Adamstown", sent: "Sent to Jim on WhatsApp",
+    wa: { title: "To Jim: new job booked", body: "Mel, 14 Ridge St, Merewether. Kitchen power point sparking, no smoke. Booked today 2 to 4pm." },
+  },
+  {
+    id: "restaurant", tab: "Restaurant", lines: SAMPLE_RESTAURANT.lines as Line[], audio: SAMPLE_RESTAURANT.audio as SampleAudio | null,
+    caller: "Pauline", face: () => "priya", agent: "Maria's AI agent", owner: "Maria", relaxedAt: 7,
+    ringing: "Pauline is calling Nonna Pina", talking: "On the call: Pauline and Maria's AI agent", done: "Call ended, table booked",
+    where: "Maria's in the kitchen in Leichhardt", sent: "Sent to Maria on WhatsApp",
+    wa: { title: "To Maria: new booking", body: "Pauline, table for 6, Sat 6:30pm. One gluten-free. 0491 570 159, confirmation texted." },
+  },
+];
 
 function CallVisual({ active }: { active: boolean }) {
+  const [which, setWhich] = useState(0);
+  return (
+    <div className="sv sv-call">
+      <div className="sv-calltabs" role="tablist" aria-label="Sample calls">
+        {CALLS.map((c, i) => (
+          <button key={c.id} type="button" role="tab" aria-selected={which === i} className={which === i ? "is-on" : ""} onClick={() => setWhich(i)}>{c.tab}</button>
+        ))}
+      </div>
+      <SampleCall key={CALLS[which].id} call={CALLS[which]} active={active} />
+    </div>
+  );
+}
+
+function SampleCall({ call, active }: { call: Call; active: boolean }) {
+  const LINES = call.lines;
+  const AUDIO = call.audio;
+  const DONE = LINES.length + 1; // 0 is the call coming in, lines are 1..n, then the summary
   const [step, setStep] = useState(DONE);
   // Once someone presses play, the recording drives the transcript instead of the timers.
   const [heard, setHeard] = useState(false);
@@ -200,7 +239,7 @@ function CallVisual({ active }: { active: boolean }) {
     });
     timers.push(window.setTimeout(() => setStep(DONE), at + 600));
     return () => timers.forEach(clearTimeout);
-  }, [active, heard]);
+  }, [active, heard, LINES, DONE]);
   useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
   const tick = () => {
@@ -228,15 +267,15 @@ function CallVisual({ active }: { active: boolean }) {
 
   const said = Math.min(step, LINES.length);
   const live = step > 0 && step <= LINES.length;
-  const melOk = said >= BOOKED;
+  const relaxed = said >= call.relaxedAt;
 
   return (
-    <div className="sv sv-call">
+    <>
       <div className="sv-callcard">
         <div className="sv-caller">
-          <span className="sv-av"><Face who={melOk ? "mel-ok" : "mel-worried"} label="Mel, the caller" /></span>
-          <div><b>{step === 0 ? "Mel is calling Kerr & Sons" : step >= DONE ? "Call ended, job booked" : "On the call: Mel and Jim's AI agent"}</b><small>{step >= DONE ? "Sent to Jim on WhatsApp" : "Jim's up a ladder in Adamstown"}</small></div>
-          <span className="sv-av sv-av-ai"><span className="sv-facewrap is-ai"><Face who="concierge" label="Jim's AI agent" /></span></span>
+          <span className="sv-av"><Face who={call.face(relaxed)} label={`${call.caller}, the caller`} /></span>
+          <div><b>{step === 0 ? call.ringing : step >= DONE ? call.done : call.talking}</b><small>{step >= DONE ? call.sent : call.where}</small></div>
+          <span className="sv-av sv-av-ai"><span className="sv-facewrap is-ai"><Face who="concierge" label={call.agent} /></span></span>
         </div>
         {AUDIO && (
           <div className="sv-player">
@@ -267,7 +306,7 @@ function CallVisual({ active }: { active: boolean }) {
         <ol className={`sv-lines${live ? " is-live" : ""}`}>
           {LINES.slice(0, said).map((l, i) => (
             <li key={i} className={`sv-line is-${l.who}${live && i === said - 1 ? " is-now" : ""}`}>
-              <span className="sv-who">{l.who === "c" ? "Jim's AI agent" : "Mel"}</span>
+              <span className="sv-who">{l.who === "c" ? call.agent : call.caller}</span>
               <p>{l.text}</p>
               {l.act && <span className="sv-act"><Icon name={l.act.icon} /> {l.act.text}</span>}
             </li>
@@ -276,10 +315,10 @@ function CallVisual({ active }: { active: boolean }) {
       </div>
       <div className={`sv-wa${step >= DONE ? " is-on" : ""}`}>
         <span className="sv-wa-who sv-wa-only"><img src={logo("whatsapp")} alt="WhatsApp" width={28} height={28} /></span>
-        <div><b>To Jim: new job booked</b><span>Mel, 14 Ridge St, Merewether. Kitchen power point sparking, no smoke. Booked today 2 to 4pm.</span></div>
+        <div><b>{call.wa.title}</b><span>{call.wa.body}</span></div>
         <time>now</time>
       </div>
-    </div>
+    </>
   );
 }
 

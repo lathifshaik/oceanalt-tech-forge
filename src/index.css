@@ -193,6 +193,10 @@ button { font: inherit; }
 .sv-browser img { width: 100%; aspect-ratio: 1.6; object-fit: cover; object-position: top; }
 .sv-where { display: flex; align-items: center; gap: 1rem; color: var(--muted); font-size: .9rem; }
 .sv-where img { width: 1.4rem; height: 1.4rem; }
+.sv-calltabs { display: inline-flex; align-self: flex-start; width: max-content; gap: 4px; padding: 4px; margin-bottom: 12px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--line); }
+.sv-calltabs button { font: inherit; font-size: .9rem; font-weight: 600; padding: 7px 16px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; transition: background .2s, color .2s; }
+.sv-calltabs button:hover { color: var(--ink); }
+.sv-calltabs button.is-on { background: var(--ink); color: var(--bg, #fff); }
 .sv-callcard { border-radius: 22px; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 40px 70px -45px rgb(var(--shadow) / .5); overflow: hidden; }
 .sv-caller { display: flex; align-items: center; gap: .8rem; padding: 1rem 1.1rem; border-bottom: 1px solid var(--line); }
 .sv-caller b { display: block; font-size: .98rem; }

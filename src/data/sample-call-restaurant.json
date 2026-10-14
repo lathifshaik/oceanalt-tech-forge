@@ -1,0 +1,119 @@
+{
+  "_note": "The restaurant sample call for the concierge story step: Pauline books a table at Nonna Pina (a sample business, owner Maria). Same format as sample-call.json; `audio` is filled in by scripts/make-sample-call.py --data src/data/sample-call-restaurant.json --out public/audio/concierge-restaurant.mp3.",
+  "lines": [
+    {
+      "who": "c",
+      "text": "Hi, you're through to Nonna Pina. I'm Maria's AI agent, and this call is recorded. How can I help?",
+      "say": "Hi, you're through to Nonna Peena. I'm Maria's AI agent, and this call is recorded. How can I help?"
+    },
+    {
+      "who": "m",
+      "text": "Hi. Could I book a table for six on Saturday night?"
+    },
+    {
+      "who": "c",
+      "text": "Saturday, we've got 6:30 or 8:15 for six. Which suits you?",
+      "say": "Saturday, we've got six-thirty or eight-fifteen for six. Which suits you?"
+    },
+    {
+      "who": "m",
+      "text": "6:30, please. One of us is gluten-free. Is that okay?",
+      "say": "Six-thirty, please. One of us is gluten-free. Is that okay?"
+    },
+    {
+      "who": "c",
+      "text": "No problem, I'll put a note on the booking for the kitchen. What name is it under?",
+      "act": {
+        "icon": "check",
+        "text": "Note for the kitchen: gluten-free"
+      }
+    },
+    {
+      "who": "m",
+      "text": "Pauline. My mobile's 0491 570 159.",
+      "act": {
+        "icon": "person",
+        "text": "Name and mobile saved"
+      },
+      "say": "Pauline. My mobile's oh four nine one, five seven oh, one five nine."
+    },
+    {
+      "who": "c",
+      "text": "That's six people, Saturday at 6:30, under Pauline. I'll text you a confirmation now.",
+      "act": {
+        "icon": "calendar",
+        "text": "Booked Sat 6:30pm, table for 6"
+      },
+      "say": "That's six people, Saturday at six-thirty, under Pauline. I'll text you a confirmation now."
+    },
+    {
+      "who": "m",
+      "text": "Lovely. Thanks so much.",
+      "act": {
+        "icon": "send",
+        "text": "Confirmation texted"
+      }
+    }
+  ],
+  "audio": {
+    "src": "/audio/concierge-restaurant.mp3",
+    "duration": 41.06,
+    "starts": [
+      0.6,
+      7.85,
+      11.66,
+      17.07,
+      21.6,
+      26.61,
+      32.5,
+      39.03
+    ],
+    "peaks": [
+      0.8,
+      0.5,
+      0.97,
+      0.77,
+      0.77,
+      0.45,
+      0.94,
+      0.43,
+      0.39,
+      0.37,
+      0.31,
+      1.0,
+      0.64,
+      0.83,
+      0.58,
+      0.41,
+      0.41,
+      0.43,
+      0.49,
+      0.38,
+      0.29,
+      0.66,
+      0.7,
+      0.45,
+      0.49,
+      0.44,
+      0.47,
+      0.52,
+      0.33,
+      0.44,
+      0.43,
+      0.8,
+      0.51,
+      1.0,
+      0.65,
+      0.47,
+      0.84,
+      0.55,
+      0.4,
+      0.29
+    ],
+    "voices": {
+      "agent": "Kate-agent",
+      "caller": "Jess-pauline"
+    },
+    "model": "eleven_v4"
+  }
+}

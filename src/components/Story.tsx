@@ -12,8 +12,8 @@ import { PipelineDemo } from "./Demos";
 
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const logo = (name: string) => `/logos/${name}.svg`;
-// 3D people from Microsoft Fluent Emoji (MIT, see public/avatars/LICENSE.txt).
-const face = (name: string) => `/avatars/${name}.webp`;
+// People are from Avatars by Alohe (MIT, see public/avatars/people/LICENSE.txt).
+const face = (name: string) => `/avatars/people/${name}.webp`;
 
 // A person, plus an optional 3D expression that pops in beside them when it
 // changes (worried, relieved, grinning...), so you can read how they feel.
@@ -43,7 +43,7 @@ const SCENES: Scene[] = [
   {
     site: "kerr-and-sons-electrical", phone: "Jim's phone", when: "Tuesday, up a ladder in Adamstown",
     notes: [
-      { app: "Your concierge", icon: "phone", who: "mel-ok", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
+      { app: "Your concierge", icon: "phone", who: "mel", title: "Mel's call answered, job booked", body: "Sparking power point, Merewether. Today 2 to 4pm.", time: "11:42" },
       { app: "Your concierge", icon: "phone", who: "tom", title: "Tom rang while you were driving", body: "Wants a quote for an EV charger. Prefers a text.", time: "1:20" },
     ],
   },
@@ -63,29 +63,11 @@ const SCENES: Scene[] = [
   },
 ];
 
-// One person in two poses (hand down, hand up), played as a short flipbook so
-// they actually wave. Give it a new `key` to wave again.
-// People with a hand-made frame-by-frame wave (a strip of frames in play order,
-// made with scripts/make-wave-strip.py from the sheets in docs/design/avatars/).
-// Jim (docs/design/avatars/jim-sheet.png) is off the site for now (founder's call).
-const SPRITES: Record<string, number> = {};
-
+// The owner hops when a win lands. Give it a new `key` to hop again.
 export function Wave({ who, on, loop = false, className = "", label }: { who: string; on: boolean; loop?: boolean; className?: string; label?: string }) {
-  const frames = SPRITES[who];
-  if (frames) {
-    return (
-      <span
-        className={`face sprite${on ? " is-on" : ""}${loop ? " is-loop" : ""} ${className}`}
-        style={{ backgroundImage: `url(${face(`${who}-strip`)})`, backgroundSize: `${frames * 100}% 100%`, animationTimingFunction: `steps(${frames}, jump-none)` }}
-        role={label ? "img" : undefined}
-        aria-label={label}
-      />
-    );
-  }
   return (
-    <span className={`face flip${on ? " is-on" : ""}${loop ? " is-loop" : ""} ${className}`} role={label ? "img" : undefined} aria-label={label}>
-      <img className="flip-a" src={face(who)} alt="" width={160} height={160} />
-      <img className="flip-b" src={face(`${who}-wave`)} alt="" width={160} height={160} loading="lazy" />
+    <span className={`face hop${on ? " is-on" : ""}${loop ? " is-loop" : ""} ${className}`} role={label ? "img" : undefined} aria-label={label}>
+      <img className="face-img" src={face(who)} alt="" width={160} height={160} />
     </span>
   );
 }
@@ -177,47 +159,84 @@ type Act = { icon: "pin" | "calendar" | "send" | "check" | "person"; text: strin
 type Line = { who: "c" | "m"; text: string; act?: Act };
 type SampleAudio = { src: string; duration: number; starts: number[]; peaks: number[] };
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+const person = face;
 
 // Two sample businesses: a sparky booking a job, and a restaurant taking a table.
 type Call = {
-  id: string; tab: string; lines: Line[]; audio: SampleAudio | null;
-  caller: string; face: (relaxed: boolean) => string; agent: string; owner: string;
-  relaxedAt: number; // the line after which the caller relaxes
-  ringing: string; talking: string; done: string; where: string; sent: string;
-  wa: { title: string; body: string };
+  id: string; business: string; what: string; lines: Line[]; audio: SampleAudio | null;
+  caller: string; callerImg: string; agent: string; owner: string; ownerImg: string;
+  ringing: string; talking: string; done: string; where: string;
+  summary: { subject: string; body: string };
 };
 const CALLS: Call[] = [
   {
-    id: "tradie", tab: "Sparky", lines: SAMPLE.lines as Line[], audio: SAMPLE.audio as SampleAudio | null,
-    caller: "Mel", face: (ok) => (ok ? "mel-ok" : "mel-worried"), agent: "Jim's AI agent", owner: "Jim", relaxedAt: 7,
+    id: "tradie", business: "Kerr & Sons", what: "Sparky books an urgent job",
+    lines: SAMPLE.lines as Line[], audio: SAMPLE.audio as SampleAudio | null,
+    caller: "Mel", callerImg: "mel", agent: "Jim's AI agent", owner: "Jim", ownerImg: "jim",
     ringing: "Mel is calling Kerr & Sons", talking: "On the call: Mel and Jim's AI agent", done: "Call ended, job booked",
-    where: "Jim's up a ladder in Adamstown", sent: "Sent to Jim on WhatsApp",
-    wa: { title: "To Jim: new job booked", body: "Mel, 14 Ridge St, Merewether. Kitchen power point sparking, no smoke. Booked today 2 to 4pm." },
+    where: "Jim's up a ladder in Adamstown",
+    summary: { subject: "New job booked: Mel, today 2 to 4pm", body: "Mel, 14 Ridge St, Merewether. Kitchen power point sparking, no smoke. Booked today 2 to 4pm." },
   },
   {
-    id: "restaurant", tab: "Restaurant", lines: SAMPLE_RESTAURANT.lines as Line[], audio: SAMPLE_RESTAURANT.audio as SampleAudio | null,
-    caller: "Pauline", face: () => "priya", agent: "Maria's AI agent", owner: "Maria", relaxedAt: 7,
+    id: "restaurant", business: "Nonna Pina", what: "Restaurant takes a booking",
+    lines: SAMPLE_RESTAURANT.lines as Line[], audio: SAMPLE_RESTAURANT.audio as SampleAudio | null,
+    caller: "Pauline", callerImg: "pauline", agent: "Maria's AI agent", owner: "Maria", ownerImg: "maria",
     ringing: "Pauline is calling Nonna Pina", talking: "On the call: Pauline and Maria's AI agent", done: "Call ended, table booked",
-    where: "Maria's in the kitchen in Leichhardt", sent: "Sent to Maria on WhatsApp",
-    wa: { title: "To Maria: new booking", body: "Pauline, table for 6, Sat 6:30pm. One gluten-free. 0491 570 159, confirmation texted." },
+    where: "Maria's in the kitchen in Leichhardt",
+    summary: { subject: "New booking: Pauline, table for 6, Sat 6:30pm", body: "Pauline, table for 6, Sat 6:30pm. One gluten-free. 0491 570 159, confirmation texted." },
   },
+];
+
+// Where the owner gets the summary after every call.
+type Channel = "whatsapp" | "text" | "email";
+const CHANNELS: { id: Channel; name: string; logo?: string }[] = [
+  { id: "whatsapp", name: "WhatsApp", logo: "whatsapp" },
+  { id: "text", name: "Text" },
+  { id: "email", name: "Email", logo: "gmail" },
 ];
 
 function CallVisual({ active }: { active: boolean }) {
   const [which, setWhich] = useState(0);
+  const [channel, setChannel] = useState<Channel>("whatsapp");
   return (
     <div className="sv sv-call">
-      <div className="sv-calltabs" role="tablist" aria-label="Sample calls">
+      <div className="sv-picks" role="tablist" aria-label="Sample calls">
         {CALLS.map((c, i) => (
-          <button key={c.id} type="button" role="tab" aria-selected={which === i} className={which === i ? "is-on" : ""} onClick={() => setWhich(i)}>{c.tab}</button>
+          <button key={c.id} type="button" role="tab" aria-selected={which === i} className={`sv-pick${which === i ? " is-on" : ""}`} onClick={() => setWhich(i)}>
+            <img src={person(c.callerImg)} alt="" width={40} height={40} />
+            <span><b>{c.business}</b><small>{c.what}</small></span>
+          </button>
         ))}
       </div>
-      <SampleCall key={CALLS[which].id} call={CALLS[which]} active={active} />
+      <SampleCall key={CALLS[which].id} call={CALLS[which]} channel={channel} active={active} />
+      <div className="sv-send" role="radiogroup" aria-label="How the owner gets the summary">
+        <span>{CALLS[which].owner} gets the summary by</span>
+        {CHANNELS.map((ch) => (
+          <button key={ch.id} type="button" role="radio" aria-checked={channel === ch.id} className={channel === ch.id ? "is-on" : ""} onClick={() => setChannel(ch.id)}>
+            {ch.logo ? <img src={logo(ch.logo)} alt="" width={16} height={16} /> : <Icon name="chat" />} {ch.name}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
 
-function SampleCall({ call, active }: { call: Call; active: boolean }) {
+function Summary({ call, channel, on }: { call: Call; channel: Channel; on: boolean }) {
+  const ch = CHANNELS.find((c) => c.id === channel)!;
+  return (
+    <div className={`sv-wa sv-sum is-${channel}${on ? " is-on" : ""}`}>
+      <span className="sv-wa-who"><img className="sv-person" src={person(call.ownerImg)} alt={call.owner} width={44} height={44} />{ch.logo ? <img className="sv-wa-logo" src={logo(ch.logo)} alt="" width={18} height={18} /> : <span className="sv-wa-logo sv-sms"><Icon name="chat" /></span>}</span>
+      <div>
+        <small className="sv-sum-head">{channel === "email" ? <>To {call.owner.toLowerCase()}@{call.business.toLowerCase().replace(/[^a-z]/g, "")}.example</> : <>To {call.owner}, by {ch.name.toLowerCase() === "text" ? "text message" : ch.name}</>}</small>
+        <b>{channel === "email" ? call.summary.subject : call.summary.subject.split(":")[0]}</b>
+        <span>{call.summary.body}</span>
+      </div>
+      <time>now</time>
+    </div>
+  );
+}
+
+function SampleCall({ call, channel, active }: { call: Call; channel: Channel; active: boolean }) {
   const LINES = call.lines;
   const AUDIO = call.audio;
   const DONE = LINES.length + 1; // 0 is the call coming in, lines are 1..n, then the summary
@@ -267,15 +286,14 @@ function SampleCall({ call, active }: { call: Call; active: boolean }) {
 
   const said = Math.min(step, LINES.length);
   const live = step > 0 && step <= LINES.length;
-  const relaxed = said >= call.relaxedAt;
 
   return (
     <>
       <div className="sv-callcard">
         <div className="sv-caller">
-          <span className="sv-av"><Face who={call.face(relaxed)} label={`${call.caller}, the caller`} /></span>
-          <div><b>{step === 0 ? call.ringing : step >= DONE ? call.done : call.talking}</b><small>{step >= DONE ? call.sent : call.where}</small></div>
-          <span className="sv-av sv-av-ai"><span className="sv-facewrap is-ai"><Face who="concierge" label={call.agent} /></span></span>
+          <span className={`sv-av${step === 0 ? " is-ringing" : ""}`}><img className="sv-person" src={person(call.callerImg)} alt={`${call.caller}, the caller`} width={48} height={48} /></span>
+          <div><b>{step === 0 ? call.ringing : step >= DONE ? call.done : call.talking}</b><small>{step >= DONE ? `Summary sent to ${call.owner}` : call.where}</small></div>
+          <span className="sv-av sv-av-ai"><span className="sv-facewrap is-ai"><img className="sv-person" src={person("agent")} alt={call.agent} width={48} height={48} /></span></span>
         </div>
         {AUDIO && (
           <div className="sv-player">
@@ -313,11 +331,7 @@ function SampleCall({ call, active }: { call: Call; active: boolean }) {
           ))}
         </ol>
       </div>
-      <div className={`sv-wa${step >= DONE ? " is-on" : ""}`}>
-        <span className="sv-wa-who sv-wa-only"><img src={logo("whatsapp")} alt="WhatsApp" width={28} height={28} /></span>
-        <div><b>{call.wa.title}</b><span>{call.wa.body}</span></div>
-        <time>now</time>
-      </div>
+      <Summary call={call} channel={channel} on={step >= DONE} />
     </>
   );
 }

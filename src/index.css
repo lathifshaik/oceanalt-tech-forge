@@ -114,7 +114,7 @@ button { font: inherit; }
 .hp-phone { position: absolute; right: 4%; top: 0; bottom: 0; width: min(19rem, 56%); padding: 1rem .75rem; border-radius: 2.6rem; background: linear-gradient(180deg, #e9f1f2, #f7f8f6 60%); box-shadow: 0 0 0 7px #0b1a22, 0 0 0 8px rgb(255 255 255 / .2), 0 60px 90px -50px rgb(var(--shadow) / .7); animation: rise 1s var(--ease) .15s both; overflow: hidden; }
 .hp-island { width: 5.5rem; height: 1.45rem; margin: 0 auto; border-radius: 999px; background: #0b1a22; }
 .face { position: relative; display: block; }
-.face-img { display: block; width: 100%; height: 100%; object-fit: contain; animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) both, bob 4.5s ease-in-out .8s infinite; }
+.face-img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) both, bob 4.5s ease-in-out .8s infinite; }
 @keyframes mood { from { opacity: 0; transform: scale(.2) rotate(-25deg); } }
 @keyframes pop { from { opacity: 0; transform: scale(.55) translateY(8px); } }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-3px) rotate(-2deg); } }
@@ -193,10 +193,32 @@ button { font: inherit; }
 .sv-browser img { width: 100%; aspect-ratio: 1.6; object-fit: cover; object-position: top; }
 .sv-where { display: flex; align-items: center; gap: 1rem; color: var(--muted); font-size: .9rem; }
 .sv-where img { width: 1.4rem; height: 1.4rem; }
-.sv-calltabs { display: inline-flex; align-self: flex-start; width: max-content; gap: 4px; padding: 4px; margin-bottom: 12px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--line); }
-.sv-calltabs button { font: inherit; font-size: .9rem; font-weight: 600; padding: 7px 16px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; transition: background .2s, color .2s; }
-.sv-calltabs button:hover { color: var(--ink); }
-.sv-calltabs button.is-on { background: var(--ink); color: var(--bg, #fff); }
+/* The sample calls: pick a business, then pick how the owner hears about it. */
+.sv-picks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.sv-pick { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; border: 0; border-radius: 16px; background: var(--card); box-shadow: 0 0 0 1px var(--line); font: inherit; text-align: left; color: var(--ink); cursor: pointer; transition: box-shadow .2s, transform .2s var(--ease); }
+.sv-pick img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.sv-pick b { display: block; font-size: .92rem; }
+.sv-pick small { display: block; color: var(--muted); font-size: .78rem; line-height: 1.3; }
+.sv-pick:hover { transform: translateY(-1px); }
+.sv-pick.is-on { box-shadow: 0 0 0 2px var(--ink); }
+.sv-send { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 12px 0 10px; font-size: .82rem; color: var(--muted); }
+.sv-send > span { margin-right: 2px; }
+.sv-send button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 0; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--line); font: inherit; font-weight: 600; color: var(--ink); cursor: pointer; }
+.sv-send button img, .sv-send button .i { width: 16px; height: 16px; }
+.sv-send button.is-on { background: var(--ink); color: var(--bg); box-shadow: none; }
+.sv-person { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.sv-av .sv-person { width: 2.75rem; height: 2.75rem; }
+.sv-sum .sv-wa-who { width: 2.75rem; height: 2.75rem; }
+.sv-sum-head { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .02em; color: var(--muted); margin-bottom: 2px; }
+.sv-sum time { margin-left: auto; font-size: .72rem; color: var(--muted); }
+.sv-sum.is-whatsapp { background: #e7fbe9; box-shadow: 0 0 0 1px #c9eccf, 0 24px 50px -30px rgb(var(--shadow) / .5); }
+.sv-sum.is-text { background: #f1f1f4; }
+.sv-sum.is-text > div { position: relative; }
+.sv-sum.is-email { background: var(--card); border-top: 3px solid #ea4335; }
+.sv-sms { display: grid; place-items: center; background: #34c759 !important; color: #fff; padding: 2px; }
+.sv-sms .i { width: 100%; height: 100%; }
+@media (max-width: 560px) { .sv-picks { grid-template-columns: 1fr; } }
+
 .sv-callcard { border-radius: 22px; background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 40px 70px -45px rgb(var(--shadow) / .5); overflow: hidden; }
 .sv-caller { display: flex; align-items: center; gap: .8rem; padding: 1rem 1.1rem; border-bottom: 1px solid var(--line); }
 .sv-caller b { display: block; font-size: .98rem; }
@@ -749,3 +771,9 @@ section { padding-block: clamp(5.5rem, 11vw, 9rem); scroll-margin-top: 5rem; }
 .sv-player-info { grid-template-columns: minmax(0, 1fr); }
 .sv-wave { width: 100%; }
 @media (min-width: 900px) { .sv-player ~ .sv-lines { height: 18.5rem; } }
+
+/* The owner hops when a win lands (Wave in Story.tsx). */
+.hop.is-on .face-img { animation: hop .9s cubic-bezier(.34, 1.56, .64, 1) both; }
+.hop.is-loop .face-img { animation-iteration-count: infinite; }
+@keyframes hop { 0% { transform: translateY(0) scale(1); } 35% { transform: translateY(-14%) scale(1.06); } 60% { transform: translateY(0) scale(.97); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hop.is-on .face-img { animation: none; } }

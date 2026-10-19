@@ -1,0 +1,141 @@
+{
+  "template": "pro",
+  "slug": "twist-design-studio",
+  "url": "https://twiststudio.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "ProfessionalService",
+  "business": {
+    "name": "Twist Studio",
+    "headline": "Ideas with a bit of bend.",
+    "intro": "A small design studio in Collingwood. Brand identities, websites and packaging for businesses that would rather not look like everyone else.",
+    "address": "Level 1, 22 Peel Street, Collingwood VIC 3066",
+    "street": "Level 1, 22 Peel Street",
+    "suburb": "Collingwood",
+    "state": "VIC",
+    "postcode": "3066",
+    "phone": "(03) 5550 8137",
+    "email": "studio@twist.example",
+    "contactName": "Noor Haddad",
+    "contactRole": "Creative director",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Start a project",
+    "disclaimer": "Sample site made by Oceanalt. Not a real design studio."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1670189577367-2c6ef31a4b8c?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Glossy lavender and pink 3D loops tied in a knot",
+    "eyebrow": "Brand / Web / Print",
+    "accent": "bend."
+  },
+  "credentials": [
+    {
+      "icon": "layout",
+      "text": "Brand, web and packaging"
+    },
+    {
+      "icon": "tag",
+      "text": "A fixed fee for every project"
+    },
+    {
+      "icon": "person",
+      "text": "You work with the designer, not an account manager"
+    }
+  ],
+  "servicesIntro": "Most of our clients are cafés, shops and small brands in Melbourne. We take on four projects at a time, so each one gets our full attention.",
+  "services": [
+    {
+      "icon": "compass",
+      "name": "Brand identity",
+      "desc": "Name check, logo, colours, type and a one-page guide your printer will understand.",
+      "fee": "From $4,800"
+    },
+    {
+      "icon": "layout",
+      "name": "Website design",
+      "desc": "Designed, written with you and built to load fast on a phone.",
+      "fee": "From $6,500"
+    },
+    {
+      "icon": "tag",
+      "name": "Packaging and print",
+      "desc": "Labels, boxes, menus and signage, set up for your printer.",
+      "fee": "From $2,200"
+    }
+  ],
+  "feesIntro": "Every project has a fixed fee, agreed in writing before we start. Two rounds of changes are included at each stage.",
+  "fees": [
+    {
+      "item": "Discovery workshop",
+      "price": "$650",
+      "note": "Half a day, comes off your project fee"
+    },
+    {
+      "item": "Logo refresh",
+      "price": "From $1,900",
+      "note": "For brands that just need tidying"
+    },
+    {
+      "item": "Brand identity",
+      "price": "From $4,800",
+      "note": "Staged payments"
+    },
+    {
+      "item": "Website",
+      "price": "From $6,500",
+      "note": "Hosting quoted separately"
+    }
+  ],
+  "process": [
+    {
+      "title": "A workshop",
+      "desc": "Half a day on who you're for, what you sell and what you're sick of looking like."
+    },
+    {
+      "title": "Two directions",
+      "desc": "Two different routes, shown on real things: your sign, your cup, your homepage."
+    },
+    {
+      "title": "The finished kit",
+      "desc": "Every file, a short guide and a call with your printer if you want one."
+    }
+  ],
+  "faq": [
+    {
+      "q": "How long does a brand take?",
+      "a": "About six weeks from the workshop to the finished files."
+    },
+    {
+      "q": "Do you work with businesses outside Melbourne?",
+      "a": "Yes. The workshop can be on a video call."
+    },
+    {
+      "q": "Who owns the work?",
+      "a": "You do, once the final invoice is paid. We'll ask before showing it in our portfolio."
+    }
+  ],
+  "contactTitle": "Start a project",
+  "contactIntro": "Tell us what you're making. We reply within a business day.",
+  "showcase": [
+    {
+      "theme": "lilac",
+      "hero": "full",
+      "look": {
+        "creds": "band",
+        "services": "cards",
+        "fees": "cards",
+        "process": "big",
+        "faq": "grid",
+        "contact": "centre",
+        "heads": "left"
+      },
+      "sections": [
+        "services",
+        "creds",
+        "process",
+        "fees",
+        "faq",
+        "contact"
+      ]
+    }
+  ]
+}

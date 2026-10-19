@@ -1,0 +1,190 @@
+{
+  "template": "cafe",
+  "slug": "whirl-gelato",
+  "url": "https://whirl.example/",
+  "_note": "Sample business for the gallery, a dessert bar design. Names, numbers and details are fictional.",
+  "schemaType": "IceCreamShop",
+  "business": {
+    "name": "Whirl",
+    "headline": "Soft serve, swirled to order.",
+    "intro": "Soft serve and gelato on Lygon Street, made in the back every morning from Victorian milk.",
+    "address": "301 Lygon Street, Brunswick East VIC 3057",
+    "street": "301 Lygon Street",
+    "suburb": "Brunswick East",
+    "state": "VIC",
+    "postcode": "3057",
+    "phone": "(03) 5550 2276",
+    "email": "hello@whirl.example",
+    "instagram": "whirlsoftserve",
+    "hoursSummary": "Every day from midday, late on weekends",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "12pm",
+        "close": "9pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "12pm",
+        "close": "9pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "12pm",
+        "close": "9pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "12pm",
+        "close": "10pm"
+      },
+      {
+        "day": "Friday",
+        "open": "12pm",
+        "close": "11pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "11am",
+        "close": "11pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "11am",
+        "close": "10pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1705103654884-cbd03d95761a?w=1600&q=75&auto=format&fit=crop",
+    "photoAlt": "A soft serve cone on a dusty pink background",
+    "eyebrow": "New season"
+  },
+  "facts": [
+    {
+      "icon": "leaf",
+      "text": "Victorian milk, made every morning"
+    },
+    {
+      "icon": "tag",
+      "text": "Cones from $6"
+    },
+    {
+      "icon": "clock",
+      "text": "Open late on weekends"
+    }
+  ],
+  "dishes": {
+    "kicker": "This season",
+    "title": "Four new flavours",
+    "items": [
+      {
+        "name": "Strawberry swirl",
+        "price": "$7",
+        "photo": "https://images.unsplash.com/photo-1636564499112-6113e73c504a?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A strawberry and vanilla soft serve cone",
+        "desc": "Vanilla soft serve twisted with roasted strawberry"
+      },
+      {
+        "name": "Cookies and cream",
+        "price": "$7.50",
+        "photo": "https://images.unsplash.com/photo-1616863858589-9e04f2728c86?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A cookies and cream gelato cone",
+        "desc": "Dark cocoa biscuit through sweet cream"
+      },
+      {
+        "name": "Matcha soft serve",
+        "price": "$7.50",
+        "photo": "https://images.unsplash.com/photo-1554630981-a73ffb5ed6f8?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A green matcha soft serve cone",
+        "desc": "Ceremonial matcha, not too sweet"
+      },
+      {
+        "name": "Birthday cake",
+        "price": "$7",
+        "photo": "https://images.unsplash.com/photo-1705103654898-d663145f5f50?w=700&q=75&auto=format&fit=crop",
+        "photoAlt": "A scoop of vanilla with sprinkles",
+        "desc": "Vanilla, cake crumbs and sprinkles"
+      }
+    ]
+  },
+  "special": {
+    "kicker": "Thursday nights",
+    "title": "Two cones for $10",
+    "body": "Every Thursday after 6pm, any two soft serve cones for $10. Dipped cones included.",
+    "price": "$10",
+    "photo": "https://images.unsplash.com/photo-1563252781-2f76e089e889?w=900&q=75&auto=format&fit=crop",
+    "photoAlt": "Two gelato cones on a stand"
+  },
+  "menuIntro": "Soft serve is swirled to order. Gelato is churned in the back every morning, so flavours change with what's good.",
+  "menu": [
+    {
+      "category": "Soft serve",
+      "items": [
+        {
+          "name": "Cone or cup",
+          "price": "6.00"
+        },
+        {
+          "name": "Dipped cone",
+          "price": "7.50",
+          "desc": "Dark chocolate or pistachio shell"
+        },
+        {
+          "name": "Sundae",
+          "price": "10.00",
+          "desc": "Soft serve, sauce, crumble"
+        }
+      ]
+    },
+    {
+      "category": "Gelato",
+      "items": [
+        {
+          "name": "One scoop",
+          "price": "6.00"
+        },
+        {
+          "name": "Two scoops",
+          "price": "8.50"
+        },
+        {
+          "name": "Take-home tub, 500 ml",
+          "price": "16.00"
+        }
+      ]
+    },
+    {
+      "category": "Extras",
+      "items": [
+        {
+          "name": "Waffle cone",
+          "price": "1.00"
+        },
+        {
+          "name": "Sprinkles or crumble",
+          "price": "0.50"
+        },
+        {
+          "name": "Affogato",
+          "price": "8.00"
+        }
+      ]
+    }
+  ],
+  "menuNote": "Gluten-free cups and dairy-free sorbet every day. Ask us about allergens.",
+  "sections": [
+    "dishes",
+    "facts",
+    "special",
+    "menu",
+    "visit"
+  ],
+  "dishStyle": "round",
+  "showcase": [
+    {
+      "theme": "swirl",
+      "hero": "split"
+    }
+  ]
+}

@@ -506,6 +506,51 @@ export const WORK: {
       { path: "leap-dance-studio", theme: "Pirouette" },
     ],
   },
+  {
+    id: "studio",
+    kind: "Art classes",
+    group: "learning",
+    added: "2026-10-19",
+    business: "Wide Eyes Art Studio, Fitzroy",
+    problem: "People wanted to try a class but couldn't tell which one was for beginners.",
+    pitch: "Classes for adults and kids with prices up front, booked and paid online.",
+    designs: [
+      { path: "wide-eyes-art-studio", theme: "Orbit" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Design studio",
+    added: "2026-10-19",
+    business: "Twist Studio, Collingwood",
+    problem: "Their own site looked older than the work they were doing for clients.",
+    pitch: "Fixed project fees in plain sight, how a project runs, and one button to start.",
+    designs: [
+      { path: "twist-design-studio", theme: "Lilac" },
+    ],
+  },
+  {
+    id: "cafe",
+    kind: "Soft serve and gelato",
+    added: "2026-10-19",
+    business: "Whirl, Brunswick East",
+    problem: "New flavours sold out before anyone online knew they existed.",
+    pitch: "This season's flavours up top, the Thursday deal, and the full menu with prices.",
+    designs: [
+      { path: "whirl-gelato", theme: "Swirl" },
+    ],
+  },
+  {
+    id: "shop",
+    kind: "Growers' market",
+    added: "2026-10-19",
+    business: "Hillside Orchard Market, Bilpin",
+    problem: "Saturday boxes were ordered by text and written in a notebook.",
+    pitch: "This week's boxes to order and pay online by Thursday, ready for Saturday pickup.",
+    designs: [
+      { path: "hillside-orchard-market", theme: "Orchard" },
+    ],
+  },
 ];
 
 

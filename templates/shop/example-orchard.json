@@ -1,0 +1,136 @@
+{
+  "template": "shop",
+  "slug": "hillside-orchard-market",
+  "url": "https://hillsideorchard.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional. Buy links are placeholders for Stripe Payment Links.",
+  "schemaType": "Store",
+  "business": {
+    "name": "Hillside Orchard Market",
+    "headline": "Orchard fresh, picked this week.",
+    "intro": "Apples, pears and juice from our orchard in Bilpin, plus the growers down the road. Order by Thursday and pick up on Saturday.",
+    "address": "2134 Bells Line of Road, Bilpin NSW 2758",
+    "street": "2134 Bells Line of Road",
+    "suburb": "Bilpin",
+    "state": "NSW",
+    "postcode": "2758",
+    "phone": "0491 570 157",
+    "email": "hello@hillsideorchard.example",
+    "instagram": "hillsideorchardmarket",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday"
+      },
+      {
+        "day": "Wednesday"
+      },
+      {
+        "day": "Thursday",
+        "open": "9am",
+        "close": "4pm"
+      },
+      {
+        "day": "Friday",
+        "open": "9am",
+        "close": "4pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "8am",
+        "close": "4pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "8am",
+        "close": "3pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=1400&q=75&auto=format&fit=crop",
+    "photoAlt": "A pile of red apples, freshly picked",
+    "eyebrow": "Fresh food / Local growers / Saturdays",
+    "accent": "picked this week."
+  },
+  "delivery": {
+    "facts": [
+      {
+        "icon": "clock",
+        "title": "Order by Thursday 5pm",
+        "detail": "Ready for Saturday pickup"
+      },
+      {
+        "icon": "pin",
+        "title": "Pick up in Bilpin",
+        "detail": "Or local delivery for $8"
+      },
+      {
+        "icon": "leaf",
+        "title": "Picked this week",
+        "detail": "From our trees and our neighbours'"
+      }
+    ]
+  },
+  "shopTitle": "This week's picking",
+  "shopIntro": "Picked on Thursday, on the table on Saturday. Order here and we'll have your box ready with your name on it.",
+  "products": [
+    {
+      "name": "Mixed orchard box, 6 kg",
+      "price": "$24",
+      "desc": "Whatever's best this week: apples, pears and a few surprises.",
+      "photo": "https://images.unsplash.com/photo-1636958926605-2016302f4e35?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example",
+      "tag": "Most popular"
+    },
+    {
+      "name": "Pink Lady apples, 2 kg",
+      "price": "$9",
+      "desc": "Crisp and sweet, picked this week.",
+      "photo": "https://images.unsplash.com/photo-1759893904139-3f9143e60dcf?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Royal Gala apples, 2 kg",
+      "price": "$8",
+      "desc": "Soft, sweet and good for lunchboxes.",
+      "photo": "https://images.unsplash.com/photo-1603189864361-0cc65b5ecd3a?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Cooking seconds, 3 kg",
+      "price": "$7",
+      "desc": "A little marked, perfect for pies and sauce.",
+      "photo": "https://images.unsplash.com/photo-1612800694220-35a0a24e7f98?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    }
+  ],
+  "shopNote": "Prices in AUD. Payments are processed securely by Stripe. Boxes are held until 1pm Saturday.",
+  "story": {
+    "title": "Grown up the hill, sold down the road",
+    "body": "Three generations have picked this orchard. On Saturdays we open the shed to the growers around us too: honey, eggs, bread and whatever's in season.",
+    "photo": "https://images.unsplash.com/photo-1691304433281-349a0e244c44?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "Apples ripening on a branch"
+  },
+  "showcase": [
+    {
+      "theme": "orchard",
+      "hero": "split",
+      "look": {
+        "products": "feature",
+        "story": "quote",
+        "reviews": "line",
+        "visit": "invert",
+        "heads": "left",
+        "facts": "band"
+      },
+      "sections": [
+        "facts",
+        "products",
+        "story",
+        "visit"
+      ]
+    }
+  ]
+}

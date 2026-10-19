@@ -1,0 +1,167 @@
+{
+  "template": "studio",
+  "slug": "wide-eyes-art-studio",
+  "url": "https://wideeyes.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "schemaType": "EducationalOrganization",
+  "business": {
+    "name": "Wide Eyes Art Studio",
+    "servicesLabel": "Classes",
+    "servicesCta": "See classes",
+    "headline": "See it differently.",
+    "intro": "Small art classes for adults and kids in Fitzroy. Paint, drawing, printmaking and clay. All materials included, no experience needed.",
+    "address": "2/48 Gertrude Street, Fitzroy VIC 3065",
+    "street": "2/48 Gertrude Street",
+    "suburb": "Fitzroy",
+    "state": "VIC",
+    "postcode": "3065",
+    "phone": "(03) 5550 4412",
+    "email": "hello@wideeyes.example",
+    "instagram": "wideeyesfitzroy",
+    "bookingUrl": "https://cal.com/example",
+    "hours": [
+      {
+        "day": "Monday"
+      },
+      {
+        "day": "Tuesday",
+        "open": "10am",
+        "close": "9pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "10am",
+        "close": "9pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "10am",
+        "close": "9pm"
+      },
+      {
+        "day": "Friday",
+        "open": "10am",
+        "close": "6pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "9am",
+        "close": "5pm"
+      },
+      {
+        "day": "Sunday",
+        "open": "10am",
+        "close": "4pm"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1752649936574-84227cafab50?w=2000&q=75&auto=format&fit=crop",
+    "photoAlt": "Two people painting at easels in a sunny studio",
+    "eyebrow": "Paint / Draw / Print / Clay",
+    "accent": "differently."
+  },
+  "about": {
+    "title": "Eight people a class, never more",
+    "body": "Every class has one teacher and no more than eight people, so you get proper help, not a demo from the front. Aprons, paint and paper are on us. Take your work home, or leave it here to dry.",
+    "badges": [
+      "All materials included",
+      "Kids from 6",
+      "Beginners welcome"
+    ],
+    "photo": "https://images.unsplash.com/photo-1708795921147-f747d1ff86b4?w=1000&q=75&auto=format&fit=crop",
+    "photoAlt": "A table covered in paint, brushes and paper"
+  },
+  "treatmentsIntro": "Book a single class or a four-week course. Pay by card, Apple Pay, Google Pay or Afterpay.",
+  "treatments": [
+    {
+      "group": "Adults",
+      "items": [
+        {
+          "name": "Painting from life",
+          "duration": "2 h",
+          "price": "$65"
+        },
+        {
+          "name": "Linocut printing",
+          "duration": "2.5 h",
+          "price": "$75"
+        },
+        {
+          "name": "Four-week drawing course",
+          "duration": "Weekly",
+          "note": "Thursdays 7pm",
+          "price": "$220"
+        }
+      ]
+    },
+    {
+      "group": "Kids and teens",
+      "items": [
+        {
+          "name": "Saturday art club, ages 6 to 11",
+          "duration": "90 min",
+          "price": "$35"
+        },
+        {
+          "name": "Teen portfolio class",
+          "duration": "2 h",
+          "price": "$45"
+        },
+        {
+          "name": "School holiday workshop",
+          "duration": "Half day",
+          "price": "$70"
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Give someone a class",
+    "body": "Gift cards for any class or course, sent by email straight away.",
+    "amount": "$65",
+    "buyUrl": "https://buy.stripe.com/example",
+    "terms": [
+      "Any amount from $35",
+      "Valid for 3 years",
+      "Use on any class or course",
+      "Delivered by email straight away"
+    ]
+  },
+  "policies": [
+    {
+      "q": "Do I need any experience?",
+      "a": "No. Most people in our adult classes haven't painted since school."
+    },
+    {
+      "q": "What should I wear?",
+      "a": "Something you don't mind getting paint on. We have aprons."
+    },
+    {
+      "q": "Cancellations",
+      "a": "Move or cancel up to 24 hours before for free. After that we keep the booking."
+    }
+  ],
+  "closingLine": "Book a class this week.",
+  "showcase": [
+    {
+      "theme": "orbit",
+      "hero": "split",
+      "look": {
+        "treatments": "numbered",
+        "about": "quote",
+        "visit": "wide",
+        "band": "giant",
+        "heads": "centre",
+        "gift": "band"
+      },
+      "sections": [
+        "about",
+        "treatments",
+        "gift",
+        "visit",
+        "band"
+      ]
+    }
+  ]
+}

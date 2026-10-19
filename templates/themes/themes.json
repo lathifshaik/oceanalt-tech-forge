@@ -1539,5 +1539,169 @@
       "on-accent-2": "#0b1a10"
     },
     "css": ".hero-split .hero{background:var(--bg)}.hero-split .hero-img{filter:grayscale(1) contrast(1.5) brightness(1.18);mix-blend-mode:multiply;border-radius:0;object-fit:cover}.photo img,.portrait img,.ph img,.frame img{filter:grayscale(1) contrast(1.5) brightness(1.18);mix-blend-mode:multiply}.hero h1{text-transform:uppercase;font-size:clamp(3.6rem,9vw,8rem);line-height:.82;letter-spacing:-.03em;max-width:9ch}.hero-split .hero h1{font-size:clamp(3.4rem,7.5vw,7rem)}h1 em.accent{font-style:normal;color:var(--accent-2)}.h2{text-transform:uppercase;font-size:clamp(2.4rem,5.5vw,4.4rem);line-height:.88}.eyebrow,.top .nav a,.btn{font-family:\"Space Mono\",monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.74rem}.btn-accent{background:#0b0b0b;color:#f1b8c4}.btn-accent:hover{filter:none;background:var(--accent-2);color:#fff}.price{font-family:\"Space Mono\",monospace}.hero-split .hero::after{display:block;content:\"\";position:absolute;top:0;bottom:0;left:50%;right:0;z-index:1;background:var(--accent-2);mix-blend-mode:lighten;pointer-events:none}@media (max-width:860px){.hero-split .hero::after{left:0;top:auto;height:75vw}}.hero-split .hero-img{object-position:62% center}"
+  },
+  "orbit": {
+    "name": "Orbit",
+    "mood": "Festival poster. Cream paper, deep green extruded capitals, orange spheres, thin orbit lines and four-point sparkles.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap",
+    "type": {
+      "display": "\"Archivo Black\"",
+      "body": "\"Space Grotesk\"",
+      "weight": 400,
+      "tracking": "0"
+    },
+    "shape": {
+      "r": "18px",
+      "img": "999px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#efe6d2",
+      "surface": "#e7dcc3",
+      "card": "#f6f0e2",
+      "ink": "#1d3b2b",
+      "muted": "#4f5d50",
+      "line": "#d8ccb1",
+      "accent": "#e2532d",
+      "on-accent": "#fff6ee",
+      "accent-2": "#1d3b2b",
+      "on-accent-2": "#efe6d2"
+    },
+    "dark": {
+      "bg": "#13221a",
+      "surface": "#1a2c22",
+      "card": "#203529",
+      "ink": "#efe6d2",
+      "muted": "#b9c2b2",
+      "line": "#2c4335",
+      "accent": "#f0683f",
+      "on-accent": "#13221a",
+      "accent-2": "#efe6d2",
+      "on-accent-2": "#13221a"
+    },
+    "css": ".hero-split .hero{background:var(--bg);overflow:hidden}.hero-split .hero .wrap{position:relative;z-index:2}.hero h1,.h2{text-transform:uppercase;letter-spacing:-.01em;color:#2f5a43;text-shadow:1px 1px 0 #10241a,2px 2px 0 #10241a,3px 3px 0 #10241a,4px 4px 0 #10241a,5px 5px 0 #10241a,6px 6px 0 #10241a,10px 12px 18px rgb(16 36 26 / .18)}.hero h1{font-size:clamp(3rem,6.6vw,6rem);line-height:.92;max-width:10ch}.h2{font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:.95;text-shadow:1px 1px 0 #10241a,2px 2px 0 #10241a,3px 3px 0 #10241a,4px 4px 0 #10241a}h1 em.accent{font-style:normal;color:#e2532d;text-shadow:1px 1px 0 #8f2a12,2px 2px 0 #8f2a12,3px 3px 0 #8f2a12,4px 4px 0 #8f2a12,5px 5px 0 #8f2a12,6px 6px 0 #8f2a12}.eyebrow{color:#1d3b2b;opacity:1;letter-spacing:.3em}.hero-split .hero::before{content:\"\";grid-area:1/2;align-self:center;justify-self:center;width:min(36vw,32rem);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 34% 30%,#ff8a5c,#e2532d 55%,#b8391a);box-shadow:0 30px 60px -30px rgb(120 40 10 / .5)}.hero-split .hero-img{grid-area:1/2;align-self:center;justify-self:center;width:min(36vw,32rem);height:auto;aspect-ratio:1;border-radius:50%;filter:grayscale(1) contrast(1.25) brightness(1.1);mix-blend-mode:multiply}.hero-split .hero::after{display:block;content:\"\";position:absolute;z-index:1;inset:auto;right:2%;top:16%;width:58vw;height:24vw;background:none;border:1.5px solid #e2532d;border-radius:50%;rotate:-16deg;pointer-events:none}.hero-split .curve{display:none}.hero .ctas::after{content:\"\";width:2rem;height:2rem;align-self:center;margin-left:.5rem;background:#e2532d;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}.btn-accent{background:#1d3b2b;color:#efe6d2}.btn-accent:hover{filter:none;background:#e2532d}.hero-split .hero .btn-light{background:transparent;color:#1d3b2b;border:1.5px solid #1d3b2b}.top .wrap{background:transparent;border:0;border-bottom:1.5px solid #1d3b2b;border-radius:0;backdrop-filter:none}.hero-split .top .wrap{background:transparent}.nav a,.btn{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700}.treat,.info{background:var(--surface)}.gift .wrap{position:relative}.gift .wrap::before{content:\"\";position:absolute;right:4%;top:-1.5rem;width:2.4rem;height:2.4rem;background:#e2532d;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}.portrait{border-radius:50%;aspect-ratio:1;box-shadow:0 0 0 1.5px #1d3b2b,0 0 0 14px var(--bg),0 0 0 15.5px #e2532d}@media (max-width:860px){.hero-split .hero::before,.hero-split .hero-img{grid-area:2/1;width:min(78vw,22rem);margin:0 auto 2.5rem}.hero-split .hero::after{top:auto;bottom:6%;width:92vw;height:38vw;right:-8%}.hero h1{font-size:clamp(2.6rem,12vw,4rem)}}"
+  },
+  "lilac": {
+    "name": "Lilac",
+    "mood": "Creative agency. Lavender, a big high-contrast serif, a lime ball and a thin yellow orbit around glossy 3D shapes.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=DM+Sans:wght@400;500;700&display=swap",
+    "type": {
+      "display": "\"Bodoni Moda\"",
+      "body": "\"DM Sans\"",
+      "weight": 400,
+      "tracking": "-0.03em"
+    },
+    "shape": {
+      "r": "22px",
+      "img": "22px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#c9b6f6",
+      "surface": "#bea8f0",
+      "card": "#d8caf9",
+      "ink": "#121018",
+      "muted": "#3d3554",
+      "line": "#a993e6",
+      "accent": "#121018",
+      "on-accent": "#c9b6f6",
+      "accent-2": "#d6f24b",
+      "on-accent-2": "#121018"
+    },
+    "dark": {
+      "bg": "#17121f",
+      "surface": "#1f1829",
+      "card": "#271f34",
+      "ink": "#e4dafc",
+      "muted": "#b3a7cf",
+      "line": "#352a47",
+      "accent": "#c9b6f6",
+      "on-accent": "#17121f",
+      "accent-2": "#d6f24b",
+      "on-accent-2": "#121018"
+    },
+    "css": ".hero-full .hero{background:#c9b6f6;color:#121018}.hero-full .shot::after{display:none}.hero-full .shot img{object-position:72% center}.hero-full .hero::before{content:\"\";position:absolute;z-index:1;right:9%;top:13%;width:clamp(4.5rem,9vw,8.5rem);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 34% 30%,#f4ff9c,#d6f24b 55%,#9db81c);box-shadow:0 20px 40px -18px rgb(60 70 0 / .45)}.hero-full .hero::after{content:\"\";position:absolute;z-index:1;left:34%;top:26%;width:52%;height:46%;border:2px solid #e9f25b;border-radius:50%;rotate:-16deg;pointer-events:none}.hero h1{font-size:clamp(3.4rem,8vw,7.6rem);line-height:.88;letter-spacing:-.04em;max-width:9ch}h1 em.accent{font-style:italic}.hero-full .hero p{color:#2a2338}.hero-full .hero .btn-line,.btn-line{color:#121018;border:1.5px solid #121018}.eyebrow{opacity:1;letter-spacing:.32em}.h2{font-size:clamp(2.4rem,5vw,4.2rem);line-height:.95;letter-spacing:-.035em}.btn,.nav a{text-transform:uppercase;letter-spacing:.14em;font-size:.76rem}.top{border-bottom:1px solid #121018}.mono{border-radius:50%;background:#d6f24b;color:#121018}.svc li,.fee-list li,.faq details{border-radius:22px}@media (max-width:860px){.hero-full .hero::after{left:8%;width:84%;top:40%;height:30%}.hero-full .hero::before{top:9%;right:6%}.hero-full .shot img{object-position:68% center;opacity:.55}}"
+  },
+  "swirl": {
+    "name": "Swirl",
+    "mood": "Gelato bar. Dusty rose, a towering plum serif set on its side, line-drawn clouds and a terracotta circle with a drawn leaf.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Jost:wght@400;500;600&display=swap",
+    "type": {
+      "display": "\"Abril Fatface\"",
+      "body": "\"Jost\"",
+      "weight": 400,
+      "tracking": "0"
+    },
+    "shape": {
+      "r": "14px",
+      "img": "999px 999px 14px 14px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#dbb2a7",
+      "surface": "#d3a69a",
+      "card": "#e6c7be",
+      "ink": "#3b1626",
+      "muted": "#6b3b44",
+      "line": "#c9958a",
+      "accent": "#3b1626",
+      "on-accent": "#f4e1da",
+      "accent-2": "#c0664a",
+      "on-accent-2": "#fff7f2"
+    },
+    "dark": {
+      "bg": "#211016",
+      "surface": "#2a151c",
+      "card": "#331a22",
+      "ink": "#f1d9d1",
+      "muted": "#cfaaa2",
+      "line": "#40222b",
+      "accent": "#e9b4a6",
+      "on-accent": "#211016",
+      "accent-2": "#d77b5d",
+      "on-accent-2": "#211016"
+    },
+    "css": ".hero-split .hero{background:var(--bg);position:relative;overflow:hidden}.hero-split .hero .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:clamp(1.5rem,3vw,3rem);align-items:center}.hero-split .hero .wrap > :not(.wordmark){grid-column:2}.hero-split .wordmark{display:block;grid-column:1;grid-row:1/span 6;margin:0;writing-mode:vertical-rl;rotate:180deg;font-family:var(--font-display);font-size:clamp(6rem,11vw,11rem);line-height:.78;letter-spacing:.01em;text-transform:uppercase;color:#3b1626;text-shadow:none}.hero h1{text-transform:uppercase;font-size:clamp(2.4rem,4.4vw,4.2rem);line-height:.98;max-width:12ch}.hero p{text-transform:uppercase;letter-spacing:.14em;font-size:.86rem !important;line-height:1.7;max-width:30ch}.eyebrow{opacity:1;letter-spacing:.3em}.hero-split .hero-img{border-radius:999px 999px 0 0;margin:3rem 3rem 0 0;width:calc(100% - 3rem);object-fit:cover}.hero-split .hero::before{content:\"\";position:absolute;z-index:1;right:30%;top:14%;width:clamp(10rem,20vw,17rem);aspect-ratio:2;background:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%237a3a3a' stroke-width='1.6' stroke-linecap='round'><path d='M10 96 H200 C226 96 230 70 210 64 C214 44 192 34 178 46 C172 22 140 18 128 40 C118 28 96 30 92 50 C70 44 56 62 66 76 C46 72 34 86 44 96'/><path d='M128 40 C140 44 146 56 140 66 C136 72 126 70 126 62 C126 56 134 54 136 60'/><path d='M92 50 C102 54 104 66 96 72 C90 76 84 70 88 64'/><path d='M178 46 C186 52 186 62 178 66'/></svg>\") center/contain no-repeat;pointer-events:none}.hero-split .hero::after{display:block;content:\"\";position:absolute;z-index:2;right:4%;bottom:6%;width:clamp(6.5rem,11vw,10rem);aspect-ratio:1;border-radius:50%;background:#c0664a url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%233b1626' stroke-width='1.6' stroke-linecap='round'><path d='M50 88 C50 60 50 40 50 14'/><path d='M50 30 C38 24 30 26 26 34 C34 38 44 36 50 30'/><path d='M50 30 C62 24 70 26 74 34 C66 38 56 36 50 30'/><path d='M50 48 C36 42 26 46 22 56 C32 60 44 56 50 48'/><path d='M50 48 C64 42 74 46 78 56 C68 60 56 56 50 48'/><path d='M50 66 C40 62 32 66 30 74 C38 76 46 72 50 66'/><path d='M50 66 C60 62 68 66 70 74 C62 76 54 72 50 66'/></svg>\") center/62% no-repeat;opacity:1}.hero-split .btn-primary{background:#3b1626;color:#f4e1da}.hero-split .btn-glass{border-color:#3b1626}.h2{text-transform:uppercase;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1}.btn,.nav a{text-transform:uppercase;letter-spacing:.16em;font-size:.76rem}.facts{background:#3b1626;color:#f4e1da}.dishes-round img,.dish img{border-radius:999px 999px 14px 14px}@media (max-width:860px){.hero-split .hero .wrap{grid-template-columns:1fr}.hero-split .hero .wrap > :not(.wordmark){grid-column:1}.hero-split .wordmark{grid-row:auto;writing-mode:horizontal-tb;rotate:none;font-size:clamp(4.5rem,24vw,8rem)}.hero-split .hero-img{margin:0 1.25rem;width:calc(100% - 2.5rem);aspect-ratio:4/5}.hero-split .hero::before{top:auto;bottom:40%;right:6%;width:9rem}.hero-split .hero::after{width:5.5rem;bottom:3%}}"
+  },
+  "orchard": {
+    "name": "Orchard",
+    "mood": "Growers' market poster. Peach paper, heavy condensed green capitals, fruit printed into the page inside outlined circles, a lime arrow.",
+    "fonts": "https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap",
+    "type": {
+      "display": "\"Anton\"",
+      "body": "\"Space Grotesk\"",
+      "weight": 400,
+      "tracking": "0"
+    },
+    "shape": {
+      "r": "14px",
+      "img": "999px",
+      "btn": "999px"
+    },
+    "light": {
+      "bg": "#f7d3b9",
+      "surface": "#f2c6a7",
+      "card": "#fbe2d0",
+      "ink": "#1d3a23",
+      "muted": "#4b5a40",
+      "line": "#e5b08f",
+      "accent": "#1d3a23",
+      "on-accent": "#f7d3b9",
+      "accent-2": "#c8e050",
+      "on-accent-2": "#1d3a23"
+    },
+    "dark": {
+      "bg": "#14200f",
+      "surface": "#1b2a15",
+      "card": "#22331b",
+      "ink": "#f7d3b9",
+      "muted": "#cfb7a2",
+      "line": "#2e4023",
+      "accent": "#f7d3b9",
+      "on-accent": "#14200f",
+      "accent-2": "#c8e050",
+      "on-accent-2": "#14200f"
+    },
+    "css": ".hero h1{text-transform:uppercase;font-size:clamp(3.4rem,7.4vw,6.8rem);line-height:.9;letter-spacing:0;max-width:9ch}h1 em.accent{display:block;margin-top:.25em;font-family:\"Space Grotesk\",sans-serif;font-style:normal;font-weight:500;text-transform:none;font-size:.38em;letter-spacing:-.01em;line-height:1.1}.eyebrow,.facts,.btn,.nav a,.badge,.product .price{font-family:\"Space Mono\",monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.74rem}.eyebrow{opacity:1}.shot{position:relative}.shot .photo{border-radius:50%;aspect-ratio:1;background:transparent}.shot .photo img{mix-blend-mode:multiply;filter:saturate(1.15) contrast(1.05)}.shot::before,.shot::after{content:\"\";position:absolute;z-index:2;border:1.5px solid #1d3a23;border-radius:50%;pointer-events:none}.shot::before{inset:-6% 26% 30% -12%}.shot::after{inset:34% -10% -8% 30%}.btn-accent{background:transparent;color:#1d3a23;border:1.5px solid #1d3a23}.btn-accent:hover{filter:none;background:#1d3a23;color:#f7d3b9}.btn-dark{background:#1d3a23;color:#f7d3b9}.hero .ctas::after{content:\"\\2192\";display:grid;place-items:center;width:3rem;height:3rem;border-radius:50%;background:#c8e050;color:#1d3a23;font-size:1.2rem}.h2{text-transform:uppercase;font-size:clamp(2.4rem,5.2vw,4.4rem);line-height:.92}.top{border-bottom:1.5px solid #1d3a23}.product .ph{border-radius:50%;aspect-ratio:1}.product .ph img{mix-blend-mode:multiply}.facts{border-block:1.5px solid #1d3a23}@media (max-width:860px){.shot::before{inset:-4% 24% 28% -4%}.shot::after{inset:30% -4% -6% 28%}.hero h1{font-size:clamp(3rem,15vw,4.6rem)}}"
   }
 }

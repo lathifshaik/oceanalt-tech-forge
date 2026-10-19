@@ -5,7 +5,7 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 A site's look comes from three independent choices, so no two clients get the same design:
 
 1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
-2. **Theme** (`design.theme`): one of thirty-eight complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
+2. **Theme** (`design.theme`): one of forty-two complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
 3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`). The `cafe` layout also has two restaurant heroes: `centre` (a big centred headline with `hero.lineTwo` in italic, a round dish photo `hero.dish` rising from the bottom, and optional `hero.cards` and `hero.stats`) and `wordmark` (the business name huge, sized to fit its longest word, the headline as a tagline, and a live open or closed chip from the hours).
 
 On top of that come the client's own accent colour (`design.accent`, `design.accentDark`), photos, words and logo.
@@ -50,6 +50,10 @@ On top of that come the client's own accent colour (`design.accent`, `design.acc
 | `burst` | Adrenaline. Black, a hot-pink starburst, Archivo Black with an italic serif word, grain (always dark) |
 | `sunnyside` | Breakfast. Cobalt and yolk orange, drawn fried eggs (cafe wordmark hero), Gabarito |
 | `pirouette` | Dance poster. Pink, giant League Spartan capitals, green-tinted photos printed into the page |
+| `orbit` | Festival poster. Cream, deep green extruded capitals, orange spheres, orbit lines and four-point sparkles |
+| `lilac` | Creative agency. Lavender, a big Bodoni serif, a lime ball and a thin yellow orbit over glossy 3D shapes |
+| `swirl` | Gelato bar. Dusty rose, the name set huge on its side in plum Abril Fatface, arched photo, line-drawn clouds, terracotta leaf circle |
+| `orchard` | Growers' market poster. Peach, heavy condensed Anton capitals, fruit printed inside outlined circles, a lime arrow |
 
 Any theme can use `hero.eyebrow` (a small spaced line above the headline) and `hero.accent` (a word of the headline set in the accent style); the builder adds them in every layout.
 
@@ -125,5 +129,5 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/base.css`: shared reset and accessibility styles
 - `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
 - `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
-- `themes/themes.json`: the thirty-eight design directions
+- `themes/themes.json`: the forty-two design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

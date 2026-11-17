@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Icon } from "../components/Icon";
+import { Icon, type IconName } from "../components/Icon";
 import { ABN, EMAIL, FOUNDER, LogoMark, PHONE, PHONE_HREF, WORK } from "../App";
 import { NEEDS, SERVICES, STEPS, STUDIO_FAQ, WHY } from "./content";
 import "./studio.css";
@@ -29,6 +29,7 @@ const getFeatured = () => FEATURED.flatMap((path) => {
 const SERVICE_PAGE: Record<string, string> = {
   brand: "/brand-identity/", websites: "/website-design-sydney/", software: "/web-apps-and-software/",
   ai: "/ai-agents/", search: "/search-and-ai-visibility/",
+  voice: "/voice-agents-and-audio/", payments: "/payments/",
 };
 
 // Photos that fail (or aren't in yet) stay hidden instead of showing a broken icon.
@@ -123,7 +124,7 @@ function Hero() {
       <div className="s-wrap s-hero-copy">
         <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Design and technology studio, Sydney</p>
         <h1 id="s-hero-h">We design and build what your brand runs on</h1>
-        <p className="s-hero-sub">Brand, websites, software and AI agents from one studio. The people who design it are the people who build it, and they're still here after launch.</p>
+        <p className="s-hero-sub">Brand, websites, software, payments and voice agents from one studio. The people who design it are the people who build it, and they're still here after launch.</p>
         <div className="s-ctas">
           <a className="s-btn s-btn-ink" href="#start">Start a project <Arrow /></a>
           <a className="s-btn s-btn-soft" href="#work">See the work</a>
@@ -246,6 +247,51 @@ function Why() {
             ))}
           </div>
           <figcaption>An example of how changes work</figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+// The free website: paid for by a platform fee on payments, never by an
+// invoice. The rate is in the written agreement, not on the site.
+const PAY_STEPS = [
+  { icon: "layout" as IconName, title: "We design, build and host your site", body: "At no charge, to the same standard as any project we quote." },
+  { icon: "card" as IconName, title: "Customers pay through our gateway", body: "Cards, Apple Pay and Google Pay, paid straight into your own account." },
+  { icon: "chart" as IconName, title: "We take a small fee per payment", body: "A platform fee on each payment, agreed in writing. When nothing sells, you pay nothing." },
+];
+
+function FreeSite() {
+  const ref = useReveal<HTMLElement>();
+  return (
+    <section id="payments" className="s-sec s-free s-reveal" ref={ref} aria-labelledby="s-free-h">
+      <div className="s-wrap s-split">
+        <div>
+          <p className="s-label">Payments</p>
+          <h2 id="s-free-h" className="s-h2">The website is free. We earn when you do.</h2>
+          <p className="s-lede">Take payments through our gateway and there's no bill for the site. We take a small platform fee on each payment instead, so we only do well when your customers buy.</p>
+          <ul className="s-rows">
+            {PAY_STEPS.map((s) => (
+              <li key={s.title}>
+                <span className="s-sq" aria-hidden="true"><Icon name={s.icon} /></span>
+                <div><b>{s.title}</b><span>{s.body}</span></div>
+              </li>
+            ))}
+          </ul>
+          <a className="s-btn s-btn-ink s-free-cta" href="/payments/">How payments work <Arrow /></a>
+        </div>
+        <figure className="s-panel s-pay" aria-label="Example payment">
+          <div className="s-pay-sheet">
+            <p className="s-pay-shop">Ridgeline Wines</p>
+            <p className="s-pay-item"><span>Mixed dozen, 2025 release</span></p>
+            <div className="s-pay-methods" aria-hidden="true">
+              <img src="/logos/applepay.svg" alt="" width={44} height={28} />
+              <img src="/logos/googlepay.svg" alt="" width={44} height={28} />
+              <span className="s-pay-card"><Icon name="card" /> Card</span>
+            </div>
+            <p className="s-pay-paid"><Icon name="check-circle" /> Paid to Ridgeline's own account</p>
+          </div>
+          <figcaption>A sample business, for illustration</figcaption>
         </figure>
       </div>
     </section>
@@ -501,6 +547,7 @@ export function StudioHome() {
       <Tools />
       <Services />
       <Why />
+      <FreeSite />
       <Process />
       <Work />
       <Founder />

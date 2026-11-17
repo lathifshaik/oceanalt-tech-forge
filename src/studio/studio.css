@@ -143,6 +143,22 @@ html:has(.s-page) body, .s-page { background: #fff; }
 .s-msg.is-us p { background: #fff; color: var(--s-ink); text-align: left; }
 .s-chat figcaption { position: absolute; left: 1.25rem; bottom: 1rem; font-size: .75rem; color: rgb(13 17 20 / .55); }
 
+.s-free { border-top: 1px solid var(--s-line); }
+.s-free-cta { margin-top: 2rem; }
+.s-pay { display: grid; place-items: center; padding: clamp(1.5rem, 5vw, 4rem); background: linear-gradient(160deg, #1f3a46 0%, #4f6b77 60%, #9fb0b6 100%); }
+.s-pay-sheet { width: min(100%, 22rem); padding: 1.6rem; border-radius: 1.4rem; background: #fff; box-shadow: 0 40px 80px -40px rgb(5 20 28 / .7); opacity: 0; transform: translateY(1.5rem); transition: opacity .9s var(--s-ease) .2s, transform 1s var(--s-ease) .2s; }
+.is-in .s-pay-sheet { opacity: 1; transform: none; }
+.s-pay-shop { font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--s-mute); }
+.s-pay-item { display: flex; justify-content: space-between; margin-top: .6rem !important; font-size: 1.15rem; font-weight: 500; letter-spacing: -.02em; color: var(--s-ink); }
+.s-pay-methods { display: flex; gap: .5rem; margin-top: 1.4rem; }
+.s-pay-methods img, .s-pay-card { display: grid; place-items: center; height: 2.6rem; padding: 0 .9rem; border-radius: .6rem; background: var(--s-soft); }
+.s-pay-methods img { width: auto; box-sizing: border-box; padding: .55rem .9rem; }
+.s-pay-card { display: flex; align-items: center; gap: .4rem; font-size: .9rem; color: var(--s-ink); }
+.s-pay-card .i { width: 1.1rem; height: 1.1rem; }
+.s-pay-paid { display: flex; align-items: center; gap: .5rem; margin-top: 1.4rem !important; padding-top: 1.1rem; border-top: 1px solid var(--s-line); font-size: .95rem; color: #2b6b5a; }
+.s-pay-paid .i { width: 1.2rem; height: 1.2rem; }
+.s-pay figcaption { position: absolute; left: 1.25rem; bottom: 1rem; font-size: .75rem; color: rgb(255 255 255 / .7); }
+
 .s-steps { display: grid; place-items: center; padding: 2.5rem clamp(1rem, 4vw, 3rem); background: linear-gradient(180deg, #d9dfe0 0%, #a8b5b9 50%, #5d727b 100%); }
 .s-steps ol { display: grid; gap: .75rem; width: min(100%, 28rem); }
 .s-steps li { display: flex; align-items: center; gap: 1rem; padding: .85rem 1rem; border-radius: .75rem; background: rgb(255 255 255 / .38); color: var(--s-ink); font-size: 1rem; transition: background-color .6s var(--s-ease), transform .6s var(--s-ease), box-shadow .6s var(--s-ease); }

@@ -13,7 +13,7 @@ export type Landing = {
   /** Short name for links and breadcrumbs. */
   nav: string;
   /** SERVICES id in src/studio/content.ts: the photo and icon. */
-  service: "brand" | "websites" | "software" | "ai" | "search" | "care";
+  service: "brand" | "websites" | "software" | "ai" | "voice" | "payments" | "search" | "care";
   h1: string;
   intro: string;
   offers: { title: string; body: string }[];
@@ -168,6 +168,60 @@ export const LANDINGS: Landing[] = [
       { q: "Will it answer every call?", a: "It answers the calls you send to it, at the times you choose. Like any phone system it relies on networks and providers, so we set up a fallback, such as voicemail or your own number." },
       { q: "What does it cost to run?", a: "Agents have a running cost for AI usage and, for phone agents, call time. We estimate it in the written quote, pass it on at cost and agree a monthly cap with you." },
       QUOTED,
+    ],
+  },
+  {
+    slug: "voice-agents-and-audio",
+    title: "Voice Agents and Custom Audio for Brands | Oceanalt",
+    description: "Phone and voice agents in your brand's own voice, plus voiceovers, sonic logos and on-hold audio. Designed and built in Sydney for Australian brands.",
+    nav: "Voice agents and audio",
+    service: "voice",
+    h1: "Your brand, with a voice of its own",
+    intro: "More of your customers now hear your brand before they see it: on the phone, in a voice assistant, in a video. We build voice agents that answer and book in a voice made for you, and the audio that goes around them.",
+    offers: [
+      { title: "Voice agents", body: "Answer calls, book, take messages and pass anything tricky to your team, with a summary after every call. Every call opens by saying it's an AI agent and that the call is recorded." },
+      { title: "A custom voice", body: "Pick from licensed Australian voices or create one for the brand, with clear rights to use it commercially." },
+      { title: "Voiceovers", body: "Narration for videos, explainers and ads, written and produced to match the brand." },
+      { title: "Sonic branding", body: "A short audio logo, on-hold sound and notification sounds that belong to you." },
+    ],
+    approach: {
+      h2: "Natural, honest and tested",
+      body: [
+        "A voice agent is tested on real calls from your business before it answers a customer, and checked after launch. It always says it's an AI agent, and a person is one step away.",
+        "We only use voices licensed for commercial use, and we list every provider that hears a call in writing before you go live.",
+      ],
+    },
+    faq: [
+      { q: "Can it sound like a real person from our team?", a: "Only with that person's written consent, and it still says it's an AI agent on every call. Most brands choose a licensed voice that suits them instead." },
+      { q: "What does it cost to run?", a: "Voice agents have running costs for AI usage and call time. We estimate them in the written quote, pass them on at cost and agree a monthly cap with you." },
+      QUOTED,
+    ],
+  },
+  {
+    slug: "payments",
+    title: "Payments and a Free Website for Your Brand | Oceanalt",
+    description: "Take payments through our gateway and your website is designed, built and hosted at no charge. We take a small platform fee per payment instead.",
+    nav: "Payments",
+    service: "payments",
+    h1: "A free website, paid for by what you sell",
+    intro: "Take payments through our gateway and there's no bill for the website. We design, build and host it, and take a small platform fee on each payment instead. If nothing sells, you pay us nothing.",
+    offers: [
+      { title: "Checkout built in", body: "Cards, Apple Pay and Google Pay on your own site, for orders, deposits, bookings or invoices." },
+      { title: "Paid into your own account", body: "Money goes straight to your business through the payment provider. We never hold your funds." },
+      { title: "A clear fee, in writing", body: "One platform fee per payment, on top of the provider's processing fee, set out in your agreement before anything starts." },
+      { title: "One dashboard", body: "Every payment, refund and fee is visible in your own payments dashboard, so there are no surprises." },
+    ],
+    approach: {
+      h2: "We only do well when you do",
+      body: [
+        "Most studios send an invoice whether the site sells or not. Here, the site is free and we earn a small share of what goes through it, so our job is to make it sell.",
+        "The fee rate, what's included and what happens if you ever move to another provider are all in your written agreement. No hidden charges, and no lock-in on your domain or content.",
+      ],
+    },
+    faq: [
+      { q: "What's the platform fee?", a: "A small percentage of each payment through the gateway, on top of the provider's processing fee. The exact rate depends on what you sell and how, and it's in your written agreement before work starts." },
+      { q: "What if we don't take payments online?", a: "Then the website is quoted as a project, like our other work. The free website is for brands whose customers pay online." },
+      { q: "Can we leave?", a: "Yes. Your domain and content are always yours, and the agreement sets out exactly how a move works, including keeping the site." },
     ],
   },
   {

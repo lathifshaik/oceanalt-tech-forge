@@ -338,7 +338,7 @@ function Founder() {
         </blockquote>
         <div className="s-person">
           <img src={FOUNDER_PHOTO} alt={`${FOUNDER}, founder of Oceanalt`} width={112} height={112} loading="lazy" />
-          <div><b>{FOUNDER}</b><span>Founder, Oceanalt</span></div>
+          <div><b>{FOUNDER}</b><span>Builder, Oceanalt</span></div>
           <a className="s-btn s-btn-soft" href={PHONE_HREF}><Icon name="phone" /> {PHONE}</a>
         </div>
       </div>

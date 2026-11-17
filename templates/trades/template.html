@@ -115,7 +115,8 @@ form small{color:var(--muted)}
    areas: chips (default) | columns | band
    reviews: cards (default) | feature | wall
    quote: split (default) | invert | stack
-   heads: left (default) | centre | rule */
+   heads: left (default) | centre | rule
+   plates (the optional photo section): wide (default) | offset | strip */
 .look-trust-band .trust{background:var(--accent-2);color:var(--on-accent-2);border:0}
 .look-trust-band .trust small{color:inherit;opacity:.75}
 .look-trust-band .trust .i{background:var(--accent);color:var(--on-accent)}
@@ -192,7 +193,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#main"><span class="mark" aria-hidden="true">{{business.initials}}</span>{{business.name}}</a>
-    <nav class="nav" aria-label="Main"><a href="#services">Services</a><a href="#areas">Areas</a><a href="#reviews">Reviews</a><a href="#quote">Free quote</a></nav>
+    <nav class="nav" aria-label="Main"><a href="#services">{{#labels.servicesNav}}{{labels.servicesNav}}{{/labels.servicesNav}}{{^labels.servicesNav}}Services{{/labels.servicesNav}}</a>{{#plates}}<a href="#work">{{#labels.platesNav}}{{labels.platesNav}}{{/labels.platesNav}}{{^labels.platesNav}}Work{{/labels.platesNav}}</a>{{/plates}}<a href="#areas">{{#labels.areasNav}}{{labels.areasNav}}{{/labels.areasNav}}{{^labels.areasNav}}Areas{{/labels.areasNav}}</a>{{#reviews}}{{#@first}}<a href="#reviews">Reviews</a>{{/@first}}{{/reviews}}<a href="#quote">{{#labels.quoteNav}}{{labels.quoteNav}}{{/labels.quoteNav}}{{^labels.quoteNav}}Free quote{{/labels.quoteNav}}</a></nav>
     <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} <span>{{business.phone}}</span></a>
   </div>
 </header>
@@ -206,7 +207,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
         <p>{{business.intro}}</p>
         <div class="ctas">
           <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} Call {{business.phone}}</a>
-          <a class="btn btn-line" href="#quote">Get a free quote</a>
+          <a class="btn btn-line" href="#quote">{{#labels.quote}}{{labels.quote}}{{/labels.quote}}{{^labels.quote}}Get a free quote{{/labels.quote}}</a>
         </div>
         {{#business.licence}}<p class="lic">{{icon:shield-check}} Licensed and insured <small>{{business.licenceLabel}} {{business.licence}}</small></p>{{/business.licence}}
       </div>
@@ -222,7 +223,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
 
   <!--s:services--><section id="services">
     <div class="wrap">
-      <h2 class="h2">What we do</h2>
+      <h2 class="h2">{{#labels.services}}{{labels.services}}{{/labels.services}}{{^labels.services}}What we do{{/labels.services}}</h2>
       {{#servicesIntro}}<p class="lede">{{servicesIntro}}</p>{{/servicesIntro}}
       <ul class="svc">
         {{#services}}<li>{{icon:@icon}}<h3>{{name}}</h3><p>{{desc}}</p>{{#from}}<span class="from num">{{from}}</span>{{/from}}</li>
@@ -232,14 +233,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
     </div>
   </section><!--/s:services-->
 
-  <!--s:process-->{{#process}}{{#@first}}<section class="how"><div class="wrap"><h2 class="h2">How a job works</h2><ol class="steps">{{/@first}}
+  <!--s:process-->{{#process}}{{#@first}}<section class="how"><div class="wrap"><h2 class="h2">{{#labels.process}}{{labels.process}}{{/labels.process}}{{^labels.process}}How a job works{{/labels.process}}</h2><ol class="steps">{{/@first}}
     <li><h3>{{title}}</h3><p>{{desc}}</p></li>
   {{#@last}}</ol></div></section>{{/@last}}{{/process}}<!--/s:process-->
+
+  <!--s:plates-->{{#plates}}<section class="plates" id="work"><div class="wrap">{{#title}}<h2 class="h2">{{title}}</h2>{{/title}}{{#intro}}<p class="lede">{{intro}}</p>{{/intro}}<ul class="plate-grid">{{#photos}}<li><figure><img src="{{photo}}" alt="{{photoAlt}}" width="1400" height="1000" loading="lazy"><figcaption>{{#name}}<b>{{name}}</b>{{/name}}{{#caption}}<span>{{caption}}</span>{{/caption}}</figcaption></figure></li>{{/photos}}</ul></div></section>{{/plates}}<!--/s:plates-->
 
   <!--s:areas--><section class="area" id="areas">
     <div class="wrap">
       <div>
-        <h2 class="h2">Where we work</h2>
+        <h2 class="h2">{{#labels.areas}}{{labels.areas}}{{/labels.areas}}{{^labels.areas}}Where we work{{/labels.areas}}</h2>
         {{#areasNote}}<p class="lede">{{areasNote}}</p>{{/areasNote}}
       </div>
       <ul class="chips">{{#areas}}<li>{{.}}</li>{{/areas}}</ul>
@@ -253,7 +256,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
   <!--s:quote--><section class="quote" id="quote">
     <div class="wrap">
       <div>
-        <h2 class="h2">Get a free quote</h2>
+        <h2 class="h2">{{#labels.quote}}{{labels.quote}}{{/labels.quote}}{{^labels.quote}}Get a free quote{{/labels.quote}}</h2>
         <p class="lede">{{#quoteNote}}{{quoteNote}}{{/quoteNote}}{{^quoteNote}}Tell us what's going on and we'll get back to you with a price.{{/quoteNote}}</p>
         <div class="direct">
           <a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
@@ -267,10 +270,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
           <label for="q-name">Name<input id="q-name" name="name" autocomplete="name" required></label>
           <label for="q-phone">Phone<input id="q-phone" name="phone" type="tel" autocomplete="tel" required></label>
         </div>
-        <label for="q-suburb">Suburb<input id="q-suburb" name="suburb" autocomplete="address-level2"></label>
-        <label for="q-job">What do you need done?<textarea id="q-job" name="message" rows="4" required></textarea></label>
-        <button class="btn btn-dark" type="submit">Send my request</button>
-        <small>We reply within one business day. Urgent? Call instead.</small>
+        <label for="q-suburb">{{#labels.formPlace}}{{labels.formPlace}}{{/labels.formPlace}}{{^labels.formPlace}}Suburb{{/labels.formPlace}}<input id="q-suburb" name="suburb" autocomplete="address-level2"></label>
+        <label for="q-job">{{#labels.formMessage}}{{labels.formMessage}}{{/labels.formMessage}}{{^labels.formMessage}}What do you need done?{{/labels.formMessage}}<textarea id="q-job" name="message" rows="4" required></textarea></label>
+        <button class="btn btn-dark" type="submit">{{#labels.formSend}}{{labels.formSend}}{{/labels.formSend}}{{^labels.formSend}}Send my request{{/labels.formSend}}</button>
+        <small>{{#labels.formNote}}{{labels.formNote}}{{/labels.formNote}}{{^labels.formNote}}We reply within one business day. Urgent? Call instead.{{/labels.formNote}}</small>
       </form>
       {{/contact.formAction}}
     </div>
@@ -285,6 +288,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-be
 </footer>
 
 <div class="callbar">
-  <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} Call now</a>
-  <a class="btn btn-line" href="#quote">Free quote</a>
+  <a class="btn btn-call" href="{{business.phoneHref}}">{{icon:phone}} {{#labels.callbar}}{{labels.callbar}}{{/labels.callbar}}{{^labels.callbar}}Call now{{/labels.callbar}}</a>
+  <a class="btn btn-line" href="#quote">{{#labels.quoteNav}}{{labels.quoteNav}}{{/labels.quoteNav}}{{^labels.quoteNav}}Free quote{{/labels.quoteNav}}</a>
 </div>

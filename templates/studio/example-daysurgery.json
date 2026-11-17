@@ -1,0 +1,213 @@
+{
+  "template": "studio",
+  "slug": "calloway-day-surgery",
+  "url": "https://calloway.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "business": {
+    "name": "Calloway Day Surgery",
+    "tagline": "Specialist day surgery across Sydney",
+    "headline": "Specialist day surgery, and home the same evening.",
+    "intro": "Four centres across Sydney for eye, orthopaedic, gastro and skin procedures. Your specialist refers you, and we look after you from the first phone call to the follow-up.",
+    "address": "9 Help Street, Chatswood NSW 2067",
+    "street": "9 Help Street",
+    "suburb": "Chatswood",
+    "state": "NSW",
+    "postcode": "2067",
+    "phone": "(02) 9070 6600",
+    "email": "admissions@calloway.example",
+    "bookingUrl": "https://book.example/calloway",
+    "bookLabel": "Start your admission",
+    "itemCta": "Details",
+    "servicesLabel": "Procedures",
+    "servicesCta": "See procedures",
+    "hours": [
+      {
+        "day": "Monday",
+        "open": "6:30am",
+        "close": "8pm"
+      },
+      {
+        "day": "Tuesday",
+        "open": "6:30am",
+        "close": "8pm"
+      },
+      {
+        "day": "Wednesday",
+        "open": "6:30am",
+        "close": "8pm"
+      },
+      {
+        "day": "Thursday",
+        "open": "6:30am",
+        "close": "8pm"
+      },
+      {
+        "day": "Friday",
+        "open": "6:30am",
+        "close": "8pm"
+      },
+      {
+        "day": "Saturday",
+        "open": "7am",
+        "close": "2pm"
+      },
+      {
+        "day": "Sunday"
+      }
+    ]
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=1400&q=75&auto=format&fit=crop",
+    "photoAlt": "Two clinicians reviewing a scan on a screen",
+    "eyebrow": "Chatswood / Parramatta / Kogarah / Bella Vista"
+  },
+  "about": {
+    "title": "Day surgery is all we do",
+    "body": "Our theatres, nurses and anaesthetists do the same procedures every day. That focus is why most patients are home by the evening, and why your admission feels calm rather than rushed.",
+    "photo": "https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=75&auto=format&fit=crop",
+    "photoAlt": "A bright, empty operating theatre",
+    "badges": [
+      "Accredited to the national safety and quality standards",
+      "No-gap or known-gap with most health funds",
+      "Free parking at every centre"
+    ]
+  },
+  "treatmentsIntro": "Times are a typical stay, from arrival to going home. Your specialist will tell you what to expect for your own procedure.",
+  "treatments": [
+    {
+      "group": "Eyes",
+      "items": [
+        {
+          "name": "Cataract surgery",
+          "duration": "Local anaesthetic, around 20 minutes in theatre",
+          "price": "About 3 hours"
+        },
+        {
+          "name": "Eye injections",
+          "duration": "For macular degeneration and diabetic eye disease",
+          "price": "About 1 hour"
+        }
+      ]
+    },
+    {
+      "group": "Orthopaedics",
+      "items": [
+        {
+          "name": "Knee arthroscopy",
+          "duration": "Keyhole surgery under general anaesthetic",
+          "price": "About 5 hours"
+        },
+        {
+          "name": "Carpal tunnel release",
+          "duration": "Usually under local anaesthetic",
+          "price": "About 3 hours"
+        }
+      ]
+    },
+    {
+      "group": "Gastroenterology",
+      "items": [
+        {
+          "name": "Colonoscopy and gastroscopy",
+          "duration": "Under sedation, with prep instructions sent ahead",
+          "price": "About 3 hours"
+        }
+      ]
+    },
+    {
+      "group": "Skin and plastics",
+      "items": [
+        {
+          "name": "Skin cancer removal and grafts",
+          "duration": "Same-day results discussion where possible",
+          "price": "About 3 hours"
+        }
+      ]
+    }
+  ],
+  "teamTitle": "Some of our specialists",
+  "team": [
+    {
+      "name": "Dr Arjun Mehta",
+      "role": "Ophthalmologist, Chatswood and Bella Vista",
+      "photo": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=75&auto=format&fit=crop"
+    },
+    {
+      "name": "Dr Grace Okafor",
+      "role": "Plastic and reconstructive surgeon, Kogarah",
+      "photo": "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=600&q=75&auto=format&fit=crop"
+    },
+    {
+      "name": "Dr Sam Ruiz",
+      "role": "Gastroenterologist, Parramatta",
+      "photo": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=75&auto=format&fit=crop"
+    },
+    {
+      "name": "Dr Helen Byrne",
+      "role": "Hand and wrist surgeon, Chatswood",
+      "photo": "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=75&auto=format&fit=crop"
+    }
+  ],
+  "visitTitle": "Our centres",
+  "locations": [
+    {
+      "name": "Chatswood",
+      "address": "9 Help Street, Chatswood NSW 2067",
+      "detail": "Eyes, orthopaedics"
+    },
+    {
+      "name": "Parramatta",
+      "address": "Level 2, 40 Macquarie Street, Parramatta NSW 2150",
+      "detail": "Gastroenterology, orthopaedics"
+    },
+    {
+      "name": "Kogarah",
+      "address": "15 Belgrave Street, Kogarah NSW 2217",
+      "detail": "Skin and plastics, gastroenterology"
+    },
+    {
+      "name": "Bella Vista",
+      "address": "22 Lexington Drive, Bella Vista NSW 2153",
+      "detail": "Eyes"
+    }
+  ],
+  "policies": [
+    {
+      "q": "Fasting before surgery",
+      "a": "Most patients stop eating six hours before and stop clear fluids two hours before. Your admission letter gives your exact times."
+    },
+    {
+      "q": "Fees and health funds",
+      "a": "We confirm your out-of-pocket cost in writing before your procedure. With most funds there is no gap, or a known gap."
+    },
+    {
+      "q": "Getting home",
+      "a": "You'll need an adult to collect you and stay with you overnight. We can't let you leave in a taxi on your own."
+    },
+    {
+      "q": "Interpreters",
+      "a": "Free through TIS National. Tell us when you book and we'll arrange it."
+    }
+  ],
+  "closingLine": "Referred by your specialist? Start your admission online.",
+  "sections": [
+    "about",
+    "treatments",
+    "team",
+    "visit",
+    "band"
+  ],
+  "look": {
+    "about": "split",
+    "treatments": "numbered",
+    "team": "list",
+    "visit": "invert",
+    "band": "line"
+  },
+  "showcase": [
+    {
+      "theme": "lucent",
+      "hero": "split"
+    }
+  ]
+}

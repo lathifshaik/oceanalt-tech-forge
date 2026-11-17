@@ -1,0 +1,194 @@
+{
+  "template": "pro",
+  "slug": "calder-and-ames",
+  "url": "https://calderames.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "business": {
+    "name": "Calder & Ames",
+    "tagline": "Private wealth advice, Sydney and Melbourne",
+    "headline": "Private wealth advice, for the long run.",
+    "intro": "We advise families, business owners and retirees in Sydney and Melbourne. You get one senior adviser, a written strategy, and a fee agreed in writing before we start.",
+    "address": "Level 14, 60 Castlereagh Street, Sydney NSW 2000",
+    "street": "Level 14, 60 Castlereagh Street",
+    "suburb": "Sydney",
+    "state": "NSW",
+    "postcode": "2000",
+    "phone": "(02) 8070 3300",
+    "email": "advice@calderames.example",
+    "contactName": "Rachel Ames",
+    "contactRole": "Principal adviser",
+    "bookingUrl": "https://cal.com/example",
+    "ctaLabel": "Book an introductory meeting",
+    "disclaimer": "Sample site made by Oceanalt. Calder & Ames is fictional. General information only, not financial advice."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=1400&q=75&auto=format&fit=crop",
+    "photoAlt": "Glass office towers seen from street level",
+    "eyebrow": "Private wealth / Sydney and Melbourne",
+    "accent": "the long run"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "text": "Our own financial services licence"
+    },
+    {
+      "icon": "tag",
+      "text": "Fixed fees, no commissions"
+    },
+    {
+      "icon": "person",
+      "text": "One senior adviser per client"
+    },
+    {
+      "icon": "pin",
+      "text": "Sydney and Melbourne"
+    }
+  ],
+  "servicesTitle": "What we advise on",
+  "servicesIntro": "Most clients come to us about one of these and stay for all of them.",
+  "services": [
+    {
+      "icon": "chart",
+      "name": "Investment strategy",
+      "desc": "A portfolio built around what it has to pay for, reviewed twice a year."
+    },
+    {
+      "icon": "calendar",
+      "name": "Retirement and super",
+      "desc": "When you can stop, how to draw an income, and an SMSF if one suits you."
+    },
+    {
+      "icon": "briefcase",
+      "name": "Business owners",
+      "desc": "Selling or handing on a business, structures, and keeping company and personal money apart."
+    },
+    {
+      "icon": "file",
+      "name": "Estate planning",
+      "desc": "Wills, trusts and powers of attorney, drafted with your lawyer so the plan holds when it's needed."
+    },
+    {
+      "icon": "shield-check",
+      "name": "Insurance",
+      "desc": "Life, TPD and income protection, inside or outside super, reviewed every year."
+    }
+  ],
+  "teamTitle": "Your advisers",
+  "team": [
+    {
+      "name": "Rachel Ames",
+      "role": "Principal adviser, Sydney",
+      "bio": "Twenty years in private wealth. Works mostly with retirees and families bringing property and super together.",
+      "photo": "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&q=75&auto=format&fit=crop"
+    },
+    {
+      "name": "Tom Calder",
+      "role": "Principal adviser, Melbourne",
+      "bio": "A former tax accountant. Advises business owners before, during and after a sale.",
+      "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=75&auto=format&fit=crop"
+    },
+    {
+      "name": "Elena Marsh",
+      "role": "Senior adviser, Sydney",
+      "bio": "Looks after clients in their fifties planning the move from salary to super.",
+      "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=75&auto=format&fit=crop"
+    }
+  ],
+  "plates": {
+    "photos": [
+      {
+        "photo": "https://images.unsplash.com/photo-1517502884422-41eaead166d4?w=1800&q=75&auto=format&fit=crop",
+        "photoAlt": "A meeting room with a long timber table and a city view",
+        "name": "Castlereagh Street, Sydney",
+        "caption": "Meetings in Sydney, Melbourne, or by video"
+      }
+    ]
+  },
+  "processTitle": "How we start",
+  "process": [
+    {
+      "title": "An introductory meeting",
+      "desc": "An hour, at no cost. We ask what you want your money to do. You decide whether we're the right fit."
+    },
+    {
+      "title": "A written strategy",
+      "desc": "Our recommendations in a Statement of Advice, with the fee to put it in place and the annual fee shown in dollars."
+    },
+    {
+      "title": "Advice that keeps going",
+      "desc": "Two reviews a year, a call whenever something changes, and an annual fee you renew in writing."
+    }
+  ],
+  "feesTitle": "Insights",
+  "feesNav": "Insights",
+  "feesIntro": "Short notes from our advisers. General information only, not advice for your situation.",
+  "fees": [
+    {
+      "item": "Super changes from 1 July: what they mean if you're over sixty",
+      "price": "Nov 2026",
+      "note": "Rachel Ames"
+    },
+    {
+      "item": "Selling a business in the next five years? Start with the structure",
+      "price": "Oct 2026",
+      "note": "Tom Calder"
+    },
+    {
+      "item": "Rates are falling. Should the offset account come first?",
+      "price": "Sep 2026",
+      "note": "Elena Marsh"
+    },
+    {
+      "item": "Four questions to ask before you set up an SMSF",
+      "price": "Aug 2026",
+      "note": "Tom Calder"
+    }
+  ],
+  "faqTitle": "Before we meet",
+  "faq": [
+    {
+      "q": "How do you charge?",
+      "a": "A fixed fee for the strategy and a fixed annual fee for ongoing advice, both agreed in writing. We take no commissions on investments."
+    },
+    {
+      "q": "Is there a minimum?",
+      "a": "Our advice tends to suit people with $750,000 or more to invest, including super. If we're not the right fit, we'll say so in the first meeting."
+    },
+    {
+      "q": "Who holds my money?",
+      "a": "Your investments sit in your name on an independent platform. We can't withdraw money from your accounts."
+    },
+    {
+      "q": "Will you work with my accountant?",
+      "a": "Yes, and with your lawyer. Most of our clients' plans need all three of us."
+    }
+  ],
+  "contactTitle": "Start with a conversation",
+  "contactIntro": "Sydney: Level 14, 60 Castlereagh Street. Melbourne: Level 9, 365 Little Collins Street. Or by video, wherever you are.",
+  "sections": [
+    "creds",
+    "services",
+    "team",
+    "plates",
+    "process",
+    "fees",
+    "faq",
+    "contact"
+  ],
+  "look": {
+    "creds": "bar",
+    "services": "split",
+    "team": "large",
+    "process": "big",
+    "fees": "table",
+    "faq": "grid",
+    "contact": "centre"
+  },
+  "showcase": [
+    {
+      "theme": "claret",
+      "hero": "split"
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "template": "shop",
+  "slug": "tallowwood-home",
+  "url": "https://tallowwood.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "business": {
+    "name": "Tallowwood",
+    "tagline": "Australian homewares",
+    "headline": "Made for every day, and for a long time.",
+    "intro": "Linen woven for us in Lithuania, stoneware thrown in Marrickville, and boards cut from salvaged spotted gum. Free delivery over $250.",
+    "phone": "(02) 9070 8180",
+    "email": "hello@tallowwood.example",
+    "instagram": "tallowwood.home"
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1616627561839-074385245ff6?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A bed made with rust and oat linen against a plaster wall",
+    "eyebrow": "The summer edit",
+    "accent": "a long time"
+  },
+  "delivery": {
+    "facts": [
+      {
+        "icon": "van",
+        "title": "Free delivery over $250",
+        "detail": "Australia-wide, in two to five business days"
+      },
+      {
+        "icon": "check",
+        "title": "30-day returns",
+        "detail": "On anything unused, in its packaging"
+      },
+      {
+        "icon": "leaf",
+        "title": "Every maker named",
+        "detail": "On the label and on the product page"
+      }
+    ]
+  },
+  "shopTitle": "The summer edit",
+  "shopIntro": "Six pieces from this season. Each one has its maker's name on it.",
+  "products": [
+    {
+      "name": "Kiln vases, set of three",
+      "price": "$240",
+      "desc": "Unglazed stoneware in charcoal and ash, from a two-person studio in Marrickville.",
+      "photo": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=1200&q=75&auto=format&fit=crop",
+      "tag": "New",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Speckle tumblers, set of four",
+      "price": "$88",
+      "desc": "Hand-thrown, dishwasher safe.",
+      "photo": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Ridge vase, chalk",
+      "price": "$120",
+      "desc": "A satin glaze over pale clay.",
+      "photo": "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Spotted gum serving board",
+      "price": "$165",
+      "desc": "Salvaged timber, oiled by hand.",
+      "photo": "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Linen pillowcases, stripe",
+      "price": "$95",
+      "desc": "A pair, stonewashed so they're soft from the first night.",
+      "photo": "https://images.unsplash.com/photo-1445991842772-097fea258e7b?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    },
+    {
+      "name": "Tide dinner plates, set of four",
+      "price": "$140",
+      "desc": "Reactive glaze, so no two are the same.",
+      "photo": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=75&auto=format&fit=crop",
+      "buyUrl": "https://buy.stripe.com/example"
+    }
+  ],
+  "story": {
+    "title": "Made slowly, by people we know",
+    "body": "We started Tallowwood in 2011 with one linen supplier and a market stall. We still visit every workshop we buy from, and we still name every maker on the label.",
+    "photo": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A warm living room with a curved cream sofa and woven baskets"
+  },
+  "plates": {
+    "title": "At home with Tallowwood",
+    "photos": [
+      {
+        "photo": "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=75&auto=format&fit=crop",
+        "photoAlt": "A sideboard with a round mirror, plants and ceramics",
+        "name": "The hallway",
+        "caption": "Ridge vase, Tide plates"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=900&q=75&auto=format&fit=crop",
+        "photoAlt": "A living room with a dark wall and framed prints",
+        "name": "The living room",
+        "caption": "Linen throws in clay"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=900&q=75&auto=format&fit=crop",
+        "photoAlt": "A bed with patterned linen beside a bedside lamp",
+        "name": "The spare room",
+        "caption": "Linen sheets in ink"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=900&q=75&auto=format&fit=crop",
+        "photoAlt": "Timber wall shelves with plants and a framed print",
+        "name": "The study",
+        "caption": "Speckle tumblers, Kiln vases"
+      }
+    ]
+  },
+  "visitTitle": "Our stores",
+  "locations": [
+    {
+      "name": "Paddington",
+      "address": "128 Oxford Street, Paddington NSW 2021",
+      "detail": "Monday to Saturday 10 to 5:30, Sunday 11 to 4"
+    },
+    {
+      "name": "Armadale",
+      "address": "1042 High Street, Armadale VIC 3143",
+      "detail": "Monday to Saturday 10 to 5:30, Sunday 11 to 4"
+    },
+    {
+      "name": "Byron Bay",
+      "address": "3/12 Jonson Street, Byron Bay NSW 2481",
+      "detail": "Every day 9:30 to 5"
+    }
+  ],
+  "sections": [
+    "facts",
+    "products",
+    "story",
+    "plates",
+    "visit"
+  ],
+  "look": {
+    "facts": "bar",
+    "products": "feature",
+    "story": "banner",
+    "plates": "strip",
+    "visit": "invert",
+    "heads": "centre"
+  },
+  "showcase": [
+    {
+      "theme": "kiln",
+      "hero": "full"
+    }
+  ]
+}

@@ -99,7 +99,8 @@ section{padding-block:clamp(4rem,8vw,6.5rem)}
    process: line (default) | timeline | big | cards
    faq: stack (default) | grid | split
    contact: card (default) | invert | centre
-   heads: left (default) | centre | rule */
+   heads: left (default) | centre | rule
+   plates (the optional photo section): wide (default) | offset | strip */
 .look-creds-band .creds{background:var(--accent);color:var(--on-accent);border:0}
 .look-creds-band .creds .i{color:inherit}
 .look-creds-band .creds ul{justify-content:space-between;padding-block:1.6rem;font-size:1.08rem}
@@ -172,6 +173,21 @@ section{padding-block:clamp(4rem,8vw,6.5rem)}
 .look-heads-centre section > .wrap > .h2,.look-heads-centre section > .wrap > .lede{text-align:center;margin-inline:auto}
 .look-heads-rule section > .wrap > .h2{border-top:2px solid currentColor;padding-top:1.25rem}
 
+/* Optional enquiry form in the contact section (contact.formAction, with contact.options for a
+   select list): open fields on a hairline, no boxes. */
+.enquire{display:grid;gap:1.4rem}
+.enquire .form-title{font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:1.4rem}
+.enquire label{display:grid;gap:.35rem;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.enquire input,.enquire select,.enquire textarea{font:inherit;font-size:1.05rem;letter-spacing:0;text-transform:none;color:inherit;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:.6rem 0}
+.enquire option{color:#111;background:#fff}
+.enquire input:focus,.enquire select:focus,.enquire textarea:focus{outline:none;border-bottom-color:currentColor}
+.enquire .row2{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.enquire .btn{justify-self:start}
+.enquire small{color:var(--muted);font-size:.9rem}
+.direct-line{display:grid;gap:.3rem;margin-top:1.25rem}
+.direct-line a{text-decoration:none;font-weight:500;width:fit-content;overflow-wrap:anywhere}
+@media (max-width:600px){.enquire .row2{grid-template-columns:1fr}}
+
 footer{border-top:1px solid var(--line);padding-block:2.5rem;color:var(--muted);font-size:.9rem}
 footer .wrap{display:grid;gap:.5rem}
 
@@ -188,7 +204,7 @@ footer .wrap{display:grid;gap:.5rem}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#main"><span class="mono" aria-hidden="true">{{business.initials}}</span>{{business.name}}</a>
-    <nav class="nav" aria-label="Main"><a href="#services">Services</a>{{#fees}}{{#@first}}<a href="#fees">Fees</a>{{/@first}}{{/fees}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#contact">Contact</a></nav>
+    <nav class="nav" aria-label="Main"><a href="#services">Services</a>{{#fees}}{{#@first}}<a href="#fees">{{#feesNav}}{{feesNav}}{{/feesNav}}{{^feesNav}}Fees{{/feesNav}}</a>{{/@first}}{{/fees}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#contact">Contact</a></nav>
     <a class="btn btn-accent" href="{{#business.bookingUrl}}{{business.bookingUrl}}{{/business.bookingUrl}}{{^business.bookingUrl}}#contact{{/business.bookingUrl}}"><span class="lg">{{#business.ctaLabel}}{{business.ctaLabel}}{{/business.ctaLabel}}{{^business.ctaLabel}}Book a consultation{{/business.ctaLabel}}</span><span class="sm" aria-hidden="true">Book</span></a>
   </div>
 </header>
@@ -220,22 +236,24 @@ footer .wrap{display:grid;gap:.5rem}
     </div>
   </section><!--/s:services-->
 
-  <!--s:fees-->{{#fees}}{{#@first}}<section class="fees" id="fees"><div class="wrap"><div><h2 class="h2">Clear fees, agreed upfront</h2>{{#feesIntro}}<p class="lede">{{feesIntro}}</p>{{/feesIntro}}</div><ul class="fee-list">{{/@first}}
+  <!--s:plates-->{{#plates}}<section class="plates" id="work"><div class="wrap">{{#title}}<h2 class="h2">{{title}}</h2>{{/title}}{{#intro}}<p class="lede">{{intro}}</p>{{/intro}}<ul class="plate-grid">{{#photos}}<li><figure><img src="{{photo}}" alt="{{photoAlt}}" width="1400" height="1000" loading="lazy"><figcaption>{{#name}}<b>{{name}}</b>{{/name}}{{#caption}}<span>{{caption}}</span>{{/caption}}</figcaption></figure></li>{{/photos}}</ul></div></section>{{/plates}}<!--/s:plates-->
+
+  <!--s:fees-->{{#fees}}{{#@first}}<section class="fees" id="fees"><div class="wrap"><div><h2 class="h2">{{#feesTitle}}{{feesTitle}}{{/feesTitle}}{{^feesTitle}}Clear fees, agreed upfront{{/feesTitle}}</h2>{{#feesIntro}}<p class="lede">{{feesIntro}}</p>{{/feesIntro}}</div><ul class="fee-list">{{/@first}}
     <li><b>{{item}}</b><span class="amt num">{{price}}</span>{{#note}}<small>{{note}}</small>{{/note}}</li>
   {{#@last}}</ul></div></section>{{/@last}}{{/fees}}<!--/s:fees-->
 
-  <!--s:team-->{{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">Who you'll work with</h2><div class="team-grid">{{/@first}}
+  <!--s:team-->{{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">{{#teamTitle}}{{teamTitle}}{{/teamTitle}}{{^teamTitle}}Who you'll work with{{/teamTitle}}</h2><div class="team-grid">{{/@first}}
     <figure class="member" style="margin:0">
       {{#photo}}<div class="ph"><img src="{{photo}}" alt="{{name}}" width="560" height="700" loading="lazy"></div>{{/photo}}
       <figcaption><h3>{{name}}</h3><div class="role">{{role}}</div>{{#bio}}<p>{{bio}}</p>{{/bio}}</figcaption>
     </figure>
   {{#@last}}</div></div></section>{{/@last}}{{/team}}<!--/s:team-->
 
-  <!--s:process-->{{#process}}{{#@first}}<section class="steps-sec"><div class="wrap"><h2 class="h2">What happens next</h2><ol class="steps">{{/@first}}
+  <!--s:process-->{{#process}}{{#@first}}<section class="steps-sec"><div class="wrap"><h2 class="h2">{{#processTitle}}{{processTitle}}{{/processTitle}}{{^processTitle}}What happens next{{/processTitle}}</h2><ol class="steps">{{/@first}}
     <li><h3>{{title}}</h3><p>{{desc}}</p></li>
   {{#@last}}</ol></div></section>{{/@last}}{{/process}}<!--/s:process-->
 
-  <!--s:faq-->{{#faq}}{{#@first}}<section class="faq-sec"><div class="wrap"><h2 class="h2">Common questions</h2><div class="faq">{{/@first}}
+  <!--s:faq-->{{#faq}}{{#@first}}<section class="faq-sec"><div class="wrap"><h2 class="h2">{{#faqTitle}}{{faqTitle}}{{/faqTitle}}{{^faqTitle}}Common questions{{/faqTitle}}</h2><div class="faq">{{/@first}}
     <details{{#@first}} open{{/@first}}><summary>{{q}}</summary><p>{{a}}</p></details>
   {{#@last}}</div></div></section>{{/@last}}{{/faq}}<!--/s:faq-->
 
@@ -245,16 +263,26 @@ footer .wrap{display:grid;gap:.5rem}
         <h2 class="h2">{{#contactTitle}}{{contactTitle}}{{/contactTitle}}{{^contactTitle}}Talk to us{{/contactTitle}}</h2>
         {{#contactIntro}}<p class="lede">{{contactIntro}}</p>{{/contactIntro}}
         {{#business.address}}<address>{{business.address}}</address>{{/business.address}}
+        {{#contact.formAction}}<p class="direct-line"><a href="{{business.phoneHref}}">{{business.phone}}</a> <a href="mailto:{{business.email}}">{{business.email}}</a></p>{{/contact.formAction}}
         <div class="ctas">
           <a class="btn btn-accent" href="{{#business.bookingUrl}}{{business.bookingUrl}}{{/business.bookingUrl}}{{^business.bookingUrl}}{{business.phoneHref}}{{/business.bookingUrl}}">{{icon:calendar}} {{#business.ctaLabel}}{{business.ctaLabel}}{{/business.ctaLabel}}{{^business.ctaLabel}}Book a consultation{{/business.ctaLabel}}</a>
         </div>
       </div>
-      <div class="reach">
+      {{#contact.formAction}}<form class="enquire" action="{{contact.formAction}}" method="post">
+        {{#contact.formTitle}}<p class="form-title">{{contact.formTitle}}</p>{{/contact.formTitle}}
+        <label for="e-name">Name<input id="e-name" name="name" autocomplete="name" required></label>
+        <div class="row2"><label for="e-email">Email<input id="e-email" name="email" type="email" autocomplete="email" required></label><label for="e-phone">Phone<input id="e-phone" name="phone" type="tel" autocomplete="tel"></label></div>
+        {{#contact.options}}{{#@first}}<label for="e-pick">{{#contact.optionsLabel}}{{contact.optionsLabel}}{{/contact.optionsLabel}}{{^contact.optionsLabel}}I'm interested in{{/contact.optionsLabel}}<select id="e-pick" name="interest">{{/@first}}<option>{{.}}</option>{{#@last}}</select></label>{{/@last}}{{/contact.options}}
+        <label for="e-msg">{{#contact.messageLabel}}{{contact.messageLabel}}{{/contact.messageLabel}}{{^contact.messageLabel}}Anything else?{{/contact.messageLabel}}<textarea id="e-msg" name="message" rows="3"></textarea></label>
+        <button class="btn btn-accent" type="submit">{{#contact.submit}}{{contact.submit}}{{/contact.submit}}{{^contact.submit}}Send{{/contact.submit}}</button>
+        {{#contact.note}}<small>{{contact.note}}</small>{{/contact.note}}
+      </form>{{/contact.formAction}}
+      {{^contact.formAction}}<div class="reach">
         <span class="who">{{#business.contactName}}{{business.contactName}}{{#business.contactRole}}, {{business.contactRole}}{{/business.contactRole}}{{/business.contactName}}{{^business.contactName}}{{business.name}}{{/business.contactName}}</span>
         <a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
         <a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>
         <a class="save" href="{{business.vcard}}" download="{{business.name}}.vcf">{{icon:person}} Save contact to your phone</a>
-      </div>
+      </div>{{/contact.formAction}}
     </div>
   </section><!--/s:contact-->
 </main>

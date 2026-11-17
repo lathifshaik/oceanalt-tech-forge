@@ -1,0 +1,155 @@
+{
+  "template": "trades",
+  "slug": "torrens-and-pike",
+  "url": "https://torrenspike.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "business": {
+    "name": "Torrens & Pike",
+    "tagline": "Commercial construction and engineering",
+    "headline": "Hospitals, schools and workplaces, built without the drama.",
+    "intro": "A commercial builder and engineering contractor with 280 people in Sydney and Melbourne. Projects from $10 million to $250 million, as design and construct, managing contractor or early works.",
+    "phone": "(02) 8070 5500",
+    "email": "projects@torrenspike.example",
+    "hoursSummary": "Monday to Friday, 7:30am to 5:30pm",
+    "serviceArea": "Sydney / Melbourne / regional NSW and Victoria"
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A site team in hi-vis standing on a slab, seen from above",
+    "eyebrow": "Construction / Engineering / Since 1987",
+    "accent": "without the drama"
+  },
+  "labels": {
+    "servicesNav": "Sectors",
+    "platesNav": "Projects",
+    "areasNav": "Offices",
+    "quoteNav": "Contact",
+    "quote": "Talk to us about a project",
+    "services": "Sectors",
+    "process": "How we deliver",
+    "areas": "Where we work",
+    "formPlace": "Company",
+    "formMessage": "Tell us about the project",
+    "formSend": "Send enquiry",
+    "formNote": "Tenders and EOIs: tenders@torrenspike.example. Careers: careers@torrenspike.example.",
+    "callbar": "Call"
+  },
+  "credentials": [
+    {
+      "icon": "shield-check",
+      "title": "Safety, quality and environment",
+      "detail": "Certified to ISO 45001, 9001 and 14001"
+    },
+    {
+      "icon": "check-circle",
+      "title": "Federally accredited",
+      "detail": "Under the WHS Accreditation Scheme"
+    },
+    {
+      "icon": "person",
+      "title": "Apprentices on every site",
+      "detail": "And a cadetship for engineering students"
+    }
+  ],
+  "servicesIntro": "We build where the building can't stop working: live hospitals, occupied schools and offices with tenants upstairs.",
+  "services": [
+    {
+      "icon": "care",
+      "name": "Health",
+      "desc": "Day surgeries, wards and mental health units, staged around hospitals that stay open."
+    },
+    {
+      "icon": "pencil",
+      "name": "Education",
+      "desc": "Schools, TAFE and university buildings, programmed around term dates."
+    },
+    {
+      "icon": "briefcase",
+      "name": "Workplaces",
+      "desc": "Offices to twelve levels, from base build to final fit-out."
+    },
+    {
+      "icon": "home",
+      "name": "Civic and community",
+      "desc": "Libraries, aquatic centres and council buildings."
+    },
+    {
+      "icon": "wrench",
+      "name": "Engineering",
+      "desc": "Structural remediation, facade replacement and complex refurbishment."
+    }
+  ],
+  "plates": {
+    "title": "Selected projects",
+    "photos": [
+      {
+        "photo": "https://images.unsplash.com/photo-1574958269340-fa927503f3dd?w=1800&q=75&auto=format&fit=crop",
+        "photoAlt": "A new glass and metal health building at dusk",
+        "name": "Northern Beaches Health Hub",
+        "caption": "Health / Completed 2025"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1000&q=75&auto=format&fit=crop",
+        "photoAlt": "An angular white building against the sky",
+        "name": "Parramatta Learning Centre",
+        "caption": "Education / Completed 2024"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1541976590-713941681591?w=1000&q=75&auto=format&fit=crop",
+        "photoAlt": "A pale facade with rows of windows, looking up",
+        "name": "Docklands Workplace",
+        "caption": "Workplaces / Completed 2023"
+      }
+    ]
+  },
+  "process": [
+    {
+      "title": "In early",
+      "desc": "We join at design stage, price as the design develops, and find the problems while they're still on paper."
+    },
+    {
+      "title": "One team",
+      "desc": "The project manager who prices your job is the one who runs it on site."
+    },
+    {
+      "title": "A proper handover",
+      "desc": "Commissioning, defects and twelve months of building tuning, with the same people."
+    }
+  ],
+  "areasNote": "Head office in North Sydney, a full team in Melbourne, and site teams wherever the job is.",
+  "areas": [
+    "North Sydney (head office)",
+    "Melbourne CBD",
+    "Parramatta",
+    "Newcastle",
+    "Wollongong",
+    "Geelong"
+  ],
+  "quoteNote": "Tell us what you're planning, where it's at, and when you need it. A director will call you back.",
+  "contact": {
+    "formAction": "https://formspree.io/f/example"
+  },
+  "sections": [
+    "trust",
+    "services",
+    "plates",
+    "process",
+    "areas",
+    "quote"
+  ],
+  "look": {
+    "trust": "band",
+    "services": "list",
+    "process": "big",
+    "areas": "columns",
+    "quote": "invert",
+    "heads": "rule",
+    "plates": "wide"
+  },
+  "showcase": [
+    {
+      "theme": "girder",
+      "hero": "full"
+    }
+  ]
+}

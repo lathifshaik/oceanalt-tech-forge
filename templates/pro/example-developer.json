@@ -1,0 +1,211 @@
+{
+  "template": "pro",
+  "slug": "fenwick-hale",
+  "url": "https://fenwickhale.example/",
+  "_note": "Sample business for the gallery. Names, numbers and details are fictional.",
+  "business": {
+    "name": "Fenwick Hale",
+    "tagline": "The Merri, Northcote",
+    "headline": "Forty-eight homes on the edge of Merri Creek.",
+    "intro": "The Merri is six storeys of one, two and three-bedroom homes in Northcote, set back behind the creek's river red gums. Registrations are open. The display suite opens in February.",
+    "address": "Display suite, 212 High Street, Northcote VIC 3070",
+    "street": "212 High Street",
+    "suburb": "Northcote",
+    "state": "VIC",
+    "postcode": "3070",
+    "phone": "(03) 9070 4410",
+    "email": "themerri@fenwickhale.example",
+    "contactName": "Clare Odum",
+    "contactRole": "Sales, The Merri",
+    "ctaLabel": "Register your interest",
+    "disclaimer": "Sample site made by Oceanalt. Fenwick Hale and The Merri are fictional. Images are for illustration only."
+  },
+  "hero": {
+    "photo": "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A pale brick and timber building behind trees",
+    "eyebrow": "The Merri / Northcote / Registrations open",
+    "accent": "Merri Creek"
+  },
+  "credentials": [
+    {
+      "icon": "home",
+      "text": "48 homes over six levels"
+    },
+    {
+      "icon": "layout",
+      "text": "One, two and three bedrooms"
+    },
+    {
+      "icon": "bolt",
+      "text": "All electric, 7.5 star average energy rating"
+    },
+    {
+      "icon": "calendar",
+      "text": "Completion late 2028"
+    }
+  ],
+  "servicesTitle": "The residences",
+  "servicesIntro": "Every home faces north or east, every balcony is deep enough to eat on, and the floors are oak throughout.",
+  "services": [
+    {
+      "icon": "home",
+      "name": "One bedroom",
+      "desc": "62 to 70 m² inside and a 9 m² balcony. A study nook, and a bathroom with a window.",
+      "fee": "From $585,000"
+    },
+    {
+      "icon": "home",
+      "name": "Two bedrooms",
+      "desc": "82 to 96 m², two bathrooms, and a balcony the width of the living room. Most look over the creek.",
+      "fee": "From $845,000"
+    },
+    {
+      "icon": "home",
+      "name": "Three bedrooms",
+      "desc": "118 to 134 m² on the corners, with light from two sides and a separate laundry.",
+      "fee": "From $1.29m"
+    },
+    {
+      "icon": "leaf",
+      "name": "Garden homes",
+      "desc": "Four ground-floor homes with walled gardens and a gate onto the creek path.",
+      "fee": "From $1.12m"
+    },
+    {
+      "icon": "compass",
+      "name": "Penthouses",
+      "desc": "Two on level six, 186 m² each, with a 60 m² terrace over the treetops to the city.",
+      "fee": "By appointment"
+    }
+  ],
+  "plates": {
+    "title": "Designed from the creek, not the street",
+    "intro": "Architecture by Aldridge Kemp, landscape by Field Office. Images are artist's impressions.",
+    "photos": [
+      {
+        "photo": "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1800&q=75&auto=format&fit=crop",
+        "photoAlt": "A dark timber building behind a river red gum at dusk",
+        "name": "The creek side",
+        "caption": "Recycled brick, blackbutt battens, every gum kept"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&q=75&auto=format&fit=crop",
+        "photoAlt": "A pale living room with a timber wall and full-height windows",
+        "name": "Two-bedroom living",
+        "caption": "2.7 m ceilings, oak floors"
+      },
+      {
+        "photo": "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=1000&q=75&auto=format&fit=crop",
+        "photoAlt": "An open living room with a timber ceiling opening to a garden",
+        "name": "Garden home",
+        "caption": "Opens to a walled garden"
+      }
+    ]
+  },
+  "teamTitle": "Who's building it",
+  "team": [
+    {
+      "name": "Aldridge Kemp",
+      "role": "Architecture",
+      "bio": "Brick, timber and deep window reveals. The brief was a building that looks settled from the creek path on the day it opens."
+    },
+    {
+      "name": "Field Office",
+      "role": "Landscape",
+      "bio": "Kept the river red gums on the site and planted the creek edge with species from the Merri Creek corridor."
+    },
+    {
+      "name": "Brunt Construction",
+      "role": "Builder",
+      "bio": "On a fixed-price contract signed before a single home was offered for sale."
+    },
+    {
+      "name": "Fenwick Hale",
+      "role": "Developer",
+      "bio": "Building mid-rise homes in Melbourne's inner north since 2009. We hold a share of every building for ten years after handover."
+    }
+  ],
+  "processTitle": "From registration to keys",
+  "process": [
+    {
+      "title": "Register",
+      "desc": "Leave your details. Floorplans and the price list come to you before they go anywhere else."
+    },
+    {
+      "title": "Private preview, February 2027",
+      "desc": "Registered buyers see the display suite first, by appointment, a week before it opens to the public."
+    },
+    {
+      "title": "Contracts",
+      "desc": "A 10% deposit, held in trust until settlement. We'll show you where to check the off-the-plan duty concession."
+    },
+    {
+      "title": "Building, 2027 to 2028",
+      "desc": "Site updates every quarter, and two hard-hat tours for buyers."
+    },
+    {
+      "title": "Settlement, late 2028",
+      "desc": "A walk-through with the site manager before settlement, then your keys."
+    }
+  ],
+  "faqTitle": "What buyers ask",
+  "faq": [
+    {
+      "q": "Is there parking?",
+      "a": "Every two and three-bedroom home has a basement car space with an EV charger. One-bedroom buyers can add a space while they last."
+    },
+    {
+      "q": "What will the owners corporation fees be?",
+      "a": "Estimated at $3,800 to $6,900 a year, depending on the home. The full budget is in the contract pack."
+    },
+    {
+      "q": "Can I buy to rent it out?",
+      "a": "Yes. We can introduce you to two local property managers for a rental appraisal."
+    },
+    {
+      "q": "Are the pictures real?",
+      "a": "They're artist's impressions. The finished building and finishes may differ, and the contract sets out exactly what's included."
+    }
+  ],
+  "contactTitle": "Register your interest",
+  "contactIntro": "Floorplans and the full price list go to registered buyers first. We'll call to book a time at the display suite.",
+  "contact": {
+    "formAction": "https://formspree.io/f/example",
+    "optionsLabel": "I'm looking at",
+    "options": [
+      "One bedroom",
+      "Two bedrooms",
+      "Three bedrooms",
+      "A garden home",
+      "A penthouse",
+      "Not sure yet"
+    ],
+    "messageLabel": "Anything we should know?",
+    "submit": "Register",
+    "note": "We only use your details to contact you about The Merri."
+  },
+  "sections": [
+    "creds",
+    "services",
+    "plates",
+    "team",
+    "process",
+    "faq",
+    "contact"
+  ],
+  "look": {
+    "creds": "big",
+    "services": "rows",
+    "team": "list",
+    "process": "timeline",
+    "faq": "split",
+    "contact": "invert",
+    "plates": "wide"
+  },
+  "showcase": [
+    {
+      "theme": "plinth",
+      "hero": "full"
+    }
+  ]
+}

@@ -19,3 +19,35 @@ ul{margin:0;padding:0;list-style:none}
 .eyebrow{margin:0 0 1.1rem;font-size:.74rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;opacity:.8}
 h1 em.accent{font-style:italic;color:var(--accent-text,var(--accent))}
 @media (max-width:760px){.eyebrow{letter-spacing:.16em!important;font-size:.7rem}}
+
+/* Optional photo plates (site "plates": { title, intro, photos: [{ photo, photoAlt, name, caption }] }),
+   in the pro, studio, shop and trades layouts: big editorial photographs with a quiet caption, no boxes.
+   look.plates: wide (default: one full-width plate, then two side by side) | offset (two columns, the
+   second dropped half a plate) | strip (a sideways row that scrolls) */
+.plates{padding-block:clamp(4rem,9vw,7.5rem)}
+.plate-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(2rem,4vw,3rem) clamp(1rem,2.5vw,2rem);margin-top:clamp(2rem,5vw,3.5rem)}
+.plate-grid li{grid-column:span 6;min-width:0}
+.plate-grid li:nth-child(3n+1){grid-column:1/-1}
+.plate-grid figure{margin:0}
+.plate-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-img);background:var(--surface)}
+.plate-grid li:nth-child(3n+1) img{aspect-ratio:21/9}
+.plate-grid figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1.5rem;margin-top:1rem;font-size:.95rem;color:var(--muted)}
+.plate-grid figcaption b{color:var(--ink);font-weight:500;font-size:1.05rem}
+.look-plates-offset .plate-grid li,.look-plates-offset .plate-grid li:nth-child(3n+1){grid-column:span 6}
+.look-plates-offset .plate-grid li img,.look-plates-offset .plate-grid li:nth-child(3n+1) img{aspect-ratio:4/5}
+.look-plates-offset .plate-grid li:nth-child(even){margin-top:clamp(3rem,12vw,10rem)}
+.look-plates-strip .plate-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem}
+.look-plates-strip .plate-grid li{flex:0 0 min(82vw,30rem);scroll-snap-align:start}
+.look-plates-strip .plate-grid li img,.look-plates-strip .plate-grid li:nth-child(3n+1) img{aspect-ratio:3/4}
+@media (max-width:760px){
+  .plate-grid li,.look-plates-offset .plate-grid li,.look-plates-offset .plate-grid li:nth-child(3n+1){grid-column:1/-1;margin-top:0!important}
+  .plate-grid li:nth-child(3n+1) img{aspect-ratio:4/3}
+}
+
+/* Optional list of locations (site "locations": [{ name, address, detail }]) in the studio and shop
+   layouts, for a business with more than one address. */
+.locs{display:grid;margin-top:2rem;border-top:1px solid var(--line)}
+.locs li{display:grid;gap:.15rem;padding-block:1.1rem;border-bottom:1px solid var(--line)}
+.locs b{font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);font-size:1.3rem;line-height:1.2}
+.locs span{color:var(--muted)}
+.locs small{font-size:.9rem;color:var(--muted)}

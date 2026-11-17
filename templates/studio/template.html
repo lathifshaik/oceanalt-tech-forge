@@ -129,7 +129,8 @@ section{padding-block:clamp(4rem,9vw,7rem)}
    team: grid (default) | circles | strip | list
    visit: split (default) | invert | wide
    band: box (default) | giant | line
-   heads: left (default) | centre | rule */
+   heads: left (default) | centre | rule
+   plates (the optional photo section): wide (default) | offset | strip */
 .look-treatments-menu .treat{background:var(--bg)}
 .look-treatments-menu .groups{grid-template-columns:1fr;gap:0}
 .look-treatments-menu .group{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:0 clamp(2rem,6vw,5rem);background:none;border-radius:0;border-top:1px solid var(--ink);padding:2.25rem 0}
@@ -218,7 +219,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
   <div class="wrap">
     <a class="brand" href="#main">{{icon:sparkle}} {{business.name}}</a>
     <nav class="nav" aria-label="Main"><a href="#treatments">{{#business.servicesLabel}}{{business.servicesLabel}}{{/business.servicesLabel}}{{^business.servicesLabel}}Treatments{{/business.servicesLabel}}</a>{{#gift}}<a href="#gift">Gift vouchers</a>{{/gift}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#visit">Visit</a></nav>
-    <a class="btn btn-light" href="{{business.bookingUrl}}">Book online</a>
+    <a class="btn btn-light" href="{{business.bookingUrl}}">{{#business.bookLabel}}{{business.bookLabel}}{{/business.bookLabel}}{{^business.bookLabel}}Book online{{/business.bookLabel}}</a>
   </div>
 </header>
 
@@ -229,7 +230,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
       <h1>{{business.headline}}</h1>
       <p>{{business.intro}}</p>
       <div class="ctas">
-        <a class="btn btn-accent" href="{{business.bookingUrl}}">{{icon:calendar}} Book online</a>
+        <a class="btn btn-accent" href="{{business.bookingUrl}}">{{icon:calendar}} {{#business.bookLabel}}{{business.bookLabel}}{{/business.bookLabel}}{{^business.bookLabel}}Book online{{/business.bookLabel}}</a>
         <a class="btn btn-light" href="#treatments">{{#business.servicesCta}}{{business.servicesCta}}{{/business.servicesCta}}{{^business.servicesCta}}See treatments{{/business.servicesCta}}</a>
       </div>
     </div>
@@ -261,7 +262,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
           <div class="tx">
             <div><b>{{name}}</b>{{#duration}}<div class="meta">{{duration}}{{#note}} &middot; {{note}}{{/note}}</div>{{/duration}}</div>
             <span class="price num">{{price}}</span>
-            <a href="{{#bookUrl}}{{bookUrl}}{{/bookUrl}}{{^bookUrl}}{{business.bookingUrl}}{{/bookUrl}}">Book {{icon:arrow-right}}</a>
+            <a href="{{#bookUrl}}{{bookUrl}}{{/bookUrl}}{{^bookUrl}}{{business.bookingUrl}}{{/bookUrl}}">{{#business.itemCta}}{{business.itemCta}}{{/business.itemCta}}{{^business.itemCta}}Book{{/business.itemCta}} {{icon:arrow-right}}</a>
           </div>
           {{/items}}
         </div>
@@ -289,23 +290,26 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
   </section>
   {{/gift}}<!--/s:gift-->
 
-  <!--s:team-->{{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">The team</h2><div class="team-grid">{{/@first}}
+  <!--s:team-->{{#team}}{{#@first}}<section id="team"><div class="wrap"><h2 class="h2">{{#teamTitle}}{{teamTitle}}{{/teamTitle}}{{^teamTitle}}The team{{/teamTitle}}</h2><div class="team-grid">{{/@first}}
     <figure class="member" style="margin:0">
       {{#photo}}<div class="ph"><img src="{{photo}}" alt="{{name}}" width="800" height="1000" loading="lazy"></div>{{/photo}}
       <h3>{{name}}</h3><p>{{role}}</p>
     </figure>
   {{#@last}}</div></div></section>{{/@last}}{{/team}}<!--/s:team-->
 
+  <!--s:plates-->{{#plates}}<section class="plates" id="work"><div class="wrap">{{#title}}<h2 class="h2">{{title}}</h2>{{/title}}{{#intro}}<p class="lede">{{intro}}</p>{{/intro}}<ul class="plate-grid">{{#photos}}<li><figure><img src="{{photo}}" alt="{{photoAlt}}" width="1400" height="1000" loading="lazy"><figcaption>{{#name}}<b>{{name}}</b>{{/name}}{{#caption}}<span>{{caption}}</span>{{/caption}}</figcaption></figure></li>{{/photos}}</ul></div></section>{{/plates}}<!--/s:plates-->
+
   <!--s:visit--><section class="info" id="visit">
     <div class="wrap">
       <div>
-        <h2 class="h2">Find us</h2>
+        <h2 class="h2">{{#visitTitle}}{{visitTitle}}{{/visitTitle}}{{^visitTitle}}Find us{{/visitTitle}}</h2>
         <p class="addr">{{business.address}}</p>
         <div class="contact">
           {{#business.phone}}<a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>{{/business.phone}}
           {{#business.email}}<a href="mailto:{{business.email}}">{{icon:mail}} {{business.email}}</a>{{/business.email}}
           <a href="{{business.mapUrl}}">{{icon:pin}} Get directions</a>
         </div>
+        {{#locations}}{{#@first}}<ul class="locs">{{/@first}}<li><b>{{name}}</b><span>{{address}}</span>{{#detail}}<small>{{detail}}</small>{{/detail}}</li>{{#@last}}</ul>{{/@last}}{{/locations}}
         {{#business.hours}}{{#@first}}<ul class="hours num" aria-label="Opening hours">{{/@first}}<li data-day="{{dayIndex}}"><span>{{day}}</span><span>{{#open}}{{open}} to {{close}}{{/open}}{{^open}}Closed{{/open}}</span></li>{{#@last}}</ul>{{/@last}}{{/business.hours}}
       </div>
       <div class="policies">
@@ -317,7 +321,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
   <!--s:band--><section class="cta-band">
     <div class="wrap">
       <h2>{{#closingLine}}{{closingLine}}{{/closingLine}}{{^closingLine}}Ready when you are.{{/closingLine}}</h2>
-      <a class="btn" href="{{business.bookingUrl}}">{{icon:calendar}} Book online</a>
+      <a class="btn" href="{{business.bookingUrl}}">{{icon:calendar}} {{#business.bookLabel}}{{business.bookLabel}}{{/business.bookLabel}}{{^business.bookLabel}}Book online{{/business.bookLabel}}</a>
     </div>
   </section><!--/s:band-->
 </main>

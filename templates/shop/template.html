@@ -101,7 +101,8 @@ section{padding-block:clamp(4rem,8vw,6.5rem)}
    story: split (default) | banner | quote
    reviews: cards (default) | feature | line
    visit: split (default) | invert
-   heads: left (default) | centre | rule */
+   heads: left (default) | centre | rule
+   plates (the optional photo section): wide (default) | offset | strip */
 .look-facts-band .facts{background:var(--accent-2);color:var(--on-accent-2);border:0}
 .look-facts-band .facts small{color:inherit;opacity:.75}
 .look-facts-band .facts .i{color:var(--accent)}
@@ -230,6 +231,8 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
   </section>
   {{/story}}<!--/s:story-->
 
+  <!--s:plates-->{{#plates}}<section class="plates" id="work"><div class="wrap">{{#title}}<h2 class="h2">{{title}}</h2>{{/title}}{{#intro}}<p class="lede">{{intro}}</p>{{/intro}}<ul class="plate-grid">{{#photos}}<li><figure><img src="{{photo}}" alt="{{photoAlt}}" width="1400" height="1000" loading="lazy"><figcaption>{{#name}}<b>{{name}}</b>{{/name}}{{#caption}}<span>{{caption}}</span>{{/caption}}</figcaption></figure></li>{{/photos}}</ul></div></section>{{/plates}}<!--/s:plates-->
+
   <!--s:reviews-->{{#reviews}}{{#@first}}<section><div class="wrap"><h2 class="h2">Kind words</h2><div class="rv">{{/@first}}
     <figure><div class="stars" role="img" aria-label="5 stars">{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}{{icon:star}}</div><q>{{quote}}</q><figcaption>{{name}}, {{source}}</figcaption></figure>
   {{#@last}}</div></div></section>{{/@last}}{{/reviews}}<!--/s:reviews-->
@@ -237,7 +240,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
   <!--s:visit--><section class="visit" id="visit">
     <div class="wrap">
       <div>
-        <h2 class="h2">{{#business.address}}Visit the shop{{/business.address}}{{^business.address}}Get in touch{{/business.address}}</h2>
+        <h2 class="h2">{{#visitTitle}}{{visitTitle}}{{/visitTitle}}{{^visitTitle}}{{#business.address}}Visit the shop{{/business.address}}{{^business.address}}Get in touch{{/business.address}}{{/visitTitle}}</h2>
         {{#business.address}}<p class="addr">{{business.address}}</p>{{/business.address}}
         <div class="contact">
           <a href="{{business.phoneHref}}">{{icon:phone}} {{business.phone}}</a>
@@ -245,6 +248,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
           {{#business.instagram}}<a href="https://instagram.com/{{business.instagram}}">{{icon:camera}} @{{business.instagram}}</a>{{/business.instagram}}
           {{#business.mapUrl}}<a href="{{business.mapUrl}}">{{icon:pin}} Get directions</a>{{/business.mapUrl}}
         </div>
+        {{#locations}}{{#@first}}<ul class="locs">{{/@first}}<li><b>{{name}}</b><span>{{address}}</span>{{#detail}}<small>{{detail}}</small>{{/detail}}</li>{{#@last}}</ul>{{/@last}}{{/locations}}
       </div>
       {{#business.hours}}{{#@first}}<ul class="hours num" aria-label="Opening hours">{{/@first}}<li data-day="{{dayIndex}}"><span>{{day}}</span><span>{{#open}}{{open}} to {{close}}{{/open}}{{^open}}Closed{{/open}}</span></li>{{#@last}}</ul>{{/@last}}{{/business.hours}}
     </div>

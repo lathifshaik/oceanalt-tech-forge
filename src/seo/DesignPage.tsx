@@ -21,7 +21,7 @@ const PRINCIPLES: { title: string; body: string }[] = [
 const PRACTICE: { name: string; icon: IconName; photo: string; line: string; points: string[]; href: string; more: string }[] = [
   {
     name: "Identity",
-    icon: "sparkle",
+    icon: "svc-brand",
     photo: "/photos/brand.webp",
     line: "A mark, type and colour system that holds together from a phone screen to a shopfront.",
     points: ["Logo refresh or new mark", "Type, colour and layout system", "Guidelines and templates"],
@@ -30,7 +30,7 @@ const PRACTICE: { name: string; icon: IconName; photo: string; line: string; poi
   },
   {
     name: "Websites",
-    icon: "layout",
+    icon: "svc-web",
     photo: "/photos/websites.webp",
     line: "Sites designed around what customers came to do, then built by the same team.",
     points: ["Structure and copy", "Page design and components", "Built and tested in-house"],
@@ -39,7 +39,7 @@ const PRACTICE: { name: string; icon: IconName; photo: string; line: string; poi
   },
   {
     name: "Product and app UI",
-    icon: "bolt",
+    icon: "svc-software",
     photo: "/photos/software.webp",
     line: "Portals, dashboards and tools that staff and customers can use without a manual.",
     points: ["Flows and wireframes", "Interface design system", "Prototypes you can click through"],

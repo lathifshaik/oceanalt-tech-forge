@@ -256,9 +256,9 @@ function Why() {
 // The free website: paid for by a platform fee on payments, never by an
 // invoice. The rate is in the written agreement, not on the site.
 const PAY_STEPS = [
-  { icon: "layout" as IconName, title: "We design, build and host your site", body: "At no charge, to the same standard as any project we quote." },
-  { icon: "card" as IconName, title: "Customers pay through our gateway", body: "Cards, Apple Pay and Google Pay, paid straight into your own account." },
-  { icon: "chart" as IconName, title: "We take a small fee per payment", body: "A platform fee on each payment, agreed in writing. When nothing sells, you pay nothing." },
+  { icon: "svc-web" as IconName, title: "We design, build and host your site", body: "At no charge, to the same standard as any project we quote." },
+  { icon: "svc-payments" as IconName, title: "Customers pay through our gateway", body: "Cards, Apple Pay and Google Pay, paid straight into your own account." },
+  { icon: "step-improve" as IconName, title: "We take a small fee per payment", body: "A platform fee on each payment, agreed in writing. When nothing sells, you pay nothing." },
 ];
 
 function FreeSite() {

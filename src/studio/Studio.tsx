@@ -61,8 +61,9 @@ function useReveal<T extends HTMLElement>() {
   return ref;
 }
 
+// Plain pill buttons: no icon-in-a-circle (a stock AI-site pattern, founder 17 Nov 2026).
 function Arrow() {
-  return <span className="s-btn-i" aria-hidden="true"><Icon name="arrow-up-right" /></span>;
+  return null;
 }
 
 export function StudioNav({ home = true }: { home?: boolean }) {
@@ -122,7 +123,6 @@ function Hero() {
   return (
     <section className="s-hero" aria-labelledby="s-hero-h">
       <div className="s-wrap s-hero-copy">
-        <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Design and technology studio, Sydney and Melbourne</p>
         <h1 id="s-hero-h">We design and build what your brand runs on</h1>
         <p className="s-hero-sub">Brand, websites, software, payments and voice agents from one studio. The people who design it are the people who build it, and they're still here after launch.</p>
         <div className="s-ctas">
@@ -165,15 +165,12 @@ const TOOLS = [
 ];
 
 function Tools() {
-  const row = (hidden: boolean) => (
-    <ul aria-hidden={hidden || undefined}>
-      {TOOLS.map(([name, file]) => <li key={file}><img src={`/logos/${file}.svg`} alt={hidden ? "" : name} title={name} width={30} height={30} loading="lazy" /></li>)}
-    </ul>
-  );
   return (
-    <section className="s-tools" aria-labelledby="s-tools-h">
-      <h2 id="s-tools-h" className="s-small">Built on and connected to the tools you already trust</h2>
-      <div className="s-tools-track">{row(false)}{row(true)}</div>
+    <section className="s-tools s-wrap" aria-labelledby="s-tools-h">
+      <h2 id="s-tools-h" className="s-small">What we build with and connect to</h2>
+      <ul className="s-tools-row">
+        {TOOLS.map(([name, file]) => <li key={file}><img src={`/logos/${file}.svg`} alt={name} title={name} width={30} height={30} loading="lazy" /></li>)}
+      </ul>
     </section>
   );
 }
@@ -200,9 +197,9 @@ function Services() {
           <article className="s-svc" key={s.id}>
             <div className="s-svc-art" data-svc={s.id}>
               <img src={s.photo} alt="" loading="lazy" width={900} height={1125} {...showWhenLoaded} />
-              <span className="s-svc-glyph" aria-hidden="true"><Icon name={s.icon} /></span>
+              <Icon name={s.icon} className="i s-svc-glyph" />
             </div>
-            <h3 className="s-label">{s.name}</h3>
+            <h3 className="s-svc-name">{s.name}</h3>
             <p>{s.line}</p>
           </article>
         ))}
@@ -211,43 +208,26 @@ function Services() {
   );
 }
 
-// A short, made-up exchange that shows what working with one team feels like.
-const CHAT: { who: "you" | "us"; text: string }[] = [
-  { who: "you", text: "Can the new range go live on Thursday?" },
-  { who: "us", text: "Yes. The pages are designed, I'll build them tomorrow and send you a preview." },
-  { who: "you", text: "And the booking flow change?" },
-  { who: "us", text: "Same preview. One link, one person to call." },
-];
-
 function Why() {
   const ref = useReveal<HTMLElement>();
   return (
     <section id="studio" className="s-sec s-why s-reveal" ref={ref} aria-labelledby="s-why-h">
       <div className="s-wrap s-split">
         <div>
-          <p className="s-label">Why one studio</p>
           <h2 id="s-why-h" className="s-h2">Handovers are where projects go wrong</h2>
           <p className="s-lede">When the designer, the developers and whoever looks after the site work for different companies, every change becomes a meeting. Here it's one team, from the first sketch to the hundredth update.</p>
           <ul className="s-rows">
-            {WHY.map((w) => (
+            {WHY.map((w, i) => (
               <li key={w.title}>
-                <span className="s-sq" aria-hidden="true"><Icon name={w.icon} /></span>
+                <span className="s-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                 <div><b>{w.title}</b><span>{w.body}</span></div>
               </li>
             ))}
           </ul>
         </div>
-        <figure className="s-panel s-chat" aria-label="Example conversation">
-          <div className="s-chat-list">
-            {CHAT.map((m, i) => (
-              <div key={i} className={`s-msg is-${m.who}`} style={{ transitionDelay: `${300 + i * 450}ms` }}>
-                {m.who === "you" && <small>You</small>}
-                <p>{m.text}</p>
-              </div>
-            ))}
-          </div>
-          <figcaption>An example of how changes work</figcaption>
-        </figure>
+        <div className="s-photo" aria-hidden="true">
+          <img src="/photos/studio-1.webp" alt="" width={1600} height={1000} loading="lazy" {...showWhenLoaded} />
+        </div>
       </div>
     </section>
   );
@@ -267,13 +247,12 @@ function FreeSite() {
     <section id="payments" className="s-sec s-free s-reveal" ref={ref} aria-labelledby="s-free-h">
       <div className="s-wrap s-split">
         <div>
-          <p className="s-label">Payments</p>
           <h2 id="s-free-h" className="s-h2">The website is free. We earn when you do.</h2>
           <p className="s-lede">Take payments through our gateway and there's no bill for the site. We take a small platform fee on each payment instead, so we only do well when your customers buy.</p>
           <ul className="s-rows">
-            {PAY_STEPS.map((s) => (
+            {PAY_STEPS.map((s, i) => (
               <li key={s.title}>
-                <span className="s-sq" aria-hidden="true"><Icon name={s.icon} /></span>
+                <span className="s-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                 <div><b>{s.title}</b><span>{s.body}</span></div>
               </li>
             ))}
@@ -299,39 +278,19 @@ function FreeSite() {
 }
 
 function Process() {
-  const ref = useReveal<HTMLElement>();
-  const [on, setOn] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const el = ref.current;
-    if (!el) return;
-    let t: number | undefined;
-    const io = new IntersectionObserver(([e]) => {
-      window.clearInterval(t);
-      if (e.isIntersecting) t = window.setInterval(() => setOn((n) => (n + 1) % STEPS.length), 1900);
-    });
-    io.observe(el);
-    return () => { io.disconnect(); window.clearInterval(t); };
-  }, [ref]);
   return (
-    <section className="s-sec s-process s-reveal" ref={ref} aria-labelledby="s-proc-h">
-      <div className="s-wrap s-split is-flip">
-        <div className="s-panel s-steps">
-          <ol>
-            {STEPS.map((s, i) => (
-              <li key={s.title} className={i === on ? "is-on" : ""}>
-                <span className="s-sq" aria-hidden="true"><Icon name={s.icon} /></span>
-                {s.title}
-              </li>
-            ))}
-          </ol>
-        </div>
+    <section className="s-sec s-process" aria-labelledby="s-proc-h">
+      <div className="s-wrap s-split is-top">
         <div className="s-process-copy">
-          <p className="s-label">How it runs</p>
           <h2 id="s-proc-h" className="s-h2">From the first call to launch, and after</h2>
           <p className="s-lede">You get a written scope and a fixed quote before anything starts. Then you see the work as it's made, on a private link, and nothing goes live until you've signed it off.</p>
-          <a className="s-btn s-btn-ink" href="#start">Start a project <Arrow /></a>
+          <a className="s-btn s-btn-ink" href="#start">Start a project</a>
         </div>
+        <ol className="s-steps-list">
+          {STEPS.map((s, i) => (
+            <li key={s.title}><span className="s-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>{s.title}</li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -378,7 +337,7 @@ function Founder() {
   return (
     <section className="s-sec s-founder s-reveal" ref={ref} aria-labelledby="s-founder-h">
       <div className="s-wrap">
-        <p className="s-label" id="s-founder-h">Who you'll work with</p>
+        <h2 className="sr" id="s-founder-h">Who you'll work with</h2>
         <blockquote>
           <p>"I keep the studio small on purpose. You deal with me from the first call, I sign off every page before it goes live, and I pick up the phone."</p>
         </blockquote>
@@ -397,7 +356,6 @@ function Faq() {
     <section id="faq" className="s-sec s-faq" aria-labelledby="s-faq-h">
       <div className="s-wrap s-split is-top">
         <div>
-          <p className="s-label">FAQ</p>
           <h2 id="s-faq-h" className="s-h2">Questions?<br />Fair enough.</h2>
           <p className="s-lede">Something else? Email <a className="s-link" href={`mailto:${EMAIL}`}>{EMAIL}</a> or call <a className="s-link" href={PHONE_HREF}>{PHONE}</a>.</p>
         </div>
@@ -456,7 +414,6 @@ function Start() {
     <section id="start" className="s-sec s-start" aria-labelledby="s-start-h">
       <div className="s-wrap s-split is-top">
         <div>
-          <p className="s-label">Start a project</p>
           <h2 id="s-start-h" className="s-h2">Tell us what you're working on</h2>
           <p className="s-lede">A few lines is plenty. Lathif reads every enquiry himself and replies the same business day to set up a first call.</p>
           <ul className="s-contact">
@@ -506,7 +463,6 @@ export function StudioFooter({ home = true }: { home?: boolean }) {
     <footer className="s-foot">
       <div className="s-wrap">
         <div className="s-foot-cta">
-          <p className="s-label">Have something in mind?</p>
           <h2 className="s-h2">Let's talk it through.</h2>
           <a className="s-btn s-btn-white" href={`${base}#start`}>Start a project <Arrow /></a>
         </div>

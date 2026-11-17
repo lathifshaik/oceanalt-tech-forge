@@ -49,7 +49,6 @@ export function DesignsPage() {
       <main id="main" className="s-page sp sp-dz">
         <section className="s-hero sp-hero" aria-labelledby="sp-h1">
           <div className="s-wrap s-hero-copy">
-            <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Sample designs</p>
             <h1 id="sp-h1">Every design, newest first</h1>
             <p className="s-hero-sub">Website designs made for fictional businesses, to show the range of what we draw and build. A client's design is made for them and never reused.</p>
             <ul className="sp-stats">

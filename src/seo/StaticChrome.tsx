@@ -17,7 +17,7 @@ const LINKS: [string, string][] = [
 ];
 
 export function Arrow() {
-  return <span className="s-btn-i" aria-hidden="true"><Icon name="arrow-up-right" /></span>;
+  return null; // plain pill buttons, no icon-in-a-circle
 }
 
 export function StaticNav({ current }: { current?: string }) {
@@ -103,7 +103,7 @@ export function Art({ src, icon, className = "" }: { src: string; icon: IconName
   return (
     <div className={`sp-art ${className}`}>
       <span className="sp-art-img" dangerouslySetInnerHTML={{ __html: `<img src="${src}" alt="" width="1200" height="900" loading="lazy" decoding="async" onerror="this.hidden=true">` }} />
-      <span className="s-svc-glyph" aria-hidden="true"><Icon name={icon} /></span>
+      <Icon name={icon} className="i s-svc-glyph" />
     </div>
   );
 }

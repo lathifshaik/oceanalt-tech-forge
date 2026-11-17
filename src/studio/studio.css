@@ -72,9 +72,7 @@ html:has(.s-page) body, .s-page { background: #fff; }
 /* Hero: one centred statement, then the work */
 .s-hero { padding-top: clamp(3.5rem, 7vh, 6rem); overflow: hidden; }
 .s-hero-copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.s-kicker { display: inline-flex; align-items: center; gap: .6rem; font-size: .92rem; color: #2b3237; animation: s-up .9s var(--s-ease) both; }
-.s-dot { width: .5rem; height: .5rem; border-radius: 50%; background: #3f8f7a; box-shadow: 0 0 0 4px rgb(63 143 122 / .16); }
-.s-hero h1 { max-width: 15ch; margin-top: 1.5rem; font-size: clamp(2.6rem, min(1rem + 5vw, 9.5vh), 5.6rem); font-weight: 500; line-height: .95; letter-spacing: -.045em; text-transform: uppercase; text-wrap: balance; color: var(--s-ink); animation: s-up 1s var(--s-ease) .08s both; }
+.s-hero h1 { max-width: 15ch; margin-top: 0; font-size: clamp(2.6rem, min(1rem + 5vw, 9.5vh), 5.6rem); font-weight: 500; line-height: .95; letter-spacing: -.045em; text-transform: uppercase; text-wrap: balance; color: var(--s-ink); animation: s-up 1s var(--s-ease) .08s both; }
 .s-hero-sub { max-width: 37rem; margin-top: 1.75rem !important; font-size: clamp(1.05rem, 1rem + .35vw, 1.25rem); line-height: 1.55; color: #2b3237; text-wrap: pretty; animation: s-up 1s var(--s-ease) .16s both; }
 .s-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 2.25rem; animation: s-up 1s var(--s-ease) .24s both; }
 
@@ -269,3 +267,38 @@ details[open] .s-plus { transform: rotate(45deg); }
 
 /* Acknowledgement of Country, above the footer base */
 .s-ack { max-width: 46rem; margin: 0; padding-top: 2rem; border-top: 1px solid rgb(255 255 255 / .14); font-size: .88rem; line-height: 1.6; color: rgb(255 255 255 / .72); }
+
+/* ── Plain, editorial details (founder, 17 Nov 2026: remove stock AI-site
+   patterns). No arrow-in-a-circle buttons, no glass icon tiles, no gradient
+   panels or footer, no icon squares on lists, no slide-in reveals, no
+   animated "trusted tools" ticker. Flat colour, numbers, lines, photos. ── */
+.s-btn-i { display: none; }
+.s-btn:has(.s-btn-i) { padding-right: 1.35rem; }
+.s-btn:hover .s-btn-i { transform: none; }
+
+.s-tools-row { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(2rem, 5vw, 4.5rem); margin: 2rem 0 0; padding: 0; list-style: none; }
+.s-tools-row img { width: 1.75rem; height: 1.75rem; filter: grayscale(1) contrast(1.2); opacity: .7; }
+
+.s-svc-art { background: #f1f2f2; }
+.s-svc-glyph { position: relative; width: 3.25rem; height: 3.25rem; color: var(--s-ink); stroke-width: 1.25; }
+.s-svc-art img.is-loaded + .s-svc-glyph { display: none; }
+.s-svc-name { margin-top: 1.25rem; font-size: 1.15rem; font-weight: 500; letter-spacing: -.02em; color: var(--s-ink); }
+
+.s-num { flex: none; width: 2.5rem; padding-top: .1rem; font-size: .9rem; font-variant-numeric: tabular-nums; color: var(--s-mute); }
+
+.s-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1rem; background: var(--s-teal); }
+.s-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s var(--s-ease); }
+.s-photo img.is-loaded { opacity: 1; }
+
+.s-pay { background: var(--s-teal); }
+.s-pay-sheet, .is-in .s-pay-sheet { opacity: 1; transform: none; transition: none; box-shadow: none; }
+
+.s-steps-list { display: grid; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+.s-steps-list li { display: flex; align-items: baseline; padding-block: 1.35rem; border-top: 1px solid var(--s-line); font-size: clamp(1.1rem, 1rem + .4vw, 1.35rem); letter-spacing: -.015em; color: var(--s-ink); }
+.s-steps-list li:last-child { border-bottom: 1px solid var(--s-line); }
+.s-process-copy .s-btn { margin-top: 2rem; }
+
+.s-foot { background: var(--s-teal); }
+.s-case-kind { letter-spacing: 0; text-transform: none; font-size: .9rem; font-weight: 500; }
+
+.s-reveal > .s-wrap, .s-reveal .s-svc-track { opacity: 1; transform: none; transition: none; }

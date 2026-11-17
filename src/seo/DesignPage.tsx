@@ -57,7 +57,6 @@ export function DesignPage() {
       <main id="main" className="s-page sp">
         <section className="s-hero sp-hero" aria-labelledby="sp-h1">
           <div className="s-wrap s-hero-copy">
-            <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Design practice</p>
             <h1 id="sp-h1">Clear design for brands with a name to keep</h1>
             <p className="s-hero-sub">Identity, websites and product screens for established Australian brands. Designed and built by one small team in Sydney and Melbourne, and never reused for anyone else.</p>
             <div className="s-ctas">
@@ -70,7 +69,6 @@ export function DesignPage() {
         <section className="s-sec" aria-labelledby="sp-how">
           <div className="s-wrap s-split is-top">
             <div className="sp-sticky">
-              <p className="s-label">How we design</p>
               <h2 id="sp-how" className="s-h2">Four rules we don't bend</h2>
               <p className="s-lede">Good design for an established brand is mostly restraint: keep what people already recognise, remove what gets in their way, and make the rest work properly.</p>
             </div>
@@ -87,13 +85,12 @@ export function DesignPage() {
 
         <section className="s-sec sp-band" aria-labelledby="sp-what">
           <div className="s-wrap">
-            <p className="s-label">What we design</p>
             <h2 id="sp-what" className="s-h2 sp-h2-wide">Three kinds of work, one way of doing it</h2>
             <div className="sp-practice">
               {PRACTICE.map((p) => (
                 <article key={p.name} className="sp-card">
                   <Art src={p.photo} icon={p.icon} />
-                  <h3 className="s-label">{p.name}</h3>
+                  <h3 className="s-svc-name">{p.name}</h3>
                   <p className="sp-card-line">{p.line}</p>
                   <ul className="sp-ticks">
                     {p.points.map((x) => <li key={x}><Icon name="check" /> {x}</li>)}
@@ -109,7 +106,6 @@ export function DesignPage() {
           <div className="s-wrap">
             <div className="s-head-row">
               <div>
-                <p className="s-label">Selected work</p>
                 <h2 id="sp-work" className="s-h2 sp-h2-gap">Sample designs, each made for one business</h2>
               </div>
               <a className="s-btn s-btn-soft" href="/designs/">See all {total} designs <Arrow /></a>

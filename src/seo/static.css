@@ -155,3 +155,16 @@ a:hover .sp-open, a:focus-visible .sp-open { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .sp *, .sp-menu * , .sp-menu a { animation: none !important; transition: none !important; }
 }
+
+/* Plain, editorial details (founder, 17 Nov 2026: no stock AI-site patterns):
+   lines instead of boxes, plain text instead of pill chips, flat colour. */
+.sp-art { background: #f1f2f2; }
+.sp-rules { gap: 0; }
+.sp-rules li { padding: 1.6rem 0; border-radius: 0; background: none; border-top: 1px solid var(--s-line); }
+.sp-rules li:last-child { border-bottom: 1px solid var(--s-line); }
+.sp-offers { gap: 0 clamp(2rem, 5vw, 4rem); }
+.sp-offers li { min-height: 0; padding: 1.75rem 0; border-radius: 0; background: none; border-top: 1px solid var(--s-line); }
+.sp-stats { gap: 0; }
+.sp-stats li { padding: 0; border-radius: 0; background: none; }
+.sp-stats li + li::before { content: "·"; margin-inline: .7rem; color: var(--s-mute); }
+.sp-others-h { margin: 0; font-size: 1.1rem; font-weight: 500; letter-spacing: -.02em; color: var(--s-ink); }

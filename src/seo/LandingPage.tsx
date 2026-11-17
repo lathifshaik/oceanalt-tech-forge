@@ -31,7 +31,6 @@ export function LandingPage({ page }: { page: Landing }) {
             </nav>
             <div className="s-split">
               <div>
-                <p className="s-label">{page.nav}</p>
                 <h1 id="sp-h1" className="sp-h1">{page.h1}</h1>
                 <p className="s-lede">{page.intro}</p>
                 <div className="sp-ctas">
@@ -46,7 +45,6 @@ export function LandingPage({ page }: { page: Landing }) {
 
         <section className="s-sec sp-band" aria-labelledby="sp-offer">
           <div className="s-wrap">
-            <p className="s-label">What's included</p>
             <h2 id="sp-offer" className="s-h2 sp-h2-wide">What we do for you</h2>
             <ul className="sp-offers">
               {page.offers.map((o, i) => (
@@ -63,7 +61,6 @@ export function LandingPage({ page }: { page: Landing }) {
         <section className="s-sec" aria-labelledby="sp-approach">
           <div className="s-wrap s-split is-top">
             <div>
-              <p className="s-label">How we work</p>
               <h2 id="sp-approach" className="s-h2">{page.approach.h2}</h2>
             </div>
             <div className="sp-prose">
@@ -82,7 +79,6 @@ export function LandingPage({ page }: { page: Landing }) {
             <div className="s-wrap">
               <div className="s-head-row">
                 <div>
-                  <p className="s-label">Sample work</p>
                   <h2 id="sp-samples" className="s-h2 sp-h2-gap">Designs made to show the range</h2>
                 </div>
                 <a className="s-btn s-btn-soft" href="/designs/">All designs <Arrow /></a>
@@ -108,7 +104,6 @@ export function LandingPage({ page }: { page: Landing }) {
         <section className="s-sec s-faq" aria-labelledby="sp-faq">
           <div className="s-wrap s-split is-top">
             <div>
-              <p className="s-label">FAQ</p>
               <h2 id="sp-faq" className="s-h2">Questions about {lc(page.nav)}</h2>
             </div>
             <div className="s-faq-list">
@@ -124,7 +119,7 @@ export function LandingPage({ page }: { page: Landing }) {
 
         <section className="s-sec sp-tight sp-others" aria-labelledby="sp-others">
           <div className="s-wrap">
-            <p className="s-label" id="sp-others">More from the studio</p>
+            <h2 className="sp-others-h" id="sp-others">More from the studio</h2>
             <ul>
               {others.map((l) => (
                 <li key={l.slug}><a href={`/${l.slug}/`}>{l.nav}<span className="sp-others-i" aria-hidden="true"><Icon name="arrow-up-right" /></span></a></li>

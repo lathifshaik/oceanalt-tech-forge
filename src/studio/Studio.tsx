@@ -122,7 +122,7 @@ function Hero() {
   return (
     <section className="s-hero" aria-labelledby="s-hero-h">
       <div className="s-wrap s-hero-copy">
-        <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Design and technology studio, Sydney</p>
+        <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Design and technology studio, Sydney and Melbourne</p>
         <h1 id="s-hero-h">We design and build what your brand runs on</h1>
         <p className="s-hero-sub">Brand, websites, software, payments and voice agents from one studio. The people who design it are the people who build it, and they're still here after launch.</p>
         <div className="s-ctas">
@@ -462,7 +462,7 @@ function Start() {
           <ul className="s-contact">
             <li><Icon name="mail" /><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
             <li><Icon name="phone" /><a href={PHONE_HREF}>{PHONE}</a></li>
-            <li><Icon name="pin" />Sydney, working Australia-wide</li>
+            <li><Icon name="pin" />Sydney and Melbourne, working Australia-wide</li>
           </ul>
         </div>
         {state === "replied" || state === "done" ? (
@@ -528,9 +528,10 @@ export function StudioFooter({ home = true }: { home?: boolean }) {
             <p className="s-label">Contact</p>
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <a href={PHONE_HREF}>{PHONE}</a>
-            <span>Sydney, Australia</span>
+            <span>Sydney and Melbourne</span>
           </div>
         </div>
+        <p className="s-ack">Oceanalt works on the lands of the Gadigal people of the Eora Nation in Sydney and the Wurundjeri Woi-wurrung people of the Kulin Nation in Melbourne. We pay our respects to their Elders past and present.</p>
         <div className="s-foot-base">
           <span>© {new Date().getFullYear()} Oceanalt · ABN {ABN}</span>
           <span><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>

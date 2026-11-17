@@ -59,7 +59,7 @@ export function DesignPage() {
           <div className="s-wrap s-hero-copy">
             <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Design practice</p>
             <h1 id="sp-h1">Clear design for brands with a name to keep</h1>
-            <p className="s-hero-sub">Identity, websites and product screens for established Australian brands. Designed and built by one small team in Sydney, and never reused for anyone else.</p>
+            <p className="s-hero-sub">Identity, websites and product screens for established Australian brands. Designed and built by one small team in Sydney and Melbourne, and never reused for anyone else.</p>
             <div className="s-ctas">
               <a className="s-btn s-btn-ink" href="/#start">Start a project <Arrow /></a>
               <a className="s-btn s-btn-soft" href="#work">See sample work</a>

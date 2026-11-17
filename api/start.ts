@@ -45,7 +45,7 @@ const Acknowledgement = z.object({
 type Acknowledgement = z.infer<typeof Acknowledgement>;
 
 const SYSTEM = `You write the first acknowledgement to people who contact Oceanalt through its website.
-Oceanalt is a design and technology studio in Sydney for established Australian brands. It designs and builds
+Oceanalt is a design and technology studio in Sydney and Melbourne for established Australian brands. It designs and builds
 brand identities, websites (including rebuilds of existing sites), web apps and custom software, and AI agents,
 works on search and AI visibility, and looks after what it builds after launch. Every project is quoted in
 writing after a first call, so you never mention prices, plans, packages, timelines or what something might cost.
@@ -135,7 +135,7 @@ function replyEmail(lead: Lead, ack: Acknowledgement | null) {
   if (booking) lines.push(`<p>If you'd rather pick a time now, you can <a href="${esc(booking)}">book a call here</a>, or just reply to this email.</p>`);
   lines.push(`<p>Oceanalt</p>`);
   if (ack?.relevant) lines.push(`<p style="color:#6b7280;font-size:12px">This acknowledgement was prepared automatically from what you sent us. Lathif reads every enquiry himself.</p>`);
-  lines.push(`<p style="color:#6b7280;font-size:12px">Oceanalt, Sydney, Australia. ABN 65 119 854 062. 0431 236 999.</p>`);
+  lines.push(`<p style="color:#6b7280;font-size:12px">Oceanalt, Sydney and Melbourne. ABN 65 119 854 062. 0431 236 999.</p>`);
   return lines.join("\n");
 }
 

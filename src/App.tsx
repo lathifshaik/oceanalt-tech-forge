@@ -612,7 +612,7 @@ function Legal({ title, children }: { title: string; children: ReactNode }) {
 function Terms() {
   return (
     <Legal title="Terms of service">
-      <p>These terms are between you and Oceanalt (ABN {ABN}), based in Sydney, Australia. They apply to every project, alongside the written proposal for that project. Where the proposal and these terms differ, the proposal wins.</p>
+      <p>These terms are between you and Oceanalt (ABN {ABN}), based in Sydney and Melbourne, Australia. They apply to every project, alongside the written proposal for that project. Where the proposal and these terms differ, the proposal wins.</p>
       <h2>1. Services</h2>
       <p>Oceanalt designs and builds brand identities, websites, web apps and software, AI agents and search work, and looks after them after launch. Every project is scoped and quoted in writing before any work starts. Work outside the agreed scope is quoted separately and only goes ahead once you've approved it in writing.</p>
       <h2>2. Quotes and payment</h2>
@@ -642,7 +642,7 @@ function Privacy() {
   return (
     <Legal title="Privacy policy">
       <h2>1. Contact</h2>
-      <p>Oceanalt (ABN {ABN}) is based in Sydney, Australia. For privacy enquiries, email {EMAIL}.</p>
+      <p>Oceanalt (ABN {ABN}) is based in Sydney and Melbourne, Australia. For privacy enquiries, email {EMAIL}.</p>
       <h2>2. What is collected</h2>
       <p>When you send the start form, we collect your name, company, email, and optionally your phone number, current website and message. No tracking pixels or third-party analytics are used by default.</p>
       <h2>3. Where it is stored</h2>

@@ -15,7 +15,7 @@ const urls = [{
   loc: SITE,
   priority: "1.0",
   images: [
-    { loc: `${SITE}og-image.png`, title: "Oceanalt, a design and technology studio in Sydney" },
+    { loc: `${SITE}og-image.png`, title: "Oceanalt, a design and technology studio in Sydney and Melbourne" },
   ],
 }];
 
@@ -37,9 +37,9 @@ function business(seo) {
     image: `${SITE}og-image.png`,
     email: seo.EMAIL,
     telephone: seo.PHONE ? "+61 " + seo.PHONE.replace(/^0/, "") : undefined,
-    description: "A Sydney design and technology studio for established Australian brands: brand identity, websites, web apps and software, AI agents, and search and AI visibility, designed, built and looked after by one team. Every project is quoted after a call.",
+    description: "A Sydney and Melbourne design and technology studio for established Australian brands: brand identity, websites, web apps and software, AI agents, and search and AI visibility, designed, built and looked after by one team. Every project is quoted after a call.",
     address: { "@type": "PostalAddress", addressLocality: "Sydney", addressRegion: "NSW", postalCode: "2037", addressCountry: "AU" },
-    areaServed: [{ "@type": "City", name: "Sydney" }, { "@type": "Country", name: "Australia" }],
+    areaServed: [{ "@type": "City", name: "Sydney" }, { "@type": "City", name: "Melbourne" }, { "@type": "Country", name: "Australia" }],
     taxID: seo.ABN,
     founder: { "@type": "Person", name: "Lathif Shaik" },
     knowsAbout: ["Brand identity design", "Website design", "Website development", "Website migration", "Web application development", "Custom software", "Systems integration", "AI agents", "Technical SEO", "Google Business Profile", "AI search visibility", "Accessibility"],

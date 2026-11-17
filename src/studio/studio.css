@@ -266,3 +266,6 @@ details[open] .s-plus { transform: rotate(45deg); }
   .s-reveal > .s-wrap, .s-reveal .s-svc-track, .s-msg { opacity: 1 !important; transform: none !important; }
   .s-strip-track, .s-tools-track { overflow-x: auto; width: auto; }
 }
+
+/* Acknowledgement of Country, above the footer base */
+.s-ack { max-width: 46rem; margin: 0; padding-top: 2rem; border-top: 1px solid rgb(255 255 255 / .14); font-size: .88rem; line-height: 1.6; color: rgb(255 255 255 / .72); }

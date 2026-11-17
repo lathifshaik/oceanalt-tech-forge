@@ -1,10 +1,11 @@
-// After `vite build`: renders the home page and every service page to HTML,
+// After `vite build`: renders the home page, /design/, /designs/ and every
+// service page to HTML,
 // adds structured data and writes sitemap.xml, so each page is fully readable
 // without JavaScript.
 // If anything here fails, the build still succeeds: the home page works
 // without pre-rendering (the browser renders it), so a prerender bug must never
 // block a deploy. The error is printed in full so it shows in the host's log.
-import { readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { execSync } from "node:child_process";
 
 const SITE = "https://oceanalt.com.au/";
@@ -14,8 +15,7 @@ const urls = [{
   loc: SITE,
   priority: "1.0",
   images: [
-    { loc: `${SITE}og-image.png`, title: "Oceanalt: your website, done for you" },
-    { loc: `${SITE}ai/cafe.webp`, title: "A café after closing, its AI assistant still answering customers" },
+    { loc: `${SITE}og-image.png`, title: "Oceanalt, a design and technology studio in Sydney" },
   ],
 }];
 
@@ -37,20 +37,17 @@ function business(seo) {
     image: `${SITE}og-image.png`,
     email: seo.EMAIL,
     telephone: seo.PHONE ? "+61 " + seo.PHONE.replace(/^0/, "") : undefined,
-    description: "Websites, AI concierges, web apps and workflow automation for Australian small businesses, designed, built and looked after from Sydney.",
+    description: "A Sydney design and technology studio for established Australian brands: brand identity, websites, web apps and software, AI agents, and search and AI visibility, designed, built and looked after by one team. Every project is quoted after a call.",
     address: { "@type": "PostalAddress", addressLocality: "Sydney", addressRegion: "NSW", postalCode: "2037", addressCountry: "AU" },
     areaServed: [{ "@type": "City", name: "Sydney" }, { "@type": "Country", name: "Australia" }],
     taxID: seo.ABN,
-    priceRange: "$29 to $149 a month",
-    knowsAbout: ["Website design", "Web application development", "Custom software", "Business automation", "Local SEO", "Google Business Profile", "AI search optimisation", "AI concierge", "Phone answering", "Online bookings", "Online payments", "Website migration", "AI assistants for small businesses"],
-    makesOffer: seo.PLANS.map((p) => ({
-      "@type": "Offer",
-      name: `${p.name} plan`,
-      description: p.desc,
-      price: p.price.replace("$", ""),
-      priceCurrency: "AUD",
-      priceSpecification: { "@type": "UnitPriceSpecification", price: p.price.replace("$", ""), priceCurrency: "AUD", unitText: "MONTH" },
-    })),
+    founder: { "@type": "Person", name: "Lathif Shaik" },
+    knowsAbout: ["Brand identity design", "Website design", "Website development", "Website migration", "Web application development", "Custom software", "Systems integration", "AI agents", "Technical SEO", "Google Business Profile", "AI search visibility", "Accessibility"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Studio services",
+      itemListElement: seo.LANDINGS.map((l) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: l.nav, url: `${SITE}${l.slug}/` } })),
+    },
   };
 }
 
@@ -68,7 +65,7 @@ function withHead(html, { title, description, url }) {
 }
 
 async function prerender() {
-  const { render, renderLanding, renderDesigns, seo } = await import("../dist-ssr/entry-server.js");
+  const { render, renderLanding, renderDesigns, renderDesign, seo } = await import("../dist-ssr/entry-server.js");
   const template = readFileSync("dist/index.html", "utf8");
   if (!template.includes('<div id="root"></div>')) throw new Error("root div not found in dist/index.html");
 
@@ -104,14 +101,15 @@ async function prerender() {
             description: page.description,
             url,
             provider: { "@id": BUSINESS },
+            serviceType: page.nav,
             areaServed: { "@type": "Country", name: "Australia" },
-            offers: { "@type": "AggregateOffer", priceCurrency: "AUD", lowPrice: "29", highPrice: "149" },
           },
           {
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-              { "@type": "ListItem", position: 2, name: page.nav, item: url },
+              { "@type": "ListItem", position: 2, name: "Services", item: `${SITE}#services` },
+              { "@type": "ListItem", position: 3, name: page.nav, item: url },
             ],
           },
           faqPage(`${url}#faq`, page.faq),
@@ -119,9 +117,43 @@ async function prerender() {
       })}\n  </head>`);
     mkdirSync(`dist/${page.slug}`, { recursive: true });
     writeFileSync(`dist/${page.slug}/index.html`, html);
-    urls.push({ loc: url, priority: "0.8", images: [{ loc: new URL(page.image.src, SITE).href, title: page.image.alt }] });
+    // The service photo, once it's in public/photos/.
+    const photo = seo.SERVICES.find((s) => s.id === page.service)?.photo;
+    urls.push({ loc: url, priority: "0.8", images: photo && existsSync(`dist${photo}`) ? [{ loc: new URL(photo, SITE).href, title: page.nav }] : [] });
   }
   console.log(`prerender: ${seo.LANDINGS.length} service pages`);
+
+  // The design practice page.
+  {
+    const url = `${SITE}design/`;
+    const html = withHead(staticTemplate, { ...seo.DESIGN_PAGE, url })
+      .replace('<div id="root"></div>', `<div id="root">${renderDesign()}</div>`)
+      .replace("</head>", `${ld({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": `${url}#page`,
+            name: "Design at Oceanalt",
+            description: seo.DESIGN_PAGE.description,
+            url,
+            inLanguage: "en-AU",
+            publisher: { "@id": BUSINESS },
+          },
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+              { "@type": "ListItem", position: 2, name: "Design", item: url },
+            ],
+          },
+        ],
+      })}\n  </head>`);
+    mkdirSync("dist/design", { recursive: true });
+    writeFileSync("dist/design/index.html", html);
+    urls.push({ loc: url, priority: "0.9", images: seo.DESIGNS.slice(0, 6).map((d) => ({ loc: `${SITE}previews/${d.path}.webp`, title: `${d.business}, ${d.theme} sample design` })) });
+    console.log("prerender: /design/");
+  }
 
   // The designs page: every sample design, newest first.
   {
@@ -134,7 +166,7 @@ async function prerender() {
           {
             "@type": "CollectionPage",
             "@id": `${url}#page`,
-            name: "Our designs",
+            name: "Sample designs",
             description: seo.DESIGNS_PAGE.description,
             url,
             publisher: { "@id": BUSINESS },
@@ -150,7 +182,7 @@ async function prerender() {
       })}\n  </head>`);
     mkdirSync("dist/designs", { recursive: true });
     writeFileSync("dist/designs/index.html", html);
-    urls.push({ loc: url, priority: "0.8", images: seo.DESIGNS.slice(0, 12).map((d) => ({ loc: `${SITE}previews/${d.path}.webp`, title: `${d.business}, ${d.theme} design` })) });
+    urls.push({ loc: url, priority: "0.8", images: seo.DESIGNS.slice(0, 12).map((d) => ({ loc: `${SITE}previews/${d.path}.webp`, title: `${d.business}, ${d.theme} sample design` })) });
     console.log(`prerender: /designs/ (${seo.DESIGNS.length} designs)`);
   }
 }

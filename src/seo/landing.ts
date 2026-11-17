@@ -1,485 +1,199 @@
-// Service pages, one per search intent ("websites for tradies", "pay monthly
-// website", ...). scripts/prerender.mjs renders each to /<slug>/index.html at
-// build time and adds it to sitemap.xml. Every page must be genuinely useful on
-// its own: specific to that kind of business, no invented stats, prices that
-// match PLANS in src/App.tsx.
+// Service pages for the studio: one per service an established brand might
+// search for. scripts/prerender.mjs renders each to /<slug>/index.html at build
+// time and adds it to sitemap.xml. No prices (founder's call, 17 Nov 2026):
+// every project is quoted after a call. No invented stats, testimonials or
+// ranking promises. Old small-business slugs redirect here (public/_redirects).
 
 export type Landing = {
   slug: string;
-  /** <title>, under 60 characters. */
+  /** <title>, about 60 characters or fewer. */
   title: string;
-  /** Meta description, under 155 characters. */
+  /** Meta description, about 155 characters or fewer. */
   description: string;
   /** Short name for links and breadcrumbs. */
   nav: string;
+  /** SERVICES id in src/studio/content.ts: the photo and icon. */
+  service: "brand" | "websites" | "software" | "ai" | "search" | "care";
   h1: string;
   intro: string;
-  image: { src: string; alt: string };
-  /** A sample site to open, from /work/. */
-  example?: { path: string; label: string };
-  includes: string[];
-  sections: { h2: string; body: string[] }[];
+  offers: { title: string; body: string }[];
+  approach: { h2: string; body: string[] };
+  /** Sample designs to show (paths in WORK, src/App.tsx). */
+  examples?: string[];
   faq: { q: string; a: string }[];
-  /** Plan to preselect in the start form. */
-  plan: "launch" | "grow" | "care" | "rebuild" | "ai" | "custom" | "concierge";
+};
+
+const QUOTED = {
+  q: "How is it priced?",
+  a: "Every project is quoted in writing after a first call, with a fixed scope, so you know the number before anything starts. We don't publish prices because no two briefs are the same.",
 };
 
 export const LANDINGS: Landing[] = [
   {
-    slug: "online-payments-and-bookings",
-    title: "Online Bookings and Payments with Stripe | Oceanalt",
-    description: "Let customers book and pay in one go, by card, Apple Pay, Google Pay or Afterpay (where Stripe approves your business), straight into your Stripe account. Included in Grow, $149 a month, 3-month minimum.",
-    nav: "Payments and bookings",
-    h1: "Get paid without the chasing",
-    intro: "Customers pick a time, pay a deposit or the full amount, and get a confirmation, all in a minute on their phone. Instead of chasing payments by text after the job, you get the booking and the money together.",
-    image: { src: "/ai/physio.webp", alt: "A client stretching by the water at sunset after a session" },
-    example: { path: "tidewater-physio-pilates", label: "a sample clinic with online booking" },
-    includes: [
-      "Card, Apple Pay and Google Pay through Stripe, plus Afterpay where Stripe approves your business",
-      "Deposits or full payment when they book",
-      "Booking and confirmation in one step, with reminders before the day",
-      "Money paid straight into your own Stripe account",
-      "Gift vouchers and packages sold online",
-      "Refunds and changes handled from your Stripe dashboard",
+    slug: "brand-identity",
+    title: "Brand Identity Design for Established Brands | Oceanalt",
+    description: "Logo, type, colour and a brand system your team can actually use, from the website to signage. Designed in Sydney for established Australian brands.",
+    nav: "Brand identity",
+    service: "brand",
+    h1: "A brand your whole team can use properly",
+    intro: "Most established brands don't need a new name. They need the logo, type and colour pulled into one system that works on a phone, in a proposal and on the side of a van, with rules simple enough that people follow them.",
+    offers: [
+      { title: "An honest audit", body: "We start with every place the brand shows up now and keep what's working. Often a careful refresh is the right call, not a rebuild." },
+      { title: "Mark, type and colour", body: "A logo that reads at small sizes, type that works on screen and in print, and colours that pass contrast checks." },
+      { title: "Guidelines people read", body: "A short, practical guide with real examples, not a hundred-page PDF nobody opens." },
+      { title: "Templates", body: "Decks, social posts, email signatures and signage, set up in the tools your team already uses." },
     ],
-    sections: [
-      { h2: "Fewer no-shows, less chasing", body: [
-        "A deposit gives people a reason to turn up, or at least to reschedule instead of not showing. When they've paid in full, there's no invoice to send and nothing to chase.",
-      ] },
-      { h2: "Your money, your account", body: [
-        "Payments go straight into your own Stripe account, and Stripe pays them into your bank. We never hold your money or see card details. Stripe charges its standard fee on each payment; there's no extra fee from us.",
-      ] },
-    ],
+    approach: {
+      h2: "Designed for the screen first",
+      body: [
+        "Most people meet your brand on a phone. So we design the identity alongside the website and product screens, and test it there before anything goes to print.",
+        "Because the same team builds the website, the brand system goes straight into code: colours, type and spacing are set once and used everywhere.",
+      ],
+    },
+    examples: ["twist-design-studio", "wide-eyes-art-studio", "whirl-gelato"],
     faq: [
-      { q: "Do I need a Stripe account?", a: "Yes, in your business name. It takes about 10 minutes with your ABN and bank details, and we help you set it up on the call." },
-      { q: "Can customers pay later with Afterpay?", a: "Yes, Afterpay can be switched on in Stripe, so customers can split a payment while you're paid up front, less Afterpay's fee." },
-      { q: "Which plan includes this?", a: "Online payments, bookings and gift vouchers are part of Grow: month one you pay only for your domain, then $149 a month." },
+      { q: "Do we have to change our logo?", a: "No. If the logo has equity, we usually keep it and tidy it up. If we think a bigger change is worth it, we'll say so plainly, and why." },
+      { q: "Who owns the files?", a: "You do, once the final invoice is paid: the source files, the guidelines and the templates. Where a typeface needs a licence, it's bought in your name." },
+      QUOTED,
     ],
-    plan: "grow",
-  },
-  {
-    slug: "ai-concierge",
-    title: "AI Concierge for Small Business, Australia | Oceanalt",
-    description: "An AI concierge that answers your business phone when you can't, takes bookings and messages, and sends you the details on WhatsApp or email. An AI receptionist for small business, $149 a month.",
-    nav: "AI concierge",
-    h1: "Answered, even when you can't",
-    intro: "You're up a ladder, with a client, or it's 8pm. The phone rings anyway. Your AI concierge answers, says up front that it's an AI agent and the call is recorded, books the job or takes a message, and sends you the details. Urgent calls can come straight through to your mobile, if you want.",
-    image: { src: "/ai/sparky.webp", alt: "An electrician working on a switchboard" },
-    includes: [
-      "Keep your number: calls you can't take, or after-hours calls, divert to your concierge",
-      "Or a new local Australian number, included",
-      "A natural Australian voice that tells callers up front it's an AI agent and the call is recorded",
-      "Knows your services, prices, hours and areas, and books into your calendar",
-      "A summary on WhatsApp, text or email after every call",
-      "Urgent calls put straight through to your mobile, if you want",
-    ],
-    sections: [
-      { h2: "What a call sounds like", body: [
-        "\"G'day, you're through to Kerr & Sons. I'm Jim's AI agent, and this call is recorded. How can I help?\" The caller explains the job, the concierge asks the questions you'd ask, offers a time from your calendar and confirms it. You get a message with the name, number, address, job and time.",
-        "If it's something it can't handle, it takes a proper message and tells the caller you'll ring back, so nobody hangs up and calls the next business on Google.",
-      ] },
-      { h2: "What it costs", body: [
-        "$149 a month, including one local Australian number, plus call time at cost with no markup (our estimate: about 15 to 20 cents a minute, so a 3-minute call is about 45 to 60 cents, and 200 minutes is roughly $30 to $40). You set a monthly cap, so there's never a surprise bill. There's a 3-month minimum, and nothing is charged until it's passed our test calls and you're happy with it.",
-        "Setup takes a 15-minute call: we ask the questions a new concierge would, then test it with you before it answers a real customer.",
-      ] },
-    ],
-    faq: [
-      { q: "Will callers know it's AI?", a: "Yes. It says so at the start of every call. Most people just want their job booked or question answered, and it does that quickly and politely." },
-      { q: "Can it handle emergencies?", a: "You decide the rules. For example, anything urgent can be put straight through to your mobile, with a text to you at the same time." },
-      { q: "Does it work with my calendar?", a: "It can book into Google Calendar, Outlook and most booking systems. If yours isn't covered, it takes the booking request and you confirm it with one tap." },
-    ],
-    plan: "concierge",
-  },
-  {
-    slug: "show-up-in-ai-search",
-    title: "Show Up in ChatGPT and Google AI Search | Oceanalt",
-    description: "People now ask ChatGPT and Google's AI to find a local business. We set up your website and Google profile so AI search has clear, correct details about you.",
-    nav: "AI search",
-    h1: "Show up when people ask AI",
-    intro: "People now ask ChatGPT, Gemini and Google's AI Overviews things like \"good electrician in Newcastle\". Those answers are built from what the web says about you. We make sure it says the right things, clearly and consistently.",
-    image: { src: "/previews/harlow-reid-lawyers-calm.webp", alt: "A website we designed for a sample law firm" },
-    example: { path: "harlow-reid-lawyers-calm", label: "a sample law firm" },
-    includes: [
-      "Your services, areas, prices and hours written as clear, quotable answers",
-      "Business details marked up so search engines and AI read them correctly",
-      "Google Business Profile complete, with the right categories and photos",
-      "The same name, address and phone on the directories AI tools read",
-      "Answers to the questions your customers actually ask, on your site",
-      "A check every few months of what AI search says about you",
-    ],
-    sections: [
-      { h2: "No tricks, no guarantees", body: [
-        "Nobody can promise an AI will recommend you, and you should be wary of anyone who does. What works is the basics done properly: a fast site with real answers, a complete Google profile, consistent details everywhere, and genuine reviews.",
-      ] },
-      { h2: "Included in every website plan", body: [
-        "Launch ($69 a month, $99 from month 7) and Grow ($149 a month) sites are built this way from day one. If you already have a site, we can audit and fix it as part of a rebuild.",
-      ] },
-    ],
-    faq: [
-      { q: "Is this different from SEO?", a: "It's the same foundations as good local SEO, with extra care that your details are clear and quotable, because AI answers summarise rather than list links." },
-      { q: "How long does it take to work?", a: "Your Google profile and site changes can be picked up within weeks. How often AI tools mention you depends on your area, competition and reviews." },
-      { q: "Can you check what ChatGPT says about my business now?", a: "Yes. Ask on the call and we'll show you what the main AI tools say about you today, and what we'd fix." },
-    ],
-    plan: "launch",
-  },
-  {
-    slug: "web-apps-for-small-business",
-    title: "Web Apps and Custom Software for Small Business | Oceanalt",
-    description: "We make your pipeline efficient: booking systems, portals, quoting tools and automations for Aussie small businesses. Data stored in Australia.",
-    nav: "Web apps and software",
-    h1: "Web apps and software for small businesses",
-    intro: "If your week is lost to spreadsheets, double entry and chasing paperwork, we make your pipeline efficient, from first enquiry to paid invoice, with tools shaped around how you already work.",
-    image: { src: "/ai/tools.webp", alt: "A roll of well-used tools" },
-    includes: [
-      "Booking and scheduling systems that fit your services",
-      "Client portals for documents, approvals and updates",
-      "Quoting, job and invoicing tools for trades and services",
-      "Dashboards that pull your numbers into one place",
-      "Automations that link the apps you already use",
-      "Hosted on Cloudflare and AWS, with your data stored in Australia",
-      "Backups and support after launch",
-    ],
-    sections: [
-      { h2: "How a project works", body: [
-        "Send a short brief: what takes too long, what you use now, and who would use the new tool. Within 24 hours you get a written scope and a fixed price.",
-        "We build in small steps and show you working versions early, so you're never paying for something you haven't seen. After launch we host it, back it up and keep it running.",
-      ] },
-      { h2: "Built for small teams", body: [
-        "No enterprise software and no long manuals. Each tool does the few things your business needs, works on a phone, and connects to what you already use, like your calendar, accounting software or payments.",
-      ] },
-    ],
-    faq: [
-      { q: "What does a web app cost?", a: "It depends on what it does, so every project gets a fixed quote after a short brief. You'll have the scope and price within 24 hours." },
-      { q: "Can it connect to the software we already use?", a: "Usually, yes. Most calendars, accounting tools, payment providers and email services can be connected. We confirm this in the scope before you commit." },
-      { q: "Can AI be part of it?", a: "Yes. An AI agent can answer questions, sort enquiries, draft replies or chase follow-ups inside the tool, with you approving anything that matters." },
-    ],
-    plan: "custom",
-  },
-  {
-    slug: "digital-presence-for-small-business",
-    title: "Digital Presence for Small Business: Website, Google, SEO | Oceanalt",
-    description: "A website, Google Business Profile, local SEO and reviews working together, so customers find you first. Done for you: month one, just your domain, then from $69 a month.",
-    nav: "Digital presence",
-    h1: "Be the business people find first",
-    intro: "Most customers meet you online before they ever call. We make that first impression easy and convincing: a website made for you, your Google profile set up properly, and everything kept up to date.",
-    image: { src: "/previews/little-tern-coffee-sun.webp", alt: "A website we designed for a sample café" },
-    example: { path: "little-tern-coffee-sun", label: "a sample café" },
-    includes: [
-      "A website designed for your business, never reused",
-      "Google Business Profile set up and linked to your site",
-      "Your services, areas and hours marked up for Google",
-      "Reviews linked from your site, and a simple way to ask for more",
-      "Your details written so AI answers like ChatGPT and Google's AI Overviews can find and quote you",
-      "Your social accounts connected and consistent",
-      "Changes by email, usually done within two business days",
-    ],
-    sections: [
-      { h2: "Everything telling the same story", body: [
-        "Customers check your website, your Google listing and your socials, often in that order. When your hours, services and photos match everywhere, they trust you faster and call sooner.",
-      ] },
-      { h2: "Kept current for you", body: [
-        "New prices, holiday hours, a new service: email us and it's updated everywhere we manage. Launch includes 30 minutes of changes a month; Grow includes an hour.",
-      ] },
-    ],
-    faq: [
-      { q: "Do you run our social media?", a: "We set up and connect your accounts and keep your details consistent. We don't post content for you yet." },
-      { q: "How long until we show up on Google?", a: "Your Google Business Profile can appear within days of verification. Ranking in regular search results usually takes a few months and depends on your area and competition." },
-      { q: "What does it cost?", a: "Month one, you pay only for your domain. Then Launch is $69 a month until month 6 and $99 after that; Grow is $149 a month. Both have a 6-month minimum, and after that the site is yours to keep." },
-    ],
-    plan: "launch",
   },
   {
     slug: "website-design-sydney",
-    title: "Website Design Sydney for Small Businesses | Oceanalt",
-    description: "Sydney website design for small businesses. A custom site, built and looked after for one monthly fee. Month one, just your domain, then from $69 a month. Live in 1 to 3 days.",
-    nav: "Website design Sydney",
-    h1: "Website design for Sydney small businesses",
-    intro: "We're a small Sydney studio. We design your website, write the words, build it, host it and keep it up to date, for one monthly fee. Month one, you pay only for your domain, then it's from $69 a month.",
-    image: { src: "/previews/tidewater-physio-pilates-forest.webp", alt: "A website we designed for a sample physio and Pilates studio" },
-    example: { path: "tidewater-physio-pilates-forest", label: "a sample physio and Pilates studio" },
-    includes: [
-      "A design made for your business, never reused for anyone else",
-      "We write the words after a 15-minute call",
-      "Your domain, hosting and SSL, set up and paid for",
-      "Google Business Profile set up and linked",
-      "Online bookings or payments on the Grow plan",
-      "Changes by email, usually done within two business days",
+    title: "Website Design and Build for Established Brands | Oceanalt",
+    description: "Custom websites designed and built by one Sydney studio: strategy, copy, design and a fast build on Cloudflare, for established Australian brands.",
+    nav: "Websites",
+    service: "websites",
+    h1: "Websites built around what your customers came to do",
+    intro: "We find out what people are trying to do when they land on your site, then design the shortest way to get them there. Strategy, words, design and build happen in one studio, so nothing gets lost between agencies.",
+    offers: [
+      { title: "Strategy and structure", body: "What the site is for, who it's for and what they need to find, worked out before anything is drawn." },
+      { title: "Copy", body: "Words written for your customers in your voice, working from what you have or starting fresh." },
+      { title: "Design", body: "A design made for your brand and never reused. You see it on a private link as it comes together." },
+      { title: "Build", body: "Fast, accessible pages on Cloudflare, with the parts that change often set up for your team to edit." },
     ],
-    sections: [
-      { h2: "Local, and quick", body: [
-        "We're based in Sydney (NSW 2037) and work with businesses across the city, from the Inner West to Parramatta and the Shire, and anywhere else in Australia.",
-        "Most sites are live 1 to 3 business days after the first call, because we start from our own library of layouts and components and tailor them, rather than starting from a blank page.",
-      ] },
-      { h2: "What it costs", body: [
-        "Launch is $69 a month (from month 7, $99) for a custom site of up to 5 pages. Grow is $149 a month and adds online payments, bookings, gift vouchers and a rebuild of your current site. In month one of either you pay only for your domain. Both have a 6-month minimum, and after 6 months the site and its code are yours to keep.",
-        "If you'd rather pay once, one-off builds start at $1,499.",
-      ] },
-    ],
+    approach: {
+      h2: "Fast, accessible and yours",
+      body: [
+        "Pages are built to load quickly on an ordinary phone connection and to meet the WCAG accessibility guidelines, because both decide who can actually use the site.",
+        "The code, design and content are yours once the final invoice is paid, and your domain stays registered in your name.",
+      ],
+    },
+    examples: ["harlow-reid-lawyers", "small-spaces-architects", "ridgeline-wines"],
     faq: [
-      { q: "Do you meet in person?", a: "Usually a 15-minute phone or video call is all we need. If you're in Sydney and would rather meet, we can." },
-      { q: "Do I need to supply photos?", a: "A few of your own photos help most. If you don't have any, we use your Google Business photos or licensed photos that look local." },
-      { q: "Will it show up on Google?", a: "Every site is built to be fast and readable by search engines, with your business details marked up for Google. We also set up your Google Business Profile, which matters most for local searches." },
+      { q: "Can our team edit the site?", a: "Yes. We set up editing for the parts that change often, such as news, team, products or locations, and show your team how it works." },
+      { q: "Can you work with our marketing team?", a: "Yes. We can work from your team's brief and brand, or take on the whole project. Either way you have one person to call." },
+      { q: "How long does a website take?", a: "The timeline comes with the quote and is set around your launch date. Larger sites go live in stages, so you see working pages early." },
+      QUOTED,
     ],
-    plan: "launch",
-  },
-  {
-    slug: "websites-for-tradies",
-    title: "Websites for Tradies, from $69 a Month | Oceanalt",
-    description: "Websites for electricians, plumbers, builders and other trades. Tap-to-call, quote forms and your licence up front. Month one, just your domain, then from $69 a month.",
-    nav: "Tradies",
-    h1: "Websites for tradies that make the phone ring",
-    intro: "Electricians, plumbers, builders, landscapers, cleaners. Your website has one job: get people to call or ask for a quote. We build it around that, and look after it for one monthly fee.",
-    image: { src: "/previews/kerr-and-sons-electrical.webp", alt: "A website we designed for a sample electrician" },
-    example: { path: "kerr-and-sons-electrical", label: "a sample electrician's site" },
-    includes: [
-      "Tap-to-call buttons on every screen, made for phones",
-      "A quote form that lands in your inbox or phone",
-      "Your licence number, insurance and service areas up front",
-      "A page for each main service, so people find you for the job they need",
-      "Your Google reviews linked from the site",
-      "Photos of your work, updated whenever you send new ones",
-    ],
-    sections: [
-      { h2: "Built for people searching on their phone", body: [
-        "Most people looking for a tradie are on a phone, often in a hurry. The site loads fast, puts your number where their thumb is, and says clearly which suburbs you cover.",
-        "Each main service gets its own section with plain-English detail, which also helps you show up when someone searches for that job in their area.",
-      ] },
-      { h2: "No time spent on it", body: [
-        "You give us 15 minutes on the phone. We write the words, sort the domain and set up your Google Business Profile. When something changes, like prices, areas or a new service, text or email us and we update it.",
-      ] },
-    ],
-    faq: [
-      { q: "Can customers book or pay a deposit online?", a: "Yes, on the Grow plan ($149 a month). Payments go straight into your own Stripe account." },
-      { q: "I already have a Facebook page. Do I need a website?", a: "A Facebook page is a good start, but many people search Google first and want a site with your services, areas and a way to get a quote. We link the two together." },
-      { q: "What if I want to leave?", a: "After 6 months you can cancel any time and keep the site, the code and your domain." },
-    ],
-    plan: "launch",
-  },
-  {
-    slug: "websites-for-cafes-restaurants",
-    title: "Websites for Cafés and Restaurants | Oceanalt",
-    description: "Café and restaurant websites with your menu, hours and directions first, plus online ordering if you want it. Month one, just your domain, then from $69 a month.",
-    nav: "Cafés and restaurants",
-    h1: "Websites for cafés and restaurants",
-    intro: "People want three things from a café or restaurant website: the menu, the hours and how to get there. We put those first, make it look like your place, and keep it current for you.",
-    image: { src: "/previews/little-tern-coffee.webp", alt: "A website we designed for a sample café" },
-    example: { path: "little-tern-coffee", label: "a sample café" },
-    includes: [
-      "Your menu as real text, easy to read and easy for us to update",
-      "Opening hours, with an open or closed sign that follows them",
-      "Directions, parking and a map link",
-      "Table bookings or online ordering on the Grow plan",
-      "Gift vouchers you can sell online",
-      "Your photos, styled to match the place",
-    ],
-    sections: [
-      { h2: "A menu that's always right", body: [
-        "Menus change. Email or text us the new prices or specials and we update the site, usually within two business days. Launch includes 30 minutes of changes a month; Grow includes an hour.",
-      ] },
-      { h2: "Made to look like your place", body: [
-        "Your site gets its own colours, type and layout, chosen from your fit-out, your signage and your food. We never give the same design to two businesses.",
-      ] },
-    ],
-    faq: [
-      { q: "Can people order or book online?", a: "Yes, on the Grow plan. We can connect a booking tool or set up simple online ordering, with payments going straight to your own Stripe account." },
-      { q: "Can you add an assistant that answers questions?", a: "Yes. Our AI assistant answers questions about your menu, hours and dietary options day and night, for $39 a month plus AI usage at cost." },
-      { q: "How fast can it be live?", a: "Usually 1 to 3 business days after a 15-minute call, once we have your menu, hours and a few photos." },
-    ],
-    plan: "launch",
-  },
-  {
-    slug: "websites-for-clinics-salons",
-    title: "Websites for Clinics, Salons and Studios | Oceanalt",
-    description: "Websites for physios, salons, Pilates studios and clinics, with online bookings, prices and gift vouchers. With bookings from $149 a month, and month one is just your domain.",
-    nav: "Clinics, salons and studios",
-    h1: "Websites for clinics, salons and studios",
-    intro: "If your business runs on appointments, your website should take them. Every treatment gets a price and a Book button, and gift vouchers sell themselves.",
-    image: { src: "/previews/tidewater-physio-pilates.webp", alt: "A website we designed for a sample physio and Pilates studio" },
-    example: { path: "tidewater-physio-pilates", label: "a sample physio and Pilates studio" },
-    includes: [
-      "Online bookings connected to the booking tool you already use",
-      "Every service with its price and length",
-      "Gift vouchers sold online, paid into your own Stripe account",
-      "Practitioner profiles with photos",
-      "Health fund, HICAPS and referral details where they apply",
-      "Opening hours and how to find you",
-    ],
-    sections: [
-      { h2: "Fewer phone calls, fuller days", body: [
-        "When people can see prices and book in a few taps, they don't need to call during a session. Bookings and vouchers come with the Grow plan at $149 a month.",
-      ] },
-      { h2: "Already using a booking system?", body: [
-        "We connect the one you have rather than make you switch, and design the site around it so the booking step doesn't feel bolted on.",
-      ] },
-    ],
-    faq: [
-      { q: "Which booking systems do you work with?", a: "Most of the common ones used by clinics and salons can be linked or embedded. Tell us which you use on the call and we'll confirm." },
-      { q: "Can an assistant handle booking questions?", a: "Yes. Our AI assistant can answer questions, suggest times and hold a slot for you to confirm, for $39 a month plus AI usage at cost." },
-      { q: "Can you rebuild my current site?", a: "Yes. A rebuild of your existing site is included in Grow, and we keep your pages' addresses and redirect old links, so your search traffic has the best chance of carrying over." },
-    ],
-    plan: "grow",
-  },
-  {
-    slug: "websites-for-shops",
-    title: "Websites for Shops with Online Ordering | Oceanalt",
-    description: "Websites for florists, makers and local shops, with online ordering and payments straight to your Stripe. From $149 a month; month one is just your domain.",
-    nav: "Shops and online ordering",
-    h1: "Websites for shops that sell online",
-    intro: "Florists, makers, bakers, boutiques. Every product gets its own Buy button, payments land in your own Stripe account, and delivery details are clear before checkout.",
-    image: { src: "/previews/wattle-and-fern-florist.webp", alt: "A website we designed for a sample florist" },
-    example: { path: "wattle-and-fern-florist", label: "a sample florist" },
-    includes: [
-      "Products with photos, prices and a Buy button",
-      "Payments straight into your own Stripe account",
-      "Delivery areas, cut-off times and pickup options",
-      "Gift vouchers",
-      "Product updates by email whenever your range changes",
-      "A small shop that's simple to run, not a full e-commerce system",
-    ],
-    sections: [
-      { h2: "Simple selling, not a big platform", body: [
-        "Most local shops don't need a full e-commerce system with apps and themes. A clear catalogue with Buy buttons, delivery details and secure payments covers it, and we keep it updated for you.",
-      ] },
-      { h2: "Your money, your account", body: [
-        "Customer payments go straight into your own Stripe account. We never hold your money or see card details.",
-      ] },
-    ],
-    faq: [
-      { q: "How many products can I have?", a: "The Grow plan suits a focused range of products. For a large catalogue we'll quote a custom build first." },
-      { q: "Can you move my shop from Shopify, Wix or Square?", a: "Yes. We rebuild it, move your products and set up redirects so old links keep working." },
-      { q: "What does it cost?", a: "Month one, you pay only for your domain. Then Grow is $149 a month, with a 6-month minimum. Stripe charges its standard card fees on each sale." },
-    ],
-    plan: "grow",
-  },
-  {
-    slug: "websites-for-professional-services",
-    title: "Websites for Accountants, Lawyers and Advisers | Oceanalt",
-    description: "Websites for accountants, lawyers, real estate and consultants. Clear services, fixed fees and the team up front. Month one, just your domain, then from $69 a month.",
-    nav: "Professional services",
-    h1: "Websites for accountants, lawyers and advisers",
-    intro: "People choosing an accountant, lawyer or adviser want to know three things: what you do, roughly what it costs, and who they'll deal with. Your site should answer all three in under a minute.",
-    image: { src: "/previews/harlow-reid-lawyers.webp", alt: "A website we designed for a sample law firm" },
-    example: { path: "harlow-reid-lawyers", label: "a sample law firm" },
-    includes: [
-      "Each service explained in plain English",
-      "Fixed fees or starting prices, if you want to show them",
-      "Team profiles with photos and qualifications",
-      "An enquiry or booking form that lands in your inbox",
-      "Your contact details on the site, saveable to a phone",
-      "Privacy policy and the details your industry body asks for",
-    ],
-    sections: [
-      { h2: "Trust first", body: [
-        "A calm, readable design, real photos of the team, and the details that show you're the real thing: registration numbers, memberships and where you are.",
-      ] },
-      { h2: "Kept current without your time", body: [
-        "New team members, new services, changed fees. Email us and it's done, usually within two business days.",
-      ] },
-    ],
-    faq: [
-      { q: "Can clients book a first meeting online?", a: "Yes. We can link your calendar or booking tool; online booking and payments come with the Grow plan." },
-      { q: "Can you write about our services?", a: "Yes. We write the words after a 15-minute call, and you approve everything before it goes live." },
-      { q: "Do we own the site?", a: "Your domain is registered in your name from day one, and after 6 months the site and its code are yours to keep." },
-    ],
-    plan: "launch",
-  },
-  {
-    slug: "pay-monthly-websites",
-    title: "Pay Monthly Websites in Australia, From $69 | Oceanalt",
-    description: "Pay monthly websites for Australian small businesses: month one, just your domain, then a custom site from $69 a month. No hostage terms. Keep the site after 6 months.",
-    nav: "Pay monthly websites",
-    h1: "Pay monthly websites. Month one, just your domain.",
-    intro: "A custom website for your business for one monthly fee, with design, writing, hosting and changes included. And none of the catches pay-monthly websites are known for.",
-    image: { src: "/previews/kerr-and-sons-electrical-ink.webp", alt: "A website we designed for a sample electrician" },
-    example: { path: "kerr-and-sons-electrical-ink", label: "a sample electrician's site" },
-    includes: [
-      "Care, $29 a month: hosting and upkeep for a site you already like",
-      "Launch, $69 a month ($99 from month 7): a custom site up to 5 pages",
-      "Grow, $149 a month: payments, bookings, vouchers and a rebuild",
-      "Month one on Launch and Grow: just your domain, at cost",
-      "You see the site before the first charge",
-      "Your domain is registered in your name",
-    ],
-    sections: [
-      { h2: "No hostage websites", body: [
-        "Some pay-monthly providers keep your domain or make leaving expensive. We put the opposite in writing: the domain is yours from day one, and after 6 months the site and its code are yours to keep, free.",
-        "If you leave in the first 6 months, it costs the rest of those 6 months, and the site is still yours.",
-      ] },
-      { h2: "Why monthly works", body: [
-        "There's no big bill to start, and the site doesn't go stale, because changes are part of the plan. Launch includes 30 minutes of changes a month; Grow includes an hour.",
-      ] },
-    ],
-    faq: [
-      { q: "Is there a contract?", a: "Launch and Grow have a 6-month minimum, then run month to month with 30 days' notice. Care is month to month from the start." },
-      { q: "What happens after 6 months?", a: "The site and its code become yours. Stay with us, move to Care for $29 a month, or take it anywhere." },
-      { q: "Would a one-off payment be cheaper?", a: "One-off builds start at $1,499. Monthly suits most small businesses because changes and hosting are included and month one is just your domain." },
-    ],
-    plan: "launch",
   },
   {
     slug: "website-rebuild",
-    title: "Website Rebuild: Move from Wix, WordPress or Squarespace | Oceanalt",
-    description: "We rebuild slow Wix, WordPress, Squarespace and Shopify sites: faster, cleaner, with payments, and redirects from every old address. Included in Grow at $149 a month.",
-    nav: "Website rebuild",
-    h1: "Rebuild your website, without starting from scratch on Google",
-    intro: "A slow Wix site, a WordPress install nobody updates, a Squarespace theme you've outgrown. We rebuild it faster and cleaner, connect payments, and move everything across with redirects from every old address.",
-    image: { src: "/previews/wattle-and-fern-florist-forest.webp", alt: "A website we designed for a sample florist" },
-    example: { path: "wattle-and-fern-florist-forest", label: "a sample florist" },
-    includes: [
-      "A new design made for your business",
-      "Your existing pages, words and images moved across",
-      "Redirects from every old address, so old links keep working",
-      "Online payments or bookings connected",
-      "The switch done with no downtime, on the same domain and email",
-      "Included in the Grow plan, $149 a month",
+    title: "Website Rebuilds Without Losing Search Traffic | Oceanalt",
+    description: "Rebuild or redesign an established website: every old address mapped and redirected, content moved carefully, and DNS switched only after testing.",
+    nav: "Website rebuilds",
+    service: "websites",
+    h1: "Rebuild the site without losing what it's earned",
+    intro: "An established site has years of links, search history and content behind it. We rebuild it carefully: every page accounted for, every old address redirected, and nothing switched over until it's been tested.",
+    offers: [
+      { title: "A full inventory", body: "We crawl the current site and list every indexed page and file, so nothing is forgotten in the move." },
+      { title: "A redirect map", body: "Each old address is mapped to its new home with a permanent redirect, and checked before and after launch." },
+      { title: "Careful content moves", body: "Content comes across as it is unless we've agreed to rewrite it, with images, titles and structured data kept." },
+      { title: "A quiet cutover", body: "Your domain and email stay where they are. DNS changes only after testing passes, at a time that suits you." },
     ],
-    sections: [
-      { h2: "How the move works", body: [
-        "Send us your current address and tell us what works and what doesn't. Within a day you get a preview of the new version, built from your existing content.",
-        "Once you're happy, we move every page, set up redirects from the old addresses, and switch the domain over. Your email keeps working, and your old host can be cancelled.",
-      ] },
-      { h2: "Protecting your search traffic", body: [
-        "Rankings belong to your page addresses and content. We keep your best pages, redirect the rest to their closest match, and submit the new sitemap to Google so your existing rankings have the best chance of carrying over. Nobody can promise a ranking, and we won't.",
-      ] },
-    ],
+    approach: {
+      h2: "No promises about rankings, just careful work",
+      body: [
+        "Nobody can promise a rebuild won't move your search rankings, and you should be wary of anyone who does. What we can do is remove the usual causes of a drop: missing pages, broken redirects, lost titles and slower pages.",
+        "We watch the search data for several weeks after launch and fix anything that turns up.",
+      ],
+    },
+    examples: ["tally-and-co", "gable-and-co", "brightwater-dental"],
     faq: [
-      { q: "Will my email stop working?", a: "No. We only change where the website points; your email settings stay as they are." },
-      { q: "Can you move my online shop too?", a: "Yes, for a focused range of products. Larger catalogues get a fixed quote first." },
-      { q: "How long does a rebuild take?", a: "Usually 1 to 3 business days after we have access, plus time for you to check the preview." },
+      { q: "Will our email be affected?", a: "No. We don't touch your email (MX) records. Only the records for the website change, and only after testing." },
+      { q: "Can you keep our current design?", a: "Yes. Some clients want the same look on faster, cleaner code; others want a redesign at the same time. Both are rebuilds." },
+      QUOTED,
     ],
-    plan: "rebuild",
   },
   {
-    slug: "ai-assistant-for-small-business",
-    title: "AI Assistant for Small Business Websites | Oceanalt",
-    description: "An AI assistant on your website that answers customers, takes booking requests and replies to enquiries day and night. $39 a month plus usage at cost.",
-    nav: "AI assistant",
-    h1: "An AI assistant for your small business",
-    intro: "It answers customer questions on your website day and night, from your real prices, hours and policies, and hands anything it isn't sure about to you.",
-    image: { src: "/ai/cafe.webp", alt: "A café after closing, its sign still lit" },
-    includes: [
-      "Answers questions from your real menu, prices, hours and FAQs",
-      "Replies to new enquiries within minutes, even at night",
-      "Suggests booking times and holds a slot for you to confirm",
-      "Drafts replies to Google reviews for you to approve",
-      "Follows up quotes that went quiet, at a time you choose",
-      "Hands anything unusual to you, with the conversation attached",
+    slug: "web-apps-and-software",
+    title: "Web Apps and Custom Software, Australia | Oceanalt",
+    description: "Customer portals, dashboards, booking and quoting tools built around how your business runs, connected to Xero, Stripe and your CRM. Data kept in Australia.",
+    nav: "Web apps and software",
+    service: "software",
+    h1: "Software shaped around how your business runs",
+    intro: "When work moves through spreadsheets, inboxes and copy-paste, small delays add up. We design and build the tools that take that admin out: portals, dashboards, booking and quoting systems, and the connections between the apps you already pay for.",
+    offers: [
+      { title: "Customer and staff portals", body: "One place for customers to see orders, bookings or documents, and for staff to manage them." },
+      { title: "Dashboards", body: "The numbers you check every week, pulled from the systems they live in, without the export and paste." },
+      { title: "Booking, quoting and job tools", body: "From the first enquiry to the paid invoice, with each step recorded once." },
+      { title: "Integrations", body: "Connections to Xero, MYOB, Stripe, Shopify, your CRM and calendars, so nothing is typed twice." },
     ],
-    sections: [
-      { h2: "What it costs", body: [
-        "$39 a month on any plan, plus AI usage billed at cost with no markup, usually $5 to $30 a month for a small business. You set a monthly cap, so there's no surprise bill.",
-        "Custom agents, for things like invoice chasing or lead sorting, are quoted per job.",
-      ] },
-      { h2: "You stay in charge", body: [
-        "The assistant only uses the information you give it. Anything that matters, like a booking, a review reply or a quote follow-up, waits for your approval if you want it to.",
-        "It's the same kind of assistant that answers enquiries on our own site.",
-      ] },
-    ],
+    approach: {
+      h2: "Start with the step that costs the most",
+      body: [
+        "We map how the work moves now and find the step that costs the most time. That usually becomes the first release, so you're using working software early, with the rest planned in stages.",
+        "Apps run on Cloudflare and AWS, with your customers' data stored in Australia, in Sydney. Where a tool needs an overseas provider, we list it in writing before you go live.",
+      ],
+    },
     faq: [
-      { q: "Will it make things up?", a: "It's set up to answer only from your information and to say it will check with you when something isn't covered." },
-      { q: "Do I need a website from you to use it?", a: "It's easiest on a site we build, but we can add it to most existing sites." },
-      { q: "Can I see it working?", a: "Yes. Our home page plays a sample call and booking, and on a 15-minute call we can set one up with your own business details to try." },
+      { q: "Do you build mobile apps?", a: "We build web apps that work well on phones and can be added to the home screen. If you need an app in the App Store or Google Play, we'll talk through whether it's worth it for you." },
+      { q: "Can you work with our existing systems?", a: "Usually. If a system has an API we can connect to it. If it doesn't, we'll tell you on the first call what the options are." },
+      { q: "Who owns the code?", a: "You do, once the final invoice is paid. It's documented so your own team, or another one, could take it over." },
+      QUOTED,
     ],
-    plan: "ai",
+  },
+  {
+    slug: "ai-agents",
+    title: "AI Agents for Phone, Chat and Admin | Oceanalt",
+    description: "AI agents that answer calls, reply to enquiries and handle follow-up, working from your own information, with a clear hand-off to your team.",
+    nav: "AI agents",
+    service: "ai",
+    h1: "Agents that do the follow-up, and know when to hand over",
+    intro: "A lot of a team's day goes on the same questions, the same replies and the same follow-ups. We build AI agents that take that on, working from your own information, and pass anything unusual to a person.",
+    offers: [
+      { title: "Phone agents", body: "Answer the calls you can't take, book or take a message, and send your team a summary. Every call opens by saying it's an AI agent and that the call is recorded." },
+      { title: "Website and email agents", body: "Reply to enquiries with accurate answers from your own content, and collect what your team needs to follow up." },
+      { title: "Admin agents", body: "Draft quotes, chase unpaid invoices, reply to reviews or sort incoming documents, with a person approving where it matters." },
+      { title: "A clear hand-off", body: "You decide what an agent can do on its own and what goes to a person, and it says so when it isn't sure." },
+    ],
+    approach: {
+      h2: "Tested before it talks to a customer",
+      body: [
+        "Each agent is tested against real situations from your business before it goes live, and we keep checking its work after launch.",
+        "We use AI providers that don't train on your data and list every one in writing. Customer records we store for you stay in Australia.",
+      ],
+    },
+    faq: [
+      { q: "Will customers know they're talking to AI?", a: "Yes. Our agents always say they're an AI agent, and phone calls open with a recording notice. That can't be switched off." },
+      { q: "Will it answer every call?", a: "It answers the calls you send to it, at the times you choose. Like any phone system it relies on networks and providers, so we set up a fallback, such as voicemail or your own number." },
+      { q: "What does it cost to run?", a: "Agents have a running cost for AI usage and, for phone agents, call time. We estimate it in the written quote, pass it on at cost and agree a monthly cap with you." },
+      QUOTED,
+    ],
+  },
+  {
+    slug: "search-and-ai-visibility",
+    title: "Search and AI Visibility for Australian Brands | Oceanalt",
+    description: "Technical SEO, Google Business Profile and clear content that AI answer engines can quote, so Google and AI tools describe your brand correctly.",
+    nav: "Search and AI visibility",
+    service: "search",
+    h1: "Be described correctly, wherever people search",
+    intro: "People now ask Google, ChatGPT and other AI tools about a brand before they visit. We make sure what those tools find about you is accurate, consistent and easy to quote, and that your site gives them a clear path to you.",
+    offers: [
+      { title: "Technical SEO", body: "Site structure, speed, titles, structured data and crawl problems fixed at the source." },
+      { title: "Google Business Profile", body: "Locations, hours, categories and photos kept accurate and consistent with your site." },
+      { title: "Content AI tools can quote", body: "Clear, factual pages about what you do, where and for whom, written for people and easy for machines to read." },
+      { title: "Plain reporting", body: "A short monthly note on what changed, what we found and what we'd do next." },
+    ],
+    approach: {
+      h2: "No ranking promises",
+      body: [
+        "Nobody controls where Google or an AI tool puts you, and anyone who guarantees a ranking is guessing. What we can control is whether the information about your brand is accurate, consistent and easy to find, and that's where we spend the time.",
+      ],
+    },
+    faq: [
+      { q: "Can you guarantee the first page of Google?", a: "No, and be wary of anyone who does. We fix what's in your control and report honestly on what changes." },
+      { q: "Do you write the content?", a: "Yes, or we work with your team's writers. Either way it's checked for accuracy against what you actually offer." },
+      { q: "Is this a monthly service?", a: "It can be a one-off project or ongoing care agreed in writing. Both are quoted after a first call." },
+    ],
   },
 ];

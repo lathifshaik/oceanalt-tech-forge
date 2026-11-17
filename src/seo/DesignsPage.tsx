@@ -1,20 +1,20 @@
 import { Icon } from "../components/Icon";
 import { WORK } from "../App";
-import { SiteFooter, SiteHeader } from "./LandingPage";
+import { Arrow, StaticFooter, StaticNav } from "./StaticChrome";
 
-// /designs/: every design we've made, newest first, rendered to static HTML at
+// /designs/: every sample design, newest first, rendered to static HTML at
 // build time (scripts/prerender.mjs). The filter is plain radio buttons and CSS
 // (:has), so it works without JavaScript. New samples added to WORK in App.tsx
-// show up here on the next build.
+// show up here on the next build, and the newest get the New badge.
 
 const CATS = [
   { id: "food", label: "Food and drink", layouts: ["cafe"] },
   { id: "trades", label: "Trades and home", layouts: ["trades"] },
   { id: "health", label: "Health and beauty", layouts: ["studio"] },
   { id: "fitness", label: "Fitness", layouts: [] },
-  { id: "shops", label: "Shops", layouts: ["shop"] },
+  { id: "shops", label: "Retail", layouts: ["shop"] },
   { id: "pro", label: "Professional services", layouts: ["pro"] },
-  { id: "learning", label: "Kids and learning", layouts: [] },
+  { id: "learning", label: "Education", layouts: [] },
   { id: "pets", label: "Pets", layouts: [] },
 ];
 
@@ -36,75 +36,67 @@ export const DESIGNS = WORK.flatMap((w) =>
 ).sort((a, b) => b.added.localeCompare(a.added));
 
 export const DESIGNS_PAGE = {
-  title: "Our designs: websites for Australian small businesses | Oceanalt",
-  description: `Every website design we've made so far, on sample businesses: cafés, restaurants, salons, gyms, tradies, clinics, shops and professionals. ${DESIGNS.length} designs and counting.`,
+  title: "Sample Designs: Websites Made for One Business Each | Oceanalt",
+  description: `Every sample website design from Oceanalt's Sydney studio, newest first: hospitality, retail, health, professional services and more. ${DESIGNS.length} designs, each made for one business.`,
 };
 
 export function DesignsPage() {
   const newest = DESIGNS[0].added;
   const styles = new Set(DESIGNS.map((d) => d.theme.split(",")[0])).size;
-  const start = "/?plan=launch#start";
   return (
     <>
-      <SiteHeader start={start} cta="Start my website" />
-      <main id="main" className="lp dz">
-        <div className="wrap">
-          <nav className="lp-crumbs" aria-label="Breadcrumb">
-            <a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Designs</span>
-          </nav>
-          <div className="dz-head">
-            <h1>Our designs</h1>
-            <p>Every design we've made so far, shown on sample businesses. We keep adding new ones, so this page keeps growing.</p>
-            <p>See one you like? Tell us, and we use it as the starting point for yours: your words, your photos, your colours. Once it's yours, we don't give the same design to anyone else.</p>
-            <ul className="dz-stats">
-              <li><b className="num">{DESIGNS.length}</b> designs</li>
-              <li><b className="num">{WORK.length}</b> sample businesses</li>
-              <li><b className="num">{styles}</b> styles</li>
+      <StaticNav />
+      <main id="main" className="s-page sp sp-dz">
+        <section className="s-hero sp-hero" aria-labelledby="sp-h1">
+          <div className="s-wrap s-hero-copy">
+            <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Sample designs</p>
+            <h1 id="sp-h1">Every design, newest first</h1>
+            <p className="s-hero-sub">Website designs made for fictional businesses, to show the range of what we draw and build. A client's design is made for them and never reused.</p>
+            <ul className="sp-stats">
+              <li><b>{DESIGNS.length}</b> designs</li>
+              <li><b>{WORK.length}</b> sample businesses</li>
+              <li><b>{styles}</b> styles</li>
               <li>Last added <b>{longDate(newest)}</b></li>
             </ul>
           </div>
+        </section>
 
-          <fieldset className="dz-filter">
-            <legend className="sr">Show designs for</legend>
-            <input type="radio" name="dz" id="dz-all" className="sr" defaultChecked />
-            <label htmlFor="dz-all">All <span className="num">{DESIGNS.length}</span></label>
-            {CATS.map((c) => (
-              <span key={c.id} className="dz-opt">
-                <input type="radio" name="dz" id={`dz-${c.id}`} className="sr" />
-                <label htmlFor={`dz-${c.id}`}>{c.label} <span className="num">{DESIGNS.filter((d) => d.cat === c.id).length}</span></label>
+        <section className="s-sec sp-gallery" aria-label="Designs">
+          <div className="s-wrap">
+            <fieldset className="sp-filter">
+              <legend className="sr">Show designs for</legend>
+              <span className="sp-opt">
+                <input type="radio" name="dz" id="dz-all" className="sr" defaultChecked />
+                <label htmlFor="dz-all">All <span>{DESIGNS.length}</span></label>
               </span>
-            ))}
-          </fieldset>
+              {CATS.map((c) => (
+                <span key={c.id} className="sp-opt">
+                  <input type="radio" name="dz" id={`dz-${c.id}`} className="sr" />
+                  <label htmlFor={`dz-${c.id}`}>{c.label} <span>{DESIGNS.filter((d) => d.cat === c.id).length}</span></label>
+                </span>
+              ))}
+            </fieldset>
 
-          <ul className="dz-grid">
-            {DESIGNS.map((d) => (
-              <li key={d.path} className="dz-card" data-cat={d.cat}>
-                <a href={`/work/${d.path}/`} target="_blank" rel="noopener">
-                  <span className="dz-img">
-                    <img src={`/previews/${d.path}.webp`} alt={`${d.business}, ${d.theme} design`} width={1200} height={750} loading="lazy" />
-                    {d.added === newest && <span className="dz-new">New</span>}
-                    <span className="dz-open" aria-hidden="true"><Icon name="arrow-up-right" /></span>
-                  </span>
-                  <span className="dz-meta">
-                    <b>{d.business}</b>
-                    <small>{d.kind} · {d.theme}</small>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <p className="lp-note">Every business on this page is a sample we made up to show the designs. They aren't clients, and no results are claimed.</p>
-        </div>
-
-        <section className="lp-sec lp-end">
-          <div className="wrap">
-            <h2 className="h2">Don't see your kind of business?</h2>
-            <p className="lede">We design for any small business, and new designs go up here as we make them. Send a short form and a person replies the same business day.</p>
-            <a className="btn btn-primary btn-island" href={start}>Start my website <span className="btn-i"><Icon name="arrow-up-right" /></span></a>
+            <ul className="sp-grid">
+              {DESIGNS.map((d) => (
+                <li key={d.path} className="sp-cell" data-cat={d.cat}>
+                  <a href={`/work/${d.path}/`} target="_blank" rel="noopener">
+                    <span className="sp-shot">
+                      <img src={`/previews/${d.path}.webp`} alt={`${d.business}, ${d.theme} design`} width={1200} height={750} loading="lazy" decoding="async" />
+                      {d.added === newest && <span className="sp-new">New</span>}
+                      <span className="sp-open" aria-hidden="true"><Icon name="arrow-up-right" /></span>
+                    </span>
+                    <span className="sp-meta"><b>{d.business}</b><small>{d.kind} · {d.theme}</small></span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="s-note">Every business on this page is a sample we made up to show the designs. They aren't clients, and no results are claimed.</p>
+            <a className="s-btn s-btn-soft sp-gap" href="/design/">How we design <Arrow /></a>
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <StaticFooter label="Don't see your kind of business?" heading="Every design starts from your brand." />
     </>
   );
 }

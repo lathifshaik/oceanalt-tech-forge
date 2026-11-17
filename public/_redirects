@@ -1,0 +1,28 @@
+# Old small-business service pages, retired 17 Nov 2026 when Oceanalt became a
+# studio for established brands. Each goes to the closest new service page.
+# Cloudflare format: <from> <to> <status>. Both spellings, with and without the
+# trailing slash, so neither falls through to the 404 page.
+/online-payments-and-bookings/ /web-apps-and-software/ 301
+/online-payments-and-bookings /web-apps-and-software/ 301
+/web-apps-for-small-business/ /web-apps-and-software/ 301
+/web-apps-for-small-business /web-apps-and-software/ 301
+/ai-concierge/ /ai-agents/ 301
+/ai-concierge /ai-agents/ 301
+/ai-assistant-for-small-business/ /ai-agents/ 301
+/ai-assistant-for-small-business /ai-agents/ 301
+/show-up-in-ai-search/ /search-and-ai-visibility/ 301
+/show-up-in-ai-search /search-and-ai-visibility/ 301
+/digital-presence-for-small-business/ /website-design-sydney/ 301
+/digital-presence-for-small-business /website-design-sydney/ 301
+/websites-for-tradies/ /website-design-sydney/ 301
+/websites-for-tradies /website-design-sydney/ 301
+/websites-for-cafes-restaurants/ /website-design-sydney/ 301
+/websites-for-cafes-restaurants /website-design-sydney/ 301
+/websites-for-clinics-salons/ /website-design-sydney/ 301
+/websites-for-clinics-salons /website-design-sydney/ 301
+/websites-for-shops/ /website-design-sydney/ 301
+/websites-for-shops /website-design-sydney/ 301
+/websites-for-professional-services/ /website-design-sydney/ 301
+/websites-for-professional-services /website-design-sydney/ 301
+/pay-monthly-websites/ /website-design-sydney/ 301
+/pay-monthly-websites /website-design-sydney/ 301

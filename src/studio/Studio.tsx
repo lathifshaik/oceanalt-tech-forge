@@ -1,0 +1,511 @@
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { Icon } from "../components/Icon";
+import { ABN, EMAIL, FOUNDER, LogoMark, PHONE, PHONE_HREF, WORK } from "../App";
+import { NEEDS, SERVICES, STEPS, STUDIO_FAQ, WHY } from "./content";
+import "./studio.css";
+
+// The studio homepage. Layout learned from premium studios (docs/design/STUDIO_STUDY.md):
+// a centred statement, real work straight after it, services you can swipe through,
+// one idea per section, and a dark band for the work.
+
+const FOUNDER_PHOTO = "/team/lathif.webp";
+
+// The samples that read most like an established brand lead the strip and the
+// work band. The rest stay on /designs/.
+const FEATURED = [
+  "small-spaces-architects", "ridgeline-wines", "willow-and-arch", "twist-design-studio", "velvet-hour",
+  "harlow-reid-lawyers", "saltbush-norwood", "golden-hour-weddings", "still-water-float", "kumo-sushi",
+  "gable-and-co", "ochre-skin-co", "wide-eyes-art-studio", "hillside-orchard-market",
+];
+// A function, not a constant: App.tsx imports this file, so WORK isn't ready
+// while this module first loads.
+const getFeatured = () => FEATURED.flatMap((path) => {
+  const w = WORK.find((x) => x.designs.some((d) => d.path === path));
+  const d = w?.designs.find((x) => x.path === path);
+  return w && d ? [{ w, d }] : [];
+});
+
+// Service pages (src/seo/landing.ts). Care has no page of its own.
+const SERVICE_PAGE: Record<string, string> = {
+  brand: "/brand-identity/", websites: "/website-design-sydney/", software: "/web-apps-and-software/",
+  ai: "/ai-agents/", search: "/search-and-ai-visibility/",
+};
+
+// Photos that fail (or aren't in yet) stay hidden instead of showing a broken icon.
+// The ref covers images that finished loading before hydration.
+const showWhenLoaded = {
+  onLoad: (e: { currentTarget: HTMLImageElement }) => e.currentTarget.classList.add("is-loaded"),
+  ref: (el: HTMLImageElement | null) => { if (el?.complete && el.naturalWidth) el.classList.add("is-loaded"); },
+};
+
+// Fades a section's children up as it scrolls into view. Off for reduced motion.
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.classList.add("is-in");
+      return;
+    }
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        el.classList.add("is-in");
+        io.disconnect();
+      }
+    }, { rootMargin: "0px 0px -12% 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+function Arrow() {
+  return <span className="s-btn-i" aria-hidden="true"><Icon name="arrow-up-right" /></span>;
+}
+
+export function StudioNav({ home = true }: { home?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 24);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    document.documentElement.classList.add("s-locked");
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.documentElement.classList.remove("s-locked");
+    };
+  }, [open]);
+  const base = home ? "" : "/";
+  const links: [string, string][] = [
+    [`${base}#work`, "Work"],
+    [`${base}#services`, "Services"],
+    ["/design/", "Design"],
+    [`${base}#studio`, "Studio"],
+    [`${base}#faq`, "FAQ"],
+  ];
+  return (
+    <header className={`s-nav${scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
+      <div className="s-wrap s-nav-row">
+        <a className="s-logo" href={home ? "#top" : "/"} aria-label="Oceanalt home">
+          <LogoMark />
+          <span translate="no">oceanalt</span>
+        </a>
+        <nav className="s-nav-links" aria-label="Main">
+          {links.map(([href, label]) => <a key={label} href={href}>{label}</a>)}
+        </nav>
+        <a className="s-btn s-btn-ink s-nav-cta" href={`${base}#start`}>Start a project</a>
+        <button className="s-burger" type="button" aria-expanded={open} aria-controls="s-menu" onClick={() => setOpen((o) => !o)}>
+          <i /><i />
+          <span className="sr">{open ? "Close menu" : "Open menu"}</span>
+        </button>
+      </div>
+      <nav id="s-menu" className="s-menu" aria-label="Main" hidden={!open}>
+        {links.map(([href, label], i) => (
+          <a key={label} href={href} style={{ transitionDelay: `${80 + i * 50}ms` }} onClick={() => setOpen(false)}>{label}</a>
+        ))}
+        <a className="s-btn s-btn-ink" href={`${base}#start`} onClick={() => setOpen(false)}>Start a project <Arrow /></a>
+      </nav>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="s-hero" aria-labelledby="s-hero-h">
+      <div className="s-wrap s-hero-copy">
+        <p className="s-kicker"><span className="s-dot" aria-hidden="true" /> Design and technology studio, Sydney</p>
+        <h1 id="s-hero-h">We design and build what your brand runs on</h1>
+        <p className="s-hero-sub">Brand, websites, software and AI agents from one studio. The people who design it are the people who build it, and they're still here after launch.</p>
+        <div className="s-ctas">
+          <a className="s-btn s-btn-ink" href="#start">Start a project <Arrow /></a>
+          <a className="s-btn s-btn-soft" href="#work">See the work</a>
+        </div>
+      </div>
+      <Strip />
+    </section>
+  );
+}
+
+// A slow, endless row of sample designs and studio photos, straight under the
+// statement: the work speaks first. Pauses on hover; still for reduced motion.
+function Strip() {
+  const items = getFeatured().slice(0, 10).map(({ w, d }) => ({ src: `/previews/${d.path}.webp`, alt: `${w.business}, sample design`, label: w.business.split(",")[0], href: `/work/${d.path}/` }));
+  const row = (hidden: boolean) => (
+    <ul className="s-strip-row" aria-hidden={hidden || undefined}>
+      {items.map((it) => (
+        <li key={it.src}>
+          <a href={it.href} target="_blank" rel="noopener" tabIndex={hidden ? -1 : undefined}>
+            <img src={it.src} alt={hidden ? "" : it.alt} width={1200} height={750} loading="lazy" />
+            <span>{it.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+  return (
+    <div className="s-strip" aria-label="Sample designs">
+      <div className="s-strip-track">{row(false)}{row(true)}</div>
+      <p className="s-wrap s-note">Sample designs for fictional businesses, made to show our range.</p>
+    </div>
+  );
+}
+
+const TOOLS = [
+  ["Cloudflare", "cloudflare"], ["Stripe", "stripe"], ["Shopify", "shopify"], ["Xero", "xero"], ["Google", "google"],
+  ["Google Maps", "googlemaps"], ["Apple Pay", "applepay"], ["Google Pay", "googlepay"], ["WhatsApp", "whatsapp"], ["MYOB", "myob"],
+];
+
+function Tools() {
+  const row = (hidden: boolean) => (
+    <ul aria-hidden={hidden || undefined}>
+      {TOOLS.map(([name, file]) => <li key={file}><img src={`/logos/${file}.svg`} alt={hidden ? "" : name} title={name} width={30} height={30} loading="lazy" /></li>)}
+    </ul>
+  );
+  return (
+    <section className="s-tools" aria-labelledby="s-tools-h">
+      <h2 id="s-tools-h" className="s-small">Built on and connected to the tools you already trust</h2>
+      <div className="s-tools-track">{row(false)}{row(true)}</div>
+    </section>
+  );
+}
+
+function Services() {
+  const track = useRef<HTMLDivElement>(null);
+  const ref = useReveal<HTMLElement>();
+  const nudge = (dir: number) => {
+    const el = track.current;
+    const card = el?.querySelector<HTMLElement>(".s-svc");
+    if (el) el.scrollBy({ left: dir * ((card?.offsetWidth ?? 400) + 16), behavior: "smooth" });
+  };
+  return (
+    <section id="services" className="s-sec s-services s-reveal" ref={ref} aria-labelledby="s-svc-h">
+      <div className="s-wrap s-head-row">
+        <h2 id="s-svc-h" className="s-h2">Everything your brand needs online, in one studio</h2>
+        <div className="s-arrows">
+          <button type="button" onClick={() => nudge(-1)} aria-label="Previous service"><Icon name="arrow-right" className="i flip" /></button>
+          <button type="button" onClick={() => nudge(1)} aria-label="Next service"><Icon name="arrow-right" /></button>
+        </div>
+      </div>
+      <div className="s-svc-track" ref={track} tabIndex={0} aria-label="Services">
+        {SERVICES.map((s) => (
+          <article className="s-svc" key={s.id}>
+            <div className="s-svc-art" data-svc={s.id}>
+              <img src={s.photo} alt="" loading="lazy" width={900} height={1125} {...showWhenLoaded} />
+              <span className="s-svc-glyph" aria-hidden="true"><Icon name={s.icon} /></span>
+            </div>
+            <h3 className="s-label">{s.name}</h3>
+            <p>{s.line}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// A short, made-up exchange that shows what working with one team feels like.
+const CHAT: { who: "you" | "us"; text: string }[] = [
+  { who: "you", text: "Can the new range go live on Thursday?" },
+  { who: "us", text: "Yes. The pages are designed, I'll build them tomorrow and send you a preview." },
+  { who: "you", text: "And the booking flow change?" },
+  { who: "us", text: "Same preview. One link, one person to call." },
+];
+
+function Why() {
+  const ref = useReveal<HTMLElement>();
+  return (
+    <section id="studio" className="s-sec s-why s-reveal" ref={ref} aria-labelledby="s-why-h">
+      <div className="s-wrap s-split">
+        <div>
+          <p className="s-label">Why one studio</p>
+          <h2 id="s-why-h" className="s-h2">Handovers are where projects go wrong</h2>
+          <p className="s-lede">When the designer, the developers and whoever looks after the site work for different companies, every change becomes a meeting. Here it's one team, from the first sketch to the hundredth update.</p>
+          <ul className="s-rows">
+            {WHY.map((w) => (
+              <li key={w.title}>
+                <span className="s-sq" aria-hidden="true"><Icon name={w.icon} /></span>
+                <div><b>{w.title}</b><span>{w.body}</span></div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <figure className="s-panel s-chat" aria-label="Example conversation">
+          <div className="s-chat-list">
+            {CHAT.map((m, i) => (
+              <div key={i} className={`s-msg is-${m.who}`} style={{ transitionDelay: `${300 + i * 450}ms` }}>
+                {m.who === "you" && <small>You</small>}
+                <p>{m.text}</p>
+              </div>
+            ))}
+          </div>
+          <figcaption>An example of how changes work</figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  const ref = useReveal<HTMLElement>();
+  const [on, setOn] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = ref.current;
+    if (!el) return;
+    let t: number | undefined;
+    const io = new IntersectionObserver(([e]) => {
+      window.clearInterval(t);
+      if (e.isIntersecting) t = window.setInterval(() => setOn((n) => (n + 1) % STEPS.length), 1900);
+    });
+    io.observe(el);
+    return () => { io.disconnect(); window.clearInterval(t); };
+  }, [ref]);
+  return (
+    <section className="s-sec s-process s-reveal" ref={ref} aria-labelledby="s-proc-h">
+      <div className="s-wrap s-split is-flip">
+        <div className="s-panel s-steps">
+          <ol>
+            {STEPS.map((s, i) => (
+              <li key={s.title} className={i === on ? "is-on" : ""}>
+                <span className="s-sq" aria-hidden="true"><Icon name={s.icon} /></span>
+                {s.title}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="s-process-copy">
+          <p className="s-label">How it runs</p>
+          <h2 id="s-proc-h" className="s-h2">From the first call to launch, and after</h2>
+          <p className="s-lede">You get a written scope and a fixed quote before anything starts. Then you see the work as it's made, on a private link, and nothing goes live until you've signed it off.</p>
+          <a className="s-btn s-btn-ink" href="#start">Start a project <Arrow /></a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Work() {
+  const track = useRef<HTMLDivElement>(null);
+  const nudge = (dir: number) => {
+    const el = track.current;
+    const card = el?.querySelector<HTMLElement>(".s-case");
+    if (el) el.scrollBy({ left: dir * ((card?.offsetWidth ?? 560) + 8), behavior: "smooth" });
+  };
+  const picks = getFeatured().slice(4, 14);
+  const total = WORK.reduce((n, w) => n + w.designs.length, 0);
+  return (
+    <section id="work" className="s-work" aria-labelledby="s-work-h">
+      <div className="s-wrap s-head-row">
+        <h2 id="s-work-h" className="s-h2">Selected designs, each made for one business</h2>
+        <a className="s-btn s-btn-white" href="/designs/">See all {total} designs <Arrow /></a>
+      </div>
+      <div className="s-case-track" ref={track} tabIndex={0} aria-label="Selected designs">
+        {picks.map(({ w, d }) => (
+          <a className="s-case" key={d.path} href={`/work/${d.path}/`} target="_blank" rel="noopener">
+            <img src={`/previews/${d.path}.webp`} alt={`${w.business}, ${d.theme} design`} width={1200} height={750} loading="lazy" />
+            <span className="s-case-name">{w.business.split(",")[0]}</span>
+            <span className="s-case-kind">{w.kind}</span>
+            <span className="s-pill">View design</span>
+          </a>
+        ))}
+      </div>
+      <div className="s-wrap s-work-foot">
+        <p className="s-note">Sample businesses made to show the range; names and details are fictional. A client's design is made for them and never reused.</p>
+        <div className="s-arrows is-dark">
+          <button type="button" onClick={() => nudge(-1)} aria-label="Previous design"><Icon name="arrow-right" className="i flip" /></button>
+          <button type="button" onClick={() => nudge(1)} aria-label="Next design"><Icon name="arrow-right" /></button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Founder() {
+  const ref = useReveal<HTMLElement>();
+  return (
+    <section className="s-sec s-founder s-reveal" ref={ref} aria-labelledby="s-founder-h">
+      <div className="s-wrap">
+        <p className="s-label" id="s-founder-h">Who you'll work with</p>
+        <blockquote>
+          <p>"I keep the studio small on purpose. You deal with me from the first call, I sign off every page before it goes live, and I pick up the phone."</p>
+        </blockquote>
+        <div className="s-person">
+          <img src={FOUNDER_PHOTO} alt={`${FOUNDER}, founder of Oceanalt`} width={112} height={112} loading="lazy" />
+          <div><b>{FOUNDER}</b><span>Founder, Oceanalt</span></div>
+          <a className="s-btn s-btn-soft" href={PHONE_HREF}><Icon name="phone" /> {PHONE}</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="s-sec s-faq" aria-labelledby="s-faq-h">
+      <div className="s-wrap s-split is-top">
+        <div>
+          <p className="s-label">FAQ</p>
+          <h2 id="s-faq-h" className="s-h2">Questions?<br />Fair enough.</h2>
+          <p className="s-lede">Something else? Email <a className="s-link" href={`mailto:${EMAIL}`}>{EMAIL}</a> or call <a className="s-link" href={PHONE_HREF}>{PHONE}</a>.</p>
+        </div>
+        <div className="s-faq-list">
+          {STUDIO_FAQ.map((f) => (
+            <details key={f.q}>
+              <summary>{f.q}<span className="s-plus" aria-hidden="true"><Icon name="plus" /></span></summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Start() {
+  const [state, setState] = useState<"idle" | "sending" | "done" | "replied" | "error">("idle");
+  const [need, setNeed] = useState("unsure");
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    setState("sending");
+    const site = String(data.get("website") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    try {
+      const res = await fetch("/api/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"), business: data.get("business"), email: data.get("email"),
+          phone, website: site, template: "unsure", plan: need, message: data.get("message"),
+          company_site: data.get("company_site"),
+        }),
+      });
+      if (res.ok && (await res.json()).replied) { setState("replied"); return; }
+    } catch {
+      // No API here: use the fallback below.
+    }
+    try {
+      const { saveLead } = await import("../firebase");
+      await saveLead({
+        name: String(data.get("name") || ""),
+        email: String(data.get("email") || ""),
+        company: String(data.get("business") || ""),
+        projectType: NEEDS[need] ?? need,
+        query: [String(data.get("message") || ""), site && `Current site: ${site}`, phone && `Phone: ${phone}`].filter(Boolean).join("\n"),
+        source: "form",
+      });
+      setState("done");
+    } catch {
+      setState("error");
+    }
+  };
+  return (
+    <section id="start" className="s-sec s-start" aria-labelledby="s-start-h">
+      <div className="s-wrap s-split is-top">
+        <div>
+          <p className="s-label">Start a project</p>
+          <h2 id="s-start-h" className="s-h2">Tell us what you're working on</h2>
+          <p className="s-lede">A few lines is plenty. Lathif reads every enquiry himself and replies the same business day to set up a first call.</p>
+          <ul className="s-contact">
+            <li><Icon name="mail" /><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+            <li><Icon name="phone" /><a href={PHONE_HREF}>{PHONE}</a></li>
+            <li><Icon name="pin" />Sydney, working Australia-wide</li>
+          </ul>
+        </div>
+        {state === "replied" || state === "done" ? (
+          <div className="s-form s-form-done" role="status">
+            <Icon name="check-circle" />
+            <h3>Thanks, it's with us.</h3>
+            <p>{state === "replied" ? "There's a note in your inbox now. " : ""}Lathif will reply the same business day from {EMAIL} to find a time to talk.</p>
+          </div>
+        ) : (
+          <form className="s-form" onSubmit={submit}>
+            <div className="s-row">
+              <label className="s-field"><span>Your name</span><input id="f-name" name="name" autoComplete="name" required /></label>
+              <label className="s-field"><span>Company</span><input name="business" autoComplete="organization" required /></label>
+            </div>
+            <div className="s-row">
+              <label className="s-field"><span>Email</span><input name="email" type="email" autoComplete="email" spellCheck={false} required /></label>
+              <label className="s-field"><span>Phone <small>(optional)</small></span><input name="phone" type="tel" autoComplete="tel" /></label>
+            </div>
+            <div className="s-row">
+              <label className="s-field"><span>What do you need?</span>
+                <select value={need} onChange={(e) => setNeed(e.target.value)}>
+                  {Object.entries(NEEDS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+                </select>
+              </label>
+              <label className="s-field"><span>Current website <small>(optional)</small></span><input name="website" inputMode="url" autoComplete="url" spellCheck={false} placeholder="yourbrand.com.au…" /></label>
+            </div>
+            <label className="s-field"><span>About the project</span><textarea name="message" rows={5} maxLength={2000} required placeholder="What you're trying to do, any dates that matter…" /></label>
+            <div className="hp" aria-hidden="true"><label htmlFor="f-company-site">Leave this empty</label><input id="f-company-site" name="company_site" tabIndex={-1} autoComplete="off" /></div>
+            {state === "error" && <p className="s-form-error" role="alert">That didn't send. Please try again, or email {EMAIL}.</p>}
+            <button className="s-btn s-btn-ink" type="submit" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send enquiry"} <Arrow /></button>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+}
+
+export function StudioFooter({ home = true }: { home?: boolean }) {
+  const base = home ? "" : "/";
+  return (
+    <footer className="s-foot">
+      <div className="s-wrap">
+        <div className="s-foot-cta">
+          <p className="s-label">Have something in mind?</p>
+          <h2 className="s-h2">Let's talk it through.</h2>
+          <a className="s-btn s-btn-white" href={`${base}#start`}>Start a project <Arrow /></a>
+        </div>
+        <div className="s-foot-grid">
+          <a className="s-foot-logo" href={home ? "#top" : "/"} aria-label="Oceanalt home"><LogoMark /><span translate="no">oceanalt</span></a>
+          <nav aria-label="Studio">
+            <p className="s-label">Studio</p>
+            <a href={`${base}#work`}>Work</a>
+            <a href={`${base}#services`}>Services</a>
+            <a href="/design/">Design</a>
+            <a href="/designs/">All designs</a>
+            <a href={`${base}#faq`}>FAQ</a>
+          </nav>
+          <nav aria-label="Services">
+            <p className="s-label">Services</p>
+            {SERVICES.map((s) => <a key={s.id} href={SERVICE_PAGE[s.id] ?? `${base}#services`}>{s.name}</a>)}
+          </nav>
+          <div>
+            <p className="s-label">Contact</p>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <a href={PHONE_HREF}>{PHONE}</a>
+            <span>Sydney, Australia</span>
+          </div>
+        </div>
+        <div className="s-foot-base">
+          <span>© {new Date().getFullYear()} Oceanalt · ABN {ABN}</span>
+          <span><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export function StudioHome() {
+  return (
+    <main id="main" className="s-page">
+      <Hero />
+      <Tools />
+      <Services />
+      <Why />
+      <Process />
+      <Work />
+      <Founder />
+      <Faq />
+      <Start />
+    </main>
+  );
+}

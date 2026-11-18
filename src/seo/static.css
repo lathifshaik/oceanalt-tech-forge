@@ -100,24 +100,7 @@ a:hover .sp-open, a:focus-visible .sp-open { opacity: 1; transform: none; }
 .sp-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-top: 2rem !important; animation: s-up 1s var(--s-ease) .24s both; }
 .sp-stats li { padding: .5rem 1rem; border-radius: 999px; background: var(--s-soft); color: var(--s-mute); font-size: .92rem; }
 .sp-stats b { color: var(--s-ink); font-weight: 500; font-variant-numeric: tabular-nums; }
-.sp-gallery { padding-top: 0; }
-.sp-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: 0 0 3rem; padding: 0; border: 0; }
-.sp-opt { display: contents; }
-.sp-filter label { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding: 0 1.1rem; border-radius: 999px; background: var(--s-soft); color: var(--s-ink); font-size: .94rem; font-weight: 450; cursor: pointer; transition: background-color .3s var(--s-ease), color .3s var(--s-ease); }
-.sp-filter label:hover { background: #e7e9ea; }
-.sp-filter label span { font-size: .8rem; color: var(--s-mute); font-variant-numeric: tabular-nums; }
-.sp-filter input:checked + label { background: var(--s-ink); color: #fff; }
-.sp-filter input:checked + label span { color: rgb(255 255 255 / .65); }
-.sp-filter input:focus-visible + label { outline: 2px solid var(--s-ink); outline-offset: 3px; }
-.sp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: 2.25rem 1rem; }
-.sp-dz:has(#dz-food:checked) .sp-cell:not([data-cat="food"]),
-.sp-dz:has(#dz-trades:checked) .sp-cell:not([data-cat="trades"]),
-.sp-dz:has(#dz-health:checked) .sp-cell:not([data-cat="health"]),
-.sp-dz:has(#dz-fitness:checked) .sp-cell:not([data-cat="fitness"]),
-.sp-dz:has(#dz-shops:checked) .sp-cell:not([data-cat="shops"]),
-.sp-dz:has(#dz-pro:checked) .sp-cell:not([data-cat="pro"]),
-.sp-dz:has(#dz-learning:checked) .sp-cell:not([data-cat="learning"]),
-.sp-dz:has(#dz-pets:checked) .sp-cell:not([data-cat="pets"]) { display: none; }
+/* (record shop styles for /designs/ are at the end of this file) */
 
 /* Service pages */
 .sp-svc-hero { padding-top: clamp(2rem, 4vw, 3rem); }
@@ -149,8 +132,6 @@ a:hover .sp-open, a:focus-visible .sp-open { opacity: 1; transform: none; }
   .sp-offers li { min-height: 0; }
   .sp-rules li { grid-template-columns: 2.25rem 1fr; padding: 1.3rem 1.1rem; }
   .sp-art-tall { aspect-ratio: 4 / 3; }
-  .sp-filter { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--s-gut) * -1); padding-inline: var(--s-gut); scrollbar-width: none; }
-  .sp-filter label { white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sp *, .sp-menu * , .sp-menu a { animation: none !important; transition: none !important; }
@@ -168,3 +149,142 @@ a:hover .sp-open, a:focus-visible .sp-open { opacity: 1; transform: none; }
 .sp-stats li { padding: 0; border-radius: 0; background: none; }
 .sp-stats li + li::before { content: "·"; margin-inline: .7rem; color: var(--s-mute); }
 .sp-others-h { margin: 0; font-size: 1.1rem; font-weight: 500; letter-spacing: -.02em; color: var(--s-ink); }
+
+/* /designs/: the record shop (founder, 17 Nov 2026: "like a music gallery,
+   lots you can pick up and see what you like"). Each design is a record in a
+   square sleeve; crates group them by trade; the wall shows them all. Works
+   without JavaScript (covers link to the live design, the view switch is two
+   radios); /crate.js adds the lift-out panel, Shuffle and the keyboard. */
+.sp-dz .sp-hero { padding-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.sp .sp-shop { padding: 0 0 clamp(5rem, 9vw, 8rem); }
+.sp-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--s-line); }
+.sp-views { display: flex; gap: clamp(1.25rem, 3vw, 2.25rem); }
+.sp-views label { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--s-mute); font-size: 1.02rem; font-weight: 500; letter-spacing: -.01em; cursor: pointer; box-shadow: inset 0 -2px 0 transparent; transition: color .3s var(--s-ease), box-shadow .3s var(--s-ease); }
+.sp-views label:hover { color: var(--s-ink); }
+#sp-v-crates:checked ~ .sp-bar [for="sp-v-crates"], #sp-v-wall:checked ~ .sp-bar [for="sp-v-wall"] { color: var(--s-ink); box-shadow: inset 0 -2px 0 var(--s-ink); }
+#sp-v-crates:focus-visible ~ .sp-bar [for="sp-v-crates"], #sp-v-wall:focus-visible ~ .sp-bar [for="sp-v-wall"] { outline: 2px solid var(--s-ink); outline-offset: 4px; border-radius: 2px; }
+#sp-v-wall:checked ~ .sp-crates, #sp-v-crates:checked ~ .sp-wall-wrap { display: none; }
+.sp-dig { min-height: 2.75rem; }
+.sp-dig[hidden], .sp-flick[hidden] { display: none; }
+
+/* A crate: the count, the trade, then a row you flick through. */
+.sp .sp-crate { padding: clamp(2.75rem, 5vw, 4.5rem) 0 clamp(.5rem, 1vw, 1rem); scroll-margin-top: 6rem; }
+.sp-crate + .sp-crate { border-top: 1px solid var(--s-line); }
+.sp-crate-head { display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: clamp(1rem, 2vw, 1.75rem); }
+.sp-crate-n { min-width: 1.6ch; font-size: clamp(3.25rem, 1.6rem + 4.6vw, 6.5rem); font-weight: 500; line-height: .78; letter-spacing: -.065em; color: var(--s-ink); font-variant-numeric: tabular-nums; }
+.sp-crate-t { position: relative; }
+.sp-crate-t h2 { font-size: clamp(1.35rem, 1rem + 1.1vw, 2.1rem); font-weight: 500; line-height: 1.05; letter-spacing: -.035em; color: var(--s-ink); }
+.sp-crate-t p { margin-top: .4rem !important; font-size: .95rem; color: var(--s-mute); }
+.sp-flick { display: flex; gap: .4rem; }
+.sp-flick button, .sp-lift-nav button { display: grid; place-items: center; width: 3.25rem; height: 2.75rem; border: 0; border-radius: 999px; background: var(--s-soft); color: var(--s-ink); cursor: pointer; transition: background-color .3s var(--s-ease), opacity .3s var(--s-ease); }
+.sp-flick button:hover, .sp-lift-nav button:hover { background: #e7e9ea; }
+.sp-flick button:disabled { opacity: .35; cursor: default; }
+.sp-flick .i, .sp-lift-nav .i { width: 1.1rem; height: 1.1rem; }
+.sp-flip { transform: scaleX(-1); }
+
+.sp-row { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(9.75rem, 15.5vw, 15rem); gap: clamp(1rem, 1.7vw, 1.6rem); width: min(100%, 90rem); margin-inline: auto; padding: 2rem var(--s-gut) 1.25rem; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: var(--s-gut); scrollbar-width: thin; scrollbar-color: rgb(13 17 20 / .18) transparent; box-sizing: border-box; }
+.sp-rec { position: relative; }
+.sp-rec a { display: grid; gap: .85rem; color: inherit; text-decoration: none; scroll-snap-align: start; }
+.sp-cover { position: relative; display: block; aspect-ratio: 1; border-radius: 3px; background: var(--s-soft); box-shadow: 0 1px 2px rgb(13 17 20 / .08), 0 14px 26px -16px rgb(31 58 70 / .45); transition: transform .7s var(--s-ease), box-shadow .7s var(--s-ease); }
+.sp-cover img { display: block; width: 100%; height: 100%; border-radius: inherit; object-fit: cover; object-position: 0 0; }
+/* The sleeve's edge: a hairline and a faint spine on the left. */
+.sp-cover::after, .sp-sleeve::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgb(13 17 20 / .07), inset 3px 0 0 rgb(13 17 20 / .05); pointer-events: none; }
+.sp-rec a:hover .sp-cover, .sp .sp-rec a:focus-visible .sp-cover { transform: translateY(-.7rem); box-shadow: 0 1px 2px rgb(13 17 20 / .08), 0 26px 34px -20px rgb(31 58 70 / .55); }
+.sp .sp-rec a:focus-visible { outline: none; }
+.sp .sp-rec a:focus-visible .sp-cover { outline: 2px solid var(--s-ink); outline-offset: 4px; }
+.sp-rec.is-lifted .sp-cover { visibility: hidden; }
+.sp-rec-t { display: grid; gap: .1rem; min-width: 0; }
+.sp-rec-t b { overflow: hidden; font-size: 1rem; font-weight: 500; letter-spacing: -.015em; color: var(--s-ink); white-space: nowrap; text-overflow: ellipsis; }
+.sp-rec-t small { font-size: .88rem; color: var(--s-mute); }
+.sp-cover .sp-new { z-index: 1; left: .5rem; top: .5rem; padding: .22rem .5rem; border-radius: .3rem; background: var(--s-ink); color: #fff; font-size: .74rem; font-weight: 500; letter-spacing: 0; text-transform: none; }
+
+/* The wall: everything, newest first. */
+.sp-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(9.5rem, 14vw, 13rem), 1fr)); gap: clamp(1.75rem, 3vw, 2.75rem) clamp(1rem, 1.7vw, 1.6rem); padding-top: clamp(2.5rem, 4vw, 3.5rem); }
+.sp-honest { margin-top: clamp(3rem, 5vw, 4.5rem) !important; }
+
+/* The lift-out panel: the sleeve comes out of the crate, the record slides
+   out of the sleeve, the details sit beside it. */
+html:has(.sp-lift[open]) { overflow: hidden; }
+.sp-lift { width: min(70rem, calc(100% - 2rem)); max-width: none; max-height: calc(100dvh - 2rem); padding: 0; border: 0; border-radius: 1.25rem; background: #fff; color: var(--s-ink); box-shadow: 0 40px 90px -30px rgb(13 17 20 / .5); overflow: auto; overscroll-behavior: contain; }
+.sp-lift::backdrop { background: rgb(13 17 20 / .55); }
+.sp-lift[open] { animation: sp-in .45s var(--s-ease) both; }
+.sp-lift[open]::backdrop { animation: sp-fade .45s var(--s-ease) both; }
+.sp-lift.is-leaving { animation: sp-out .22s ease-in both; }
+.sp-lift.is-leaving::backdrop { animation: sp-fade .22s ease-in reverse both; }
+@keyframes sp-in { from { opacity: 0; transform: translateY(12px) scale(.985); } }
+@keyframes sp-out { to { opacity: 0; transform: translateY(8px) scale(.99); } }
+@keyframes sp-fade { from { opacity: 0; } }
+.sp-lift-in { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); min-height: 100%; }
+.sp-lift-x { position: absolute; top: 1rem; right: 1rem; z-index: 3; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%; background: var(--s-soft); color: var(--s-ink); cursor: pointer; transition: background-color .3s var(--s-ease); }
+.sp-lift-x:hover { background: #e7e9ea; }
+.sp-lift-x .i { width: 1.25rem; height: 1.25rem; transform: rotate(45deg); }
+.sp-lift :focus-visible { outline: 2px solid var(--s-ink); outline-offset: 3px; }
+.sp-lift h2:focus { outline: none; }
+
+.sp-stage { position: relative; display: flex; align-items: center; padding: clamp(1.5rem, 4vw, 3.5rem); background: var(--s-soft); overflow: hidden; }
+.sp-deck { position: relative; width: 56%; aspect-ratio: 1; margin-left: calc((100% - 56% * 1.62) / 2); }
+.sp-sleeve { position: absolute; inset: 0; z-index: 2; border-radius: 4px; background: #fff; box-shadow: 0 2px 3px rgb(13 17 20 / .1), 0 30px 50px -26px rgb(31 58 70 / .6); }
+.sp-sleeve img { display: block; width: 100%; height: 100%; border-radius: inherit; object-fit: cover; object-position: 0 0; }
+.sp-sleeve.is-hidden { visibility: hidden; }
+.sp-fly { position: fixed; z-index: 10; margin: 0; border-radius: 4px; object-fit: cover; object-position: 0 0; box-shadow: 0 30px 50px -26px rgb(31 58 70 / .6); transform-origin: 0 0; pointer-events: none; }
+
+/* The record: a picture disc with a second crop of the design, grooves and a
+   teal centre label. It slides out of the sleeve, turning as it goes. */
+.sp-disc { position: absolute; inset: 2%; z-index: 1; border-radius: 50%; overflow: hidden; background: var(--s-ink); box-shadow: 0 20px 40px -20px rgb(13 17 20 / .65); transform: translateX(0) rotate(-140deg); transition: transform 1.1s var(--s-ease); }
+.sp-disc.is-out { transform: translateX(64%) rotate(0deg); }
+.sp-disc.is-back { transition-duration: .32s; }
+.sp-disc.no-t { transition: none; }
+.sp-disc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 78%; transform: scale(1.35); }
+.sp-disc::before { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 50%; background: repeating-radial-gradient(circle, rgb(13 17 20 / 0) 0 2.5px, rgb(13 17 20 / .13) 2.5px 3.5px); }
+.sp-disc::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 50%; box-shadow: inset 0 0 0 clamp(.35rem, .8vw, .6rem) var(--s-ink), inset 0 0 0 calc(clamp(.35rem, .8vw, .6rem) + 1px) rgb(255 255 255 / .18); }
+.sp-label { position: absolute; z-index: 2; top: 50%; left: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem; width: 36%; aspect-ratio: 1; padding: 0 6%; border-radius: 50%; background: var(--s-teal); color: #fff; text-align: center; transform: translate(-50%, -50%); box-sizing: border-box; }
+.sp-label::after { content: ""; position: absolute; top: 50%; left: 50%; width: .55rem; height: .55rem; margin: -.275rem; border-radius: 50%; background: var(--s-soft); }
+.sp-label b { font-size: clamp(.58rem, .4rem + .45vw, .82rem); font-weight: 500; line-height: 1.15; letter-spacing: -.01em; }
+.sp-label small { font-size: clamp(.5rem, .35rem + .35vw, .68rem); color: rgb(255 255 255 / .72); }
+
+.sp-lift-info { display: flex; flex-direction: column; gap: 1.25rem; padding: clamp(1.75rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 2.75rem); }
+.sp-lift-info > * { animation: sp-rise .7s var(--s-ease) both; }
+.sp-lift-info > :nth-child(2) { animation-delay: .04s; }
+.sp-lift-info > :nth-child(3) { animation-delay: .08s; }
+.sp-lift-info > :nth-child(n + 4) { animation-delay: .12s; }
+@keyframes sp-rise { from { opacity: 0; transform: translateY(10px); } }
+.sp-lift-info h2 { max-width: 15ch; padding-right: 2.5rem; font-size: clamp(1.7rem, 1.2rem + 1.5vw, 2.6rem); font-weight: 500; line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
+.sp-lift-kind { margin-top: -.6rem !important; color: var(--s-mute); }
+.sp-lift-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0; padding-top: 1.1rem; border-top: 1px solid var(--s-line); }
+.sp-lift-dl dt { font-size: .82rem; color: var(--s-mute); }
+.sp-lift-dl dd { margin: .2rem 0 0; font-weight: 500; }
+.sp-lift-shot { display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: .6rem; background: var(--s-soft); box-shadow: inset 0 0 0 1px var(--s-line); }
+.sp-lift-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.sp-lift-go { align-self: flex-start; }
+.sp-lift-more[hidden] { display: none; }
+.sp-lift-more h3 { font-size: .9rem; font-weight: 500; color: var(--s-mute); }
+.sp-lift-more ul { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .6rem !important; }
+.sp-lift-more button { display: block; width: 3.6rem; aspect-ratio: 1; padding: 0; border: 0; border-radius: 3px; background: var(--s-soft); cursor: pointer; box-shadow: 0 8px 14px -10px rgb(31 58 70 / .6); transition: transform .5s var(--s-ease); }
+.sp-lift-more button:hover { transform: translateY(-3px); }
+.sp-lift-more button[aria-current="true"] { outline: 2px solid var(--s-ink); outline-offset: 3px; }
+.sp-lift-more img { display: block; width: 100%; height: 100%; border-radius: inherit; object-fit: cover; object-position: 0 0; }
+.sp-lift-nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: auto; padding-top: 1.1rem; border-top: 1px solid var(--s-line); }
+.sp-lift-nav p { font-size: .9rem; color: var(--s-mute); text-align: center; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 860px) {
+  .sp-crate-head { grid-template-columns: auto 1fr; align-items: center; }
+  .sp-dz .sp-stats li:last-child { flex-basis: 100%; margin-top: .3rem; }
+  .sp-dz .sp-stats li:last-child::before { content: none; }
+  .sp-lift-shot { display: none; }
+  .sp-flick { display: none; }
+  .sp-row { grid-auto-columns: 42vw; padding-top: 1.5rem; }
+  .sp-rec a:hover .sp-cover { transform: none; }
+  .sp-lift { width: 100%; max-height: 94dvh; margin: auto 0 0; border-radius: 1.25rem 1.25rem 0 0; }
+  .sp-lift[open] { animation-name: sp-sheet; }
+  @keyframes sp-sheet { from { transform: translateY(40px); opacity: 0; } }
+  .sp-lift-in { grid-template-columns: 1fr; }
+  .sp-stage { padding: 1.5rem 1.25rem; }
+  .sp-deck { width: 52%; margin-left: calc((100% - 52% * 1.62) / 2); }
+  .sp-lift-info { padding: 1.5rem 1.25rem 1.75rem; }
+  .sp-lift-x { background: #fff; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sp-lift[open], .sp-lift[open]::backdrop, .sp-lift.is-leaving, .sp-lift.is-leaving::backdrop, .sp-lift-info > * { animation: none !important; }
+  .sp-disc, .sp-disc.is-out { transition: none !important; transform: translateX(64%); }
+  .sp-cover, .sp-rec a:hover .sp-cover { transition: none; transform: none; }
+}

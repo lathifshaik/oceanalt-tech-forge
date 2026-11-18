@@ -5,7 +5,7 @@ This is what makes **custom design in 1–3 days** possible. Each client site is
 A site's look comes from three independent choices, so no two clients get the same design:
 
 1. **Layout** (`template`): `cafe`, `trades`, `studio`, `shop` or `pro`. This is the structure, built around how that kind of business gets customers.
-2. **Theme** (`design.theme`): one of forty-two complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
+2. **Theme** (`design.theme`): one of forty-eight complete design directions in `themes/themes.json`. Each one sets the palette (light and dark), the font pairing, the corner style and the heading style. Any theme works with any layout.
 3. **Hero** (`design.hero`): a full-bleed photo (`full`) or a split screen (`split`). The `cafe` layout also has two restaurant heroes: `centre` (a big centred headline with `hero.lineTwo` in italic, a round dish photo `hero.dish` rising from the bottom, and optional `hero.cards` and `hero.stats`) and `wordmark` (the business name huge, sized to fit its longest word, the headline as a tagline, and a live open or closed chip from the hours).
 
 On top of that come the client's own accent colour (`design.accent`, `design.accentDark`), photos, words and logo.
@@ -54,6 +54,12 @@ On top of that come the client's own accent colour (`design.accent`, `design.acc
 | `lilac` | Creative agency. Lavender, a big Bodoni serif, a lime ball and a thin yellow orbit over glossy 3D shapes |
 | `swirl` | Gelato bar. Dusty rose, the name set huge on its side in plum Abril Fatface, arched photo, line-drawn clouds, terracotta leaf circle |
 | `orchard` | Growers' market poster. Peach, heavy condensed Anton capitals, fruit printed inside outlined circles, a lime arrow |
+| `plinth` | Residential development. Warm concrete and near-black, light Noto Serif Display set very large, spaced capitals, hairline rows, nothing boxed |
+| `foyer` | Boutique hotels. Bottle-green black, brass and parchment, Gilda Display in spaced capitals, arched portraits, hairlines (always dark) |
+| `lucent` | Private health. Clinical white and pale sage-grey, one deep blue, light Onest at large sizes, soft rounded photos |
+| `claret` | Private wealth. Warm paper, ink and claret, light Source Serif 4 with italics, claret duotone photos, square buttons, ruled rows |
+| `kiln` | Homewares label. Oat, clay and terracotta, Castoro with italics, spaced capitals, centred wordmark, text-link buttons |
+| `girder` | Commercial construction. Concrete grey, near-black and signal orange, tall Big Shoulders capitals, numbered rows, a dark enquiry panel |
 
 Any theme can use `hero.eyebrow` (a small spaced line above the headline) and `hero.accent` (a word of the headline set in the accent style); the builder adds them in every layout.
 
@@ -92,6 +98,8 @@ The build fails with a clear list if a required field is missing (see each templ
 
 **Sections and looks (every layout):** every layout marks its sections, so `sections` reorders or drops them anywhere: studio has `about, treatments, gift, team, visit, band`; pro has `creds, services, fees, team, process, faq, contact`; trades has `trust, services, process, areas, reviews, quote`; shop has `facts, products, story, reviews, visit`. `look` changes how each section is laid out, so two sites in one layout differ below the hero, not just in the hero and colours. The options are listed at the top of each layout's "Section variants" CSS, for example `"look": {"treatments": "menu", "about": "quote", "visit": "invert", "band": "giant", "heads": "centre"}`. Studio: treatments `cards|menu|tiles|numbered`, gift `split|band|line`, about `split|quote|banner`, team `grid|circles|strip|list`, visit `split|invert|wide`, band `box|giant|line`. Pro: creds `bar|band|big`, services `grid|rows|cards|split`, fees `list|table|cards|band`, team `grid|large|list`, process `line|timeline|big|cards`, faq `stack|grid|split`, contact `card|invert|centre`. Trades: trust `tiles|band|plain`, services `bento|list|cards`, process `dots|big|timeline`, areas `chips|columns|band`, reviews `cards|feature|wall`, quote `split|invert|stack`. Shop: facts `bar|band`, products `grid|feature|row|list`, story `split|banner|quote`, reviews `cards|feature|line`, visit `split|invert`. All layouts: heads `left|centre|rule`. The look counts toward the uniqueness check. When two designs share a layout, change at least three looks and the section order between them, not just the theme.
 
+**Established-brand sections (opt-in, Nov 2026):** `plates` adds big editorial photographs with a caption line (`{ title, intro, photos: [{ photo, photoAlt, name, caption }] }`) to the pro, studio, shop and trades layouts; `look.plates` is `wide` (default), `offset` or `strip`. `locations` (`[{ name, address, detail }]`) lists several addresses in the studio and shop visit sections. The pro contact section takes an enquiry form when `contact.formAction` is set (with `contact.options` for a select list, `optionsLabel`, `messageLabel`, `submit`, `note`). Headings and buttons that used to be fixed can be renamed: pro `feesTitle`, `feesNav`, `teamTitle`, `processTitle`, `faqTitle`, `business.ctaShort`; studio `teamTitle`, `teamNav`, `visitTitle`, `business.bookLabel`, `business.itemCta`; shop `visitTitle`; trades `labels` (`services`, `servicesNav`, `platesNav`, `areas`, `areasNav`, `process`, `quote`, `quoteNav`, `formPlace`, `formMessage`, `formSend`, `formNote`, `callbar`). Leave them out and the page is exactly as before. Six samples use them: `pro/example-developer`, `pro/example-wealth`, `studio/example-hotel`, `studio/example-daysurgery`, `shop/example-homewares`, `trades/example-construction`.
+
 **Payments and bookings:** `business.bookingUrl` (Cal.com, Fresha, Square…), `gift.buyUrl` and `bookUrl` on any treatment take Stripe Payment Links created in the **client's own** Stripe account.
 
 **Forms:** `contact.formAction` takes any form endpoint (Formspree, Web3Forms, Basin). Leave it out and the page shows phone and email only.
@@ -129,5 +137,5 @@ Not covered by the 1–3 day promise, because a third party controls them: Googl
 - `engine/base.css`: shared reset and accessibility styles
 - `engine/fx.js`: the 3D tilt, flip, live open/closed sign, same-day delivery countdown and today's hours (around 3 KB, no dependencies)
 - `icons/icons.json`: Oceanalt's custom icon set (47 icons, 24px grid, 1.75 stroke), also in `icons/svg/`
-- `themes/themes.json`: the forty-two design directions
+- `themes/themes.json`: the forty-eight design directions
 - `<template>/template.html` (reads only theme tokens: `--bg`, `--ink`, `--accent`, `--accent-text`, `--accent-2`, `--font-display`, `--r`, `--r-img`, `--r-btn`…), `meta.json` (required fields, default theme, hero variants, showcase), `example.json`

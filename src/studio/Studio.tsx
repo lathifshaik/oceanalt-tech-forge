@@ -13,6 +13,7 @@ const FOUNDER_PHOTO = "/team/lathif.webp";
 // The samples that read most like an established brand lead the strip and the
 // work band. The rest stay on /designs/.
 const FEATURED = [
+  "fenwick-hale", "corella-hotels", "calloway-day-surgery", "calder-and-ames", "tallowwood-home", "torrens-and-pike",
   "small-spaces-architects", "ridgeline-wines", "willow-and-arch", "twist-design-studio", "velvet-hour",
   "harlow-reid-lawyers", "saltbush-norwood", "golden-hour-weddings", "still-water-float", "kumo-sushi",
   "gable-and-co", "ochre-skin-co", "wide-eyes-art-studio", "hillside-orchard-market",
@@ -303,7 +304,7 @@ function Work() {
     const card = el?.querySelector<HTMLElement>(".s-case");
     if (el) el.scrollBy({ left: dir * ((card?.offsetWidth ?? 560) + 8), behavior: "smooth" });
   };
-  const picks = getFeatured().slice(4, 14);
+  const picks = getFeatured().slice(0, 10);
   const total = WORK.reduce((n, w) => n + w.designs.length, 0);
   return (
     <section id="work" className="s-work" aria-labelledby="s-work-h">

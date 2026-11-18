@@ -549,6 +549,74 @@ export const WORK: {
       { path: "hillside-orchard-market", theme: "Orchard" },
     ],
   },
+  {
+    id: "pro",
+    kind: "Property developer",
+    added: "2026-11-17",
+    business: "Fenwick Hale, Northcote",
+    problem: "A new project launch needed registrations before the display suite opened, not a brochure PDF.",
+    pitch: "The homes, prices and who's building it, then a register-interest form that asks which home you want.",
+    designs: [
+      { path: "fenwick-hale", theme: "Plinth" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Boutique hotel group",
+    group: "food",
+    added: "2026-11-17",
+    business: "Corella Hotels, Surry Hills",
+    problem: "Three hotels, three booking engines, and most guests booking through someone else's site.",
+    pitch: "All three hotels on one page, every room with its rate and a Book button, and gift vouchers sold online.",
+    designs: [
+      { path: "corella-hotels", theme: "Foyer" },
+    ],
+  },
+  {
+    id: "studio",
+    kind: "Day surgery group",
+    added: "2026-11-17",
+    business: "Calloway Day Surgery, Chatswood",
+    problem: "Patients rang four centres with the same questions about fasting, fees and getting home.",
+    pitch: "Procedures with typical stay times, the specialists, all four centres, and admission started online.",
+    designs: [
+      { path: "calloway-day-surgery", theme: "Lucent" },
+    ],
+  },
+  {
+    id: "pro",
+    kind: "Private wealth firm",
+    added: "2026-11-17",
+    business: "Calder & Ames, Sydney",
+    problem: "The site said nothing a client couldn't get from any other adviser.",
+    pitch: "The advisers by name, how fees work in plain words, short insights, and one button to book a first meeting.",
+    designs: [
+      { path: "calder-and-ames", theme: "Claret" },
+    ],
+  },
+  {
+    id: "shop",
+    kind: "Homewares label",
+    added: "2026-11-17",
+    business: "Tallowwood, Paddington",
+    problem: "The stores looked like the brand. The website looked like a marketplace listing.",
+    pitch: "This season's pieces with each maker named, bought online, and all three stores in one place.",
+    designs: [
+      { path: "tallowwood-home", theme: "Kiln" },
+    ],
+  },
+  {
+    id: "trades",
+    kind: "Commercial builder",
+    group: "pro",
+    added: "2026-11-17",
+    business: "Torrens & Pike, North Sydney",
+    problem: "Tender panels and graduates both judged the firm on a site built for a much smaller builder.",
+    pitch: "Sectors, selected projects, how a job is delivered, accreditations up front, and a project enquiry form.",
+    designs: [
+      { path: "torrens-and-pike", theme: "Girder" },
+    ],
+  },
 ];
 
 

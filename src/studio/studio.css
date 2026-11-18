@@ -302,3 +302,12 @@ details[open] .s-plus { transform: rotate(45deg); }
 .s-case-kind { letter-spacing: 0; text-transform: none; font-size: .9rem; font-weight: 500; }
 
 .s-reveal > .s-wrap, .s-reveal .s-svc-track { opacity: 1; transform: none; transition: none; }
+
+/* Work band: the design shown clean, with the name as a caption underneath
+   (an overlaid name fought with each design's own headline). */
+.s-case { display: block; aspect-ratio: auto; overflow: visible; border-radius: 0; }
+.s-case img { position: static; display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; border-radius: .9rem; filter: none; }
+.s-case:hover img { filter: brightness(.9); transform: none; }
+.s-case-name { display: block; margin-top: 1rem; padding: 0; font-size: clamp(1.15rem, 1rem + .5vw, 1.5rem); text-align: left; }
+.s-case-kind { position: static; display: block; margin-top: .25rem; color: rgb(255 255 255 / .6); }
+.s-case .s-pill { display: none; }

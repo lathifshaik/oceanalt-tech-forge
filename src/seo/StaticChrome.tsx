@@ -88,7 +88,7 @@ export function StaticFooter({ label = "Have something in mind?", heading = "Let
         <p className="s-ack">Oceanalt works on the lands of the Gadigal people of the Eora Nation in Sydney and the Wurundjeri Woi-wurrung people of the Kulin Nation in Melbourne. We pay our respects to their Elders past and present.</p>
         <div className="s-foot-base">
           <span>© {new Date().getFullYear()} Oceanalt · ABN {ABN}</span>
-          <span><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>
+          <span><a href="/photos/CREDITS.md">Photo credits</a><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>
         </div>
       </div>
     </footer>

@@ -226,7 +226,7 @@ function Why() {
           </ul>
         </div>
         <div className="s-photo" aria-hidden="true">
-          <img src="/photos/studio-1.webp" alt="" width={1600} height={1000} loading="lazy" {...showWhenLoaded} />
+          <img src="/photos/studio-2.webp" alt="" width={1600} height={1000} loading="lazy" {...showWhenLoaded} />
         </div>
       </div>
     </section>
@@ -490,7 +490,7 @@ export function StudioFooter({ home = true }: { home?: boolean }) {
         <p className="s-ack">Oceanalt works on the lands of the Gadigal people of the Eora Nation in Sydney and the Wurundjeri Woi-wurrung people of the Kulin Nation in Melbourne. We pay our respects to their Elders past and present.</p>
         <div className="s-foot-base">
           <span>© {new Date().getFullYear()} Oceanalt · ABN {ABN}</span>
-          <span><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>
+          <span><a href="/photos/CREDITS.md">Photo credits</a><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>
         </div>
       </div>
     </footer>

@@ -25,7 +25,6 @@
   "hero": {
     "photo": "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=1800&q=75&auto=format&fit=crop",
     "photoAlt": "A dim hotel lounge with tall windows and a low sofa",
-    "eyebrow": "Surry Hills / Bondi / Blackheath",
     "accent": "a past"
   },
   "teamTitle": "The hotels",
@@ -42,8 +41,8 @@
     },
     {
       "name": "Blackheath",
-      "role": "12 rooms and a cottage on the edge of the Grose Valley",
-      "photo": "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=900&q=75&auto=format&fit=crop"
+      "role": "12 rooms and a timber cottage, ten minutes from the cliff walks",
+      "photo": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=900&q=75&auto=format&fit=crop"
     }
   ],
   "about": {
@@ -220,5 +219,6 @@
       "theme": "foyer",
       "hero": "full"
     }
-  ]
+  ],
+  "teamNav": "Hotels"
 }

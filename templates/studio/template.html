@@ -218,7 +218,7 @@ footer a{text-decoration:none} footer a:hover{color:var(--ink)}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#main">{{icon:sparkle}} {{business.name}}</a>
-    <nav class="nav" aria-label="Main"><a href="#treatments">{{#business.servicesLabel}}{{business.servicesLabel}}{{/business.servicesLabel}}{{^business.servicesLabel}}Treatments{{/business.servicesLabel}}</a>{{#gift}}<a href="#gift">Gift vouchers</a>{{/gift}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#visit">Visit</a></nav>
+    <nav class="nav" aria-label="Main"><a href="#treatments">{{#business.servicesLabel}}{{business.servicesLabel}}{{/business.servicesLabel}}{{^business.servicesLabel}}Treatments{{/business.servicesLabel}}</a>{{#gift}}<a href="#gift">Gift vouchers</a>{{/gift}}{{#team}}{{#@first}}<a href="#team">{{#teamNav}}{{teamNav}}{{/teamNav}}{{^teamNav}}Team{{/teamNav}}</a>{{/@first}}{{/team}}<a href="#visit">Visit</a></nav>
     <a class="btn btn-light" href="{{business.bookingUrl}}">{{#business.bookLabel}}{{business.bookLabel}}{{/business.bookLabel}}{{^business.bookLabel}}Book online{{/business.bookLabel}}</a>
   </div>
 </header>

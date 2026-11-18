@@ -205,7 +205,7 @@ footer .wrap{display:grid;gap:.5rem}
   <div class="wrap">
     <a class="brand" href="#main"><span class="mono" aria-hidden="true">{{business.initials}}</span>{{business.name}}</a>
     <nav class="nav" aria-label="Main"><a href="#services">Services</a>{{#fees}}{{#@first}}<a href="#fees">{{#feesNav}}{{feesNav}}{{/feesNav}}{{^feesNav}}Fees{{/feesNav}}</a>{{/@first}}{{/fees}}{{#team}}{{#@first}}<a href="#team">Team</a>{{/@first}}{{/team}}<a href="#contact">Contact</a></nav>
-    <a class="btn btn-accent" href="{{#business.bookingUrl}}{{business.bookingUrl}}{{/business.bookingUrl}}{{^business.bookingUrl}}#contact{{/business.bookingUrl}}"><span class="lg">{{#business.ctaLabel}}{{business.ctaLabel}}{{/business.ctaLabel}}{{^business.ctaLabel}}Book a consultation{{/business.ctaLabel}}</span><span class="sm" aria-hidden="true">Book</span></a>
+    <a class="btn btn-accent" href="{{#business.bookingUrl}}{{business.bookingUrl}}{{/business.bookingUrl}}{{^business.bookingUrl}}#contact{{/business.bookingUrl}}"><span class="lg">{{#business.ctaLabel}}{{business.ctaLabel}}{{/business.ctaLabel}}{{^business.ctaLabel}}Book a consultation{{/business.ctaLabel}}</span><span class="sm" aria-hidden="true">{{#business.ctaShort}}{{business.ctaShort}}{{/business.ctaShort}}{{^business.ctaShort}}Book{{/business.ctaShort}}</span></a>
   </div>
 </header>
 

@@ -15,7 +15,6 @@
   "hero": {
     "photo": "https://images.unsplash.com/photo-1616627561839-074385245ff6?w=1800&q=75&auto=format&fit=crop",
     "photoAlt": "A bed made with rust and oat linen against a plaster wall",
-    "eyebrow": "The summer edit",
     "accent": "a long time"
   },
   "delivery": {
@@ -87,8 +86,8 @@
   "story": {
     "title": "Made slowly, by people we know",
     "body": "We started Tallowwood in 2011 with one linen supplier and a market stall. We still visit every workshop we buy from, and we still name every maker on the label.",
-    "photo": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1800&q=75&auto=format&fit=crop",
-    "photoAlt": "A warm living room with a curved cream sofa and woven baskets"
+    "photo": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A living room with a dark wall and framed prints"
   },
   "plates": {
     "title": "At home with Tallowwood",
@@ -100,10 +99,10 @@
         "caption": "Ridge vase, Tide plates"
       },
       {
-        "photo": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=900&q=75&auto=format&fit=crop",
-        "photoAlt": "A living room with a dark wall and framed prints",
+        "photo": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900&q=75&auto=format&fit=crop",
+        "photoAlt": "A warm living room with a curved cream sofa and woven baskets",
         "name": "The living room",
-        "caption": "Linen throws in clay"
+        "caption": "Linen throws in oat"
       },
       {
         "photo": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=900&q=75&auto=format&fit=crop",

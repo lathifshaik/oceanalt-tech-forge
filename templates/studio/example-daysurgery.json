@@ -58,8 +58,7 @@
   },
   "hero": {
     "photo": "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=1400&q=75&auto=format&fit=crop",
-    "photoAlt": "Two clinicians reviewing a scan on a screen",
-    "eyebrow": "Chatswood / Parramatta / Kogarah / Bella Vista"
+    "photoAlt": "Two clinicians reviewing a scan on a screen"
   },
   "about": {
     "title": "Day surgery is all we do",
@@ -209,5 +208,6 @@
       "theme": "lucent",
       "hero": "split"
     }
-  ]
+  ],
+  "teamNav": "Specialists"
 }

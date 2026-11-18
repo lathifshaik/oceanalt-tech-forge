@@ -19,12 +19,12 @@
     "contactRole": "Principal adviser",
     "bookingUrl": "https://cal.com/example",
     "ctaLabel": "Book an introductory meeting",
-    "disclaimer": "Sample site made by Oceanalt. Calder & Ames is fictional. General information only, not financial advice."
+    "disclaimer": "Sample site made by Oceanalt. Calder & Ames is fictional. General information only, not financial advice.",
+    "ctaShort": "Book a meeting"
   },
   "hero": {
-    "photo": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=1400&q=75&auto=format&fit=crop",
+    "photo": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=75&auto=format&fit=crop",
     "photoAlt": "Glass office towers seen from street level",
-    "eyebrow": "Private wealth / Sydney and Melbourne",
     "accent": "the long run"
   },
   "credentials": [
@@ -165,7 +165,7 @@
     }
   ],
   "contactTitle": "Start with a conversation",
-  "contactIntro": "Sydney: Level 14, 60 Castlereagh Street. Melbourne: Level 9, 365 Little Collins Street. Or by video, wherever you are.",
+  "contactIntro": "Meet us in Sydney or Melbourne, or by video wherever you are. Melbourne: Level 9, 365 Little Collins Street.",
   "sections": [
     "creds",
     "services",

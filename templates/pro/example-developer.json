@@ -6,8 +6,8 @@
   "business": {
     "name": "Fenwick Hale",
     "tagline": "The Merri, Northcote",
-    "headline": "Forty-eight homes on the edge of Merri Creek.",
-    "intro": "The Merri is six storeys of one, two and three-bedroom homes in Northcote, set back behind the creek's river red gums. Registrations are open. The display suite opens in February.",
+    "headline": "Twenty-four homes on the edge of Merri Creek.",
+    "intro": "The Merri is townhouses and garden apartments in Northcote, set among the creek's river red gums. Registrations are open, and the display suite opens in February.",
     "address": "Display suite, 212 High Street, Northcote VIC 3070",
     "street": "212 High Street",
     "suburb": "Northcote",
@@ -18,22 +18,22 @@
     "contactName": "Clare Odum",
     "contactRole": "Sales, The Merri",
     "ctaLabel": "Register your interest",
-    "disclaimer": "Sample site made by Oceanalt. Fenwick Hale and The Merri are fictional. Images are for illustration only."
+    "disclaimer": "Sample site made by Oceanalt. Fenwick Hale and The Merri are fictional. Images are for illustration only.",
+    "ctaShort": "Register"
   },
   "hero": {
-    "photo": "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1800&q=75&auto=format&fit=crop",
-    "photoAlt": "A pale brick and timber building behind trees",
-    "eyebrow": "The Merri / Northcote / Registrations open",
+    "photo": "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1800&q=75&auto=format&fit=crop",
+    "photoAlt": "A timber and dark-clad townhouse behind a river red gum",
     "accent": "Merri Creek"
   },
   "credentials": [
     {
       "icon": "home",
-      "text": "48 homes over six levels"
+      "text": "24 homes on a creek-side site"
     },
     {
       "icon": "layout",
-      "text": "One, two and three bedrooms"
+      "text": "Townhouses and garden apartments"
     },
     {
       "icon": "bolt",
@@ -45,36 +45,30 @@
     }
   ],
   "servicesTitle": "The residences",
-  "servicesIntro": "Every home faces north or east, every balcony is deep enough to eat on, and the floors are oak throughout.",
+  "servicesIntro": "Every home faces north or east onto the gums, with its own outdoor space and oak floors throughout.",
   "services": [
     {
       "icon": "home",
-      "name": "One bedroom",
-      "desc": "62 to 70 m² inside and a 9 m² balcony. A study nook, and a bathroom with a window.",
-      "fee": "From $585,000"
+      "name": "Garden apartments",
+      "desc": "Six single-level homes, 78 to 92 m², each with a walled courtyard and a gate onto the creek path.",
+      "fee": "From $780,000"
     },
     {
       "icon": "home",
-      "name": "Two bedrooms",
-      "desc": "82 to 96 m², two bathrooms, and a balcony the width of the living room. Most look over the creek.",
-      "fee": "From $845,000"
+      "name": "Two-bedroom townhouses",
+      "desc": "Two storeys, 118 m², a north garden and a study nook on the landing.",
+      "fee": "From $1.08m"
     },
     {
       "icon": "home",
-      "name": "Three bedrooms",
-      "desc": "118 to 134 m² on the corners, with light from two sides and a separate laundry.",
-      "fee": "From $1.29m"
+      "name": "Three-bedroom townhouses",
+      "desc": "Three storeys, 164 to 176 m², with a roof terrace that looks over the treetops to the city.",
+      "fee": "From $1.39m"
     },
     {
       "icon": "leaf",
-      "name": "Garden homes",
-      "desc": "Four ground-floor homes with walled gardens and a gate onto the creek path.",
-      "fee": "From $1.12m"
-    },
-    {
-      "icon": "compass",
-      "name": "Penthouses",
-      "desc": "Two on level six, 186 m² each, with a 60 m² terrace over the treetops to the city.",
+      "name": "Creek-front townhouses",
+      "desc": "Four homes on the creek edge, 190 m², with living rooms that open straight under the gums.",
       "fee": "By appointment"
     }
   ],
@@ -83,10 +77,10 @@
     "intro": "Architecture by Aldridge Kemp, landscape by Field Office. Images are artist's impressions.",
     "photos": [
       {
-        "photo": "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1800&q=75&auto=format&fit=crop",
-        "photoAlt": "A dark timber building behind a river red gum at dusk",
-        "name": "The creek side",
-        "caption": "Recycled brick, blackbutt battens, every gum kept"
+        "photo": "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1800&q=75&auto=format&fit=crop",
+        "photoAlt": "A pale perforated facade with timber eaves against the sky",
+        "name": "The street side",
+        "caption": "Perforated screens, blackbutt soffits"
       },
       {
         "photo": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&q=75&auto=format&fit=crop",
@@ -152,11 +146,11 @@
   "faq": [
     {
       "q": "Is there parking?",
-      "a": "Every two and three-bedroom home has a basement car space with an EV charger. One-bedroom buyers can add a space while they last."
+      "a": "Every townhouse has a double garage with an EV charger. Garden apartments have one basement space each, also with a charger."
     },
     {
       "q": "What will the owners corporation fees be?",
-      "a": "Estimated at $3,800 to $6,900 a year, depending on the home. The full budget is in the contract pack."
+      "a": "Estimated at $2,400 to $4,100 a year, depending on the home. The full budget is in the contract pack."
     },
     {
       "q": "Can I buy to rent it out?",
@@ -173,11 +167,10 @@
     "formAction": "https://formspree.io/f/example",
     "optionsLabel": "I'm looking at",
     "options": [
-      "One bedroom",
-      "Two bedrooms",
-      "Three bedrooms",
-      "A garden home",
-      "A penthouse",
+      "A garden apartment",
+      "A two-bedroom townhouse",
+      "A three-bedroom townhouse",
+      "A creek-front townhouse",
       "Not sure yet"
     ],
     "messageLabel": "Anything we should know?",

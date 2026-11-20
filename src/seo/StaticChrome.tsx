@@ -1,5 +1,5 @@
 import { Icon, type IconName } from "../components/Icon";
-import { ABN, EMAIL, LogoMark, PHONE, PHONE_HREF } from "../App";
+import { ABN, EMAIL, FOUNDER, LogoMark, PHONE, PHONE_HREF } from "../App";
 import { SERVICES } from "../studio/content";
 import { LANDINGS } from "./landing";
 
@@ -12,7 +12,8 @@ const LINKS: [string, string][] = [
   ["/#work", "Work"],
   ["/#services", "Services"],
   ["/design/", "Design"],
-  ["/#studio", "Studio"],
+  ["/#agents", "AI agents"],
+  ["/#automation", "Automation"],
   ["/#faq", "FAQ"],
 ];
 
@@ -87,7 +88,7 @@ export function StaticFooter({ label = "Have something in mind?", heading = "Let
         </div>
         <p className="s-ack">Oceanalt works on the lands of the Gadigal people of the Eora Nation in Sydney and the Wurundjeri Woi-wurrung people of the Kulin Nation in Melbourne. We pay our respects to their Elders past and present.</p>
         <div className="s-foot-base">
-          <span>© {new Date().getFullYear()} Oceanalt · ABN {ABN}</span>
+          <span>© {new Date().getFullYear()} Oceanalt · {FOUNDER}, Builder · ABN {ABN}</span>
           <span><a href="/photos/CREDITS.md">Photo credits</a><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>
         </div>
       </div>

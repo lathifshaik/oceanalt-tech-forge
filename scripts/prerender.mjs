@@ -37,7 +37,7 @@ function business(seo) {
     image: `${SITE}og-image.png`,
     email: seo.EMAIL,
     telephone: seo.PHONE ? "+61 " + seo.PHONE.replace(/^0/, "") : undefined,
-    description: "A Sydney and Melbourne design and technology studio for established Australian brands: brand identity, websites, web apps and software, AI agents, and search and AI visibility, designed, built and looked after by one team. Every project is quoted after a call.",
+    description: "A Sydney and Melbourne design and technology studio for established Australian brands: brand identity, websites, web apps and software, AI and voice agents, workflow automation, payments, and search and AI visibility, designed, built and looked after by one team. Every project is quoted after a call.",
     address: { "@type": "PostalAddress", addressLocality: "Sydney", addressRegion: "NSW", postalCode: "2037", addressCountry: "AU" },
     areaServed: [{ "@type": "City", name: "Sydney" }, { "@type": "City", name: "Melbourne" }, { "@type": "Country", name: "Australia" }],
     taxID: seo.ABN,

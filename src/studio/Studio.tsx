@@ -93,7 +93,8 @@ export function StudioNav({ home = true }: { home?: boolean }) {
     [`${base}#work`, "Work"],
     [`${base}#services`, "Services"],
     ["/design/", "Design"],
-    [`${base}#studio`, "Studio"],
+    [`${base}#agents`, "AI agents"],
+    [`${base}#automation`, "Automation"],
     [`${base}#faq`, "FAQ"],
   ];
   return (
@@ -505,6 +506,10 @@ function Start() {
             <li><Icon name="phone" /><a href={PHONE_HREF}>{PHONE}</a></li>
             <li><Icon name="pin" />Sydney and Melbourne, working Australia-wide</li>
           </ul>
+          <div className="s-start-who">
+            <img src={FOUNDER_PHOTO} alt="" width={56} height={56} loading="lazy" />
+            <p><b>{FOUNDER}</b><span>Builder. Reads every enquiry and answers the phone.</span></p>
+          </div>
         </div>
         {state === "replied" || state === "done" ? (
           <div className="s-form s-form-done" role="status">
@@ -573,7 +578,7 @@ export function StudioFooter({ home = true }: { home?: boolean }) {
         </div>
         <p className="s-ack">Oceanalt works on the lands of the Gadigal people of the Eora Nation in Sydney and the Wurundjeri Woi-wurrung people of the Kulin Nation in Melbourne. We pay our respects to their Elders past and present.</p>
         <div className="s-foot-base">
-          <span>© {new Date().getFullYear()} Oceanalt · ABN {ABN}</span>
+          <span>© {new Date().getFullYear()} Oceanalt · {FOUNDER}, Builder · ABN {ABN}</span>
           <span><a href="/photos/CREDITS.md">Photo credits</a><a href="/#/terms">Terms</a><a href="/#/privacy">Privacy</a></span>
         </div>
       </div>

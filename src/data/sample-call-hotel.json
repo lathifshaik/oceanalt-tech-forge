@@ -1,0 +1,27 @@
+{
+  "_note": "The homepage voice-agent demo (src/studio/CallPhone.tsx): a guest rings Corella Hotels (a sample business) about a late arrival. Made 20 Nov 2026 with ElevenLabs eleven_v4 (paid plan, licensed for commercial use): Kate (w9rPM8AIZle60Nbpw7nl) as the agent, Jack (OLOI4oonuvD0YxxCCZy0) as the guest; one take per line, stitched with 0.5 s gaps and loudness-normalised. `starts` are the line start times in seconds.",
+  "business": "Corella Hotels",
+  "line": "Bondi",
+  "agent": "Corella's AI agent",
+  "caller": { "name": "Tom Avery", "initials": "TA", "number": "0491 570 156" },
+  "summaryTitle": "Late arrival sorted for Tom",
+  "summaryTo": "Sent to the Bondi night team",
+  "lines": [
+    { "who": "c", "text": "Hi, you've called Corella Hotels. I'm Corella's AI agent, and this call is recorded. How can I help?" },
+    { "who": "m", "text": "Hi. I'm booked at Corella Bondi tonight, but my flight's delayed. I won't get in till about eleven." },
+    { "who": "c", "text": "No trouble at all. What's the name on the booking?" },
+    { "who": "m", "text": "Tom Avery.", "act": { "icon": "person", "text": "Booking found: Ocean Room, tonight" } },
+    { "who": "c", "text": "Thanks, Tom. I've got you in an Ocean Room tonight. Reception's open all night, so eleven is fine. I've noted that you're arriving late.", "act": { "icon": "calendar", "text": "Late arrival noted, about 11pm" } },
+    { "who": "m", "text": "Great. Any chance of something to eat when I get in?" },
+    { "who": "c", "text": "The kitchen closes at ten, but I can ask the night team to leave a cheese plate in your room. Would you like that?" },
+    { "who": "m", "text": "Yes please, that'd be great.", "act": { "icon": "check", "text": "Cheese plate requested from the night team" } },
+    { "who": "c", "text": "Done. I'll text you the late check-in details now. Safe travels, Tom.", "act": { "icon": "send", "text": "Late check-in details texted to Tom" } }
+  ],
+  "audio": {
+    "src": "/audio/concierge-hotel.mp3",
+    "duration": 45.92,
+    "starts": [0.6, 8.14, 14.56, 17.94, 19.64, 28.54, 32.0, 38.66, 41.16],
+    "voices": { "agent": "Kate-agent", "caller": "Jack - Relaxed Aussie Explainer" },
+    "model": "eleven_v4"
+  }
+}

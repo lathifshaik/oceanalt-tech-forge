@@ -131,3 +131,15 @@
   .mx-chips button { flex: none; scroll-snap-align: center; max-width: 15rem; }
   .mx-thread { font-size: .76rem; }
 }
+
+/* The phone never changes size (founder: "why is the phone growing"). Its
+   height is fixed from its width; the chat scrolls inside the screen and the
+   composer stays one line. */
+.mx-fig .cp-device { --pw: 18.5rem; width: var(--pw); height: calc(var(--pw) * 19.3 / 9); aspect-ratio: auto; max-width: none; flex: none; }
+.mx .mx-screen { height: 100%; min-height: 0; }
+.mx .mx-thread { flex: 1 1 0; min-height: 0; }
+.mx .mx-h, .mx .mx-compose, .mx .mx-screen .cp-status { flex: none; }
+.mx-compose span, .mx-compose span.is-typing { white-space: nowrap; overflow: hidden; text-overflow: clip; }
+@media (max-width: 640px) {
+  .mx-fig .cp-device { --pw: min(15.5rem, 76vw); width: var(--pw); }
+}

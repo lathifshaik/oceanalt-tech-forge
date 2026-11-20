@@ -81,3 +81,22 @@
 /* keep the record visible on dark covers */
 .sh-disc { box-shadow: 0 0 0 1px rgb(255 255 255 / .14), inset 0 0 0 .35rem rgb(255 255 255 / .04), 0 1.5rem 2.5rem -1.5rem rgb(0 0 0 / .6); }
 .sh-disc::after { background: conic-gradient(from 30deg, transparent 0 18%, rgb(255 255 255 / .16) 25%, transparent 32% 68%, rgb(255 255 255 / .12) 75%, transparent 82%); }
+
+/* The record has to be seen (founder: "the round cd things coming out, i can't see it").
+   Slide it well clear of the sleeve, lighter grooves, a bright rim and a big label. */
+.sh-art { margin-right: 36%; }
+.sh-disc {
+  top: 2%; bottom: 2%; left: 2%;
+  background:
+    radial-gradient(circle, #f4f1ea 0 1.6%, var(--al-acc) 1.8% 17%, #0a0a0a 17.5% 18.5%, transparent 19%),
+    repeating-radial-gradient(circle, #1a1a1a 0 1.5px, #2a2a2a 1.5px 3px),
+    #151515;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / .22), 0 0 0 8px rgb(0 0 0 / .25), 0 2rem 3rem -1.2rem rgb(0 0 0 / .7);
+  animation: sh-disc 1.1s var(--s-ease) .3s both, sh-spin 5s linear 1.4s infinite;
+}
+.sh-disc::after { background: conic-gradient(from 20deg, transparent 0 14%, rgb(255 255 255 / .28) 22%, transparent 30% 64%, rgb(255 255 255 / .2) 72%, transparent 80%); }
+.sh-disc span { font-size: clamp(1.2rem, 2.6vw, 1.9rem); color: #fff; mix-blend-mode: normal; text-shadow: 0 1px 2px rgb(0 0 0 / .35); }
+@keyframes sh-disc { from { transform: translateX(0); } to { transform: translateX(52%); } }
+@keyframes sh-spin { from { transform: translateX(52%) rotate(0); } to { transform: translateX(52%) rotate(360deg); } }
+@media (max-width: 760px) { .sh-art { width: 64%; margin-right: 0; } }
+@media (prefers-reduced-motion: reduce) { .sh-disc { animation: none; transform: translateX(52%); } }

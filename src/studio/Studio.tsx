@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Icon, type IconName } from "../components/Icon";
 import { ABN, EMAIL, FOUNDER, LogoMark, PHONE, PHONE_HREF, WORK } from "../App";
 import { NEEDS, SERVICES, STEPS, STUDIO_FAQ, WHY } from "./content";
+import { PayVisual } from "../components/Story";
+import { CallPhone } from "./CallPhone";
 import "./studio.css";
 
 // The studio homepage. Layout learned from premium studios (docs/design/STUDIO_STUDY.md):
@@ -209,14 +211,7 @@ function Services() {
   );
 }
 
-// AI agents for your business: an example day's log for a sample hotel group,
-// and a real sample call (ElevenLabs, licensed voices; see CLAUDE.md).
-const AGENT_DAY = [
-  { t: "7:42am", what: "Answered a call about a late check-in at Bondi", done: "Arrival noted, front desk told" },
-  { t: "8:15am", what: "Replied to an enquiry for a group of 12 in March", done: "Dates and rates sent, passed to sales" },
-  { t: "9:03am", what: "Chased an unpaid invoice from a corporate account", done: "Second reminder, polite and on time" },
-  { t: "9:30am", what: "A guest asked for a refund", done: "Handed to a person, with the booking attached" },
-];
+// AI agents for your business: what they do, and a phone that rings (CallPhone).
 const AGENT_KINDS = [
   { title: "Phone and voice agents", body: "Answer the calls your team can't take, book, take messages and send a summary." },
   { title: "Enquiry and email agents", body: "Reply to enquiries with accurate answers from your own information, and collect what your team needs." },
@@ -241,21 +236,7 @@ function Agents() {
           <a className="s-btn s-btn-ink s-free-cta" href="/ai-agents/">How our agents work</a>
         </div>
         <div className="s-agent-side">
-          <figure className="s-log" aria-label="An example morning for an AI agent">
-            <p className="s-log-head"><b>Corella Hotels</b><span>Agent log, Tuesday</span></p>
-            <ol>
-              {AGENT_DAY.map((r) => (
-                <li key={r.t}><time>{r.t}</time><div><p>{r.what}</p><span>{r.done}</span></div></li>
-              ))}
-            </ol>
-            <figcaption>An example morning for a sample hotel group</figcaption>
-          </figure>
-          <div className="s-call">
-            <p><b>Hear a sample call</b><span>A table booking for a fictional restaurant, 41 seconds. It opens by saying it's an AI agent and that the call is recorded.</span></p>
-            <audio controls preload="none" src="/audio/concierge-restaurant.mp3">
-              <a href="/audio/concierge-restaurant.mp3">Download the sample call</a>
-            </audio>
-          </div>
+          <CallPhone />
         </div>
       </div>
     </section>
@@ -337,8 +318,24 @@ const PAY_STEPS = [
   { icon: "step-improve" as IconName, title: "We take a small fee per payment", body: "A platform fee on each payment, agreed in writing. When nothing sells, you pay nothing." },
 ];
 
+// Plays the checkout animation only while the section is on screen.
+function useInView<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setOn(e.isIntersecting), { threshold: 0.25 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return [ref, on] as const;
+}
+
+const PAY_SHOP = { name: "Ridgeline Wines", item: "Mixed dozen, 2025 release", amount: "$340.00", four: "$85.00" };
+
 function FreeSite() {
-  const ref = useReveal<HTMLElement>();
+  const [ref, inView] = useInView<HTMLElement>();
   return (
     <section id="payments" className="s-sec s-free s-reveal" ref={ref} aria-labelledby="s-free-h">
       <div className="s-wrap s-split">
@@ -355,17 +352,8 @@ function FreeSite() {
           </ul>
           <a className="s-btn s-btn-ink s-free-cta" href="/payments/">How payments work <Arrow /></a>
         </div>
-        <figure className="s-panel s-pay" aria-label="Example payment">
-          <div className="s-pay-sheet">
-            <p className="s-pay-shop">Ridgeline Wines</p>
-            <p className="s-pay-item"><span>Mixed dozen, 2025 release</span></p>
-            <div className="s-pay-methods" aria-hidden="true">
-              <img src="/logos/applepay.svg" alt="" width={44} height={28} />
-              <img src="/logos/googlepay.svg" alt="" width={44} height={28} />
-              <span className="s-pay-card"><Icon name="card" /> Card</span>
-            </div>
-            <p className="s-pay-paid"><Icon name="check-circle" /> Paid to Ridgeline's own account</p>
-          </div>
+        <figure className="s-panel s-pay" aria-label="Example checkout: Apple Pay, Google Pay, Afterpay and card">
+          <PayVisual active={inView} shop={PAY_SHOP} />
           <figcaption>A sample business, for illustration</figcaption>
         </figure>
       </div>

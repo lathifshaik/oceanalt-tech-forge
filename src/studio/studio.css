@@ -339,3 +339,67 @@ details[open] .s-plus { transform: rotate(45deg); }
 .s-flow time { font-weight: 400; font-size: .88rem; font-variant-numeric: tabular-nums; color: rgb(255 255 255 / .6); }
 .s-flow-end { margin: 1rem 0 0 !important; padding-top: 1rem; border-top: 1px solid rgb(255 255 255 / .14); font-size: 1.1rem; font-weight: 500; }
 @media (max-width: 860px) { .s-auto .s-split > .s-flow { order: 2; } }
+
+/* The ringing phone (CallPhone.tsx): answer it to hear the sample call. */
+.cp { display: grid; justify-items: center; gap: 1.1rem; margin: 0; }
+.cp-phone { position: relative; display: flex; flex-direction: column; width: min(100%, 20rem); height: 36rem; padding: 2.6rem 1.25rem 1.5rem; box-sizing: border-box; border-radius: 3rem; background: var(--s-teal); color: #fff; box-shadow: 0 0 0 .55rem var(--s-ink), 0 0 0 .6rem rgb(255 255 255 / .12), 0 60px 90px -50px rgb(13 30 40 / .7); overflow: hidden; }
+.cp-island { position: absolute; top: .8rem; left: 50%; width: 5.5rem; height: 1.45rem; margin-left: -2.75rem; border-radius: 999px; background: var(--s-ink); }
+.cp-phone.is-ringing { animation: cp-shake 2.6s var(--s-ease) infinite; }
+@keyframes cp-shake { 0%, 72%, 100% { transform: rotate(0); } 76% { transform: rotate(-2deg); } 80% { transform: rotate(2deg); } 84% { transform: rotate(-1.5deg); } 88% { transform: rotate(1.5deg); } 92% { transform: rotate(0); } }
+
+.cp-ring { display: flex; flex: 1; flex-direction: column; align-items: center; text-align: center; padding-top: 3rem; }
+.cp-small { margin: 0; font-size: .85rem; color: rgb(255 255 255 / .7); }
+.cp-name { margin: .6rem 0 .35rem; font-size: 2.4rem; font-weight: 500; letter-spacing: -.035em; }
+.cp-btns { display: flex; justify-content: space-between; width: 100%; margin-top: auto; padding: 0 .75rem 1rem; box-sizing: border-box; }
+.cp-btn { display: grid; justify-items: center; gap: .55rem; padding: 0; border: 0; background: none; color: #fff; font: inherit; font-size: .85rem; cursor: pointer; }
+.cp-btn:disabled { cursor: default; opacity: .55; }
+.cp-dot { position: relative; display: grid; place-items: center; width: 4.2rem; height: 4.2rem; border-radius: 50%; transition: transform .4s var(--s-ease); }
+.cp-dot .i { width: 1.6rem; height: 1.6rem; }
+.cp-btn:not(:disabled):hover .cp-dot { transform: scale(1.06); }
+.cp-btn:active .cp-dot { transform: scale(.94); }
+.is-decline .cp-dot, .cp-hang .cp-dot { background: #c4453b; }
+.is-decline .cp-dot .i, .cp-hang .cp-dot .i { transform: rotate(135deg); }
+.is-answer .cp-dot { background: #3f9a6e; }
+.is-ringing .is-answer .cp-dot::before, .is-ringing .is-answer .cp-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgb(63 154 110 / .6); animation: cp-ripple 2s var(--s-ease) infinite; }
+.is-ringing .is-answer .cp-dot::after { animation-delay: 1s; }
+@keyframes cp-ripple { from { transform: scale(1); opacity: 1; } to { transform: scale(1.7); opacity: 0; } }
+.cp-btn:focus-visible, .cp-hang:focus-visible, .cp-again:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 1rem; }
+
+.cp-live { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+.cp-live-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; padding: .4rem .25rem .9rem; border-bottom: 1px solid rgb(255 255 255 / .14); }
+.cp-live-head p { margin: 0; }
+.cp-live-head b { display: block; font-weight: 500; }
+.cp-live-head span { font-size: .8rem; color: rgb(255 255 255 / .65); }
+.cp-live-head time { font-size: .85rem; color: rgb(255 255 255 / .75); }
+.cp-lines { flex: 1; min-height: 0; margin: 0; padding: .9rem .1rem; list-style: none; overflow-y: auto; scrollbar-width: none; display: grid; align-content: start; gap: .7rem; }
+.cp-lines::-webkit-scrollbar { display: none; }
+.cp-lines li { max-width: 88%; animation: s-up .5s var(--s-ease) both; }
+.cp-lines li.is-caller { justify-self: end; text-align: right; }
+.cp-lines small { display: block; margin-bottom: .25rem; font-size: .68rem; letter-spacing: .04em; color: rgb(255 255 255 / .6); }
+.cp-lines p { display: inline-block; margin: 0; padding: .6rem .8rem; border-radius: 1rem; font-size: .88rem; line-height: 1.35; text-align: left; }
+.cp-lines .is-agent p { background: #fff; color: var(--s-ink); border-bottom-left-radius: .3rem; }
+.cp-lines .is-caller p { background: rgb(255 255 255 / .16); border-bottom-right-radius: .3rem; }
+.cp-act { display: flex; align-items: center; gap: .35rem; margin-top: .35rem; font-size: .75rem; color: #bfe3cf; }
+.cp-act .i { width: .9rem; height: .9rem; }
+.cp-lines .is-caller .cp-act { justify-content: flex-end; }
+.cp-hang { align-self: center; padding: 0; margin-top: .6rem; border: 0; background: none; color: #fff; cursor: pointer; }
+.cp-hang .cp-dot { width: 3.4rem; height: 3.4rem; }
+
+.cp-end { display: flex; flex: 1; flex-direction: column; padding: 2.5rem .5rem 0; }
+.cp-sum-title { margin: .6rem 0 1.25rem; font-size: 1.5rem; font-weight: 500; letter-spacing: -.03em; }
+.cp-end ul { margin: 0; padding: 0; list-style: none; }
+.cp-end li { display: flex; gap: .6rem; padding-block: .75rem; border-top: 1px solid rgb(255 255 255 / .14); font-size: .92rem; }
+.cp-end li .i { flex: none; width: 1.1rem; height: 1.1rem; color: #bfe3cf; }
+.cp-again { align-self: center; margin-top: auto; margin-bottom: 1rem; padding: .7rem 1.3rem; border: 0; border-radius: 999px; background: #fff; color: var(--s-ink); font: inherit; font-weight: 500; cursor: pointer; }
+.cp figcaption { max-width: 22rem; font-size: .82rem; line-height: 1.5; color: var(--s-mute); text-align: center; }
+.s-agent-side { justify-items: center; }
+
+/* The checkout animation on the free-website panel. */
+.s-pay { display: grid; align-content: center; justify-items: center; }
+.s-pay .sv-pay { width: min(100%, 24rem); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-phone.is-ringing, .is-ringing .is-answer .cp-dot::before, .is-ringing .is-answer .cp-dot::after, .cp-lines li { animation: none !important; }
+}
+.s-pay .sv-methods span { color: rgb(255 255 255 / .75); }
+.s-pay .sv-methods img { filter: none; opacity: 1; }

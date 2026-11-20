@@ -369,15 +369,20 @@ function FaceId() {
   );
 }
 
-function Sheet({ m, phase }: { m: (typeof PAY)[number]; phase: Phase }) {
+// Who is being paid. Defaults to the Saltwater Yoga sample the old story used;
+// the studio homepage passes its own sample business.
+export type PayShop = { name: string; item: string; amount: string; four: string; face?: string };
+const YOGA: PayShop = { name: "Saltwater Yoga", item: "Sunrise flow, Sat 7am", amount: "$25.00", four: "$6.25", face: "ana" };
+
+function Sheet({ m, phase, shop }: { m: (typeof PAY)[number]; phase: Phase; shop: PayShop }) {
   const auth = phase === "auth";
   const done = phase === "done";
   return (
     <div className={`sv-sheet is-${m.id}${phase === "sheet" || auth || done ? " is-open" : ""}`}>
       <div className="sv-sheet-top">
         {m.logo ? <img src={logo(m.logo)} alt="" width={40} height={40} /> : <Icon name="card" />}
-        <span>{m.id === "apple" ? "Pay Saltwater Yoga" : m.id === "afterpay" ? "Pay in 4 at Saltwater Yoga" : m.id === "card" ? "Card payment" : "Saltwater Yoga"}<small>Sunrise flow, Sat 7am</small></span>
-        <b className="num">$25.00</b>
+        <span>{m.id === "apple" ? `Pay ${shop.name}` : m.id === "afterpay" ? `Pay in 4 at ${shop.name}` : m.id === "card" ? "Card payment" : shop.name}<small>{shop.item}</small></span>
+        <b className="num">{shop.amount}</b>
       </div>
       {done ? (
         <div className="sv-sheet-done"><Tick color={m.done} /><span>{m.id === "apple" ? "Done" : "Paid"}</span></div>
@@ -391,7 +396,7 @@ function Sheet({ m, phase }: { m: (typeof PAY)[number]; phase: Phase }) {
       ) : m.id === "afterpay" ? (
         <div className="sv-sheet-auth">
           <ol className={`sv-four${auth ? " is-fill" : ""}`}><li /><li /><li /><li /></ol>
-          <span>4 payments of $6.25, interest-free</span>
+          <span>4 payments of {shop.four}, interest-free</span>
         </div>
       ) : (
         <div className="sv-sheet-auth">
@@ -403,7 +408,7 @@ function Sheet({ m, phase }: { m: (typeof PAY)[number]; phase: Phase }) {
   );
 }
 
-function PayVisual({ active }: { active: boolean }) {
+export function PayVisual({ active, shop = YOGA }: { active: boolean; shop?: PayShop }) {
   const [k, setK] = useState(0);
   const [phase, setPhase] = useState<Phase>("paid");
   useEffect(() => {
@@ -431,10 +436,10 @@ function PayVisual({ active }: { active: boolean }) {
     <div className="sv sv-pay">
       <div className={`sv-checkout${phase === "sheet" || phase === "auth" || phase === "done" ? " is-sheet" : ""}`}>
         <div className="sv-co-top">
-          <Face who="ana" className="sv-co-face" />
-          <div><b>Saltwater Yoga</b><span>Sunrise flow, Sat 7am with Ana</span></div>
+          {shop.face && <Face who={shop.face} className="sv-co-face" />}
+          <div><b>{shop.name}</b><span>{shop === YOGA ? "Sunrise flow, Sat 7am with Ana" : shop.item}</span></div>
         </div>
-        <div className="sv-co-amt"><span>Class</span><b className="num">$25.00</b></div>
+        <div className="sv-co-amt"><span>{shop === YOGA ? "Class" : "Order"}</span><b className="num">{shop.amount}</b></div>
         <div className={`sv-co-btn is-${phase === "paid" ? "paid" : "ready"}${phase === "ready" ? " is-press" : ""}`}>
           {phase === "paid" ? (
             <><Icon name="check" /> Paid with {m.name === "card" ? "card" : m.name}</>
@@ -443,7 +448,7 @@ function PayVisual({ active }: { active: boolean }) {
           )}
         </div>
         <p className="sv-co-to"><img src={logo("stripe")} alt="" width={14} height={14} /> Paid straight into your own Stripe account</p>
-        <Sheet m={m} phase={phase} />
+        <Sheet m={m} phase={phase} shop={shop} />
       </div>
       <div className="sv-methods">
         <img src={logo("applepay")} alt="Apple Pay" width={26} height={26} />

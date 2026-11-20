@@ -6,6 +6,7 @@ import { PayVisual } from "../components/Story";
 import { CallPhone } from "./CallPhone";
 import { ServiceArt } from "./ServiceArt";
 import { Shelf } from "./Shelf";
+import { Postcard } from "./Postcard";
 import "./studio.css";
 
 // The studio homepage. Layout learned from premium studios (docs/design/STUDIO_STUDY.md):
@@ -449,9 +450,11 @@ function Faq() {
 function Start() {
   const [state, setState] = useState<"idle" | "sending" | "done" | "replied" | "error">("idle");
   const [need, setNeed] = useState("unsure");
+  const [sent, setSent] = useState({ name: "", company: "", message: "" });
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    setSent({ name: String(data.get("name") || ""), company: String(data.get("business") || ""), message: String(data.get("message") || "") });
     setState("sending");
     const site = String(data.get("website") || "").trim();
     const phone = String(data.get("phone") || "").trim();
@@ -501,11 +504,7 @@ function Start() {
           </div>
         </div>
         {state === "replied" || state === "done" ? (
-          <div className="s-form s-form-done" role="status">
-            <Icon name="check-circle" />
-            <h3>Thanks, it's with us.</h3>
-            <p>{state === "replied" ? "There's a note in your inbox now. " : ""}Lathif will reply the same business day from {EMAIL} to find a time to talk.</p>
-          </div>
+          <Postcard name={sent.name} company={sent.company} message={sent.message} replied={state === "replied"} email={EMAIL} />
         ) : (
           <form className="s-form" onSubmit={submit}>
             <div className="s-row">

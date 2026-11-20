@@ -1,0 +1,50 @@
+/* MASA section (Masa.tsx), in MASA's own theme */
+
+.mx {
+  --mx-ink: #15171a; --mx-gold: #ffc42e; --mx-text2: #3a424b; --mx-text3: #646c75; --mx-line: #e4e6e8; --mx-soft: #f5f6f6;
+  font-family: "Instrument Sans Variable", "Instrument Sans", -apple-system, "Segoe UI", system-ui, sans-serif;
+  color: var(--mx-ink); background: #fff; padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+.mx-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+
+.mx-logo { display: inline-flex; align-items: center; gap: .65rem; font-size: 1.2rem; font-weight: 600; letter-spacing: -.01em; }
+.mx .mx-try { margin-top: 1.6rem; font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--mx-text3); }
+.mx h2 { margin: .6rem 0 0; font-size: clamp(3rem, 7vw, 5.6rem); font-weight: 500; line-height: .92; letter-spacing: -.045em; }
+.mx .mx-lede { margin-top: 1.4rem; max-width: 30rem; font-size: clamp(1.05rem, 1.4vw, 1.2rem); line-height: 1.5; color: var(--mx-text2); }
+.mx-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin-top: 2rem; }
+.mx-btn { display: inline-flex; align-items: center; min-height: 3.1rem; padding: 0 1.6rem; border-radius: 1.4rem; background: var(--mx-ink); color: #fff; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform .2s cubic-bezier(.2,.8,.2,1); }
+.mx-btn:hover { transform: translateY(-1px); }
+.mx-btn:active { transform: scale(.98); }
+.mx-link { color: var(--mx-ink); font-weight: 500; text-decoration: underline; text-underline-offset: .25em; text-decoration-thickness: 1px; }
+.mx .mx-for { margin-top: 1.4rem; font-size: .9rem; color: var(--mx-text3); }
+
+/* the marigold panel and phone, like MASA's own site */
+.mx-panel { display: grid; place-items: center; padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem); border-radius: 2.2rem 2.2rem 2.2rem 2.2rem; background: var(--mx-gold); }
+.mx-phone { display: grid; grid-template-rows: auto 1fr auto; width: min(100%, 22rem); height: 28rem; margin: 0; border: .5rem solid var(--mx-ink); border-radius: 2.4rem; background: #fff; overflow: hidden; box-shadow: 0 30px 60px -30px rgb(21 23 26 / .55); }
+.mx-bar { display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem; border-bottom: 1px solid var(--mx-line); }
+.mx-bar b { font-weight: 600; font-size: 1rem; }
+.mx-bar span { margin-left: auto; font-size: .8rem; color: var(--mx-text2); }
+.mx-chat { display: flex; flex-direction: column; justify-content: flex-end; gap: .6rem; padding: 1rem; }
+.mx .mx-me { align-self: flex-end; max-width: 85%; padding: .6rem .85rem; border-radius: 1rem 1rem .3rem 1rem; background: var(--mx-ink); color: #fff; font-size: .92rem; min-height: 2.4rem; }
+.mx-dots { display: inline-flex; gap: .3rem; align-self: flex-start; padding: .7rem .85rem; border-radius: 1rem; background: var(--mx-soft); }
+.mx-dots i { width: .4rem; height: .4rem; border-radius: 50%; background: var(--mx-text3); animation: mx-dot 1s ease-in-out infinite; }
+.mx-dots i:nth-child(2) { animation-delay: .15s; }
+.mx-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes mx-dot { 50% { transform: translateY(-3px); opacity: .5; } }
+.mx-reply { display: grid; gap: .5rem; max-width: 92%; animation: mx-in .45s cubic-bezier(.2,.8,.2,1) both; }
+.mx .mx-reply > p:first-child { padding: .6rem .85rem; border-radius: 1rem 1rem 1rem .3rem; background: var(--mx-soft); font-size: .92rem; line-height: 1.4; }
+.mx-card { display: grid; gap: .15rem; padding: .7rem .85rem; border-radius: .7rem; border: 1px solid var(--mx-line); }
+.mx-card b { font-weight: 600; font-size: .92rem; }
+.mx-card span { font-size: .78rem; color: var(--mx-text3); }
+.mx .mx-note { font-size: .78rem; color: var(--mx-text3); }
+@keyframes mx-in { from { opacity: 0; transform: translateY(.4rem); } to { opacity: 1; transform: none; } }
+.mx .mx-input { display: flex; align-items: center; justify-content: space-between; margin: 0 .75rem .75rem; padding: .35rem .35rem .35rem 1rem; border: 1px solid var(--mx-line); border-radius: 999px; font-size: .88rem; color: var(--mx-text3); }
+.mx-input i { width: 2rem; height: 2rem; border-radius: 50%; background: var(--mx-gold); }
+
+@media (max-width: 860px) {
+  .mx-in { grid-template-columns: 1fr; }
+  .mx-phone { height: 25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mx-dots i, .mx-reply { animation: none; }
+}

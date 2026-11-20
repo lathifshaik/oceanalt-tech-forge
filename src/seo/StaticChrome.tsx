@@ -74,6 +74,7 @@ export function StaticFooter({ label = "Have something in mind?", heading = "Let
             <a href="/design/">Design</a>
             <a href="/designs/">All designs</a>
             <a href="/#faq">FAQ</a>
+            <a href="https://masa.8fy6kwkzn2.workers.dev/welcome" target="_blank" rel="noopener">MASA, free</a>
           </nav>
           <nav aria-label="Services">
             <p className="s-label">Services</p>

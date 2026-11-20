@@ -7,6 +7,7 @@ import { CallPhone } from "./CallPhone";
 import { ServiceArt } from "./ServiceArt";
 import { Shelf } from "./Shelf";
 import { Postcard } from "./Postcard";
+import { Masa, MASA_URL } from "./Masa";
 import "./studio.css";
 
 // The studio homepage. Layout learned from premium studios (docs/design/STUDIO_STUDY.md):
@@ -552,6 +553,7 @@ export function StudioFooter({ home = true }: { home?: boolean }) {
             <a href="/design/">Design</a>
             <a href="/designs/">All designs</a>
             <a href={`${base}#faq`}>FAQ</a>
+            <a href={`${MASA_URL}/welcome`} target="_blank" rel="noopener">MASA, free</a>
           </nav>
           <nav aria-label="Services">
             <p className="s-label">Services</p>
@@ -582,6 +584,7 @@ export function StudioHome() {
       <Services />
       <Agents />
       <Automation />
+      <Masa />
       <Why />
       <FreeSite />
       <Process />

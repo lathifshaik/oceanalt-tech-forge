@@ -1,38 +1,58 @@
-/* A sent enquiry, posted (Postcard.tsx) */
+/* A sent enquiry, posted (Postcard.tsx).
+   Timeline: arrives picture side up, flips, the message writes itself
+   (--write long), stamp, postmark, into the slot, thank-you. */
 
-.pc { display: grid; gap: 1.5rem; align-content: start; }
+.pc { --t: calc(1.85s + var(--write, 1.2s)); display: grid; gap: 1.5rem; align-content: start; }
 .pc-stage { position: relative; padding-top: 1.1rem; }
 .pc-slot { position: absolute; z-index: 2; left: 6%; right: 6%; top: 1.1rem; height: .85rem; border-radius: 999px; background: linear-gradient(180deg, #05080a, #1d2328); box-shadow: inset 0 2px 3px rgb(0 0 0 / .6), 0 1px 0 rgb(255 255 255 / .6); }
 .pc-slot span { position: absolute; bottom: calc(100% + .35rem); left: 50%; transform: translateX(-50%); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--s-mute); }
-/* everything above the slot's middle is inside the box */
-.pc-drop { position: relative; overflow: hidden; margin-top: .42rem; padding: 1.2rem .5rem 2.5rem; }
+.pc-drop { position: relative; overflow: hidden; max-height: 34rem; margin-top: .42rem; padding: 1.2rem .5rem 2.5rem; animation: pc-collapse .5s var(--s-ease) calc(var(--t) + 2.4s) forwards; }
+@keyframes pc-collapse { to { max-height: 0; padding-top: 0; padding-bottom: 0; } }
 
+.pc-post { perspective: 1400px; transform-origin: 50% 0; animation: pc-in .6s var(--s-ease) both, pc-post 1s cubic-bezier(.55,0,.3,1) calc(var(--t) + 1.3s) forwards; }
+@keyframes pc-in { from { opacity: 0; transform: translateY(1.2rem) scale(.96) rotate(-1.5deg); } to { opacity: 1; transform: none; } }
+@keyframes pc-post { 0% { transform: none; } 18% { transform: translateY(.4rem) rotate(-1deg); } 100% { transform: translateY(-125%) rotate(-2deg); } }
+
+.pc-flip { display: grid; transform-style: preserve-3d; animation: pc-flip .85s cubic-bezier(.5,0,.2,1) .9s both; }
+@keyframes pc-flip { from { transform: rotateY(0); } to { transform: rotateY(180deg); } }
+.pc-flip > * { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: .35rem; box-shadow: 0 1px 0 rgb(255 255 255 / .5) inset, 0 1.6rem 2.4rem -1.4rem rgb(13 30 40 / .45); }
+
+/* picture side */
+.pc-front {
+  position: relative; display: grid; align-content: end; gap: .3rem; min-height: 15rem; padding: 1.6rem; overflow: hidden; color: #f8f4ea;
+  background:
+    repeating-radial-gradient(circle at 85% 120%, transparent 0 18px, rgb(255 255 255 / .06) 18px 19px),
+    radial-gradient(120% 90% at 0% 0%, #2f5866, transparent 60%),
+    #1f3a46;
+}
+.pc-front svg { position: absolute; top: 1.4rem; right: 1.4rem; width: 3.4rem; height: 3.4rem; opacity: .9; }
+.pc-greet { display: grid; font-family: "Iowan Old Style", Georgia, serif; font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: .95; letter-spacing: -.02em; }
+.pc-greet small { font-family: "Caveat", cursive; font-size: 1.5rem; letter-spacing: 0; color: #e8c98f; }
+.pc-cities { font-size: .7rem; letter-spacing: .24em; text-transform: uppercase; opacity: .75; }
+
+/* writing side */
 .pc-card {
-  position: relative; display: grid; grid-template-columns: 1.25fr 1fr; gap: 1.25rem; min-height: 15rem; padding: 1.4rem;
-  border-radius: .35rem; color: #2b2a26;
+  position: relative; display: grid; grid-template-columns: 1.25fr 1fr; gap: 1.25rem; min-height: 15rem; padding: 1.4rem; color: #2b2a26;
+  transform: rotateY(180deg);
   background:
     radial-gradient(120% 90% at 0% 0%, rgb(255 255 255 / .7), transparent 60%),
     repeating-linear-gradient(0deg, rgb(0 0 0 / .012) 0 2px, transparent 2px 4px),
     #f8f4ea;
-  box-shadow: 0 1px 0 rgb(255 255 255 / .8) inset, 0 1.6rem 2.4rem -1.4rem rgb(13 30 40 / .45);
-  transform-origin: 50% 0;
-  animation: pc-in .6s var(--s-ease) both, pc-post 1s cubic-bezier(.55,0,.3,1) 2.4s forwards;
 }
-@keyframes pc-in { from { opacity: 0; transform: translateY(1rem) scale(.97); } to { opacity: 1; transform: none; } }
-@keyframes pc-post { 0% { transform: none; } 18% { transform: translateY(.4rem) rotate(-1deg); } 100% { transform: translateY(-120%) rotate(-2deg); } }
-
-.pc-left { display: grid; align-content: start; gap: .7rem; padding-right: .5rem; }
-.pc-dear { font-family: "Iowan Old Style", Georgia, serif; font-style: italic; font-size: 1.35rem; }
-.pc-msg { font-family: "Iowan Old Style", Georgia, serif; font-style: italic; font-size: 1rem; line-height: 1.5; color: #45423b; overflow-wrap: anywhere; }
-.pc-sign { margin-top: .4rem !important; font-family: "Iowan Old Style", Georgia, serif; font-style: italic; font-size: .95rem; color: #1f3a46; }
+.pc-hand { font-family: "Caveat", "Segoe Print", cursive; font-weight: 500; color: #23415a; }
+.pc-left { display: grid; align-content: start; gap: .55rem; padding-right: .5rem; }
+.pc-dear { font-size: 1.75rem; line-height: 1; animation: pc-ink .4s ease 1.65s both; }
+.pc-msg { font-size: 1.32rem; line-height: 1.3; overflow-wrap: anywhere; }
+.pc-msg span { animation: pc-ink .35s ease calc(1.85s + var(--w)) both; }
+.pc-sign { margin-top: .3rem !important; font-size: 1.3rem; color: #1f3a46; animation: pc-ink .4s ease calc(var(--t) + .05s) both; }
+@keyframes pc-ink { from { opacity: 0; filter: blur(2px); } to { opacity: 1; filter: none; } }
 
 .pc-right { position: relative; display: grid; grid-template-rows: auto 1fr; padding-left: 1.25rem; border-left: 1px solid #d9d2c2; }
 .pc-stamp {
   justify-self: end; display: grid; justify-items: center; gap: .3rem; width: 4.6rem; padding: .7rem .4rem .45rem;
   background: #1f3a46; color: #f8f4ea; font-size: .55rem; letter-spacing: .14em; text-transform: uppercase;
-  border: .22rem solid #fbf8f1; outline: 2px dotted #cfc6b3; outline-offset: -1px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / .18);
-  animation: pc-stamp .45s cubic-bezier(.3,1.5,.5,1) .7s both;
+  border: .22rem solid #fbf8f1; outline: 2px dotted #cfc6b3; outline-offset: -1px; box-shadow: 0 2px 4px rgb(0 0 0 / .18);
+  animation: pc-stamp .45s cubic-bezier(.3,1.5,.5,1) calc(var(--t) + .25s) both;
 }
 .pc-stamp svg { width: 2.2rem; height: 2.2rem; }
 @keyframes pc-stamp { from { opacity: 0; transform: scale(1.6) rotate(-14deg); } to { opacity: 1; transform: rotate(3deg); } }
@@ -41,33 +61,29 @@
   width: 5.2rem; height: 5.2rem; border: 2px solid currentColor; border-radius: 50%; outline: 1px solid currentColor; outline-offset: 3px;
   color: rgb(31 58 70 / .78); font-size: .5rem; letter-spacing: .12em; text-transform: uppercase; text-align: center; line-height: 1.3;
   transform: rotate(-14deg); mix-blend-mode: multiply;
-  animation: pc-mark .3s ease-out 1.25s both;
+  animation: pc-mark .3s ease-out calc(var(--t) + .75s) both;
 }
 .pc-postmark b { font-size: .62rem; letter-spacing: .04em; }
 @keyframes pc-mark { 0% { opacity: 0; transform: rotate(-14deg) scale(1.35); } 70% { opacity: .9; transform: rotate(-14deg) scale(.96); } 100% { opacity: .85; transform: rotate(-14deg) scale(1); } }
 .pc-to { align-self: end; display: grid; gap: .55rem; }
-.pc-to span { padding-bottom: .25rem; border-bottom: 1px solid #d9d2c2; font-family: "Iowan Old Style", Georgia, serif; font-style: italic; font-size: .95rem; }
+.pc-to span { padding-bottom: .2rem; border-bottom: 1px solid #d9d2c2; font-family: "Caveat", cursive; font-weight: 500; font-size: 1.25rem; color: #23415a; }
 
-.pc-thanks { display: grid; gap: .6rem; animation: pc-thanks .6s var(--s-ease) 3.1s both; }
+.pc-thanks { display: grid; gap: .6rem; animation: pc-thanks .6s var(--s-ease) calc(var(--t) + 2.3s) both; }
 .pc-thanks h3 { font-size: 1.6rem; font-weight: 500; letter-spacing: -.03em; }
 .pc-thanks p { color: var(--s-mute); max-width: 28rem; }
 @keyframes pc-thanks { from { opacity: 0; transform: translateY(.6rem); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 560px) {
-  .pc-card { grid-template-columns: 1fr; min-height: 0; }
+  .pc-card { grid-template-columns: 1fr; }
   .pc-right { padding: 1rem 0 0; border-left: 0; border-top: 1px solid #d9d2c2; grid-template-rows: auto; }
   .pc-stamp { position: absolute; top: -5.6rem; right: 0; }
   .pc-postmark { top: -5rem; right: 3rem; }
   .pc-left { padding-right: 5.5rem; }
+  .pc-sign { max-width: 58%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pc-card, .pc-stamp, .pc-postmark, .pc-thanks { animation: none; }
+  .pc-drop, .pc-post, .pc-flip, .pc-dear, .pc-msg span, .pc-sign, .pc-stamp, .pc-postmark, .pc-thanks { animation: none; }
+  .pc-flip { transform: rotateY(180deg); }
   .pc-stamp { transform: rotate(3deg); }
 }
-
-/* once it's posted, close the gap so the thank-you sits under the slot */
-.pc-drop { max-height: 30rem; animation: pc-collapse .5s var(--s-ease) 3.2s forwards; }
-@keyframes pc-collapse { to { max-height: 0; padding-top: 0; padding-bottom: 0; } }
-@media (prefers-reduced-motion: reduce) { .pc-drop { animation: none; } }
-@media (max-width: 560px) { .pc-sign { max-width: 58%; } }

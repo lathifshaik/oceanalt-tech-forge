@@ -188,6 +188,17 @@ function Services() {
     const card = el?.querySelector<HTMLElement>(".s-svc");
     if (el) el.scrollBy({ left: dir * ((card?.offsetWidth ?? 400) + 16), behavior: "smooth" });
   };
+  // Play each card's moment once it's properly on screen (ServiceArt).
+  useEffect(() => {
+    const el = track.current;
+    if (!el || !("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    el.dataset.anim = "1";
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+    }, { threshold: 0.6 });
+    el.querySelectorAll(".s-svc").forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, []);
   return (
     <section id="services" className="s-sec s-services s-reveal" ref={ref} aria-labelledby="s-svc-h">
       <div className="s-wrap s-head-row">

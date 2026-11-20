@@ -1,0 +1,166 @@
+/* Service pictures (ServiceArt.tsx). Each card is a square in one sample
+   brand's own colours. Animations only run when Services marks the track
+   data-anim (JS on, motion allowed) and the card .is-in; otherwise the
+   finished state shows. */
+
+.s-svc-art { aspect-ratio: 1 / 1; display: block; background: #eceeee; }
+.sa { position: absolute; inset: 0; overflow: hidden; font-size: .88rem; line-height: 1.35; color: var(--s-ink); }
+.sa p { margin: 0; }
+.sa .num { font-variant-numeric: tabular-nums; }
+.sa-tag { position: absolute; top: 1.1rem; left: 1.2rem; z-index: 3; font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; opacity: .55; }
+.sa-tick { display: inline-grid; place-items: center; flex: none; width: 1.2rem; height: 1.2rem; border-radius: 50%; background: #1f3a46; color: #fff; }
+.sa-tick .i { width: .72rem; height: .72rem; stroke-width: 2.6; }
+
+/* ── Brand: Fenwick Hale (Plinth) ─────────────────────────────────────── */
+.sa-brand { background: #f1eee8; color: #1b1a17; }
+.sa-brand .sa-brand-mark { position: absolute; top: 18%; left: 9%; font-family: "Iowan Old Style", Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(2.6rem, 4.6vw, 4rem); line-height: .92; letter-spacing: -.035em; }
+.sa-dots { position: absolute; top: 20%; right: 9%; display: grid; gap: .4rem; }
+.sa-dots i { width: 1.6rem; height: 1.6rem; border-radius: 50%; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .08); }
+.sa-hoarding { position: absolute; left: 9%; right: -2%; bottom: -2%; height: 40%; padding: 1.2rem 1.4rem; background: #1b1a17; color: #f1eee8; display: flex; flex-direction: column; justify-content: space-between; }
+.sa-hoarding small { font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: #cdb48c; }
+.sa-hoarding p { font-family: "Iowan Old Style", Georgia, serif; font-size: clamp(1.4rem, 2.3vw, 2rem); line-height: 1; letter-spacing: -.02em; }
+.sa-hoarding em { color: #cdb48c; }
+
+/* ── Websites: Corella Hotels (Foyer) ─────────────────────────────────── */
+.sa-web { background: #0e1411; color: #ece5d6; }
+.sa-browser { position: absolute; top: 18%; left: 12%; width: 104%; overflow: hidden; border-radius: .6rem 0 0 .6rem; background: #18201b; box-shadow: 0 30px 60px -20px rgb(0 0 0 / .7); }
+.sa-bar { display: flex; align-items: center; gap: .3rem; padding: .5rem .7rem; background: #141b17; }
+.sa-bar i { width: .42rem; height: .42rem; border-radius: 50%; background: #2a332d; }
+.sa-bar span { margin-left: .5rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .62rem; color: #a8a293; }
+.sa-browser img { display: block; width: 100%; height: auto; }
+.sa-mobile { position: absolute; left: 7%; bottom: -10%; width: 30%; aspect-ratio: 9 / 18; overflow: hidden; border: .3rem solid #050706; border-radius: 1.3rem; background: #18201b; box-shadow: 0 30px 50px -20px rgb(0 0 0 / .8); }
+.sa-mobile img { width: 100%; height: 100%; object-fit: cover; object-position: 12% 40%; }
+
+/* ── Software: Calloway Day Surgery (Lucent) ──────────────────────────── */
+.sa-app { background: #ebefed; color: #11232b; }
+.sa-sheet { position: absolute; top: 15%; left: 9%; right: -3%; bottom: -3%; padding: 1.2rem 1.3rem; border-radius: .8rem 0 0 0; background: #fff; box-shadow: 0 30px 60px -30px rgb(17 35 43 / .45); }
+.sa-sheet-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .7rem !important; }
+.sa-sheet-h b { font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; }
+.sa-sheet-h span { font-size: .72rem; color: #4f6168; }
+.sa-app ul { margin: 0; padding: 0; list-style: none; }
+.sa-app li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .7rem; padding: .55rem 0; border-top: 1px solid #e6ebea; }
+.sa-app li b { display: block; font-weight: 500; font-size: .84rem; }
+.sa-app li small { font-size: .7rem; color: #4f6168; }
+.sa-av { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: #cfe0e4; color: #1f4e79; font-size: .62rem; font-weight: 600; }
+.sa-pill { padding: .2rem .55rem; border-radius: 999px; font-size: .68rem; white-space: nowrap; background: #eef1f0; color: #4f6168; }
+.sa-pill.is-ok { background: #1f4e79; color: #fff; }
+.sa-pill.is-wait { background: #f6efe1; color: #7a5a1c; }
+.sa-swap { display: grid; justify-items: end; }
+.sa-swap > * { grid-area: 1 / 1; }
+.sa-swap .is-wait { opacity: 0; }
+
+/* ── Automation (our own teal) ────────────────────────────────────────── */
+.sa-flow { background: #e9eeee; display: flex; flex-direction: column; justify-content: center; padding: 0 9%; }
+.sa-flow ol { position: relative; margin: 0; padding: 0; list-style: none; }
+.sa-flow ol::before { content: ""; position: absolute; left: .95rem; top: 1.4rem; bottom: 1.4rem; width: 1px; background: #c7d1d1; }
+.sa-flow li { position: relative; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: .8rem; padding: .55rem 0; }
+.sa-app-chip { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: .5rem; background: #fff; font-size: .74rem; font-weight: 600; box-shadow: 0 1px 2px rgb(13 17 20 / .1); }
+.sa-flow li b { display: block; font-weight: 500; font-size: .88rem; }
+.sa-flow li small, .sa-flow time { font-size: .72rem; color: var(--s-mute); }
+.sa-flow .sa-flow-end { margin-top: .9rem; padding-left: 2.7rem; font-size: 1.05rem; font-weight: 500; color: #1f3a46; }
+
+/* ── AI agents: Corella Hotels (Foyer, light) ─────────────────────────── */
+.sa-chat { background: #ece5d6; color: #15110a; display: flex; flex-direction: column; justify-content: center; gap: .55rem; padding: 0 9%; }
+.sa-msg { max-width: 86%; padding: .75rem .95rem; border-radius: 1rem; font-size: .86rem; line-height: 1.45; }
+.sa-msg.is-in { align-self: flex-start; background: #fff; border-bottom-left-radius: .25rem; }
+.sa-msg.is-out { align-self: flex-end; background: #0e1411; color: #ece5d6; border-bottom-right-radius: .25rem; }
+.sa-typing { display: none; }
+.sa-typing i { width: .38rem; height: .38rem; border-radius: 50%; background: #0e1411; opacity: .45; animation: sa-dot 1s ease-in-out infinite; }
+.sa-typing i:nth-child(2) { animation-delay: .15s; }
+.sa-typing i:nth-child(3) { animation-delay: .3s; }
+.sa-checked { display: flex; align-items: center; gap: .45rem; align-self: flex-end; font-size: .74rem; color: #675b4a; }
+.sa-checked .sa-tick { background: #c9a46a; color: #15110a; }
+
+/* ── Voice (our teal) ─────────────────────────────────────────────────── */
+.sa-voice { background: #1f3a46; color: #fff; display: flex; flex-direction: column; justify-content: center; gap: 1rem; padding: 0 9%; }
+.sa-call { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: rgb(255 255 255 / .75); }
+.sa-live { width: .5rem; height: .5rem; border-radius: 50%; background: #5fd08a; box-shadow: 0 0 0 .25rem rgb(95 208 138 / .2); }
+.sa-wave { display: flex; align-items: center; gap: 2.5%; height: 4.5rem; }
+.sa-wave i { flex: 1; border-radius: 99px; background: rgb(255 255 255 / .9); transform-origin: center; }
+.sa-voice .sa-caption { font-size: 1.02rem; line-height: 1.4; letter-spacing: -.005em; }
+.sa-voice .sa-voice-t { font-size: .72rem; color: rgb(255 255 255 / .6); }
+
+/* ── Payments: Tallowwood (Kiln) ──────────────────────────────────────── */
+.sa-pay { background: #efe9df; color: #2b2420; }
+.sa-throw { position: absolute; top: -8%; right: -12%; width: 72%; height: 70%; border-radius: 0 0 0 2.2rem; background: repeating-linear-gradient(90deg, #e2d6c4 0 14px, #d9cbb6 14px 15px), #e2d6c4; transform: rotate(-8deg); box-shadow: inset 0 -1.6rem 0 #94432a; }
+.sa-checkout { position: absolute; left: 9%; right: 22%; bottom: 9%; padding: 1.1rem 1.2rem; border-radius: .9rem; background: #fbf8f4; box-shadow: 0 30px 60px -30px rgb(43 36 32 / .5); }
+.sa-pay-row { display: flex; justify-content: space-between; margin-bottom: .9rem !important; font-size: .86rem; }
+.sa-paybtn { display: grid; padding: .7rem; border-radius: .55rem; background: #000; color: #fff; font-size: .8rem; font-weight: 500; text-align: center; }
+.sa-paybtn > * { grid-area: 1 / 1; display: flex; align-items: center; justify-content: center; gap: .45rem; }
+.sa-paybtn-a { opacity: 0; }
+.sa-paybtn .sa-tick { background: #fff; color: #000; }
+.sa-pay-more { margin-top: .6rem !important; font-size: .7rem; text-align: center; color: #675b51; }
+
+/* ── Search: Calder & Ames (Claret) ───────────────────────────────────── */
+.sa-search { background: #f4f2ee; color: #16181d; display: flex; flex-direction: column; justify-content: center; gap: .6rem; padding: 0 9%; }
+.sa-q { padding: .65rem 1.1rem; border-radius: 999px; background: #fff; font-size: .86rem; box-shadow: 0 1px 2px rgb(22 24 29 / .08), 0 10px 30px -18px rgb(22 24 29 / .35); }
+.sa-type { display: inline-block; white-space: nowrap; border-right: 1px solid transparent; }
+.sa-answer, .sa-result { padding: .8rem 1rem; border-radius: .7rem; }
+.sa-answer { background: #ebe7e0; }
+.sa-result { background: #fff; box-shadow: 0 10px 30px -20px rgb(22 24 29 / .35); }
+.sa-answer small, .sa-result small { display: block; font-size: .64rem; color: #585a60; }
+.sa-answer p, .sa-result p { margin-top: .25rem !important; font-size: .76rem; line-height: 1.4; color: #585a60; }
+.sa-result b { display: block; margin-top: .15rem; font-family: "Iowan Old Style", Georgia, serif; font-weight: 400; font-size: 1.05rem; color: #5c1f2b; }
+
+/* ── Care: Torrens & Pike (Girder) ────────────────────────────────────── */
+.sa-care { background: #ecebe7; color: #111316; }
+.sa-report { position: absolute; top: 15%; left: 9%; right: 9%; bottom: 9%; padding: 1.2rem 1.3rem; background: #f5f4f1; box-shadow: inset 0 .3rem 0 #e0531f, 0 30px 60px -30px rgb(17 19 22 / .4); display: flex; flex-direction: column; gap: .75rem; }
+.sa-report-h { font-size: 1.5rem; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; line-height: 1; }
+.sa-days { display: grid; grid-template-columns: repeat(15, 1fr); gap: 3px; }
+.sa-days i { aspect-ratio: 1; background: #2f7d5b; }
+.sa-care ul { display: grid; gap: .4rem; margin: 0; padding: 0; list-style: none; font-size: .82rem; }
+.sa-care li { display: flex; align-items: center; gap: .5rem; }
+.sa-care .sa-tick { background: #111316; }
+.sa-next { margin-top: auto !important; padding-top: .7rem; border-top: 1px solid #cfccc5; font-size: .76rem; color: #52575d; }
+
+/* ── Motion ───────────────────────────────────────────────────────────── */
+@keyframes sa-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes sa-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sa-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes sa-dot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes sa-typing { 0% { opacity: 0; max-height: 2rem; } 15%, 80% { opacity: 1; max-height: 2rem; } 100% { opacity: 0; max-height: 0; margin: -.55rem 0 0; } }
+@keyframes sa-wave { from { transform: scaleY(.3); } to { transform: scaleY(1); } }
+@keyframes sa-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sa-fill { from { background: #d9d7d1; } to { background: #2f7d5b; } }
+@keyframes sa-press { 0%, 100% { transform: none; } 50% { transform: scale(.96); } }
+
+[data-anim] .s-svc:not(.is-in) .sa-step,
+[data-anim] .s-svc:not(.is-in) .sa-q { opacity: 0; }
+[data-anim] .s-svc.is-in .sa-step { animation: sa-in .8s var(--s-ease) calc(.25s + var(--i, 0) * .45s) both; }
+
+/* chat: typing dots between the question and the reply */
+[data-anim] .s-svc.is-in .sa-typing { display: flex; gap: .3rem; align-self: flex-start; overflow: hidden; padding: .7rem .9rem; border-radius: 1rem; background: #fff; animation: sa-typing 1.4s ease calc(.7s) both; }
+[data-anim] .s-svc.is-in .sa-chat .is-out { animation-delay: 2.1s; }
+[data-anim] .s-svc.is-in .sa-chat .sa-checked { animation-delay: 2.8s; }
+
+/* software: forms come in, the pill turns to Ready */
+[data-anim] .s-svc.is-in .sa-swap .is-wait { opacity: 1; animation: sa-fade-out .4s ease 2.8s both; }
+[data-anim] .s-svc.is-in .sa-swap .is-ok { animation: sa-fade-in .4s ease 2.8s both; }
+
+/* payments: press, then paid */
+[data-anim] .s-svc.is-in .sa-paybtn { animation: sa-press .35s ease 1.6s both; }
+[data-anim] .s-svc.is-in .sa-paybtn-a { opacity: 1; animation: sa-fade-out .3s ease 1.8s both; }
+[data-anim] .s-svc.is-in .sa-paybtn-b { animation: sa-fade-in .3s ease 1.85s both; }
+
+/* search: the query types itself, then the results */
+[data-anim] .s-svc.is-in .sa-type { animation: sa-type 1.3s steps(32, end) .3s both; }
+[data-anim] .s-svc.is-in .sa-search .sa-step { animation-delay: calc(1.3s + (var(--i) - 1) * .45s); }
+
+/* care: the month fills in day by day */
+[data-anim] .s-svc.is-in .sa-days i { animation: sa-fill .3s ease calc(.3s + var(--i) * .04s) both; }
+[data-anim] .s-svc.is-in .sa-care .sa-step { animation-delay: calc(1.6s + var(--i) * .35s); }
+
+/* voice: the line keeps talking while the card is on screen */
+[data-anim] .s-svc.is-in .sa-wave i { animation: sa-wave 1.1s ease-in-out infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sa-typing i { animation: none; }
+}
+
+/* Beat the older photo rules in studio.css (.s-svc-art img was a faded-in photo) */
+.s-svc .s-svc-art { aspect-ratio: 1 / 1; }
+.s-svc-art .sa img { position: static; inset: auto; opacity: 1; transform: none; transition: none; }
+.s-svc-art .sa-mobile img { width: 100%; height: 100%; }
+.s-svc:hover .s-svc-art .sa img { transform: none; }
+.sa-next { margin-top: .2rem !important; }
+.sa-report { bottom: auto; }

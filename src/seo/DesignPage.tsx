@@ -1,6 +1,6 @@
 import { Icon, type IconName } from "../components/Icon";
 import { WORK } from "../App";
-import { Arrow, Art, StaticFooter, StaticNav } from "./StaticChrome";
+import { Arrow, ServicePicture, StaticFooter, StaticNav } from "./StaticChrome";
 
 // /design/: Oceanalt's design practice, for established brands. Rendered to
 // static HTML at build time (scripts/prerender.mjs), no JavaScript. The work
@@ -22,7 +22,7 @@ const PRACTICE: { name: string; icon: IconName; photo: string; line: string; poi
   {
     name: "Identity",
     icon: "svc-brand",
-    photo: "/photos/brand.webp",
+    photo: "brand",
     line: "A mark, type and colour system that holds together from a phone screen to a shopfront.",
     points: ["Logo refresh or new mark", "Type, colour and layout system", "Guidelines and templates"],
     href: "/brand-identity/",
@@ -31,7 +31,7 @@ const PRACTICE: { name: string; icon: IconName; photo: string; line: string; poi
   {
     name: "Websites",
     icon: "svc-web",
-    photo: "/photos/websites.webp",
+    photo: "websites",
     line: "Sites designed around what customers came to do, then built by the same team.",
     points: ["Structure and copy", "Page design and components", "Built and tested in-house"],
     href: "/website-design-sydney/",
@@ -40,7 +40,7 @@ const PRACTICE: { name: string; icon: IconName; photo: string; line: string; poi
   {
     name: "Product and app UI",
     icon: "svc-software",
-    photo: "/photos/software.webp",
+    photo: "software",
     line: "Portals, dashboards and tools that staff and customers can use without a manual.",
     points: ["Flows and wireframes", "Interface design system", "Prototypes you can click through"],
     href: "/web-apps-and-software/",
@@ -89,7 +89,7 @@ export function DesignPage() {
             <div className="sp-practice">
               {PRACTICE.map((p) => (
                 <article key={p.name} className="sp-card">
-                  <Art src={p.photo} icon={p.icon} />
+                  <ServicePicture id={p.photo} />
                   <h3 className="s-svc-name">{p.name}</h3>
                   <p className="sp-card-line">{p.line}</p>
                   <ul className="sp-ticks">

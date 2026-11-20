@@ -288,3 +288,7 @@ html:has(.sp-lift[open]) { overflow: hidden; }
   .sp-disc, .sp-disc.is-out { transition: none !important; transform: translateX(64%); }
   .sp-cover, .sp-rec a:hover .sp-cover { transition: none; transform: none; }
 }
+
+/* Service pictures on static pages (ServicePicture → ServiceArt), finished state */
+.sp-art.sp-sa { display: block; aspect-ratio: 1 / 1; max-height: none; background: #eceeee; }
+.sp-art.sp-sa.sp-art-tall { aspect-ratio: 1 / 1; }

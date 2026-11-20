@@ -2,6 +2,7 @@ import { Icon, type IconName } from "../components/Icon";
 import { ABN, EMAIL, FOUNDER, LogoMark, PHONE, PHONE_HREF } from "../App";
 import { SERVICES } from "../studio/content";
 import { LANDINGS } from "./landing";
+import { ServiceArt } from "../studio/ServiceArt";
 
 // The nav and footer for the static, no-JavaScript pages (/design/, /designs/
 // and the service pages). Same markup and classes as StudioNav and StudioFooter
@@ -105,6 +106,16 @@ export function Art({ src, icon, className = "" }: { src: string; icon: IconName
     <div className={`sp-art ${className}`}>
       <span className="sp-art-img" dangerouslySetInnerHTML={{ __html: `<img src="${src}" alt="" width="1200" height="900" loading="lazy" decoding="async" onerror="this.hidden=true">` }} />
       <Icon name={icon} className="i s-svc-glyph" />
+    </div>
+  );
+}
+
+// The same picture of the real thing as the homepage's service cards
+// (ServiceArt), shown finished: these pages run no JavaScript.
+export function ServicePicture({ id, className = "" }: { id: string; className?: string }) {
+  return (
+    <div className={`sp-art sp-sa ${className}`} aria-hidden="true">
+      <ServiceArt id={id} />
     </div>
   );
 }

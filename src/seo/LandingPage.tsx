@@ -2,7 +2,7 @@ import { Icon } from "../components/Icon";
 import { WORK } from "../App";
 import { SERVICES } from "../studio/content";
 import { LANDINGS, type Landing } from "./landing";
-import { Arrow, Art, StaticFooter, StaticNav } from "./StaticChrome";
+import { Arrow, ServicePicture, StaticFooter, StaticNav } from "./StaticChrome";
 
 // Lower-cases a service name mid-sentence, keeping "AI" as is.
 const lc = (s: string) => (s.startsWith("AI") ? s : s[0].toLowerCase() + s.slice(1));
@@ -38,7 +38,7 @@ export function LandingPage({ page }: { page: Landing }) {
                   <a className="s-btn s-btn-soft" href="/design/">How we design</a>
                 </div>
               </div>
-              <Art src={svc.photo} icon={svc.icon} className="sp-art-tall" />
+              <ServicePicture id={svc.id} className="sp-art-tall" />
             </div>
           </div>
         </section>

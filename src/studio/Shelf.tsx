@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { WORK } from "../App";
+import { CONCEPTS, WORK } from "../App";
 import SPINES from "../data/spines.json";
 import "./shelf.css";
 
@@ -12,7 +12,7 @@ import "./shelf.css";
 // Arrow keys flip through, Esc puts it back. Reduced motion: no flight, the
 // shelf stays still and scrolls by hand. Colours: src/data/spines.json.
 
-type Rec = { path: string; business: string; kind: string; theme: string; added: string; bg: string; ink: string; accent: string };
+type Rec = { path: string; business: string; kind: string; theme: string; added: string; bg: string; ink: string; accent: string; href?: string };
 const COLOURS = SPINES as Record<string, { bg: string; ink: string; accent: string }>;
 const LEAD = ["fenwick-hale", "corella-hotels", "calloway-day-surgery", "calder-and-ames", "tallowwood-home", "torrens-and-pike"];
 const cat = (i: number) => `OA-${String(i + 1).padStart(3, "0")}`;
@@ -27,7 +27,9 @@ function useRecords(): Rec[] {
     }));
     const lead = LEAD.flatMap((p) => all.filter((s) => s.path === p));
     const rest = all.filter((s) => !LEAD.includes(s.path)).sort((a, b) => b.added.localeCompare(a.added));
-    return [...lead, ...rest];
+    // Concept redesigns for real businesses go first, clearly labelled as concepts.
+    const concepts: Rec[] = CONCEPTS.map((c) => ({ path: c.path, business: c.business, kind: c.kind, theme: "Concept", added: c.added, bg: c.bg, ink: c.ink, accent: c.accent, href: c.href }));
+    return [...concepts, ...lead, ...rest];
   }, []);
 }
 
@@ -186,7 +188,7 @@ export function Shelf() {
       <div className={`sh-shelf${open !== null ? " is-holding" : ""}`}>
         <div className="sh-track">{row(false)}{row(true)}</div>
       </div>
-      <p className="s-wrap s-note">{recs.length} sample designs for fictional businesses, filed like records. Pull one out.</p>
+      <p className="s-wrap s-note">{recs.length} designs, filed like records: samples for fictional businesses, and concept redesigns labelled as concepts. Pull one out.</p>
 
       <dialog ref={dlg} className="sh-dlg" onCancel={(e) => { e.preventDefault(); close(); }} onClick={(e) => { if (e.target === dlg.current) close(); }} aria-label={s ? `${s.business}, sample design` : "Sample design"}>
         {s && open !== null && (
@@ -195,16 +197,16 @@ export function Shelf() {
               <div className="sh-disc" aria-hidden="true"><span>{s.business.slice(0, 1)}</span></div>
               <div className="sh-cover" ref={cover}>
                 <img src={img(s.path)} alt={`${s.business}, sample design`} width={1200} height={750} />
-                <span className="sh-sticker">Sample</span>
+                <span className="sh-sticker">{s.href ? "Concept" : "Sample"}</span>
               </div>
             </div>
             <div className="sh-info">
-              <p className="sh-meta">{cat(open)} · {s.theme} pressing</p>
+              <p className="sh-meta">{cat(open)} · {s.href ? "Concept redesign" : `${s.theme} pressing`}</p>
               <h3>{s.business}</h3>
               <p className="sh-kind">{s.kind}</p>
-              <p className="sh-note">A sample design for a fictional business, made to show our range.</p>
+              <p className="sh-note">{s.href ? `Our concept redesign for a real business. Not commissioned by ${s.business}.` : "A sample design for a fictional business, made to show our range."}</p>
               <div className="sh-actions">
-                <a className="s-btn s-btn-ink" href={`/work/${s.path}/`} target="_blank" rel="noopener">Play the site</a>
+                <a className="s-btn s-btn-ink" href={s.href ?? `/work/${s.path}/`} target="_blank" rel="noopener">{s.href ? "See the concept" : "Play the site"}</a>
                 <button type="button" className="s-btn s-btn-soft" onClick={() => step(1)}>Next record</button>
               </div>
               <button type="button" className="sh-close" onClick={close}>Back on the shelf</button>

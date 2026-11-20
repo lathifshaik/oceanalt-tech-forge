@@ -19,6 +19,14 @@ type TemplateId = "cafe" | "trades" | "studio" | "shop" | "pro";
 
 // Each example business shown in three of its designs. Paths match the
 // showcase list in templates/<template>/meta.json (built by `npm run templates`).
+// Concept redesigns: our own unasked-for ideas for real businesses (founder,
+// 20 Nov 2026). Never presented as client work: always labelled "Concept
+// redesign, not commissioned by <business>", and they link to the concept
+// itself. Shown on the homepage shelf and /designs/, never in WORK.
+export const CONCEPTS: { business: string; kind: string; href: string; path: string; added: string; bg: string; ink: string; accent: string }[] = [
+  { business: "Ragpiq", kind: "Pre-loved fashion resale, Melbourne", href: "https://ragpiq-redesign.vercel.app", path: "ragpiq-concept", added: "2026-11-20", bg: "#f5f1ea", ink: "#0e0e0e", accent: "#c6f432" },
+];
+
 export const WORK: {
   id: TemplateId;
   kind: string;

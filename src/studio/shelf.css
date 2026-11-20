@@ -140,3 +140,10 @@
 .sh-album.is-leaving .sh-info { opacity: 0; transition: opacity .25s; }
 .sh-spine.is-home { animation: sh-home .6s cubic-bezier(.3,1.6,.5,1) both; }
 @keyframes sh-home { 0% { transform: translateY(-.6rem); } 60% { transform: translateY(.15rem); } 100% { transform: none; } }
+
+/* Phones: taller records so they read as records */
+@media (max-width: 640px) {
+  .sh { margin-top: 2.5rem; }
+  .sh-shelf { --rec: 15rem; padding-top: 1.6rem; }
+  .sh-title { font-size: .52rem; }
+}

@@ -1,5 +1,5 @@
 import { Icon } from "../components/Icon";
-import { WORK } from "../App";
+import { CONCEPTS, WORK } from "../App";
 import { Arrow, StaticFooter, StaticNav } from "./StaticChrome";
 
 // /designs/: every sample design, filed like a record shop. Each design is a
@@ -139,8 +139,25 @@ export function DesignsPage() {
             </ul>
           </div>
 
+          <div className="s-wrap sp-concepts">
+            <h2 className="s-h2">Concept redesigns</h2>
+            <p className="s-lede">Our own ideas for real businesses, made without being asked. They aren't clients, and the businesses didn't commission these.</p>
+            <ul>
+              {CONCEPTS.map((c) => (
+                <li key={c.path}>
+                  <a href={c.href} target="_blank" rel="noopener">
+                    <img src={`/previews/${c.path}.webp`} alt={`Concept redesign for ${c.business}`} width={1200} height={750} loading="lazy" decoding="async" />
+                    <span className="sp-concept-tag">Concept, not commissioned</span>
+                  </a>
+                  <p><b>{c.business}</b> · {c.kind}</p>
+                  <p className="s-note">Concept redesign, not commissioned by {c.business}.</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="s-wrap">
-            <p className="s-note sp-honest">Every business on this page is a sample we made up to show the designs. They aren't clients, and no results are claimed.</p>
+            <p className="s-note sp-honest">Every business in the crates is a sample we made up to show the designs. They aren't clients, and no results are claimed.</p>
             <a className="s-btn s-btn-soft sp-gap" href="/design/">How we design <Arrow /></a>
           </div>
         </section>

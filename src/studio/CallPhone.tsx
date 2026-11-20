@@ -19,7 +19,7 @@ type State = "ringing" | "declined" | "live" | "ended";
 
 const mmss = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
 
-function StatusBar() {
+export function StatusBar() {
   return (
     <div className="cp-status" aria-hidden="true">
       <span className="cp-clock">9:41</span>

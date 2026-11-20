@@ -292,3 +292,13 @@ html:has(.sp-lift[open]) { overflow: hidden; }
 /* Service pictures on static pages (ServicePicture → ServiceArt), finished state */
 .sp-art.sp-sa { display: block; aspect-ratio: 1 / 1; max-height: none; background: #eceeee; }
 .sp-art.sp-sa.sp-art-tall { aspect-ratio: 1 / 1; }
+
+/* Concept redesigns for real businesses (/designs/) */
+.sp-concepts { margin-top: 4rem; }
+.sp-concepts ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1.5rem; margin: 2rem 0 0; padding: 0; list-style: none; }
+.sp-concepts li > a { position: relative; display: block; overflow: hidden; border-radius: .9rem; box-shadow: 0 20px 40px -28px rgb(13 30 40 / .5); }
+.sp-concepts img { display: block; width: 100%; height: auto; transition: transform .8s var(--s-ease); }
+.sp-concepts li > a:hover img { transform: scale(1.03); }
+.sp-concept-tag { position: absolute; top: .75rem; left: .75rem; padding: .3rem .6rem; border-radius: 999px; background: #fff; color: var(--s-ink); font-size: .72rem; font-weight: 600; }
+.sp-concepts li > p { margin-top: .8rem; }
+.sp-concepts li > p.s-note { margin-top: .2rem; }

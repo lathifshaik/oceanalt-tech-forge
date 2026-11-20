@@ -1,4 +1,5 @@
-/* MASA section (Masa.tsx), in MASA's own theme */
+/* MASA section (Masa.tsx), in MASA's own theme. The phone shell is the
+   realistic iPhone from CallPhone (.cp-device etc. in studio.css). */
 
 .mx {
   --mx-ink: #15171a; --mx-gold: #ffc42e; --mx-text2: #3a424b; --mx-text3: #646c75; --mx-line: #e4e6e8; --mx-soft: #f5f6f6;
@@ -7,6 +8,7 @@
 }
 .mx-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
 
+/* copy */
 .mx-logo { display: inline-flex; align-items: center; gap: .65rem; font-size: 1.2rem; font-weight: 600; letter-spacing: -.01em; }
 .mx .mx-try { margin-top: 1.6rem; font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--mx-text3); }
 .mx h2 { margin: .6rem 0 0; font-size: clamp(3rem, 7vw, 5.6rem); font-weight: 500; line-height: .92; letter-spacing: -.045em; }
@@ -18,33 +20,114 @@
 .mx-link { color: var(--mx-ink); font-weight: 500; text-decoration: underline; text-underline-offset: .25em; text-decoration-thickness: 1px; }
 .mx .mx-for { margin-top: 1.4rem; font-size: .9rem; color: var(--mx-text3); }
 
-/* the marigold panel and phone, like MASA's own site */
-.mx-panel { display: grid; place-items: center; padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem); border-radius: 2.2rem 2.2rem 2.2rem 2.2rem; background: var(--mx-gold); }
-.mx-phone { display: grid; grid-template-rows: auto 1fr auto; width: min(100%, 22rem); height: 28rem; margin: 0; border: .5rem solid var(--mx-ink); border-radius: 2.4rem; background: #fff; overflow: hidden; box-shadow: 0 30px 60px -30px rgb(21 23 26 / .55); }
-.mx-bar { display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem; border-bottom: 1px solid var(--mx-line); }
-.mx-bar b { font-weight: 600; font-size: 1rem; }
-.mx-bar span { margin-left: auto; font-size: .8rem; color: var(--mx-text2); }
-.mx-chat { display: flex; flex-direction: column; justify-content: flex-end; gap: .6rem; padding: 1rem; }
-.mx .mx-me { align-self: flex-end; max-width: 85%; padding: .6rem .85rem; border-radius: 1rem 1rem .3rem 1rem; background: var(--mx-ink); color: #fff; font-size: .92rem; min-height: 2.4rem; }
-.mx-dots { display: inline-flex; gap: .3rem; align-self: flex-start; padding: .7rem .85rem; border-radius: 1rem; background: var(--mx-soft); }
-.mx-dots i { width: .4rem; height: .4rem; border-radius: 50%; background: var(--mx-text3); animation: mx-dot 1s ease-in-out infinite; }
+/* the marigold panel */
+.mx-panel { display: grid; justify-items: center; gap: 1.6rem; padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 3vw, 2.5rem); border-radius: 2.2rem; background: var(--mx-gold); }
+.mx-fig { margin: 0; }
+.mx-fig .cp-device { width: min(100%, 18.5rem); }
+
+/* the screen: light apps get a dark status bar */
+.mx .mx-screen { background: #fff; color: var(--mx-ink); font-family: inherit; }
+.mx .mx-screen .cp-status { color: var(--mx-ink); }
+.mx .mx-screen .cp-sys svg { fill: currentColor; }
+.mx .mx-screen.is-slack .cp-status { background: #3f0e40; color: #fff; }
+.mx .mx-screen.is-teams .cp-status { background: #4b53bc; color: #fff; }
+.mx .mx-screen .cp-home { background: rgb(21 23 26 / .85); }
+
+/* app headers */
+.mx-h { display: flex; align-items: center; gap: .55rem; padding: .55rem .9rem .7rem; }
+.mx-h b { font-weight: 600; font-size: .98rem; }
+.mx-h small { display: block; font-size: .66rem; opacity: .75; }
+.mx-h-web { border-bottom: 1px solid var(--mx-line); }
+.mx-h-web span { margin-left: auto; font-size: .74rem; color: var(--mx-text2); }
+.mx-h-slack { background: #3f0e40; color: #fff; }
+.mx-h-teams { background: #4b53bc; color: #fff; }
+.mx-back { font-size: 1.5rem; line-height: 1; opacity: .85; margin-right: .1rem; }
+.mx-grp { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: rgb(255 255 255 / .22); font-size: .66rem; font-weight: 600; }
+
+/* thread */
+.mx-thread { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: .55rem; padding: .75rem; overflow: hidden; font-size: .82rem; line-height: 1.4; }
+.mx .mx-screen.is-teams .mx-thread { background: #f5f5f5; }
+.mx-b { max-width: 86%; padding: .55rem .75rem; border-radius: 1rem; }
+.mx-b-me { align-self: flex-end; background: var(--mx-ink); color: #fff; border-bottom-right-radius: .3rem; animation: mx-in .3s cubic-bezier(.2,.8,.2,1) both; }
+.mx-b-them { background: var(--mx-soft); border-bottom-left-radius: .3rem; }
+.mx-teams-me { background: #e8ebfa; color: #242424; border-radius: .5rem; }
+.mx-at { color: #4b53bc; font-weight: 600; }
+.mx-reply { display: grid; gap: .4rem; max-width: 92%; }
+.mx-reply.is-teams { grid-template-columns: auto 1fr; gap: .45rem; align-items: start; }
+.mx-reply.is-teams .mx-b-them { background: #fff; border-radius: .5rem; box-shadow: 0 1px 2px rgb(0 0 0 / .08); }
+.mx-reply-body { display: grid; gap: .4rem; }
+.mx-card { display: grid; gap: .1rem; padding: .55rem .7rem; border-radius: .6rem; background: #fff; border: 1px solid var(--mx-line); }
+.mx-card b { font-weight: 600; font-size: .82rem; }
+.mx-card span { font-size: .7rem; color: var(--mx-text3); }
+
+/* Slack-style rows */
+.mx-row { display: grid; grid-template-columns: auto 1fr; gap: .55rem; align-items: start; animation: mx-in .3s cubic-bezier(.2,.8,.2,1) both; }
+.mx-av { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: .45rem; background: #2eb67d; color: #fff; font-weight: 700; font-size: .78rem; overflow: hidden; }
+.mx-av-masa { background: none; }
+.mx-name { font-weight: 700; font-size: .8rem; }
+.mx-name time { margin-left: .25rem; font-weight: 400; font-size: .64rem; color: var(--mx-text3); }
+.mx-name em { margin-left: .2rem; padding: 0 .25rem; border-radius: .2rem; background: #e8e8e8; color: #555; font-style: normal; font-size: .55rem; font-weight: 700; letter-spacing: .04em; vertical-align: .1em; }
+.mx-txt code { padding: 0 .2rem; border-radius: .2rem; background: #f6f0f6; color: #b0177a; font-family: ui-monospace, Menlo, monospace; font-size: .78rem; }
+.mx-att { display: grid; gap: .1rem; margin-top: .4rem; padding: .3rem .6rem; border-left: 3px solid var(--mx-gold); }
+.mx-att b { font-size: .8rem; }
+.mx-att span { font-size: .7rem; color: var(--mx-text3); }
+
+.mx-dots { display: inline-flex; gap: .25rem; align-self: flex-start; padding: .55rem .7rem; border-radius: 1rem; background: var(--mx-soft); }
+.mx-dots i { width: .34rem; height: .34rem; border-radius: 50%; background: var(--mx-text3); animation: mx-dot 1s ease-in-out infinite; }
 .mx-dots i:nth-child(2) { animation-delay: .15s; }
 .mx-dots i:nth-child(3) { animation-delay: .3s; }
 @keyframes mx-dot { 50% { transform: translateY(-3px); opacity: .5; } }
-.mx-reply { display: grid; gap: .5rem; max-width: 92%; animation: mx-in .45s cubic-bezier(.2,.8,.2,1) both; }
-.mx .mx-reply > p:first-child { padding: .6rem .85rem; border-radius: 1rem 1rem 1rem .3rem; background: var(--mx-soft); font-size: .92rem; line-height: 1.4; }
-.mx-card { display: grid; gap: .15rem; padding: .7rem .85rem; border-radius: .7rem; border: 1px solid var(--mx-line); }
-.mx-card b { font-weight: 600; font-size: .92rem; }
-.mx-card span { font-size: .78rem; color: var(--mx-text3); }
-.mx .mx-note { font-size: .78rem; color: var(--mx-text3); }
+.mx-in-anim { animation: mx-in .45s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes mx-in { from { opacity: 0; transform: translateY(.4rem); } to { opacity: 1; transform: none; } }
-.mx .mx-input { display: flex; align-items: center; justify-content: space-between; margin: 0 .75rem .75rem; padding: .35rem .35rem .35rem 1rem; border: 1px solid var(--mx-line); border-radius: 999px; font-size: .88rem; color: var(--mx-text3); }
-.mx-input i { width: 2rem; height: 2rem; border-radius: 50%; background: var(--mx-gold); }
+
+/* composer */
+.mx-compose { display: flex; align-items: center; gap: .5rem; margin: 0 .6rem 1.6rem; padding: .35rem .35rem .35rem .85rem; border: 1px solid var(--mx-line); border-radius: 999px; background: #fff; font-size: .78rem; color: var(--mx-text3); }
+.mx-compose span { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.mx-compose span.is-typing { color: var(--mx-ink); white-space: normal; }
+.mx-compose b { flex: none; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--mx-gold); opacity: .45; transition: opacity .2s, transform .2s; }
+.mx-compose b.is-ready { opacity: 1; transform: scale(1.08); }
+.mx-compose.is-slack { border-radius: .6rem; }
+.mx-compose.is-slack b { background: #007a5a; border-radius: .4rem; }
+.mx-compose.is-teams { border-radius: .4rem; }
+.mx-compose.is-teams b { background: #4b53bc; border-radius: .3rem; }
+.mx-caret { display: inline-block; width: 1.5px; height: 1em; margin-left: 1px; vertical-align: -.15em; background: currentColor; animation: mx-blink 1s steps(2) infinite; }
+@keyframes mx-blink { 50% { opacity: 0; } }
+
+/* try it */
+.mx-try-it { display: grid; justify-items: center; gap: .6rem; width: 100%; }
+.mx .mx-try-it > p { font-size: .82rem; font-weight: 600; color: var(--mx-ink); }
+.mx-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.mx-chips button { display: grid; gap: .1rem; padding: .55rem .9rem; border: 0; border-radius: .9rem; background: #fff; color: var(--mx-ink); font: inherit; font-size: .84rem; text-align: left; cursor: pointer; box-shadow: 0 1px 2px rgb(21 23 26 / .12); transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s; }
+.mx-chips button small { font-size: .66rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--mx-text3); }
+.mx-chips button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px -10px rgb(21 23 26 / .5); }
+.mx-chips button[aria-pressed="true"] { background: var(--mx-ink); color: #fff; }
+.mx-chips button[aria-pressed="true"] small { color: rgb(255 255 255 / .7); }
+.mx-chips button:focus-visible { outline: 2px solid var(--mx-ink); outline-offset: 2px; }
 
 @media (max-width: 860px) {
   .mx-in { grid-template-columns: 1fr; }
-  .mx-phone { height: 25rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mx-dots i, .mx-reply { animation: none; }
+  .mx-dots i, .mx-in-anim, .mx-row, .mx-b-me, .mx-caret { animation: none; }
+}
+
+/* fit the island and status bar to this narrower phone */
+.mx .mx-screen .cp-island { width: 4.8rem; height: 1.45rem; margin-left: -2.4rem; top: .6rem; }
+.mx .mx-screen .cp-status { height: 2.6rem; padding: 0 1.35rem 0 1.6rem; font-size: .8rem; }
+.mx .mx-screen .cp-sys svg { transform: scale(.85); transform-origin: right center; }
+
+/* Phones: a smaller phone and the "try it" options in one swipeable row right under it */
+@media (max-width: 640px) {
+  .mx { padding-block: 3.5rem; }
+  .mx h2 { font-size: 3.1rem; }
+  .mx .mx-lede { font-size: 1rem; }
+  .mx-ctas { gap: 1rem; margin-top: 1.5rem; }
+  .mx-panel { gap: 1rem; padding: 1.5rem 0 1.25rem; border-radius: 1.6rem; overflow: hidden; }
+  .mx-fig .cp-device { width: 15.5rem; max-width: 80vw; }
+  .mx-try-it { justify-items: stretch; }
+  .mx .mx-try-it > p { text-align: center; }
+  .mx-chips { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; padding: .2rem 1rem .4rem; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .mx-chips::-webkit-scrollbar { display: none; }
+  .mx-chips button { flex: none; scroll-snap-align: center; max-width: 15rem; }
+  .mx-thread { font-size: .76rem; }
 }

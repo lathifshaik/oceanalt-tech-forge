@@ -438,3 +438,11 @@ details[open] .s-plus { transform: rotate(45deg); }
 .s-start-who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
 .s-start-who p { margin: 0; display: grid; gap: 2px; font-size: 15px; }
 .s-start-who span { color: var(--s-mute, #5b6266); font-size: 14px; }
+
+/* Phones (founder: "in mobile it kinda sucks"): tighter sections, smaller phones */
+@media (max-width: 640px) {
+  .s-sec { padding-block: 3.75rem; }
+  .s-split { gap: 2rem; }
+  .cp-device { width: min(100%, 16rem); }
+  .s-lede { font-size: 1.02rem; }
+}

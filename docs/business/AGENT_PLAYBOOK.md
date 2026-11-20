@@ -1,5 +1,7 @@
 # Agent playbook
 
+_Updated 20 November 2026 for the studio (BUSINESS_PLAN section 0). Every agent works to `POLICIES.md`._
+
 Everything Oceanalt's agents handle, who handles it, and what still needs the founder. The agents live in `.claude/agents/`. Ask for one by name ("use the `growth` agent to…"). If a job isn't listed here, it goes to the `ceo` agent to decide who owns it.
 
 ## The rule that overrides everything
@@ -9,41 +11,41 @@ Agents draft, build, check and recommend. **The founder approves anything that l
 ## Who handles what
 
 ### `ceo`: decisions
-- **Handles:** pricing and offer changes, go/no-go on custom work, the domain-only first month and $69 intro price, minimum terms, risk and legal checks on claims (ACL, Spam Act, Privacy Act, AI disclosure, call recording), the monthly KPI review and the Friday weekly numbers.
-- **Starts when:** a price, term or claim changes; a custom quote comes in; it's Friday or the 1st of the month; any agent is unsure who owns a job.
-- **Produces:** a decision with a reason, the exact wording, and updates to `BUSINESS_PLAN.md`. Prices and terms change in all four places together (see CLAUDE.md).
+- **Handles:** `POLICIES.md` and its open decisions (platform fee band, free-website term and exit), checking the scope and price of every proposal, go/no-go on large or regulated work, risk and legal checks on claims (ACL, Spam Act, Privacy Act, AI disclosure, call recording), the monthly KPI review and the Friday weekly numbers.
+- **Starts when:** a proposal is drafted; a price, term or claim changes; it's Friday or the 1st of the month; any agent is unsure who owns a job.
+- **Produces:** a decision with a reason, the exact wording, and updates to `BUSINESS_PLAN.md` and `POLICIES.md`. How we price and our terms change in all four places together (see CLAUDE.md). No prices ever go on the site.
 - **Founder signs off:** every price, term or offer change before it goes live.
 
 ### `researcher`: facts
-- **Handles:** niche and suburb validation, competitor pricing, finding target businesses, and checking any claim or number before it goes on the site. Always with sources.
-- **Starts when:** we pick a new trade or area, or someone wants to state a fact or price publicly.
-- **Produces:** a short sourced note, and lead lists for `growth`.
+- **Handles:** finding established brands to contact (the person, their role, a source for their contact details, the one thing we noticed), competitor studios, and checking any claim before it goes on the site. Always with sources.
+- **Starts when:** it's Monday, we pick a new segment, or someone wants to state a fact publicly.
+- **Produces:** 20 researched brands a week for `growth`, and short sourced notes.
 
 ### `growth`: leads
-- **Handles:** lead lists, preview-site outreach drafts (email, SMS, DMs) under the Spam Act rules in `docs/growth/OUTREACH.md`, follow-ups, referral offers, niche landing pages, and `docs/growth/pipeline.md`.
+- **Handles:** outreach drafts to named people at established brands (email, LinkedIn) under `docs/growth/OUTREACH.md`, the two-tier follow-up policy (POLICIES section 14), teardowns with `designer`, service pages, and the Notion Sales pipeline.
 - **Starts when:** it's Monday batch day, a new niche is approved, or a reply needs a follow-up drafted.
-- **Produces:** 40 to 50 leads a week with a preview link each, and messages ready to send.
+- **Produces:** 15 to 20 first messages a week, each with one specific, checked observation, ready to send.
 - **Founder signs off:** sends every message personally. Agents never send.
 
 ### `marketing`: what we say
-- **Handles:** positioning, the homepage story, landing-page and ad copy, the hero scenes, the concierge call script, and a final word check on anything customer-facing (Aussie voice, no hype, no invented stats, sample businesses labelled).
+- **Handles:** positioning, the homepage and service-page copy, LinkedIn posts, voice agent call scripts, and a final word check on anything customer-facing (Aussie voice, no hype, no invented stats, samples labelled as fictional, no prices).
 - **Starts when:** any customer-facing words are written or changed.
 - **Produces:** exact before/after copy. Legal-sensitive lines go to `ceo` first.
 
 ### `client-success`: clients
-- **Handles:** reading every enquiry the same business day; correcting the AI's suggested plan; booking the 15-minute call; writing `clients/<slug>/BRIEF.md` and `site.json`; edit requests logged against the cap in `EDITS.md`; upgrades; cancellations; the concierge setup form (`CONCIERGE_SETUP.md`) with the client.
+- **Handles:** reading every enquiry the same business day; booking the 30-minute first call; drafting proposals, change requests and care agreements (POLICIES sections 3 to 7); kick-off briefs; support requests against the response times; complaints; existing small-business clients' edits against their allowance; the voice agent setup form (`CONCIERGE_SETUP.md`).
 - **Starts when:** an enquiry, reply, edit request or cancellation arrives.
-- **Produces:** drafted replies for the founder, briefs and edit logs.
-- **Founder signs off:** replies to clients, and anything off-plan or over the edit cap.
+- **Produces:** drafted replies and proposals for the founder (proposal within 3 business days of the call), briefs and logs.
+- **Founder signs off:** every reply, proposal, agreement and change request.
 
 ### `designer`, `ui-designer`, `ux-designer`: how it looks and works
-- **`designer`:** client previews and redesigns. Picks layout, theme, hero and accent for each client (never reused), from the brief.
+- **`designer`:** client design, sample brands and outreach teardowns. Every design unique; the builder refuses one another client has.
 - **`ui-designer`:** visual polish on our site and client sites: type, colour, spacing, motion, avatars and character animations (via `scripts/make-wave-strip.py`).
 - **`ux-designer`:** page order, journeys, forms, mobile flow and accessibility.
 - **All three:** load the design skills first, check screenshots at 390 px and 1440 px, and keep the light theme and no-emoji rules.
 
 ### `engineer`: builds and launches
-- **Handles:** building client sites, Stripe (Payment Links, deposits, Apple Pay, Google Pay, Afterpay), bookings, migrations from Wix, WordPress and Shopify, DNS and launches, the AI concierge setup (number, voice agent, booking, WhatsApp summaries, spend caps), the chat assistant, the 15-minute reply port to Cloudflare, and the tech-debt list in `OPERATIONS.md`.
+- **Handles:** building client sites and apps, Stripe Connect and the platform fee, project invoices, bookings, migrations, DNS and launches, AI and voice agents (number, voice, actions, summaries, spend caps), workflow automations, data in AWS Sydney, access and breach response (POLICIES section 10), the 15-minute reply port to Cloudflare, and the tech-debt list in `OPERATIONS.md`.
 - **Starts when:** a client approves a preview, a concierge form is complete, or something breaks.
 - **Founder signs off:** going live, and anything that changes a client's billing.
 
@@ -55,8 +57,8 @@ Agents draft, build, check and recommend. **The founder approves anything that l
 ## Founder only
 
 - Sending any outreach, and replying to clients (agents draft).
-- The 15-minute discovery call.
-- Approving previews, launches, prices, terms and offers.
+- The 30-minute first call.
+- Signing proposals and agreements; approving designs, launches, prices, terms and offers.
 - Anything that touches money: Stripe account, refunds, invoices.
 - Accounts and legal: ABN, ASIC business name, domain, insurance, the lawyer review of the Terms.
 - Making character art for the site (agents turn it into animations).
@@ -65,18 +67,18 @@ Agents draft, build, check and recommend. **The founder approves anything that l
 
 | When | Agents | What |
 |---|---|---|
-| Monday | `researcher` → `designer` → `qa` → `growth` | 40 to 50 leads, a preview each, checked, messages drafted |
+| Monday | `researcher` → `designer` → `growth` → `marketing` | 20 brands researched, teardowns for the best 5, messages drafted and checked |
 | Every weekday morning | `client-success` | Read every enquiry and reply, draft answers, update the pipeline |
-| Mon–Fri, 9 to 5 | Founder | Send 10 to 15 messages a day; follow up once after 4 to 5 days |
-| When someone says yes | Founder, then `client-success` | 15-minute call, then brief and `site.json` the same day |
-| Next 1 to 3 days | `designer` → `engineer` → `qa` | Preview within 24 h, build, QA, launch |
+| Mon–Fri, 9 to 5 | Founder | Send about 4 a day; one follow-up after 5 to 7 business days |
+| After a first call | `client-success` → `ceo` → founder | Proposal within 3 business days |
+| Once signed | `designer` → `engineer` → `qa` | Kick-off, design, build, QA, launch, by the proposal's stages |
 | Friday | `ceo` | Weekly numbers: sent, replies, calls, clients, what to change |
 | 1st of the month | `ceo` | KPI review against `OPERATIONS.md` |
 
 ## Promises the agents must keep true
 
 - A person reads every enquiry the same business day. The site only promises a 15-minute AI reply once `api/start` runs on Cloudflare and passes an end-to-end test.
-- Prices, terms, delivery time and reply time match in the business plan, the site, the Terms and `api/start.ts`.
+- How we price, terms and reply time match in the business plan, `POLICIES.md`, the site's FAQ, the Terms and `api/start.ts`. No prices on the site, ever.
 - No invented stats, testimonials or scarcity. Sample businesses are labelled as samples. Never promise rankings.
 - Client data stays in AWS Sydney; overseas processors are listed in writing.
-- The concierge always opens by saying it's the owner's AI agent and that the call is recorded, and never gives safety or technical advice beyond "call triple zero".
+- Every voice agent opens by saying it's the brand's AI agent and that the call is recorded, and never gives safety or technical advice beyond "call triple zero".

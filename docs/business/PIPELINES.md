@@ -1,100 +1,101 @@
 # How Oceanalt runs, end to end
 
-The pipelines that turn a stranger into a paying client and keep them. Owner agents are in `.claude/agents/`; the founder does anything marked **(founder)**. Pricing is the founder's decision of 12 October 2026 (see `BUSINESS_PLAN.md` section 3c): Care $29/month; Launch month one just the domain at cost, then $69/month for months 2 to 6 and $99/month from month 7; Grow month one just the domain, then $149/month; 6-month minimum on Launch and Grow, then the site is theirs.
+_Rewritten 20 November 2026 for the studio (BUSINESS_PLAN section 0). Policies behind every step: `POLICIES.md`._
 
-The founder's working copy of these pipelines lives in Notion ("Oceanalt: plans, pricing and pipeline", with the Sales pipeline database). This file is the source of truth if they disagree.
+The pipelines that turn a brand we've never met into a signed project and a long client. Owner agents are in `.claude/agents/`; the founder does anything marked **(founder)**. No prices here or on the site: every project is quoted in writing, and the platform fee rate lives only in each client's agreement.
+
+The founder's working copy lives in Notion (the Sales pipeline database). This file is the source of truth if they disagree.
 
 ## 1. Set up once (founder)
 
 | # | What | Why | Status |
 |---|---|---|---|
 | 1 | ABN | Invoices, Stripe, domains | Done (65 119 854 062) |
-| 2 | Register "Oceanalt" as a business name with ASIC (small yearly fee) | Trading under a name that isn't yours legally needs it; matches the .com.au | To do |
-| 3 | Separate bank account for the business | Stripe payouts and expenses kept apart from personal money | To do |
-| 4 | Stripe account in Oceanalt's name, with the ABN | Our subscriptions and invoices. Clients' own sales go to *their* Stripe, never ours | To do |
-| 5 | Stripe products and prices (section 4) | So a yes can be billed the same day | To do |
-| 6 | `hello@oceanalt.com.au` mailbox, plus Resend for site email | Replies and the start form | Check |
-| 7 | Cal.com (free) link for 15-minute calls | Every reply offers a time | To do |
-| 8 | Google Business Profile: "Website designer", service area Sydney + Australia-wide, mobile 0431 236 999 | Local search and reviews | To do |
-| 9 | Insurance: professional indemnity and public liability | Clients and venues ask; cheap at our size | Get quotes |
-| 10 | Notion: Sales pipeline database (section 2) | One place to see every lead and client | Done |
-| 11 | Lawyer review of the Terms (minimum term, early exit, auto-renewal) | Australian Consumer Law | Before client 10 |
+| 2 | Register "Oceanalt" as a business name with ASIC | Trading under the name | To do |
+| 3 | Separate business bank account | Payouts and costs kept apart | To do |
+| 4 | Stripe account in Oceanalt's name, with the ABN | Project invoices and care agreements | To do |
+| 5 | **Stripe Connect platform** approval | The free website with payments runs on it | Apply now |
+| 6 | `hello@oceanalt.com.au` mailbox, Resend for site email | Replies and the start form | Check |
+| 7 | Booking link for 30-minute calls | In every reply | To do |
+| 8 | Insurance: professional indemnity and public liability | Brands' procurement asks | Get quotes |
+| 9 | Lawyer review: Terms, free-website agreement, care agreement, voice greeting | Before the first signing | To do |
+| 10 | Proposal and agreement templates (`client-success` drafts from POLICIES sections 3 to 7) | So a proposal goes out within 3 business days | Drafting |
+| 11 | Notion Sales pipeline (section 2 stages) | One place for every lead | Done; stages to update |
 
-## 2. Sales pipeline (owner: `growth`, founder makes the calls)
+## 2. Sales pipeline (owner: `growth`; founder makes the calls)
 
-Every lead is one row in the Notion **Sales pipeline** database, moved through these stages:
+Every brand is one row in the Notion **Sales pipeline**, moved through:
 
 | Stage | Means | Next step and timing |
 |---|---|---|
-| **Lead** | We know the business; no contact yet | Make a free preview of their new site (about 1 hour from the closest sample) |
-| **Contacted** | Preview sent (walk-in, call, email or text) | Follow up on day 2 and day 7, then stop. Spam Act rules in `docs/growth/OUTREACH.md` |
-| **Call booked** | 15-minute call in the calendar | Brief filled in on the call (`OPERATIONS.md` brief template) |
-| **Preview sent** | Their real preview link, with their words and photos | Ask for changes within 2 days |
-| **Approved** | They said yes to the preview | Payments pipeline, section 4 |
-| **Live** | Site launched, subscription running | Ask for a Google review after 2 weeks |
-| **Lost** | Said no or went quiet after day 7 | Note why; try again in 3 months only if they said "not now" |
+| **Researched** | Brand, person, role, source of contact, one thing we noticed | First message (OUTREACH.md) |
+| **Contacted** | First message sent | One follow-up after 5 to 7 business days; at most one call; then stop |
+| **Talking** | They replied | Offer call times the same day |
+| **First call** | 30 minutes with Lathif | Notes in the row; proposal within 3 business days |
+| **Proposal sent** | Written scope, price, timeline, schedule | Answer questions; offer a call with the other decision-makers |
+| **Signed** | Agreement signed, deposit paid (or gateway agreement signed) | Kick-off within a week |
+| **In delivery** | Section 3 | — |
+| **Live** | Launched | Care agreement running; ask for permission to show the work after 4 weeks |
+| **Lost** | No, not a fit, or quiet after the last touch | Reason noted; try again in 3 months only if they said "not now" |
 
-Where leads come from, in the order to try them:
-1. **Walk-ins and calls** to local businesses with no site or a bad one, with the preview on a phone. Appointment businesses first (dentists, physios, salons, barbers), then cafés and tradies.
-2. **Google Business Profile** enquiries.
-3. **Referrals:** ask every live client, every time. No paid referrals until the Terms cover them.
-4. **Outreach email or text** (`OUTREACH.md`), one business at a time, never bought lists.
+Where work comes from, in the order to try:
+1. **Introductions** from people we know in property, hospitality, health and professional firms.
+2. **Researched outreach** to a named person (OUTREACH.md), 15 to 20 a week.
+3. **The site:** the start form, service pages, Google Business Profile.
+4. **Existing clients:** ask for one introduction once they're happy. No paid referrals until the Terms cover them.
 
-What to say on price (the trust answer): "Month one, you only pay for your domain, and only after you've seen and approved the site. Then it's $69 a month until month six, $99 after that. Six-month minimum, then the site's yours to keep." Show the preview before price comes up.
-
-Weekly numbers to watch (put real numbers in, don't guess): leads added, previews sent, calls booked, approvals, live sites, lost and why.
+What to say about price: "Every project is quoted in writing after a call, with a fixed scope, so you know the number before anything starts. If you take payments online, the website can be free; we take a small platform fee per payment instead, set out in the agreement."
 
 ## 3. Delivery pipeline (owners: `client-success`, `designer`, `engineer`, `qa`)
 
-The 10 stages in `OPERATIONS.md` ("Client pipeline"), in short: brief on the call → preview within 24 hours (a design no other client has) → approval → one round of changes → QA at phone and desktop sizes → launch, usually 1 to 3 business days from the call. The founder signs off every design before it's sent ("designed by a person" must stay true).
+1. **Kick-off** (week 1): brief, access, content plan, dates, who approves. Domain checked or registered in the client's name.
+2. **Design**: direction, then key pages, shown as we go. Two rounds of changes per stage.
+3. **Build** on a private preview link. Payments in test mode; agents tested with their test calls.
+4. **QA** against `OPERATIONS.md`. A fail blocks launch.
+5. **Launch** once the client approves in writing. Redirects, Search Console, analytics.
+6. **First month:** fixes at our cost; first care report.
+
+Founder signs off every design before the client sees it.
 
 ## 4. Payments pipeline (owner: `client-success`; founder sets up Stripe)
 
-**Stripe products (once):**
-- Care: A$29/month.
-- Launch: two prices, A$69/month and A$99/month.
-- Grow: A$149/month.
-- Domain: invoiced as a one-off item at what we pay the registrar (no markup).
+**Projects:**
+1. On signing: Stripe invoice for the deposit (recommended 40%), due in 14 days. Work starts when it's paid.
+2. Milestones: invoice when the client approves the milestone (recommended 40% at preview, 20% at launch).
+3. Running costs (domains, software, AI usage, call time) at cost, in AUD, monthly in arrears, under the cap in the proposal.
 
-**When a client approves their preview:**
-1. Register the domain **in the client's name** and send a Stripe invoice for it at cost, due on receipt. This is the only charge in month one.
-2. Create their subscription as a **Stripe subscription schedule** starting one month after approval:
-   - Launch: phase 1 = A$69/month for 5 iterations (months 2 to 6), phase 2 = A$99/month ongoing.
-   - Grow: A$149/month ongoing.
-   - Save the card at this point (Stripe Checkout in setup mode or the hosted invoice page), so month two charges on its own.
-3. Turn on the **customer portal** so they can update cards, see invoices and cancel without calling us.
-4. Log the start date, the plan and the month-6 date in the Notion row.
+**Care agreements:** a Stripe subscription for the agreed monthly amount, customer portal on, 30 days' notice to end.
 
-**Every month:** Stripe charges in advance. For AI add-ons, add usage and call time **in arrears, at cost, in AUD**, as invoice items before the next charge (`OPERATIONS.md`, "AI add-on operations").
+**Free website with payments (Stripe Connect):**
+1. Client creates (or connects) their own Stripe account through our Connect onboarding; payouts go to their bank.
+2. Our platform fee is set as an **application fee** on each charge, at the rate in their agreement. Stripe's own fee comes off as normal.
+3. Each month: check gateway volume against the agreement (low-volume floor, POLICIES section 19); send the client a short statement of payments and fees, which also show in their own dashboard.
+4. Log the term start and end dates in the Notion row.
 
-**If a payment fails:** Stripe Smart Retries and its reminder emails run for 2 weeks. Day 3, text the client. Day 14, call. Don't take a site down for non-payment unless the Terms say how and when; add that wording at the lawyer review (step 11) before relying on it.
+**If a payment is late:** reminder at day 3 overdue, call at day 10, written notice and work paused after 30 days. Never take a live site down without the notice in the Terms.
 
-**If they cancel:**
-- Inside the 6 months: invoice the remaining months of the term (the Terms say so), then hand over the site.
-- After 6 months: cancel at the end of the paid month (30 days' notice), hand over the code and domain, offer Care at $29.
+**Tax:** not GST-registered; invoices say "No GST" and show the ABN. Register before turnover heads past A$75,000 a year. Set money aside for income tax from every payout.
 
-**Tax:** we're not registered for GST, so invoices say "No GST" and show the ABN. Register for GST once turnover is heading past A$75,000 a year, and update prices, invoices and the site the same week. Set money aside for income tax from every payout; ask an accountant what share.
+## 5. Support and changes (owners: `client-success` → `engineer`)
 
-**Clients' own payments:** card payments on client sites (Grow) go to the **client's own Stripe account**. We help them set it up on the kickoff call. We never hold client money or card data.
-
-## 5. Support and edits (owners: `client-success` → `engineer`)
-
-- Requests by email or text to 0431 236 999; logged in the Notion row with minutes used.
-- Included: 30 minutes a month on Launch, 1 hour on Grow, changes to existing pages only. New pages or features: quoted in writing first.
-- Turnaround: 2 business days.
+Response times in POLICIES section 8. Every request logged in the Notion row with time spent. Inside the care allowance: done. Outside it, or anything new: a written change request first.
 
 ## 6. Money, every month (founder, with `ceo`)
 
 On the 1st:
-1. Stripe: revenue last month, failed payments, upcoming month-6 dates.
-2. Costs: hosting, domains, AI and phone usage (already billed at cost), tools.
-3. Contribution per client against `BUSINESS_PLAN.md` section 4. **Watch item:** a Launch client who leaves at month 6 costs us about $30; if more than 1 in 4 leave then, raise months 2 to 6 to $79 or the minimum to 9 months.
+1. Stripe: project invoices paid and owing, care subscriptions, Connect volume and platform fees per client.
+2. Costs: hosting, AI and phone usage (passed on), software, insurance.
+3. Pipeline value: proposals out, likely to sign, expected start dates.
 4. Update the KPI table in `OPERATIONS.md`.
 
-## 7. The week
+## 7. Existing small-business clients
+
+Keep running on their plans (POLICIES section 18): Stripe subscription schedules as set up, edits logged against their allowance, Care offered after their term. Don't move them to studio pricing unless they ask.
+
+## 8. The week
 
 | Day | What |
 |---|---|
-| Monday | Pick 10 businesses; make previews for the best 5 |
-| Tuesday to Thursday | Visits, calls and follow-ups; build approved sites |
-| Friday | QA and launches; update every Notion row; ask live clients for reviews and referrals |
+| Monday | 20 brands researched, teardowns for the best 5, messages drafted |
+| Tuesday to Thursday | Send, calls, proposals, delivery |
+| Friday | QA and launches; Notion rows updated; `ceo` weekly numbers |

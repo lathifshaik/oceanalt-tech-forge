@@ -8,6 +8,7 @@ Oceanalt is run as a small firm of Claude agents plus the founder. Since 17 Nov 
 
 ## Source of truth
 - `docs/business/BUSINESS_PLAN.md`: offer, pricing, unit economics, validation plan, risks
+- `docs/business/POLICIES.md`: the studio's policies (who we work with, proposals, payment terms, the free website and platform fee, changes, care, response times, ownership, data, AI and voice, honesty, outreach and follow-up, complaints) and the open decisions with recommended defaults
 - `docs/business/OPERATIONS.md`: client pipeline, QA checklist, edit policy, KPIs, Stripe setup, tech debt
 - `docs/business/LAUNCH_PLAN.md`: the first 30 days, setup checklist and weekly rhythm
 - `docs/business/PIPELINES.md`: how the business runs end to end: one-off setup, the sales pipeline (tracked in the founder's Notion "Sales pipeline" database), delivery, payments on the new pricing (Stripe subscription schedules), support, monthly money

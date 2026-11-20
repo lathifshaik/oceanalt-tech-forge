@@ -2,12 +2,14 @@
 
 How the firm runs day to day. Each stage names the agent in `.claude/agents/` that owns it.
 
+_Updated 20 November 2026 for the studio. Policies (quotes, payment terms, the free website, response times, data, AI) are in `POLICIES.md`; the end-to-end pipelines in `PIPELINES.md`. The 1 to 3 day launches, plans and edit caps below now apply only to existing small-business clients._
+
 ## Client pipeline
 
 | Stage | Owner agent | Output | Time target |
 |---|---|---|---|
-| 1. Lead in (form, outreach) | `growth` | `api/start.ts` emails the enquirer a recommended plan + booking link and sends us the lead (fallback: Firestore + EmailJS). Not running on Cloudflare yet, so the site promises a person's reply the same business day | 15 min once ported; same business day now |
-| 2. Qualify + plan fit | `client-success` | A person reads every enquiry and the AI's suggestion, corrects it if needed, and confirms the call | Same business day |
+| 1. Lead in (form, outreach) | `growth` | `api/start.ts` emails the enquirer an acknowledgement (no prices or plans) and sends us the lead (fallback: Firestore + EmailJS). Not running on Cloudflare yet, so the site promises a person's reply the same business day | 15 min once ported; same business day now |
+| 2. First call + proposal | `client-success` → `ceo` | A person reads every enquiry and books the 30-minute call; proposal follows (POLICIES section 3) | Reply same business day; proposal within 3 business days |
 | 3. Brief + content | `client-success` | `clients/<slug>/BRIEF.md` and `clients/<slug>/site.json` (copied from the closest `templates/*/example.json`); we write the copy | Day 0, same day as the call |
 | 4. Preview | `designer` | Built site on a private preview URL. The designer picks the layout, theme, hero and accent for this client (the builder refuses a combination another client has), then places photos and orders sections around what customers do first | Within 24 h |
 | 5. Approval → first charge | `client-success` | Client approves; Stripe trial ends or is ended early | — |
@@ -59,7 +61,10 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
 - [ ] No console errors; no placeholder text or lorem ipsum; no stock-photo watermarks
 - [ ] `web-design-guidelines` review has no unresolved accessibility findings
 
-## Edit-time policy
+## Edit-time policy (existing small-business clients)
+
+Studio clients: changes run under their care agreement and change requests (POLICIES sections 6 and 7).
+
 
 - Log every edit: `clients/<slug>/EDITS.md` with date, request, minutes.
 - Launch: 30 min/mo. Grow: 60 min/mo. No rollover.
@@ -67,6 +72,19 @@ Starting points: five layouts (`cafe`, `trades`, `studio`, `shop`, `pro`) × sev
 - A client over the cap two months running should be offered an upgrade (Launch → Grow).
 
 ## Monthly KPIs (CEO review)
+
+Studio KPIs (from 20 Nov 2026):
+
+| KPI | Healthy | Action if not |
+|---|---|---|
+| First calls a month | ≥ 8 | Better research; a new segment; ask for introductions |
+| Calls → proposal | ≥ 40% | Qualify harder before the call |
+| Proposal → signed | ≥ 25% | Review scope, price and how the proposal reads |
+| Proposal sent within 3 business days | 100% | Proposal template; `ceo` turnaround |
+| Gateway volume vs agreement | on track | Talk to the client early (POLICIES section 5) |
+| Response times met (POLICIES section 8) | 100% | Find the cause; fix the process |
+
+Legacy small-business KPIs (existing clients only):
 
 | KPI | Healthy | Action if not |
 |---|---|---|
@@ -120,7 +138,7 @@ Not running on Cloudflare yet: the Vercel functions in `api/` (the 15-minute AI 
 
 On the site (done, in the build):
 - The home page is pre-rendered to HTML at build time (`scripts/prerender.mjs`), so Google and link previews see the full page without running JavaScript.
-- Title and description target "websites for Australian small businesses". One H1. Canonical URL `https://oceanalt.com.au/`.
+- Title and description target a Sydney and Melbourne design and technology studio for established brands (updated 17 to 20 Nov 2026). One H1. Canonical URL `https://oceanalt.com.au/`.
 - Structured data (JSON-LD): ProfessionalService (Sydney NSW 2037, Australia-wide, ABN, plans and prices), WebSite and FAQPage, generated from `PLANS` and `FAQ` in `src/App.tsx`, so it can't drift from the page.
 - Nine service pages, one per search intent (Sydney, tradies, cafés, clinics and salons, shops, professional services, pay monthly, rebuilds, AI assistant). Content lives in `src/seo/landing.ts`, layout in `src/seo/LandingPage.tsx`; each is rendered to static HTML at `/<slug>/` with Service, BreadcrumbList and FAQPage data, and linked from every footer. To add one, add an entry to `LANDINGS`; it must be genuinely specific to that kind of business (no copy-paste suburb pages, which Google treats as doorway pages).
 - `sitemap.xml` (home plus every service page) written at build; `robots.txt` points to it.

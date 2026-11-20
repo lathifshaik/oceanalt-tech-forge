@@ -13,7 +13,8 @@ This section overrides sections 1 to 3 for all new work. The rest of the plan is
 - **Pricing:** every project is quoted in writing after a first call, with a fixed scope. **No prices anywhere on the site**, not even "from" (founder). Deposit and milestones are set in each written proposal. Care after launch is agreed in writing with the project.
 - **Retired:** Care $29, Launch $69/$99, Grow $149, one-off from $1,499, AI concierge $149 and chat assistant $39 are no longer offered or shown. **Existing clients keep their plan**, and the 27 businesses quoted the 1 November outreach offer (Launch $69 held 12 months, Grow $99, then Care $29) get that price if they reply.
 - **Proof:** sample designs, clearly labelled as fictional, until we have real case studies. No invented stats, testimonials, client logos or scarcity. Design study: `docs/design/STUDIO_STUDY.md`.
-- **Next:** 4 to 6 new sample projects at established-brand level (for example a property developer, a hotel group, a health group), then outreach to that segment with a new playbook.
+- **Policies (20 Nov 2026):** how we quote, take payment, run the free website, support clients, handle data and AI, and follow up are in `POLICIES.md`, with recommended defaults for the open decisions (section 19). The first 30 days are in `LAUNCH_PLAN.md`.
+- **Done (17 to 20 Nov 2026):** six established-brand samples, the studio site, and the new outreach playbook (`docs/growth/OUTREACH.md`). **Next:** the 30-day plan in `LAUNCH_PLAN.md`.
 
 ## 1. The idea in one line
 

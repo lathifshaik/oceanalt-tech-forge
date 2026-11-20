@@ -1,58 +1,62 @@
-# Launch plan: the first 30 days
+# Launch plan: the studio's first 30 days
 
-Goal: test the business properly. 200 personalised contacts in 4 weeks; 5 or more paying clients means it works (see BUSINESS_PLAN section 6).
+_Rewritten 20 November 2026 for the studio (BUSINESS_PLAN section 0). Runs 23 November to 22 December 2026. The small-business plan it replaces is in git history._
 
-Business details: Abdul Lathif Shaik, sole trader, ABN 65 119 854 062 (active from 3 October 2026, not registered for GST), NSW 2037.
+**Goal:** prove established brands will talk to us. By 22 December: **8 first calls and 3 written proposals** from about 80 well-researched contacts. One signed project, or one signed free website with payments, is a win before Christmas; most brands decide in January.
 
-## Week 0: setup (this week)
+Business details: Abdul Lathif Shaik, sole trader, ABN 65 119 854 062 (not registered for GST), NSW 2037. Studio in Sydney and Melbourne.
 
-Founder does these; most take 10 to 20 minutes.
+## Week 0 (now to 22 Nov): set up what a brand will check
+
+Founder, mostly 10 to 30 minutes each.
 
 | # | Task | Why | Done |
 |---|---|---|---|
-| 1 | Register the business name "Oceanalt" on business.gov.au (about $44 for 1 year) | Required to trade as "Oceanalt" on a sole-trader ABN, and gives the .com.au a matching name | |
-| 2 | Re-register oceanalt.com.au, eligibility type ABN, registrant "Abdul Lathif Shaik", add the business name once it's issued | The first attempt failed before the ABN showed on ABN Lookup; it shows now | |
-| 3 | Until the domain works: change the site's contact email to one that works today | hello@oceanalt.com.au bounces until the domain exists | |
-| 4 | Domain live: add it in Vercel, set up the hello@ inbox, verify it in Resend | See OPERATIONS.md, "Business details and domain" | |
-| 5 | Vercel env vars: ANTHROPIC_API_KEY (with a monthly spend limit), RESEND_API_KEY, LEAD_FROM_EMAIL, LEAD_NOTIFY_EMAIL, BOOKING_URL | Turns on the 15-minute reply and the live AI demo | |
-| 6 | Stripe account in the business name, ABN attached | Monthly billing for clients | |
-| 7 | A free booking link (Cal.com or Google Calendar booking page) for 15-minute calls | Used in every "yes" reply | |
-| 8 | Test the whole path: send an enquiry through the form, get the reply, book a call with yourself | Catch problems before a real lead does | |
+| 1 | Say "push it live" so the new studio site, gallery and samples are on oceanalt.com.au | Every message links to it | |
+| 2 | Change the Outlook/Gmail signature from "Websites for Australian small businesses" to: Lathif Shaik · Oceanalt · Design and technology studio, Sydney and Melbourne · oceanalt.com.au · 0431 236 999 · ABN 65 119 854 062 | First thing a brand sees | |
+| 3 | LinkedIn: headline "Founder, Oceanalt, design and technology studio for Australian brands", banner from a sample design, link to the site | Brands look you up before replying | |
+| 4 | Register "Oceanalt" as a business name (ASIC, about $44 a year) | Trading under a name needs it; brands' finance teams check | |
+| 5 | Apply for **Stripe Connect** as a platform | The free website can't be signed without it; approval can take weeks | |
+| 6 | Professional indemnity and public liability insurance quotes | Established brands' procurement asks for certificates | |
+| 7 | Lawyer review: Terms, the free-website agreement (POLICIES section 19 defaults), the voice agent greeting | Before the first signature | |
+| 8 | Decide the open defaults in POLICIES section 19 (fee band, term, exit) | So a proposal can go out the day it's needed | |
+| 9 | Update the Notion pricing page to "quoted per project; free website with payments; legacy plans for existing clients" | Notion still shows the old plans | |
+| 10 | A booking link for 30-minute calls (Cal.com or Google Calendar) | In every reply | |
 
-Optional but sensible before the first client: public liability and professional indemnity insurance.
+## Week 1 (23 to 29 Nov): first 20, done properly
 
-## Week 1: first batch
+- `researcher`: 20 brands from the list in `docs/growth/OUTREACH.md` ("Who to contact first"), half Sydney, half Melbourne. For each: the person, their role, the source of their contact details, the one thing we noticed, and whether they take payments online.
+- `designer`: for the best 5, a one-page teardown (three changes with screenshots), ready to send if they say yes.
+- `marketing` + `growth`: one first message each, from the templates. `qa`-style check: names, titles and the noticed thing are right.
+- **Founder:** send 4 a day, Monday to Friday. Accept every call. Post one LinkedIn note about a sample design (labelled fictional).
 
-- **Where:** start close to home, in the Inner West (Glebe, Newtown, Leichhardt, Annandale, Marrickville). Close enough to walk in, which converts far better than email for cafés and shops. Second area: Western Sydney trades (Parramatta, Blacktown, Penrith).
-- **Who:** businesses with no website, or only a Facebook page, and a decent Google rating. Trades, cafés, salons, physios.
-- **Agents:** `researcher` finds 20 leads; `designer` and `engineer` build 10 preview sites; `qa` checks every name, phone number and suburb; `growth` writes each message from `docs/growth/OUTREACH.md`.
-- **Founder:** review the 10, send them (emails from Gmail drafts, texts from your phone), walk into 3 or 4 of the local ones with the preview on your phone.
-
-## Weeks 2 to 4: steady rhythm
+## Weeks 2 to 4 (30 Nov to 22 Dec): steady rhythm
 
 | When | Who | What |
 |---|---|---|
-| Monday morning | `researcher`, `designer`, `engineer`, `qa`, `growth` | 40 to 50 new leads, previews built and checked, messages ready |
-| Monday to Friday, 9am to 5pm | Founder | Send 10 to 15 a day; one follow-up after 4 to 5 days |
-| Every weekday morning | `client-success` | Read replies, draft answers, update `docs/growth/pipeline.md` |
-| When someone says yes | Founder | 15-minute call; then Stripe setup |
-| After a call | `engineer` → `qa` | Finish the site and launch within 1 to 3 days |
-| Friday | `ceo` | Weekly numbers: sent, replies, calls, clients, what to change |
+| Monday | `researcher` → `designer` → `growth` | 20 new brands, teardowns for the best 5, messages drafted |
+| Mon to Fri, 9 to 5 | Founder | Send 4 a day; one follow-up after 5 to 7 business days; at most one call per cold lead |
+| Every weekday morning | `client-success` | Read every enquiry and reply; draft answers; update the Notion Sales pipeline |
+| After a first call | `client-success` → `ceo` → founder | Proposal within 3 business days (`ceo` checks scope and price) |
+| Wednesday | `marketing` | One LinkedIn post: a sample, an idea, or how we work. No invented results |
+| Friday | `ceo` | Weekly numbers and what to change |
 
-Founder time: about 30 minutes a day, plus calls.
+Founder time: about 45 minutes a day, plus calls.
 
-## Numbers we track (in pipeline.md, reviewed every Friday)
+Slow down from 15 December: brands go quiet. Use the last week for warm follow-ups ("Shall we pick this up in January?") and to set January's calls.
 
-Previews sent, replies, "yes" replies, calls, paying clients, cancellations, hours spent per launch.
+## Numbers (Notion Sales pipeline, reviewed every Friday)
 
-## Day 30 decision
+Contacts sent · replies · first calls · proposals · signed · value of proposals · reason lost. Real numbers only.
 
-- 5 or more paying clients from about 200 contacts: it works. Keep going, add a second area.
-- 2 to 4: change the trade, the area or the message. Not the price.
-- Under 2: stop outreach and rethink the offer with the `ceo` agent before spending more time.
+## Day 30 decision (22 December, with `ceo`)
 
-## Things that would make this work better
+- **8+ calls, 3+ proposals:** it works. January: 25 contacts a week, add a second segment.
+- **3 to 7 calls:** keep the offer, change the segment or the message. Look at which "noticed" lines got replies.
+- **Under 3 calls:** before sending more, test the offer itself with 5 short conversations with marketing leads we know (or are introduced to), and rethink with `ceo`.
 
-- Preview sites with an "I want this" button and a note that it was made for them (to build).
-- A text alert when a business opens its preview, so you can call while they're looking (to build; disclose it in the Privacy page).
-- First clients asked for a real testimonial once they're happy. Never invent one.
+## Things that would help
+
+- One real client project as a case study, with their permission and real numbers.
+- Introductions: ask everyone we know in property, hospitality and health for one name. Warm intros beat cold email.
+- A sample line for the voice agent once the CEO gives the final go (CLAUDE.md, $50/month cap).

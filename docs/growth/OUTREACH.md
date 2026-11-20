@@ -1,64 +1,107 @@
-# Outreach: emails and messages
+# Outreach: messages to established brands
 
-Owner: `growth` drafts, the founder approves and sends. Agents never send anything themselves.
+_Rewritten 20 November 2026 for the studio (BUSINESS_PLAN section 0, POLICIES section 14). The old small-business preview-site emails are retired; see "Legacy" at the end._
 
-The idea: we build the business a preview site first, send them the link, and ask for one word back. No pitch, no form, no pressure.
+Owner: `growth` drafts, `marketing` checks the words, the founder approves and sends. Agents never send anything themselves.
 
-Placeholders: `{name}` (first name if we know it, otherwise skip the greeting name), `{business}`, `{link}` (their preview site), `{found}` (where we found them, e.g. "on Google Maps").
+## The idea
+
+Established brands don't buy from a cold "I made you a website". They buy from someone who clearly understands their business and has one useful idea for it. So every message is:
+
+- **To one named person** who owns the problem: head of marketing, digital lead, GM, operations manager or founder. Never info@ if a person is findable on the brand's own site or LinkedIn.
+- **About one specific thing** we noticed on their site or in how they take bookings, enquiries or payments. Checked by a person before it goes.
+- **Short.** Under 120 words. No attachments on a first message.
+- **No prices**, no "free website" in the subject line, no invented results.
+
+What we can offer as the reason to talk (pick one per message):
+1. **A short teardown:** three things we'd change on their site, with a screenshot each (a one-page PDF or Loom, only once they say yes to seeing it).
+2. **The free website with payments:** for brands that take payments online. Mention it as a question, never the headline.
+3. **An AI agent or automation idea** for a real bottleneck we can see (after-hours enquiries, a booking form that emails a person, double data entry).
+
+Placeholders: `{first}`, `{brand}`, `{noticed}` (the one specific thing), `{idea}` (what we'd do about it), `{why_us}` (one line, from POLICIES "advantages").
 
 ## Email: first message
 
-Subject: I made a website for {business}
+Subject: {brand}: {short version of noticed}
 
-> Hi {name},
+> Hi {first},
 >
-> I came across {business} {found} and saw you don't have a website, so I made you one:
-> {link}
+> I was looking at {brand}'s site and noticed {noticed}. {idea}
 >
-> If you like it, it can be live this week. In the first month you pay only for the domain, and only once you're happy with it. Then it's $69 a month, and $99 from month 7.
+> I run Oceanalt, a design and technology studio in Sydney and Melbourne. We design and build the site, the software behind it and the AI agents, all in one team, and I run every project myself.
 >
-> Interested? Just reply "yes" and I'll sort the rest. If not, no worries, ignore this and I'll take it down.
+> Worth a 20-minute call to see if it's useful? Happy to send a short teardown first if you'd rather.
 >
-> Oceanalt
-> Oceanalt, Sydney. ABN 65 119 854 062
-> Reply "stop" and I won't contact you again.
+> Lathif Shaik
+> Oceanalt · oceanalt.com.au · 0431 236 999 · ABN 65 119 854 062
+> If this isn't for you, reply "no thanks" and I won't get in touch again.
 
-For a business that already has a site, swap the second line for: "I had a go at a faster, cleaner version of your website, with online bookings:" and keep the rest.
+Example `{noticed}` / `{idea}` pairs (always rewrite for the real brand):
+- "the booking form for the Bondi hotel sends people to a separate site with different branding." / "Bringing it onto your own site, with Apple Pay and Google Pay, usually lifts completed bookings and keeps the brand consistent."
+- "enquiries after 5pm go to voicemail." / "A voice agent in your brand's voice can take the details, book a callback and pass anything tricky to your team in the morning."
+- "the site takes 9 seconds to load on a phone." / "A rebuild on Cloudflare would get that under two, without changing how your team edits it."
 
-## Email: one follow-up, 4 to 5 days later, only if no reply
+## One follow-up, 5 to 7 business days later, only if no reply
 
-Subject: Re: I made a website for {business}
+Subject: Re: {brand}: …
 
-> Hi {name}, just checking you saw the site I made for {business}: {link}
+> Hi {first}, one more and then I'll leave it. I put together {the teardown / a rough sketch of the idea} for {brand}. Want me to send it over? A yes or no is plenty.
 >
-> Happy to change anything. Reply "yes" if you want it, or "stop" and I won't message again.
->
-> Oceanalt, Sydney
+> Lathif
 
-That's the last message. No third follow-up.
+That's the last email. A cold lead gets at most one phone call after this, to the business's published number, and only if the follow-up wasn't a no.
 
-## SMS (under 300 characters, 2 texts)
+## LinkedIn (connection note, under 300 characters)
 
-> Hi {name}, it's Oceanalt, a small web studio in Sydney. I made a free preview website for {business}: {link} If you want it live, just reply YES. $79/mo, nothing upfront. Not interested? Reply STOP. ABN 65 119 854 062
+> Hi {first}, I run Oceanalt, a design and tech studio in Sydney and Melbourne. Noticed {noticed, in a few words} on {brand}'s site and had an idea about it. Happy to share if useful. Lathif
 
-## Facebook or Instagram message
+One note and one message after they connect. No InMail sequences.
 
-> Hi! I made a website for {business}, no strings attached: {link}
-> If you want it live, just reply "yes" and I'll sort everything. If not, all good. Oceanalt (Sydney)
+## Warm leads (they enquired, met us, or said "follow up")
+
+Up to six to eight touches over a few weeks (POLICIES section 14). Each must carry something useful:
+
+1. Same-day reply to the enquiry, with times for a call.
+2. After the call: thanks, what we heard, when the proposal comes.
+3. The proposal (within 3 business days).
+4. A day or two later: answer any questions; offer a second call with whoever else decides.
+5. A week later: one relevant idea or example (a sketch, a sample design, a note on their timing).
+6. Two weeks later: "Is the timing still right, or should I check back in {month}?"
+7 to 8. Only if they asked: a check-in near the date they gave.
+
+Stop when they say no, it's clearly not a fit, or they go quiet after the last touch. Note the reason in the Notion Sales pipeline.
 
 ## When they reply
 
-- **"Yes":** `client-success` drafts a reply within the hour: thanks, a link to book a 15-minute call (or "what time suits for a quick call?"), and what we'll need (logo, photos, prices, domain if they have one). The founder sends it.
-- **A question:** answer it plainly in two or three sentences, then ask for the call.
-- **"Stop", "no", or anything unfriendly:** reply nothing, add them to the do-not-contact list in `docs/growth/pipeline.md` the same day, take the preview down.
+- **Yes / tell me more:** `client-success` drafts a reply within the hour with two or three call times (or the booking link). Founder sends.
+- **A question:** answer it plainly in two or three sentences, then offer the call. Never quote a price by email before a call.
+- **"Not now":** thank them, ask when, log a reminder for that month. Nothing before then.
+- **No, stop, or anything unfriendly:** no reply, add to do-not-contact in Notion the same day.
 
-## Rules (Spam Act 2003 and common sense)
+## Rules (Spam Act 2003 and how we want to be seen)
 
-1. Only contact addresses and numbers the business publishes itself (their Google listing, website, Facebook page), and only about something relevant to their business. That's "inferred consent". Never buy lists.
-2. Every message says who we are (name, Oceanalt, ABN) and has a way to opt out ("stop"). Opt-outs are honoured within 5 business days; we do it the same day.
-3. One message plus one follow-up per business, per channel. Don't email and text and DM the same person in the same week; pick the channel they're most likely to see (tradies: SMS; cafés and salons: Instagram or email).
-4. Send on weekdays between 9am and 5pm, local time. Not at night, not on weekends.
-5. Start slowly: 10 to 20 emails a day from a new address, so they don't land in spam.
-6. Every preview is checked by a person before it goes out: business name, phone number, suburb and services must be right. One wrong number loses the lead.
-7. No invented reviews, stats or deadlines. "First 10 clients at $79" is real (see BUSINESS_PLAN validation plan); stop using it once 10 have signed.
-8. Log every message in `docs/growth/pipeline.md`: business, contact, channel, date, status.
+1. Only use addresses and numbers the business or person publishes for business contact (their site, Google listing, LinkedIn), and only about something relevant to their role. Never buy or scrape lists.
+2. Every message says who we are (name, Oceanalt, ABN) and has a clear way to opt out. Opt-outs are honoured the same day (the law allows 5 business days).
+3. Cold: one message plus one follow-up per channel, and at most one call. Don't email, LinkedIn and call the same person in the same week.
+4. Weekdays, 9am to 5pm their local time.
+5. 10 to 20 cold emails a day at most, from the founder's own address, so they don't land in spam. Watch bounces; stop if more than 3 in a batch bounce.
+6. A person checks every message before it goes: the name, title, brand and the thing we noticed must be right.
+7. No invented stats, results, clients or deadlines. Sample designs are called samples.
+8. Log every message in the Notion Sales pipeline: brand, person, role, channel, date, what we noticed, status.
+
+## Who to contact first
+
+Sydney and Melbourne brands with 20 to 500 staff, a site that's clearly behind the brand, and a reason to take payments or handle a lot of enquiries:
+
+- Boutique hotel groups and serviced apartments
+- Private hospitals, day surgeries, dental and allied-health groups
+- Restaurant and hospitality groups with several venues
+- Property developers and builders with projects selling now
+- Wineries, homewares and consumer brands selling direct
+- Professional firms (wealth, legal, accounting) with dated sites
+
+`researcher` builds 15 to 20 a week with the person, their role, a source for the contact details and the one thing we noticed.
+
+## Legacy (small-business outreach, retired 17 Nov 2026)
+
+The preview-site emails ("I made a website for {business}") and the $69 / $79 offers are no longer sent. The 27 businesses quoted the 1 November offer keep that price if they reply (BUSINESS_PLAN section 0). The 51 businesses emailed in October and November are logged in Notion; don't email them again with the studio pitch unless they reply first.

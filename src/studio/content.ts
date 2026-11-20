@@ -42,6 +42,14 @@ export const SERVICES: Service[] = [
     points: ["Customer and staff portals", "Integrations with Xero, Stripe and your CRM", "Data stored in Australia"],
   },
   {
+    id: "automation",
+    name: "Workflow automation",
+    line: "From first enquiry to paid invoice, the steps between your apps run on their own, so nobody types the same thing twice.",
+    icon: "svc-automation",
+    photo: "/photos/studio-1.webp",
+    points: ["A map of how work moves now", "Your apps connected: Xero, Stripe, your CRM", "A person approves where it matters"],
+  },
+  {
     id: "ai",
     name: "AI agents",
     line: "Agents that answer the phone, reply to enquiries and do the follow-up, with a person checking the edge cases.",
@@ -116,6 +124,10 @@ export const STUDIO_FAQ: { q: string; a: string }[] = [
     a: "It's a small percentage of each payment taken through the gateway, on top of the card network's standard processing fee. There's no fee when nothing sells. The exact rate is in your written agreement, and every payment and fee shows in your own payments dashboard.",
   },
   {
+    q: "Can you automate how our business runs?",
+    a: "Yes. On a first call we map how a job moves now, from the first enquiry to the paid invoice, and where the time goes. Then we quote the fix in writing: sometimes it's a few connections between apps you already use, sometimes an AI agent or a small web app. A person on your team approves anything that matters.",
+  },
+  {
     q: "What are voice agents?",
     a: "Agents that answer your phone or speak on your site in a natural voice, can be your brand's own custom voice, and book, answer questions and pass anything tricky to your team. Every call opens by saying it's an AI agent and that the call is recorded.",
   },
@@ -152,7 +164,8 @@ export const NEEDS: Record<string, string> = {
   rebuild: "Rebuild our current website",
   software: "A web app or software",
   payments: "A free website with payments",
-  ai: "AI agents",
+  ai: "AI agents for our business",
+  automation: "Automate a workflow",
   voice: "Voice agents or custom audio",
   care: "Look after an existing site",
 };

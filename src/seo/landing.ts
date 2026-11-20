@@ -13,7 +13,7 @@ export type Landing = {
   /** Short name for links and breadcrumbs. */
   nav: string;
   /** SERVICES id in src/studio/content.ts: the photo and icon. */
-  service: "brand" | "websites" | "software" | "ai" | "voice" | "payments" | "search" | "care";
+  service: "brand" | "websites" | "software" | "automation" | "ai" | "voice" | "payments" | "search" | "care";
   h1: string;
   intro: string;
   offers: { title: string; body: string }[];
@@ -139,6 +139,33 @@ export const LANDINGS: Landing[] = [
       { q: "Do you build mobile apps?", a: "We build web apps that work well on phones and can be added to the home screen. If you need an app in the App Store or Google Play, we'll talk through whether it's worth it for you." },
       { q: "Can you work with our existing systems?", a: "Usually. If a system has an API we can connect to it. If it doesn't, we'll tell you on the first call what the options are." },
       { q: "Who owns the code?", a: "You do, once the final invoice is paid. It's documented so your own team, or another one, could take it over." },
+      QUOTED,
+    ],
+  },
+  {
+    slug: "workflow-automation",
+    title: "Workflow Automation for Australian Businesses | Oceanalt",
+    description: "We map how work moves through your business, from first enquiry to paid invoice, then connect your apps and AI agents so the busywork runs on its own.",
+    nav: "Workflow automation",
+    service: "automation",
+    h1: "Automate the way your business runs",
+    intro: "Most admin is people copying the same details from one app to the next: an enquiry into the CRM, a quote into a spreadsheet, an invoice into Xero. We map how a job moves through your business and connect the steps, so the work moves on its own and your team spends the time on customers.",
+    offers: [
+      { title: "A map of how work moves now", body: "One call to walk through a job from first enquiry to paid invoice, and a written map of where the time and the double entry go." },
+      { title: "Your apps, connected", body: "Email, calendar, CRM, Stripe, Xero or MYOB talking to each other, so a detail typed once turns up everywhere it's needed." },
+      { title: "AI agents for the in-between work", body: "Reading enquiries, drafting quotes, chasing invoices and sorting documents, with a person approving where it matters." },
+      { title: "Watched after launch", body: "Every automation is logged and monitored. If something fails, we know before it costs you a customer." },
+    ],
+    approach: {
+      h2: "Start with one workflow",
+      body: [
+        "We pick the job that costs the most time each week, automate that first and show you the result. Then the next one. No big-bang system replacement.",
+        "Customer data we store for you stays in Australia, and every outside service an automation uses is listed in writing before it goes live.",
+      ],
+    },
+    faq: [
+      { q: "Do we have to change our software?", a: "Usually not. We connect what you already use where it has a way in. If something truly can't be connected, we'll say so on the first call and explain the options." },
+      { q: "What if an automation gets something wrong?", a: "You decide which steps run on their own and which wait for a person to approve. Everything is logged, so it's easy to see what happened and fix it." },
       QUOTED,
     ],
   },

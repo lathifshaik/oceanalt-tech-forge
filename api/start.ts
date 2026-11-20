@@ -28,6 +28,7 @@ const NEEDS: Record<string, string> = {
   brand: "Brand identity",
   website: "A new website",
   payments: "A free website with payments",
+  automation: "Automate a workflow",
   voice: "Voice agents or custom audio",
   rebuild: "Rebuild of their current website",
   software: "A web app or software",

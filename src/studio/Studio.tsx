@@ -30,7 +30,7 @@ const getFeatured = () => FEATURED.flatMap((path) => {
 const SERVICE_PAGE: Record<string, string> = {
   brand: "/brand-identity/", websites: "/website-design-sydney/", software: "/web-apps-and-software/",
   ai: "/ai-agents/", search: "/search-and-ai-visibility/",
-  voice: "/voice-agents-and-audio/", payments: "/payments/",
+  voice: "/voice-agents-and-audio/", payments: "/payments/", automation: "/workflow-automation/",
 };
 
 // Photos that fail (or aren't in yet) stay hidden instead of showing a broken icon.
@@ -125,7 +125,7 @@ function Hero() {
     <section className="s-hero" aria-labelledby="s-hero-h">
       <div className="s-wrap s-hero-copy">
         <h1 id="s-hero-h">We design and build what your brand runs on</h1>
-        <p className="s-hero-sub">Brand, websites, software, payments and voice agents from one studio. The people who design it are the people who build it, and they're still here after launch.</p>
+        <p className="s-hero-sub">Brand, websites, software, AI agents and automation from one studio. The people who design it are the people who build it, and they're still here after launch.</p>
         <div className="s-ctas">
           <a className="s-btn s-btn-ink" href="#start">Start a project <Arrow /></a>
           <a className="s-btn s-btn-soft" href="#work">See the work</a>
@@ -204,6 +204,101 @@ function Services() {
             <p>{s.line}</p>
           </article>
         ))}
+      </div>
+    </section>
+  );
+}
+
+// AI agents for your business: an example day's log for a sample hotel group,
+// and a real sample call (ElevenLabs, licensed voices; see CLAUDE.md).
+const AGENT_DAY = [
+  { t: "7:42am", what: "Answered a call about a late check-in at Bondi", done: "Arrival noted, front desk told" },
+  { t: "8:15am", what: "Replied to an enquiry for a group of 12 in March", done: "Dates and rates sent, passed to sales" },
+  { t: "9:03am", what: "Chased an unpaid invoice from a corporate account", done: "Second reminder, polite and on time" },
+  { t: "9:30am", what: "A guest asked for a refund", done: "Handed to a person, with the booking attached" },
+];
+const AGENT_KINDS = [
+  { title: "Phone and voice agents", body: "Answer the calls your team can't take, book, take messages and send a summary." },
+  { title: "Enquiry and email agents", body: "Reply to enquiries with accurate answers from your own information, and collect what your team needs." },
+  { title: "Admin agents", body: "Draft quotes, chase invoices, reply to reviews and sort documents, with a person approving where it matters." },
+];
+
+function Agents() {
+  return (
+    <section id="agents" className="s-sec s-agents" aria-labelledby="s-agents-h">
+      <div className="s-wrap s-split is-top">
+        <div>
+          <h2 id="s-agents-h" className="s-h2">AI agents for your business</h2>
+          <p className="s-lede">Agents that answer the phone, reply to enquiries and do the follow-up, working from your own information. They always say they're AI, and anything unusual goes to a person on your team.</p>
+          <ul className="s-rows">
+            {AGENT_KINDS.map((k, i) => (
+              <li key={k.title}>
+                <span className="s-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <div><b>{k.title}</b><span>{k.body}</span></div>
+              </li>
+            ))}
+          </ul>
+          <a className="s-btn s-btn-ink s-free-cta" href="/ai-agents/">How our agents work</a>
+        </div>
+        <div className="s-agent-side">
+          <figure className="s-log" aria-label="An example morning for an AI agent">
+            <p className="s-log-head"><b>Corella Hotels</b><span>Agent log, Tuesday</span></p>
+            <ol>
+              {AGENT_DAY.map((r) => (
+                <li key={r.t}><time>{r.t}</time><div><p>{r.what}</p><span>{r.done}</span></div></li>
+              ))}
+            </ol>
+            <figcaption>An example morning for a sample hotel group</figcaption>
+          </figure>
+          <div className="s-call">
+            <p><b>Hear a sample call</b><span>A table booking for a fictional restaurant, 41 seconds. It opens by saying it's an AI agent and that the call is recorded.</span></p>
+            <audio controls preload="none" src="/audio/concierge-restaurant.mp3">
+              <a href="/audio/concierge-restaurant.mp3">Download the sample call</a>
+            </audio>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Automating workflows: one job moving through a sample day-surgery group's
+// apps, from referral to paid, with nothing typed twice.
+const FLOW = [
+  { t: "9:02am", logo: "gmail", app: "Gmail", what: "Referral received", detail: "The specialist's referral read and filed to the patient's record" },
+  { t: "9:03am", logo: "gmail", app: "Gmail", what: "Forms sent", detail: "Admission forms sent to the patient, with a reminder set" },
+  { t: "11:40am", logo: "googlecalendar", app: "Google Calendar", what: "Surgery booked", detail: "Date confirmed against the theatre list" },
+  { t: "11:52am", logo: "stripe", app: "Stripe", what: "Excess paid", detail: "Paid online by the patient" },
+  { t: "11:53am", logo: "xero", app: "Xero", what: "In the books", detail: "Invoice and payment reconciled" },
+];
+
+function Automation() {
+  return (
+    <section id="automation" className="s-sec s-auto" aria-labelledby="s-auto-h">
+      <div className="s-wrap s-split is-top">
+        <figure className="s-flow" aria-label="An example workflow, from referral to paid">
+          <p className="s-log-head"><b>Calloway Day Surgery</b><span>One admission, start to finish</span></p>
+          <ol>
+            {FLOW.map((f, i) => (
+              <li key={i}>
+                <img src={`/logos/${f.logo}.svg`} alt={f.app} width={28} height={28} loading="lazy" />
+                <div><p>{f.what}<time>{f.t}</time></p><span>{f.detail}</span></div>
+              </li>
+            ))}
+          </ol>
+          <p className="s-flow-end">Nothing typed twice.</p>
+          <figcaption>An example for a sample day-surgery group</figcaption>
+        </figure>
+        <div>
+          <h2 id="s-auto-h" className="s-h2">Automate the way your business runs</h2>
+          <p className="s-lede">Most admin is copying the same details from one app to the next. We map how a job moves from first enquiry to paid invoice, then connect the steps so they happen on their own, with a person approving where it matters.</p>
+          <ul className="s-rows">
+            <li><span className="s-num" aria-hidden="true">01</span><div><b>Map it</b><span>One call to walk through a job and find where the time and the double entry go.</span></div></li>
+            <li><span className="s-num" aria-hidden="true">02</span><div><b>Connect it</b><span>Email, calendar, CRM, Stripe, Xero or MYOB working together, with AI agents for the in-between steps.</span></div></li>
+            <li><span className="s-num" aria-hidden="true">03</span><div><b>Watch it</b><span>Every step is logged and monitored, so problems are caught before a customer notices.</span></div></li>
+          </ul>
+          <a className="s-btn s-btn-ink s-free-cta" href="/workflow-automation/">How automation works</a>
+        </div>
       </div>
     </section>
   );
@@ -504,6 +599,8 @@ export function StudioHome() {
       <Hero />
       <Tools />
       <Services />
+      <Agents />
+      <Automation />
       <Why />
       <FreeSite />
       <Process />

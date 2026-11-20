@@ -311,3 +311,31 @@ details[open] .s-plus { transform: rotate(45deg); }
 .s-case-name { display: block; margin-top: 1rem; padding: 0; font-size: clamp(1.15rem, 1rem + .5vw, 1.5rem); text-align: left; }
 .s-case-kind { position: static; display: block; margin-top: .25rem; color: rgb(255 255 255 / .6); }
 .s-case .s-pill { display: none; }
+
+/* AI agents and automation sections: a plain log on teal, a call player,
+   and one job moving through the apps. Lines and type, no boxes in boxes. */
+.s-agents { border-top: 1px solid var(--s-line); }
+.s-agent-side { display: grid; gap: 1rem; }
+.s-log, .s-flow { margin: 0; padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: 1rem; background: var(--s-teal); color: #fff; }
+.s-log-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; margin: 0 0 1.25rem !important; font-size: .95rem; }
+.s-log-head b { font-weight: 500; }
+.s-log-head span { color: rgb(255 255 255 / .6); }
+.s-log ol, .s-flow ol { margin: 0; padding: 0; list-style: none; }
+.s-log li { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; padding-block: 1rem; border-top: 1px solid rgb(255 255 255 / .14); }
+.s-log time { font-size: .88rem; font-variant-numeric: tabular-nums; color: rgb(255 255 255 / .6); padding-top: .1rem; }
+.s-log p, .s-flow li p { margin: 0; font-size: 1.02rem; line-height: 1.4; }
+.s-log li span, .s-flow li span { display: block; margin-top: .3rem; font-size: .9rem; color: rgb(255 255 255 / .68); }
+.s-log figcaption, .s-flow figcaption { margin-top: 1.25rem; font-size: .75rem; color: rgb(255 255 255 / .55); }
+.s-call { display: grid; gap: .9rem; padding: 1.4rem 1.5rem; border-radius: 1rem; background: var(--s-soft); }
+.s-call p { margin: 0; }
+.s-call b { display: block; font-weight: 500; color: var(--s-ink); }
+.s-call span { display: block; margin-top: .3rem; font-size: .9rem; color: var(--s-mute); }
+.s-call audio { width: 100%; height: 2.6rem; }
+.s-auto { border-top: 1px solid var(--s-line); }
+.s-flow li { position: relative; display: grid; grid-template-columns: 2.75rem 1fr; gap: 1rem; padding-block: 1rem; }
+.s-flow li + li::before { content: ""; position: absolute; left: 1.35rem; top: -1rem; height: 2rem; border-left: 1px dashed rgb(255 255 255 / .3); }
+.s-flow li img { width: 2.75rem; height: 2.75rem; box-sizing: border-box; padding: .6rem; border-radius: 50%; background: #fff; }
+.s-flow li p { display: flex; justify-content: space-between; gap: 1rem; font-weight: 500; }
+.s-flow time { font-weight: 400; font-size: .88rem; font-variant-numeric: tabular-nums; color: rgb(255 255 255 / .6); }
+.s-flow-end { margin: 1rem 0 0 !important; padding-top: 1rem; border-top: 1px solid rgb(255 255 255 / .14); font-size: 1.1rem; font-weight: 500; }
+@media (max-width: 860px) { .s-auto .s-split > .s-flow { order: 2; } }

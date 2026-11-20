@@ -5,6 +5,7 @@ import { NEEDS, SERVICES, STEPS, STUDIO_FAQ, WHY } from "./content";
 import { PayVisual } from "../components/Story";
 import { CallPhone } from "./CallPhone";
 import { ServiceArt } from "./ServiceArt";
+import { MixDesk } from "./MixDesk";
 import "./studio.css";
 
 // The studio homepage. Layout learned from premium studios (docs/design/STUDIO_STUDY.md):
@@ -471,6 +472,18 @@ function Faq() {
 function Start() {
   const [state, setState] = useState<"idle" | "sending" | "done" | "replied" | "error">("idle");
   const [need, setNeed] = useState("unsure");
+  const msg = useRef<HTMLTextAreaElement>(null);
+  // The mixing desk (MixDesk) sends its mix here.
+  useEffect(() => {
+    const on = (e: Event) => {
+      const d = (e as CustomEvent<{ need: string; message: string }>).detail;
+      setState("idle");
+      setNeed(d.need);
+      window.setTimeout(() => { if (msg.current) msg.current.value = d.message; }, 0);
+    };
+    window.addEventListener("oc:mix", on);
+    return () => window.removeEventListener("oc:mix", on);
+  }, []);
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -546,7 +559,7 @@ function Start() {
               </label>
               <label className="s-field"><span>Current website <small>(optional)</small></span><input name="website" inputMode="url" autoComplete="url" spellCheck={false} placeholder="yourbrand.com.au…" /></label>
             </div>
-            <label className="s-field"><span>About the project</span><textarea name="message" rows={5} maxLength={2000} required placeholder="What you're trying to do, any dates that matter…" /></label>
+            <label className="s-field"><span>About the project</span><textarea ref={msg} name="message" rows={5} maxLength={2000} required placeholder="What you're trying to do, any dates that matter…" /></label>
             <div className="hp" aria-hidden="true"><label htmlFor="f-company-site">Leave this empty</label><input id="f-company-site" name="company_site" tabIndex={-1} autoComplete="off" /></div>
             {state === "error" && <p className="s-form-error" role="alert">That didn't send. Please try again, or email {EMAIL}.</p>}
             <button className="s-btn s-btn-ink" type="submit" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send enquiry"} <Arrow /></button>
@@ -611,6 +624,7 @@ export function StudioHome() {
       <Work />
       <Founder />
       <Faq />
+      <MixDesk />
       <Start />
     </main>
   );

@@ -4,6 +4,7 @@ import { ABN, EMAIL, FOUNDER, LogoMark, PHONE, PHONE_HREF, WORK } from "../App";
 import { NEEDS, SERVICES, STEPS, STUDIO_FAQ, WHY } from "./content";
 import { PayVisual } from "../components/Story";
 import { CallPhone } from "./CallPhone";
+import { ServiceArt } from "./ServiceArt";
 import "./studio.css";
 
 // The studio homepage. Layout learned from premium studios (docs/design/STUDIO_STUDY.md):
@@ -190,7 +191,7 @@ function Services() {
   return (
     <section id="services" className="s-sec s-services s-reveal" ref={ref} aria-labelledby="s-svc-h">
       <div className="s-wrap s-head-row">
-        <h2 id="s-svc-h" className="s-h2">Everything your brand needs online, in one studio</h2>
+        <div><h2 id="s-svc-h" className="s-h2">Everything your brand needs online, in one studio</h2><p className="s-note">Shown with our fictional sample brands.</p></div>
         <div className="s-arrows">
           <button type="button" onClick={() => nudge(-1)} aria-label="Previous service"><Icon name="arrow-right" className="i flip" /></button>
           <button type="button" onClick={() => nudge(1)} aria-label="Next service"><Icon name="arrow-right" /></button>
@@ -199,9 +200,8 @@ function Services() {
       <div className="s-svc-track" ref={track} tabIndex={0} aria-label="Services">
         {SERVICES.map((s) => (
           <article className="s-svc" key={s.id}>
-            <div className="s-svc-art" data-svc={s.id}>
-              <img src={s.photo} alt="" loading="lazy" width={900} height={1125} {...showWhenLoaded} />
-              <Icon name={s.icon} className="i s-svc-glyph" />
+            <div className="s-svc-art" data-svc={s.id} aria-hidden="true">
+              <ServiceArt id={s.id} />
             </div>
             <h3 className="s-svc-name">{s.name}</h3>
             <p>{s.line}</p>

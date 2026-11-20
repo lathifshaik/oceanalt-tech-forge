@@ -12,7 +12,6 @@
 
 .sh-row { display: flex; align-items: flex-end; gap: 1px; margin: 0; padding: 0 1px 0 0; list-style: none; }
 .sh-row li { display: flex; align-items: flex-end; }
-.sh-row li.is-face { padding: 0 .9rem 0 .5rem; }
 
 /* a sleeve seen edge-on */
 .sh-spine {
@@ -30,14 +29,9 @@
 .sh-title { writing-mode: vertical-rl; transform: rotate(180deg); flex: 1; overflow: hidden; margin: .7rem 0 .4rem; font-size: .5rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; text-overflow: ellipsis; line-height: 1; }
 .sh-cat { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .42rem; letter-spacing: .08em; opacity: .65; font-variant-numeric: tabular-nums; line-height: 1; }
 
-/* a sleeve turned face-out, leaning on its neighbours */
-.sh-face { position: relative; display: block; width: var(--rec); height: var(--rec); padding: 0; border: 0; border-radius: 2px; overflow: hidden; background: var(--sp-bg); cursor: pointer; transform: rotate(-2.5deg); transform-origin: bottom left; box-shadow: .6rem .4rem 1.2rem -.6rem rgb(0 0 0 / .45), inset 0 0 0 1px rgb(255 255 255 / .08); transition: transform .45s var(--s-ease); }
-.sh-face img { width: 100%; height: 100%; object-fit: cover; object-position: left top; }
-.sh-face:hover, .sh-face:focus-visible { transform: rotate(-1deg) translateY(-1rem); }
-.sh-face:focus-visible { outline: 2px solid var(--s-ink); outline-offset: 3px; }
 
 /* the gap a record leaves while it's out */
-.sh-spine.is-out, .sh-face.is-out { opacity: 0; transform: translateY(-2rem); }
+.sh-spine.is-out { opacity: 0; transform: translateY(-2rem); }
 
 /* the record in flight, between its slot and the album */
 .sh-fly { position: fixed; z-index: 10; pointer-events: none; border-radius: 2px; background: var(--fly-bg) left top / cover no-repeat; box-shadow: 0 2rem 3rem -1.4rem rgb(0 0 0 / .6); transform-origin: left center; }
@@ -97,7 +91,7 @@
   .sh-row[aria-hidden="true"] { display: none; }
   .sh-info, .sh-dlg[open] { animation: none; }
   .sh-album.is-landed .sh-disc { animation: none; transform: translateX(52%); }
-  .sh-spine, .sh-face { transition: none; }
+  .sh-spine { transition: none; }
 }
 
 /* Let the pull be seen: the album's panel fades in only once the sleeve is on its way.

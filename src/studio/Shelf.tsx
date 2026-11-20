@@ -7,8 +7,7 @@ import "./shelf.css";
 // can only see ||||| lines moving and when we click on them they are like
 // albums"; then "it feels like books, not records" and "it should feel like
 // we're actually getting it out"). Every sample design is a record filed
-// spine out: thin sleeves, all one height, packed tight, with the odd one
-// turned face-out. Pick one and it lifts out of its slot, turns from spine to
+// spine out: thin sleeves, all one height, packed tight, spines only. Pick one and it lifts out of its slot, turns from spine to
 // cover as it comes to you, lands, and the record slides out of the sleeve.
 // Arrow keys flip through, Esc puts it back. Reduced motion: no flight, the
 // shelf stays still and scrolls by hand. Colours: src/data/spines.json.
@@ -16,8 +15,6 @@ import "./shelf.css";
 type Rec = { path: string; business: string; kind: string; theme: string; added: string; bg: string; ink: string; accent: string };
 const COLOURS = SPINES as Record<string, { bg: string; ink: string; accent: string }>;
 const LEAD = ["fenwick-hale", "corella-hotels", "calloway-day-surgery", "calder-and-ames", "tallowwood-home", "torrens-and-pike"];
-const FACE_EVERY = 13; // every 13th record stands face-out
-const isFace = (i: number) => i % FACE_EVERY === 4;
 const cat = (i: number) => `OA-${String(i + 1).padStart(3, "0")}`;
 const img = (p: string) => `/previews/${p}.webp`;
 const still = () => typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -111,19 +108,12 @@ export function Shelf() {
   const row = (hidden: boolean) => (
     <ul className="sh-row" aria-hidden={hidden || undefined}>
       {recs.map((s, i) => (
-        <li key={s.path} className={isFace(i) ? "is-face" : undefined}>
-          {isFace(i) ? (
-            <button type="button" className="sh-face" tabIndex={hidden ? -1 : undefined} style={spineStyle(s, i)}
-              aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`} onClick={(e) => pick(i, e.currentTarget)}>
-              <img src={img(s.path)} alt="" width={1200} height={750} loading="lazy" decoding="async" />
-            </button>
-          ) : (
-            <button type="button" className="sh-spine" tabIndex={hidden ? -1 : undefined} style={spineStyle(s, i)}
-              aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`} onClick={(e) => pick(i, e.currentTarget)}>
-              <span className="sh-title">{s.business}</span>
-              <span className="sh-cat">{cat(i)}</span>
-            </button>
-          )}
+        <li key={s.path}>
+          <button type="button" className="sh-spine" tabIndex={hidden ? -1 : undefined} style={spineStyle(s, i)}
+            aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`} onClick={(e) => pick(i, e.currentTarget)}>
+            <span className="sh-title">{s.business}</span>
+            <span className="sh-cat">{cat(i)}</span>
+          </button>
         </li>
       ))}
     </ul>

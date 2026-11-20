@@ -1,0 +1,83 @@
+/* The record shelf (Shelf.tsx) */
+
+.sh { margin-top: clamp(3rem, 7vw, 5.5rem); }
+.sh-shelf { position: relative; overflow: hidden; padding: 1.2rem 0 0; }
+/* the ledge the records stand on */
+.sh-shelf::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .9rem; background: linear-gradient(180deg, #d9dcdb, #c9cdcc); box-shadow: 0 1.2rem 2rem -1.2rem rgb(13 17 20 / .35); }
+/* fade the ends so spines slide in and out of the dark */
+.sh-shelf::before { content: ""; position: absolute; inset: 0 0 .9rem; z-index: 2; pointer-events: none; background: linear-gradient(90deg, #fff, transparent 7%, transparent 93%, #fff); }
+
+.sh-track { display: flex; width: max-content; animation: sh-drift 240s linear infinite; }
+.sh-shelf:hover .sh-track, .sh-shelf:focus-within .sh-track { animation-play-state: paused; }
+@keyframes sh-drift { to { transform: translateX(-50%); } }
+
+.sh-row { display: flex; align-items: flex-end; gap: 3px; margin: 0; padding: 0 3px 0 0; list-style: none; }
+.sh-row li { display: flex; }
+
+.sh-spine {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  width: var(--sp-w, 2rem); height: clamp(15rem, 26vw, 21rem); padding: .7rem 0 .6rem; border: 0; border-radius: 2px 2px 0 0;
+  background: var(--sp-bg); color: var(--sp-fg); font: inherit; cursor: pointer;
+  box-shadow: inset 2px 0 0 rgb(255 255 255 / .14), inset -2px 0 0 rgb(0 0 0 / .14), 0 1px 0 rgb(0 0 0 / .1);
+  transition: transform .45s var(--s-ease), box-shadow .45s var(--s-ease);
+}
+.sh-spine:hover, .sh-spine:focus-visible { transform: translateY(-1.1rem); box-shadow: inset 2px 0 0 rgb(255 255 255 / .14), inset -2px 0 0 rgb(0 0 0 / .14), 0 1.4rem 1.4rem -1rem rgb(13 17 20 / .45); }
+.sh-spine:focus-visible { outline: 2px solid var(--s-ink); outline-offset: 2px; }
+.sh-band { width: 100%; height: .45rem; background: var(--sp-band); }
+.sh-title { writing-mode: vertical-rl; transform: rotate(180deg); flex: 1; overflow: hidden; margin: .7rem 0; font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; text-overflow: ellipsis; }
+.sh-cat { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .56rem; letter-spacing: .1em; opacity: .7; font-variant-numeric: tabular-nums; }
+
+/* ── the album, off the shelf ──────────────────────────────────────────── */
+.sh-dlg { width: min(64rem, calc(100vw - 2rem)); max-width: none; max-height: calc(100dvh - 2rem); padding: 0; border: 0; border-radius: 1.4rem; background: var(--al-bg, #fff); overflow: auto; color: var(--s-ink); }
+.sh-dlg::backdrop { background: rgb(13 17 20 / .55); backdrop-filter: blur(6px); }
+.sh-album { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 4vw, 3rem); padding: clamp(1.25rem, 4vw, 3rem); background: var(--al-bg); color: var(--al-ink); }
+
+.sh-art { position: relative; aspect-ratio: 1; margin-right: 16%; }
+.sh-cover { position: absolute; inset: 0; z-index: 2; overflow: hidden; border-radius: .35rem; background: var(--al-ink); box-shadow: 0 2rem 3rem -1.5rem rgb(0 0 0 / .55), inset 0 0 0 1px rgb(255 255 255 / .06); animation: sh-cover .7s var(--s-ease) both; }
+.sh-cover img { width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+.sh-sticker { position: absolute; top: .8rem; right: .8rem; padding: .25rem .55rem; border-radius: 999px; background: #fff; color: #0d1114; font-size: .66rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.sh-disc {
+  position: absolute; z-index: 1; top: 3%; bottom: 3%; left: 3%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background:
+    radial-gradient(circle, var(--al-acc) 0 15%, #0a0a0a 15.5% 17%, transparent 17.5%),
+    repeating-radial-gradient(circle, #121212 0 2px, #1d1d1d 2px 3px),
+    #111;
+  box-shadow: 0 1.5rem 2.5rem -1.5rem rgb(0 0 0 / .6);
+  animation: sh-disc 1s var(--s-ease) .35s both, sh-spin 6s linear 1.3s infinite;
+}
+.sh-disc::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 30deg, transparent 0 20%, rgb(255 255 255 / .09) 25%, transparent 30% 70%, rgb(255 255 255 / .07) 75%, transparent 80%); }
+.sh-disc span { position: relative; z-index: 1; font-weight: 700; font-size: clamp(.9rem, 2vw, 1.3rem); color: var(--al-bg); }
+@keyframes sh-cover { from { opacity: 0; transform: translateY(2.5rem) rotate(-2deg); } to { opacity: 1; transform: none; } }
+@keyframes sh-disc { from { transform: translateX(0); } to { transform: translateX(22%); } }
+@keyframes sh-spin { from { transform: translateX(22%) rotate(0); } to { transform: translateX(22%) rotate(360deg); } }
+
+.sh-info { display: grid; gap: .6rem; animation: sh-info .6s var(--s-ease) .25s both; }
+@keyframes sh-info { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: none; } }
+.sh-meta { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; opacity: .65; }
+.sh-info h3 { margin: 0; font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 500; line-height: 1; letter-spacing: -.035em; }
+.sh-kind { font-size: 1.05rem; opacity: .8; }
+.sh-note { font-size: .86rem; opacity: .65; }
+.sh-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; }
+.sh-album .s-btn-ink { background: var(--al-ink); color: var(--al-bg); }
+.sh-album .s-btn-soft { background: rgb(127 127 127 / .14); color: var(--al-ink); }
+.sh-close { justify-self: start; margin-top: .3rem; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: .92rem; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; }
+.sh-keys { font-size: .74rem; opacity: .5; }
+
+@media (max-width: 760px) {
+  .sh-album { grid-template-columns: 1fr; }
+  .sh-art { width: 72%; }
+  .sh-keys { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sh-track { animation: none; }
+  .sh-shelf { overflow-x: auto; }
+  .sh-row[aria-hidden="true"] { display: none; }
+  .sh-cover, .sh-info { animation: none; }
+  .sh-disc { animation: none; transform: translateX(22%); }
+  .sh-spine { transition: none; }
+}
+
+/* keep the record visible on dark covers */
+.sh-disc { box-shadow: 0 0 0 1px rgb(255 255 255 / .14), inset 0 0 0 .35rem rgb(255 255 255 / .04), 0 1.5rem 2.5rem -1.5rem rgb(0 0 0 / .6); }
+.sh-disc::after { background: conic-gradient(from 30deg, transparent 0 18%, rgb(255 255 255 / .16) 25%, transparent 32% 68%, rgb(255 255 255 / .12) 75%, transparent 82%); }

@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "templates": "node templates/engine/build-all.mjs",
+    "templates": "node templates/engine/build-all.mjs && node scripts/make-spines.mjs",
     "prebuild": "npm run templates",
     "predev": "npm run templates",
     "site:build": "node templates/engine/build.mjs",

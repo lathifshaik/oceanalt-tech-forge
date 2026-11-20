@@ -1,24 +1,28 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { WORK } from "../App";
 import SPINES from "../data/spines.json";
 import "./shelf.css";
 
-// The record shelf under the homepage statement (founder, 20 Nov 2026: "more
-// like the discs ... we can only see ||||| lines moving and when we click on
-// them they are like albums"). Every sample design is a record filed spine
-// out, in its own theme's colours, drifting slowly past. Pick one and the
-// album slides off the shelf: the cover (the design) with its record sliding
-// out, the details, and a link to play the site. Arrow keys flip through,
-// Esc puts it back. Still for reduced motion (the shelf scrolls by hand).
-// Spine colours: src/data/spines.json (scripts/make-spines.mjs).
+// The record shelf under the homepage statement (founder, 20 Nov 2026: "we
+// can only see ||||| lines moving and when we click on them they are like
+// albums"; then "it feels like books, not records" and "it should feel like
+// we're actually getting it out"). Every sample design is a record filed
+// spine out: thin sleeves, all one height, packed tight, with the odd one
+// turned face-out. Pick one and it lifts out of its slot, turns from spine to
+// cover as it comes to you, lands, and the record slides out of the sleeve.
+// Arrow keys flip through, Esc puts it back. Reduced motion: no flight, the
+// shelf stays still and scrolls by hand. Colours: src/data/spines.json.
 
-type Spine = { path: string; business: string; kind: string; theme: string; added: string; bg: string; ink: string; accent: string };
+type Rec = { path: string; business: string; kind: string; theme: string; added: string; bg: string; ink: string; accent: string };
 const COLOURS = SPINES as Record<string, { bg: string; ink: string; accent: string }>;
-
-// Established-brand samples lead; the rest newest first.
 const LEAD = ["fenwick-hale", "corella-hotels", "calloway-day-surgery", "calder-and-ames", "tallowwood-home", "torrens-and-pike"];
+const FACE_EVERY = 13; // every 13th record stands face-out
+const isFace = (i: number) => i % FACE_EVERY === 4;
+const cat = (i: number) => `OA-${String(i + 1).padStart(3, "0")}`;
+const img = (p: string) => `/previews/${p}.webp`;
+const still = () => typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function useSpines(): Spine[] {
+function useRecords(): Rec[] {
   return useMemo(() => {
     const all = WORK.flatMap((w) => w.designs.map((d) => {
       const c = COLOURS[d.theme] ?? { bg: "#f3f4f4", ink: "#0d1114", accent: "#1f3a46" };
@@ -30,20 +34,20 @@ function useSpines(): Spine[] {
   }, []);
 }
 
-// Three spine styles so the shelf reads like a real one, not a barcode.
-function spineStyle(s: Spine, i: number): CSSProperties {
-  const v = (i * 7) % 3;
-  const [bg, fg, band] = v === 0 ? [s.ink, s.bg, s.accent] : v === 1 ? [s.accent, s.ink, s.bg] : [s.bg, s.ink, s.accent];
-  return { "--sp-bg": bg, "--sp-fg": fg, "--sp-band": band, "--sp-w": `${1.7 + ((i * 13) % 5) * 0.22}rem` } as CSSProperties;
+// A sleeve spine: mostly the theme's ink or background, with a thin accent stripe.
+function spineStyle(s: Rec, i: number): CSSProperties {
+  const v = (i * 7) % 4;
+  const [bg, fg] = v === 0 || v === 3 ? [s.ink, s.bg] : v === 1 ? [s.accent, s.ink] : [s.bg, s.ink];
+  return { "--sp-bg": bg, "--sp-fg": fg, "--sp-acc": s.accent, "--sp-w": `${0.5 + ((i * 11) % 5) * 0.11}rem` } as CSSProperties;
 }
 
-const cat = (i: number) => `OA-${String(i + 1).padStart(3, "0")}`;
-
 export function Shelf() {
-  const spines = useSpines();
+  const recs = useRecords();
   const [open, setOpen] = useState<number | null>(null);
+  const [landed, setLanded] = useState(true);
   const dlg = useRef<HTMLDialogElement>(null);
-  const last = useRef<HTMLButtonElement | null>(null);
+  const cover = useRef<HTMLDivElement>(null);
+  const from = useRef<{ el: HTMLElement; rect: DOMRect } | null>(null);
 
   useEffect(() => {
     const d = dlg.current;
@@ -52,53 +56,95 @@ export function Shelf() {
     if (open === null && d.open) d.close();
   }, [open]);
 
+  // The flight: from the spine's slot on the shelf to the cover's place in the album.
+  useLayoutEffect(() => {
+    const f = from.current, to = cover.current, d = dlg.current;
+    if (open === null || landed || !f || !to || !d) return;
+    if (!d.open) d.showModal(); // open first, so the album has a place to land
+    const a = f.rect, b = to.getBoundingClientRect();
+    const fly = document.createElement("div");
+    fly.className = "sh-fly";
+    fly.style.backgroundImage = `url(${img(recs[open].path)})`;
+    fly.style.setProperty("--fly-bg", getComputedStyle(f.el).getPropertyValue("--sp-bg") || "#222");
+    d.appendChild(fly);
+    const box = (x: number, y: number, w: number, h: number) => ({ left: `${x}px`, top: `${y}px`, width: `${w}px`, height: `${h}px` });
+    const lift = a.height * 0.55;
+    const anim = fly.animate([
+      { ...box(a.left, a.top, a.width, a.height), transform: "perspective(900px) rotateY(0deg)", offset: 0 },
+      { ...box(a.left, a.top - lift, a.width, a.height), transform: "perspective(900px) rotateY(0deg)", offset: 0.32 },
+      { ...box((a.left + b.left) / 2, a.top - lift * 0.8, Math.max(a.width, b.width * 0.45), (a.height + b.height) / 2), transform: "perspective(900px) rotateY(-55deg)", offset: 0.62 },
+      { ...box(b.left, b.top, b.width, b.height), transform: "perspective(900px) rotateY(0deg)", offset: 1 },
+    ], { duration: 1150, easing: "cubic-bezier(.32,.72,0,1)", fill: "forwards" });
+    anim.onfinish = () => { setLanded(true); fly.remove(); };
+    return () => { anim.cancel(); fly.remove(); };
+  }, [open, landed, recs]);
+
   useEffect(() => {
     if (open === null) return;
     const on = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") setOpen((o) => (o === null ? o : (o + 1) % spines.length));
-      if (e.key === "ArrowLeft") setOpen((o) => (o === null ? o : (o - 1 + spines.length) % spines.length));
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
     };
     window.addEventListener("keydown", on);
     return () => window.removeEventListener("keydown", on);
-  }, [open, spines.length]);
+  });
 
-  const pick = (i: number, el: HTMLButtonElement) => { last.current = el; setOpen(i); };
-  const close = () => { setOpen(null); last.current?.focus(); };
+  const pick = (i: number, el: HTMLElement) => {
+    from.current = { el, rect: el.getBoundingClientRect() };
+    el.classList.add("is-out");
+    setLanded(still());
+    setOpen(i);
+  };
+  const step = (dir: number) => {
+    from.current?.el.classList.remove("is-out");
+    from.current = null;
+    setLanded(true);
+    setOpen((o) => (o === null ? o : (o + dir + recs.length) % recs.length));
+  };
+  const close = () => {
+    const f = from.current;
+    setOpen(null);
+    if (f) { f.el.classList.remove("is-out"); f.el.focus({ preventScroll: true }); }
+    from.current = null;
+  };
 
   const row = (hidden: boolean) => (
     <ul className="sh-row" aria-hidden={hidden || undefined}>
-      {spines.map((s, i) => (
-        <li key={s.path}>
-          <button
-            type="button" className="sh-spine" style={spineStyle(s, i)} tabIndex={hidden ? -1 : undefined}
-            aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`}
-            onClick={(e) => pick(i, e.currentTarget)}
-          >
-            <span className="sh-band" aria-hidden="true" />
-            <span className="sh-title">{s.business}</span>
-            <span className="sh-cat">{cat(i)}</span>
-          </button>
+      {recs.map((s, i) => (
+        <li key={s.path} className={isFace(i) ? "is-face" : undefined}>
+          {isFace(i) ? (
+            <button type="button" className="sh-face" tabIndex={hidden ? -1 : undefined} style={spineStyle(s, i)}
+              aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`} onClick={(e) => pick(i, e.currentTarget)}>
+              <img src={img(s.path)} alt="" width={1200} height={750} loading="lazy" decoding="async" />
+            </button>
+          ) : (
+            <button type="button" className="sh-spine" tabIndex={hidden ? -1 : undefined} style={spineStyle(s, i)}
+              aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`} onClick={(e) => pick(i, e.currentTarget)}>
+              <span className="sh-title">{s.business}</span>
+              <span className="sh-cat">{cat(i)}</span>
+            </button>
+          )}
         </li>
       ))}
     </ul>
   );
 
-  const s = open === null ? null : spines[open];
+  const s = open === null ? null : recs[open];
 
   return (
     <div className="sh" aria-label="Sample designs, filed like records">
-      <div className="sh-shelf">
+      <div className={`sh-shelf${open !== null ? " is-holding" : ""}`}>
         <div className="sh-track">{row(false)}{row(true)}</div>
       </div>
-      <p className="s-wrap s-note">{spines.length} sample designs for fictional businesses, filed like records. Pull one out.</p>
+      <p className="s-wrap s-note">{recs.length} sample designs for fictional businesses, filed like records. Pull one out.</p>
 
       <dialog ref={dlg} className="sh-dlg" onClose={() => open !== null && close()} onClick={(e) => { if (e.target === dlg.current) close(); }} aria-label={s ? `${s.business}, sample design` : "Sample design"}>
         {s && open !== null && (
-          <div className="sh-album" key={s.path} style={{ "--al-bg": s.bg, "--al-ink": s.ink, "--al-acc": s.accent } as CSSProperties}>
+          <div className={`sh-album${landed ? " is-landed" : ""}`} key={s.path} style={{ "--al-bg": s.bg, "--al-ink": s.ink, "--al-acc": s.accent } as CSSProperties}>
             <div className="sh-art">
               <div className="sh-disc" aria-hidden="true"><span>{s.business.slice(0, 1)}</span></div>
-              <div className="sh-cover">
-                <img src={`/previews/${s.path}.webp`} alt={`${s.business}, sample design`} width={1200} height={750} />
+              <div className="sh-cover" ref={cover}>
+                <img src={img(s.path)} alt={`${s.business}, sample design`} width={1200} height={750} />
                 <span className="sh-sticker">Sample</span>
               </div>
             </div>
@@ -109,7 +155,7 @@ export function Shelf() {
               <p className="sh-note">A sample design for a fictional business, made to show our range.</p>
               <div className="sh-actions">
                 <a className="s-btn s-btn-ink" href={`/work/${s.path}/`} target="_blank" rel="noopener">Play the site</a>
-                <button type="button" className="s-btn s-btn-soft" onClick={() => setOpen((o) => (o === null ? o : (o + 1) % spines.length))}>Next record</button>
+                <button type="button" className="s-btn s-btn-soft" onClick={() => step(1)}>Next record</button>
               </div>
               <button type="button" className="sh-close" onClick={close}>Back on the shelf</button>
               <p className="sh-keys">Arrow keys flip through. Esc puts it back.</p>

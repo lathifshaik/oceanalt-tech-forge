@@ -98,11 +98,67 @@ export function Shelf() {
     setLanded(true);
     setOpen((o) => (o === null ? o : (o + dir + recs.length) % recs.length));
   };
-  const close = () => {
-    const f = from.current;
+  // Leaning a record out: load its cover only when someone reaches for it.
+  const touch = useRef(false);
+  const peek = (el: HTMLElement, path: string) => {
+    if (!el.style.getPropertyValue("--peek")) el.style.setProperty("--peek", `url(${img(path)})`);
+  };
+  // On touch, the first tap leans the record out; the second pulls it off the shelf.
+  const tap = (i: number, el: HTMLElement, path: string) => {
+    if (touch.current && !el.classList.contains("is-lean")) {
+      document.querySelectorAll(".sh-spine.is-lean").forEach((x) => x.classList.remove("is-lean"));
+      peek(el, path);
+      el.classList.add("is-lean");
+      return;
+    }
+    el.classList.remove("is-lean");
+    pick(i, el);
+  };
+  // Back on the shelf: the record slides back into its sleeve, the album turns
+  // back into a spine, flies home to its gap and drops in.
+  const leaving = useRef(false);
+  const slotFor = (i: number) =>
+    document.querySelector<HTMLElement>(`.sh-row:not([aria-hidden]) > li:nth-child(${i + 1}) > .sh-spine`);
+  const settle = (slot: HTMLElement | null) => {
+    leaving.current = false;
     setOpen(null);
-    if (f) { f.el.classList.remove("is-out"); f.el.focus({ preventScroll: true }); }
     from.current = null;
+    if (!slot) return;
+    slot.classList.remove("is-out");
+    if (!still()) {
+      slot.classList.add("is-home");
+      window.setTimeout(() => slot.classList.remove("is-home"), 700);
+    }
+    slot.focus({ preventScroll: true });
+  };
+  const close = () => {
+    if (open === null || leaving.current) return;
+    const d = dlg.current, cov = cover.current;
+    const slot = from.current?.el ?? slotFor(open);
+    slot?.classList.add("is-out");
+    const r = slot?.getBoundingClientRect();
+    const onScreen = r && r.right > 0 && r.left < window.innerWidth && r.width > 0;
+    if (still() || !d || !cov || !slot || !onScreen) { settle(slot); return; }
+    leaving.current = true;
+    d.querySelector(".sh-album")?.classList.add("is-leaving");
+    window.setTimeout(() => {
+      const a = cov.getBoundingClientRect(), b = slot.getBoundingClientRect();
+      const fly = document.createElement("div");
+      fly.className = "sh-fly";
+      fly.style.backgroundImage = `url(${img(recs[open].path)})`;
+      fly.style.setProperty("--fly-bg", getComputedStyle(slot).getPropertyValue("--sp-bg") || "#222");
+      d.appendChild(fly);
+      cov.style.visibility = "hidden";
+      const box = (x: number, y: number, w: number, h: number) => ({ left: `${x}px`, top: `${y}px`, width: `${w}px`, height: `${h}px` });
+      const lift = b.height * 0.55;
+      const anim = fly.animate([
+        { ...box(a.left, a.top, a.width, a.height), transform: "perspective(900px) rotateY(0deg)", offset: 0 },
+        { ...box((a.left + b.left) / 2, b.top - lift * 0.8, Math.max(b.width, a.width * 0.45), (a.height + b.height) / 2), transform: "perspective(900px) rotateY(55deg)", offset: 0.45 },
+        { ...box(b.left, b.top - lift, b.width, b.height), transform: "perspective(900px) rotateY(0deg)", offset: 0.75 },
+        { ...box(b.left, b.top, b.width, b.height), transform: "perspective(900px) rotateY(0deg)", offset: 1 },
+      ], { duration: 1050, easing: "cubic-bezier(.45,0,.2,1)", fill: "forwards" });
+      anim.onfinish = () => { fly.remove(); settle(slot); };
+    }, 420);
   };
 
   const row = (hidden: boolean) => (
@@ -110,7 +166,11 @@ export function Shelf() {
       {recs.map((s, i) => (
         <li key={s.path}>
           <button type="button" className="sh-spine" tabIndex={hidden ? -1 : undefined} style={spineStyle(s, i)}
-            aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`} onClick={(e) => pick(i, e.currentTarget)}>
+            aria-label={hidden ? undefined : `${s.business}, ${s.kind}. Take it off the shelf`}
+            onPointerEnter={(e) => peek(e.currentTarget, s.path)} onFocus={(e) => peek(e.currentTarget, s.path)}
+            onPointerDown={(e) => { touch.current = e.pointerType === "touch"; }}
+            onClick={(e) => tap(i, e.currentTarget, s.path)}>
+            <span className="sh-peek" aria-hidden="true" />
             <span className="sh-title">{s.business}</span>
             <span className="sh-cat">{cat(i)}</span>
           </button>
@@ -128,7 +188,7 @@ export function Shelf() {
       </div>
       <p className="s-wrap s-note">{recs.length} sample designs for fictional businesses, filed like records. Pull one out.</p>
 
-      <dialog ref={dlg} className="sh-dlg" onClose={() => open !== null && close()} onClick={(e) => { if (e.target === dlg.current) close(); }} aria-label={s ? `${s.business}, sample design` : "Sample design"}>
+      <dialog ref={dlg} className="sh-dlg" onCancel={(e) => { e.preventDefault(); close(); }} onClick={(e) => { if (e.target === dlg.current) close(); }} aria-label={s ? `${s.business}, sample design` : "Sample design"}>
         {s && open !== null && (
           <div className={`sh-album${landed ? " is-landed" : ""}`} key={s.path} style={{ "--al-bg": s.bg, "--al-ink": s.ink, "--al-acc": s.accent } as CSSProperties}>
             <div className="sh-art">

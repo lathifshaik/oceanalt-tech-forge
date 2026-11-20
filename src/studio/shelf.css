@@ -102,3 +102,41 @@
 .sh-album:not(.is-landed) { animation-delay: .5s; }
 @keyframes sh-panel { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .sh-album { animation: none; } }
+
+/* Leaning a record out (hover, keyboard focus, or a first tap on touch):
+   it tips forward out of the row and opens to show a slice of its cover,
+   and its neighbours tip aside to make room, like flicking through a crate. */
+.sh-shelf { perspective: 1100px; }
+.sh-row li { transition: margin .45s var(--s-ease); }
+.sh-spine { transform-origin: 50% 100%; transition: transform .45s var(--s-ease), width .45s var(--s-ease), opacity .3s; }
+.sh-peek { position: absolute; inset: 0; z-index: 0; border-radius: 1px; background: var(--peek, var(--sp-bg)) left top / cover no-repeat; opacity: 0; transition: opacity .35s var(--s-ease); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
+.sh-title, .sh-cat { position: relative; z-index: 1; transition: opacity .25s; }
+
+.sh-spine:hover, .sh-spine:focus-visible, .sh-spine.is-lean {
+  z-index: 2; width: calc(var(--rec) * .42);
+  transform: translateY(-.9rem) rotateY(-24deg) rotateZ(-3deg);
+  box-shadow: -1.2rem 1.2rem 1.6rem -1rem rgb(0 0 0 / .55);
+}
+.sh-spine:hover .sh-peek, .sh-spine:focus-visible .sh-peek, .sh-spine.is-lean .sh-peek { opacity: 1; }
+.sh-spine:hover :is(.sh-title, .sh-cat), .sh-spine:focus-visible :is(.sh-title, .sh-cat), .sh-spine.is-lean :is(.sh-title, .sh-cat) { opacity: 0; }
+
+/* the neighbours tip aside */
+.sh-row li:has(+ li > .sh-spine:is(:hover, :focus-visible, .is-lean)) .sh-spine { transform: rotateZ(-5deg); }
+.sh-row li:has(> .sh-spine:is(:hover, :focus-visible, .is-lean)) + li .sh-spine { transform: rotateZ(5deg); }
+.sh-row li:has(+ li + li > .sh-spine:is(:hover, :focus-visible, .is-lean)) .sh-spine { transform: rotateZ(-2deg); }
+.sh-row li:has(> .sh-spine:is(:hover, :focus-visible, .is-lean)) + li + li .sh-spine { transform: rotateZ(2deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sh-spine:hover, .sh-spine:focus-visible, .sh-spine.is-lean { transform: none; }
+  .sh-row li .sh-spine { transform: none !important; }
+}
+
+/* Back on the shelf: the record slides back into the sleeve, the panel fades,
+   the sleeve flies home (Shelf.tsx) and drops into its gap with a small bounce. */
+.sh-album.is-leaving .sh-disc { animation: sh-disc-in .4s var(--s-ease) both; }
+@keyframes sh-disc-in { from { transform: translateX(52%); } to { transform: translateX(0); } }
+.sh-album.is-leaving { animation: sh-panel-out .55s ease .3s both; }
+@keyframes sh-panel-out { from { opacity: 1; } to { opacity: 0; transform: scale(.985); } }
+.sh-album.is-leaving .sh-info { opacity: 0; transition: opacity .25s; }
+.sh-spine.is-home { animation: sh-home .6s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes sh-home { 0% { transform: translateY(-.6rem); } 60% { transform: translateY(.15rem); } 100% { transform: none; } }

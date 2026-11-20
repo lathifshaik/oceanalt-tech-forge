@@ -25,7 +25,7 @@ export type Landing = {
 
 const QUOTED = {
   q: "How is it priced?",
-  a: "Every project is quoted in writing after a first call, with a fixed scope, so you know the number before anything starts. We don't publish prices because no two briefs are the same.",
+  a: "Every project starts with a free first call, about 30 minutes with Lathif. Within 3 business days you get a written proposal with a fixed scope and a fixed price, so you know the number before anything starts. We don't publish a price list because no two briefs are the same, and a “from” figure would mislead more people than it helped.",
 };
 
 export const LANDINGS: Landing[] = [
@@ -246,7 +246,7 @@ export const LANDINGS: Landing[] = [
       ],
     },
     faq: [
-      { q: "What's the platform fee?", a: "A small percentage of each payment through the gateway, on top of the provider's processing fee. The exact rate depends on what you sell and how, and it's in your written agreement before work starts." },
+      { q: "What's the platform fee?", a: "A small percentage of each payment through the gateway, on top of the provider's processing fee. We set the rate with you on the first call, based on what you expect to sell, and fix it in your written agreement before work starts. There's no fee when nothing sells." },
       { q: "What if we don't take payments online?", a: "Then the website is quoted as a project, like our other work. The free website is for brands whose customers pay online." },
       { q: "Can we leave?", a: "Yes. Your domain and content are always yours, and the agreement sets out exactly how a move works, including keeping the site." },
     ],

@@ -132,7 +132,7 @@ function replyEmail(lead: Lead, ack: Acknowledgement | null) {
     const qs = ack.questions.slice(0, 3);
     if (qs.length) lines.push(`<p>If it's easy, a few things that would help us prepare:</p><ul>${qs.map((q) => `<li>${esc(q)}</li>`).join("")}</ul>`);
   }
-  lines.push(`<p>Lathif will reply the same business day to set up a call and talk it through. Every project is scoped and quoted in writing after that call, so there's nothing to commit to yet.</p>`);
+  lines.push(`<p>Lathif will reply the same business day to set up a call and talk it through. The call is free. Within 3 business days of it you'll have a written proposal with a fixed scope and price, so there's nothing to commit to yet.</p>`);
   if (booking) lines.push(`<p>If you'd rather pick a time now, you can <a href="${esc(booking)}">book a call here</a>, or just reply to this email.</p>`);
   lines.push(`<p>Oceanalt</p>`);
   if (ack?.relevant) lines.push(`<p style="color:#6b7280;font-size:12px">This acknowledgement was prepared automatically from what you sent us. Lathif reads every enquiry himself.</p>`);

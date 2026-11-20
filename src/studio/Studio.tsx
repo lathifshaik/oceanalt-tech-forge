@@ -379,7 +379,7 @@ function Process() {
       <div className="s-wrap s-split is-top">
         <div className="s-process-copy">
           <h2 id="s-proc-h" className="s-h2">From the first call to launch, and after</h2>
-          <p className="s-lede">You get a written scope and a fixed quote before anything starts. Then you see the work as it's made, on a private link, and nothing goes live until you've signed it off.</p>
+          <p className="s-lede">It starts with a free call. Within 3 business days you get a written scope and a fixed quote, before anything starts. Then you see the work as it's made, on a private link, and nothing goes live until you've signed it off.</p>
           <a className="s-btn s-btn-ink" href="#start">Start a project</a>
         </div>
         <ol className="s-steps-list">

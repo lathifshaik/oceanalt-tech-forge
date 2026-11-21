@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>One Piece: R.M. Williams concept by Oceanalt</title>
+<meta name="description" content="A concept redesign by Oceanalt. Not affiliated with, endorsed by or commissioned by R.M. Williams." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#1b1510" />
+<script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Manrope:wght@400..700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --night: #1b1510;      /* dark saddle brown, not black */
+    --bone: #efe6d8;
+    --tan: #c4925f;
+    --saddle: #8a5a32;
+    --ochre: #b5552b;
+    --dust: #d9b48a;
+    --ease: cubic-bezier(.22, .7, .15, 1);
+    --gut: clamp(16px, 4vw, 56px);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--night); color: var(--bone); font: 400 17px/1.6 "Manrope", system-ui, sans-serif; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--dust); outline-offset: 4px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .serif { font-family: "Fraunces", Georgia, serif; font-variation-settings: "SOFT" 60; }
+
+  /* the concept note, quiet but always there */
+  .note { position: fixed; z-index: 40; top: 0; left: 0; right: 0; margin: 0; padding: 7px 16px; text-align: center; font-size: 12px; color: rgba(239, 230, 216, .75);
+    background: rgba(27, 21, 16, .78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(196, 146, 95, .25); }
+  .top { position: fixed; z-index: 30; left: 0; right: 0; top: var(--nh, 32px); display: flex; align-items: center; justify-content: space-between; padding: 18px var(--gut); }
+  .word { font-family: "Fraunces", serif; font-weight: 600; font-size: 20px; letter-spacing: .14em; text-decoration: none; font-variation-settings: "SOFT" 30, "opsz" 24; }
+  .top nav { display: flex; gap: 28px; font-size: 14px; }
+  .top nav a { text-decoration: none; opacity: .8; } .top nav a:hover { opacity: 1; }
+  @media (max-width: 700px) { .top nav { display: none; } }
+
+  /* scenes: tall sections with a sticky stage; each later scene dissolves in over the last */
+  .scene { position: relative; }
+  html.motion .scene + .scene { margin-top: -200vh; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; background: var(--night); }
+  .stage > svg, .stage > canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .line { position: absolute; z-index: 5; left: var(--gut); right: var(--gut); bottom: clamp(56px, 12vh, 130px); margin: 0; max-width: 16ch;
+    font-family: "Fraunces", serif; font-weight: 400; font-size: clamp(40px, min(6.4vw, 10vh), 104px); line-height: 1.02; letter-spacing: -.02em; font-variation-settings: "SOFT" 80, "opsz" 144;
+    opacity: 0; transform: translateY(16px); filter: blur(10px); transition: opacity 1.2s var(--ease), transform 1.4s var(--ease), filter 1.2s var(--ease); pointer-events: none; }
+  .line em { font-style: italic; color: var(--dust); }
+  .line small { display: block; margin-top: 18px; max-width: 34ch; font: 400 clamp(16px, 1.3vw, 19px)/1.55 "Manrope", sans-serif; letter-spacing: 0; color: rgba(239, 230, 216, .78);
+    opacity: 0; transform: translateY(8px); transition: opacity 1s .3s var(--ease), transform 1.2s .3s var(--ease); }
+  .line.is-on, .line.is-on small { opacity: 1; transform: none; filter: none; }
+  .line.right { left: auto; text-align: right; } .line.right small { margin-left: auto; }
+  .line.top-left { bottom: auto; top: clamp(110px, 18vh, 190px); }
+  html:not(.motion) .line { opacity: 1; transform: none; filter: none; }
+  html:not(.motion) .line small { opacity: 1; transform: none; }
+
+  .kicker { position: absolute; z-index: 5; left: var(--gut); top: clamp(96px, 15vh, 150px); margin: 0; font-size: 13px; letter-spacing: .02em; color: var(--dust); opacity: .9; }
+  .hint { position: absolute; z-index: 6; left: 50%; bottom: 22px; transform: translateX(-50%); margin: 0; font-size: 12px; color: rgba(239, 230, 216, .7); display: grid; justify-items: center; gap: 8px; transition: opacity .6s; }
+  .hint i { width: 1px; height: 36px; background: linear-gradient(var(--dust), transparent); }
+  .hint.is-gone { opacity: 0; }
+
+  /* chapter rail */
+  .rail { position: fixed; z-index: 25; right: clamp(10px, 2vw, 28px); top: 50%; transform: translateY(-50%); display: grid; gap: 8px; }
+  .rail::before, .rail::after { content: ""; position: absolute; right: 4px; top: 6px; bottom: 6px; width: 1px; }
+  .rail::before { background: rgba(239, 230, 216, .2); }
+  .rail::after { background: var(--dust); transform-origin: top; transform: scaleY(var(--fill, 0)); }
+  .rail a { position: relative; z-index: 1; display: flex; align-items: center; justify-content: flex-end; gap: 12px; min-height: 26px; text-decoration: none; font-size: 12px; }
+  .rail a::after { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(239, 230, 216, .5); background: var(--night); transition: background .4s, border-color .4s, transform .4s var(--ease); }
+  .rail a span { opacity: 0; transform: translateX(6px); transition: opacity .35s, transform .35s var(--ease); }
+  .rail a:hover span, .rail a.is-on span { opacity: 1; transform: none; }
+  .rail a.is-on::after { background: var(--dust); border-color: var(--dust); transform: scale(1.3); }
+  @media (max-width: 700px) { .rail { display: none; } }
+
+  .grain { position: fixed; inset: -50%; z-index: 45; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  html.motion .grain { animation: grain .6s steps(4) infinite; }
+  @keyframes grain { 25% { transform: translate(-2%, 2%); } 50% { transform: translate(2%, -2%); } 75% { transform: translate(-1%, -2%); } }
+
+  /* 1. the range: layered ridges at dawn */
+  #range .stage { background: linear-gradient(180deg, #1d1a2b 0%, #4a2f3a 34%, #b5552b 64%, #e3a25e 82%, #f0c98d 100%); }
+  .sun { position: absolute; z-index: 0; left: 62%; width: 22vmin; height: 22vmin; border-radius: 50%; background: radial-gradient(circle, #fff3d6 0%, #f6cf8c 40%, rgba(246, 207, 140, 0) 70%); filter: blur(2px); }
+  .smoke { z-index: 3; }
+
+  /* 2. the hide: live leather */
+  #hide .stage { cursor: crosshair; }
+
+  /* 3. the cut */
+  #cut .stage { background: radial-gradient(70% 60% at 50% 45%, #3a2a1d, var(--night)); }
+  #cut svg { overflow: visible; }
+
+  /* 4. the seam */
+  #seam .stage { background: radial-gradient(60% 60% at 50% 50%, #2c2118, var(--night)); }
+
+  /* 5. the road */
+  #road .stage { background: #2a1d14; }
+
+  /* 6. the boot */
+  .boot { position: relative; padding: clamp(80px, 12vw, 160px) 0; background: radial-gradient(55% 60% at 68% 50%, rgba(196, 146, 95, .2), transparent 70%), var(--night); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
+  .boot .wrap { display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 900px) { .boot .wrap { grid-template-columns: 1fr 1.15fr; } }
+  .boot h2 { margin: 0; font: 400 clamp(44px, 6vw, 92px)/1 "Fraunces", serif; letter-spacing: -.02em; font-variation-settings: "SOFT" 80, "opsz" 144; }
+  .boot h2 em { color: var(--dust); }
+  .boot p { margin: 20px 0 0; max-width: 38ch; color: rgba(239, 230, 216, .8); }
+  .boot-view { position: relative; height: min(70vh, 620px); min-height: 360px; perspective: 1200px; }
+  .boot-art { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .6s var(--ease); }
+  .boot-art > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .boot-leather { -webkit-mask: var(--boot-mask) center / contain no-repeat; mask: var(--boot-mask) center / contain no-repeat; }
+  .boot-hint { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; text-align: center; font-size: 13px; color: rgba(239, 230, 216, .6); }
+
+  .facts { padding: clamp(64px, 9vw, 120px) 0; background: var(--bone); color: var(--night); }
+  .facts h2 { margin: 0; font: 400 clamp(36px, 5vw, 72px)/1.05 "Fraunces", serif; letter-spacing: -.02em; max-width: 18ch; font-variation-settings: "SOFT" 80, "opsz" 144; }
+  .facts ol { list-style: none; margin: clamp(36px, 5vw, 64px) 0 0; padding: 0; display: grid; gap: 28px 48px; }
+  @media (min-width: 820px) { .facts ol { grid-template-columns: repeat(3, 1fr); } }
+  .facts li { padding-top: 18px; border-top: 1px solid rgba(27, 21, 16, .25); }
+  .facts b { display: block; font: 500 26px/1.2 "Fraunces", serif; margin-bottom: 6px; }
+  .facts p { margin: 0; color: rgba(27, 21, 16, .78); max-width: 34ch; }
+
+  .foot { padding: clamp(56px, 8vw, 96px) 0 40px; font-size: 14px; color: rgba(239, 230, 216, .7); }
+  .foot .wrap { display: grid; gap: 24px; }
+  .foot .big { font: 400 clamp(28px, 4vw, 48px)/1.1 "Fraunces", serif; color: var(--bone); margin: 0; font-variation-settings: "SOFT" 80; }
+  .foot p { margin: 0; max-width: 80ch; }
+</style>
+</head>
+<body>
+<p class="note">Concept redesign by Oceanalt. Not affiliated with, endorsed by or commissioned by R.M. Williams.</p>
+<header class="top">
+  <a class="word" href="#range">R.M.WILLIAMS</a>
+  <nav aria-label="Main"><a href="#range">The story</a><a href="#boot">The boot</a><a href="#facts">Made by hand</a></nav>
+</header>
+<nav class="rail" aria-label="Chapters">
+  <a href="#range"><span>The range</span></a>
+  <a href="#hide"><span>The hide</span></a>
+  <a href="#cut"><span>The cut</span></a>
+  <a href="#seam"><span>The seam</span></a>
+  <a href="#road"><span>The road</span></a>
+  <a href="#boot"><span>The boot</span></a>
+</nav>
+<div class="grain" aria-hidden="true"></div>
+
+<main>
+  <h1 class="sr">One piece: the story of a boot cut from a single piece of leather. A concept by Oceanalt.</h1>
+
+  <!-- 1. the range -->
+  <section class="scene" id="range" style="height: 320vh" aria-label="The range">
+    <div class="stage">
+      <div class="sun" aria-hidden="true"></div>
+      <svg class="ridges" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+      <canvas class="smoke" aria-hidden="true"></canvas>
+      <p class="kicker">South Australia, 1932</p>
+      <p class="line is-on" data-from="0" data-to=".34">A bushman sat down to make a boot.<small>He had a piece of leather, a knife and a long way to walk.</small></p>
+      <p class="line" data-from=".44" data-to=".95">He didn't want <em>parts.</em><small>Parts come apart. He wanted one piece.</small></p>
+      <p class="hint" aria-hidden="true">Scroll<i></i></p>
+    </div>
+  </section>
+
+  <!-- 2. the hide -->
+  <section class="scene" id="hide" style="height: 320vh" aria-label="The hide">
+    <div class="stage">
+      <canvas aria-hidden="true"></canvas>
+      <p class="line" data-from=".08" data-to=".5">One hide.<small>Move the light across it. Every mark is the animal's own.</small></p>
+      <p class="line right" data-from=".56" data-to=".97">Nothing <em>stitched on.</em><small>No toe cap, no side panels. Just the hide.</small></p>
+    </div>
+  </section>
+
+  <!-- 3. the cut -->
+  <section class="scene" id="cut" style="height: 380vh" aria-label="The cut">
+    <div class="stage">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <pattern id="leatherPat" patternUnits="userSpaceOnUse" width="1600" height="900"><image class="leather-img" width="1600" height="900" preserveAspectRatio="xMidYMid slice" /></pattern>
+          <filter id="lift" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity=".55" /></filter>
+        </defs>
+        <rect class="cut-hide" x="180" y="120" width="1240" height="680" rx="60" fill="url(#leatherPat)" opacity=".55" />
+        <path class="cut-piece" fill="url(#leatherPat)" filter="url(#lift)" />
+        <path class="cut-line" fill="none" stroke="#efe6d8" stroke-width="3" stroke-dasharray="8 10" />
+        <g class="knife"><path d="M0 0 L46 -10 L52 0 L46 10 Z" fill="#d8d2c6" /><rect x="-58" y="-7" width="60" height="14" rx="5" fill="#5a3a22" /></g>
+      </svg>
+      <p class="line top-left" data-from=".02" data-to=".42">Cut it whole.<small>The pattern goes on the hide in one line. The knife follows it all the way round.</small></p>
+      <p class="line" data-from=".55" data-to=".97">Then fold it <em>round the foot.</em><small>From one piece. That's the whole trick.</small></p>
+    </div>
+  </section>
+
+  <!-- 4. the seam -->
+  <section class="scene" id="seam" style="height: 320vh" aria-label="The seam">
+    <div class="stage">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><pattern id="leatherPat2" patternUnits="userSpaceOnUse" width="1600" height="900"><image class="leather-img" width="1600" height="900" preserveAspectRatio="xMidYMid slice" /></pattern></defs>
+        <path d="M0 0 H780 C800 300 790 600 780 900 H0 Z" fill="url(#leatherPat2)" />
+        <path d="M1600 0 H820 C800 300 810 600 820 900 H1600 Z" fill="url(#leatherPat2)" />
+        <path d="M790 0 C805 300 795 600 790 900" stroke="#140f0b" stroke-width="12" fill="none" opacity=".7" />
+        <g class="stitches"></g>
+        <path class="needle" d="M0 0 L140 0" stroke="#e8e2d6" stroke-width="5" stroke-linecap="round" />
+      </svg>
+      <p class="line" data-from=".08" data-to=".52">One seam.<small>At the back, where it meets itself.</small></p>
+      <p class="line right" data-from=".6" data-to=".97">Sewn <em>by hand.</em><small>In a workshop in Adelaide. Still.</small></p>
+    </div>
+  </section>
+
+  <!-- 5. the road -->
+  <section class="scene" id="road" style="height: 360vh" aria-label="The road">
+    <div class="stage">
+      <canvas aria-hidden="true"></canvas>
+      <p class="line top-left" data-from=".04" data-to=".45">Then it went <em>walking.</em><small>Stock routes, red dirt, a lot of creek crossings.</small></p>
+      <p class="line right" data-from=".55" data-to=".97">It never stopped.<small>Same boot. Different streets.</small></p>
+    </div>
+  </section>
+
+  <!-- 6. the boot -->
+  <section class="boot" id="boot" aria-labelledby="boot-h">
+    <div class="wrap">
+      <div>
+        <h2 id="boot-h">One piece.<br /><em>Since 1932.</em></h2>
+        <p>A Chelsea boot cut from a single piece of leather, with one seam at the back, made by hand in Adelaide.</p>
+      </div>
+      <div class="boot-view" id="boot-view">
+        <div class="boot-art">
+          <canvas class="boot-leather" aria-hidden="true"></canvas>
+          <svg class="boot-lines" viewBox="0 0 640 520" aria-hidden="true"></svg>
+        </div>
+        <p class="boot-hint">Move over the boot to turn it to the light</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="facts" id="facts" aria-labelledby="facts-h">
+    <div class="wrap">
+      <h2 id="facts-h" class="serif">Some things don't need improving. Just keeping.</h2>
+      <ol>
+        <li><b>1932</b><p>The year R.M. Williams started making boots in South Australia.</p></li>
+        <li><b>One piece</b><p>Each boot is cut from a single piece of leather, with one seam at the back.</p></li>
+        <li><b>Adelaide</b><p>Still made by hand there, in the workshop at Salisbury.</p></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="big">One piece. Since 1932.</p>
+    <p>A concept redesign by <a href="https://oceanalt.com.au">Oceanalt</a>, Sydney and Melbourne. Not affiliated with, endorsed by or commissioned by R.M. Williams; their name and marks are theirs. Everything on this page is drawn in code for this concept. Facts from public sources, including the company's own history.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flubber@0.4.2/build/flubber.min.js"></script>
+<script>
+(() => {
+  const motion = document.documentElement.classList.contains("motion");
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const smooth = (x) => { x = clamp(x); return x * x * (3 - 2 * x); };
+  const note = document.querySelector(".note");
+  const nh = () => document.documentElement.style.setProperty("--nh", note.offsetHeight + "px");
+  nh(); addEventListener("resize", nh);
+
+  /* ---------------------------------------------------------------- leather, made once
+     A procedural hide: pebbled grain from cellular noise, creases from fbm, pores, a tan
+     gradient. Rendered in WebGL once into an image the cut and the seam use, and live (with a
+     light you move) in the hide scene and on the boot. */
+  const LEATHER_FS = `precision highp float;
+  varying vec2 v; uniform vec2 R; uniform vec2 L; uniform float t, live;
+  float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+  vec2 h2(vec2 p){ return fract(sin(vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3))))*43758.5453); }
+  float n(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
+    return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
+  float fbm(vec2 p){ float s=0., a=.5; for(int i=0;i<5;i++){ s+=a*n(p); p*=2.03; a*=.5; } return s; }
+  float cell(vec2 p){ vec2 i=floor(p), f=fract(p); float d=1.;
+    for(int y=-1;y<=1;y++) for(int x=-1;x<=1;x++){ vec2 g=vec2(x,y); vec2 o=h2(i+g); d=min(d, length(g+o-f)); } return d; }
+  float height(vec2 p){
+    float pebble = smoothstep(.0, .6, cell(p*150.));            /* a fine, even grain */
+    float crease = fbm(p*vec2(2.2,6.) + fbm(p*1.6)*1.2);         /* soft, long creases */
+    float pores = smoothstep(.05, .0, cell(p*420.));
+    return pebble*.16 + crease*.42 - pores*.06;
+  }
+  void main(){
+    vec2 uv = v * vec2(R.x/R.y, 1.);
+    float e = 1./R.y;
+    float hc = height(uv), hx = height(uv+vec2(e*1.5,0.)), hy = height(uv+vec2(0.,e*1.5));
+    vec3 N = normalize(vec3((hc-hx)*3.2, (hc-hy)*3.2, 1.));
+    float mott = fbm(uv*1.8) * .7 + fbm(uv*7.) * .3;
+    vec3 base = mix(vec3(.34,.19,.09), vec3(.62,.39,.2), mott);
+    base *= .86 + hc*.25;
+    vec2 lp = mix(vec2(.3,.75), L, live);
+    vec3 Ld = normalize(vec3((lp - v)*vec2(R.x/R.y,1.)*1.6, .55));
+    float dif = clamp(dot(N, Ld), 0., 1.);
+    vec3 H = normalize(Ld + vec3(0.,0.,1.));
+    float spec = pow(clamp(dot(N, H), 0., 1.), 22.) * .22;
+    float vig = smoothstep(1.25, .35, length((v-.5)*vec2(1.2,1.)));
+    vec3 col = base*(.42 + .75*dif) + spec*vec3(1.,.9,.75);
+    gl_FragColor = vec4(col*mix(1., vig, live*.8), 1.);
+  }`;
+  const VS = `attribute vec2 p; varying vec2 v; void main(){ v = p*.5+.5; gl_Position = vec4(p,0.,1.); }`;
+  function leatherGL(canvas) {
+    const gl = canvas.getContext("webgl", { preserveDrawingBuffer: true, antialias: false });
+    if (!gl) return null;
+    const sh = (t, s) => { const x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return gl.getShaderParameter(x, gl.COMPILE_STATUS) ? x : (console.warn(gl.getShaderInfoLog(x)), null); };
+    const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, LEATHER_FS);
+    if (!vs || !fs) return null;
+    const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr); gl.useProgram(pr);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const u = { R: gl.getUniformLocation(pr, "R"), L: gl.getUniformLocation(pr, "L"), t: gl.getUniformLocation(pr, "t"), live: gl.getUniformLocation(pr, "live") };
+    return {
+      draw(lx, ly, live) {
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.uniform2f(u.R, canvas.width, canvas.height); gl.uniform2f(u.L, lx, ly); gl.uniform1f(u.live, live);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      },
+    };
+  }
+  /* the still leather image for the cut and the seam */
+  (() => {
+    const c = document.createElement("canvas"); c.width = 1600; c.height = 900;
+    const L = leatherGL(c);
+    let url;
+    if (L) { L.draw(.3, .75, 0); url = c.toDataURL("image/jpeg", .9); }
+    else { const x = c.getContext("2d"); x.fillStyle = "#9a6a3e"; x.fillRect(0, 0, 1600, 900); url = c.toDataURL(); }
+    document.querySelectorAll(".leather-img").forEach((im) => im.setAttribute("href", url));
+  })();
+
+  /* ---------------------------------------------------------------- scroll engine
+     Every scene eases toward the scroll; each later scene dissolves in over a screen. */
+  const scenes = [...document.querySelectorAll(".scene")].map((el, i) => ({ el, i, id: el.id, stage: el.querySelector(".stage"), lines: [...el.querySelectorAll(".line")], p: 0 }));
+  const rail = document.querySelector(".rail"), railLinks = [...rail.querySelectorAll("a")].map((a) => ({ a, el: document.querySelector(a.getAttribute("href")) }));
+  const hint = document.querySelector(".hint");
+  const handlers = {};
+  function measure() {
+    const vh = innerHeight;
+    for (const s of scenes) {
+      const r = s.el.getBoundingClientRect();
+      const raw = clamp(-r.top / Math.max(1, r.height - vh));
+      s.sp = s.sp == null || !motion ? raw : s.sp + (raw - s.sp) * .12;
+      if (Math.abs(raw - s.sp) < .0005) s.sp = raw;
+      const fade = motion && s.i > 0 ? vh / Math.max(1, r.height - vh) : 0;
+      s.op = 1;
+      if (fade) { s.op = smooth(s.sp / fade); s.stage.style.opacity = String(s.op); }
+      s.p = fade ? clamp((s.sp - fade) / (1 - fade)) : s.sp;
+      s.on = r.top < vh && r.bottom > 0;
+      for (const l of s.lines) l.classList.toggle("is-on", s.p >= +l.dataset.from && (s.p < +l.dataset.to || +l.dataset.to >= 1));
+    }
+    scenes.forEach((s, i) => { const nx = scenes[i + 1]; if (nx && nx.on && nx.op > .12) s.lines.forEach((l) => l.classList.remove("is-on")); });
+    let act = 0; railLinks.forEach((c, i) => { if (c.el.getBoundingClientRect().top < vh * .5) act = i; });
+    railLinks.forEach((c, i) => c.a.classList.toggle("is-on", i === act));
+    rail.style.setProperty("--fill", String(clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - vh))));
+    if (hint) hint.classList.toggle("is-gone", scrollY > 40);
+  }
+  function frame(now) {
+    measure();
+    if (motion) for (const s of scenes) if (s.on && handlers[s.id]) handlers[s.id](s, now / 1000);
+    requestAnimationFrame(frame);
+  }
+  window.__film = { scenes, handlers };
+
+  /* ---------------------------------------------------------------- 1. the range
+     Five ridgelines drawn from noise, back to front, each a little darker and lower; they drift
+     apart as you scroll (parallax) while the sun lifts. Campfire smoke curls up front left. */
+  const ridgeSvg = document.querySelector("#range .ridges");
+  const ridgeCols = ["#7c3f3a", "#8f4429", "#6b3020", "#4a2316", "#2b160d"];
+  const rnd = (i) => { const x = Math.sin(i * 127.1) * 43758.5453; return x - Math.floor(x); };
+  const noise1 = (x, seed) => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return rnd(i + seed) * (1 - u) + rnd(i + 1 + seed) * u; };
+  const ridges = ridgeCols.map((col, k) => {
+    const base = 470 + k * 80, amp = 150 - k * 18, seed = k * 31.7;
+    let d = `M -100 900 L -100 ${base}`;
+    for (let x = -100; x <= 1700; x += 20) {
+      const y = base - amp * (noise1(x / 260, seed) * .7 + noise1(x / 90, seed + 9) * .25 + noise1(x / 30, seed + 3) * .05);
+      d += ` L ${x} ${y.toFixed(1)}`;
+    }
+    d += " L 1700 900 Z";
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttribute("d", d); p.setAttribute("fill", col);
+    ridgeSvg.appendChild(p);
+    return p;
+  });
+  const sun = document.querySelector("#range .sun");
+  const smokeCv = document.querySelector("#range .smoke"), sx = smokeCv.getContext("2d");
+  const puffs = [];
+  let lastT = 0;
+  handlers.range = (s, t) => {
+    const k = s.p, dt = Math.min(.05, t - lastT || .016); lastT = t;
+    ridges.forEach((p, i) => p.setAttribute("transform", `translate(0 ${(-k * (14 + i * 34)).toFixed(1)})`));
+    sun.style.top = `${44 - k * 26}%`;
+    sun.style.opacity = String(.7 + k * .3);
+    const dpr = Math.min(devicePixelRatio || 1, 2), W = smokeCv.clientWidth * dpr, H = smokeCv.clientHeight * dpr;
+    if (smokeCv.width !== W || smokeCv.height !== H) { smokeCv.width = W; smokeCv.height = H; }
+    if (puffs.length < 60 && Math.random() < .4) puffs.push({ x: W * .18 + (Math.random() - .5) * 10 * dpr, y: H * .9, r: 6 * dpr, a: .22, vy: -(18 + Math.random() * 18) * dpr, life: 0 });
+    sx.clearRect(0, 0, W, H);
+    for (const q of puffs) {
+      q.life += dt; q.y += q.vy * dt; q.x += Math.sin(q.life * 1.3 + q.y * .01) * 14 * dpr * dt + 8 * dpr * dt; q.r += 9 * dpr * dt;
+      const a = q.a * (1 - q.life / 6);
+      const g = sx.createRadialGradient(q.x, q.y, 0, q.x, q.y, q.r);
+      g.addColorStop(0, `rgba(230,214,196,${Math.max(0, a)})`); g.addColorStop(1, "rgba(230,214,196,0)");
+      sx.fillStyle = g; sx.beginPath(); sx.arc(q.x, q.y, q.r, 0, Math.PI * 2); sx.fill();
+    }
+    for (let i = puffs.length - 1; i >= 0; i--) if (puffs[i].life > 6) puffs.splice(i, 1);
+    /* the fire itself: a small flicker */
+    const fx = W * .18, fy = H * .91, fl = 1 + Math.sin(t * 13) * .12 + Math.sin(t * 7.3) * .08;
+    const fg = sx.createRadialGradient(fx, fy, 0, fx, fy, 60 * dpr * fl);
+    fg.addColorStop(0, "rgba(255,190,90,.85)"); fg.addColorStop(.3, "rgba(240,120,40,.45)"); fg.addColorStop(1, "rgba(240,120,40,0)");
+    sx.fillStyle = fg; sx.beginPath(); sx.arc(fx, fy, 60 * dpr * fl, 0, Math.PI * 2); sx.fill();
+  };
+
+  /* ---------------------------------------------------------------- 2. the hide (live) */
+  const hideCv = document.querySelector("#hide canvas");
+  const hideL = leatherGL(hideCv);
+  let lx = .3, ly = .7, tx = .3, ty = .7, pointer = false;
+  hideCv.parentElement.addEventListener("pointermove", (e) => { const r = hideCv.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width; ty = 1 - (e.clientY - r.top) / r.height; pointer = true; });
+  handlers.hide = (s, t) => {
+    if (!hideL) return;
+    const dpr = Math.min(devicePixelRatio || 1, 1.5), W = Math.round(hideCv.clientWidth * dpr), H = Math.round(hideCv.clientHeight * dpr);
+    if (hideCv.width !== W || hideCv.height !== H) { hideCv.width = W; hideCv.height = H; }
+    if (!pointer) { tx = .25 + s.p * .5 + Math.sin(t * .4) * .05; ty = .65 - s.p * .25; }   /* with no mouse, the light sweeps as you scroll */
+    lx += (tx - lx) * .08; ly += (ty - ly) * .08;
+    hideL.draw(lx, ly, 1);
+  };
+
+  /* ---------------------------------------------------------------- 3. the cut
+     The one-piece pattern (both quarters and the vamp, flat) is traced by a dashed knife line as
+     you scroll; then the piece lifts off the hide and folds into the side of a boot. */
+  const PATTERN = "M330 230 L560 210 C620 360 700 470 800 500 C900 470 980 360 1040 210 L1270 230 C1280 420 1230 610 1100 700 C1030 750 920 772 800 772 C680 772 570 750 500 700 C370 610 320 420 330 230 Z";
+  const BOOT = "M150 62 C200 54 255 50 300 52 C302 140 306 205 318 240 C338 282 380 300 450 318 C520 334 572 350 588 384 C598 406 590 428 570 436 L232 440 L226 466 L146 466 L140 430 C134 300 138 170 150 62 Z".replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, (m, x, y) => `${(+x * 1.6 + 290).toFixed(1)} ${(+y * 1.6 + 30).toFixed(1)}`);
+  const cutPiece = document.querySelector("#cut .cut-piece"), cutLine = document.querySelector("#cut .cut-line"), knife = document.querySelector("#cut .knife"), cutHide = document.querySelector("#cut .cut-hide");
+  cutPiece.setAttribute("d", PATTERN); cutLine.setAttribute("d", PATTERN);
+  const lineLen = cutLine.getTotalLength();
+  const morph = window.flubber ? flubber.interpolate(PATTERN, BOOT, { maxSegmentLength: 8 }) : null;
+  let morphTo = null;
+  handlers.cut = (s) => {
+    const trace = smooth(s.p / .48);
+    cutLine.style.strokeDasharray = `${lineLen}`;
+    cutLine.style.strokeDashoffset = String(lineLen * (1 - trace));
+    const pt = cutLine.getPointAtLength(lineLen * trace), pt2 = cutLine.getPointAtLength(Math.min(lineLen, lineLen * trace + 2));
+    const ang = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180 / Math.PI;
+    knife.setAttribute("transform", `translate(${pt.x} ${pt.y}) rotate(${ang})`);
+    knife.style.opacity = String(trace > .001 && trace < .999 ? 1 : 0);
+    const lift = smooth((s.p - .48) / .1), fold = smooth((s.p - .56) / .34);
+    cutPiece.style.opacity = String(.25 + .75 * Math.max(trace > .999 ? 1 : 0, lift));
+    cutHide.style.opacity = String(.55 * (1 - lift));
+    cutLine.style.opacity = String(1 - lift);
+    cutPiece.style.transform = `translate(0px, ${-lift * 14}px)`;
+    if (morph) cutPiece.setAttribute("d", fold > 0 ? morph(fold) : PATTERN);
+  };
+
+  /* ---------------------------------------------------------------- 4. the seam
+     Stitches appear one by one down the back seam as the needle works its way down. */
+  const stG = document.querySelector("#seam .stitches"), needle = document.querySelector("#seam .needle");
+  const STITCHES = 26, stitches = [];
+  for (let i = 0; i < STITCHES; i++) {
+    const y = 40 + i * (820 / STITCHES), x = 790 + Math.sin(y / 900 * Math.PI) * 8;
+    const l = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    l.setAttribute("d", `M${x - 26} ${y} L${x + 26} ${y + 14}`);
+    l.setAttribute("stroke", "#efe0c2"); l.setAttribute("stroke-width", "5"); l.setAttribute("stroke-linecap", "round");
+    l.style.opacity = "0"; stG.appendChild(l); stitches.push({ l, x, y });
+  }
+  handlers.seam = (s, t) => {
+    const k = smooth(s.p / .9) * STITCHES;
+    stitches.forEach((st, i) => { st.l.style.opacity = String(clamp(k - i)); });
+    const cur = stitches[Math.min(STITCHES - 1, Math.floor(k))];
+    const bob = Math.sin(t * 9) * 10;
+    needle.setAttribute("transform", `translate(${cur.x + 30} ${cur.y + 10 + bob}) rotate(-28)`);
+    needle.style.opacity = String(k < STITCHES - .2 ? 1 : 0);
+  };
+
+  /* ---------------------------------------------------------------- 5. the road
+     Ground slides past: red dirt that turns to bluestone cobbles halfway. A pair of boot prints
+     walks across, left, right, and each print stays a while before the dust takes it. */
+  const roadCv = document.querySelector("#road canvas"), rx = roadCv.getContext("2d");
+  const print = (x, y, s, flip, a) => {
+    rx.save(); rx.translate(x, y); rx.scale(s * (flip ? -1 : 1), s); rx.globalAlpha = a;
+    rx.fillStyle = "rgba(24,12,6,.8)";
+    rx.beginPath(); rx.ellipse(0, -34, 30, 52, 0, 0, Math.PI * 2); rx.fill();          /* sole */
+    rx.beginPath(); rx.ellipse(-2, 58, 26, 28, 0, 0, Math.PI * 2); rx.fill();          /* heel */
+    rx.fillStyle = "rgba(255,210,160,.12)";
+    rx.beginPath(); rx.ellipse(4, -40, 18, 36, 0, 0, Math.PI * 2); rx.fill();          /* pressed edge catching light */
+    rx.restore();
+  };
+  handlers.road = (s, t) => {
+    const dpr = Math.min(devicePixelRatio || 1, 2), W = roadCv.clientWidth * dpr, H = roadCv.clientHeight * dpr;
+    if (roadCv.width !== W || roadCv.height !== H) { roadCv.width = W; roadCv.height = H; }
+    const scroll = s.p * W * 2.2;
+    const city = smooth((s.p - .42) / .2);
+    /* ground */
+    const g = rx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, `rgb(${148 - city * 80},${72 - city * 10},${40 + city * 20})`); g.addColorStop(1, `rgb(${92 - city * 50},${44 - city * 4},${24 + city * 16})`);
+    rx.fillStyle = g; rx.fillRect(0, 0, W, H);
+    /* dirt speckle, sliding */
+    rx.globalAlpha = 1 - city;
+    for (let i = 0; i < 380; i++) {
+      const px = ((rnd(i) * W * 1.5 - scroll * .9) % (W * 1.5) + W * 1.5) % (W * 1.5) - W * .25, py = rnd(i + 7) * H;
+      rx.fillStyle = rnd(i + 3) > .5 ? "rgba(70,30,14,.5)" : "rgba(210,140,90,.35)";
+      rx.beginPath(); rx.arc(px, py, (1 + rnd(i + 5) * 3) * dpr, 0, Math.PI * 2); rx.fill();
+    }
+    /* cobbles, sliding */
+    rx.globalAlpha = city;
+    const cw = 120 * dpr, ch = 70 * dpr;
+    for (let row = -1; row < H / ch + 1; row++) for (let col = -2; col < W / cw + 2; col++) {
+      const off = (row % 2) * cw * .5, x = col * cw + off - (scroll % cw), y = row * ch;
+      const v = 58 + rnd(row * 31 + col * 7) * 26;
+      rx.fillStyle = `rgb(${v.toFixed(0)},${(v + 3).toFixed(0)},${(v + 8).toFixed(0)})`;
+      rx.beginPath(); rx.roundRect(x + 4 * dpr, y + 4 * dpr, cw - 8 * dpr, ch - 8 * dpr, 18 * dpr); rx.fill();
+      rx.fillStyle = "rgba(255,220,170,.06)"; rx.fillRect(x + 10 * dpr, y + 8 * dpr, cw - 20 * dpr, 6 * dpr);   /* lamplight on the wet stone */
+    }
+    rx.globalAlpha = 1;
+    /* prints: a stride every 140px of travel, alternating */
+    const stride = 150 * dpr;
+    const first = Math.floor((scroll - W) / stride);
+    for (let i = first; i < first + W / stride + 3; i++) {
+      const wx = i * stride - scroll + W * .2, left = i % 2 === 0;
+      const y = H * (left ? .56 : .66), age = (W * .78 - wx) / (W * .9);
+      if (wx > W * .82) continue;
+      print(wx, y, dpr * 1.1, !left, clamp(1 - age * .8));
+    }
+    /* a soft vignette */
+    const v = rx.createRadialGradient(W / 2, H / 2, H * .2, W / 2, H / 2, H * .95);
+    v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(15,10,6,.7)");
+    rx.fillStyle = v; rx.fillRect(0, 0, W, H);
+  };
+
+  /* ---------------------------------------------------------------- 6. the boot
+     The boot drawn as an outline with its single back seam and pull tab, filled with the live
+     leather. It tilts toward your pointer and the light follows. */
+  const bootView = document.getElementById("boot-view"), art = bootView.querySelector(".boot-art");
+  const bootCv = bootView.querySelector(".boot-leather"), bootSvg = bootView.querySelector(".boot-lines");
+  const BOOT_SIDE = "M150 62 C200 54 255 50 300 52 C302 140 306 205 318 240 C338 282 380 300 450 318 C520 334 572 350 588 384 C598 406 590 428 570 436 L232 440 L226 466 L146 466 L140 430 C134 300 138 170 150 62 Z";
+  bootSvg.innerHTML = `
+    <defs><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".7" stop-color="#000" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></linearGradient></defs>
+    <path d="${BOOT_SIDE}" fill="url(#shade)" />
+    <path d="M205 56 C213 120 221 172 232 214 C243 172 251 120 259 53" fill="#1f1610" />
+    <path d="M207 60 C214 118 222 168 232 206 M257 57 C250 118 242 168 232 206" stroke="#3a2b20" stroke-width="1.5" fill="none" />
+    <path d="M150 62 C146 36 150 20 160 18 C172 17 176 34 172 60" fill="none" stroke="#5a3a22" stroke-width="8" stroke-linecap="round" />
+    <path d="M138 430 L570 434 C586 432 592 424 594 414 L596 440 C592 449 582 452 570 452 L234 454 L228 472 L144 472 Z" fill="#20160f" />
+    <path d="M236 446 L568 442" stroke="#c9b089" stroke-width="2" stroke-dasharray="5 5" opacity=".55" />
+    <path d="M157 72 C148 200 145 320 146 424" fill="none" stroke="#efe0c2" stroke-width="2.2" stroke-dasharray="6 6" opacity=".7" />
+    <path d="M300 52 C200 54 160 60 150 62" fill="none" stroke="#2a1d14" stroke-width="3" />`;
+  const maskSvg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 520'><path d='${BOOT_SIDE}' fill='black'/></svg>`;
+  bootCv.style.setProperty("--boot-mask", `url("data:image/svg+xml;utf8,${encodeURIComponent(maskSvg)}")`);
+  const bootL = leatherGL(bootCv);
+  let bx = .5, by = .5, btx = .5, bty = .5, bootOn = false;
+  bootView.addEventListener("pointermove", (e) => { const r = bootView.getBoundingClientRect(); btx = (e.clientX - r.left) / r.width; bty = (e.clientY - r.top) / r.height; });
+  bootView.addEventListener("pointerleave", () => { btx = .5; bty = .5; });
+  new IntersectionObserver(([e]) => { bootOn = e.isIntersecting; if (bootOn) requestAnimationFrame(bootLoop); }).observe(bootView);
+  function bootLoop(now) {
+    if (!bootOn) return;
+    const t = now / 1000;
+    if (!motion) { btx = .45; bty = .4; }
+    else if (btx === .5 && bty === .5) { btx = .5 + Math.sin(t * .5) * .12; }
+    bx += (btx - bx) * .07; by += (bty - by) * .07;
+    art.style.transform = motion ? `rotateY(${(bx - .5) * 18}deg) rotateX(${-(by - .5) * 10}deg)` : "";
+    if (bootL) {
+      const dpr = Math.min(devicePixelRatio || 1, 2), W = Math.round(bootCv.clientWidth * dpr), H = Math.round(bootCv.clientHeight * dpr);
+      if (bootCv.width !== W || bootCv.height !== H) { bootCv.width = W; bootCv.height = H; }
+      bootL.draw(bx, 1 - by, 1);
+    }
+    if (motion) requestAnimationFrame(bootLoop);
+  }
+
+  /* ---------------------------------------------------------------- go */
+  if (!motion) {
+    addEventListener("scroll", measure, { passive: true }); measure();
+    /* still frames for reduced motion */
+    handlers.range({ p: 0 }, 0); hideL && hideL.draw(.3, .7, 1); handlers.cut({ p: 1 }); handlers.seam({ p: 1 }, 0); handlers.road({ p: .3 }, 0);
+    return;
+  }
+  if (typeof Lenis !== "undefined") {
+    const lenis = new Lenis({ lerp: .08, smoothWheel: true, wheelMultiplier: .9 });
+    const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
+    document.addEventListener("click", (e) => { const a = e.target.closest('a[href^="#"]'); const el = a && document.querySelector(a.getAttribute("href")); if (el) { e.preventDefault(); lenis.scrollTo(el, { duration: 1.8 }); } });
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -808,34 +808,39 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   void main(){
     vec2 full = O + vec2(v.x, 1.-v.y) * S, C = vec2(.5, .55);
     vec2 uv = C + (full - C) / Z;
-    vec3 base = texture2D(T, uv).rgb, c = base;
-    /* the pour: slide down, two phases cross-faded */
-    float stream = step(.45, uv.x) * step(uv.x, .72) * (1. - smoothstep(.42, .47, uv.y)) * max(green(base), smoothstep(.45,.8, dot(base, vec3(.3,.6,.1))));
+    /* outside the picture (phones show the whole glass) is black, faded softly at the edges */
+    float inside = smoothstep(0., .05, uv.y) * smoothstep(1., .95, uv.y) * smoothstep(0., .03, uv.x) * smoothstep(1., .97, uv.x);
+    vec2 cuv = clamp(uv, .001, .999);
+    vec3 base = texture2D(T, cuv).rgb, c = base;
+    /* the pour: its own texture slides down, two phases cross-faded; soft edges, no box */
+    float box = smoothstep(.43, .49, uv.x) * (1. - smoothstep(.67, .73, uv.x)) * (1. - smoothstep(.38, .48, uv.y));
+    float stream = box * max(green(base), smoothstep(.45, .8, dot(base, vec3(.3, .6, .1))));
     if (stream > .01) {
-      float L = .07, p1 = fract(t*.9), p2 = fract(t*.9 + .5);
-      vec2 w = vec2((n(vec2(uv.y*30., t*3.)) - .5) * .004, 0.);
-      vec3 a = texture2D(T, uv + w - vec2(0., p1*L)).rgb, b = texture2D(T, uv + w - vec2(0., p2*L)).rgb;
+      float L = .06, p1 = fract(t*.7), p2 = fract(t*.7 + .5);
+      vec2 w = vec2((n(vec2(uv.y*24., t*2.)) - .5) * .003, 0.);
+      vec3 a = texture2D(T, clamp(cuv + w - vec2(0., p1*L), .001, .999)).rgb, b = texture2D(T, clamp(cuv + w - vec2(0., p2*L), .001, .999)).rgb;
       c = mix(c, mix(a, b, abs(p1*2. - 1.)), stream);
     }
-    /* the soda in the glass: refraction wobble, light catching, bubbles rising */
-    float glass = smoothstep(.26, .28, uv.x) * (1. - smoothstep(.71, .73, uv.x)) * smoothstep(.43, .47, uv.y);
+    /* the soda: a gentle shimmer, light catching, and bubbles rising; the edges blend away */
+    float glass = smoothstep(.24, .31, uv.x) * (1. - smoothstep(.69, .76, uv.x)) * smoothstep(.42, .52, uv.y);
     if (glass > .01) {
-      vec2 d = vec2(n(uv*vec2(14.,9.) + vec2(0., -t*.5)) - .5, n(uv*vec2(9.,14.) + vec2(t*.3, -t*.6)) - .5) * .006;
-      vec3 r = texture2D(T, uv + d).rgb;
-      r += pow(n(uv*vec2(40.,24.) + vec2(t*.4, -t*1.2)), 6.) * .35 * vec3(.85, 1., .6);
-      /* bubbles: a grid of cells, each with its own rising speed and a few lit */
-      vec2 g = vec2(uv.x * 70., uv.y * 38.);
-      float col = floor(g.x), sp = 1.2 + h(vec2(col, 3.)) * 2.4;
-      vec2 cell = vec2(col, floor(g.y + t * sp)), f = vec2(fract(g.x), fract(g.y + t * sp)) - .5;
-      float on = step(.82, h(cell)), rad = .16 + h(cell + 7.) * .18;
-      float ring = smoothstep(rad, rad - .06, length(f)) - smoothstep(rad - .08, rad - .14, length(f));
-      r += on * ring * vec3(.9, 1., .75) * .75 * smoothstep(.47, .55, uv.y);
-      /* the foam line churns */
-      float foam = exp(-pow((uv.y - .455) / .012, 2.)) * n(vec2(uv.x * 60. - t * 2., t));
-      r += foam * vec3(.9, 1., .8) * .25;
+      vec2 d = vec2(n(uv*vec2(10.,7.) + vec2(0., -t*.35)) - .5, n(uv*vec2(7.,10.) + vec2(t*.2, -t*.4)) - .5) * .0028 * glass;
+      vec3 r = texture2D(T, clamp(cuv + d, .001, .999)).rgb;
+      r += pow(n(uv*vec2(34.,20.) + vec2(t*.3, -t*.8)), 7.) * .22 * vec3(.85, 1., .6);
+      vec2 g = vec2(uv.x * 120., uv.y * 64.);
+      float col = floor(g.x), sp = 1.6 + h(vec2(col, 3.)) * 3.;
+      vec2 cell = vec2(col, floor(g.y + t * sp));
+      vec2 f = vec2(fract(g.x), fract(g.y + t * sp)) - .5;
+      f.x += (h(cell + 3.) - .5) * .35;
+      float on = step(.9, h(cell)), rad = .12 + h(cell + 7.) * .22, dd = length(f);
+      float rim = smoothstep(rad, rad - .05, dd) - smoothstep(rad - .05, rad - .11, dd);
+      float spec = smoothstep(rad * .45, 0., length(f - vec2(-rad * .35, -rad * .35)));
+      r += on * smoothstep(.5, .62, uv.y) * (rim * .32 * vec3(.9, 1., .8) + spec * .75);
+      float foam = exp(-pow((uv.y - .455) / .014, 2.)) * n(vec2(uv.x * 50. - t * 1.4, t * .6));
+      r += foam * vec3(.9, 1., .8) * .18;
       c = mix(c, r, glass);
     }
-    gl_FragColor = vec4(c, 1.);
+    gl_FragColor = vec4(c * inside, 1.);
   }`;
   const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); if (!gl.getShaderParameter(x, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(x)); return null; } return x; };
   const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
@@ -853,8 +858,15 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     cv.width = Math.round(w * dpr); cv.height = Math.round(hh * dpr); gl.viewport(0, 0, cv.width, cv.height);
     spl.width = cv.width; spl.height = cv.height;
     const ir = img.naturalWidth / img.naturalHeight, vr = w / hh;
-    let a = 1, b = 1; if (vr > ir) b = ir / vr; else a = vr / ir;
-    crop = { sx: a, sy: b, ox: (1 - a) * .5, oy: (1 - b) * .5 };
+    let a = 1, b = 1, ox, oy;
+    if (vr < 1) {
+      /* a tall phone: show the whole glass and pour, with black above and below */
+      a = .62; b = a * ir / vr; ox = .5 - a / 2; oy = .55 - b / 2;
+    } else {
+      if (vr > ir) b = ir / vr; else a = vr / ir;
+      ox = (1 - a) * .5; oy = (1 - b) * .5;
+    }
+    crop = { sx: a, sy: b, ox, oy };
     gl.uniform2f(uS, a, b); gl.uniform2f(uO, crop.ox, crop.oy);
   }
   /* image point -> screen pixel, through the crop and the zoom */
@@ -881,7 +893,8 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
       gDark.style.opacity = String(clamp01((s.p - .8) / .2));
       if (s.clips) return;
       const t = now, dt = Math.min(.05, t - last || .016); last = t;
-      Z = 1.22 - .22 * (1 - Math.pow(1 - s.p, 3));
+      const zFrom = innerWidth < innerHeight ? 1.06 : 1.16;
+      Z = zFrom - (zFrom - 1) * (1 - Math.pow(1 - s.p, 3));
       gl.uniform1f(uZ, Z); gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       if (drops.length < 34 && Math.random() < .5) spawn();
       sx.clearRect(0, 0, spl.width, spl.height);

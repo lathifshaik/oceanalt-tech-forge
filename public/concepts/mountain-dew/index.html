@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mountain Dew, concept redesign by Oceanalt</title>
+<meta name="description" content="A concept redesign by Oceanalt. Not affiliated with, endorsed by or commissioned by Mountain Dew or PepsiCo." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --granite: #1c2320;
+    --snow: #eef2ec;
+    --dew: #a6e22e;
+    --pine: #1f3a2a;
+    --mist: #c8d5cc;
+    --ease: cubic-bezier(.22, .7, .15, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--granite); color: var(--snow); font: 400 18px/1.55 "Archivo", system-ui, sans-serif; font-stretch: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--dew); outline-offset: 3px; }
+
+  /* ---------- the concept note: always the first thing you can read */
+  .note { margin: 0; position: relative; z-index: 5; padding: 9px 16px; background: var(--dew); color: var(--granite); font-size: 13px; font-weight: 600; text-align: center; }
+
+  /* ---------- hero: the mountain pours */
+  .hero { position: relative; min-height: 100svh; display: grid; overflow: hidden; isolation: isolate; }
+  .hero-img, .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); }
+  .hero canvas { opacity: 0; transition: opacity 1.2s var(--ease); }
+  .hero.is-live canvas { opacity: 1; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(28, 35, 32, .55) 0%, rgba(28, 35, 32, 0) 34%, rgba(28, 35, 32, 0) 70%, var(--granite) 100%); }
+  .mist { position: absolute; inset: 0; z-index: 2; pointer-events: none; width: 100%; height: 100%; }
+
+  .bar { position: absolute; z-index: 4; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 22px clamp(16px, 4vw, 48px); }
+  .word { font-weight: 900; font-stretch: 62%; font-size: 26px; letter-spacing: .01em; text-transform: uppercase; line-height: 1; text-decoration: none; }
+  .bar nav { display: flex; gap: 22px; font-size: 15px; font-weight: 500; }
+  .bar nav a { text-decoration: none; opacity: .9; }
+  .bar nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+
+  .hero-copy { position: relative; z-index: 3; align-self: start; padding: clamp(96px, 14vh, 140px) clamp(16px, 4vw, 48px) 0; }
+  .hero h1 { margin: 0; font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .84; letter-spacing: -.005em;
+    font-size: clamp(56px, min(9.4vw, 15vh), 168px); max-width: 9ch; text-shadow: 0 2px 40px rgba(0, 0, 0, .25); }
+  .hero h1 span { display: block; }
+  .hero p { margin: 22px 0 0; max-width: 30ch; font-size: clamp(17px, 1.5vw, 20px); color: var(--snow); }
+  .pour { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 15px 26px; border-radius: 999px;
+    background: var(--dew); color: var(--granite); font-weight: 700; font-size: 16px; text-decoration: none;
+    box-shadow: 0 10px 40px -8px rgba(166, 226, 46, .65); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .pour:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -8px rgba(166, 226, 46, .8); }
+  .pour:active { transform: translateY(0); }
+
+  /* load: the headline settles once, then the mountain does the moving */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 span { animation: settle 1.1s var(--ease) both; }
+    .hero h1 span + span { animation-delay: .12s; }
+    .hero p, .hero .pour { animation: fade 1s .45s var(--ease) both; }
+  }
+  @keyframes settle { from { opacity: 0; transform: translateY(.35em); } }
+  @keyframes fade { from { opacity: 0; } }
+
+  /* ---------- below: quiet and short */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); }
+  .taste { padding-block: clamp(72px, 12vw, 150px) clamp(56px, 8vw, 100px); }
+  .taste h2 { margin: 0; font-weight: 800; font-stretch: 75%; font-size: clamp(40px, 6.4vw, 92px); line-height: .95; letter-spacing: -.01em; text-transform: uppercase; max-width: 14ch; }
+  .taste-grid { display: grid; gap: 28px 48px; margin-top: clamp(40px, 6vw, 72px); }
+  .taste-grid div { padding-top: 18px; border-top: 2px solid var(--dew); }
+  .taste-grid h3 { margin: 0 0 6px; font-size: 22px; font-weight: 700; font-stretch: 85%; }
+  .taste-grid p { margin: 0; color: var(--mist); max-width: 34ch; }
+  @media (min-width: 820px) { .taste-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  .find { background: var(--dew); color: var(--granite); }
+  .find .wrap { display: grid; gap: 24px; padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(56px, 8vw, 96px); }
+  .find h2 { margin: 0; font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: clamp(48px, 8vw, 120px); line-height: .88; }
+  .find p { margin: 0; max-width: 40ch; font-size: 19px; }
+  .find form { display: flex; flex-wrap: wrap; gap: 10px; }
+  .find label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .find input { flex: 1 1 220px; min-height: 54px; padding: 0 22px; border: 2px solid var(--granite); border-radius: 999px; background: transparent; color: var(--granite); font: inherit; }
+  .find input::placeholder { color: rgba(28, 35, 32, .6); }
+  .find button { min-height: 54px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--granite); color: var(--dew); font: inherit; font-weight: 700; cursor: pointer; }
+  .find-msg { min-height: 1.5em; font-weight: 600; }
+  @media (min-width: 900px) { .find .wrap { grid-template-columns: 1.1fr 1fr; align-items: end; } }
+
+  footer { padding: 36px 0 44px; font-size: 14px; color: var(--mist); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; }
+  footer a { color: var(--snow); }
+
+  @media (max-width: 640px) {
+    .bar nav { display: none; }
+    .hero { min-height: 92svh; }
+    /* on a phone the words sit over the fall, so the left side gets a little shade */
+    .hero-copy::before { content: ""; position: absolute; z-index: -1; inset: 40px -16px -40px -16px; pointer-events: none;
+      background: radial-gradient(120% 80% at 0% 40%, rgba(28, 35, 32, .62), rgba(28, 35, 32, 0) 70%); }
+    .hero p { text-shadow: 0 1px 12px rgba(0, 0, 0, .5); }
+  }
+</style>
+</head>
+<body>
+<p class="note">Concept redesign by Oceanalt. Not affiliated with, endorsed by or commissioned by Mountain Dew or PepsiCo.</p>
+
+<header class="hero" id="top">
+  <img class="hero-img" src="hero.webp" alt="A granite mountain at dawn with bright green liquid pouring from a crack in its face into a green pool among pine trees." fetchpriority="high" />
+  <canvas aria-hidden="true"></canvas>
+  <canvas class="mist" aria-hidden="true"></canvas>
+  <div class="bar">
+    <a class="word" href="#top">Mountain Dew</a>
+    <nav aria-label="Page"><a href="#taste">The taste</a><a href="#find">Find it</a></nav>
+  </div>
+  <div class="hero-copy">
+    <h1><span>Straight off</span><span>the mountain</span></h1>
+    <p>Cold, sharp citrus with plenty of fizz. Best poured over ice.</p>
+    <a class="pour" href="#find">Find a cold one</a>
+  </div>
+</header>
+
+<main>
+  <section class="taste wrap" id="taste" aria-labelledby="taste-h">
+    <h2 id="taste-h">Loud on purpose.</h2>
+    <div class="taste-grid">
+      <div><h3>Citrus first</h3><p>Lemon and lime up front, a little sweetness behind, and a clean finish.</p></div>
+      <div><h3>Lots of fizz</h3><p>Big bubbles that hold up over ice, so the last sip still has bite.</p></div>
+      <div><h3>Ice cold</h3><p>Straight from the fridge or poured over a full glass of ice. Nothing in between.</p></div>
+    </div>
+  </section>
+
+  <section class="find" id="find" aria-labelledby="find-h">
+    <div class="wrap">
+      <h2 id="find-h">Find a cold one near you</h2>
+      <div>
+        <p>Pop in your suburb or postcode and we'll show the closest places that stock it.</p>
+        <form id="find-form" novalidate>
+          <label for="where">Suburb or postcode</label>
+          <input id="where" name="where" autocomplete="postal-code" placeholder="Suburb or postcode" />
+          <button type="submit">Show places</button>
+        </form>
+        <p class="find-msg" id="find-msg" role="status"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>A concept by <a href="https://oceanalt.com.au">Oceanalt</a>, Sydney and Melbourne. Mountain Dew is a trademark of PepsiCo; this page is not theirs.</span>
+    <span>Hero image generated for this concept.</span>
+  </div>
+</footer>
+
+<script>
+/* The finder is a concept: it says so instead of pretending to search. */
+document.getElementById("find-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const v = document.getElementById("where").value.trim();
+  document.getElementById("find-msg").textContent = v
+    ? `This is a concept, so there's no store list behind it. On the real site, places near ${v} would show here.`
+    : "Enter a suburb or postcode first.";
+});
+
+/* The pour. The photo is drawn in WebGL; wherever it is that bright green, the pixels are
+   sampled through falling noise, so the liquid runs down the rock and churns in the pool.
+   Everything else in the photo stays still. Mist rises off the bottom of the fall.
+   Reduced motion, no WebGL, or a failed load: the still photo stays. */
+(() => {
+  const hero = document.querySelector(".hero");
+  const img = hero.querySelector(".hero-img");
+  const [cv, mistCv] = hero.querySelectorAll("canvas");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const gl = cv.getContext("webgl", { premultipliedAlpha: false, antialias: false });
+  if (!gl) return;
+
+  const VS = `attribute vec2 p; varying vec2 v; void main(){ v = p*.5+.5; gl_Position = vec4(p,0.,1.); }`;
+  const FS = `precision highp float;
+  varying vec2 v; uniform sampler2D T; uniform float t; uniform vec2 S; uniform vec2 O;
+  float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+  float n(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
+    return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
+  float green(vec3 c){ return smoothstep(.06,.22, c.g - max(c.r*.92, c.b)) * smoothstep(.25,.5,c.g); }
+  void main(){
+    vec2 uv = O + vec2(v.x, 1.-v.y) * S;            /* cover crop; image y runs down */
+    vec3 base = texture2D(T, uv).rgb;
+    float m = green(base);
+    if (m < .01) { gl_FragColor = vec4(base,1.); return; }
+    /* the fall's own texture slides down: two copies half a cycle apart, cross-faded, so the
+       foam and bubbles keep falling and the loop never shows. Noise wobbles the edges. */
+    vec2 q = uv*vec2(90.,7.);
+    float a = n(q + vec2(0., -t*2.2));
+    float b = n(q*1.7 + vec2(3.1, -t*3.4));
+    vec2 d = vec2((a-.5)*.005 + (b-.5)*.0025, 0.);
+    float L = .045, p1 = fract(t*.42), p2 = fract(t*.42 + .5);
+    vec3 c1 = texture2D(T, uv + d - vec2(0., p1*L)).rgb;
+    vec3 c2 = texture2D(T, uv + d - vec2(0., p2*L)).rgb;
+    vec3 c = mix(c1, c2, abs(p1*2. - 1.));
+    m *= max(green(c1), green(c2));               /* never pull rock into the fall */
+    /* bright streaks running down the fall, and fizz glints */
+    float streak = pow(n(vec2(uv.x*260., uv.y*10. - t*4.)), 5.);
+    float fizz = step(.985, h(floor(uv*vec2(500.,300.)) + floor(t*12.)));
+    c += m * (streak*.3 + fizz*.4) * vec3(.85,1.,.55);
+    gl_FragColor = vec4(mix(base, c, m), 1.);
+  }`;
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
+  const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs) return;
+  const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+  gl.useProgram(pr);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uT = gl.getUniformLocation(pr, "t"), uS = gl.getUniformLocation(pr, "S"), uO = gl.getUniformLocation(pr, "O");
+
+  const focus = () => {
+    const f = getComputedStyle(img).objectPosition.split(" ").map((x) => parseFloat(x) / 100);
+    return [isNaN(f[0]) ? .5 : f[0], isNaN(f[1]) ? .5 : f[1]];
+  };
+  let crop = { sx: 1, sy: 1, ox: 0, oy: 0 }, mist = null;
+
+  const start = () => {
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+    mist = findFall();
+    resize();
+    addEventListener("resize", resize);
+    hero.classList.add("is-live");
+    let on = true;
+    new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on) requestAnimationFrame(frame); }).observe(hero);
+    const t0 = performance.now();
+    function frame(now) {
+      if (!on || document.hidden) return;
+      const t = (now - t0) / 1000;
+      gl.uniform1f(uT, t);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      drawMist(t);
+      requestAnimationFrame(frame);
+    }
+    document.addEventListener("visibilitychange", () => { if (!document.hidden && on) requestAnimationFrame(frame); });
+    requestAnimationFrame(frame);
+  };
+
+  function resize() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const w = hero.clientWidth, hh = hero.clientHeight;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(hh * dpr);
+    mistCv.width = Math.round(w * dpr); mistCv.height = Math.round(hh * dpr);
+    gl.viewport(0, 0, cv.width, cv.height);
+    const ir = img.naturalWidth / img.naturalHeight, vr = w / hh;
+    const [fx, fy] = focus();
+    let sx = 1, sy = 1;
+    if (vr > ir) sy = ir / vr; else sx = vr / ir;
+    crop = { sx, sy, ox: (1 - sx) * fx, oy: (1 - sy) * fy };
+    gl.uniform2f(uS, sx, sy); gl.uniform2f(uO, crop.ox, crop.oy);
+  }
+
+  /* where the fall hits the pool: the bottom of the tallest run of green, in image units */
+  function findFall() {
+    const W = 160, H = Math.round(160 * img.naturalHeight / img.naturalWidth);
+    const c = document.createElement("canvas"); c.width = W; c.height = H;
+    const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(img, 0, 0, W, H);
+    const d = x.getImageData(0, 0, W, H).data;
+    const g = (i) => { const r = d[i], gg = d[i + 1], b = d[i + 2]; return gg > 90 && gg - Math.max(r * .92, b) > 25; };
+    let best = { col: W / 2, run: 0, end: H * .8 };
+    for (let cx = 0; cx < W; cx++) {
+      let run = 0, top = -1;
+      for (let cy = 0; cy < H; cy++) {
+        if (g((cy * W + cx) * 4)) { if (top < 0) top = cy; run++; } else if (run > best.run) { best = { col: cx, run, end: cy }; run = 0; top = -1; } else { run = 0; top = -1; }
+      }
+      if (run > best.run) best = { col: cx, run, end: H };
+    }
+    // the width of the fall at its base
+    let l = best.col, r = best.col; const row = Math.min(H - 1, best.end - 2);
+    while (l > 0 && g((row * W + l - 1) * 4)) l--;
+    while (r < W - 1 && g((row * W + r + 1) * 4)) r++;
+    return { x: (l + r) / 2 / W, y: best.end / H, w: Math.max(4, r - l) / W, parts: [] };
+  }
+
+  const mx = mistCv.getContext("2d");
+  function drawMist(t) {
+    if (!mist) return;
+    const W = mistCv.width, H = mistCv.height;
+    mx.clearRect(0, 0, W, H);
+    const px = ((mist.x - crop.ox) / crop.sx) * W, py = ((mist.y - crop.oy) / crop.sy) * H;
+    const span = (mist.w / crop.sx) * W;
+    if (mist.parts.length < 70) mist.parts.push({ x: px + (Math.random() - .5) * span * 1.4, y: py, r: 10 + Math.random() * 30, vy: .25 + Math.random() * .6, vx: (Math.random() - .5) * .5, life: 0, max: 220 + Math.random() * 200 });
+    const dpr = W / mistCv.clientWidth;
+    for (const p of mist.parts) {
+      p.life++; p.x += p.vx * dpr; p.y -= p.vy * dpr; p.r += .12 * dpr;
+      const a = Math.sin(Math.PI * p.life / p.max) * .16;
+      const gr = mx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * dpr);
+      gr.addColorStop(0, `rgba(236,246,228,${a})`); gr.addColorStop(1, "rgba(236,246,228,0)");
+      mx.fillStyle = gr; mx.beginPath(); mx.arc(p.x, p.y, p.r * dpr, 0, Math.PI * 2); mx.fill();
+    }
+    mist.parts = mist.parts.filter((p) => p.life < p.max);
+  }
+
+  if (img.complete && img.naturalWidth) start(); else img.addEventListener("load", start, { once: true });
+})();
+</script>
+</body>
+</html>

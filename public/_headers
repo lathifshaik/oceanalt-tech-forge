@@ -1,2 +1,5 @@
 /work/*
   X-Robots-Tag: noindex, nofollow
+
+/concepts/*
+  X-Robots-Tag: noindex, nofollow

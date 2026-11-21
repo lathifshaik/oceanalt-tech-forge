@@ -139,7 +139,7 @@
   /* ---------- the source: the mountain pours (as before) */
   .hero { position: relative; min-height: 100svh; display: grid; overflow: hidden; isolation: isolate; background: var(--granite); }
   .hero-img, .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-  .hero canvas { opacity: 0; }
+  .hero canvas { opacity: 0; transition: opacity .9s ease; }
   .hero.is-live canvas { opacity: 1; }
   .will-pour .hero-img { opacity: 0; }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -442,32 +442,32 @@
     /* the fall's own texture slides down: two copies half a cycle apart, cross-faded, so the
        foam and bubbles keep falling and the loop never shows. Noise wobbles the edges. */
     vec2 q = uv*vec2(90.,7.);
-    float a = n(q + vec2(0., -t*2.2));
+    float a = n(q + vec2(0., -t*1.5));
     float b = n(q*1.7 + vec2(3.1, -t*3.4));
     vec2 d = vec2((a-.5)*.005 + (b-.5)*.0025, 0.);
-    float L = .045, p1 = fract(t*.42), p2 = fract(t*.42 + .5);
+    float L = .04, p1 = fract(t*.28), p2 = fract(t*.28 + .5);
     vec3 c1 = texture2D(T, uv + d - vec2(0., p1*L)).rgb;
     vec3 c2 = texture2D(T, uv + d - vec2(0., p2*L)).rgb;
     vec3 c = mix(c1, c2, abs(p1*2. - 1.));
     m *= max(green(c1), green(c2));               /* never pull rock into the fall */
     /* bright streaks running down the fall, and fizz glints */
-    float streak = pow(n(vec2(uv.x*260., uv.y*10. - t*4.)), 5.);
-    float fizz = step(.985, h(floor(uv*vec2(500.,300.)) + floor(t*12.)));
+    float streak = pow(n(vec2(uv.x*260., uv.y*10. - t*2.6)), 5.);
+    float fizz = step(.985, h(floor(uv*vec2(500.,300.)) + floor(t*7.))) * .7;
     c += m * (streak*.3 + fizz*.4) * vec3(.85,1.,.55);
     /* the opening pour: the fall is dry rock until the front of the liquid races down from the
        crack, then the pool fills outward from where it lands. F = (x, top, base) of the fall. */
-    float drop = clamp(P / 1.8, 0., 1.);
-    float front = F.y + (F.z - F.y) * (1. - pow(1. - drop, 2.2));
-    float jag = (n(vec2(uv.x*70., t*2.)) - .5) * .045 + (n(vec2(uv.x*240., t*5.)) - .5) * .02;
-    float wetFall = smoothstep(front + jag + .03, front + jag - .012, uv.y);
-    float fill = clamp((P - 1.5) / 1.6, 0., 1.);
-    float r = (1. - pow(1. - fill, 2.)) * .75;
+    float drop = smoothstep(0., 1., clamp((P - .4) / 4.6, 0., 1.));   /* the green takes ~4.5s to reach the pool */
+    float front = F.y + (F.z - F.y) * drop;
+    float jag = (n(vec2(uv.x*50., t*.9)) - .5) * .05 + (n(vec2(uv.x*180., t*1.8)) - .5) * .018;
+    float wetFall = smoothstep(front + jag + .09, front + jag - .04, uv.y);   /* a long, soft edge: no hard line */
+    float fill = smoothstep(0., 1., clamp((P - 4.2) / 3.6, 0., 1.));   /* then the pool fills, slowly */
+    float r = fill * .78;
     float dist = length((uv - vec2(F.x, F.z)) * vec2(A, 1.));
-    float wetPool = smoothstep(r + .06 + jag, r - .05, dist);
+    float wetPool = smoothstep(r + .12 + jag, r - .08, dist);
     float wet = mix(wetFall, wetPool, smoothstep(F.z - .03, F.z + .01, uv.y));
     vec3 dry = vec3(dot(base, vec3(.3, .5, .2))) * vec3(.36, .4, .38);
     /* a bright, frothy leading edge while it's still falling */
-    float lip = wet * (1. - smoothstep(0., .035, front - uv.y)) * (1. - drop * drop);
+    float lip = wet * (1. - smoothstep(0., .08, front - uv.y)) * (1. - drop * drop) * .6;
     c += lip * vec3(.5, .6, .3);
     vec3 flowing = mix(base, c, m);
     gl_FragColor = vec4(mix(base, mix(dry, flowing, wet), mw), 1.);
@@ -566,7 +566,7 @@
     mx.clearRect(0, 0, W, H);
     const px = ((mist.x - crop.ox) / crop.sx) * W, py = ((mist.y - crop.oy) / crop.sy) * H;
     const span = (mist.w / crop.sx) * W;
-    if (t > 1.6 && mist.parts.length < Math.min(70, (t - 1.6) * 40)) mist.parts.push({ x: px + (Math.random() - .5) * span * 1.4, y: py, r: 10 + Math.random() * 30, vy: .25 + Math.random() * .6, vx: (Math.random() - .5) * .5, life: 0, max: 220 + Math.random() * 200 });
+    if (t > 4 && mist.parts.length < Math.min(70, (t - 4) * 14)) mist.parts.push({ x: px + (Math.random() - .5) * span * 1.4, y: py, r: 10 + Math.random() * 30, vy: .25 + Math.random() * .6, vx: (Math.random() - .5) * .5, life: 0, max: 220 + Math.random() * 200 });
     const dpr = W / mistCv.clientWidth;
     for (const p of mist.parts) {
       p.life++; p.x += p.vx * dpr; p.y -= p.vy * dpr; p.r += .12 * dpr;

@@ -54,6 +54,8 @@
 
   /* ---------- scenes: tall sections with a sticky stage; scroll drives --p from 0 to 1 */
   .scene { position: relative; }
+  /* each chapter starts a screen before the last one ends, and fades in over it */
+  html.motion .scene + .scene { margin-top: -200vh; }
   .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; background: var(--night); }
   .stage > img, .stage > canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .stage > img { will-change: transform; transform-origin: 50% 50%; }
@@ -62,8 +64,10 @@
   .cap { position: absolute; z-index: 5; left: var(--gut); right: var(--gut); bottom: clamp(48px, 10vh, 110px); margin: 0;
     font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .86; letter-spacing: -.005em;
     font-size: clamp(48px, min(9vw, 13vh), 150px); max-width: 11ch; text-shadow: 0 2px 30px rgba(0, 0, 0, .45);
-    opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .9s var(--ease); pointer-events: none; }
-  .cap.is-on { opacity: 1; transform: none; }
+    opacity: 0; transform: translateY(18px); filter: blur(12px); transition: opacity 1.1s var(--ease), transform 1.3s var(--ease), filter 1.1s var(--ease); pointer-events: none; }
+  .cap small { opacity: 0; transform: translateY(10px); transition: opacity 1s .25s var(--ease), transform 1.2s .25s var(--ease); }
+  .cap.is-on small { opacity: 1; transform: none; }
+  .cap.is-on { opacity: 1; transform: none; filter: none; }
   .cap small { display: block; margin-top: 18px; font-weight: 500; font-stretch: 100%; text-transform: none; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.45; letter-spacing: 0; max-width: 32ch; color: var(--mist); }
   .cap.is-right { left: auto; text-align: right; }
   .cap.is-right small { margin-left: auto; }
@@ -107,8 +111,6 @@
   @keyframes fade { from { opacity: 0; } }
 
   /* the dive toward the pool */
-  #stream .stage > img { object-position: 52% 85%; transform-origin: 52% 88%; }
-  #stream .dark { position: absolute; inset: 0; z-index: 2; background: var(--night); opacity: 0; pointer-events: none; }
   .hero .hint { z-index: 6; }
 
   /* clips: a video replaces the still once it exists; they cross-fade inside a scene */
@@ -116,7 +118,7 @@
   .stage > video.is-on { opacity: 1; }
   /* on a tall phone screen the clips play as a wide cinema strip, so the whole face fits */
   @media (max-aspect-ratio: 4/5) {
-    .stage > video { top: 50%; left: 50%; height: 46svh; width: calc(46svh * 16 / 9); transform: translate(-50%, -62%); }
+    .stage > video, #cave .stage > canvas { top: 50%; left: 50%; height: 46svh; width: calc(46svh * 16 / 9); transform: translate(-50%, -62%); }
   }
 
   /* the sting */
@@ -137,7 +139,9 @@
   html.motion .sting .sting-line { transition: opacity .8s 2.1s var(--ease), transform .8s 2.1s var(--ease); }
 
   /* ---------- the source: the mountain pours (as before) */
-  .hero { position: relative; min-height: 100svh; display: grid; overflow: hidden; isolation: isolate; background: var(--granite); }
+  .hero { display: grid; background: var(--granite); }
+  .shot { position: absolute; inset: 0; transform-origin: 52% 86%; will-change: transform; }
+  .stage .dark { position: absolute; inset: 0; z-index: 4; background: var(--night); opacity: 0; pointer-events: none; }
   .hero-img, .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
   .hero canvas { opacity: 0; transition: opacity .9s ease; }
   .hero.is-live canvas { opacity: 1; }
@@ -148,7 +152,7 @@
   .hero-copy { position: relative; z-index: 3; align-self: start; padding: clamp(130px, 18vh, 180px) var(--gut) 0; }
   .hero h2 { margin: 0; font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .84; letter-spacing: -.005em;
     font-size: clamp(56px, min(9.4vw, 15vh), 168px); max-width: 9ch; text-shadow: 0 2px 40px rgba(0, 0, 0, .25); }
-  .hero p { margin: 22px 0 0; max-width: 30ch; font-size: clamp(17px, 1.5vw, 20px); }
+  .hero-copy > p { margin: 22px 0 0; max-width: 30ch; font-size: clamp(17px, 1.5vw, 20px); }
 
   /* ---------- the can */
   .can { position: relative; padding: clamp(72px, 10vw, 130px) 0; background:
@@ -168,7 +172,10 @@
 
   /* ---------- the story: chapter rail, cinema bars, film grain */
   .rail { position: fixed; z-index: 25; right: clamp(10px, 2vw, 28px); top: 50%; transform: translateY(-50%); display: grid; gap: 6px; }
-  .rail a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 30px; text-decoration: none; color: var(--snow); }
+  .rail::before, .rail::after { content: ""; position: absolute; right: 12px; top: 15px; bottom: 15px; width: 2px; border-radius: 2px; }
+  .rail::before { background: rgba(238, 242, 236, .18); }
+  .rail::after { background: var(--dew); transform-origin: top; transform: scaleY(var(--fill, 0)); }
+  .rail a { position: relative; z-index: 1; display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 30px; text-decoration: none; color: var(--snow); }
   .rail b { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; font-size: 12px; font-weight: 700;
     border: 1.5px solid rgba(238, 242, 236, .45); background: rgba(5, 7, 6, .35); backdrop-filter: blur(6px); transition: background-color .4s, color .4s, border-color .4s, transform .4s var(--ease); order: 2; }
   .rail span { font-size: 13px; font-weight: 600; opacity: 0; transform: translateX(8px); transition: opacity .35s, transform .35s var(--ease); text-shadow: 0 1px 10px rgba(0, 0, 0, .6); }
@@ -229,7 +236,6 @@
   @media (max-width: 640px) {
     .top-cta { padding: 0 16px; font-size: 14px; }
     .brand span { font-size: 19px; }
-    .hero { min-height: 92svh; }
     .hero-copy { padding-top: 150px; }
   }
 </style>
@@ -265,34 +271,31 @@
 <main>
   <h1 class="sr">Mountain Dew: a concept commercial. A cheetah finds green liquid deep in a mountain, drinks, and runs.</h1>
 
-  <!-- 1. the mountain pours: the opening shot -->
-  <section class="hero" id="source" aria-labelledby="source-h">
-    <img class="hero-img" src="hero.webp" alt="A granite mountain at dawn with bright green liquid pouring from a crack in its face into a green pool among pine trees." fetchpriority="high" />
-    <canvas aria-hidden="true"></canvas>
-    <canvas class="mist" aria-hidden="true"></canvas>
-    <div class="hero-copy">
-      <svg class="hero-mark" viewBox="0 0 640 300" aria-hidden="true">
-        <path class="hm-peak" d="M150 210 L262 52 L318 134 L352 92 L470 210" />
-        <path class="hm-drop" d="M262 96 C262 96 246 122 246 134 A16 16 0 0 0 278 134 C278 122 262 96 262 96 Z" />
-        <text class="hm-word" x="320" y="272" text-anchor="middle">MOUNTAIN DEW</text>
-      </svg>
-      <h2 id="source-h">It starts up high</h2>
-      <p>Past the tree line, where the rock stays cold all year, something green has been finding its way out.</p>
-    </div>
-    <p class="hint" aria-hidden="true">Scroll<i></i></p>
-  </section>
-
-  <!-- 2. follow it down: the camera dives toward the pool (code only, kept as the founder likes it) -->
-  <section class="scene" id="stream" style="height: 200vh" aria-label="Follow it down">
-    <div class="stage">
-      <img src="hero.webp" alt="" />
+  <!-- 1. the source: the mountain pours, then the camera dives into the pool and down into the dark -->
+  <section class="scene" id="source" style="height: 320vh" aria-labelledby="source-h">
+    <div class="stage hero">
+      <div class="shot">
+        <img class="hero-img" src="hero.webp" alt="A granite mountain at dawn with bright green liquid pouring from a crack in its face into a green pool among pine trees." fetchpriority="high" />
+        <canvas aria-hidden="true"></canvas>
+        <canvas class="mist" aria-hidden="true"></canvas>
+      </div>
       <div class="dark"></div>
-      <p class="cap" data-from=".15" data-to=".8">Follow the green<small>Most people never go looking.</small></p>
+      <div class="hero-copy">
+        <svg class="hero-mark" viewBox="0 0 640 300" aria-hidden="true">
+          <path class="hm-peak" d="M150 210 L262 52 L318 134 L352 92 L470 210" />
+          <path class="hm-drop" d="M262 96 C262 96 246 122 246 134 A16 16 0 0 0 278 134 C278 122 262 96 262 96 Z" />
+          <text class="hm-word" x="320" y="272" text-anchor="middle">MOUNTAIN DEW</text>
+        </svg>
+        <h2 id="source-h">It starts up high</h2>
+        <p>Past the tree line, where the rock stays cold all year, something green has been finding its way out.</p>
+      </div>
+      <p class="cap" data-from=".34" data-to=".86">Follow the green<small>Most people never go looking.</small></p>
+      <p class="hint" aria-hidden="true">Scroll<i></i></p>
     </div>
   </section>
 
   <!-- 3. the cave: eyes first, then the drink -->
-  <section class="scene" id="cave" style="height: 600vh" aria-label="Deep in the mountain">
+  <section class="scene" id="cave" style="height: 700vh" aria-label="Deep in the mountain">
     <div class="stage">
       <img src="cave-drink.webp" data-clip="cave,eyes,drink" alt="Deep in a dark cave, a cheetah drinks from a glowing green pool, its face lit green from below." />
       <canvas aria-hidden="true"></canvas>
@@ -304,7 +307,7 @@
   </section>
 
   <!-- 4. out of the cave -->
-  <section class="scene" id="exit" style="height: 230vh" aria-label="Out of the cave">
+  <section class="scene" id="exit" style="height: 340vh" aria-label="Out of the cave">
     <div class="stage">
       <img src="cave-exit.webp" data-clip="exit" alt="The cheetah bursts out of the cave mouth into dawn light over snowy peaks, green drops flying off its fur." loading="lazy" />
       <div class="flash"></div>
@@ -314,7 +317,7 @@
   </section>
 
   <!-- 5. the ridge -->
-  <section class="scene" id="run" style="height: 260vh" aria-label="Up the ridge">
+  <section class="scene" id="run" style="height: 380vh" aria-label="Up the ridge">
     <div class="stage">
       <img src="run.webp" data-clip="run" alt="The cheetah at full sprint along a mountain ridge at sunrise, glowing green dust kicking up behind it." loading="lazy" />
       <canvas class="streaks" aria-hidden="true"></canvas>
@@ -326,12 +329,13 @@
 
 
   <!-- 6. over ice -->
-  <section class="scene" id="glass" style="height: 200vh" aria-label="Over ice">
+  <section class="scene" id="glass" style="height: 320vh" aria-label="Over ice">
     <div class="stage">
       <img src="glass.webp" data-clip="ice" alt="Bright green soda pouring into a tall glass of ice, splashing and fizzing against a dark background." loading="lazy" />
       <canvas class="fizz" aria-hidden="true"></canvas>
+      <div class="dark"></div>
       <div class="shade"></div>
-      <p class="cap" data-from=".1" data-to="1">Bring it down cold<small>Over a full glass of ice. Nothing in between.</small></p>
+      <p class="cap" data-from=".1" data-to=".78">Bring it down cold<small>Over a full glass of ice. Nothing in between.</small></p>
     </div>
   </section>
 
@@ -414,7 +418,7 @@
    Everything else in the photo stays still. Mist rises off the bottom of the fall.
    Reduced motion, no WebGL, or a failed load: the still photo stays. */
 (() => {
-  const hero = document.querySelector("#source");
+  const hero = document.querySelector("#source .stage");
   const img = hero.querySelector(".hero-img");
   const [cv, mistCv] = hero.querySelectorAll("canvas");
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -602,12 +606,13 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   nh(); addEventListener("resize", nh);
   const top = document.getElementById("top");
   const hint = document.querySelector(".hint");
-  const scenes = [...document.querySelectorAll(".scene")].map((el) => ({ el, id: el.id, p: 0, img: el.querySelector(".stage > img"), caps: [...el.querySelectorAll(".cap")] }));
+  const scenes = [...document.querySelectorAll(".scene")].map((el, i) => ({ el, i, id: el.id, p: 0, stage: el.querySelector(".stage"), img: el.querySelector(".stage > img"), caps: [...el.querySelectorAll(".cap")] }));
   const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
   const ease = (x) => 1 - Math.pow(1 - x, 3);
   const handlers = {};
   window.__film = { scenes, handlers };
 
+  const rail = document.querySelector(".rail");
   const chapters = [...document.querySelectorAll(".rail a")].map((btn) => ({ btn, el: document.querySelector(btn.getAttribute("href")) }));
   function measure() {
     const vh = innerHeight;
@@ -615,20 +620,28 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
       const r = s.el.getBoundingClientRect();
       const raw = clamp(-r.top / Math.max(1, r.height - vh));
       /* every scene eases toward where you've scrolled, so nothing ever snaps */
-      s.p = s.p == null || !motion ? raw : s.p + (raw - s.p) * .14;
-      if (Math.abs(raw - s.p) < .0005) s.p = raw;
+      s.sp = s.sp == null || !motion ? raw : s.sp + (raw - s.sp) * .14;
+      if (Math.abs(raw - s.sp) < .0005) s.sp = raw;
+      /* the first screen of each later chapter is a dissolve over the one before */
+      const fade = motion && s.i > 0 ? vh / Math.max(1, r.height - vh) : 0;
+      s.op = 1;
+      if (fade) { const f = clamp(s.sp / fade); s.op = f * f * (3 - 2 * f); s.stage.style.opacity = String(s.op); }
+      s.p = fade ? clamp((s.sp - fade) / (1 - fade)) : s.sp;
       s.on = r.top < vh && r.bottom > 0;
       for (const c of s.caps) {
         const from = +c.dataset.from, to = +c.dataset.to;
         c.classList.toggle("is-on", s.p >= from && (s.p < to || to >= 1));
       }
     }
+    /* a chapter's words leave as the next chapter starts to dissolve in */
+    scenes.forEach((s, i) => { const nx = scenes[i + 1]; if (nx && nx.on && nx.op > .12) s.caps.forEach((c) => c.classList.remove("is-on")); });
     top.classList.toggle("is-solid", scrollY > 40);
     /* the story rail and the cinema bars */
     const mid = innerHeight * .5;
     let act = 0;
     chapters.forEach((c, i) => { const r = c.el.getBoundingClientRect(); if (r.top < mid) act = i; });
     chapters.forEach((c, i) => c.btn.classList.toggle("is-on", i === act));
+    rail.style.setProperty("--fill", String(clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight))));
     const cave = document.getElementById("cave").getBoundingClientRect(), run = document.getElementById("run").getBoundingClientRect();
     document.documentElement.classList.toggle("cinema", cave.top < innerHeight * .3 && run.bottom > innerHeight * .7);
     if (hint) hint.classList.toggle("is-gone", scrollY > 40);
@@ -644,12 +657,14 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   requestAnimationFrame(frame);
 
 
-  /* 2. follow it down: dive into the pool at the foot of the fall, then into the dark */
-  handlers.stream = (s) => {
-    if (s.clips) return;
-    const k = ease(s.p);
-    s.img.style.transform = `scale(${1 + 2.2 * k})`;
-    s.el.querySelector(".dark").style.opacity = String(clamp((s.p - .55) / .4));
+  /* 1. the source: the words step aside, then the camera dives into the pool and down into the dark */
+  const heroCopy = document.querySelector("#source .hero-copy"), shot = document.querySelector("#source .shot"), srcDark = document.querySelector("#source .dark");
+  handlers.source = (s) => {
+    heroCopy.style.opacity = String(1 - clamp((s.p - .06) / .2));
+    heroCopy.style.transform = `translate3d(0, ${-clamp((s.p - .06) / .2) * 40}px, 0)`;
+    const k = clamp((s.p - .22) / .72), e = k * k * (3 - 2 * k);
+    shot.style.transform = `scale(${1 + 2.6 * e}) translate3d(0, ${e * 4}%, 0)`;
+    srcDark.style.opacity = String(clamp((s.p - .74) / .24));
   };
 
   /* clips: once a scene's video exists it replaces the still and is scrubbed by the scroll.
@@ -778,6 +793,7 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
 (() => {
   if (!document.documentElement.classList.contains("motion")) return;
   const stage = document.querySelector("#glass .stage");
+  const clamp01 = (x) => Math.min(1, Math.max(0, x));
   const img = stage.querySelector("img"), spl = stage.querySelector(".fizz");
   const cv = document.createElement("canvas"); cv.setAttribute("aria-hidden", "true"); img.after(cv);
   const gl = cv.getContext("webgl", { antialias: false });
@@ -860,7 +876,9 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     resize(); addEventListener("resize", resize);
     img.style.opacity = "0";
     let last = 0;
+    const gDark = stage.querySelector(".dark");
     window.__film.handlers.glass = (s, now) => {
+      gDark.style.opacity = String(clamp01((s.p - .8) / .2));
       if (s.clips) return;
       const t = now, dt = Math.min(.05, t - last || .016); last = t;
       Z = 1.22 - .22 * (1 - Math.pow(1 - s.p, 3));
@@ -938,7 +956,7 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   const EYES = [.535, .518], GAP = .0748;
 
   function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 2), w = stage.clientWidth, hh = stage.clientHeight;
+    const dpr = Math.min(devicePixelRatio || 1, 2), w = cv.clientWidth || stage.clientWidth, hh = cv.clientHeight || stage.clientHeight;
     cv.width = Math.round(w * dpr); cv.height = Math.round(hh * dpr);
     gl.viewport(0, 0, cv.width, cv.height);
     const ir = img.naturalWidth / img.naturalHeight, vr = w / hh;

@@ -85,6 +85,33 @@
   #glass .shade { background: linear-gradient(90deg, rgba(5, 7, 6, .7), transparent 55%); }
   #glass .fizz { z-index: 3; }
 
+
+  /* the dive toward the pool */
+  #stream .stage > img { object-position: 52% 85%; transform-origin: 52% 88%; }
+  #stream .dark { position: absolute; inset: 0; z-index: 2; background: var(--night); opacity: 0; pointer-events: none; }
+  .hero .hint { z-index: 6; }
+
+  /* clips: a video replaces the still once it exists; they cross-fade inside a scene */
+  .stage > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s linear; }
+  .stage > video.is-on { opacity: 1; }
+
+  /* the sting */
+  .sting { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 18px; padding: 120px var(--gut) 80px; text-align: center;
+    background: radial-gradient(50% 45% at 50% 45%, rgba(166, 226, 46, .14), transparent 70%), var(--night); }
+  .sting-logo { width: min(86vw, 640px); height: auto; overflow: visible; }
+  .sting-peak { fill: none; stroke: var(--dew); stroke-width: 24; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 760; stroke-dashoffset: 0; }
+  .sting-drop { fill: var(--snow); }
+  .sting-word { fill: var(--snow); font: 900 68px "Archivo", sans-serif; font-stretch: 62%; letter-spacing: 2px; }
+  .sting-line { margin: 0; font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: clamp(28px, 4vw, 48px); line-height: 1; color: var(--dew); }
+  .sting-note { margin: 0; font-size: 13px; color: var(--mist); }
+  html.motion .sting:not(.is-in) .sting-peak { stroke-dashoffset: 760; }
+  html.motion .sting:not(.is-in) .sting-drop { opacity: 0; transform: translateY(-60px); }
+  html.motion .sting:not(.is-in) .sting-word, html.motion .sting:not(.is-in) .sting-line { opacity: 0; transform: translateY(18px); }
+  html.motion .sting .sting-peak { transition: stroke-dashoffset 1.4s cubic-bezier(.6, 0, .2, 1); }
+  html.motion .sting .sting-drop { transform-box: fill-box; transform-origin: 50% 100%; transition: opacity .2s 1.2s, transform .7s 1.2s cubic-bezier(.3, 1.6, .5, 1); }
+  html.motion .sting .sting-word { transition: opacity .8s 1.7s var(--ease), transform .8s 1.7s var(--ease); }
+  html.motion .sting .sting-line { transition: opacity .8s 2.1s var(--ease), transform .8s 2.1s var(--ease); }
+
   /* ---------- the source: the mountain pours (as before) */
   .hero { position: relative; min-height: 100svh; display: grid; overflow: hidden; isolation: isolate; background: var(--granite); }
   .hero-img, .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
@@ -94,7 +121,7 @@
   .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg, var(--night) 0%, rgba(28, 35, 32, 0) 30%, rgba(28, 35, 32, 0) 70%, var(--night) 100%); }
   .mist { position: absolute; inset: 0; z-index: 2; pointer-events: none; width: 100%; height: 100%; }
-  .hero-copy { position: relative; z-index: 3; align-self: start; padding: clamp(110px, 16vh, 160px) var(--gut) 0; }
+  .hero-copy { position: relative; z-index: 3; align-self: start; padding: clamp(130px, 18vh, 180px) var(--gut) 0; }
   .hero h2 { margin: 0; font-weight: 900; font-stretch: 62%; text-transform: uppercase; line-height: .84; letter-spacing: -.005em;
     font-size: clamp(56px, min(9.4vw, 15vh), 168px); max-width: 9ch; text-shadow: 0 2px 40px rgba(0, 0, 0, .25); }
   .hero p { margin: 22px 0 0; max-width: 30ch; font-size: clamp(17px, 1.5vw, 20px); }
@@ -168,33 +195,53 @@
 <main>
   <h1 class="sr">Mountain Dew: a concept commercial. A cheetah finds green liquid deep in a mountain, drinks, and runs.</h1>
 
-  <!-- 1. the cave: eyes first, then the drink -->
-  <section class="scene" id="cave" style="height: 380vh" aria-label="Deep in the mountain">
+  <!-- 1. the mountain pours: the opening shot -->
+  <section class="hero" id="source" aria-labelledby="source-h">
+    <img class="hero-img" src="hero.webp" alt="A granite mountain at dawn with bright green liquid pouring from a crack in its face into a green pool among pine trees." fetchpriority="high" />
+    <canvas aria-hidden="true"></canvas>
+    <canvas class="mist" aria-hidden="true"></canvas>
+    <div class="hero-copy">
+      <h2 id="source-h">Straight off the mountain</h2>
+      <p>Something up here is pouring green. Follow it down.</p>
+    </div>
+    <p class="hint" aria-hidden="true">Scroll<i></i></p>
+  </section>
+
+  <!-- 2. follow it down: the camera dives toward the pool (a stream clip replaces this when it arrives) -->
+  <section class="scene" id="stream" style="height: 200vh" aria-label="Follow it down">
     <div class="stage">
-      <img src="cave-drink.webp" alt="Deep in a dark cave, a cheetah drinks from a glowing green pool, its face lit green from below." />
-      <canvas aria-hidden="true"></canvas>
-      <div class="shade"></div>
-      <p class="cap is-on" data-from="0" data-to=".22">Deep in the mountain<small>Something's thirsty.</small></p>
-      <p class="cap" data-from=".3" data-to=".6">It found the green stuff<small>Cold, bright and fizzing up out of the rock.</small></p>
-      <p class="cap" data-from=".66" data-to="1">One long drink</p>
-      <p class="hint" aria-hidden="true">Scroll<i></i></p>
+      <img src="hero.webp" data-clip="stream" alt="" />
+      <div class="dark"></div>
+      <p class="cap" data-from=".15" data-to=".8">Follow it down<small>Through the pines, into the rock.</small></p>
     </div>
   </section>
 
-  <!-- 2. out of the cave -->
+  <!-- 3. the cave: eyes first, then the drink -->
+  <section class="scene" id="cave" style="height: 380vh" aria-label="Deep in the mountain">
+    <div class="stage">
+      <img src="cave-drink.webp" data-clip="eyes,drink" alt="Deep in a dark cave, a cheetah drinks from a glowing green pool, its face lit green from below." />
+      <canvas aria-hidden="true"></canvas>
+      <div class="shade"></div>
+      <p class="cap" data-from="0" data-to=".22">Deep in the mountain<small>Something's thirsty.</small></p>
+      <p class="cap" data-from=".3" data-to=".6">It found the green stuff<small>Cold, bright and fizzing up out of the rock.</small></p>
+      <p class="cap" data-from=".66" data-to="1">One long drink</p>
+    </div>
+  </section>
+
+  <!-- 4. out of the cave -->
   <section class="scene" id="exit" style="height: 230vh" aria-label="Out of the cave">
     <div class="stage">
-      <img src="cave-exit.webp" alt="The cheetah bursts out of the cave mouth into dawn light over snowy peaks, green drops flying off its fur." loading="lazy" />
+      <img src="cave-exit.webp" data-clip="exit" alt="The cheetah bursts out of the cave mouth into dawn light over snowy peaks, green drops flying off its fur." loading="lazy" />
       <div class="flash"></div>
       <div class="shade"></div>
       <p class="cap" data-from=".12" data-to="1">Then it ran</p>
     </div>
   </section>
 
-  <!-- 3. the ridge -->
+  <!-- 5. the ridge -->
   <section class="scene" id="run" style="height: 260vh" aria-label="Up the ridge">
     <div class="stage">
-      <img src="run.webp" alt="The cheetah at full sprint along a mountain ridge at sunrise, glowing green dust kicking up behind it." loading="lazy" />
+      <img src="run.webp" data-clip="run" alt="The cheetah at full sprint along a mountain ridge at sunrise, glowing green dust kicking up behind it." loading="lazy" />
       <canvas class="streaks" aria-hidden="true"></canvas>
       <div class="shade"></div>
       <p class="cap" data-from=".08" data-to=".5">Out of the dark<small>And over the ridge before the sun's fully up.</small></p>
@@ -202,28 +249,18 @@
     </div>
   </section>
 
-  <!-- 4. where it comes from -->
-  <section class="hero" id="source" aria-labelledby="source-h">
-    <img class="hero-img" src="hero.webp" alt="A granite mountain at dawn with bright green liquid pouring from a crack in its face into a green pool among pine trees." loading="lazy" />
-    <canvas aria-hidden="true"></canvas>
-    <canvas class="mist" aria-hidden="true"></canvas>
-    <div class="hero-copy">
-      <h2 id="source-h">Straight off the mountain</h2>
-      <p>That green? It comes from up here.</p>
-    </div>
-  </section>
 
-  <!-- 5. over ice -->
+  <!-- 6. over ice -->
   <section class="scene" id="glass" style="height: 200vh" aria-label="Over ice">
     <div class="stage">
-      <img src="glass.webp" alt="Bright green soda pouring into a tall glass of ice, splashing and fizzing against a dark background." loading="lazy" />
+      <img src="glass.webp" data-clip="ice" alt="Bright green soda pouring into a tall glass of ice, splashing and fizzing against a dark background." loading="lazy" />
       <canvas class="fizz" aria-hidden="true"></canvas>
       <div class="shade"></div>
       <p class="cap" data-from=".1" data-to="1">Pour it over ice<small>Cold, sharp citrus with plenty of fizz.</small></p>
     </div>
   </section>
 
-  <!-- 6. the can, with our concept mark -->
+  <!-- 7. the can, with our concept mark -->
   <section class="can" id="can" aria-labelledby="can-h">
     <div class="wrap">
       <div>
@@ -238,6 +275,19 @@
         <canvas aria-label="A green can turning slowly, with the concept mark and MOUNTAIN DEW down its side." role="img"></canvas>
       </div>
     </div>
+  </section>
+
+
+  <!-- 8. the sting: the new logo draws itself, like the end of an ad -->
+  <section class="sting" id="sting" aria-labelledby="sting-h">
+    <svg class="sting-logo" viewBox="0 0 640 300" role="img" aria-labelledby="sting-h">
+      <path class="sting-peak" d="M150 210 L262 52 L318 134 L352 92 L470 210" />
+      <path class="sting-drop" d="M262 96 C262 96 246 122 246 134 A16 16 0 0 0 278 134 C278 122 262 96 262 96 Z" />
+      <text class="sting-word" x="320" y="272" text-anchor="middle">MOUNTAIN DEW</text>
+    </svg>
+    <h2 id="sting-h" class="sr">Mountain Dew, rebranded: a peak with a drop running off it.</h2>
+    <p class="sting-line">Straight off the mountain.</p>
+    <p class="sting-note">Concept rebrand by Oceanalt. Not Mountain Dew's logo.</p>
   </section>
 
   <section class="taste" id="taste" aria-labelledby="taste-h">
@@ -497,7 +547,58 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   if (!motion) { addEventListener("scroll", measure, { passive: true }); measure(); return; }
   requestAnimationFrame(frame);
 
-  /* 2. out of the cave: push through the mouth into a flash of dawn */
+
+  /* 2. follow it down: dive into the pool at the foot of the fall, then into the dark */
+  handlers.stream = (s) => {
+    if (s.clips) return;
+    const k = ease(s.p);
+    s.img.style.transform = `scale(${1 + 2.2 * k})`;
+    s.el.querySelector(".dark").style.opacity = String(clamp((s.p - .55) / .4));
+  };
+
+  /* clips: once a scene's video exists it replaces the still and is scrubbed by the scroll.
+     A scene can hold several clips in a row (the cave: eyes, then drink). */
+  /* clips.json lists the clips that exist, e.g. ["eyes", "drink", "run"] */
+  const ready = fetch("clips.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
+  for (const s of scenes) {
+    const names = (s.img && s.img.dataset.clip || "").split(",").filter(Boolean);
+    if (!names.length) continue;
+    ready.then((list) => {
+        const have = names.filter((n) => Array.isArray(list) && list.includes(n));
+        if (!have.length) return;
+        s.clips = have.map((n) => {
+          const v = document.createElement("video");
+          Object.assign(v, { muted: true, playsInline: true, preload: "auto" });
+          /* the whole clip in memory, so scrubbing can jump to any frame at once */
+          fetch(`${n}.mp4`).then((r) => r.blob()).then((bl) => { v.src = URL.createObjectURL(bl); v.load(); }).catch(() => { v.src = `${n}.mp4`; });
+          v.setAttribute("aria-hidden", "true");
+          s.img.after(v);
+          return v;
+        });
+        s.img.style.opacity = "0";
+        s.el.querySelectorAll(".stage > canvas:not(.streaks):not(.fizz)").forEach((c) => c.remove());
+        if (s.id === "cave") handlers.cave = null;
+        const own = handlers[s.id];
+        handlers[s.id] = (sc, t) => {
+          const n = sc.clips.length, seg = Math.min(n - 1, Math.floor(sc.p * n)), local = sc.p * n - seg;
+          sc.clips.forEach((v, i) => {
+            v.classList.toggle("is-on", i === seg);
+            if (i === seg && v.duration) {
+              const want = local * (v.duration - .05);
+              if (Math.abs(v.currentTime - want) > .03) v.currentTime = v.currentTime + (want - v.currentTime) * .35;
+            }
+          });
+          if (own && sc.id !== "cave") { const keep = sc.img; sc.img = sc.clips[seg]; own(sc, t); sc.img = keep; }
+        };
+        if (!motion) s.clips.forEach((v, i) => { v.classList.toggle("is-on", i === 0); v.autoplay = true; v.loop = true; v.play().catch(() => {}); });
+      });
+  }
+
+  /* 8. the sting draws itself once it's on screen */
+  const sting = document.getElementById("sting");
+  new IntersectionObserver(([e], o) => { if (e.isIntersecting) { sting.classList.add("is-in"); o.disconnect(); } }, { threshold: .45 }).observe(sting);
+
+  /* 4. out of the cave: push through the mouth into a flash of dawn */
   handlers.exit = (s) => {
     const k = ease(s.p);
     s.img.style.transform = `translate3d(${(1 - k) * -3}%, ${(1 - k) * 2}%, 0) scale(${1.32 - .32 * k})`;
@@ -640,8 +741,9 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
     gl.uniform1f(u.A, img.naturalWidth / img.naturalHeight);
     resize(); addEventListener("resize", resize);
-    const t0 = performance.now();
+    let t0 = null;   /* the eyes open the first time the cave is on screen */
     window.__film.handlers.cave = (s, now) => {
+      if (t0 === null) t0 = performance.now();
       const freeze = /#cave=([\d.]+)/.exec(location.hash);   /* for checking frames: #cave=0.4 */
       const p = freeze ? +freeze[1] : s.p;
       const t = (performance.now() - t0) / 1000;
@@ -701,7 +803,7 @@ function label() {
   x.restore();
   x.fillStyle = "#eef2ec"; x.textAlign = "center"; x.textBaseline = "alphabetic";
   try { x.fontStretch = "ultra-condensed"; } catch {}
-  x.font = '900 150px "Archivo", sans-serif';
+  x.font = '900 118px "Archivo", sans-serif';
   x.fillText("MOUNTAIN", cx, H * .70);
   x.font = '900 70px "Archivo", sans-serif'; x.fillStyle = "#a6e22e";
   x.fillText("DEW", cx, H * .775);

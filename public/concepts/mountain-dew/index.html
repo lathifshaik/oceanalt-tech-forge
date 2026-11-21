@@ -94,6 +94,10 @@
   /* clips: a video replaces the still once it exists; they cross-fade inside a scene */
   .stage > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s linear; }
   .stage > video.is-on { opacity: 1; }
+  /* on a tall phone screen the clips play as a wide cinema strip, so the whole face fits */
+  @media (max-aspect-ratio: 4/5) {
+    .stage > video { top: 50%; left: 50%; height: 46svh; width: calc(46svh * 16 / 9); transform: translate(-50%, -62%); }
+  }
 
   /* the sting */
   .sting { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 18px; padding: 120px var(--gut) 80px; text-align: center;
@@ -140,6 +144,35 @@
   .rebrand { margin-top: 28px; display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--mist); }
   .rebrand svg { width: 46px; height: 46px; flex: none; }
   @media (min-width: 900px) { .can .wrap { grid-template-columns: 1fr 1.1fr; } }
+
+
+  /* ---------- the story: chapter rail, cinema bars, film grain */
+  .rail { position: fixed; z-index: 25; right: clamp(10px, 2vw, 28px); top: 50%; transform: translateY(-50%); display: grid; gap: 6px; }
+  .rail a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 30px; text-decoration: none; color: var(--snow); }
+  .rail b { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; font-size: 12px; font-weight: 700;
+    border: 1.5px solid rgba(238, 242, 236, .45); background: rgba(5, 7, 6, .35); backdrop-filter: blur(6px); transition: background-color .4s, color .4s, border-color .4s, transform .4s var(--ease); order: 2; }
+  .rail span { font-size: 13px; font-weight: 600; opacity: 0; transform: translateX(8px); transition: opacity .35s, transform .35s var(--ease); text-shadow: 0 1px 10px rgba(0, 0, 0, .6); }
+  .rail a:hover span, .rail a:focus-visible span, .rail a.is-on span { opacity: 1; transform: none; }
+  .rail a.is-on b { background: var(--dew); border-color: var(--dew); color: var(--night); transform: scale(1.15); }
+  @media (max-width: 720px) { .rail { display: none; } }
+
+  .bars i { position: fixed; z-index: 15; left: 0; right: 0; height: 7.5vh; background: #000; pointer-events: none; transform: scaleY(0); transition: transform .9s var(--ease); }
+  .bars i:first-child { top: 0; transform-origin: top; }
+  .bars i:last-child { bottom: 0; transform-origin: bottom; }
+  html.cinema .bars i { transform: scaleY(1); }
+  @media (max-width: 720px) { .bars i { height: 5vh; } }
+
+  .grain { position: fixed; inset: -50%; z-index: 40; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  html.motion .grain { animation: grain .5s steps(4) infinite; }
+  @keyframes grain { 0% { transform: translate(0, 0); } 25% { transform: translate(-3%, 2%); } 50% { transform: translate(2%, -3%); } 75% { transform: translate(-2%, -1%); } 100% { transform: translate(0, 0); } }
+  #glass .stage > canvas:not(.fizz) { z-index: 1; }
+
+  /* ---------- tap the can */
+  .can-view { cursor: pointer; }
+  .can-tap { position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); margin: 0; font-size: 14px; font-weight: 600; color: var(--mist); white-space: nowrap; transition: opacity .4s; }
+  .can-view.is-open .can-tap { opacity: 0; }
+  .can-spray { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
   /* ---------- below: quiet and short */
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gut); }
@@ -192,6 +225,16 @@
   <a class="top-cta" href="#find">Find a cold one</a>
 </header>
 
+<nav class="rail" aria-label="Chapters">
+  <a href="#source"><b>1</b><span>The source</span></a>
+  <a href="#cave"><b>2</b><span>The cave</span></a>
+  <a href="#exit"><b>3</b><span>The run</span></a>
+  <a href="#glass"><b>4</b><span>The pour</span></a>
+  <a href="#can"><b>5</b><span>The can</span></a>
+  <a href="#sting"><b>6</b><span>The mark</span></a>
+</nav>
+<div class="bars" aria-hidden="true"><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
 <main>
   <h1 class="sr">Mountain Dew: a concept commercial. A cheetah finds green liquid deep in a mountain, drinks, and runs.</h1>
 
@@ -273,6 +316,8 @@
           <svg viewBox="0 0 120 240"><rect x="10" y="14" width="100" height="212" rx="16" fill="#123f20" /><rect x="10" y="90" width="100" height="56" fill="#a6e22e" /><use href="#mark" x="36" y="94" width="48" height="48" /></svg>
         </div>
         <canvas aria-label="A green can turning slowly, with the concept mark and MOUNTAIN DEW down its side." role="img"></canvas>
+        <canvas class="can-spray" aria-hidden="true"></canvas>
+        <p class="can-tap">Tap the can to crack it open</p>
       </div>
     </div>
   </section>
@@ -523,11 +568,15 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   const handlers = {};
   window.__film = { scenes, handlers };
 
+  const chapters = [...document.querySelectorAll(".rail a")].map((btn) => ({ btn, el: document.querySelector(btn.getAttribute("href")) }));
   function measure() {
     const vh = innerHeight;
     for (const s of scenes) {
       const r = s.el.getBoundingClientRect();
-      s.p = clamp(-r.top / Math.max(1, r.height - vh));
+      const raw = clamp(-r.top / Math.max(1, r.height - vh));
+      /* every scene eases toward where you've scrolled, so nothing ever snaps */
+      s.p = s.p == null || !motion ? raw : s.p + (raw - s.p) * .14;
+      if (Math.abs(raw - s.p) < .0005) s.p = raw;
       s.on = r.top < vh && r.bottom > 0;
       for (const c of s.caps) {
         const from = +c.dataset.from, to = +c.dataset.to;
@@ -535,6 +584,13 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
       }
     }
     top.classList.toggle("is-solid", scrollY > 40);
+    /* the story rail and the cinema bars */
+    const mid = innerHeight * .5;
+    let act = 0;
+    chapters.forEach((c, i) => { const r = c.el.getBoundingClientRect(); if (r.top < mid) act = i; });
+    chapters.forEach((c, i) => c.btn.classList.toggle("is-on", i === act));
+    const cave = document.getElementById("cave").getBoundingClientRect(), run = document.getElementById("run").getBoundingClientRect();
+    document.documentElement.classList.toggle("cinema", cave.top < innerHeight * .3 && run.bottom > innerHeight * .7);
     if (hint) hint.classList.toggle("is-gone", scrollY > 40);
   }
 
@@ -670,27 +726,119 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     }
   };
 
-  /* 5. over ice: ease in on the glass while bubbles keep rising */
-  const fizzCv = document.querySelector("#glass .fizz");
-  const fx = fizzCv.getContext("2d");
-  const bubbles = Array.from({ length: 90 }, () => ({ x: .27 + Math.random() * .45, y: Math.random(), r: .6 + Math.random() * 2.6, v: .05 + Math.random() * .14, w: Math.random() * 6 }));
-  let lastFizz = 0;
-  handlers.glass = (s, t) => {
-    const k = ease(s.p);
-    s.img.style.transform = `scale(${1.18 - .18 * k}) translate3d(0, ${(1 - k) * 2}%, 0)`;
-    const dpr = Math.min(devicePixelRatio || 1, 2), W = fizzCv.clientWidth * dpr, H = fizzCv.clientHeight * dpr;
-    if (fizzCv.width !== W || fizzCv.height !== H) { fizzCv.width = W; fizzCv.height = H; }
-    const dt = Math.min(.05, t - lastFizz || .016); lastFizz = t;
-    fx.clearRect(0, 0, W, H);
-    for (const b of bubbles) {
-      b.y -= b.v * dt;
-      if (b.y < .35) { b.y = 1.02; b.x = .27 + Math.random() * .45; }
-      const x = (b.x + Math.sin(t * 2 + b.w) * .004) * W, y = b.y * H, r = b.r * dpr;
-      fx.beginPath(); fx.arc(x, y, r, 0, Math.PI * 2);
-      fx.strokeStyle = "rgba(240,255,210,.55)"; fx.lineWidth = .8 * dpr; fx.stroke();
-      fx.beginPath(); fx.arc(x - r * .35, y - r * .35, r * .3, 0, Math.PI * 2); fx.fillStyle = "rgba(255,255,255,.7)"; fx.fill();
+  /* 6. over ice: drawn in WebGL (see the glass script below); this only eases the scene */
+})();
+
+/* ------------------------------------------------------------------ 6. the glass
+   Your glass shot, brought to life in WebGL. The pour keeps streaming down into the glass (its own
+   texture slides down, cross-faded so it never loops visibly), the soda inside wobbles and catches
+   light, bubbles race up through it, and the foam line churns. On top, a second canvas throws
+   splash droplets off the rim with gravity. The camera eases in as you scroll. If an ice clip is
+   added later, it takes over. */
+(() => {
+  if (!document.documentElement.classList.contains("motion")) return;
+  const stage = document.querySelector("#glass .stage");
+  const img = stage.querySelector("img"), spl = stage.querySelector(".fizz");
+  const cv = document.createElement("canvas"); cv.setAttribute("aria-hidden", "true"); img.after(cv);
+  const gl = cv.getContext("webgl", { antialias: false });
+  if (!gl) { cv.remove(); return; }
+  const VS = `attribute vec2 p; varying vec2 v; void main(){ v = p*.5+.5; gl_Position = vec4(p,0.,1.); }`;
+  const FS = `precision highp float;
+  varying vec2 v; uniform sampler2D T; uniform float t, Z; uniform vec2 S, O;
+  float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+  float n(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
+    return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
+  float green(vec3 c){ return smoothstep(.04,.16, c.g - max(c.r*.85, c.b)) * smoothstep(.25,.5,c.g); }
+  void main(){
+    vec2 full = O + vec2(v.x, 1.-v.y) * S, C = vec2(.5, .55);
+    vec2 uv = C + (full - C) / Z;
+    vec3 base = texture2D(T, uv).rgb, c = base;
+    /* the pour: slide down, two phases cross-faded */
+    float stream = step(.45, uv.x) * step(uv.x, .72) * (1. - smoothstep(.42, .47, uv.y)) * max(green(base), smoothstep(.45,.8, dot(base, vec3(.3,.6,.1))));
+    if (stream > .01) {
+      float L = .07, p1 = fract(t*.9), p2 = fract(t*.9 + .5);
+      vec2 w = vec2((n(vec2(uv.y*30., t*3.)) - .5) * .004, 0.);
+      vec3 a = texture2D(T, uv + w - vec2(0., p1*L)).rgb, b = texture2D(T, uv + w - vec2(0., p2*L)).rgb;
+      c = mix(c, mix(a, b, abs(p1*2. - 1.)), stream);
     }
+    /* the soda in the glass: refraction wobble, light catching, bubbles rising */
+    float glass = smoothstep(.26, .28, uv.x) * (1. - smoothstep(.71, .73, uv.x)) * smoothstep(.43, .47, uv.y);
+    if (glass > .01) {
+      vec2 d = vec2(n(uv*vec2(14.,9.) + vec2(0., -t*.5)) - .5, n(uv*vec2(9.,14.) + vec2(t*.3, -t*.6)) - .5) * .006;
+      vec3 r = texture2D(T, uv + d).rgb;
+      r += pow(n(uv*vec2(40.,24.) + vec2(t*.4, -t*1.2)), 6.) * .35 * vec3(.85, 1., .6);
+      /* bubbles: a grid of cells, each with its own rising speed and a few lit */
+      vec2 g = vec2(uv.x * 70., uv.y * 38.);
+      float col = floor(g.x), sp = 1.2 + h(vec2(col, 3.)) * 2.4;
+      vec2 cell = vec2(col, floor(g.y + t * sp)), f = vec2(fract(g.x), fract(g.y + t * sp)) - .5;
+      float on = step(.82, h(cell)), rad = .16 + h(cell + 7.) * .18;
+      float ring = smoothstep(rad, rad - .06, length(f)) - smoothstep(rad - .08, rad - .14, length(f));
+      r += on * ring * vec3(.9, 1., .75) * .75 * smoothstep(.47, .55, uv.y);
+      /* the foam line churns */
+      float foam = exp(-pow((uv.y - .455) / .012, 2.)) * n(vec2(uv.x * 60. - t * 2., t));
+      r += foam * vec3(.9, 1., .8) * .25;
+      c = mix(c, r, glass);
+    }
+    gl_FragColor = vec4(c, 1.);
+  }`;
+  const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); if (!gl.getShaderParameter(x, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(x)); return null; } return x; };
+  const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs) { cv.remove(); return; }
+  const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr); gl.useProgram(pr);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uT = gl.getUniformLocation(pr, "t"), uZ = gl.getUniformLocation(pr, "Z"), uS = gl.getUniformLocation(pr, "S"), uO = gl.getUniformLocation(pr, "O");
+  let crop = { sx: 1, sy: 1, ox: 0, oy: 0 }, Z = 1.18;
+  const sx = spl.getContext("2d");
+  const drops = [];
+  function resize() {
+    const dpr = Math.min(devicePixelRatio || 1, 2), w = stage.clientWidth, hh = stage.clientHeight;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(hh * dpr); gl.viewport(0, 0, cv.width, cv.height);
+    spl.width = cv.width; spl.height = cv.height;
+    const ir = img.naturalWidth / img.naturalHeight, vr = w / hh;
+    let a = 1, b = 1; if (vr > ir) b = ir / vr; else a = vr / ir;
+    crop = { sx: a, sy: b, ox: (1 - a) * .5, oy: (1 - b) * .5 };
+    gl.uniform2f(uS, a, b); gl.uniform2f(uO, crop.ox, crop.oy);
+  }
+  /* image point -> screen pixel, through the crop and the zoom */
+  const toScreen = (u, w) => {
+    const fx = .5 + (u - .5) * Z, fy = .55 + (w - .55) * Z;
+    return [((fx - crop.ox) / crop.sx) * spl.width, ((fy - crop.oy) / crop.sy) * spl.height];
   };
+  function spawn() {
+    const fromRim = Math.random() < .55;
+    const [x, y] = fromRim ? toScreen(.3 + Math.random() * .12, .34) : toScreen(.52 + Math.random() * .05, .43);
+    const k = spl.width / 1400;
+    drops.push({ x, y, vx: (-1.4 - Math.random() * 3.2) * k * 60, vy: (-4 - Math.random() * 5) * k * 60, r: (2 + Math.random() * 6) * k * 2, life: 0 });
+  }
+  function start() {
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+    resize(); addEventListener("resize", resize);
+    img.style.opacity = "0";
+    let last = 0;
+    window.__film.handlers.glass = (s, now) => {
+      if (s.clips) return;
+      const t = now, dt = Math.min(.05, t - last || .016); last = t;
+      Z = 1.22 - .22 * (1 - Math.pow(1 - s.p, 3));
+      gl.uniform1f(uZ, Z); gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (drops.length < 34 && Math.random() < .5) spawn();
+      sx.clearRect(0, 0, spl.width, spl.height);
+      const G = spl.height * 1.1;
+      for (const d of drops) {
+        d.life += dt; d.vy += G * dt; d.x += d.vx * dt; d.y += d.vy * dt;
+        const a = Math.max(0, 1 - d.life / 1.4);
+        const g = sx.createRadialGradient(d.x - d.r * .3, d.y - d.r * .3, 0, d.x, d.y, d.r);
+        g.addColorStop(0, `rgba(250,255,225,${.95 * a})`); g.addColorStop(.45, `rgba(190,240,70,${.75 * a})`); g.addColorStop(1, `rgba(120,190,20,${.15 * a})`);
+        sx.fillStyle = g; sx.beginPath(); sx.arc(d.x, d.y, d.r, 0, Math.PI * 2); sx.fill();
+      }
+      for (let i = drops.length - 1; i >= 0; i--) if (drops[i].life > 1.4 || drops[i].y > spl.height) drops.splice(i, 1);
+    };
+  }
+  if (img.complete && img.naturalWidth) start(); else img.addEventListener("load", start, { once: true });
 })();
 
 /* ------------------------------------------------------------------ 1. the cave
@@ -800,6 +948,22 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
 })();
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+/* scrolling glides instead of jumping a notch at a time; in-page links glide too */
+(() => {
+  if (!document.documentElement.classList.contains("motion") || typeof Lenis === "undefined") return;
+  const lenis = new Lenis({ lerp: .085, smoothWheel: true, wheelMultiplier: .9 });
+  const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const el = document.querySelector(a.getAttribute("href"));
+    if (el) { e.preventDefault(); lenis.scrollTo(el, { duration: 1.6 }); }
+  });
+})();
+</script>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
 <script type="module">
 /* ------------------------------------------------------------------ 6. the can
@@ -911,6 +1075,33 @@ if (renderer) {
   }
   size(); addEventListener("resize", size);
 
+  /* tap to crack it: the ring pull lifts, the can jolts, and green spray bursts out of the top */
+  const spray = view.querySelector(".can-spray"), spx = spray.getContext("2d");
+  let opened = -1; const jets = [];
+  view.addEventListener("click", () => {
+    if (opened >= 0 && performance.now() - opened < 1800) return;
+    opened = performance.now(); view.classList.add("is-open");
+    const top = new THREE.Vector3(0, 1.95, 0).applyMatrix4(can.matrixWorld).project(cam);
+    const w = spray.clientWidth, h = spray.clientHeight, dpr = Math.min(devicePixelRatio || 1, 2);
+    spray.width = w * dpr; spray.height = h * dpr;
+    const ox = (top.x * .5 + .5) * spray.width, oy = (-top.y * .5 + .5) * spray.height;
+    for (let i = 0; i < 160; i++) {
+      const a = -Math.PI / 2 + (Math.random() - .5) * 1.3, sp = (300 + Math.random() * 900) * dpr;
+      jets.push({ x: ox, y: oy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: (1.5 + Math.random() * 5) * dpr, life: 0, max: .8 + Math.random() * .9, white: Math.random() < .3 });
+    }
+    if (still) { renderer.render(scene, cam); }
+    requestAnimationFrame(loop);
+  });
+  function drawSpray(dt) {
+    spx.clearRect(0, 0, spray.width, spray.height);
+    for (const j of jets) {
+      j.life += dt; j.vy += 1600 * dt * (spray.height / 900); j.x += j.vx * dt; j.y += j.vy * dt; j.vx *= .99;
+      const a = Math.max(0, 1 - j.life / j.max);
+      spx.fillStyle = j.white ? `rgba(245,255,235,${a})` : `rgba(170,230,50,${a * .95})`;
+      spx.beginPath(); spx.arc(j.x, j.y, j.r, 0, Math.PI * 2); spx.fill();
+    }
+    for (let i = jets.length - 1; i >= 0; i--) if (jets[i].life > jets[i].max) jets.splice(i, 1);
+  }
   let on = false;
   new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on) requestAnimationFrame(loop); }, { rootMargin: "100px" }).observe(view);
   const t0 = performance.now();
@@ -918,13 +1109,18 @@ if (renderer) {
     const r = view.getBoundingClientRect();
     const p = Math.min(1, Math.max(0, 1 - (r.top + r.height) / (innerHeight + r.height)));
     const t = (now - t0) / 1000;
+    const dt = Math.min(.05, t - (loop.last || t)); loop.last = t;
+    /* the crack: the tab lifts and the can jolts, then settles */
+    const since = opened >= 0 ? (performance.now() - opened) / 1000 : 9;
+    tab.rotation.x = Math.PI / 2 - Math.min(1, since / .18) * .9 * (since < 1.2 ? 1 : Math.max(0, 1 - (since - 1.2) / .6));
+    if (jets.length) drawSpray(dt); else if (since < 9) spx.clearRect(0, 0, spray.width, spray.height);
     if (!still) {
       can.rotation.y = (p - .5) * Math.PI * 1.5 + Math.sin(t * .6) * .35;   /* face front mid-section */
-      can.position.y = Math.sin(t * 1.3) * .08;
+      can.position.y = Math.sin(t * 1.3) * .08 + (since < .35 ? Math.sin(since * 40) * .05 * (1 - since / .35) : 0);
       can.rotation.x = Math.sin(t * .7) * .04;
     }
     renderer.render(scene, cam);
-    if (on && !still) requestAnimationFrame(loop);
+    if (on && (!still || jets.length)) requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 }

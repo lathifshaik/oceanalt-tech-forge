@@ -6,6 +6,10 @@
 <title>Mountain Dew, concept redesign by Oceanalt</title>
 <meta name="description" content="A concept redesign by Oceanalt. Not affiliated with, endorsed by or commissioned by Mountain Dew or PepsiCo." />
 <meta name="robots" content="noindex" />
+<script>
+  /* hide the poured photo from the first paint; the pour script brings it back if it can't run */
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("will-pour");
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet" />
@@ -30,8 +34,10 @@
   /* ---------- hero: the mountain pours */
   .hero { position: relative; min-height: 100svh; display: grid; overflow: hidden; isolation: isolate; }
   .hero-img, .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); }
-  .hero canvas { opacity: 0; transition: opacity 1.2s var(--ease); }
+  .hero canvas { opacity: 0; }
   .hero.is-live canvas { opacity: 1; }
+  /* while the pour gets ready the photo (liquid already in it) stays hidden; if anything fails it comes back */
+  .will-pour .hero-img { opacity: 0; }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg, rgba(28, 35, 32, .55) 0%, rgba(28, 35, 32, 0) 34%, rgba(28, 35, 32, 0) 70%, var(--granite) 100%); }
   .mist { position: absolute; inset: 0; z-index: 2; pointer-events: none; width: 100%; height: 100%; }
@@ -169,20 +175,26 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   const [cv, mistCv] = hero.querySelectorAll("canvas");
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const gl = cv.getContext("webgl", { premultipliedAlpha: false, antialias: false });
-  if (!gl) return;
+  if (!gl) return document.documentElement.classList.remove("will-pour");
+  const giveUp = () => document.documentElement.classList.remove("will-pour");
+  setTimeout(() => { if (!hero.classList.contains("is-live")) giveUp(); }, 4000);
+  img.addEventListener("error", giveUp, { once: true });
 
   const VS = `attribute vec2 p; varying vec2 v; void main(){ v = p*.5+.5; gl_Position = vec4(p,0.,1.); }`;
   const FS = `precision highp float;
-  varying vec2 v; uniform sampler2D T; uniform float t; uniform vec2 S; uniform vec2 O;
+  varying vec2 v; uniform sampler2D T; uniform float t; uniform vec2 S; uniform vec2 O; uniform vec3 F; uniform float P; uniform float A;
   float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
   float n(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
     return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
   float green(vec3 c){ return smoothstep(.06,.22, c.g - max(c.r*.92, c.b)) * smoothstep(.25,.5,c.g); }
+  /* wider: also the pale glow and spray around the liquid, for drying it out before the pour */
+  float glow(vec3 c){ return smoothstep(.015,.11, c.g - max(c.r*.9, c.b)) * smoothstep(.12,.3,c.g); }
   void main(){
     vec2 uv = O + vec2(v.x, 1.-v.y) * S;            /* cover crop; image y runs down */
     vec3 base = texture2D(T, uv).rgb;
     float m = green(base);
-    if (m < .01) { gl_FragColor = vec4(base,1.); return; }
+    float mw = max(m, glow(base));
+    if (mw < .01) { gl_FragColor = vec4(base,1.); return; }
     /* the fall's own texture slides down: two copies half a cycle apart, cross-faded, so the
        foam and bubbles keep falling and the loop never shows. Noise wobbles the edges. */
     vec2 q = uv*vec2(90.,7.);
@@ -198,17 +210,34 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     float streak = pow(n(vec2(uv.x*260., uv.y*10. - t*4.)), 5.);
     float fizz = step(.985, h(floor(uv*vec2(500.,300.)) + floor(t*12.)));
     c += m * (streak*.3 + fizz*.4) * vec3(.85,1.,.55);
-    gl_FragColor = vec4(mix(base, c, m), 1.);
+    /* the opening pour: the fall is dry rock until the front of the liquid races down from the
+       crack, then the pool fills outward from where it lands. F = (x, top, base) of the fall. */
+    float drop = clamp(P / 1.8, 0., 1.);
+    float front = F.y + (F.z - F.y) * (1. - pow(1. - drop, 2.2));
+    float jag = (n(vec2(uv.x*70., t*2.)) - .5) * .045 + (n(vec2(uv.x*240., t*5.)) - .5) * .02;
+    float wetFall = smoothstep(front + jag + .03, front + jag - .012, uv.y);
+    float fill = clamp((P - 1.5) / 1.6, 0., 1.);
+    float r = (1. - pow(1. - fill, 2.)) * .75;
+    float dist = length((uv - vec2(F.x, F.z)) * vec2(A, 1.));
+    float wetPool = smoothstep(r + .06 + jag, r - .05, dist);
+    float wet = mix(wetFall, wetPool, smoothstep(F.z - .03, F.z + .01, uv.y));
+    vec3 dry = vec3(dot(base, vec3(.3, .5, .2))) * vec3(.36, .4, .38);
+    /* a bright, frothy leading edge while it's still falling */
+    float lip = wet * (1. - smoothstep(0., .035, front - uv.y)) * (1. - drop * drop);
+    c += lip * vec3(.5, .6, .3);
+    vec3 flowing = mix(base, c, m);
+    gl_FragColor = vec4(mix(base, mix(dry, flowing, wet), mw), 1.);
   }`;
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
   const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
-  if (!vs || !fs) return;
+  if (!vs || !fs) return giveUp();
   const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
-  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return giveUp();
   gl.useProgram(pr);
   gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
   const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uP = gl.getUniformLocation(pr, "P"), uF = gl.getUniformLocation(pr, "F"), uA = gl.getUniformLocation(pr, "A");
   const uT = gl.getUniformLocation(pr, "t"), uS = gl.getUniformLocation(pr, "S"), uO = gl.getUniformLocation(pr, "O");
 
   const focus = () => {
@@ -226,6 +255,9 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
     mist = findFall();
+    gl.uniform3f(uF, mist.x, mist.top, mist.y);
+    gl.uniform1f(uA, img.naturalWidth / img.naturalHeight);
+    gl.uniform1f(uP, 0);
     resize();
     addEventListener("resize", resize);
     hero.classList.add("is-live");
@@ -234,8 +266,10 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     const t0 = performance.now();
     function frame(now) {
       if (!on || document.hidden) return;
-      const t = (now - t0) / 1000;
+      const freeze = /#t=([\d.]+)/.exec(location.hash); /* for checking frames: #t=0.8 */
+      const t = freeze ? +freeze[1] : (now - t0) / 1000;
       gl.uniform1f(uT, t);
+      gl.uniform1f(uP, t);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       drawMist(t);
       requestAnimationFrame(frame);
@@ -265,19 +299,19 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(img, 0, 0, W, H);
     const d = x.getImageData(0, 0, W, H).data;
     const g = (i) => { const r = d[i], gg = d[i + 1], b = d[i + 2]; return gg > 90 && gg - Math.max(r * .92, b) > 25; };
-    let best = { col: W / 2, run: 0, end: H * .8 };
+    let best = { col: W / 2, run: 0, end: H * .8, top: H * .3 };
     for (let cx = 0; cx < W; cx++) {
       let run = 0, top = -1;
       for (let cy = 0; cy < H; cy++) {
-        if (g((cy * W + cx) * 4)) { if (top < 0) top = cy; run++; } else if (run > best.run) { best = { col: cx, run, end: cy }; run = 0; top = -1; } else { run = 0; top = -1; }
+        if (g((cy * W + cx) * 4)) { if (top < 0) top = cy; run++; } else if (run > best.run) { best = { col: cx, run, end: cy, top }; run = 0; top = -1; } else { run = 0; top = -1; }
       }
-      if (run > best.run) best = { col: cx, run, end: H };
+      if (run > best.run) best = { col: cx, run, end: H, top };
     }
     // the width of the fall at its base
     let l = best.col, r = best.col; const row = Math.min(H - 1, best.end - 2);
     while (l > 0 && g((row * W + l - 1) * 4)) l--;
     while (r < W - 1 && g((row * W + r + 1) * 4)) r++;
-    return { x: (l + r) / 2 / W, y: best.end / H, w: Math.max(4, r - l) / W, parts: [] };
+    return { x: (l + r) / 2 / W, y: best.end / H, top: best.top / H, w: Math.max(4, r - l) / W, parts: [] };
   }
 
   const mx = mistCv.getContext("2d");
@@ -287,7 +321,7 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     mx.clearRect(0, 0, W, H);
     const px = ((mist.x - crop.ox) / crop.sx) * W, py = ((mist.y - crop.oy) / crop.sy) * H;
     const span = (mist.w / crop.sx) * W;
-    if (mist.parts.length < 70) mist.parts.push({ x: px + (Math.random() - .5) * span * 1.4, y: py, r: 10 + Math.random() * 30, vy: .25 + Math.random() * .6, vx: (Math.random() - .5) * .5, life: 0, max: 220 + Math.random() * 200 });
+    if (t > 1.6 && mist.parts.length < Math.min(70, (t - 1.6) * 40)) mist.parts.push({ x: px + (Math.random() - .5) * span * 1.4, y: py, r: 10 + Math.random() * 30, vy: .25 + Math.random() * .6, vx: (Math.random() - .5) * .5, life: 0, max: 220 + Math.random() * 200 });
     const dpr = W / mistCv.clientWidth;
     for (const p of mist.parts) {
       p.life++; p.x += p.vx * dpr; p.y -= p.vy * dpr; p.r += .12 * dpr;

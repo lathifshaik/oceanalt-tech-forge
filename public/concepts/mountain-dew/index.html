@@ -35,13 +35,20 @@
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   /* ---------- concept note + header */
-  .note { margin: 0; position: fixed; top: 0; left: 0; right: 0; z-index: 30; padding: 8px 16px; background: var(--dew); color: var(--night); font-size: 13px; font-weight: 600; text-align: center; }
+  .note { margin: 0; position: fixed; top: 0; left: 0; right: 0; z-index: 30; padding: 7px 16px; background: rgba(5, 7, 6, .82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(166, 226, 46, .22); color: var(--mist); font-size: 12px; font-weight: 500; text-align: center; letter-spacing: .01em; }
+  .note i { display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--dew); vertical-align: 1px; }
   .top { position: fixed; z-index: 20; left: 0; right: 0; top: var(--nh, 34px); display: flex; align-items: center; justify-content: space-between; gap: 16px;
     padding: 16px var(--gut); transition: background-color .4s, backdrop-filter .4s; }
   .top.is-solid { background: rgba(5, 7, 6, .55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
   .brand svg { width: 34px; height: 34px; flex: none; }
   .brand span { font-weight: 900; font-stretch: 62%; font-size: 22px; letter-spacing: .02em; text-transform: uppercase; line-height: 1; }
+  .top-nav { display: flex; gap: clamp(18px, 2.4vw, 34px); margin-left: auto; margin-right: 8px; }
+  .top-nav a { font-size: 15px; font-weight: 600; text-decoration: none; color: var(--snow); opacity: .85; position: relative; padding: 10px 0; }
+  .top-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; background: var(--dew); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+  .top-nav a:hover { opacity: 1; } .top-nav a:hover::after { transform: scaleX(1); }
+  @media (max-width: 760px) { .top-nav { display: none; } }
   .top-cta { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: var(--dew); color: var(--night);
     font-weight: 700; font-size: 15px; text-decoration: none; }
 
@@ -85,6 +92,19 @@
   #glass .shade { background: linear-gradient(90deg, rgba(5, 7, 6, .7), transparent 55%); }
   #glass .fizz { z-index: 3; }
 
+
+  /* the opening lockup */
+  .hero-mark { display: block; width: clamp(170px, 17vw, 250px); height: auto; overflow: visible; margin: 0 0 14px -4px; }
+  .hm-peak { fill: none; stroke: var(--dew); stroke-width: 24; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 760; }
+  .hm-drop { fill: var(--snow); }
+  .hm-word { fill: var(--snow); font: 900 68px "Archivo", sans-serif; font-stretch: 62%; letter-spacing: 2px; }
+  html.motion .hm-peak { animation: hm-draw 1.5s .2s cubic-bezier(.6, 0, .2, 1) both; }
+  html.motion .hm-drop { transform-box: fill-box; animation: hm-drop .7s 1.4s cubic-bezier(.3, 1.6, .5, 1) both; }
+  html.motion .hm-word { animation: fade .8s 1.7s var(--ease) both; }
+  html.motion #source-h, html.motion .hero-copy > p { animation: fade 1s 2s var(--ease) both; }
+  @keyframes hm-draw { from { stroke-dashoffset: 760; } to { stroke-dashoffset: 0; } }
+  @keyframes hm-drop { from { opacity: 0; transform: translateY(-60px); } }
+  @keyframes fade { from { opacity: 0; } }
 
   /* the dive toward the pool */
   #stream .stage > img { object-position: 52% 85%; transform-origin: 52% 88%; }
@@ -177,7 +197,7 @@
   /* ---------- below: quiet and short */
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gut); }
   .taste { padding-block: clamp(72px, 12vw, 150px) clamp(56px, 8vw, 100px); background: var(--granite); }
-  .taste h2 { margin: 0; font-weight: 800; font-stretch: 75%; font-size: clamp(40px, 6.4vw, 92px); line-height: .95; letter-spacing: -.01em; text-transform: uppercase; max-width: 14ch; }
+  .taste h2 { margin: 0; font-weight: 900; font-stretch: 62%; font-size: clamp(44px, 7.4vw, 112px); line-height: .9; letter-spacing: -.005em; text-transform: uppercase; max-width: 15ch; }
   .taste-grid { display: grid; gap: 28px 48px; margin-top: clamp(40px, 6vw, 72px); }
   .taste-grid div { padding-top: 18px; border-top: 2px solid var(--dew); }
   .taste-grid h3 { margin: 0 0 6px; font-size: 22px; font-weight: 700; font-stretch: 85%; }
@@ -196,9 +216,15 @@
   .find-msg { min-height: 1.5em; font-weight: 600; }
   @media (min-width: 900px) { .find .wrap { grid-template-columns: 1.1fr 1fr; align-items: end; } }
 
-  footer { padding: 36px 0 44px; font-size: 14px; color: var(--mist); }
-  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; }
-  footer a { color: var(--snow); }
+  .foot { padding: clamp(56px, 8vw, 96px) 0 40px; background: var(--night); color: var(--mist); font-size: 14px; }
+  .foot-top { display: flex; flex-wrap: wrap; gap: 32px 48px; justify-content: space-between; align-items: flex-end; padding-bottom: 36px; border-bottom: 1px solid rgba(238, 242, 236, .12); }
+  .foot-brand svg { width: clamp(170px, 20vw, 260px); height: auto; overflow: visible; margin-left: -6%; }
+  .foot-brand p { margin: 10px 0 0; font-weight: 900; font-stretch: 62%; text-transform: uppercase; font-size: 22px; color: var(--dew); }
+  .foot-nav { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+  .foot-nav a { color: var(--snow); font-weight: 600; font-size: 16px; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+  .foot-nav a:hover { color: var(--dew); }
+  .foot-base p { margin: 24px 0 0; max-width: 80ch; line-height: 1.6; }
+  .foot-base a { color: var(--snow); }
 
   @media (max-width: 640px) {
     .top-cta { padding: 0 16px; font-size: 14px; }
@@ -209,7 +235,7 @@
 </style>
 </head>
 <body>
-<p class="note">Concept redesign and rebrand by Oceanalt. Not affiliated with, endorsed by or commissioned by Mountain Dew or PepsiCo.</p>
+<p class="note"><i></i>Concept redesign and rebrand by Oceanalt. Not affiliated with, endorsed by or commissioned by Mountain Dew or PepsiCo.</p>
 
 <!-- our concept mark: a peak with a drop running off it -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -222,6 +248,7 @@
 
 <header class="top" id="top">
   <a class="brand" href="#cave" aria-label="Mountain Dew concept, back to the start"><svg aria-hidden="true"><use href="#mark" /></svg><span>Mountain Dew</span></a>
+  <nav class="top-nav" aria-label="Main"><a href="#source">The story</a><a href="#can">The can</a><a href="#taste">The taste</a></nav>
   <a class="top-cta" href="#find">Find a cold one</a>
 </header>
 
@@ -244,8 +271,13 @@
     <canvas aria-hidden="true"></canvas>
     <canvas class="mist" aria-hidden="true"></canvas>
     <div class="hero-copy">
-      <h2 id="source-h">Straight off the mountain</h2>
-      <p>Something up here is pouring green. Follow it down.</p>
+      <svg class="hero-mark" viewBox="0 0 640 300" aria-hidden="true">
+        <path class="hm-peak" d="M150 210 L262 52 L318 134 L352 92 L470 210" />
+        <path class="hm-drop" d="M262 96 C262 96 246 122 246 134 A16 16 0 0 0 278 134 C278 122 262 96 262 96 Z" />
+        <text class="hm-word" x="320" y="272" text-anchor="middle">MOUNTAIN DEW</text>
+      </svg>
+      <h2 id="source-h">It starts up high</h2>
+      <p>Past the tree line, where the rock stays cold all year, something green has been finding its way out.</p>
     </div>
     <p class="hint" aria-hidden="true">Scroll<i></i></p>
   </section>
@@ -255,7 +287,7 @@
     <div class="stage">
       <img src="hero.webp" alt="" />
       <div class="dark"></div>
-      <p class="cap" data-from=".15" data-to=".8">Follow it down<small>Through the pines, into the rock.</small></p>
+      <p class="cap" data-from=".15" data-to=".8">Follow the green<small>Most people never go looking.</small></p>
     </div>
   </section>
 
@@ -265,9 +297,9 @@
       <img src="cave-drink.webp" data-clip="cave,eyes,drink" alt="Deep in a dark cave, a cheetah drinks from a glowing green pool, its face lit green from below." />
       <canvas aria-hidden="true"></canvas>
       <div class="shade"></div>
-      <p class="cap" data-from=".02" data-to=".3">Deep in the mountain<small>Something's thirsty.</small></p>
-      <p class="cap" data-from=".4" data-to=".64">It found the green stuff<small>Cold, bright and fizzing up out of the rock.</small></p>
-      <p class="cap" data-from=".72" data-to="1">One long drink</p>
+      <p class="cap" data-from=".02" data-to=".3">We weren't the first to find it<small>Some of the locals have been coming here for years.</small></p>
+      <p class="cap" data-from=".4" data-to=".64">They know a good thing<small>Cold enough to make your teeth ache. Bright enough to light the cave.</small></p>
+      <p class="cap" data-from=".72" data-to="1">Worth the climb<small>Ask anyone who's had it from the source.</small></p>
     </div>
   </section>
 
@@ -277,7 +309,7 @@
       <img src="cave-exit.webp" data-clip="exit" alt="The cheetah bursts out of the cave mouth into dawn light over snowy peaks, green drops flying off its fur." loading="lazy" />
       <div class="flash"></div>
       <div class="shade"></div>
-      <p class="cap" data-from=".12" data-to="1">Then it ran</p>
+      <p class="cap" data-from=".12" data-to="1">Some drinks wake you up<small>This one gets you moving.</small></p>
     </div>
   </section>
 
@@ -287,8 +319,8 @@
       <img src="run.webp" data-clip="run" alt="The cheetah at full sprint along a mountain ridge at sunrise, glowing green dust kicking up behind it." loading="lazy" />
       <canvas class="streaks" aria-hidden="true"></canvas>
       <div class="shade"></div>
-      <p class="cap" data-from=".08" data-to=".5">Out of the dark<small>And over the ridge before the sun's fully up.</small></p>
-      <p class="cap is-right" data-from=".56" data-to="1">A proper kick<small>Citrus, fizz and a hit of caffeine. Somewhere to be.</small></p>
+      <p class="cap" data-from=".08" data-to=".5">Fastest thing on four legs<small>Second-fastest thing in your fridge.</small></p>
+      <p class="cap is-right" data-from=".56" data-to="1">Citrus. Fizz. A kick.<small>It has caffeine. Plan your afternoon accordingly.</small></p>
     </div>
   </section>
 
@@ -299,7 +331,7 @@
       <img src="glass.webp" data-clip="ice" alt="Bright green soda pouring into a tall glass of ice, splashing and fizzing against a dark background." loading="lazy" />
       <canvas class="fizz" aria-hidden="true"></canvas>
       <div class="shade"></div>
-      <p class="cap" data-from=".1" data-to="1">Pour it over ice<small>Cold, sharp citrus with plenty of fizz.</small></p>
+      <p class="cap" data-from=".1" data-to="1">Bring it down cold<small>Over a full glass of ice. Nothing in between.</small></p>
     </div>
   </section>
 
@@ -337,7 +369,7 @@
 
   <section class="taste" id="taste" aria-labelledby="taste-h">
     <div class="wrap">
-      <h2 id="taste-h">Loud on purpose.</h2>
+      <h2 id="taste-h">We didn't invent the green. We just keep it cold.</h2>
       <div class="taste-grid">
         <div><h3>Citrus first</h3><p>Lemon and lime up front, a little sweetness behind, and a clean finish.</p></div>
         <div><h3>Lots of fizz</h3><p>Big bubbles that hold up over ice, so the last sip still has bite.</p></div>
@@ -362,10 +394,18 @@
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>A concept by <a href="https://oceanalt.com.au">Oceanalt</a>, Sydney and Melbourne. Mountain Dew is a trademark of PepsiCo; this page and its mark are not theirs.</span>
-    <span>Pictures generated for this concept.</span>
+<footer class="foot">
+  <div class="wrap foot-top">
+    <div class="foot-brand">
+      <svg viewBox="0 0 640 300" aria-hidden="true"><path d="M150 210 L262 52 L318 134 L352 92 L470 210" fill="none" stroke="#a6e22e" stroke-width="24" stroke-linejoin="round" stroke-linecap="round" /><path d="M262 96 C262 96 246 122 246 134 A16 16 0 0 0 278 134 C278 122 262 96 262 96 Z" fill="#eef2ec" /><text x="320" y="272" text-anchor="middle" fill="#eef2ec" style="font: 900 68px Archivo, sans-serif; font-stretch: 62%; letter-spacing: 2px">MOUNTAIN DEW</text></svg>
+      <p>Straight off the mountain.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="#source">The story</a><a href="#can">The can</a><a href="#taste">The taste</a><a href="#find">Find a cold one</a>
+    </nav>
+  </div>
+  <div class="wrap foot-base">
+    <p>A concept redesign and rebrand by <a href="https://oceanalt.com.au">Oceanalt</a>, Sydney and Melbourne. Mountain Dew is a trademark of PepsiCo. This page, its mark and its can are our concept and not theirs. Pictures and clips were generated for this concept.</p>
   </div>
 </footer>
 <script>

@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet" />
-<link rel="preload" as="image" href="cave-drink.webp" />
 <style>
   :root {
     --night: #050706;
@@ -74,23 +73,13 @@
   html:not(.motion) .cap { opacity: 1; transform: none; position: relative; left: auto; right: auto; bottom: auto; padding: 0 var(--gut) 48px; }
 
   /* the cave: black until the eyes, then the camera pulls back */
-  #cave .stage > img { object-position: 55% 50%; }
-  html.motion #cave .stage > img { opacity: 0; }
-  #cave canvas { z-index: 1; }
-  #cave .shade { background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(5, 7, 6, .7)); }
   .hint { position: absolute; z-index: 6; left: 50%; bottom: 22px; transform: translateX(-50%); margin: 0; font-size: 13px; font-weight: 600; color: var(--mist);
     display: grid; justify-items: center; gap: 8px; transition: opacity .5s; }
   .hint i { width: 2px; height: 34px; background: linear-gradient(var(--dew), transparent); animation: hint 1.8s var(--ease) infinite; }
   @keyframes hint { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
   .hint.is-gone { opacity: 0; }
 
-  #exit .stage > img { object-position: 60% 50%; }
-  #exit .flash { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: radial-gradient(70% 70% at 78% 40%, rgba(255, 244, 220, .9), rgba(166, 226, 46, .25) 50%, transparent 75%); opacity: 0; }
-  #exit .shade { background: linear-gradient(180deg, transparent 50%, rgba(5, 7, 6, .75)); }
 
-  #run .stage > img { object-position: 62% 50%; }
-  #run .shade { background: linear-gradient(180deg, rgba(5, 7, 6, .25), transparent 30%, transparent 60%, rgba(5, 7, 6, .7)); }
-  #run .streaks { z-index: 3; mix-blend-mode: screen; }
 
   #glass .stage > img { object-position: 50% 50%; }
   #glass .shade { background: linear-gradient(90deg, rgba(5, 7, 6, .7), transparent 55%); }
@@ -140,6 +129,7 @@
 
   /* ---------- the source: the mountain pours (as before) */
   .hero { display: grid; background: var(--granite); }
+  #source .stage:not(.has-cheetah) .wild-cap { display: none; }
   .shot { position: absolute; inset: 0; transform-origin: 52% 86%; will-change: transform; }
   .stage .dark { position: absolute; inset: 0; z-index: 4; background: var(--night); opacity: 0; pointer-events: none; }
   .hero-img, .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
@@ -253,18 +243,16 @@
 </svg>
 
 <header class="top" id="top">
-  <a class="brand" href="#cave" aria-label="Mountain Dew concept, back to the start"><svg aria-hidden="true"><use href="#mark" /></svg><span>Mountain Dew</span></a>
+  <a class="brand" href="#source" aria-label="Mountain Dew concept, back to the start"><svg aria-hidden="true"><use href="#mark" /></svg><span>Mountain Dew</span></a>
   <nav class="top-nav" aria-label="Main"><a href="#source">The story</a><a href="#can">The can</a><a href="#taste">The taste</a></nav>
   <a class="top-cta" href="#find">Find a cold one</a>
 </header>
 
 <nav class="rail" aria-label="Chapters">
   <a href="#source"><b>1</b><span>The source</span></a>
-  <a href="#cave"><b>2</b><span>The cave</span></a>
-  <a href="#exit"><b>3</b><span>The run</span></a>
-  <a href="#glass"><b>4</b><span>The pour</span></a>
-  <a href="#can"><b>5</b><span>The can</span></a>
-  <a href="#sting"><b>6</b><span>The mark</span></a>
+  <a href="#glass"><b>2</b><span>The pour</span></a>
+  <a href="#can"><b>3</b><span>The can</span></a>
+  <a href="#sting"><b>4</b><span>The mark</span></a>
 </nav>
 <div class="bars" aria-hidden="true"><i></i><i></i></div>
 <div class="grain" aria-hidden="true"></div>
@@ -272,12 +260,13 @@
   <h1 class="sr">Mountain Dew: a concept commercial. A cheetah finds green liquid deep in a mountain, drinks, and runs.</h1>
 
   <!-- 1. the source: the mountain pours, then the camera dives into the pool and down into the dark -->
-  <section class="scene" id="source" style="height: 320vh" aria-labelledby="source-h">
+  <section class="scene" id="source" style="height: 560vh" aria-labelledby="source-h">
     <div class="stage hero">
       <div class="shot">
         <img class="hero-img" src="hero.webp" alt="A granite mountain at dawn with bright green liquid pouring from a crack in its face into a green pool among pine trees." fetchpriority="high" />
         <canvas aria-hidden="true"></canvas>
         <canvas class="mist" aria-hidden="true"></canvas>
+        <canvas class="wild" aria-hidden="true"></canvas>
       </div>
       <div class="dark"></div>
       <div class="hero-copy">
@@ -289,44 +278,12 @@
         <h2 id="source-h">It starts up high</h2>
         <p>Past the tree line, where the rock stays cold all year, something green has been finding its way out.</p>
       </div>
-      <p class="cap" data-from=".34" data-to=".86">Follow the green<small>Most people never go looking.</small></p>
+      <p class="cap" data-from=".24" data-to=".44">Follow the green<small>Most people never go looking.</small></p>
+      <p class="cap wild-cap" data-from=".5" data-to=".7">We weren't the first to find it<small>The locals have been coming here for years.</small></p>
+      <p class="cap wild-cap is-right" data-from=".74" data-to=".9">Fastest thing on four legs<small>Second-fastest thing in your fridge.</small></p>
       <p class="hint" aria-hidden="true">Scroll<i></i></p>
     </div>
   </section>
-
-  <!-- 3. the cave: eyes first, then the drink -->
-  <section class="scene" id="cave" style="height: 700vh" aria-label="Deep in the mountain">
-    <div class="stage">
-      <img src="cave-drink.webp" data-clip="cave,eyes,drink" alt="Deep in a dark cave, a cheetah drinks from a glowing green pool, its face lit green from below." />
-      <canvas aria-hidden="true"></canvas>
-      <div class="shade"></div>
-      <p class="cap" data-from=".02" data-to=".3">We weren't the first to find it<small>Some of the locals have been coming here for years.</small></p>
-      <p class="cap" data-from=".4" data-to=".64">They know a good thing<small>Cold enough to make your teeth ache. Bright enough to light the cave.</small></p>
-      <p class="cap" data-from=".72" data-to="1">Worth the climb<small>Ask anyone who's had it from the source.</small></p>
-    </div>
-  </section>
-
-  <!-- 4. out of the cave -->
-  <section class="scene" id="exit" style="height: 340vh" aria-label="Out of the cave">
-    <div class="stage">
-      <img src="cave-exit.webp" data-clip="exit" alt="The cheetah bursts out of the cave mouth into dawn light over snowy peaks, green drops flying off its fur." loading="lazy" />
-      <div class="flash"></div>
-      <div class="shade"></div>
-      <p class="cap" data-from=".12" data-to="1">Some drinks wake you up<small>This one gets you moving.</small></p>
-    </div>
-  </section>
-
-  <!-- 5. the ridge -->
-  <section class="scene" id="run" style="height: 380vh" aria-label="Up the ridge">
-    <div class="stage">
-      <img src="run.webp" data-clip="run" alt="The cheetah at full sprint along a mountain ridge at sunrise, glowing green dust kicking up behind it." loading="lazy" />
-      <canvas class="streaks" aria-hidden="true"></canvas>
-      <div class="shade"></div>
-      <p class="cap" data-from=".08" data-to=".5">Fastest thing on four legs<small>Second-fastest thing in your fridge.</small></p>
-      <p class="cap is-right" data-from=".56" data-to="1">Citrus. Fizz. A kick.<small>It has caffeine. Plan your afternoon accordingly.</small></p>
-    </div>
-  </section>
-
 
   <!-- 6. over ice -->
   <section class="scene" id="glass" style="height: 320vh" aria-label="Over ice">
@@ -443,21 +400,37 @@
     float m = green(base);
     float mw = max(m, glow(base));
     if (mw < .01) { gl_FragColor = vec4(base,1.); return; }
-    /* the fall's own texture slides down: two copies half a cycle apart, cross-faded, so the
-       foam and bubbles keep falling and the loop never shows. Noise wobbles the edges. */
-    vec2 q = uv*vec2(90.,7.);
-    float a = n(q + vec2(0., -t*1.5));
-    float b = n(q*1.7 + vec2(3.1, -t*3.4));
-    vec2 d = vec2((a-.5)*.005 + (b-.5)*.0025, 0.);
-    float L = .04, p1 = fract(t*.28), p2 = fract(t*.28 + .5);
-    vec3 c1 = texture2D(T, uv + d - vec2(0., p1*L)).rgb;
-    vec3 c2 = texture2D(T, uv + d - vec2(0., p2*L)).rgb;
+    /* ---- the fall: water accelerates as it drops, so everything below runs on a stretched
+       "fall time" that speeds up toward the bottom */
+    float inPool = smoothstep(F.z - .05, F.z + .01, uv.y);
+    float ff = clamp((uv.y - F.y) / max(.05, F.z - F.y), 0., 1.);          /* 0 at the lip, 1 at the pool */
+    float fy = pow(ff, .7) * 8.;                                            /* stretched: faster lower down */
+    /* edges and body ripple sideways as sheets come down */
+    vec2 wob = vec2((n(vec2(uv.y*30. - t*6., uv.x*8.)) - .5) * .006 + (n(vec2(uv.y*90. - t*14., uv.x*30.)) - .5) * .002, 0.) * (1. - inPool);
+    /* the fall's own texture slides down, two phases cross-faded so it never visibly loops */
+    float L = .08, sp = .55, p1 = fract(t*sp), p2 = fract(t*sp + .5);
+    vec3 c1 = texture2D(T, uv + wob - vec2(0., p1*L*(1.-inPool))).rgb;
+    vec3 c2 = texture2D(T, uv + wob - vec2(0., p2*L*(1.-inPool))).rgb;
     vec3 c = mix(c1, c2, abs(p1*2. - 1.));
-    m *= max(green(c1), green(c2));               /* never pull rock into the fall */
-    /* bright streaks running down the fall, and fizz glints */
-    float streak = pow(n(vec2(uv.x*260., uv.y*10. - t*2.6)), 5.);
-    float fizz = step(.985, h(floor(uv*vec2(500.,300.)) + floor(t*7.))) * .7;
-    c += m * (streak*.3 + fizz*.4) * vec3(.85,1.,.55);
+    m *= max(green(c1), green(c2));                                          /* never pull rock into the fall */
+    /* sheets: broad bands of light and shade racing down */
+    float sheet = n(vec2(uv.x*14., fy - t*3.2)) * .6 + n(vec2(uv.x*40., fy*2. - t*5.5)) * .4;
+    /* streaks: long thin lines, longer and quicker near the bottom */
+    float streak = pow(n(vec2(uv.x*320., fy*1.4 - t*7.)), 6.) + pow(n(vec2(uv.x*150. + 7., fy - t*4.6)), 8.) * .6;
+    /* white flecks of whitewater falling fast */
+    vec2 fg = vec2(uv.x*260., fy*14. - t*60.), fc = floor(fg), fq = fract(fg) - .5;
+    fq.x += (h(fc + 5.) - .5) * .5;
+    float fleck = step(.93, h(fc)) * (1. - smoothstep(.0, .22, length(fq * vec2(1., .18)))) * smoothstep(.15, .8, ff);
+    vec3 fallCol = c * (.82 + sheet*.38) + (streak*.45 + fleck*.55) * vec3(.85, 1., .6);
+    /* ---- the pool: rings from the impact bend the light, foam churns where it lands */
+    vec2 dv = (uv - vec2(F.x, F.z)) * vec2(A, 1.);
+    float dd = length(dv);
+    float ring = sin(dd*120. - t*7.) * exp(-dd*5.) + sin(dd*55. - t*4.) * exp(-dd*2.5) * .6;
+    vec3 pc = texture2D(T, uv + (dv / max(dd, 1e-4)) * vec2(1./A, 1.) * ring * .004).rgb;
+    float shimmer = pow(n(uv*vec2(60., 140.) + vec2(t*.8, -t*.4)), 5.) * .5;
+    float foam = smoothstep(.13, .0, dd) * (n(uv*vec2(90., 60.) + vec2(t*1.6, -t*2.4)) * .7 + n(uv*240. - t*3.) * .3);
+    vec3 poolCol = pc * (1. + ring*.08) + shimmer*vec3(.7,1.,.45) + foam*vec3(.8, 1., .7)*.55;
+    c = mix(fallCol, poolCol, inPool);
     /* the opening pour: the fall is dry rock until the front of the liquid races down from the
        crack, then the pool fills outward from where it lands. F = (x, top, base) of the fall. */
     float drop = smoothstep(0., 1., clamp((P - .4) / 4.6, 0., 1.));   /* the green takes ~4.5s to reach the pool */
@@ -570,7 +543,7 @@
     mx.clearRect(0, 0, W, H);
     const px = ((mist.x - crop.ox) / crop.sx) * W, py = ((mist.y - crop.oy) / crop.sy) * H;
     const span = (mist.w / crop.sx) * W;
-    if (t > 4 && mist.parts.length < Math.min(70, (t - 4) * 14)) mist.parts.push({ x: px + (Math.random() - .5) * span * 1.4, y: py, r: 10 + Math.random() * 30, vy: .25 + Math.random() * .6, vx: (Math.random() - .5) * .5, life: 0, max: 220 + Math.random() * 200 });
+    if (t > 4 && mist.parts.length < Math.min(110, (t - 4) * 18)) mist.parts.push({ x: px + (Math.random() - .5) * span * 1.4, y: py, r: 10 + Math.random() * 30, vy: .25 + Math.random() * .6, vx: (Math.random() - .5) * .5, life: 0, max: 220 + Math.random() * 200 });
     const dpr = W / mistCv.clientWidth;
     for (const p of mist.parts) {
       p.life++; p.x += p.vx * dpr; p.y -= p.vy * dpr; p.r += .12 * dpr;
@@ -642,8 +615,6 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
     chapters.forEach((c, i) => { const r = c.el.getBoundingClientRect(); if (r.top < mid) act = i; });
     chapters.forEach((c, i) => c.btn.classList.toggle("is-on", i === act));
     rail.style.setProperty("--fill", String(clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight))));
-    const cave = document.getElementById("cave").getBoundingClientRect(), run = document.getElementById("run").getBoundingClientRect();
-    document.documentElement.classList.toggle("cinema", cave.top < innerHeight * .3 && run.bottom > innerHeight * .7);
     if (hint) hint.classList.toggle("is-gone", scrollY > 40);
   }
 
@@ -662,124 +633,15 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   handlers.source = (s) => {
     heroCopy.style.opacity = String(1 - clamp((s.p - .06) / .2));
     heroCopy.style.transform = `translate3d(0, ${-clamp((s.p - .06) / .2) * 40}px, 0)`;
-    const k = clamp((s.p - .22) / .72), e = k * k * (3 - 2 * k);
-    shot.style.transform = `scale(${1 + 2.6 * e}) translate3d(0, ${e * 4}%, 0)`;
-    srcDark.style.opacity = String(clamp((s.p - .74) / .24));
+    const k = clamp((s.p - .2) / .3), e = k * k * (3 - 2 * k);
+    shot.style.transform = `scale(${1 + 1.25 * e}) translate3d(0, ${-e * 3}%, 0)`;
+    srcDark.style.opacity = String(clamp((s.p - .9) / .1));
+    window.__src = s.p;
   };
-
-  /* clips: once a scene's video exists it replaces the still and is scrubbed by the scroll.
-     A scene can hold several clips in a row (the cave: eyes, then drink). */
-  /* clips.json lists the clips that exist, e.g. ["eyes", "drink", "run"] */
-  const ready = fetch("clips.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
-  for (const s of scenes) {
-    const names = (s.img && s.img.dataset.clip || "").split(",").filter(Boolean);
-    if (!names.length) continue;
-    ready.then((list) => {
-        const have = names.filter((n) => Array.isArray(list) && list.includes(n));
-        if (!have.length) return;
-        s.clips = have.map((n) => {
-          const v = document.createElement("video");
-          Object.assign(v, { muted: true, playsInline: true, preload: "auto" });
-          /* the whole clip in memory, so scrubbing can jump to any frame at once */
-          /* fetched only when the scene is within a couple of screens, so the opening stays fast */
-          const load = () => fetch(`${n}.mp4`).then((r) => r.blob()).then((bl) => { v.src = URL.createObjectURL(bl); v.load(); }).catch(() => { v.src = `${n}.mp4`; });
-          new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); load(); } }, { rootMargin: "200% 0px" }).observe(s.el);
-          v.setAttribute("aria-hidden", "true");
-          s.img.after(v);
-          return v;
-        });
-        s.img.style.opacity = "0";
-        /* the cave without a drink clip: the clips play first, then the code pull-back from the
-           eyes to the drinking cheetah takes over, so the eyes clip hands straight into it */
-        if (s.id === "cave") window.__film.caveClips = true;
-        /* the cave: eyes clip, then the code pull-back from those eyes to the drinking cheetah,
-           then the drink clip picks up from that same frame */
-        if (s.id === "cave") {
-          const canvas = s.el.querySelector(".stage > canvas");
-          const drinkAt = have.indexOf("drink");
-          const order = have.filter((n) => n !== "drink").map((n) => ({ v: s.clips[have.indexOf(n)] }));
-          order.push({ shader: true });
-          if (drinkAt >= 0) order.push({ v: s.clips[drinkAt] });
-          const n = order.length;
-          handlers.cave = (sc, t) => {
-            const seg = Math.min(n - 1, Math.floor(sc.p * n)), local = sc.p * n - seg, cur = order[seg];
-            sc.clips.forEach((v) => v.classList.toggle("is-on", v === cur.v));
-            if (cur.v && cur.v.duration) {
-              const want = local * (cur.v.duration - .05);
-              if (Math.abs(cur.v.currentTime - want) > .03) cur.v.currentTime = cur.v.currentTime + (want - cur.v.currentTime) * .35;
-            }
-            if (canvas) canvas.style.opacity = cur.shader ? "1" : "0";
-            if (cur.shader && window.__film.shader) window.__film.shader({ p: drinkAt >= 0 ? Math.min(1, local / .7) : local }, t);
-          };
-          return;
-        }
-        s.el.querySelectorAll(".stage > canvas:not(.streaks):not(.fizz)").forEach((c) => c.remove());
-        if (s.id === "cave") handlers.cave = null;
-        const own = handlers[s.id];
-        handlers[s.id] = (sc, t) => {
-          const n = sc.clips.length, seg = Math.min(n - 1, Math.floor(sc.p * n)), local = sc.p * n - seg;
-          sc.clips.forEach((v, i) => {
-            v.classList.toggle("is-on", i === seg);
-            if (i === seg && v.duration) {
-              const want = local * (v.duration - .05);
-              if (Math.abs(v.currentTime - want) > .03) v.currentTime = v.currentTime + (want - v.currentTime) * .35;
-            }
-          });
-          if (own && sc.id !== "cave") { const keep = sc.img; sc.img = sc.clips[seg]; own(sc, t); sc.img = keep; }
-        };
-        if (!motion) s.clips.forEach((v, i) => { v.classList.toggle("is-on", i === 0); v.autoplay = true; v.loop = true; v.play().catch(() => {}); });
-      });
-  }
 
   /* 8. the sting draws itself once it's on screen */
   const sting = document.getElementById("sting");
   new IntersectionObserver(([e], o) => { if (e.isIntersecting) { sting.classList.add("is-in"); o.disconnect(); } }, { threshold: .45 }).observe(sting);
-
-  /* 4. out of the cave: push through the mouth into a flash of dawn */
-  handlers.exit = (s) => {
-    const k = ease(s.p);
-    s.el.querySelector(".flash").style.opacity = String(clamp(1 - s.p / .2) * .95);
-    if (s.clips) return;
-    s.img.style.transform = `translate3d(${(1 - k) * -3}%, ${(1 - k) * 2}%, 0) scale(${1.32 - .32 * k})`;
-    s.el.querySelector(".flash").style.opacity = String(clamp(1 - s.p / .2) * .95);
-  };
-
-  /* 3. the ridge: the camera pans with the run and shakes a little; streaks fly past */
-  const streakCv = document.querySelector("#run .streaks");
-  const sx = streakCv.getContext("2d");
-  const lines = Array.from({ length: 46 }, () => ({ x: Math.random(), y: Math.random(), l: .05 + Math.random() * .22, v: .6 + Math.random() * 1.6, a: .05 + Math.random() * .18, g: Math.random() < .35 }));
-  let lastRun = 0;
-  handlers.run = (s, t) => {
-    const k = s.p;
-    if (s.clips) { drawStreaks(t); return; }
-    const bob = Math.sin(t * 15) * .25, sway = Math.sin(t * 7.5) * .15;
-    if (innerWidth / innerHeight < 1) {
-      /* on a phone the picture is far wider than the screen: track along the cheetah, tail to head */
-      s.img.style.objectPosition = `${28 + 62 * ease(k)}% 50%`;
-      s.img.style.transform = `translate3d(${sway}%, ${bob}%, 0) scale(1.08)`;
-    } else {
-      s.img.style.objectPosition = "";
-      s.img.style.transform = `translate3d(${8 - 16 * k + sway}%, ${bob}%, 0) scale(1.22)`;
-    }
-    drawStreaks(t);
-  };
-  function drawStreaks(t) {
-    const dpr = Math.min(devicePixelRatio || 1, 2), W = streakCv.clientWidth * dpr, H = streakCv.clientHeight * dpr;
-    if (streakCv.width !== W || streakCv.height !== H) { streakCv.width = W; streakCv.height = H; }
-    const dt = Math.min(.05, t - lastRun || .016); lastRun = t;
-    sx.clearRect(0, 0, W, H);
-    sx.lineCap = "round";
-    for (const ln of lines) {
-      ln.x -= ln.v * dt * 1.3;
-      if (ln.x + ln.l < 0) { ln.x = 1 + Math.random() * .2; ln.y = Math.random(); }
-      const y = (ln.y * .85 + .1) * H;
-      const g = sx.createLinearGradient(ln.x * W, 0, (ln.x + ln.l) * W, 0);
-      const col = ln.g ? "190,240,90" : "235,245,235";
-      g.addColorStop(0, `rgba(${col},${ln.a})`); g.addColorStop(1, `rgba(${col},0)`);
-      sx.strokeStyle = g; sx.lineWidth = (ln.g ? 2.4 : 1.4) * dpr;
-      sx.beginPath(); sx.moveTo(ln.x * W, y); sx.lineTo((ln.x + ln.l) * W, y); sx.stroke();
-    }
-  };
 
   /* 6. over ice: drawn in WebGL (see the glass script below); this only eases the scene */
 })();
@@ -912,111 +774,7 @@ document.getElementById("find-form").addEventListener("submit", (e) => {
   if (img.complete && img.naturalWidth) start(); else img.addEventListener("load", start, { once: true });
 })();
 
-/* ------------------------------------------------------------------ 1. the cave
-   The drinking shot, drawn in WebGL. It opens pitch black with only the cheetah's eyes lit (and
-   blinking), zoomed right in. Scrolling pulls the camera back while the light spreads out from
-   the eyes until the whole scene is there: the cheetah, the green-lit cave, the pool. Once it's
-   drinking, rings spread from its tongue and the green light shimmers on the rock. */
-(() => {
-  if (!document.documentElement.classList.contains("motion")) return;
-  const stage = document.querySelector("#cave .stage");
-  const img = stage.querySelector("img"), cv = stage.querySelector("canvas");
-  const gl = cv.getContext("webgl", { antialias: false });
-  const fail = () => { img.style.opacity = "1"; cv.remove(); };
-  if (!gl) return fail();
-  const VS = `attribute vec2 p; varying vec2 v; void main(){ v = p*.5+.5; gl_Position = vec4(p,0.,1.); }`;
-  const FS = `precision highp float;
-  varying vec2 v; uniform sampler2D T; uniform float t, Z, R, E, K, W, A; uniform vec2 S, O, C;
-  const vec2 L = vec2(.4976,.5154), RE = vec2(.5724,.5207), M = vec2(.535,.518), TG = vec2(.541,.722);
-  float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
-  float n(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
-    return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
-  void main(){
-    vec2 full = O + vec2(v.x, 1.-v.y) * S;
-    vec2 uv = C + (full - (O + .5*S)) / Z;
-    /* rings from the tongue, only on the pool */
-    vec2 dv = (uv - TG) * vec2(A, 1.); float d = length(dv);
-    float pool = smoothstep(.66, .72, uv.y);
-    float wave = sin(d*150. - t*6.5) * exp(-d*3.5) * W * pool;
-    uv += (dv / max(d, 1e-4)) * vec2(1./A, 1.) * wave * .0028;
-    uv += vec2(n(uv*vec2(8.,40.) + vec2(t*.3, 0.)) - .5, 0.) * .0018 * pool * W;
-    vec3 c = texture2D(T, clamp(uv, .001, .999)).rgb;
-    /* the green light breathes on the rock */
-    float gm = smoothstep(.05, .2, c.g - max(c.r*.9, c.b));
-    c *= 1. + gm * (n(uv*26. + vec2(t*.5, -t*.3)) - .5) * .45 * R;
-    /* the eyes, in the dark */
-    float e = exp(-pow(length((uv-L)*vec2(A,1.))/.016, 2.)) + exp(-pow(length((uv-RE)*vec2(A,1.))/.016, 2.));
-    float lid = K;
-    /* light spreads out from between the eyes as the camera pulls back */
-    float spread = smoothstep(R*1.6, R*1.6 - .35, length((uv - M)*vec2(A,1.)));
-    float lit = max(max(spread, R*R), e * E * lid * 1.25);
-    vec3 col = c * lit;
-    col += e * E * lid * (1. - R) * vec3(1., .6, .15) * .35;
-    gl_FragColor = vec4(col, 1.);
-  }`;
-  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(s)); return null; } return s; };
-  const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
-  if (!vs || !fs) return fail();
-  const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
-  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return fail();
-  gl.useProgram(pr);
-  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-  const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const U = (n) => gl.getUniformLocation(pr, n);
-  const u = { t: U("t"), Z: U("Z"), R: U("R"), E: U("E"), K: U("K"), W: U("W"), A: U("A"), S: U("S"), O: U("O"), C: U("C") };
-  let crop = { sx: 1, sy: 1, ox: 0, oy: 0 }, z0 = 5;
-  const EYES = [.535, .518], GAP = .0748;
 
-  function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 2), w = cv.clientWidth || stage.clientWidth, hh = cv.clientHeight || stage.clientHeight;
-    cv.width = Math.round(w * dpr); cv.height = Math.round(hh * dpr);
-    gl.viewport(0, 0, cv.width, cv.height);
-    const ir = img.naturalWidth / img.naturalHeight, vr = w / hh;
-    let sx = 1, sy = 1;
-    if (vr > ir) sy = ir / vr; else sx = vr / ir;
-    const fx = .55, fy = .5;   /* same focus as the still */
-    crop = { sx, sy, ox: (1 - sx) * fx, oy: (1 - sy) * fy };
-    gl.uniform2f(u.S, sx, sy); gl.uniform2f(u.O, crop.ox, crop.oy);
-    /* zoom so the eyes sit about half a screen apart, whatever the screen */
-    z0 = Math.min(6.5, Math.max(1.6, .46 * sx / GAP));
-  }
-
-  function start() {
-    const tex = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
-    gl.uniform1f(u.A, img.naturalWidth / img.naturalHeight);
-    resize(); addEventListener("resize", resize);
-    let t0 = null;   /* the eyes open the first time the cave is on screen */
-    const shaderFn = (s, now) => {
-      if (t0 === null) t0 = performance.now();
-      const freeze = /#cave=([\d.]+)/.exec(location.hash);   /* for checking frames: #cave=0.4 */
-      const p = freeze ? +freeze[1] : s.p;
-      const t = (performance.now() - t0) / 1000;
-      const k = 1 - Math.pow(1 - Math.min(1, p / .55), 2.2);       /* the pull-back */
-      const z = z0 + (1 - z0) * k;
-      const cs = [crop.ox + .5 * crop.sx, crop.oy + .5 * crop.sy];
-      const m = (z - 1) / Math.max(.001, z0 - 1);
-      gl.uniform2f(u.C, cs[0] + (EYES[0] - cs[0]) * m, cs[1] + (EYES[1] - cs[1]) * m);
-      gl.uniform1f(u.Z, z);
-      gl.uniform1f(u.R, Math.min(1, Math.max(0, (p - .04) / .5)));
-      gl.uniform1f(u.E, freeze ? 1 : Math.min(1, Math.max(0, (t - .5) / 1.4)));   /* the eyes open in the dark */
-      const bl = (t % 4.2);                                                       /* and blink now and then */
-      gl.uniform1f(u.K, bl > 3.95 ? .08 : 1);
-      gl.uniform1f(u.W, Math.min(1, Math.max(0, (p - .45) / .2)));
-      gl.uniform1f(u.t, t);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    };
-    window.__film.shader = shaderFn;
-    if (!window.__film.caveClips) window.__film.handlers.cave = shaderFn;
-  }
-  if (img.complete && img.naturalWidth) start(); else { img.addEventListener("load", start, { once: true }); img.addEventListener("error", fail, { once: true }); }
-})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -1192,6 +950,87 @@ if (renderer) {
     }
     renderer.render(scene, cam);
     if (on && (!still || jets.length)) requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+</script>
+
+<script type="module">
+/* ------------------------------------------------------------------ the locals
+   A 3D cheetah at the pool (an open model, CC Attribution, credited in the footer). If the model
+   file isn't there, this does nothing and the chapter's lines stay hidden. It walks in from the
+   trees, drinks at the bank, then turns and bolts; scroll sets where it is, its legs run on real
+   time. Lit warm from the dawn side and green from the pool. */
+import * as THREE from "three";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+const stage = document.querySelector("#source .stage"), cv = stage.querySelector("canvas.wild"), photo = stage.querySelector(".hero-img");
+const url = new URLSearchParams(location.search).get("cheetah") || "cheetah/scene.gltf";
+let gltf = null;
+try { const r = await fetch(url, { method: "HEAD" }); if (r.ok) gltf = await new GLTFLoader().loadAsync(url); } catch {}
+if (gltf && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  stage.classList.add("has-cheetah");
+  const renderer = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(24, 1, .1, 200); cam.position.set(0, 0, 40);
+  scene.add(new THREE.HemisphereLight(0xd6dfee, 0x2f4a12, 1.1));
+  const sun = new THREE.DirectionalLight(0xffd6a0, 2.2); sun.position.set(-10, 8, 6); scene.add(sun);
+  const pool = new THREE.PointLight(0xa6e22e, 30, 18, 1.6); scene.add(pool);
+  const model = gltf.scene; scene.add(model);
+  model.traverse((o) => { if (o.isMesh) { o.frustumCulled = false; if (o.material) o.material.side = THREE.FrontSide; } });
+  /* normalise: unit length, feet on y = 0, centred */
+  const box = new THREE.Box3().setFromObject(model), size = box.getSize(new THREE.Vector3()), ctr = box.getCenter(new THREE.Vector3());
+  const unit = 1 / Math.max(size.x, size.z, .001);
+  const rig = new THREE.Group(); scene.add(rig); rig.add(model);
+  model.position.set(-ctr.x, -box.min.y, -ctr.z);
+  const lenAxisX = size.x > size.z;                       /* which way the model's body runs */
+  const mixer = new THREE.AnimationMixer(model);
+  const clip = (re) => gltf.animations.find((a) => re.test(a.name.toLowerCase()));
+  const pick = { run: clip(/gallop|sprint|run/), walk: clip(/walk|trot/), drink: clip(/drink|lap|lick|eat|graz/), idle: clip(/idle|stand|breath|sit/) };
+  const any = gltf.animations[0];
+  const acts = {}; for (const [k, c] of Object.entries(pick)) { const a = c || (k === "drink" ? pick.idle : null) || (k === "walk" ? pick.run : null) || any; if (a) { acts[k] = mixer.clipAction(a); acts[k].play(); acts[k].setEffectiveWeight(0); } }
+  let current = null;
+  const go = (k) => { if (current === k || !acts[k]) return; for (const [n, a] of Object.entries(acts)) a.setEffectiveWeight(n === k ? 1 : 0); current = k; };
+  const sm = (x) => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
+  /* where the pool is in the photo (image units), the same numbers the pour uses */
+  const FX = .53, FZ = .88;
+  function resize() {
+    const w = cv.clientWidth, h = cv.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+  }
+  resize(); addEventListener("resize", resize);
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min(.05, (now - last) / 1000); last = now;
+    const p = window.__src ?? 0;
+    const on = p > .44 && p < .93;
+    cv.style.visibility = on ? "visible" : "hidden";
+    if (on) {
+      /* cover-crop of the photo, as the browser draws it */
+      const W = cv.clientWidth, H = cv.clientHeight, ir = (photo.naturalWidth || 2048) / (photo.naturalHeight || 1152), vr = W / H;
+      let sx = 1, sy = 1; if (vr > ir) sy = ir / vr; else sx = vr / ir;
+      const ox = (1 - sx) * .5, oy = (1 - sy) * .5;
+      const toWorld = (u, v) => {
+        const nx = ((u - ox) / sx) * 2 - 1, ny = -(((v - oy) / sy) * 2 - 1);
+        const hh = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * cam.position.z;
+        return new THREE.Vector3(nx * hh * cam.aspect, ny * hh, 0);
+      };
+      /* the walk: in from the trees (left), to the bank, drink, then turn and bolt back */
+      const lenU = Math.min(.11, sx * .2), bank = [FX - Math.min(.16, sx * .17), FZ + .03], off = [FX - Math.max(.65, sx * .8), FZ + .05];
+      const qIn = sm((p - .5) / .1), qOut = sm((p - .75) / .12);
+      let u, v, facing, anim;
+      if (p < .75) { u = off[0] + (bank[0] - off[0]) * qIn; v = off[1] + (bank[1] - off[1]) * qIn; facing = 1; anim = qIn < .98 ? (qIn > .02 ? "walk" : "idle") : "drink"; }
+      else { u = bank[0] + (off[0] - bank[0]) * qOut; v = bank[1] + (off[1] - bank[1]) * qOut; facing = -1; anim = qOut > .01 ? "run" : "idle"; }
+      go(anim);
+      const pos = toWorld(u, v), pos2 = toWorld(u + lenU, v);
+      const len = pos2.x - pos.x;                          /* about a ninth of the photo's width */
+      rig.position.copy(pos);
+      rig.scale.setScalar(len * unit);
+      rig.rotation.set(0, (lenAxisX ? 0 : Math.PI / 2) * facing + (lenAxisX && facing < 0 ? Math.PI : 0), 0);
+      pool.position.set(pos.x + len * .6, pos.y - len * .2, len * .8);
+      mixer.update(dt * (anim === "run" ? 1.4 : 1));
+      renderer.render(scene, cam);
+    }
+    requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 }

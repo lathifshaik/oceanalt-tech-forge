@@ -60,8 +60,12 @@ html:has(.s-page) body, .s-page { background: #fff; }
 .s-burger i:nth-child(2) { top: calc(50% + 3px); }
 .is-open .s-burger i:first-child { top: 50%; transform: rotate(45deg); }
 .is-open .s-burger i:nth-child(2) { top: 50%; transform: rotate(-45deg); }
-.s-menu { position: fixed; inset: 4.75rem 0 0; display: flex; flex-direction: column; gap: .25rem; padding: 1.5rem var(--s-gut) 3rem; background: #fff; }
+/* The nav's backdrop-filter makes it the containing block for fixed children, so the menu is
+   sized from the nav itself (top: 100%, full viewport height) and the page behind is locked. */
+.s-nav.is-open { background: #fff; }
+.s-menu { position: absolute; top: 100%; left: 0; right: 0; height: calc(100dvh - 4.75rem); box-sizing: border-box; overflow-y: auto; display: flex; flex-direction: column; gap: .25rem; padding: 1.5rem var(--s-gut) 3rem; background: #fff; }
 .s-menu[hidden] { display: none; }
+html:has(.s-nav.is-open) { overflow: hidden; }
 .s-menu a:not(.s-btn) { padding: .5rem 0; color: var(--s-ink); font-size: 2.2rem; font-weight: 500; letter-spacing: -.035em; text-decoration: none; animation: s-up .6s var(--s-ease) both; animation-delay: inherit; }
 .s-menu .s-btn { align-self: flex-start; margin-top: 1.5rem; }
 @media (max-width: 860px) {

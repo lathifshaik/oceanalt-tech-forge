@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Eat different. Eat new. · Oceanalt × Uber</title>
-<meta name="description" content="A taste engine for people who order every day. A prototype by Oceanalt with Uber, Melbourne." />
+<title>Eat different. Eat new. · Oceanalt × Uber Eats</title>
+<meta name="description" content="A taste engine for people who order every day. A prototype by Oceanalt with Uber Eats, Melbourne." />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="theme-color" content="#050505" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +35,7 @@
   .loader.gone { display: none; }
   .loader-in { display: grid; justify-items: center; gap: 30px; width: min(560px, 88vw); }
   .lockup { display: flex; align-items: center; gap: 16px; font-weight: 650; font-size: clamp(30px, 6vw, 52px); letter-spacing: -.045em; line-height: 1; }
-  .lockup span { opacity: 0; transform: translateY(16px); filter: blur(6px); animation: rise .9s var(--out) forwards; }
+  .lockup span { white-space: nowrap; opacity: 0; transform: translateY(16px); filter: blur(6px); animation: rise .9s var(--out) forwards; }
   .lockup .x { font-weight: 300; color: var(--green); animation-delay: .12s; }
   .lockup .u { animation-delay: .24s; }
   .route { width: 100%; height: auto; overflow: visible; }
@@ -396,7 +396,7 @@
 
 <div class="loader" id="loader" aria-hidden="true">
   <div class="loader-in">
-    <div class="lockup"><span>Oceanalt</span><span class="x">×</span><span class="u">Uber</span></div>
+    <div class="lockup"><span>Oceanalt</span><span class="x">×</span><span class="u">Uber Eats</span></div>
     <svg class="route" viewBox="0 0 400 140">
       <g class="dots" id="dots"></g>
       <path class="path glow" pathLength="1" d="M28 112 H120 V64 H212 V92 H292 V30 H372" />
@@ -410,7 +410,7 @@
 </div>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="Oceanalt × Uber, top">Oceanalt <span class="x">×</span> Uber</a>
+  <a class="brand" href="#top" aria-label="Oceanalt × Uber Eats, top">Oceanalt <span class="x">×</span> Uber Eats</a>
   <nav aria-label="Main"><a href="#engine">Find something new</a><a href="#group">Group order</a><a href="#how">How it picks</a></nav>
   <button class="cart-btn" type="button" id="cartBtn" aria-label="Open order">Order <b id="cartCount">0</b></button>
 </header>
@@ -419,10 +419,10 @@
   <section class="hero dark">
     <div class="wrap hero-grid">
       <div>
-        <p class="pill">Uber Eats · Melbourne</p>
+        <p class="pill">Melbourne</p>
         <h1><span class="line"><span>Eat different.</span></span><span class="line"><span class="g" style="--d:.12s">Eat new.</span></span></h1>
         <p class="lede rv" style="--d:.35s">Most of us order the same three dinners on repeat. Tell us your usual and a taste engine finds <b>the place you'd love next</b>, close by and open now.</p>
-        <p class="mnote rv" style="--d:.6s;display:none;margin:22px 0 0;font-size:12.5px;color:#8a8a8e">Prototype by Oceanalt with Uber. Sample places and prices; picks open a real search in Uber Eats.</p>
+        <p class="mnote rv" style="--d:.6s;display:none;margin:22px 0 0;font-size:12.5px;color:#8a8a8e">Prototype by Oceanalt with Uber Eats. Sample places and prices; picks open a real search in Uber Eats.</p>
         <div class="btns rv" style="--d:.5s">
           <a class="btn green" href="#engine">Find my next order <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
           <a class="btn glass plain" href="#group">Ordering for a group</a>
@@ -550,7 +550,7 @@
 
 <footer>
   <div class="wrap">
-    <span><b>Oceanalt × Uber</b> · a prototype made in Melbourne</span>
+    <span><b>Oceanalt × Uber Eats</b> · a prototype made in Melbourne</span>
     <span>Designed and built by Oceanalt. Places, dishes, prices, distances and times are samples, not real listings. "Open in Uber Eats" searches Uber Eats for the dish; no orders are placed from this page. Uber and Uber Eats are trademarks of Uber Technologies, Inc.</span>
   </div>
 </footer>

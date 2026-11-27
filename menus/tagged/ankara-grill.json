@@ -1,0 +1,44 @@
+{
+ "name": "Ankara Grill",
+ "suburb": "Brunswick",
+ "level": 1,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Turkish",
+ "dishes": [
+  {
+   "name": "Adana kebab plate",
+   "price": 23,
+   "kind": "main",
+   "heat": 0.6,
+   "crunch": 0.3,
+   "rich": 0.8,
+   "fresh": 0.4,
+   "sweet": 0.1,
+   "tang": 0.4,
+   "umami": 0.7,
+   "diets": [
+    "halal",
+    "gf"
+   ],
+   "look": "plate-grill"
+  },
+  {
+   "name": "Lahmacun",
+   "price": 13,
+   "kind": "main",
+   "heat": 0.4,
+   "crunch": 0.6,
+   "rich": 0.5,
+   "fresh": 0.5,
+   "sweet": 0.1,
+   "tang": 0.5,
+   "umami": 0.6,
+   "diets": [
+    "halal"
+   ],
+   "look": "flat"
+  }
+ ]
+}

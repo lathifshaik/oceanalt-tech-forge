@@ -1,0 +1,27 @@
+{
+ "name": "Hanoi Hannah's",
+ "suburb": "South Yarra",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Vietnamese",
+ "dishes": [
+  {
+   "name": "Lemongrass beef salad",
+   "price": 21,
+   "kind": "main",
+   "heat": 0.4,
+   "crunch": 0.5,
+   "rich": 0.3,
+   "fresh": 0.9,
+   "sweet": 0.3,
+   "tang": 0.7,
+   "umami": 0.6,
+   "diets": [
+    "gf"
+   ],
+   "look": "greens"
+  }
+ ]
+}

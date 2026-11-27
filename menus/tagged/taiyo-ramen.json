@@ -1,0 +1,39 @@
+{
+ "name": "Taiyo Ramen",
+ "suburb": "Carlton",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Japanese",
+ "dishes": [
+  {
+   "name": "Spicy miso ramen",
+   "price": 21,
+   "kind": "main",
+   "heat": 0.7,
+   "crunch": 0.2,
+   "rich": 0.8,
+   "fresh": 0.2,
+   "sweet": 0.1,
+   "tang": 0.1,
+   "umami": 0.9,
+   "diets": [],
+   "look": "noodles-red"
+  },
+  {
+   "name": "Shoyu ramen",
+   "price": 19,
+   "kind": "main",
+   "heat": 0.1,
+   "crunch": 0.2,
+   "rich": 0.7,
+   "fresh": 0.3,
+   "sweet": 0.1,
+   "tang": 0.2,
+   "umami": 0.9,
+   "diets": [],
+   "look": "noodles"
+  }
+ ]
+}

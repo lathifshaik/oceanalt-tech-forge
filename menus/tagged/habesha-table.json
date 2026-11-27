@@ -1,0 +1,46 @@
+{
+ "name": "Habesha Table",
+ "suburb": "Footscray",
+ "level": 1,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Ethiopian",
+ "dishes": [
+  {
+   "name": "Doro wat with injera",
+   "price": 22,
+   "kind": "main",
+   "heat": 0.8,
+   "crunch": 0,
+   "rich": 0.8,
+   "fresh": 0.2,
+   "sweet": 0.1,
+   "tang": 0.4,
+   "umami": 0.8,
+   "diets": [
+    "gf",
+    "halal"
+   ],
+   "look": "bowl-red"
+  },
+  {
+   "name": "Veg combination",
+   "price": 19,
+   "kind": "main",
+   "heat": 0.5,
+   "crunch": 0.1,
+   "rich": 0.6,
+   "fresh": 0.5,
+   "sweet": 0.1,
+   "tang": 0.4,
+   "umami": 0.6,
+   "diets": [
+    "veg",
+    "gf",
+    "halal"
+   ],
+   "look": "platter"
+  }
+ ]
+}

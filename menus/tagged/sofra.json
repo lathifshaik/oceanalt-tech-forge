@@ -1,0 +1,62 @@
+{
+ "name": "Sofra",
+ "suburb": "Brunswick",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Lebanese",
+ "dishes": [
+  {
+   "name": "Lamb shawarma plate",
+   "price": 24,
+   "kind": "main",
+   "heat": 0.3,
+   "crunch": 0.3,
+   "rich": 0.7,
+   "fresh": 0.6,
+   "sweet": 0.1,
+   "tang": 0.5,
+   "umami": 0.7,
+   "diets": [
+    "halal",
+    "gf"
+   ],
+   "look": "plate-grill"
+  },
+  {
+   "name": "Falafel and hummus",
+   "price": 18,
+   "kind": "main",
+   "heat": 0.2,
+   "crunch": 0.8,
+   "rich": 0.5,
+   "fresh": 0.6,
+   "sweet": 0.1,
+   "tang": 0.5,
+   "umami": 0.5,
+   "diets": [
+    "veg",
+    "halal"
+   ],
+   "look": "falafel"
+  },
+  {
+   "name": "Fattoush",
+   "price": 14,
+   "kind": "main",
+   "heat": 0.1,
+   "crunch": 0.7,
+   "rich": 0.2,
+   "fresh": 1,
+   "sweet": 0.2,
+   "tang": 0.7,
+   "umami": 0.3,
+   "diets": [
+    "veg",
+    "halal"
+   ],
+   "look": "greens"
+  }
+ ]
+}

@@ -33,18 +33,18 @@
   .loader.gone { display: none; }
   .loader-in { display: grid; justify-items: center; gap: 30px; width: min(560px, 88vw); }
   .lockup { display: flex; align-items: center; gap: 16px; font-weight: 650; font-size: clamp(30px, 6vw, 52px); letter-spacing: -.045em; line-height: 1; }
-  .lockup span { white-space: nowrap; opacity: 0; transform: translateY(16px); filter: blur(6px); animation: rise .9s var(--out) forwards; }
-  .lockup .x { font-weight: 300; color: var(--green); animation-delay: .12s; }
-  .lockup .u { animation-delay: .24s; }
+  .lockup span { white-space: nowrap; opacity: 0; transform: translateY(16px); filter: blur(6px); animation: rise 1.3s var(--out) forwards; }
+  .lockup .x { font-weight: 300; color: var(--green); animation-delay: .3s; }
+  .lockup .u { animation-delay: .6s; }
   .route { width: 100%; height: auto; overflow: visible; }
   .route .dots circle { fill: #262626; }
-  .route .path { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s .4s var(--spring) forwards; }
+  .route .path { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s 1s var(--spring) forwards; }
   .route .glow { stroke: var(--green); stroke-width: 9; opacity: .18; filter: blur(4px); }
   .route .pin { opacity: 0; transform-box: fill-box; transform-origin: center; animation: pop .5s var(--out) forwards; }
-  .route .pin.a { animation-delay: .35s; }
-  .route .pin.b { animation-delay: 1.85s; }
-  .route .car { offset-path: var(--route); offset-rotate: auto; animation: drive 1.6s .4s var(--spring) forwards; offset-distance: 0%; }
-  .loader-tag { margin: 0; font-size: clamp(18px, 2.4vw, 22px); font-weight: 500; letter-spacing: -.02em; color: #8a8a8a; opacity: 0; animation: rise .8s 1.7s var(--out) forwards; }
+  .route .pin.a { animation-delay: .9s; }
+  .route .pin.b { animation-delay: 3.5s; }
+  .route .car { offset-path: var(--route); offset-rotate: auto; animation: drive 2.6s 1s var(--spring) forwards; offset-distance: 0%; }
+  .loader-tag { margin: 0; font-size: clamp(18px, 2.4vw, 22px); font-weight: 500; letter-spacing: -.02em; color: #8a8a8a; opacity: 0; animation: rise 1.1s 3.4s var(--out) forwards; }
   .loader-tag b { color: #fff; font-weight: 600; }
   .loader-tag em { font-style: normal; color: var(--green); }
   @keyframes rise { to { opacity: 1; transform: none; filter: blur(0); } }
@@ -588,7 +588,7 @@ const USUALS = [
 ];
 
 /* places: name, suburb, cuisine, price level, dishes [name, price, art, vector, diets] */
-const PLACES = [
+let PLACES = [
   ["Little Red Lantern", "Collingwood", "Sichuan", 2, [["Dan dan noodles", 19, "noodles-red", [.9, .2, .7, .2, .1, .3, .9], []], ["Mapo tofu", 21, "bowl-red", [.9, 0, .7, .2, 0, .2, .9], ["veg", "gf"]], ["Dry-fried green beans", 15, "greens", [.6, .6, .3, .6, .1, .2, .7], ["veg", "gf"]]]],
   ["Ojo de Agua", "Fitzroy", "Mexican", 2, [["Al pastor tacos", 18, "tacos", [.5, .4, .6, .5, .4, .5, .6], ["gf"]], ["Mushroom quesadilla", 17, "flat", [.2, .5, .7, .3, .1, .2, .7], ["veg"]]]],
   ["Kaki Lima", "Footscray", "Indonesian", 1, [["Nasi goreng", 16, "rice", [.6, .3, .7, .2, .4, .3, .8], ["halal"]], ["Gado gado", 15, "greens", [.3, .6, .4, .8, .4, .4, .6], ["veg", "gf", "halal"]], ["Beef rendang", 22, "bowl-brown", [.6, 0, .9, .1, .3, .2, .9], ["gf", "halal"]]]],
@@ -612,8 +612,23 @@ const PLACES = [
 ];
 
 /* flatten */
-const DISHES = [];
-PLACES.forEach(([place, suburb, cuisine, level, dishes], pi) => dishes.forEach(([name, price, art, v, diets]) => DISHES.push({ place, suburb, cuisine, level, name, price, art, v, diets, pi })));
+let DISHES = [];
+function rebuildDishes() {
+  DISHES = [];
+  PLACES.forEach(([place, suburb, cuisine, level, dishes, ubereats, sample = true], pi) => dishes.forEach(([name, price, art, v, diets]) => DISHES.push({ place, suburb, cuisine, level, name, price, art, v, diets, pi, ubereats, sample })));
+}
+rebuildDishes();
+/* the menu index made by scripts/menus/tag-menus.ts; the built-in samples above are the fallback */
+let MENUS_SAMPLE = true;
+async function loadMenus() {
+  try {
+    const r = await fetch("menus.json", { cache: "no-cache" }); if (!r.ok) return false;
+    const { restaurants } = await r.json(); if (!restaurants || !restaurants.length) return false;
+    PLACES = restaurants.map((x) => [x.name, x.suburb, x.cuisine, x.level, x.dishes.map((d) => [d.name, d.price ?? 0, d.look, d.v, d.diets]), x.ubereats || null, !!x.sample]);
+    MENUS_SAMPLE = restaurants.some((x) => x.sample);
+    rebuildDishes(); return true;
+  } catch { return false; }
+}
 
 /* ===================================================================== plates
    Each dish gets a small drawn plate (flat shapes, no photos). */
@@ -661,10 +676,11 @@ const cen = (a) => a.map((x) => x - .4);
 const cos = (a, b) => { const x = cen(a), y = cen(b); return dot(x, y) / (norm(x) * norm(y)); };
 const MEAN = F.map((_, i) => USUALS.reduce((a, u) => a + u.v[i], 0) / USUALS.length);
 const pct = (s) => Math.round(50 + 50 * s);
-function km(from, to) { const [x1, y1] = SUBURBS[from], [x2, y2] = SUBURBS[to]; return Math.max(.6, Math.hypot(x1 - x2, y1 - y2)); }
+function km(from, to) { if (!SUBURBS[from] || !SUBURBS[to]) return 3; const [x1, y1] = SUBURBS[from], [x2, y2] = SUBURBS[to]; return Math.max(.6, Math.hypot(x1 - x2, y1 - y2)); }
 const mins = (d) => Math.round(14 + d * 2.6);
 /* Uber Eats search for the dish (Australia). With Uber's Consumer Delivery API this becomes a real cart hand-over. */
-const eatsUrl = (d) => "https://www.ubereats.com/au/search?q=" + encodeURIComponent(d.name);
+/* a real store link when the menu has one; a sample place is searched by dish only, a real one by dish and place */
+const eatsUrl = (d) => d.ubereats || "https://www.ubereats.com/au/search?q=" + encodeURIComponent(d.sample ? d.name : d.name + " " + d.place);
 const money = (n) => "$" + n.toFixed(2);
 
 function profile(ids) {
@@ -857,6 +873,7 @@ document.getElementById("findTable").addEventListener("click", () => { renderTab
 /* ===================================================================== start */
 const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
 paintPlates(); drawCart(); render(); drawPeople(); renderTable();
+loadMenus().then((ok) => { if (ok) { state.page = 0; render(); renderTable(); } });
 
 /* ticker of cuisines */
 (() => {
@@ -946,7 +963,7 @@ document.querySelectorAll(".closing h2").forEach((el) => lio.observe(el));
     setTimeout(() => { document.querySelector(".hero h1").classList.add("ready"); document.querySelectorAll(".hero .rv").forEach((el) => el.classList.add("in")); window.__startPhone(); }, 250);
   };
   let seen = false; try { seen = sessionStorage.getItem("ou-seen") === "1"; sessionStorage.setItem("ou-seen", "1"); } catch {}
-  setTimeout(finish, REDUCE ? 150 : seen ? 900 : 2900);
+  setTimeout(finish, REDUCE ? 150 : seen ? 900 : 5600);
   loader.addEventListener("click", finish);
 })();
 </script>

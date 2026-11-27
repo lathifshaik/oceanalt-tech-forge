@@ -1,0 +1,994 @@
+{
+ "built": "2026-11-27T04:39:26.095Z",
+ "restaurants": [
+  {
+   "name": "Ankara Grill",
+   "suburb": "Brunswick",
+   "cuisine": "Turkish",
+   "level": 1,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Adana kebab plate",
+     "price": 23,
+     "look": "plate-grill",
+     "kind": "main",
+     "diets": [
+      "halal",
+      "gf"
+     ],
+     "v": [
+      0.6,
+      0.3,
+      0.8,
+      0.4,
+      0.1,
+      0.4,
+      0.7
+     ]
+    },
+    {
+     "name": "Lahmacun",
+     "price": 13,
+     "look": "flat",
+     "kind": "main",
+     "diets": [
+      "halal"
+     ],
+     "v": [
+      0.4,
+      0.6,
+      0.5,
+      0.5,
+      0.1,
+      0.5,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Banh Mi Bros",
+   "suburb": "Footscray",
+   "cuisine": "Vietnamese",
+   "level": 1,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Pork banh mi",
+     "price": 12,
+     "look": "roll",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.4,
+      0.7,
+      0.5,
+      0.7,
+      0.3,
+      0.5,
+      0.7
+     ]
+    },
+    {
+     "name": "Bun cha",
+     "price": 17,
+     "look": "noodles",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.3,
+      0.3,
+      0.4,
+      0.8,
+      0.4,
+      0.6,
+      0.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Big Sky Smokehouse",
+   "suburb": "Collingwood",
+   "cuisine": "Barbecue",
+   "level": 3,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Brisket plate",
+     "price": 29,
+     "look": "plate-grill",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.2,
+      0.3,
+      1,
+      0.2,
+      0.3,
+      0.3,
+      0.9
+     ]
+    },
+    {
+     "name": "Smoked cauliflower",
+     "price": 19,
+     "look": "plate-grill",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf"
+     ],
+     "v": [
+      0.3,
+      0.4,
+      0.6,
+      0.4,
+      0.2,
+      0.3,
+      0.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Green Bell",
+   "suburb": "Northcote",
+   "cuisine": "Thai",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Khao soi",
+     "price": 21,
+     "look": "bowl-yellow",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.6,
+      0.4,
+      0.8,
+      0.3,
+      0.3,
+      0.4,
+      0.8
+     ]
+    },
+    {
+     "name": "Larb gai",
+     "price": 18,
+     "look": "greens",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.7,
+      0.3,
+      0.3,
+      0.9,
+      0.1,
+      0.8,
+      0.6
+     ]
+    },
+    {
+     "name": "Green papaya salad",
+     "price": 15,
+     "look": "greens",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf"
+     ],
+     "v": [
+      0.8,
+      0.7,
+      0.1,
+      1,
+      0.3,
+      0.9,
+      0.5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Habesha Table",
+   "suburb": "Footscray",
+   "cuisine": "Ethiopian",
+   "level": 1,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Doro wat with injera",
+     "price": 22,
+     "look": "bowl-red",
+     "kind": "main",
+     "diets": [
+      "gf",
+      "halal"
+     ],
+     "v": [
+      0.8,
+      0,
+      0.8,
+      0.2,
+      0.1,
+      0.4,
+      0.8
+     ]
+    },
+    {
+     "name": "Veg combination",
+     "price": 19,
+     "look": "platter",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf",
+      "halal"
+     ],
+     "v": [
+      0.5,
+      0.1,
+      0.6,
+      0.5,
+      0.1,
+      0.4,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Hanoi Hannah's",
+   "suburb": "South Yarra",
+   "cuisine": "Vietnamese",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Lemongrass beef salad",
+     "price": 21,
+     "look": "greens",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.4,
+      0.5,
+      0.3,
+      0.9,
+      0.3,
+      0.7,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Hellas Bakehouse",
+   "suburb": "St Kilda",
+   "cuisine": "Greek",
+   "level": 1,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Spanakopita",
+     "price": 12,
+     "look": "pie",
+     "kind": "main",
+     "diets": [
+      "veg"
+     ],
+     "v": [
+      0,
+      0.8,
+      0.6,
+      0.5,
+      0.1,
+      0.3,
+      0.5
+     ]
+    },
+    {
+     "name": "Chicken souvlaki",
+     "price": 16,
+     "look": "roll",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.2,
+      0.3,
+      0.6,
+      0.6,
+      0.1,
+      0.5,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Kaki Lima",
+   "suburb": "Footscray",
+   "cuisine": "Indonesian",
+   "level": 1,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Nasi goreng",
+     "price": 16,
+     "look": "rice",
+     "kind": "main",
+     "diets": [
+      "halal"
+     ],
+     "v": [
+      0.6,
+      0.3,
+      0.7,
+      0.2,
+      0.4,
+      0.3,
+      0.8
+     ]
+    },
+    {
+     "name": "Gado gado",
+     "price": 15,
+     "look": "greens",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf",
+      "halal"
+     ],
+     "v": [
+      0.3,
+      0.6,
+      0.4,
+      0.8,
+      0.4,
+      0.4,
+      0.6
+     ]
+    },
+    {
+     "name": "Beef rendang",
+     "price": 22,
+     "look": "bowl-brown",
+     "kind": "main",
+     "diets": [
+      "gf",
+      "halal"
+     ],
+     "v": [
+      0.6,
+      0,
+      0.9,
+      0.1,
+      0.3,
+      0.2,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Lima Social",
+   "suburb": "South Yarra",
+   "cuisine": "Peruvian",
+   "level": 3,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Ceviche classico",
+     "price": 26,
+     "look": "ceviche",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.4,
+      0.3,
+      0.1,
+      1,
+      0.1,
+      1,
+      0.5
+     ]
+    },
+    {
+     "name": "Pollo a la brasa",
+     "price": 28,
+     "look": "chicken",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.3,
+      0.6,
+      0.7,
+      0.3,
+      0.1,
+      0.3,
+      0.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Little Red Lantern",
+   "suburb": "Collingwood",
+   "cuisine": "Sichuan",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Dan dan noodles",
+     "price": 19,
+     "look": "noodles-red",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.9,
+      0.2,
+      0.7,
+      0.2,
+      0.1,
+      0.3,
+      0.9
+     ]
+    },
+    {
+     "name": "Mapo tofu",
+     "price": 21,
+     "look": "bowl-red",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf"
+     ],
+     "v": [
+      0.9,
+      0,
+      0.7,
+      0.2,
+      0,
+      0.2,
+      0.9
+     ]
+    },
+    {
+     "name": "Dry-fried green beans",
+     "price": 15,
+     "look": "greens",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf"
+     ],
+     "v": [
+      0.6,
+      0.6,
+      0.3,
+      0.6,
+      0.1,
+      0.2,
+      0.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Mama Akosua",
+   "suburb": "Northcote",
+   "cuisine": "West African",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Jollof rice and chicken",
+     "price": 22,
+     "look": "rice",
+     "kind": "main",
+     "diets": [
+      "gf",
+      "halal"
+     ],
+     "v": [
+      0.6,
+      0.2,
+      0.7,
+      0.3,
+      0.2,
+      0.3,
+      0.8
+     ]
+    },
+    {
+     "name": "Fried plantain and beans",
+     "price": 16,
+     "look": "platter",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf",
+      "halal"
+     ],
+     "v": [
+      0.3,
+      0.5,
+      0.6,
+      0.3,
+      0.6,
+      0.2,
+      0.5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Nonna Rosa's",
+   "suburb": "Carlton",
+   "cuisine": "Italian",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Cacio e pepe",
+     "price": 22,
+     "look": "pasta",
+     "kind": "main",
+     "diets": [
+      "veg"
+     ],
+     "v": [
+      0.2,
+      0,
+      0.8,
+      0.1,
+      0.1,
+      0.1,
+      0.8
+     ]
+    },
+    {
+     "name": "Nduja pizza",
+     "price": 24,
+     "look": "pizza",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.6,
+      0.5,
+      0.8,
+      0.2,
+      0.2,
+      0.3,
+      0.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Ojo de Agua",
+   "suburb": "Fitzroy",
+   "cuisine": "Mexican",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Al pastor tacos",
+     "price": 18,
+     "look": "tacos",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.5,
+      0.4,
+      0.6,
+      0.5,
+      0.4,
+      0.5,
+      0.6
+     ]
+    },
+    {
+     "name": "Mushroom quesadilla",
+     "price": 17,
+     "look": "flat",
+     "kind": "main",
+     "diets": [
+      "veg"
+     ],
+     "v": [
+      0.2,
+      0.5,
+      0.7,
+      0.3,
+      0.1,
+      0.2,
+      0.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Paneer & Co",
+   "suburb": "Richmond",
+   "cuisine": "Indian",
+   "level": 1,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Chole bhature",
+     "price": 17,
+     "look": "falafel",
+     "kind": "main",
+     "diets": [
+      "veg"
+     ],
+     "v": [
+      0.5,
+      0.6,
+      0.7,
+      0.3,
+      0.1,
+      0.3,
+      0.6
+     ]
+    },
+    {
+     "name": "Masala dosa",
+     "price": 16,
+     "look": "flat",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf"
+     ],
+     "v": [
+      0.4,
+      0.8,
+      0.5,
+      0.4,
+      0.1,
+      0.4,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Saigon Corner",
+   "suburb": "Richmond",
+   "cuisine": "Vietnamese",
+   "level": 1,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Broken rice with pork chop",
+     "price": 17,
+     "look": "rice",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.2,
+      0.4,
+      0.6,
+      0.5,
+      0.5,
+      0.4,
+      0.7
+     ]
+    },
+    {
+     "name": "Crispy spring rolls",
+     "price": 11,
+     "look": "rolls",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.1,
+      1,
+      0.5,
+      0.5,
+      0.2,
+      0.4,
+      0.5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Seoul Food Club",
+   "suburb": "Melbourne CBD",
+   "cuisine": "Korean",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Yangnyeom chicken",
+     "price": 26,
+     "look": "chicken",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.6,
+      1,
+      0.8,
+      0.1,
+      0.6,
+      0.3,
+      0.7
+     ]
+    },
+    {
+     "name": "Bibimbap",
+     "price": 19,
+     "look": "bowl-mixed",
+     "kind": "main",
+     "diets": [
+      "veg"
+     ],
+     "v": [
+      0.5,
+      0.3,
+      0.4,
+      0.7,
+      0.2,
+      0.3,
+      0.7
+     ]
+    },
+    {
+     "name": "Kimchi pancake",
+     "price": 16,
+     "look": "flat",
+     "kind": "main",
+     "diets": [
+      "veg"
+     ],
+     "v": [
+      0.5,
+      0.7,
+      0.5,
+      0.3,
+      0.1,
+      0.6,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Sofra",
+   "suburb": "Brunswick",
+   "cuisine": "Lebanese",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Lamb shawarma plate",
+     "price": 24,
+     "look": "plate-grill",
+     "kind": "main",
+     "diets": [
+      "halal",
+      "gf"
+     ],
+     "v": [
+      0.3,
+      0.3,
+      0.7,
+      0.6,
+      0.1,
+      0.5,
+      0.7
+     ]
+    },
+    {
+     "name": "Falafel and hummus",
+     "price": 18,
+     "look": "falafel",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "halal"
+     ],
+     "v": [
+      0.2,
+      0.8,
+      0.5,
+      0.6,
+      0.1,
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "name": "Fattoush",
+     "price": 14,
+     "look": "greens",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "halal"
+     ],
+     "v": [
+      0.1,
+      0.7,
+      0.2,
+      1,
+      0.2,
+      0.7,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Sumi Robata",
+   "suburb": "Melbourne CBD",
+   "cuisine": "Japanese",
+   "level": 3,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Chicken karaage don",
+     "price": 22,
+     "look": "rice",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.1,
+      0.9,
+      0.7,
+      0.2,
+      0.3,
+      0.2,
+      0.8
+     ]
+    },
+    {
+     "name": "Salmon aburi box",
+     "price": 29,
+     "look": "sushi",
+     "kind": "main",
+     "diets": [
+      "gf"
+     ],
+     "v": [
+      0.1,
+      0.2,
+      0.4,
+      0.7,
+      0.3,
+      0.3,
+      0.8
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Taiyo Ramen",
+   "suburb": "Carlton",
+   "cuisine": "Japanese",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Spicy miso ramen",
+     "price": 21,
+     "look": "noodles-red",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.7,
+      0.2,
+      0.8,
+      0.2,
+      0.1,
+      0.1,
+      0.9
+     ]
+    },
+    {
+     "name": "Shoyu ramen",
+     "price": 19,
+     "look": "noodles",
+     "kind": "main",
+     "diets": [],
+     "v": [
+      0.1,
+      0.2,
+      0.7,
+      0.3,
+      0.1,
+      0.2,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Tamarind House",
+   "suburb": "Richmond",
+   "cuisine": "Sri Lankan",
+   "level": 2,
+   "ubereats": null,
+   "sample": true,
+   "dishes": [
+    {
+     "name": "Chicken kottu roti",
+     "price": 21,
+     "look": "rice",
+     "kind": "main",
+     "diets": [
+      "halal"
+     ],
+     "v": [
+      0.7,
+      0.4,
+      0.8,
+      0.2,
+      0.1,
+      0.2,
+      0.8
+     ]
+    },
+    {
+     "name": "Hoppers with dhal",
+     "price": 17,
+     "look": "bowl-yellow",
+     "kind": "main",
+     "diets": [
+      "veg",
+      "gf"
+     ],
+     "v": [
+      0.4,
+      0.5,
+      0.6,
+      0.3,
+      0.2,
+      0.2,
+      0.6
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "name": "Green Bell",
+ "suburb": "Northcote",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Thai",
+ "dishes": [
+  {
+   "name": "Khao soi",
+   "price": 21,
+   "kind": "main",
+   "heat": 0.6,
+   "crunch": 0.4,
+   "rich": 0.8,
+   "fresh": 0.3,
+   "sweet": 0.3,
+   "tang": 0.4,
+   "umami": 0.8,
+   "diets": [],
+   "look": "bowl-yellow"
+  },
+  {
+   "name": "Larb gai",
+   "price": 18,
+   "kind": "main",
+   "heat": 0.7,
+   "crunch": 0.3,
+   "rich": 0.3,
+   "fresh": 0.9,
+   "sweet": 0.1,
+   "tang": 0.8,
+   "umami": 0.6,
+   "diets": [
+    "gf"
+   ],
+   "look": "greens"
+  },
+  {
+   "name": "Green papaya salad",
+   "price": 15,
+   "kind": "main",
+   "heat": 0.8,
+   "crunch": 0.7,
+   "rich": 0.1,
+   "fresh": 1,
+   "sweet": 0.3,
+   "tang": 0.9,
+   "umami": 0.5,
+   "diets": [
+    "veg",
+    "gf"
+   ],
+   "look": "greens"
+  }
+ ]
+}

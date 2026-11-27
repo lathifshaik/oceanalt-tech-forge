@@ -1,0 +1,44 @@
+{
+ "name": "Big Sky Smokehouse",
+ "suburb": "Collingwood",
+ "level": 3,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Barbecue",
+ "dishes": [
+  {
+   "name": "Brisket plate",
+   "price": 29,
+   "kind": "main",
+   "heat": 0.2,
+   "crunch": 0.3,
+   "rich": 1,
+   "fresh": 0.2,
+   "sweet": 0.3,
+   "tang": 0.3,
+   "umami": 0.9,
+   "diets": [
+    "gf"
+   ],
+   "look": "plate-grill"
+  },
+  {
+   "name": "Smoked cauliflower",
+   "price": 19,
+   "kind": "main",
+   "heat": 0.3,
+   "crunch": 0.4,
+   "rich": 0.6,
+   "fresh": 0.4,
+   "sweet": 0.2,
+   "tang": 0.3,
+   "umami": 0.7,
+   "diets": [
+    "veg",
+    "gf"
+   ],
+   "look": "plate-grill"
+  }
+ ]
+}

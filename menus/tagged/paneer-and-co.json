@@ -1,0 +1,44 @@
+{
+ "name": "Paneer & Co",
+ "suburb": "Richmond",
+ "level": 1,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Indian",
+ "dishes": [
+  {
+   "name": "Chole bhature",
+   "price": 17,
+   "kind": "main",
+   "heat": 0.5,
+   "crunch": 0.6,
+   "rich": 0.7,
+   "fresh": 0.3,
+   "sweet": 0.1,
+   "tang": 0.3,
+   "umami": 0.6,
+   "diets": [
+    "veg"
+   ],
+   "look": "falafel"
+  },
+  {
+   "name": "Masala dosa",
+   "price": 16,
+   "kind": "main",
+   "heat": 0.4,
+   "crunch": 0.8,
+   "rich": 0.5,
+   "fresh": 0.4,
+   "sweet": 0.1,
+   "tang": 0.4,
+   "umami": 0.6,
+   "diets": [
+    "veg",
+    "gf"
+   ],
+   "look": "flat"
+  }
+ ]
+}

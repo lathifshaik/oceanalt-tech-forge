@@ -255,6 +255,10 @@
   .add { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px; border: 0; border-radius: 999px; background: #050505; color: #fff; font-weight: 600; font-size: 13.5px; cursor: pointer; white-space: nowrap; transition: background .4s var(--spring), transform .4s var(--spring); }
   .add:active { transform: scale(.96); }
   .add.done { background: var(--green); color: #000; }
+  .fb { display: flex; gap: 6px; margin-top: 12px; }
+  .fb button { min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; box-shadow: inset 0 0 0 1px var(--hair); font-size: 12.5px; font-weight: 500; color: var(--mute); cursor: pointer; transition: background .3s, color .3s; }
+  .fb button:hover { background: var(--soft); color: #000; }
+  .reset { border: 0; background: none; padding: 0; margin-left: 6px; font: inherit; color: #000; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
   .eats { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 600; color: #000; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,.2); padding-bottom: 1px; transition: border-color .3s; }
   .eats:hover { border-color: #000; }
   .eats svg { width: 13px; height: 13px; transition: transform .5s var(--spring); }
@@ -527,6 +531,8 @@
       <ol class="steps">
         <li class="rv"><b>Your usuals</b><span>Each dish is scored on heat, crunch, richness, freshness, sweetness, tang and depth. Your usuals give us a taste profile.</span></li>
         <li class="rv"><b>Somewhere new</b><span>Places and cuisines you haven't ordered from rank higher. The slider sets how far from your usual it goes.</span></li>
+        <li class="rv"><b>Learns as you go</b><span>Tap "More like this" or "Not for me" and your taste profile moves toward what you liked. Skipped places don't come back. It stays in your browser.</span></li>
+        <li class="rv"><b>Three different picks</b><span>Each set of three is spread out, so you don't get three curries in a row.</span></li>
         <li class="rv"><b>Nearby and open</b><span>Closer places and shorter waits win ties. Closed kitchens don't show.</span></li>
         <li class="rv"><b>Order on Uber Eats</b><span>Each pick opens in Uber Eats, where you order and pay as usual.</span></li>
       </ol>
@@ -669,7 +675,10 @@ function plateSVG(key) {
 function paintPlates(root = document) { root.querySelectorAll(".plate[data-dish]").forEach((el) => { if (!el.firstChild) { el.innerHTML = plateSVG(el.dataset.dish); el.style.background = (ART[el.dataset.dish] || ["#eee"])[0]; } }); }
 
 /* ===================================================================== engine */
-const state = { usuals: new Set(["burrito", "padthai"]), adv: .6, budget: 3, diets: new Set(), suburb: "Fitzroy", page: 0, cart: [] };
+const state = { usuals: new Set(["burrito", "padthai"]), adv: .6, budget: 3, diets: new Set(), suburb: "Fitzroy", page: 0, cart: [], liked: [], skipped: [] };
+/* what you've told it, kept in this browser only */
+try { const m = JSON.parse(localStorage.getItem("ou-taste") || "{}"); state.liked = m.liked || []; state.skipped = m.skipped || []; } catch {}
+const saveTaste = () => { try { localStorage.setItem("ou-taste", JSON.stringify({ liked: state.liked.slice(-30), skipped: state.skipped.slice(-60) })); } catch {} };
 const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
 const norm = (a) => Math.sqrt(dot(a, a)) || 1;
 const cen = (a) => a.map((x) => x - .4);
@@ -683,19 +692,28 @@ const mins = (d) => Math.round(14 + d * 2.6);
 const eatsUrl = (d) => d.ubereats || "https://www.ubereats.com/au/search?q=" + encodeURIComponent(d.sample ? d.name : d.name + " " + d.place);
 const money = (n) => "$" + n.toFixed(2);
 
+/* The taste profile: the average of your usuals, then nudged by what you've liked and skipped
+   (Rocchio feedback: move toward the likes, a little away from the skips). */
+const dishKey = (d) => d.place + "|" + d.name;
+const byKey = (k) => DISHES.find((d) => dishKey(d) === k);
+const avg = (vs) => F.map((_, i) => vs.reduce((s, v) => s + v[i], 0) / vs.length);
 function profile(ids) {
   const list = USUALS.filter((u) => ids.has(u.id));
   if (!list.length) return null;
-  const v = F.map((_, i) => list.reduce((s, u) => s + u.v[i], 0) / list.length);
-  return { v, cuisines: new Set(list.map((u) => u.cuisine)), list };
+  let v = avg(list.map((u) => u.v));
+  const liked = state.liked.map(byKey).filter(Boolean), skipped = state.skipped.map(byKey).filter(Boolean);
+  if (liked.length) { const L = avg(liked.map((d) => d.v)), w = Math.min(.6, .25 + .08 * liked.length); v = v.map((x, i) => x + w * (L[i] - x)); }
+  if (skipped.length) { const S = avg(skipped.map((d) => d.v)), w = Math.min(.3, .1 + .04 * skipped.length); v = v.map((x, i) => Math.max(0, Math.min(1, x - w * (S[i] - x)))); }
+  return { v, cuisines: new Set(list.map((u) => u.cuisine)), list, liked, skippedPlaces: new Set(skipped.map((d) => d.place)), likedCuisines: new Set(liked.map((d) => d.cuisine)) };
 }
 
 function reasons(taste, dish, isNew) {
   /* what's distinctive: flavours where both your usuals and this dish sit above the typical order */
   const shared = F.map((f, i) => [f, Math.min(taste.v[i] - MEAN[i], dish.v[i] - MEAN[i]), dish.v[i]]).filter(([, s, d]) => s > -.02 && d >= .4).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([f]) => NAMES[f]);
   if (!shared.length) shared.push(NAMES[F[dish.v.indexOf(Math.max(...dish.v))]]);
-  const like = taste.list.slice().sort((a, b) => cos(b.v, dish.v) - cos(a.v, dish.v))[0];
-  return { shared, like: like.name, isNew };
+  const pool = [...taste.list, ...taste.liked.map((d) => ({ name: d.name, v: d.v, liked: true }))];
+  const like = pool.sort((a, b) => cos(b.v, dish.v) - cos(a.v, dish.v))[0];
+  return { shared, like: like.name, likedIt: !!like.liked, isNew };
 }
 
 function rank(taste, opts) {
@@ -703,20 +721,36 @@ function rank(taste, opts) {
   return DISHES
     .filter((d) => budget === 3 || d.level <= budget)
     .filter((d) => [...diets].every((x) => d.diets.includes(x)))
+    .filter((d) => !taste.skippedPlaces.has(d.place) && !state.liked.includes(dishKey(d)))
     .map((d) => {
       const sim = cos(taste.v, d.v);
       const isNew = !taste.cuisines.has(d.cuisine);
       const dist = km(suburb, d.suburb);
       const near = 1 - Math.min(1, dist / 8);
-      const score = sim * (1.1 - .6 * adv) + (isNew ? 1 : 0) * (.08 + .5 * adv) + near * .14;
+      const liked = taste.likedCuisines.has(d.cuisine) ? .08 : 0;
+      const score = sim * (1.1 - .6 * adv) + (isNew ? 1 : 0) * (.08 + .5 * adv) + near * .14 + liked;
       return { d, sim, isNew, dist, score };
     })
     .sort((a, b) => b.score - a.score);
 }
 
+/* Best dish per place, then a varied order (maximal marginal relevance): each next pick is the best
+   score minus how close it is to what's already been picked, so three picks aren't three curries. */
 function pickDistinct(list, n, skip = 0) {
-  const seen = new Set(), out = [];
-  for (const r of list) { if (seen.has(r.d.pi)) continue; seen.add(r.d.pi); out.push(r); }
+  const seen = new Set(), pool = [];
+  for (const r of list) { if (seen.has(r.d.pi)) continue; seen.add(r.d.pi); pool.push(r); }
+  const out = [];
+  while (pool.length) {
+    let bi = 0, best = -Infinity;
+    pool.forEach((r, i) => {
+      const recent = out.slice(-2);
+      const near = recent.length ? Math.max(...recent.map((o) => cos(o.d.v, r.d.v))) : 0;
+      const same = recent.some((o) => o.d.cuisine === r.d.cuisine) ? .25 : 0;
+      const mmr = r.score - .18 * Math.max(0, near) - same;
+      if (mmr > best) { best = mmr; bi = i; }
+    });
+    out.push(pool.splice(bi, 1)[0]);
+  }
   return out.slice(skip, skip + n);
 }
 
@@ -729,7 +763,8 @@ function render() {
   if (!all.length) { results.innerHTML = `<div class="empty">Nothing matches all of that nearby. Try a wider budget or fewer filters.</div>`; resNote.textContent = ""; return; }
   const pages = Math.ceil(all.length / 3), skip = (state.page % pages) * 3;
   const top = all.slice(skip, skip + 3);
-  resNote.textContent = `From ${all.length} places near ${state.suburb}`;
+  const learnt = state.liked.length + state.skipped.length;
+  resNote.innerHTML = `From ${all.length} places near ${state.suburb}` + (learnt ? ` · learning from ${state.liked.length} like${state.liked.length === 1 ? "" : "s"} and ${state.skipped.length} skip${state.skipped.length === 1 ? "" : "s"} <button type="button" class="reset" id="resetTaste">Start over</button>` : "");
   results.innerHTML = top.map(({ d, sim, isNew, dist }, i) => {
     const why = reasons(taste, d, isNew);
     const key = d.place + "|" + d.name, inCart = state.cart.some((c) => c.key === key);
@@ -738,7 +773,8 @@ function render() {
       <div>
         <h4>${d.name}</h4>
         <p class="meta">${d.place} · ${d.suburb} · ${dist.toFixed(1)} km · about ${mins(dist)} min</p>
-        <div class="why">${why.shared.map((s) => `<span>${s}</span>`).join("")}${isNew ? `<span class="new">New to you: ${d.cuisine}</span>` : `<span>Like your ${why.like.toLowerCase()}</span>`}</div>
+        <div class="why">${why.shared.map((s) => `<span>${s}</span>`).join("")}${isNew ? `<span class="new">New to you: ${d.cuisine}</span>` : ""}<span>${why.likedIt ? "Because you liked" : "Like your"} ${why.like.toLowerCase()}</span></div>
+        <div class="fb"><button type="button" data-fb="like" data-key="${key}">More like this</button><button type="button" data-fb="skip" data-key="${key}">Not for me</button></div>
       </div>
       <div class="side">
         <span class="price">${money(d.price)}</span>
@@ -776,6 +812,7 @@ const sub = document.getElementById("suburb");
 sub.innerHTML = Object.keys(SUBURBS).map((s) => `<option${s === state.suburb ? " selected" : ""}>${s}</option>`).join("");
 sub.addEventListener("change", () => { state.suburb = sub.value; state.page = 0; render(); renderTable(); });
 document.getElementById("shuffle").addEventListener("click", () => { state.page++; render(); });
+document.getElementById("resNote").addEventListener("click", (e) => { if (e.target.id !== "resetTaste") return; state.liked = []; state.skipped = []; saveTaste(); state.page = 0; render(); toast("Starting over from your usuals."); });
 
 /* ===================================================================== cart */
 const cartCount = document.getElementById("cartCount"), lines = document.getElementById("lines"), subtotal = document.getElementById("subtotal");
@@ -793,6 +830,13 @@ function drawCart() {
   paintPlates(lines);
 }
 results.addEventListener("click", (e) => {
+  const fb = e.target.closest("[data-fb]");
+  if (fb) {
+    const k = fb.dataset.key, d = byKey(k);
+    if (fb.dataset.fb === "like") { state.liked = state.liked.filter((x) => x !== k).concat(k); toast(`Got it. More like ${d.name.toLowerCase()}.`); }
+    else { state.skipped = state.skipped.filter((x) => x !== k).concat(k); toast(`Skipped ${d.place}. It won't come up again.`); }
+    saveTaste(); state.page = 0; render(); return;
+  }
   const b = e.target.closest(".add"); if (!b) return;
   const [place, name] = b.dataset.key.split("|");
   const d = DISHES.find((x) => x.place === place && x.name === name);

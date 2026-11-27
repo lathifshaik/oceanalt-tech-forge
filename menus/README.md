@@ -25,12 +25,12 @@ The page at `/concepts/uber/` recommends dishes from `public/concepts/uber/menus
 2. Tag and rebuild:
 
    ```
-   npx tsx scripts/menus/tag-menus.ts
+   node scripts/menus/build-menus.mjs
    ```
 
-   Claude reads each new or changed menu and scores every dish (heat, crunch, richness, freshness, sweetness, tang, savoury depth, diet tags and which drawn plate fits). Results go to `menus/tagged/`. Unchanged menus are skipped. Needs `ANTHROPIC_API_KEY`.
+   Our own tagger (`scripts/menus/tagger.mjs`, no outside service, no keys) reads each new or changed menu and scores every dish on heat, crunch, richness, freshness, sweetness, tang and savoury depth from its ingredients, cooking words and what well-known dishes usually contain. It also sets diet tags (only vegetarian is inferred; vegan, gluten free and halal only when the menu says so) and which drawn plate fits. Results go to `menus/tagged/`. Unchanged menus are skipped.
 
-3. Spot-check a few dishes in `menus/tagged/<restaurant>.json`. Fix any score by hand and run `npx tsx scripts/menus/tag-menus.ts --index` to rebuild without calling Claude.
+3. Spot-check a few dishes in `menus/tagged/<restaurant>.json`. To see why a dish scored what it did: `node scripts/menus/build-menus.mjs --why "Mapo tofu" "silken tofu, beef, chilli"`. Fix a score by editing the dish and adding `"fixed": true`; re-tagging keeps it. To fix it for every menu, add the word or dish to the lists in `tagger.mjs`.
 
 ## Now
 

@@ -62,8 +62,11 @@
   .brand .x { color: var(--green); font-weight: 300; }
   .nav nav { display: flex; gap: 2px; margin-left: auto; }
   .nav nav a { padding: 9px 14px; border-radius: 999px; font-size: 14px; font-weight: 500; text-decoration: none; opacity: .78; transition: opacity .3s, background .3s; }
-  .nav nav a:hover { opacity: 1; background: rgba(255,255,255,.08); }
-  .nav.light nav a:hover { background: rgba(0,0,0,.05); }
+  .nav nav { position: relative; }
+  .nav nav a { position: relative; z-index: 1; }
+  .nav nav a:hover { opacity: 1; }
+  .navpill { position: absolute; z-index: 0; top: 0; left: 0; height: 100%; border-radius: 999px; background: rgba(255,255,255,.1); opacity: 0; pointer-events: none; transition: transform .55s var(--spring), width .55s var(--spring), opacity .3s; }
+  .nav.light .navpill { background: rgba(0,0,0,.06); }
   .cart-btn { display: inline-flex; align-items: center; gap: 10px; height: 42px; padding: 0 6px 0 16px; border: 0; border-radius: 999px; background: #fff; color: #000; font-weight: 600; font-size: 14px; cursor: pointer; transition: transform .4s var(--spring); }
   .nav.light .cart-btn { background: #000; color: #fff; }
   .cart-btn:active { transform: scale(.97); }
@@ -74,6 +77,21 @@
   /* ------------------------------------------------------------------ buttons: pill with the arrow in its own circle */
   .btn { display: inline-flex; align-items: center; gap: 14px; min-height: 58px; padding: 0 8px 0 26px; border: 0; border-radius: 999px; background: #000; color: #fff; font-weight: 600; font-size: 16px; letter-spacing: -.01em; text-decoration: none; cursor: pointer; transition: transform .5s var(--spring), background .3s; }
   .btn:active { transform: scale(.98); }
+  /* sliding fill: a darker layer slides up from the bottom on hover */
+  .btn, .add, .chip, .fb button { position: relative; overflow: hidden; isolation: isolate; }
+  .btn::before, .add::before, .chip::before, .fb button::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; transform: translateY(101%); transition: transform .55s var(--spring); }
+  .btn::before { background: #2a2a2a; }
+  .btn.green::before { background: #05a95a; }
+  .btn.glass::before { background: rgba(255,255,255,.12); }
+  .btn.soft::before { background: #dcdcd7; }
+  .btn:hover::before, .add:hover::before, .fb button:hover::before { transform: none; }
+  .add::before { background: #2a2a2a; }
+  .add.done::before { background: var(--green); transform: none; }
+  .fb button::before { background: #050505; }
+  .fb button:hover { color: #fff; }
+  .chip::before { background: #050505; }
+  .chip[aria-pressed="true"]::before { transform: none; }
+  .btn > *, .add > * { position: relative; }
   .btn .ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.14); transition: transform .6s var(--spring); }
   .btn:hover .ic { transform: translate(3px, -2px) scale(1.06); }
   .btn .ic svg { width: 17px; height: 17px; }
@@ -104,7 +122,7 @@
   @keyframes breathe { to { transform: translate(-60px, 40px) scale(1.08); } }
   .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 72px); align-items: center; min-height: calc(100dvh - 220px); }
   h1 { margin: 0; font-size: clamp(52px, 8vw, 124px); line-height: .92; letter-spacing: -.05em; font-weight: 650; }
-  h1 .g { color: var(--green); }
+  h1 .g { color: inherit; }
   .hero .lede { max-width: 38ch; margin: 34px 0 40px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: #a9a9ad; font-weight: 400; }
   .hero .lede b { color: #fff; font-weight: 500; }
   .btns { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -210,7 +228,7 @@
 
   /* double bezel */
   .shell { padding: 0; }
-  .core { border-radius: 20px; background: var(--soft); }
+  .core { border-radius: 20px; background: #fff; box-shadow: inset 0 0 0 1px var(--hair); }
 
   .engine { display: grid; grid-template-columns: 400px 1fr; gap: clamp(20px, 3vw, 44px); align-items: start; }
   .panel-wrap { position: sticky; top: 92px; }
@@ -223,10 +241,11 @@
   .chip { min-height: 38px; padding: 0 15px; border: 0; border-radius: 999px; background: var(--soft); font-size: 13.5px; font-weight: 500; cursor: pointer; transition: background .35s var(--spring), color .35s, transform .4s var(--spring); }
   .chip:hover { background: #e9e9e6; }
   .chip:active { transform: scale(.95); }
-  .chip[aria-pressed="true"] { background: #050505; color: #fff; }
+  .chip[aria-pressed="true"] { color: #fff; }
+  .chip { transition: color .4s var(--spring), transform .4s var(--spring); }
   .seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; padding: 4px; border-radius: 999px; background: var(--soft); }
   .seg button { position: relative; z-index: 1; min-height: 38px; border: 0; border-radius: 999px; background: transparent; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background .4s var(--spring), box-shadow .4s; }
-  .seg button[aria-pressed="true"] { background: #fff; box-shadow: 0 2px 8px -2px rgba(0,0,0,.18); }
+  .seg .thumb { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / var(--n, 3)); border-radius: 999px; background: #fff; box-shadow: 0 2px 8px -2px rgba(0,0,0,.18); transform: translateX(calc(var(--i, 2) * 100%)); transition: transform .6s var(--spring); }
   .range { display: grid; gap: 8px; }
   input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: linear-gradient(90deg, #050505 var(--v, 60%), #e6e6e3 var(--v, 60%)); outline-offset: 6px; }
   input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 4px 12px -2px rgba(0,0,0,.3); cursor: grab; }
@@ -254,7 +273,8 @@
   .match b { color: var(--green-ink); font-weight: 650; }
   .add { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px; border: 0; border-radius: 999px; background: #050505; color: #fff; font-weight: 600; font-size: 13.5px; cursor: pointer; white-space: nowrap; transition: background .4s var(--spring), transform .4s var(--spring); }
   .add:active { transform: scale(.96); }
-  .add.done { background: var(--green); color: #000; }
+  .add.done { color: #000; }
+  .add { transition: color .4s; }
   .fb { display: flex; gap: 6px; margin-top: 12px; }
   .fb button { min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; box-shadow: inset 0 0 0 1px var(--hair); font-size: 12.5px; font-weight: 500; color: var(--mute); cursor: pointer; transition: background .3s, color .3s; }
   .fb button:hover { background: var(--soft); color: #000; }
@@ -412,7 +432,7 @@
       <g class="pin b"><circle cx="372" cy="30" r="10" fill="#06c167" opacity=".25" /><circle cx="372" cy="30" r="6" fill="#06c167" /></g>
       <g class="car" style="--route: path('M28 112 H120 V64 H212 V92 H292 V30 H372')"><rect x="-9" y="-5" width="18" height="10" rx="3" fill="#06c167" /></g>
     </svg>
-    <p class="loader-tag"><b>Eat different.</b> <em>Eat new.</em></p>
+    <p class="loader-tag"><b>Eat different.</b> <b>Eat new.</b></p>
   </div>
 </div>
 
@@ -541,7 +561,7 @@
 
   <section class="closing dark">
     <div class="wrap">
-      <h2><span class="line"><span>Eat different.</span></span><span class="line"><span style="--d:.12s;color:var(--green)">Eat new.</span></span></h2>
+      <h2><span class="line"><span>Eat different.</span></span><span class="line"><span style="--d:.12s">Eat new.</span></span></h2>
       <p class="rv">Tonight, skip the usual.</p>
       <div class="btns rv" style="--d:.1s"><a class="btn green" href="#engine">Find my next order <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></div>
     </div>
@@ -798,6 +818,14 @@ usualsEl.addEventListener("click", (e) => {
   b.setAttribute("aria-pressed", state.usuals.has(id)); state.page = 0; render();
 });
 document.getElementById("adv").addEventListener("input", (e) => { e.target.style.setProperty("--v", e.target.value + "%"); state.adv = e.target.value / 100; state.page = 0; render(); });
+/* budget: a white thumb slides to the chosen option */
+(() => { const seg = document.getElementById("budget"), btns = [...seg.querySelectorAll("button")], t = document.createElement("span"); t.className = "thumb"; seg.prepend(t);
+  seg.style.setProperty("--n", btns.length); seg.style.setProperty("--i", btns.findIndex((b) => b.getAttribute("aria-pressed") === "true"));
+  seg.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) seg.style.setProperty("--i", btns.indexOf(b)); }); })();
+/* nav: a soft pill slides under the link you point at */
+(() => { const nav = document.querySelector(".nav nav"); if (!nav) return; const pill = document.createElement("span"); pill.className = "navpill"; nav.prepend(pill);
+  nav.querySelectorAll("a").forEach((a) => a.addEventListener("pointerenter", () => { pill.style.width = a.offsetWidth + "px"; pill.style.transform = `translateX(${a.offsetLeft}px)`; pill.style.opacity = 1; }));
+  nav.addEventListener("pointerleave", () => (pill.style.opacity = 0)); })();
 document.getElementById("budget").addEventListener("click", (e) => {
   const b = e.target.closest("button"); if (!b) return;
   e.currentTarget.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));

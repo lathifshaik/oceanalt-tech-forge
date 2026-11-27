@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Oceanalt × Uber · Order something new</title>
+<meta name="description" content="A taste engine for people who order every day. A prototype by Oceanalt with Uber, Melbourne." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#000000" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #000; --paper: #fff; --soft: #f3f3f3; --line: #e2e2e2; --mute: #5e5e5e;
+    --green: #06c167; --green-ink: #03723c;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --gut: clamp(16px, 4vw, 48px);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.5 "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  html.loading { overflow: hidden; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  .wrap { width: min(100% - 2 * var(--gut), 1240px); margin-inline: auto; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  /* ---------------------------------------------------------------- loader */
+  .loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #000; color: #fff;
+    clip-path: inset(0 0 0 0); transition: clip-path 1s var(--ease); }
+  .loader.out { clip-path: inset(0 0 100% 0); }
+  .loader.gone { display: none; }
+  .loader-in { display: grid; justify-items: center; gap: 28px; width: min(560px, 88vw); }
+  .lockup { display: flex; align-items: center; gap: 18px; font-weight: 700; font-size: clamp(30px, 6vw, 52px); letter-spacing: -.035em; line-height: 1; }
+  .lockup span { opacity: 0; transform: translateY(14px); animation: up .8s var(--ease) forwards; }
+  .lockup .x { font-weight: 400; color: var(--green); animation-delay: .15s; }
+  .lockup .u { animation-delay: .3s; }
+  .route { width: 100%; height: auto; overflow: visible; }
+  .route .dots circle { fill: #2b2b2b; }
+  .route .path { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s .45s var(--ease) forwards; }
+  .route .pin { opacity: 0; animation: pop .4s var(--ease) forwards; }
+  .route .pin.a { animation-delay: .4s; }
+  .route .pin.b { animation-delay: 1.9s; }
+  .route .car { offset-path: var(--route); offset-rotate: auto; animation: drive 1.6s .45s var(--ease) forwards; offset-distance: 0%; }
+  .loader-note { margin: 0; font-size: 14px; color: #a6a6a6; min-height: 1.5em; }
+  @keyframes up { to { opacity: 1; transform: none; } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+  @keyframes drive { to { offset-distance: 100%; } }
+
+  /* ---------------------------------------------------------------- top */
+  .label { margin: 0; background: #000; color: #cfcfcf; font-size: 12.5px; text-align: center; padding: 8px var(--gut); }
+  .label b { color: #fff; font-weight: 600; }
+  header.top { position: sticky; top: 0; z-index: 20; background: #000; color: #fff; }
+  .top-row { display: flex; align-items: center; gap: 24px; height: 64px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -.03em; text-decoration: none; }
+  .brand .x { color: var(--green); font-weight: 400; }
+  .top nav { display: flex; gap: 22px; margin-left: auto; font-size: 15px; font-weight: 500; }
+  .top nav a { text-decoration: none; opacity: .85; }
+  .top nav a:hover { opacity: 1; }
+  .cart-btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: #fff; color: #000; font-weight: 600; font-size: 15px; cursor: pointer; }
+  .cart-btn b { display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--green); color: #000; font-size: 12px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border: 0; border-radius: 10px; background: #000; color: #fff; font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer; transition: transform .2s, background .2s; }
+  .btn:hover { background: #222; }
+  .btn:active { transform: scale(.98); }
+  .btn.ghost { background: var(--soft); color: #000; }
+  .btn.ghost:hover { background: #e8e8e8; }
+  .btn.green { background: var(--green); color: #000; }
+  .soft .btn.ghost { background: #e4e4e4; }
+  .btn.green:hover { background: #05ad5c; }
+  .btn svg { width: 18px; height: 18px; }
+
+  /* ---------------------------------------------------------------- hero */
+  .hero { background: #000; color: #fff; padding: clamp(48px, 8vw, 104px) 0 clamp(56px, 9vw, 120px); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px; font-size: 14px; font-weight: 600; color: var(--green); }
+  .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  h1 { margin: 0; font-size: clamp(44px, 7.4vw, 96px); line-height: .98; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
+  .hero p.lede { max-width: 34ch; margin: 26px 0 34px; font-size: clamp(18px, 1.6vw, 21px); color: #cfcfcf; }
+  .hero .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .btn.ghost { background: #1f1f1f; color: #fff; }
+  .hero .btn.ghost:hover { background: #2c2c2c; }
+
+  /* hero phone: your usual, crossed out, then the new pick */
+  .phone { justify-self: center; width: min(330px, 100%); aspect-ratio: 9 / 18.5; border-radius: 44px; padding: 12px; background: #1a1a1a; box-shadow: 0 0 0 1px #2c2c2c, 0 50px 90px -40px rgba(6, 193, 103, .35); }
+  .screen { position: relative; height: 100%; border-radius: 34px; background: #fff; color: #000; overflow: hidden; padding: 46px 18px 18px; display: flex; flex-direction: column; gap: 12px; }
+  .screen .notch { position: absolute; top: 12px; left: 50%; width: 90px; height: 24px; margin-left: -45px; border-radius: 999px; background: #000; }
+  .screen h4 { margin: 0; font-size: 21px; letter-spacing: -.03em; line-height: 1.15; }
+  .screen small { color: var(--mute); font-size: 12.5px; }
+  .usual { position: relative; display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 14px; background: var(--soft); }
+  .usual .plate { width: 52px; height: 52px; flex: none; }
+  .usual b { display: block; font-size: 14.5px; }
+  .usual .strike { position: absolute; left: 10px; right: 10px; top: 50%; height: 2px; background: #000; transform-origin: left; transform: scaleX(0); }
+  .phone.play .usual .strike { animation: strike .7s 1s var(--ease) forwards; }
+  .phone.play .usual { animation: dim .5s 1.6s forwards; }
+  .pick { padding: 14px; border-radius: 16px; background: #000; color: #fff; opacity: 0; transform: translateY(18px); }
+  .phone.play .pick { animation: up .8s 1.9s var(--ease) forwards; }
+  .pick .plate { width: 100%; height: 92px; border-radius: 12px; margin-bottom: 12px; }
+  .pick b { display: block; font-size: 16px; }
+  .pick small { color: #bdbdbd; }
+  .why { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .why span { padding: 4px 9px; border-radius: 999px; background: #1f1f1f; font-size: 11.5px; font-weight: 500; }
+  .why span.new { background: var(--green); color: #000; }
+  .also { opacity: 0; } .phone.play .also { animation: up .8s 2.3s var(--ease) forwards; }
+  .also-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+  .also-row .plate { aspect-ratio: 1; border-radius: 10px; }
+  .order-pill { margin-top: auto; display: grid; place-items: center; min-height: 46px; border-radius: 10px; background: #000; color: #fff; font-weight: 600; font-size: 14.5px; opacity: 0; }
+  .phone.play .order-pill { animation: up .8s 2.6s var(--ease) forwards; }
+  @keyframes strike { to { transform: scaleX(1); } }
+  @keyframes dim { to { opacity: .45; } }
+
+  /* ---------------------------------------------------------------- sections */
+  section.block { padding: clamp(64px, 10vw, 128px) 0; }
+  section.block.soft { background: var(--soft); }
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; align-items: end; margin-bottom: clamp(32px, 5vw, 56px); }
+  h2 { margin: 0; font-size: clamp(34px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -.04em; font-weight: 700; text-wrap: balance; }
+  .head p { margin: 0; max-width: 46ch; color: var(--mute); font-size: 17.5px; }
+
+  /* the engine */
+  .engine { display: grid; grid-template-columns: 380px 1fr; gap: clamp(20px, 3vw, 40px); align-items: start; }
+  .panel { padding: 24px; border-radius: 18px; background: #fff; border: 1px solid var(--line); position: sticky; top: 84px; }
+  .soft .panel { border-color: transparent; }
+  .step { margin: 0 0 22px; }
+  .step:last-child { margin-bottom: 0; }
+  .step h3 { margin: 0 0 4px; font-size: 16px; letter-spacing: -.01em; }
+  .step p { margin: 0 0 12px; color: var(--mute); font-size: 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { min-height: 38px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--soft); font-size: 14px; font-weight: 500; cursor: pointer; transition: background .2s, color .2s; }
+  .soft .chip { background: #ececec; }
+  .chip:hover { background: #e3e3e3; }
+  .chip[aria-pressed="true"] { background: #000; color: #fff; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; padding: 4px; border-radius: 12px; background: var(--soft); }
+  .soft .seg { background: #ececec; }
+  .seg button { min-height: 38px; border: 0; border-radius: 9px; background: transparent; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .range { display: grid; gap: 6px; }
+  .range input { width: 100%; accent-color: #000; }
+  .range .ends { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--mute); }
+  select { width: 100%; min-height: 44px; padding: 0 12px; border: 0; border-radius: 10px; background: var(--soft); font: inherit; font-size: 15px; font-weight: 500; }
+  .soft select { background: #ececec; }
+
+  .results { display: grid; gap: 16px; }
+  .res-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
+  .res-top h3 { margin: 0; font-size: 22px; letter-spacing: -.03em; }
+  .res-top small { color: var(--mute); font-size: 14px; }
+  .card { display: grid; grid-template-columns: 168px 1fr auto; gap: 20px; align-items: center; padding: 14px; border-radius: 18px; background: #fff; border: 1px solid var(--line);
+    animation: up .6s var(--ease) both; opacity: 0; transform: translateY(12px); }
+  .soft .card { border-color: transparent; }
+  .card .plate { width: 168px; height: 128px; border-radius: 12px; }
+  .card h4 { margin: 0; font-size: 19px; letter-spacing: -.02em; }
+  .card .meta { margin: 2px 0 0; color: var(--mute); font-size: 14px; }
+  .card .why span { background: var(--soft); color: #000; }
+  .soft .card .why span { background: #f0f0f0; }
+  .card .why span.new { background: var(--green); }
+  .card .side { display: grid; justify-items: end; gap: 10px; }
+  .card .price { font-weight: 700; font-size: 17px; }
+  .match { font-size: 12.5px; color: var(--mute); }
+  .match b { color: var(--green-ink); }
+  .add { min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: #000; color: #fff; font-weight: 600; font-size: 14px; cursor: pointer; white-space: nowrap; }
+  .add.done { background: var(--green); color: #000; }
+  .empty { padding: 40px; border-radius: 18px; background: var(--soft); color: var(--mute); text-align: center; }
+  .shuffle { justify-self: start; }
+
+  /* plates: drawn food, no stock photos */
+  .plate { position: relative; display: block; overflow: hidden; background: var(--bg, #f2ede4); }
+  .plate svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* group */
+  .group { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 40px); align-items: start; }
+  .people { display: grid; gap: 10px; }
+  .person { display: grid; grid-template-columns: 40px 1fr 1fr 36px; gap: 10px; align-items: center; padding: 10px; border-radius: 14px; background: #fff; }
+  .avatar { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #000; color: #fff; font-weight: 700; font-size: 15px; }
+  .person input { width: 100%; min-height: 40px; padding: 0 12px; border: 0; border-radius: 9px; background: var(--soft); font: inherit; font-size: 15px; }
+  .person select { min-height: 40px; background: var(--soft); }
+  .rm { width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; cursor: pointer; color: var(--mute); font-size: 20px; line-height: 1; }
+  .rm:hover { background: var(--soft); color: #000; }
+  .group-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .table { padding: 24px; border-radius: 20px; background: #000; color: #fff; min-height: 100%; }
+  .table h3 { margin: 0; font-size: 26px; letter-spacing: -.03em; }
+  .table .meta { margin: 4px 0 18px; color: #bdbdbd; font-size: 14.5px; }
+  .table .plate { width: 100%; height: 150px; border-radius: 14px; margin-bottom: 18px; }
+  .seats { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .seats li { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 12px; background: #161616; animation: up .5s var(--ease) both; opacity: 0; transform: translateY(8px); }
+  .seats .avatar { width: 34px; height: 34px; background: #2a2a2a; font-size: 13px; }
+  .seats b { display: block; font-size: 15px; }
+  .seats small { color: #a9a9a9; font-size: 12.5px; }
+  .fit { font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 999px; background: #233; color: #9fe8c2; white-space: nowrap; }
+  .fit.ok { background: var(--green); color: #000; }
+  .table .btn { width: 100%; margin-top: 18px; }
+  .happy { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; font-size: 13.5px; color: #bdbdbd; }
+  .happy i { flex: 1; height: 6px; border-radius: 999px; background: #262626; overflow: hidden; }
+  .happy i::after { content: ""; display: block; height: 100%; width: var(--w, 0%); background: var(--green); border-radius: inherit; transition: width .8s var(--ease); }
+
+  /* how */
+  .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
+  .how li { list-style: none; padding: 24px; border-radius: 18px; background: var(--soft); }
+  .how li::before { counter-increment: s; content: counter(s); display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 40px; border-radius: 50%; background: #000; color: #fff; font-weight: 700; font-size: 14px; }
+  .how h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.02em; }
+  .how p { margin: 0; color: var(--mute); font-size: 15px; }
+  .how ul { padding: 0; margin: 0; }
+
+  .strip { background: #000; color: #fff; padding: clamp(56px, 8vw, 96px) 0; }
+  .strip-in { display: flex; align-items: end; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .strip h2 { max-width: 16ch; }
+  .strip .btn.green { min-height: 56px; }
+
+  footer { padding: 40px 0 56px; background: #000; color: #a9a9a9; font-size: 14px; border-top: 1px solid #1d1d1d; }
+  footer .wrap { display: grid; gap: 10px; }
+  footer b { color: #fff; }
+
+  /* cart drawer */
+  .drawer { position: fixed; inset: 0; z-index: 50; visibility: hidden; }
+  .drawer.open { visibility: visible; }
+  .drawer .scrim { position: absolute; inset: 0; background: rgba(0,0,0,.5); opacity: 0; transition: opacity .4s; }
+  .drawer.open .scrim { opacity: 1; }
+  .drawer .sheet { position: absolute; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: #fff; padding: 24px; display: flex; flex-direction: column; gap: 16px; transform: translateX(100%); transition: transform .5s var(--ease); }
+  .drawer.open .sheet { transform: none; }
+  .sheet-head { display: flex; align-items: center; justify-content: space-between; }
+  .sheet-head h3 { margin: 0; font-size: 24px; letter-spacing: -.03em; }
+  .close { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--soft); cursor: pointer; font-size: 20px; }
+  .lines { flex: 1; overflow: auto; margin: 0; padding: 0; list-style: none; display: grid; align-content: start; gap: 10px; }
+  .lines li { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; }
+  .lines .plate { width: 56px; height: 56px; border-radius: 10px; }
+  .lines b { display: block; font-size: 15px; }
+  .lines small { color: var(--mute); }
+  .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 17px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .sheet .note { margin: 0; font-size: 13px; color: var(--mute); }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; z-index: 60; transform: translate(-50%, 140%); padding: 12px 18px; border-radius: 12px; background: #000; color: #fff; font-size: 14.5px; font-weight: 500; transition: transform .45s var(--ease); max-width: calc(100% - 32px); }
+  .toast.show { transform: translate(-50%, 0); }
+
+  @media (max-width: 980px) {
+    .hero-grid, .head, .engine, .group { grid-template-columns: 1fr; }
+    .panel { position: static; }
+    .how { grid-template-columns: 1fr 1fr; }
+    .top nav { display: none; }
+    .cart-btn { margin-left: auto; }
+  }
+  @media (max-width: 620px) {
+    .card { grid-template-columns: 96px 1fr; gap: 14px; }
+    .card .plate { width: 96px; height: 96px; }
+    .card .side { grid-column: 1 / -1; grid-auto-flow: column; justify-content: space-between; align-items: center; justify-items: start; }
+    .how { grid-template-columns: 1fr; }
+    .person { grid-template-columns: 36px 1fr 36px; }
+    .person .avatar { width: 36px; height: 36px; }
+    .person select { grid-column: 2 / 3; }
+    .person .rm { grid-row: 1; grid-column: 3; }
+    .phone { width: min(300px, 100%); }
+    .label { font-size: 11.5px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("loading");</script>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-in">
+    <div class="lockup"><span>Oceanalt</span><span class="x">×</span><span class="u">Uber</span></div>
+    <svg class="route" viewBox="0 0 400 140">
+      <g class="dots" id="dots"></g>
+      <path class="path" pathLength="1" d="M28 112 H120 V64 H212 V92 H292 V30 H372" />
+      <g class="pin a"><circle cx="28" cy="112" r="7" fill="#fff" /></g>
+      <g class="pin b"><rect x="364" y="22" width="16" height="16" rx="2" fill="#06c167" /></g>
+      <g class="car" style="--route: path('M28 112 H120 V64 H212 V92 H292 V30 H372')"><rect x="-9" y="-5" width="18" height="10" rx="3" fill="#06c167" /></g>
+    </svg>
+    <p class="loader-note" id="loaderNote">Finding somewhere new near you</p>
+  </div>
+</div>
+
+<p class="label"><b>Prototype</b> by Oceanalt with Uber, Melbourne. Restaurants, dishes, prices and times are samples. No orders are placed.</p>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="#top" aria-label="Oceanalt × Uber, top">Oceanalt <span class="x">×</span> Uber</a>
+    <nav aria-label="Main"><a href="#engine">Find something new</a><a href="#group">Group order</a><a href="#how">How it works</a></nav>
+    <button class="cart-btn" type="button" id="cartBtn" aria-label="Open order">Order <b id="cartCount">0</b></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Melbourne, for people who order every day</p>
+        <h1>Order something new tonight.</h1>
+        <p class="lede">Most of us have the same three dinners on repeat. Tell us what you usually get and we'll find the place you'd love next, close by and open now.</p>
+        <div class="btns">
+          <a class="btn green" href="#engine">Find my next order <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn ghost" href="#group">Ordering for a group</a>
+        </div>
+      </div>
+      <div class="phone" id="heroPhone" aria-hidden="true">
+        <div class="screen">
+          <span class="notch"></span>
+          <small>Tuesday, 7:12 pm · Fitzroy</small>
+          <h4>Same as last time?</h4>
+          <div class="usual"><span class="plate" data-dish="burrito"></span><div><b>Chicken burrito</b><small>Your usual · 23 times this year</small></div><span class="strike"></span></div>
+          <div class="pick">
+            <span class="plate" data-dish="noodles-red"></span>
+            <b>Dan dan noodles, Little Red Lantern</b>
+            <small>Collingwood · 1.2 km · about 22 min</small>
+            <div class="why"><span>Spicy</span><span>Hearty</span><span class="new">New to you: Sichuan</span></div>
+          </div>
+          <div class="also"><small>Also new near you</small><div class="also-row"><span class="plate" data-dish="ceviche"></span><span class="plate" data-dish="greens"></span><span class="plate" data-dish="tacos"></span></div></div>
+          <span class="order-pill">Add to order · $19.00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="engine">
+    <div class="wrap">
+      <div class="head">
+        <h2>What you like, somewhere you haven't been.</h2>
+        <p>Pick what you order most. The engine reads what those dishes have in common (heat, crunch, richness, freshness) and finds new places that share it.</p>
+      </div>
+      <div class="engine">
+        <form class="panel" id="prefs" onsubmit="return false">
+          <div class="step">
+            <h3>What do you usually order?</h3>
+            <p>Pick up to four.</p>
+            <div class="chips" id="usuals"></div>
+          </div>
+          <div class="step">
+            <h3>How adventurous tonight?</h3>
+            <div class="range">
+              <input type="range" id="adv" min="0" max="100" value="60" aria-label="How adventurous" />
+              <div class="ends"><span>Close to my usual</span><span>Surprise me</span></div>
+            </div>
+          </div>
+          <div class="step">
+            <h3>Budget</h3>
+            <div class="seg" id="budget"><button type="button" data-v="1">$</button><button type="button" data-v="2">$$</button><button type="button" data-v="3" aria-pressed="true">Any</button></div>
+          </div>
+          <div class="step">
+            <h3>Dietary</h3>
+            <div class="chips" id="diets"><button type="button" class="chip" data-v="veg" aria-pressed="false">Vegetarian</button><button type="button" class="chip" data-v="gf" aria-pressed="false">Gluten free</button><button type="button" class="chip" data-v="halal" aria-pressed="false">Halal</button></div>
+          </div>
+          <div class="step">
+            <h3>Deliver to</h3>
+            <select id="suburb" aria-label="Suburb"></select>
+          </div>
+        </form>
+        <div>
+          <div class="res-top"><h3 id="resTitle">Your next order</h3><small id="resNote"></small></div>
+          <div class="results" id="results" aria-live="polite"></div>
+          <div style="margin-top:16px"><button class="btn ghost shuffle" type="button" id="shuffle">Show me three more</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block soft" id="group">
+    <div class="wrap">
+      <div class="head">
+        <h2>One order the whole table is happy with.</h2>
+        <p>Everyone says what they feel like. The engine finds the one place with something for each person, then puts each person's dish in the cart. One delivery.</p>
+      </div>
+      <div class="group">
+        <div>
+          <div class="people" id="people"></div>
+          <div class="group-actions">
+            <button class="btn ghost" type="button" id="addPerson">Add a person</button>
+            <button class="btn" type="button" id="findTable">Find our place</button>
+          </div>
+        </div>
+        <div class="table" id="table" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <div class="head">
+        <h2>How it picks.</h2>
+        <p>No black box. Every suggestion shows why it was picked, and you can push it closer to your usual or further away.</p>
+      </div>
+      <ul class="how">
+        <li><h3>Your taste</h3><p>Each dish is scored on heat, crunch, richness, freshness, sweetness, tang and depth. Your usuals make a taste profile.</p></li>
+        <li><h3>Something new</h3><p>Places and cuisines you haven't ordered from rank higher. The slider sets how far from your usual it goes.</p></li>
+        <li><h3>Close and open</h3><p>Nearer places and shorter waits win ties. Closed kitchens never show.</p></li>
+        <li><h3>Always says why</h3><p>Every pick shows the flavours it shares with your usual and what's new about it.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="wrap strip-in">
+      <h2>Tonight, skip the usual.</h2>
+      <a class="btn green" href="#engine">Find my next order</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Oceanalt × Uber</b> · a prototype made in Melbourne.</span>
+    <span>Designed and built by Oceanalt. Restaurants, dishes, prices, distances and times on this page are samples, not real listings, and no orders are placed. Uber and Uber Eats are trademarks of Uber Technologies, Inc.</span>
+  </div>
+</footer>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="scrim" data-close></div>
+  <aside class="sheet" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="sheet-head"><h3 id="cartTitle">Your order</h3><button class="close" type="button" data-close aria-label="Close">×</button></div>
+    <ul class="lines" id="lines"></ul>
+    <div class="total"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+    <button class="btn green" type="button" id="checkout">Go to checkout</button>
+    <p class="note">In the prototype, checkout stops here. In the real thing this hands over to the Uber Eats checkout.</p>
+  </aside>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ===================================================================== data
+   Sample Melbourne places and dishes (made up for the prototype). Each dish is scored 0 to 1 on
+   heat, crunch, rich, fresh, sweet, tang, umami. */
+const F = ["heat", "crunch", "rich", "fresh", "sweet", "tang", "umami"];
+const NAMES = { heat: "Spicy", crunch: "Crunchy", rich: "Hearty", fresh: "Fresh", sweet: "Sweet", tang: "Tangy", umami: "Savoury" };
+const SUBURBS = { "Fitzroy": [0, 0], "Collingwood": [.9, .1], "Brunswick": [-.6, 2.8], "Carlton": [-1.2, .4], "Melbourne CBD": [-1.6, -1.6], "Richmond": [1.4, -1.9], "St Kilda": [-.8, -5.6], "Footscray": [-6.2, -1.2], "Northcote": [1.2, 2.6], "South Yarra": [.6, -3.8] };
+
+/* the usuals: what people order on repeat */
+const USUALS = [
+  { id: "burrito", name: "Chicken burrito", cuisine: "Mexican", v: [.4, .2, .7, .3, .1, .3, .6] },
+  { id: "marg", name: "Margherita pizza", cuisine: "Italian", v: [0, .4, .7, .3, .2, .3, .6] },
+  { id: "padthai", name: "Pad thai", cuisine: "Thai", v: [.4, .4, .5, .4, .5, .5, .6] },
+  { id: "butter", name: "Butter chicken", cuisine: "Indian", v: [.3, 0, .9, .1, .4, .2, .6] },
+  { id: "poke", name: "Poke bowl", cuisine: "Hawaiian", v: [.1, .3, .2, .9, .3, .4, .5] },
+  { id: "burger", name: "Cheeseburger", cuisine: "American", v: [.1, .4, .9, .1, .3, .2, .7] },
+  { id: "pho", name: "Pho", cuisine: "Vietnamese", v: [.2, .1, .4, .7, .1, .3, .8] },
+  { id: "sushi", name: "Sushi rolls", cuisine: "Japanese", v: [.1, .2, .2, .8, .3, .3, .7] },
+  { id: "fried", name: "Fried chicken", cuisine: "American", v: [.3, 1, .8, 0, .1, .1, .6] },
+  { id: "caesar", name: "Caesar salad", cuisine: "Salads", v: [0, .6, .5, .7, .1, .4, .6] },
+  { id: "kebab", name: "Chicken kebab", cuisine: "Turkish", v: [.3, .3, .7, .4, .1, .4, .6] },
+  { id: "dumplings", name: "Pork dumplings", cuisine: "Chinese", v: [.2, .3, .6, .2, .2, .3, .8] },
+];
+
+/* places: name, suburb, cuisine, price level, dishes [name, price, art, vector, diets] */
+const PLACES = [
+  ["Little Red Lantern", "Collingwood", "Sichuan", 2, [["Dan dan noodles", 19, "noodles-red", [.9, .2, .7, .2, .1, .3, .9], []], ["Mapo tofu", 21, "bowl-red", [.9, 0, .7, .2, 0, .2, .9], ["veg", "gf"]], ["Dry-fried green beans", 15, "greens", [.6, .6, .3, .6, .1, .2, .7], ["veg", "gf"]]]],
+  ["Ojo de Agua", "Fitzroy", "Mexican", 2, [["Al pastor tacos", 18, "tacos", [.5, .4, .6, .5, .4, .5, .6], ["gf"]], ["Mushroom quesadilla", 17, "flat", [.2, .5, .7, .3, .1, .2, .7], ["veg"]]]],
+  ["Kaki Lima", "Footscray", "Indonesian", 1, [["Nasi goreng", 16, "rice", [.6, .3, .7, .2, .4, .3, .8], ["halal"]], ["Gado gado", 15, "greens", [.3, .6, .4, .8, .4, .4, .6], ["veg", "gf", "halal"]], ["Beef rendang", 22, "bowl-brown", [.6, 0, .9, .1, .3, .2, .9], ["gf", "halal"]]]],
+  ["Sofra", "Brunswick", "Lebanese", 2, [["Lamb shawarma plate", 24, "plate-grill", [.3, .3, .7, .6, .1, .5, .7], ["halal", "gf"]], ["Falafel and hummus", 18, "falafel", [.2, .8, .5, .6, .1, .5, .5], ["veg", "halal"]], ["Fattoush", 14, "greens", [.1, .7, .2, 1, .2, .7, .3], ["veg", "halal"]]]],
+  ["Tamarind House", "Richmond", "Sri Lankan", 2, [["Chicken kottu roti", 21, "rice", [.7, .4, .8, .2, .1, .2, .8], ["halal"]], ["Hoppers with dhal", 17, "bowl-yellow", [.4, .5, .6, .3, .2, .2, .6], ["veg", "gf"]]]],
+  ["Sumi Robata", "Melbourne CBD", "Japanese", 3, [["Chicken karaage don", 22, "rice", [.1, .9, .7, .2, .3, .2, .8], []], ["Salmon aburi box", 29, "sushi", [.1, .2, .4, .7, .3, .3, .8], ["gf"]]]],
+  ["Habesha Table", "Footscray", "Ethiopian", 1, [["Doro wat with injera", 22, "bowl-red", [.8, 0, .8, .2, .1, .4, .8], ["gf", "halal"]], ["Veg combination", 19, "platter", [.5, .1, .6, .5, .1, .4, .6], ["veg", "gf", "halal"]]]],
+  ["Nonna Rosa's", "Carlton", "Italian", 2, [["Cacio e pepe", 22, "pasta", [.2, 0, .8, .1, .1, .1, .8], ["veg"]], ["Nduja pizza", 24, "pizza", [.6, .5, .8, .2, .2, .3, .7], []]]],
+  ["Seoul Food Club", "Melbourne CBD", "Korean", 2, [["Yangnyeom chicken", 26, "chicken", [.6, 1, .8, .1, .6, .3, .7], []], ["Bibimbap", 19, "bowl-mixed", [.5, .3, .4, .7, .2, .3, .7], ["veg"]], ["Kimchi pancake", 16, "flat", [.5, .7, .5, .3, .1, .6, .6], ["veg"]]]],
+  ["Banh Mi Bros", "Footscray", "Vietnamese", 1, [["Pork banh mi", 12, "roll", [.4, .7, .5, .7, .3, .5, .7], []], ["Bun cha", 17, "noodles", [.3, .3, .4, .8, .4, .6, .7], []]]],
+  ["Ankara Grill", "Brunswick", "Turkish", 1, [["Adana kebab plate", 23, "plate-grill", [.6, .3, .8, .4, .1, .4, .7], ["halal", "gf"]], ["Lahmacun", 13, "flat", [.4, .6, .5, .5, .1, .5, .6], ["halal"]]]],
+  ["Green Bell", "Northcote", "Thai", 2, [["Khao soi", 21, "bowl-yellow", [.6, .4, .8, .3, .3, .4, .8], []], ["Larb gai", 18, "greens", [.7, .3, .3, .9, .1, .8, .6], ["gf"]], ["Green papaya salad", 15, "greens", [.8, .7, .1, 1, .3, .9, .5], ["veg", "gf"]]]],
+  ["Paneer & Co", "Richmond", "Indian", 1, [["Chole bhature", 17, "falafel", [.5, .6, .7, .3, .1, .3, .6], ["veg"]], ["Masala dosa", 16, "flat", [.4, .8, .5, .4, .1, .4, .6], ["veg", "gf"]]]],
+  ["Lima Social", "South Yarra", "Peruvian", 3, [["Ceviche classico", 26, "ceviche", [.4, .3, .1, 1, .1, 1, .5], ["gf"]], ["Pollo a la brasa", 28, "chicken", [.3, .6, .7, .3, .1, .3, .7], ["gf"]]]],
+  ["Hellas Bakehouse", "St Kilda", "Greek", 1, [["Spanakopita", 12, "pie", [0, .8, .6, .5, .1, .3, .5], ["veg"]], ["Chicken souvlaki", 16, "roll", [.2, .3, .6, .6, .1, .5, .6], []]]],
+  ["Taiyo Ramen", "Carlton", "Japanese", 2, [["Spicy miso ramen", 21, "noodles-red", [.7, .2, .8, .2, .1, .1, .9], []], ["Shoyu ramen", 19, "noodles", [.1, .2, .7, .3, .1, .2, .9], []]]],
+  ["Saigon Corner", "Richmond", "Vietnamese", 1, [["Broken rice with pork chop", 17, "rice", [.2, .4, .6, .5, .5, .4, .7], ["gf"]], ["Crispy spring rolls", 11, "rolls", [.1, 1, .5, .5, .2, .4, .5], []]]],
+  ["Big Sky Smokehouse", "Collingwood", "Barbecue", 3, [["Brisket plate", 29, "plate-grill", [.2, .3, 1, .2, .3, .3, .9], ["gf"]], ["Smoked cauliflower", 19, "plate-grill", [.3, .4, .6, .4, .2, .3, .7], ["veg", "gf"]]]],
+  ["Mama Akosua", "Northcote", "West African", 2, [["Jollof rice and chicken", 22, "rice", [.6, .2, .7, .3, .2, .3, .8], ["gf", "halal"]], ["Fried plantain and beans", 16, "platter", [.3, .5, .6, .3, .6, .2, .5], ["veg", "gf", "halal"]]]],
+  ["Hanoi Hannah's", "South Yarra", "Vietnamese", 2, [["Lemongrass beef salad", 21, "greens", [.4, .5, .3, .9, .3, .7, .6], ["gf"]]]],
+];
+
+/* flatten */
+const DISHES = [];
+PLACES.forEach(([place, suburb, cuisine, level, dishes], pi) => dishes.forEach(([name, price, art, v, diets]) => DISHES.push({ place, suburb, cuisine, level, name, price, art, v, diets, pi })));
+
+/* ===================================================================== plates
+   Each dish gets a small drawn plate (flat shapes, no photos). */
+const ART = {
+  "noodles-red": ["#f4e3d3", "#c8361f", "noodles"], noodles: ["#efe6d6", "#e7c178", "noodles"], "bowl-red": ["#f1e2d6", "#b8321d", "bowl"],
+  "bowl-brown": ["#efe2d2", "#7a3d1c", "bowl"], "bowl-yellow": ["#f4ead2", "#e4a92a", "bowl"], "bowl-mixed": ["#eee6d8", "#d4552c", "mixed"],
+  greens: ["#e7efdf", "#5c9a3c", "greens"], tacos: ["#f3e6cf", "#e5b54a", "tacos"], flat: ["#f2e7d6", "#d9a14c", "flat"], rice: ["#f2e8d9", "#df8a2f", "rice"],
+  "plate-grill": ["#ede4d8", "#8a4a22", "grill"], falafel: ["#efe5d3", "#9a6a2a", "balls"], sushi: ["#e9e6df", "#ec7a52", "sushi"], platter: ["#efe4d4", "#c9522b", "platter"],
+  pasta: ["#f3ead5", "#f0cf73", "noodles"], pizza: ["#f1e3d2", "#d2432a", "pizza"], chicken: ["#f2e3cf", "#c25a1f", "balls"], roll: ["#f2e7d3", "#d39a45", "roll"],
+  ceviche: ["#e6efe9", "#f08a5d", "ceviche"], pie: ["#f2e8d4", "#d8a547", "pie"], rolls: ["#f1e6d2", "#d2933c", "rolls"],
+  burrito: ["#f1e6d3", "#d9a55a", "roll"],
+};
+function plateSVG(key) {
+  const [bg, c, kind] = ART[key] || ["#eee", "#999", "bowl"];
+  const rim = `<circle cx="50" cy="50" r="34" fill="#fff"/><circle cx="50" cy="50" r="27" fill="#f7f4ee"/>`;
+  let food = "";
+  const r = (n) => Array.from({ length: n });
+  switch (kind) {
+    case "noodles": food = r(6).map((_, i) => `<path d="M${30 + i * 2} ${38 + i * 5} q10 -8 20 0 t20 0" stroke="${c}" stroke-width="3.2" fill="none" stroke-linecap="round"/>`).join("") + `<circle cx="60" cy="40" r="5" fill="#5c9a3c"/>`; break;
+    case "bowl": food = `<circle cx="50" cy="50" r="22" fill="${c}"/><circle cx="43" cy="45" r="4" fill="#fff" opacity=".8"/><circle cx="57" cy="55" r="3" fill="#fff" opacity=".7"/><circle cx="55" cy="42" r="2.5" fill="#5c9a3c"/>`; break;
+    case "mixed": food = `<path d="M50 50 L50 28 A22 22 0 0 1 69 61 Z" fill="${c}"/><path d="M50 50 L69 61 A22 22 0 0 1 31 61 Z" fill="#5c9a3c"/><path d="M50 50 L31 61 A22 22 0 0 1 50 28 Z" fill="#e6b84a"/><circle cx="50" cy="50" r="7" fill="#fff"/><circle cx="50" cy="50" r="3.5" fill="#f2b22c"/>`; break;
+    case "greens": food = r(9).map((_, i) => { const a = i * 40 * Math.PI / 180, x = 50 + Math.cos(a) * 12, y = 50 + Math.sin(a) * 12; return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="9" ry="5" transform="rotate(${i * 40} ${x.toFixed(1)} ${y.toFixed(1)})" fill="${i % 3 ? c : "#9cc46a"}"/>`; }).join("") + `<circle cx="50" cy="50" r="4" fill="#e2483a"/>`; break;
+    case "tacos": food = `<path d="M28 58 q11 -26 22 0z" fill="${c}"/><path d="M50 58 q11 -26 22 0z" fill="${c}"/><circle cx="39" cy="50" r="3" fill="#c8361f"/><circle cx="61" cy="50" r="3" fill="#5c9a3c"/>`; break;
+    case "flat": food = `<circle cx="50" cy="50" r="22" fill="${c}"/><path d="M50 28 V72 M28 50 H72" stroke="#fff" stroke-width="1.5" opacity=".6"/>`; break;
+    case "rice": food = `<circle cx="50" cy="52" r="21" fill="#fbf6ea"/><path d="M33 52 a17 17 0 0 1 34 0z" fill="${c}"/><circle cx="58" cy="44" r="5" fill="#f2b22c"/><circle cx="58" cy="44" r="2.5" fill="#fff"/>`; break;
+    case "grill": food = `<rect x="30" y="38" width="40" height="22" rx="8" fill="${c}"/><path d="M36 40 l6 18 M46 40 l6 18 M56 40 l6 18" stroke="#3b1c0c" stroke-width="2" opacity=".5"/><circle cx="36" cy="64" r="4" fill="#5c9a3c"/><circle cx="64" cy="64" r="4" fill="#e2483a"/>`; break;
+    case "balls": food = r(5).map((_, i) => { const a = i * 72 * Math.PI / 180; return `<circle cx="${(50 + Math.cos(a) * 11).toFixed(1)}" cy="${(50 + Math.sin(a) * 11).toFixed(1)}" r="8" fill="${c}"/>`; }).join("") + `<circle cx="50" cy="50" r="5" fill="#f3efe4"/>`; break;
+    case "sushi": food = r(4).map((_, i) => `<g transform="translate(${34 + (i % 2) * 16} ${38 + (i >> 1) * 16})"><rect width="13" height="10" rx="4" fill="#fbf6ea"/><rect y="-2" width="13" height="6" rx="3" fill="${c}"/></g>`).join(""); break;
+    case "platter": food = `<circle cx="50" cy="50" r="23" fill="#c9a77a"/><circle cx="42" cy="44" r="7" fill="${c}"/><circle cx="58" cy="46" r="6" fill="#5c9a3c"/><circle cx="48" cy="59" r="6" fill="#e6b84a"/>`; break;
+    case "pizza": food = `<circle cx="50" cy="50" r="23" fill="#e8b764"/><circle cx="50" cy="50" r="19" fill="${c}"/>` + r(6).map((_, i) => { const a = i * 60 * Math.PI / 180; return `<circle cx="${(50 + Math.cos(a) * 10).toFixed(1)}" cy="${(50 + Math.sin(a) * 10).toFixed(1)}" r="3.5" fill="#fbf1dc"/>`; }).join(""); break;
+    case "roll": food = `<rect x="27" y="42" width="46" height="17" rx="8.5" fill="${c}" transform="rotate(-18 50 50)"/><path d="M33 52 l34 -11" stroke="#5c9a3c" stroke-width="3" stroke-linecap="round"/>`; break;
+    case "ceviche": food = `<circle cx="50" cy="50" r="22" fill="#f4efe1"/>` + r(6).map((_, i) => `<rect x="${36 + (i % 3) * 10}" y="${42 + (i > 2 ? 9 : 0)}" width="8" height="7" rx="2" fill="${c}"/>`).join("") + `<circle cx="60" cy="38" r="4" fill="#5c9a3c"/>`; break;
+    case "pie": food = `<path d="M30 62 L50 30 L70 62 Z" fill="${c}"/><path d="M36 56 h28" stroke="#fff" stroke-width="1.5" opacity=".6"/>`; break;
+    case "rolls": food = r(3).map((_, i) => `<rect x="30" y="${36 + i * 10}" width="40" height="8" rx="4" fill="${c}"/>`).join(""); break;
+  }
+  return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${rim}${food}</svg>`;
+}
+function paintPlates(root = document) { root.querySelectorAll(".plate[data-dish]").forEach((el) => { if (!el.firstChild) { el.innerHTML = plateSVG(el.dataset.dish); el.style.background = (ART[el.dataset.dish] || ["#eee"])[0]; } }); }
+
+/* ===================================================================== engine */
+const state = { usuals: new Set(["burrito", "padthai"]), adv: .6, budget: 3, diets: new Set(), suburb: "Fitzroy", page: 0, cart: [] };
+const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
+const norm = (a) => Math.sqrt(dot(a, a)) || 1;
+const cen = (a) => a.map((x) => x - .4);
+const cos = (a, b) => { const x = cen(a), y = cen(b); return dot(x, y) / (norm(x) * norm(y)); };
+const MEAN = F.map((_, i) => USUALS.reduce((a, u) => a + u.v[i], 0) / USUALS.length);
+const pct = (s) => Math.round(50 + 50 * s);
+function km(from, to) { const [x1, y1] = SUBURBS[from], [x2, y2] = SUBURBS[to]; return Math.max(.6, Math.hypot(x1 - x2, y1 - y2)); }
+const mins = (d) => Math.round(14 + d * 2.6);
+const money = (n) => "$" + n.toFixed(2);
+
+function profile(ids) {
+  const list = USUALS.filter((u) => ids.has(u.id));
+  if (!list.length) return null;
+  const v = F.map((_, i) => list.reduce((s, u) => s + u.v[i], 0) / list.length);
+  return { v, cuisines: new Set(list.map((u) => u.cuisine)), list };
+}
+
+function reasons(taste, dish, isNew) {
+  /* what's distinctive: flavours where both your usuals and this dish sit above the typical order */
+  const shared = F.map((f, i) => [f, Math.min(taste.v[i] - MEAN[i], dish.v[i] - MEAN[i]), dish.v[i]]).filter(([, s, d]) => s > -.02 && d >= .4).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([f]) => NAMES[f]);
+  if (!shared.length) shared.push(NAMES[F[dish.v.indexOf(Math.max(...dish.v))]]);
+  const like = taste.list.slice().sort((a, b) => cos(b.v, dish.v) - cos(a.v, dish.v))[0];
+  return { shared, like: like.name, isNew };
+}
+
+function rank(taste, opts) {
+  const { adv, budget, diets, suburb } = opts;
+  return DISHES
+    .filter((d) => budget === 3 || d.level <= budget)
+    .filter((d) => [...diets].every((x) => d.diets.includes(x)))
+    .map((d) => {
+      const sim = cos(taste.v, d.v);
+      const isNew = !taste.cuisines.has(d.cuisine);
+      const dist = km(suburb, d.suburb);
+      const near = 1 - Math.min(1, dist / 8);
+      const score = sim * (1.1 - .6 * adv) + (isNew ? 1 : 0) * (.08 + .5 * adv) + near * .14;
+      return { d, sim, isNew, dist, score };
+    })
+    .sort((a, b) => b.score - a.score);
+}
+
+function pickDistinct(list, n, skip = 0) {
+  const seen = new Set(), out = [];
+  for (const r of list) { if (seen.has(r.d.pi)) continue; seen.add(r.d.pi); out.push(r); }
+  return out.slice(skip, skip + n);
+}
+
+const results = document.getElementById("results"), resNote = document.getElementById("resNote");
+function render() {
+  const taste = profile(state.usuals);
+  if (!taste) { results.innerHTML = `<div class="empty">Pick at least one usual and we'll find somewhere new.</div>`; resNote.textContent = ""; return; }
+  const ranked = rank(taste, state);
+  const all = pickDistinct(ranked, 99);
+  if (!all.length) { results.innerHTML = `<div class="empty">Nothing matches all of that nearby. Try a wider budget or fewer filters.</div>`; resNote.textContent = ""; return; }
+  const pages = Math.ceil(all.length / 3), skip = (state.page % pages) * 3;
+  const top = all.slice(skip, skip + 3);
+  resNote.textContent = `From ${all.length} places near ${state.suburb}`;
+  results.innerHTML = top.map(({ d, sim, isNew, dist }, i) => {
+    const why = reasons(taste, d, isNew);
+    const key = d.place + "|" + d.name, inCart = state.cart.some((c) => c.key === key);
+    return `<article class="card" style="animation-delay:${i * 90}ms">
+      <span class="plate" data-dish="${d.art}"></span>
+      <div>
+        <h4>${d.name}</h4>
+        <p class="meta">${d.place} · ${d.suburb} · ${dist.toFixed(1)} km · about ${mins(dist)} min</p>
+        <div class="why">${why.shared.map((s) => `<span>${s}</span>`).join("")}${isNew ? `<span class="new">New to you: ${d.cuisine}</span>` : `<span>Like your ${why.like.toLowerCase()}</span>`}</div>
+      </div>
+      <div class="side">
+        <span class="price">${money(d.price)}</span>
+        <span class="match"><b>${pct(sim)}%</b> taste match</span>
+        <button class="add${inCart ? " done" : ""}" type="button" data-key="${key}">${inCart ? "Added" : "Add to order"}</button>
+      </div>
+    </article>`;
+  }).join("");
+  paintPlates(results);
+}
+
+/* controls */
+const usualsEl = document.getElementById("usuals");
+usualsEl.innerHTML = USUALS.map((u) => `<button type="button" class="chip" data-id="${u.id}" aria-pressed="${state.usuals.has(u.id)}">${u.name}</button>`).join("");
+usualsEl.addEventListener("click", (e) => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  const id = b.dataset.id;
+  if (state.usuals.has(id)) state.usuals.delete(id);
+  else { if (state.usuals.size >= 4) { toast("Four is plenty. Take one off first."); return; } state.usuals.add(id); }
+  b.setAttribute("aria-pressed", state.usuals.has(id)); state.page = 0; render();
+});
+document.getElementById("adv").addEventListener("input", (e) => { state.adv = e.target.value / 100; state.page = 0; render(); });
+document.getElementById("budget").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  e.currentTarget.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+  state.budget = +b.dataset.v; state.page = 0; render();
+});
+document.getElementById("diets").addEventListener("click", (e) => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  const v = b.dataset.v; state.diets.has(v) ? state.diets.delete(v) : state.diets.add(v);
+  b.setAttribute("aria-pressed", state.diets.has(v)); state.page = 0; render(); renderTable();
+});
+const sub = document.getElementById("suburb");
+sub.innerHTML = Object.keys(SUBURBS).map((s) => `<option${s === state.suburb ? " selected" : ""}>${s}</option>`).join("");
+sub.addEventListener("change", () => { state.suburb = sub.value; state.page = 0; render(); renderTable(); });
+document.getElementById("shuffle").addEventListener("click", () => { state.page++; render(); });
+
+/* ===================================================================== cart */
+const cartCount = document.getElementById("cartCount"), lines = document.getElementById("lines"), subtotal = document.getElementById("subtotal");
+function addToCart(d, who) {
+  const key = d.place + "|" + d.name + (who ? "|" + who : "");
+  if (state.cart.some((c) => c.key === key)) return false;
+  state.cart.push({ key, d, who }); drawCart(); return true;
+}
+function drawCart() {
+  cartCount.textContent = state.cart.length;
+  lines.innerHTML = state.cart.length ? state.cart.map((c, i) => `<li><span class="plate" data-dish="${c.d.art}"></span><div><b>${c.d.name}</b><small>${c.d.place}${c.who ? " · for " + c.who : ""}</small></div><div style="text-align:right"><b>${money(c.d.price)}</b><button class="rm" type="button" data-i="${i}" aria-label="Remove ${c.d.name}">×</button></div></li>`).join("")
+    : `<li style="display:block;color:var(--mute)">Nothing yet. Add something new.</li>`;
+  subtotal.textContent = money(state.cart.reduce((s, c) => s + c.d.price, 0));
+  paintPlates(lines);
+}
+results.addEventListener("click", (e) => {
+  const b = e.target.closest(".add"); if (!b) return;
+  const [place, name] = b.dataset.key.split("|");
+  const d = DISHES.find((x) => x.place === place && x.name === name);
+  if (addToCart(d)) { b.classList.add("done"); b.textContent = "Added"; toast(`${d.name} added`); }
+});
+lines.addEventListener("click", (e) => { const b = e.target.closest(".rm"); if (!b) return; state.cart.splice(+b.dataset.i, 1); drawCart(); render(); });
+const drawer = document.getElementById("drawer");
+const openCart = () => { drawer.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); drawer.querySelector(".close").focus(); };
+const closeCart = () => { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); };
+document.getElementById("cartBtn").addEventListener("click", openCart);
+drawer.addEventListener("click", (e) => { if (e.target.closest("[data-close]")) closeCart(); });
+addEventListener("keydown", (e) => { if (e.key === "Escape") closeCart(); });
+document.getElementById("checkout").addEventListener("click", () => toast(state.cart.length ? "This is where Uber Eats checkout takes over." : "Add something first."));
+
+let tt; function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 2200); }
+
+/* ===================================================================== group
+   Everyone picks a craving. For each place, find each person's best dish there; the place's score
+   is mostly its worst fit (so nobody gets left out) plus a little of the average. */
+const people = [{ name: "Priya", want: "butter" }, { name: "Sam", want: "burger" }, { name: "Mei", want: "poke" }];
+const peopleEl = document.getElementById("people"), tableEl = document.getElementById("table");
+function drawPeople() {
+  peopleEl.innerHTML = people.map((p, i) => `<div class="person">
+    <span class="avatar">${(p.name || "?").trim().charAt(0).toUpperCase() || "?"}</span>
+    <input value="${p.name.replace(/"/g, "&quot;")}" data-i="${i}" aria-label="Name" maxlength="16" />
+    <select data-i="${i}" aria-label="${p.name || "This person"} feels like">${USUALS.map((u) => `<option value="${u.id}"${u.id === p.want ? " selected" : ""}>Feels like ${u.name.toLowerCase()}</option>`).join("")}</select>
+    <button class="rm" type="button" data-i="${i}" aria-label="Remove ${p.name}">×</button>
+  </div>`).join("");
+}
+peopleEl.addEventListener("input", (e) => {
+  const i = +e.target.dataset.i; if (Number.isNaN(i)) return;
+  if (e.target.tagName === "INPUT") { people[i].name = e.target.value; e.target.previousElementSibling.textContent = (e.target.value.trim().charAt(0) || "?").toUpperCase(); }
+  else { people[i].want = e.target.value; renderTable(); }
+});
+peopleEl.addEventListener("change", (e) => { if (e.target.tagName === "INPUT") renderTable(); });
+peopleEl.addEventListener("click", (e) => { const b = e.target.closest(".rm"); if (!b) return; if (people.length <= 2) { toast("A group needs at least two."); return; } people.splice(+b.dataset.i, 1); drawPeople(); renderTable(); });
+const NAMES_POOL = ["Jack", "Aisha", "Tom", "Lena", "Kofi", "Rosa", "Hamish", "Yuki"];
+document.getElementById("addPerson").addEventListener("click", () => {
+  if (people.length >= 8) { toast("Eight is the limit for one order."); return; }
+  const used = new Set(people.map((p) => p.name)), name = NAMES_POOL.find((n) => !used.has(n)) || "Guest";
+  people.push({ name, want: USUALS[(people.length * 5) % USUALS.length].id }); drawPeople(); renderTable();
+});
+let tablePick = null;
+function bestTable() {
+  const wants = people.map((p) => USUALS.find((u) => u.id === p.want));
+  const scored = PLACES.map((pl, pi) => {
+    const menu = DISHES.filter((d) => d.pi === pi && [...state.diets].every((x) => d.diets.includes(x)));
+    if (!menu.length) return null;
+    const seats = wants.map((w, i) => { const best = menu.map((d) => ({ d, s: cos(w.v, d.v) })).sort((a, b) => b.s - a.s)[0]; return { who: people[i].name || "Guest", want: w, ...best }; });
+    const worst = Math.min(...seats.map((s) => s.s)), avg = seats.reduce((a, s) => a + s.s, 0) / seats.length;
+    const dist = km(state.suburb, pl[1]);
+    return { pl, seats, worst, avg, dist, score: worst * .7 + avg * .3 - dist * .004 };
+  }).filter(Boolean).sort((a, b) => b.score - a.score);
+  return scored[0];
+}
+function renderTable() {
+  const t = bestTable();
+  if (!t) { tableEl.innerHTML = `<h3>Nothing fits everyone.</h3><p class="meta">Try fewer dietary filters.</p>`; return; }
+  tablePick = t;
+  const [place, suburb, cuisine] = t.pl;
+  const happy = pct(t.avg);
+  tableEl.innerHTML = `
+    <span class="plate" data-dish="${t.seats[0].d.art}"></span>
+    <h3>${place}</h3>
+    <p class="meta">${cuisine} · ${suburb} · ${t.dist.toFixed(1)} km · about ${mins(t.dist)} min · one delivery</p>
+    <p class="happy"><span>Table fit</span><i style="--w:${happy}%"></i><b>${happy}%</b></p>
+    <ul class="seats">${t.seats.map((s, i) => `<li style="animation-delay:${i * 70}ms"><span class="avatar">${s.who.trim().charAt(0).toUpperCase() || "?"}</span><div><b>${s.who}: ${s.d.name}</b><small>Wanted ${s.want.name.toLowerCase()} · ${money(s.d.price)}</small></div><span class="fit${pct(s.s) >= 75 ? " ok" : ""}">${pct(s.s)}% fit</span></li>`).join("")}</ul>
+    <button class="btn green" type="button" id="addTable">Add everyone's dish to the order</button>`;
+  paintPlates(tableEl);
+}
+tableEl.addEventListener("click", (e) => {
+  if (!e.target.closest("#addTable") || !tablePick) return;
+  let n = 0; tablePick.seats.forEach((s) => { if (addToCart(s.d, s.who)) n++; });
+  toast(n ? `${n} dishes from ${tablePick.pl[0]} added` : "Already in your order"); openCart();
+});
+document.getElementById("findTable").addEventListener("click", () => { renderTable(); tableEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
+
+/* ===================================================================== start */
+paintPlates(); drawCart(); render(); drawPeople(); renderTable();
+
+/* loader: a street grid, a route drawn across it, then the curtain lifts */
+(() => {
+  const g = document.getElementById("dots"); let s = "";
+  for (let x = 8; x <= 392; x += 16) for (let y = 6; y <= 134; y += 16) s += `<circle cx="${x}" cy="${y}" r="1.3"/>`;
+  g.innerHTML = s;
+  const loader = document.getElementById("loader"), note = document.getElementById("loaderNote");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const lines = [`Finding somewhere new near you`, `Reading what you usually order`, `Found a few places you haven't tried`];
+  let i = 0; const iv = setInterval(() => { i = Math.min(i + 1, lines.length - 1); note.textContent = lines[i]; }, 800);
+  const finish = () => {
+    clearInterval(iv); loader.classList.add("out"); document.documentElement.classList.remove("loading");
+    setTimeout(() => loader.classList.add("gone"), 1000);
+    const phone = document.getElementById("heroPhone"); phone.classList.add("play");
+  };
+  let seen = false; try { seen = sessionStorage.getItem("ou-seen") === "1"; sessionStorage.setItem("ou-seen", "1"); } catch {}
+  setTimeout(finish, reduce ? 200 : seen ? 900 : 2600);
+  loader.addEventListener("click", finish, { once: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+ "name": "Tamarind House",
+ "suburb": "Richmond",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Sri Lankan",
+ "dishes": [
+  {
+   "name": "Chicken kottu roti",
+   "price": 21,
+   "kind": "main",
+   "heat": 0.7,
+   "crunch": 0.4,
+   "rich": 0.8,
+   "fresh": 0.2,
+   "sweet": 0.1,
+   "tang": 0.2,
+   "umami": 0.8,
+   "diets": [
+    "halal"
+   ],
+   "look": "rice"
+  },
+  {
+   "name": "Hoppers with dhal",
+   "price": 17,
+   "kind": "main",
+   "heat": 0.4,
+   "crunch": 0.5,
+   "rich": 0.6,
+   "fresh": 0.3,
+   "sweet": 0.2,
+   "tang": 0.2,
+   "umami": 0.6,
+   "diets": [
+    "veg",
+    "gf"
+   ],
+   "look": "bowl-yellow"
+  }
+ ]
+}

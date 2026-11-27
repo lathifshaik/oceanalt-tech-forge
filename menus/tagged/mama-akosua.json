@@ -1,0 +1,46 @@
+{
+ "name": "Mama Akosua",
+ "suburb": "Northcote",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "West African",
+ "dishes": [
+  {
+   "name": "Jollof rice and chicken",
+   "price": 22,
+   "kind": "main",
+   "heat": 0.6,
+   "crunch": 0.2,
+   "rich": 0.7,
+   "fresh": 0.3,
+   "sweet": 0.2,
+   "tang": 0.3,
+   "umami": 0.8,
+   "diets": [
+    "gf",
+    "halal"
+   ],
+   "look": "rice"
+  },
+  {
+   "name": "Fried plantain and beans",
+   "price": 16,
+   "kind": "main",
+   "heat": 0.3,
+   "crunch": 0.5,
+   "rich": 0.6,
+   "fresh": 0.3,
+   "sweet": 0.6,
+   "tang": 0.2,
+   "umami": 0.5,
+   "diets": [
+    "veg",
+    "gf",
+    "halal"
+   ],
+   "look": "platter"
+  }
+ ]
+}

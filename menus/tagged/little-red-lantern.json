@@ -1,0 +1,59 @@
+{
+ "name": "Little Red Lantern",
+ "suburb": "Collingwood",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Sichuan",
+ "dishes": [
+  {
+   "name": "Dan dan noodles",
+   "price": 19,
+   "kind": "main",
+   "heat": 0.9,
+   "crunch": 0.2,
+   "rich": 0.7,
+   "fresh": 0.2,
+   "sweet": 0.1,
+   "tang": 0.3,
+   "umami": 0.9,
+   "diets": [],
+   "look": "noodles-red"
+  },
+  {
+   "name": "Mapo tofu",
+   "price": 21,
+   "kind": "main",
+   "heat": 0.9,
+   "crunch": 0,
+   "rich": 0.7,
+   "fresh": 0.2,
+   "sweet": 0,
+   "tang": 0.2,
+   "umami": 0.9,
+   "diets": [
+    "veg",
+    "gf"
+   ],
+   "look": "bowl-red"
+  },
+  {
+   "name": "Dry-fried green beans",
+   "price": 15,
+   "kind": "main",
+   "heat": 0.6,
+   "crunch": 0.6,
+   "rich": 0.3,
+   "fresh": 0.6,
+   "sweet": 0.1,
+   "tang": 0.2,
+   "umami": 0.7,
+   "diets": [
+    "veg",
+    "gf"
+   ],
+   "look": "greens"
+  }
+ ]
+}

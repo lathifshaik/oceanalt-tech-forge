@@ -1,0 +1,62 @@
+{
+ "name": "Kaki Lima",
+ "suburb": "Footscray",
+ "level": 1,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Indonesian",
+ "dishes": [
+  {
+   "name": "Nasi goreng",
+   "price": 16,
+   "kind": "main",
+   "heat": 0.6,
+   "crunch": 0.3,
+   "rich": 0.7,
+   "fresh": 0.2,
+   "sweet": 0.4,
+   "tang": 0.3,
+   "umami": 0.8,
+   "diets": [
+    "halal"
+   ],
+   "look": "rice"
+  },
+  {
+   "name": "Gado gado",
+   "price": 15,
+   "kind": "main",
+   "heat": 0.3,
+   "crunch": 0.6,
+   "rich": 0.4,
+   "fresh": 0.8,
+   "sweet": 0.4,
+   "tang": 0.4,
+   "umami": 0.6,
+   "diets": [
+    "veg",
+    "gf",
+    "halal"
+   ],
+   "look": "greens"
+  },
+  {
+   "name": "Beef rendang",
+   "price": 22,
+   "kind": "main",
+   "heat": 0.6,
+   "crunch": 0,
+   "rich": 0.9,
+   "fresh": 0.1,
+   "sweet": 0.3,
+   "tang": 0.2,
+   "umami": 0.9,
+   "diets": [
+    "gf",
+    "halal"
+   ],
+   "look": "bowl-brown"
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "name": "Ojo de Agua",
+ "suburb": "Fitzroy",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Mexican",
+ "dishes": [
+  {
+   "name": "Al pastor tacos",
+   "price": 18,
+   "kind": "main",
+   "heat": 0.5,
+   "crunch": 0.4,
+   "rich": 0.6,
+   "fresh": 0.5,
+   "sweet": 0.4,
+   "tang": 0.5,
+   "umami": 0.6,
+   "diets": [
+    "gf"
+   ],
+   "look": "tacos"
+  },
+  {
+   "name": "Mushroom quesadilla",
+   "price": 17,
+   "kind": "main",
+   "heat": 0.2,
+   "crunch": 0.5,
+   "rich": 0.7,
+   "fresh": 0.3,
+   "sweet": 0.1,
+   "tang": 0.2,
+   "umami": 0.7,
+   "diets": [
+    "veg"
+   ],
+   "look": "flat"
+  }
+ ]
+}

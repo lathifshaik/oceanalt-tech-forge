@@ -1,0 +1,41 @@
+{
+ "name": "Saigon Corner",
+ "suburb": "Richmond",
+ "level": 1,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Vietnamese",
+ "dishes": [
+  {
+   "name": "Broken rice with pork chop",
+   "price": 17,
+   "kind": "main",
+   "heat": 0.2,
+   "crunch": 0.4,
+   "rich": 0.6,
+   "fresh": 0.5,
+   "sweet": 0.5,
+   "tang": 0.4,
+   "umami": 0.7,
+   "diets": [
+    "gf"
+   ],
+   "look": "rice"
+  },
+  {
+   "name": "Crispy spring rolls",
+   "price": 11,
+   "kind": "main",
+   "heat": 0.1,
+   "crunch": 1,
+   "rich": 0.5,
+   "fresh": 0.5,
+   "sweet": 0.2,
+   "tang": 0.4,
+   "umami": 0.5,
+   "diets": [],
+   "look": "rolls"
+  }
+ ]
+}

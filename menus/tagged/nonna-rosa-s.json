@@ -1,0 +1,41 @@
+{
+ "name": "Nonna Rosa's",
+ "suburb": "Carlton",
+ "level": 2,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Italian",
+ "dishes": [
+  {
+   "name": "Cacio e pepe",
+   "price": 22,
+   "kind": "main",
+   "heat": 0.2,
+   "crunch": 0,
+   "rich": 0.8,
+   "fresh": 0.1,
+   "sweet": 0.1,
+   "tang": 0.1,
+   "umami": 0.8,
+   "diets": [
+    "veg"
+   ],
+   "look": "pasta"
+  },
+  {
+   "name": "Nduja pizza",
+   "price": 24,
+   "kind": "main",
+   "heat": 0.6,
+   "crunch": 0.5,
+   "rich": 0.8,
+   "fresh": 0.2,
+   "sweet": 0.2,
+   "tang": 0.3,
+   "umami": 0.7,
+   "diets": [],
+   "look": "pizza"
+  }
+ ]
+}

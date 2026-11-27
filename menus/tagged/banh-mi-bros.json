@@ -1,0 +1,39 @@
+{
+ "name": "Banh Mi Bros",
+ "suburb": "Footscray",
+ "level": 1,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Vietnamese",
+ "dishes": [
+  {
+   "name": "Pork banh mi",
+   "price": 12,
+   "kind": "main",
+   "heat": 0.4,
+   "crunch": 0.7,
+   "rich": 0.5,
+   "fresh": 0.7,
+   "sweet": 0.3,
+   "tang": 0.5,
+   "umami": 0.7,
+   "diets": [],
+   "look": "roll"
+  },
+  {
+   "name": "Bun cha",
+   "price": 17,
+   "kind": "main",
+   "heat": 0.3,
+   "crunch": 0.3,
+   "rich": 0.4,
+   "fresh": 0.8,
+   "sweet": 0.4,
+   "tang": 0.6,
+   "umami": 0.7,
+   "diets": [],
+   "look": "noodles"
+  }
+ ]
+}

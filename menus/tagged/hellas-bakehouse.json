@@ -1,0 +1,41 @@
+{
+ "name": "Hellas Bakehouse",
+ "suburb": "St Kilda",
+ "level": 1,
+ "ubereats": null,
+ "sample": true,
+ "source": "seed",
+ "cuisine": "Greek",
+ "dishes": [
+  {
+   "name": "Spanakopita",
+   "price": 12,
+   "kind": "main",
+   "heat": 0,
+   "crunch": 0.8,
+   "rich": 0.6,
+   "fresh": 0.5,
+   "sweet": 0.1,
+   "tang": 0.3,
+   "umami": 0.5,
+   "diets": [
+    "veg"
+   ],
+   "look": "pie"
+  },
+  {
+   "name": "Chicken souvlaki",
+   "price": 16,
+   "kind": "main",
+   "heat": 0.2,
+   "crunch": 0.3,
+   "rich": 0.6,
+   "fresh": 0.6,
+   "sweet": 0.1,
+   "tang": 0.5,
+   "umami": 0.6,
+   "diets": [],
+   "look": "roll"
+  }
+ ]
+}

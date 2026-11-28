@@ -93,7 +93,7 @@
   .head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
   .head p.lede { margin: 0; color: var(--mute); font-size: 18px; max-width: 44ch; }
   @media (max-width: 860px) { .head { grid-template-columns: 1fr; } }
-  .wall { background: var(--wall); border-radius: 28px; padding: clamp(24px, 3vw, 40px) clamp(12px, 2vw, 28px) 20px; overflow-x: auto; scrollbar-width: none; transition: background .6s; }
+  .wall { background: var(--card); border-radius: 28px; padding: clamp(24px, 3vw, 40px) clamp(12px, 2vw, 28px) 20px; overflow-x: auto; scrollbar-width: none; transition: background .6s; }
   .wall::-webkit-scrollbar { display: none; }
   .rack { display: grid; grid-template-columns: repeat(10, minmax(96px, 1fr)); gap: clamp(8px, 1.2vw, 18px); min-width: 960px; }
   .board { display: grid; justify-items: center; gap: 14px; }
@@ -102,7 +102,10 @@
   .board:hover img, .board.on img { transform: translateY(-14px); filter: drop-shadow(0 18px 18px rgba(0,0,0,.18)); }
   .board.on .n { color: var(--text); } .board.on .n::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--run); margin-right: 8px; vertical-align: 2px; }
   .detail { display: grid; grid-template-columns: 300px 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; margin-top: 12px; padding: clamp(28px, 4vw, 56px); border-radius: 28px; background: var(--card); transition: background .6s; }
-  .detail .big { background: #dcdbdb; border-radius: 20px; display: grid; place-items: center; padding: 24px 0; }
+  .detail .big { background: var(--paper2); border-radius: 20px; display: grid; place-items: center; padding: 24px 0; position: relative; overflow: hidden; min-height: min(620px, 78vh); touch-action: pan-y; transition: background .6s; }
+  .detail .big canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; cursor: grab; }
+  .detail .big.gl img { visibility: hidden; }
+  .detail .big .hint3d { position: absolute; left: 16px; bottom: 12px; margin: 0; color: var(--mute); z-index: 2; display: none; } .detail .big.gl .hint3d { display: block; }
   .detail .big img { height: min(560px, 70vh); width: auto; display: block; transition: opacity .35s, transform .7s var(--out); }
   .detail .big img.swap { opacity: 0; transform: translateY(10px); }
   .detail h3 { margin: 10px 0 0; font: 500 clamp(32px, 4vw, 56px)/1 "Geist", sans-serif; letter-spacing: -.035em; }
@@ -204,7 +207,7 @@
       </div>
       <div class="wall rv" role="listbox" aria-label="Choose a board" id="wall"><div class="rack" id="rack"></div></div>
       <div class="detail rv" aria-live="polite">
-        <div class="big"><img id="bigImg" src="boards/21-woodblock-dragon.webp" alt="" /></div>
+        <div class="big" id="big3d"><p class="hint3d mono">Drag to turn</p><img id="bigImg" src="boards/21-woodblock-dragon.webp" alt="" /></div>
         <div>
           <p class="label mono" id="dN">No. 21</p>
           <h3 id="dH">Woodblock Dragon</h3>
@@ -342,14 +345,14 @@ window.RUN = (() => {
   const dN = document.getElementById("dN"), dH = document.getElementById("dH"), dP = document.getElementById("dP"), dInk = document.getElementById("dInk"), dFin = document.getElementById("dFin"), dFeel = document.getElementById("dFeel");
   B.forEach(([n, f, name], i) => {
     const b = document.createElement("button"); b.className = "board"; b.setAttribute("role", "option"); b.dataset.i = i;
-    b.innerHTML = `<img src="boards/${n}-${f}.webp" alt="" width="205" height="724" loading="lazy"><span class="n mono">${n}</span><span class="sr" style="position:absolute;left:-9999px">${name}</span>`;
+    b.innerHTML = `<img src="boards/${n}-${f}.webp" alt="" width="165" height="692" loading="lazy"><span class="n mono">${n}</span><span class="sr" style="position:absolute;left:-9999px">${name}</span>`;
     b.addEventListener("click", () => pick(i)); rack.appendChild(b);
   });
   let cur = 0;
   function pick(i, scroll) {
     cur = (i + B.length) % B.length; const [n, f, name, desc, ink, fin, feel] = B[cur];
     [...rack.children].forEach((el, k) => { el.classList.toggle("on", k === cur); el.setAttribute("aria-selected", k === cur); });
-    const set = () => { big.src = `boards/${n}-${f}.webp`; big.alt = `${name} snowboard, seen from above.`; big.classList.remove("swap"); };
+    const set = () => { big.src = `boards/${n}-${f}.webp`; window.dispatchEvent(new CustomEvent("board-pick", { detail: big.src })); big.alt = `${name} snowboard, seen from above.`; big.classList.remove("swap"); };
     if (reduce) set(); else { big.classList.add("swap"); setTimeout(set, 220); }
     dN.textContent = `No. ${n}`; dH.textContent = name; dP.textContent = desc; dInk.textContent = ink; dFin.textContent = fin; dFeel.textContent = feel;
     if (scroll) rack.children[cur].scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest", inline: "center" });
@@ -571,6 +574,42 @@ function frame(now) {
   r.render(scene, cam);
 }
 r.compile(scene, cam); requestAnimationFrame(frame);
+
+/* the range: whichever board is picked, as a 3D board */
+(() => {
+  const box = document.getElementById("big3d"); if (!box) return;
+  const rr = new THREE.WebGLRenderer({ antialias: true, alpha: true }); rr.setPixelRatio(Math.min(devicePixelRatio, 2)); rr.outputColorSpace = THREE.SRGBColorSpace;
+  box.appendChild(rr.domElement); box.classList.add("gl");
+  const sc = new THREE.Scene(); sc.add(new THREE.HemisphereLight(0xffffff, 0xb8b0a0, 1.6));
+  const k1 = new THREE.DirectionalLight(0xffffff, 1.5); k1.position.set(-300, 500, 700); sc.add(k1);
+  const k2 = new THREE.DirectionalLight(0xffffff, .6); k2.position.set(400, -100, -500); sc.add(k2);
+  const BW = 165, BL = 692, rise = (v) => { const tip = Math.max(0, (.12 - v) / .12), tail = Math.max(0, (v - .88) / .12); return 34 * (tip * tip + tail * tail) + 3.5 * Math.sin(Math.PI * v); };
+  const sheet = (z, flip) => { const g = new THREE.PlaneGeometry(BW, BL, 16, 180); if (flip) g.rotateY(Math.PI); const p = g.attributes.position; for (let i = 0; i < p.count; i++) p.setZ(i, z + rise(.5 - p.getY(i) / BL)); g.computeVertexNormals(); return g; };
+  const topM = new THREE.MeshStandardMaterial({ transparent: true, alphaTest: .5, roughness: .55, metalness: 0 });
+  const baseM = new THREE.MeshStandardMaterial({ transparent: true, alphaTest: .5, roughness: .35, metalness: 0 });
+  const bd = new THREE.Group(); bd.add(new THREE.Mesh(sheet(1.4), topM), new THREE.Mesh(sheet(-1.4, true), baseM)); sc.add(bd);
+  // the base: the board's own silhouette in dark ink with two thin lines, like The Run
+  const baseTex = (img) => { const c = document.createElement("canvas"); c.width = img.width; c.height = img.height; const x = c.getContext("2d");
+    x.drawImage(img, 0, 0); x.globalCompositeOperation = "source-in"; x.fillStyle = "#181c1f"; x.fillRect(0, 0, c.width, c.height);
+    x.globalCompositeOperation = "source-atop"; x.fillStyle = "#c9c2b2"; const w = 2, gap = 9; x.fillRect(c.width / 2 - gap / 2 - w, c.height * .05, w, c.height * .9); x.fillRect(c.width / 2 + gap / 2, c.height * .05, w, c.height * .9);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+  const ld = new THREE.TextureLoader(), cache = {};
+  const load = (src) => { if (cache[src]) { [topM.map, baseM.map] = cache[src]; topM.needsUpdate = baseM.needsUpdate = true; return; }
+    ld.load(src, (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; cache[src] = [t, baseTex(t.image)]; load(src); }); };
+  load(document.getElementById("bigImg").src);
+  addEventListener("board-pick", (e) => { load(e.detail); spin = 0; });
+  const cm = new THREE.PerspectiveCamera(26, 1, 10, 5000);
+  const fit = () => { const w = box.clientWidth, h = box.clientHeight; rr.setSize(w, h, false); cm.aspect = w / h; const half = Math.tan(THREE.MathUtils.degToRad(13)); cm.position.set(0, 0, Math.max(BL / (.84 * 2 * half), BW * 1.6 / (2 * half * cm.aspect))); cm.lookAt(0, 0, 0); cm.updateProjectionMatrix(); };
+  addEventListener("resize", fit); fit();
+  let spin = 0, vel = 0, drag = false, x0 = 0, seen = false, prev = performance.now();
+  box.addEventListener("pointerdown", (e) => { drag = true; x0 = e.clientX; vel = 0; });
+  addEventListener("pointermove", (e) => { if (!drag) return; const dx = e.clientX - x0; x0 = e.clientX; vel = dx * .01; spin += vel; });
+  addEventListener("pointerup", () => drag = false); addEventListener("pointercancel", () => drag = false);
+  new IntersectionObserver(([e]) => seen = e.isIntersecting).observe(box);
+  (function tick(now) { requestAnimationFrame(tick); const dt = Math.min(.05, (now - prev) / 1000); prev = now; if (!seen) return;
+    if (!drag) { vel *= .93; spin += vel + (reduce ? 0 : dt * .5); }
+    bd.rotation.set(-.12, spin, -.06); bd.position.y = reduce ? 0 : Math.sin(now / 1500) * 6; rr.render(sc, cm); })(prev);
+})();
 window.dispatchEvent(new Event("run-ready"));
 </script>
 </body>

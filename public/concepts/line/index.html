@@ -1,205 +1,205 @@
 <!doctype html>
-<html lang="en-AU">
+<html lang="en-AU" data-theme="cream" class="loading">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>The Line Series · Snowboards</title>
-<meta name="description" content="The Line Series: a range of classic snowboards, and where to ride snow and surf in Australia. A design concept by Oceanalt. Not a real product." />
+<title>The Run · The Line Series</title>
+<meta name="description" content="The Run: a snowboard that's a map. Scroll and the map becomes a mountain you ride. A design concept by Oceanalt. Not a real product." />
 <meta name="robots" content="noindex, nofollow" />
-<meta name="theme-color" content="#ffffff" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23fff'/%3E%3Crect x='13' y='5' width='2' height='22' rx='1' fill='%233d8fd1'/%3E%3Crect x='17' y='5' width='2' height='22' rx='1' fill='%233d8fd1'/%3E%3C/svg%3E" />
+<meta name="theme-color" content="#f4efe4" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23efe7d6'/%3E%3Cpath d='M14 4c-4 8 4 14 0 24M18 4c-4 8 4 14 0 24' stroke='%23c8402a' stroke-width='1.6' fill='none'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
 <style>
-  :root {
-    --ink: #0d1114; --soft: #f3f4f4; --line: #e3e6e8; --grey: #6f787f; --ice: #3d8fd1; --ice-2: #9cc8ec; --wall: #dcdbdb;
-    --out: cubic-bezier(.16, 1, .3, 1); --gut: clamp(16px, 4vw, 56px);
-    --h1: clamp(52px, 9vw, 144px); --h2: clamp(36px, 5vw, 72px);
-  }
+  /* three colourways; the whole site follows the board */
+  :root, [data-theme="cream"] { --bg: #f4efe4; --paper: #efe7d6; --paper2: #e6dcc6; --text: #14232b; --ink: #1f3a46; --ink2: rgba(31,58,70,.42); --run: #c8402a; --mute: #6c7578; --line: rgba(31,58,70,.14); --card: #fbf8f1; --wall: #dcdbdb; }
+  [data-theme="ice"] { --bg: #f2f4f5; --paper: #f8f9f9; --paper2: #e7ecef; --text: #0d1114; --ink: #3d8fd1; --ink2: rgba(61,143,209,.42); --run: #0d1114; --mute: #6c757b; --line: rgba(13,17,20,.1); --card: #ffffff; --wall: #dcdbdb; }
+  [data-theme="night"] { --bg: #0b0e10; --paper: #101417; --paper2: #182024; --text: #e9e6de; --ink: #e9e6de; --ink2: rgba(233,230,222,.32); --run: #5fb0ec; --mute: #8d969b; --line: rgba(233,230,222,.13); --card: #141a1d; --wall: #1d2225; }
+  :root { --out: cubic-bezier(.16, 1, .3, 1); --gut: clamp(16px, 4vw, 56px); --h2: clamp(36px, 5vw, 72px); --soft: var(--paper2); --grey: var(--mute); --ice: var(--run); }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-  body { margin: 0; background: #fff; color: var(--ink); font: 400 16px/1.55 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  html { -webkit-text-size-adjust: 100%; }
+  html.loading { overflow: hidden; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.55 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background .6s, color .6s; }
   a { color: inherit; text-decoration: none; } button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
   .mono { font-family: "Geist Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
   .wrap { width: min(100% - 2 * var(--gut), 1360px); margin-inline: auto; }
-  :focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
-  .skip { position: absolute; left: -9999px; } .skip:focus { left: 16px; top: 16px; z-index: 50; background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 99px; }
-  .label { color: var(--grey); margin: 0 0 18px; } .label b { color: var(--ice); font-weight: 500; }
+  :focus-visible { outline: 2px solid var(--run); outline-offset: 3px; }
+  .skip { position: absolute; left: -9999px; } .skip:focus { left: 16px; top: 16px; z-index: 90; background: var(--text); color: var(--bg); padding: 8px 12px; border-radius: 99px; }
+  .label { color: var(--mute); margin: 0 0 18px; } .label b { color: var(--run); font-weight: 500; }
   .h2 { margin: 0; font: 500 var(--h2)/.98 "Geist", sans-serif; letter-spacing: -.04em; }
-  .lines { display: inline-flex; gap: 5px; vertical-align: middle; } .lines i { width: 3px; height: 1em; border-radius: 2px; background: var(--ice); }
+
+  /* loader: the board draws itself, then the colour floods in */
+  .loader { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; background: #ffffff; transition: opacity .9s var(--out), visibility 0s .9s; }
+  .loader.flood { background: var(--bg); transition: background 1.1s var(--out), opacity .9s var(--out), visibility 0s .9s; }
+  .loader.gone { opacity: 0; visibility: hidden; }
+  .loader svg { height: min(76vh, 760px); width: auto; overflow: visible; }
+  .loader .edge { fill: none; stroke: #9aa1a5; stroke-width: 1.4; }
+  .loader .c { fill: none; stroke: #b9bfc3; stroke-width: .5; transition: stroke 1s var(--out); }
+  .loader .c.b { stroke-width: .9; stroke: #9aa1a5; }
+  .loader .fill { fill: var(--paper); }
+  .loader .r { fill: none; stroke: #8d9498; stroke-width: 2.1; stroke-linecap: round; transition: stroke 1s var(--out); }
+  .loader .dot { fill: #8d9498; transition: fill 1s; } .loader .ring { fill: none; stroke: #8d9498; stroke-width: 2; transition: stroke 1s; }
+  .loader.flood .c { stroke: var(--ink2); } .loader.flood .c.b { stroke: var(--ink); } .loader.flood .edge { stroke: rgba(0,0,0,.18); }
+  .loader.flood .r { stroke: var(--run); } .loader.flood .dot { fill: var(--run); } .loader.flood .ring { stroke: var(--run); }
+  .loader .meta { position: absolute; left: var(--gut); right: var(--gut); bottom: 28px; display: flex; justify-content: space-between; color: #8d9498; }
+  .loader .meta b { color: var(--text); font-weight: 500; }
+  .loader .tagl { position: absolute; left: var(--gut); top: 28px; color: #8d9498; }
 
   /* nav */
-  .nav { position: fixed; inset: 14px var(--gut) auto; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 10px 10px 20px; border-radius: 99px; background: rgba(255,255,255,.72); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); border: 1px solid rgba(13,17,20,.07); }
+  .nav { position: fixed; inset: 14px var(--gut) auto; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 8px 8px 20px; border-radius: 99px; background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); border: 1px solid var(--line); transition: background .6s; }
   .brand { display: flex; align-items: center; gap: 12px; font-weight: 500; letter-spacing: -.01em; }
-  .brand .lines i { height: 18px; }
+  .brand svg { width: 16px; height: 22px; } .brand path { stroke: var(--run); }
   .nav ul { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
-  .nav ul a { display: block; padding: 9px 14px; border-radius: 99px; transition: background .3s; } .nav ul a:hover { background: var(--soft); }
-  .tag { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--line); }
-  .tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--ice); }
+  .nav ul a { display: block; padding: 9px 14px; border-radius: 99px; transition: background .3s; } .nav ul a:hover { background: var(--line); }
+  .swatch { display: flex; gap: 6px; padding: 4px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--line); }
+  .swatch button { width: 30px; height: 30px; border-radius: 50%; position: relative; box-shadow: inset 0 0 0 1px rgba(0,0,0,.14); transition: transform .4s var(--out); }
+  .swatch button::after { content: ""; position: absolute; inset: 0; margin: auto; width: 6px; height: 16px; border-left: 1.5px solid var(--l); border-right: 1.5px solid var(--l); }
+  .swatch button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--text); }
+  .swatch button:hover { transform: scale(1.08); }
   @media (max-width: 760px) { .nav ul { display: none; } }
 
-  /* buttons */
-  .btn { display: inline-flex; align-items: center; gap: 12px; padding: 6px 20px 6px 6px; border-radius: 99px; font-weight: 500; position: relative; overflow: hidden; isolation: isolate; background: var(--ink); color: #fff; }
-  .btn::before { content: ""; position: absolute; inset: 0; background: var(--ice); transform: translateX(-101%); transition: transform .6s var(--out); z-index: -1; }
-  .btn:hover::before { transform: none; }
-  .btn .c { width: 38px; height: 38px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; transition: transform .6s var(--out); }
-  .btn:hover .c { transform: translateY(2px); }
-  .btn svg { width: 14px; height: 14px; }
-  .btn.ghost { background: rgba(255,255,255,.7); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); } .btn.ghost .c { background: var(--ink); color: #fff; } .btn.ghost:hover { color: #fff; }
+  /* the ride: a sticky 3D stage with captions over it */
+  .ride { position: relative; height: 760vh; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+  #gl { position: absolute; inset: 0; touch-action: pan-y; }
+  #gl canvas { display: block; width: 100% !important; height: 100% !important; }
+  .flat { position: absolute; inset: 0; margin: auto; height: 80%; display: none; }
+  .no-gl .flat { display: block; } .no-gl #gl { display: none; }
+  .flat .fill { fill: var(--paper); } .flat .c { fill: none; stroke: var(--ink2); stroke-width: .5; } .flat .c.b { stroke: var(--ink); stroke-width: .9; }
+  .flat .r { fill: none; stroke: var(--run); stroke-width: 2.1; } .flat .dot { fill: var(--run); } .flat .ring { fill: none; stroke: var(--run); stroke-width: 2; } .flat .edge { fill: none; stroke: var(--line); stroke-width: 1.4; }
+  .cap { position: absolute; z-index: 3; left: var(--gut); bottom: clamp(96px, 16vh, 160px); width: min(620px, 100% - 2 * var(--gut)); pointer-events: none; opacity: 0; transform: translateY(18px); transition: opacity .7s var(--out), transform .9s var(--out); }
+  .cap.on { opacity: 1; transform: none; pointer-events: auto; }
+  .cap h1, .cap h2 { margin: 0; font: 500 clamp(52px, 9vw, 150px)/.88 "Geist", sans-serif; letter-spacing: -.055em; text-transform: uppercase; }
+  .cap h2 { font-size: clamp(40px, 6.4vw, 104px); }
+  .cap p.sub { margin: 20px 0 0; font-size: 19px; max-width: 34ch; color: var(--mute); }
+  .cap.right { left: auto; right: var(--gut); text-align: right; }
+  .cap .ways { display: flex; gap: 8px; margin-top: 26px; flex-wrap: wrap; }
+  .cap .ways button { display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px 7px 7px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--line); font-weight: 500; background: color-mix(in srgb, var(--bg) 70%, transparent); }
+  .cap .ways button i { width: 26px; height: 26px; border-radius: 50%; position: relative; box-shadow: inset 0 0 0 1px rgba(0,0,0,.14); }
+  .cap .ways button i::after { content: ""; position: absolute; inset: 0; margin: auto; width: 6px; height: 14px; border-left: 1.5px solid var(--l); border-right: 1.5px solid var(--l); }
+  .cap .ways button[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--text); }
+  /* map readout */
+  .hud { position: absolute; z-index: 3; left: var(--gut); right: var(--gut); bottom: 26px; display: flex; align-items: center; gap: 18px 28px; flex-wrap: wrap; color: var(--mute); pointer-events: none; }
+  .hud b { color: var(--text); font-weight: 500; }
+  .hud .bar { flex: 1; min-width: 120px; height: 1px; background: var(--line); position: relative; }
+  .hud .bar i { position: absolute; left: 0; top: -1px; height: 3px; background: var(--run); width: 0; }
+  .hud .scale { display: inline-flex; align-items: center; gap: 8px; } .hud .scale i { width: 40px; height: 6px; border: 1.5px solid currentColor; border-top: 0; }
+  @media (max-width: 760px) { .hud .hide-m { display: none; } .cap { bottom: 120px; } }
 
-  /* hero */
-  .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: #e9edf0; }
-  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; animation: push 20s var(--out) both; }
-  @keyframes push { from { transform: scale(1.1); } to { transform: scale(1.02); } }
-  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.55) 34%, transparent 62%); pointer-events: none; }
-  .hero .copy { position: absolute; z-index: 2; left: var(--gut); bottom: clamp(56px, 12vh, 120px); width: min(640px, 100% - 2 * var(--gut)); }
-  .hero h1 { margin: 0; font: 500 var(--h1)/.9 "Geist", sans-serif; letter-spacing: -.05em; text-transform: uppercase; }
-  .hero .sub { margin: 24px 0 30px; font-size: 19px; color: #3a454d; max-width: 34ch; }
-  .row { display: flex; gap: 10px; flex-wrap: wrap; }
-  @media (max-width: 760px) { .hero::after { background: linear-gradient(0deg, rgba(255,255,255,.95) 10%, rgba(255,255,255,.6) 45%, transparent 75%); } .hero img { object-position: 70% 30%; } }
-
-  /* section heads */
-  section.band { padding: clamp(96px, 12vw, 160px) 0; }
+  /* content sections pick up the colourway */
+  section.band { padding: clamp(96px, 12vw, 160px) 0; position: relative; }
   .head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
-  .head p.lede { margin: 0; color: #44505a; font-size: 18px; max-width: 44ch; }
+  .head p.lede { margin: 0; color: var(--mute); font-size: 18px; max-width: 44ch; }
   @media (max-width: 860px) { .head { grid-template-columns: 1fr; } }
-
-  /* the run: 3D */
-  .run { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; }
-  .viewer { position: relative; height: min(82vh, 860px); min-height: 520px; border-radius: 28px; overflow: hidden; background: radial-gradient(80% 70% at 50% 45%, #ffffff 0%, #eceef0 70%, #e4e7e9 100%); touch-action: pan-y; cursor: grab; }
-  .viewer:active { cursor: grabbing; }
-  .viewer canvas { display: block; width: 100% !important; height: 100% !important; }
-  .viewer .fallback { position: absolute; inset: 0; margin: auto; height: 86%; display: none; }
-  .no-gl .viewer .fallback { display: block; } .no-gl .viewer canvas { display: none; }
-  .viewer .hint { position: absolute; left: 22px; bottom: 18px; margin: 0; color: var(--grey); pointer-events: none; }
-  .ways { display: flex; gap: 8px; margin: 30px 0 0; flex-wrap: wrap; }
-  .ways button { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--line); font-weight: 500; transition: box-shadow .3s, background .3s; }
-  .ways button i { width: 26px; height: 26px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); position: relative; overflow: hidden; }
-  .ways button i::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; margin-left: -3px; border-left: 1.5px solid var(--l); border-right: 1.5px solid var(--l); }
-  .ways button[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--ink); background: #fff; }
-  .run dl { margin: 30px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 28px; border-top: 1px solid var(--line); padding-top: 22px; }
-  .run dt { color: var(--grey); } .run dd { margin: 0; }
-  @media (max-width: 900px) { .run { grid-template-columns: 1fr; } .viewer { height: 70svh; min-height: 460px; } }
-
-  /* the wall of boards */
-  .wall { background: var(--wall); border-radius: 28px; padding: clamp(24px, 3vw, 40px) clamp(12px, 2vw, 28px) 20px; overflow-x: auto; scrollbar-width: none; }
+  .wall { background: var(--wall); border-radius: 28px; padding: clamp(24px, 3vw, 40px) clamp(12px, 2vw, 28px) 20px; overflow-x: auto; scrollbar-width: none; transition: background .6s; }
   .wall::-webkit-scrollbar { display: none; }
   .rack { display: grid; grid-template-columns: repeat(10, minmax(96px, 1fr)); gap: clamp(8px, 1.2vw, 18px); min-width: 960px; }
-  .board { display: grid; justify-items: center; gap: 14px; padding: 0; transition: transform .7s var(--out); }
-  .board img { width: 100%; max-width: 150px; height: auto; display: block; transition: transform .7s var(--out), filter .7s var(--out); filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
-  .board .n { color: #5d666c; transition: color .3s; }
+  .board { display: grid; justify-items: center; gap: 14px; }
+  .board img { width: 100%; max-width: 150px; height: auto; display: block; transition: transform .7s var(--out), filter .7s var(--out); }
+  .board .n { color: var(--mute); }
   .board:hover img, .board.on img { transform: translateY(-14px); filter: drop-shadow(0 18px 18px rgba(0,0,0,.18)); }
-  .board.on .n { color: var(--ink); }
-  .board.on .n::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ice); margin-right: 8px; vertical-align: 2px; }
-  .detail { display: grid; grid-template-columns: 300px 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; margin-top: 12px; padding: clamp(28px, 4vw, 56px); border-radius: 28px; background: var(--soft); }
-  .detail .big { background: var(--wall); border-radius: 20px; display: grid; place-items: center; padding: 24px 0; }
+  .board.on .n { color: var(--text); } .board.on .n::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--run); margin-right: 8px; vertical-align: 2px; }
+  .detail { display: grid; grid-template-columns: 300px 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; margin-top: 12px; padding: clamp(28px, 4vw, 56px); border-radius: 28px; background: var(--card); transition: background .6s; }
+  .detail .big { background: #dcdbdb; border-radius: 20px; display: grid; place-items: center; padding: 24px 0; }
   .detail .big img { height: min(560px, 70vh); width: auto; display: block; transition: opacity .35s, transform .7s var(--out); }
   .detail .big img.swap { opacity: 0; transform: translateY(10px); }
   .detail h3 { margin: 10px 0 0; font: 500 clamp(32px, 4vw, 56px)/1 "Geist", sans-serif; letter-spacing: -.035em; }
-  .detail p.d { margin: 18px 0 0; color: #44505a; font-size: 18px; max-width: 40ch; }
+  .detail p.d { margin: 18px 0 0; color: var(--mute); font-size: 18px; max-width: 40ch; }
   .detail dl { margin: 28px 0 0; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 6px 40px; }
-  .detail dt { color: var(--grey); } .detail dd { margin: 0; }
+  .detail dt { color: var(--mute); } .detail dd { margin: 0; }
   .pager { display: flex; gap: 8px; margin-top: 30px; }
-  .pager button { width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1px #cfd5d9; display: grid; place-items: center; transition: background .3s, color .3s; }
-  .pager button:hover { background: var(--ink); color: #fff; }
-  .pager svg { width: 14px; height: 14px; }
+  .pager button { width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; transition: background .3s, color .3s; }
+  .pager button:hover { background: var(--text); color: var(--bg); } .pager svg { width: 14px; height: 14px; }
   @media (max-width: 760px) { .detail { grid-template-columns: 1fr; } .detail .big img { height: 440px; } .detail dl { grid-template-columns: repeat(2, auto); } }
-  .soon { margin: 18px 0 0; color: var(--grey); }
-
-  /* the map */
+  .soon { margin: 18px 0 0; color: var(--mute); }
   .mapwrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: start; }
-  .mapcard { position: relative; background: var(--soft); border-radius: 28px; overflow: hidden; }
+  .mapcard { position: relative; background: var(--card); border-radius: 28px; overflow: hidden; transition: background .6s; }
   .mapcard svg { display: block; width: 100%; height: auto; }
   .mapcard svg.mini { position: absolute; left: 18px; bottom: 18px; width: clamp(80px, 12vw, 140px); }
-  .mini { position: absolute; left: 18px; bottom: 18px; width: clamp(90px, 14vw, 150px); }
-  .landz { fill: #fff; stroke: #cdd5da; stroke-width: 1.2; }
-  .mini .land { fill: #1f3a46; } .mini .box { fill: none; stroke: var(--ice); stroke-width: 18; }
-  .st { font: 500 12px "Geist Mono", monospace; letter-spacing: .3em; fill: #b0b9bf; }
-  .city circle { fill: var(--ink); } .city text { font: 500 11px "Geist Mono", monospace; letter-spacing: .12em; fill: var(--ink); }
-  .pin { cursor: pointer; } .pin .halo { fill: var(--ice); opacity: .16; transition: r .4s var(--out), opacity .4s; }
-  .pin .dot { fill: var(--ice); stroke: #fff; stroke-width: 2; transition: r .4s var(--out); }
-  .pin.on .halo { opacity: .3; } .pin.on .dot { fill: var(--ink); }
-  .pinlabel { font: 500 15px "Geist", sans-serif; letter-spacing: -.01em; fill: var(--ink); paint-order: stroke; stroke: #fff; stroke-width: 5px; stroke-linejoin: round; opacity: 0; transition: opacity .3s; pointer-events: none; }
+  .landz { fill: var(--paper); stroke: var(--ink2); stroke-width: 1.2; }
+  .mini .land { fill: var(--ink); } .mini .box { fill: none; stroke: var(--run); stroke-width: 18; }
+  .st { font: 500 12px "Geist Mono", monospace; letter-spacing: .3em; fill: var(--mute); opacity: .6; }
+  .city circle { fill: var(--text); } .city text { font: 500 11px "Geist Mono", monospace; letter-spacing: .12em; fill: var(--text); }
+  .pin { cursor: pointer; } .pin .halo { fill: var(--run); opacity: .16; } .pin .dot { fill: var(--run); stroke: var(--card); stroke-width: 2; }
+  .pin.on .halo { opacity: .32; } .pin.on .dot { fill: var(--text); }
+  .pinlabel { font: 500 15px "Geist", sans-serif; letter-spacing: -.01em; fill: var(--text); paint-order: stroke; stroke: var(--card); stroke-width: 5px; stroke-linejoin: round; opacity: 0; transition: opacity .3s; pointer-events: none; }
   .pinlabel.on { opacity: 1; }
   .list h4 { margin: 0 0 6px; } .list h4:not(:first-child) { margin-top: 28px; }
   .list ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
   .list li button { width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); text-align: left; transition: padding .4s var(--out); }
   .list li button span:first-child { font-size: 18px; letter-spacing: -.01em; }
   .list li button:hover, .list li button.on { padding-left: 10px; }
-  .list li button.on span:first-child::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ice); margin-right: 10px; vertical-align: 3px; }
-  .list .t { color: var(--grey); }
+  .list li button.on span:first-child::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--run); margin-right: 10px; vertical-align: 3px; }
+  .list .t { color: var(--mute); }
   @media (max-width: 960px) { .mapwrap { grid-template-columns: 1fr; } }
+  .modes { display: inline-flex; padding: 4px; border-radius: 99px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 22px; }
+  .modes button { padding: 10px 22px; border-radius: 99px; font-weight: 500; color: var(--mute); transition: background .4s var(--out), color .3s; }
+  .modes button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
 
-  .modes { display: inline-flex; padding: 4px; border-radius: 99px; background: var(--soft); margin-bottom: 22px; }
-  .modes button { padding: 10px 22px; border-radius: 99px; font-weight: 500; color: var(--grey); transition: background .4s var(--out), color .3s; }
-  .modes button[aria-pressed="true"] { background: var(--ink); color: #fff; }
-
-  /* closing */
-  .close { background: #0d1114; color: #fff; text-align: center; padding: clamp(96px, 12vw, 160px) 0; }
-  .close .h2 { font-size: clamp(44px, 8vw, 120px); text-transform: uppercase; letter-spacing: -.05em; }
-  .close .lines i { height: .8em; width: 5px; }
-  .close p { color: #a9b1b6; margin: 24px auto 0; max-width: 46ch; font-size: 18px; }
-  footer { background: #0d1114; color: #8a9297; border-top: 1px solid rgba(255,255,255,.1); padding: 32px 0 48px; }
+  /* close: the contours again, big and faint */
+  .close { position: relative; overflow: hidden; text-align: center; padding: clamp(110px, 14vw, 190px) 0; background: var(--paper2); transition: background .6s; }
+  .close .topo { position: absolute; inset: -10% -5%; width: 110%; height: 120%; opacity: .5; pointer-events: none; }
+  .close .topo path { fill: none; stroke: var(--ink2); stroke-width: .5; vector-effect: non-scaling-stroke; }
+  .close .wrap { position: relative; }
+  .close h2 { margin: 0; font: 500 clamp(52px, 10vw, 160px)/.88 "Geist", sans-serif; letter-spacing: -.055em; text-transform: uppercase; }
+  .close p { color: var(--mute); margin: 26px auto 0; max-width: 46ch; font-size: 18px; }
+  footer { border-top: 1px solid var(--line); padding: 30px 0 46px; color: var(--mute); }
   footer .wrap { display: flex; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
-  footer a { box-shadow: inset 0 -1px 0 #4a5257; }
-
+  footer a { box-shadow: inset 0 -1px 0 var(--line); }
   .rv { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--out), transform 1.1s var(--out); }
   .rv.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; } .hero img { animation: none; }
     .rv { opacity: 1; transform: none; transition: none; }
-    .board, .board img, .detail .big img, .btn::before, .btn .c, .list li button { transition: none; }
+    .cap, .board img, .detail .big img, .list li button { transition: none; }
   }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <p class="tagl mono">The Line Series · No. 01</p>
+  <svg id="ld" viewBox="-12 -12 214 1024"></svg>
+  <div class="meta mono"><span id="ldTxt">Drawing the mountain</span><b id="ldPct">0%</b></div>
+</div>
+
 <header class="nav">
-  <a class="brand" href="#top" aria-label="The Line Series, back to top"><span class="lines" aria-hidden="true"><i></i><i></i></span>The Line Series</a>
-  <nav aria-label="Sections"><ul class="mono"><li><a href="#the-run">The Run</a></li><li><a href="#range">The range</a></li><li><a href="#where">Snow and surf</a></li></ul></nav>
-  <span class="tag mono"><i></i>Concept</span>
+  <a class="brand" href="#top" aria-label="The Run, back to the top"><svg viewBox="0 0 16 22" aria-hidden="true"><path d="M5 1c-4 6 4 10 0 20M11 1c-4 6 4 10 0 20" stroke-width="1.6" fill="none"/></svg>The Run</a>
+  <nav aria-label="Sections"><ul class="mono"><li><a href="#top">Ride it</a></li><li><a href="#range">The range</a></li><li><a href="#where">Snow and surf</a></li></ul></nav>
+  <div class="swatch" role="group" aria-label="Colourway">
+    <button data-way="cream" aria-pressed="true" aria-label="Cream" style="background:#efe7d6;--l:#c8402a"></button>
+    <button data-way="ice" aria-pressed="false" aria-label="Ice" style="background:#f6f7f7;--l:#0d1114"></button>
+    <button data-way="night" aria-pressed="false" aria-label="Night" style="background:#101417;--l:#5fb0ec"></button>
+  </div>
 </header>
 
 <main id="main">
-  <section class="hero" id="top" aria-label="The Line Series">
-    <img src="hero.jpg" alt="Two white Line 01 snowboards with two thin ice-blue lines down the middle, resting on fresh snow on a mountain ridge." />
-    <div class="copy">
-      <p class="label mono"><b>01</b> &nbsp;Snowboards · Design concept</p>
-      <h1>Draw<br>a line.</h1>
-      <p class="sub">Then follow it. A snowboard that's a map, ten more classics, and where to ride, on snow and surf, in Australia.</p>
-      <div class="row">
-        <a class="btn" href="#the-run"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></span>See the range</a>
-        <a class="btn ghost" href="#where"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="6" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M7 9v4" stroke="currentColor" stroke-width="1.6"/></svg></span>Where to ride</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="the-run">
-    <div class="wrap run">
-      <div class="viewer rv" id="viewer" role="img" aria-label="3D model of The Run snowboard. Drag sideways to turn it.">
-        <img class="fallback" id="fallback" src="run/cream.webp" alt="" />
-        <p class="hint mono">Drag to turn</p>
-      </div>
-      <div class="rv">
-        <p class="label mono"><b>02</b> &nbsp;The signature board</p>
-        <h2 class="h2">The Run.</h2>
-        <p class="lede" style="margin:22px 0 0;color:#44505a;font-size:18px;max-width:40ch">Every board is a map. The contour lines are a mountain, and the two lines are the run down it, from the start dot at the tip to the finish at the tail.</p>
+  <section class="ride" id="top" aria-label="The Run: scroll to ride the board">
+    <div class="stage" id="stage">
+      <div id="gl" role="img" aria-label="The Run snowboard. As you scroll, the map on the board rises into a mountain and the camera rides the run down it."></div>
+      <svg class="flat" id="flat" viewBox="-12 -12 214 1024" aria-hidden="true"></svg>
+      <div class="cap" data-a="0" data-b=".09"><p class="label mono"><b>01</b> &nbsp;The Line Series · Design concept</p><h1>The Run.</h1><p class="sub">Every board is a map. Scroll down to ride it.</p></div>
+      <div class="cap right" data-a=".12" data-b=".28"><h2>The lines<br>are a mountain.</h2></div>
+      <div class="cap" data-a=".33" data-b=".46"><h2>Start<br>at the top.</h2></div>
+      <div class="cap right" data-a=".5" data-b=".62"><h2>Pick<br>your line.</h2></div>
+      <div class="cap" data-a=".66" data-b=".77"><h2>Follow it.</h2></div>
+      <div class="cap right" data-a=".8" data-b=".89"><h2>Then take<br>it home.</h2></div>
+      <div class="cap" data-a=".91" data-b="1.01"><p class="label mono">Three colourways</p><h2>Cream, Ice<br>or Night.</h2>
         <div class="ways" role="group" aria-label="Colourway">
           <button data-way="cream" aria-pressed="true"><i style="background:#efe7d6;--l:#c8402a"></i>Cream</button>
           <button data-way="ice" aria-pressed="false"><i style="background:#f6f7f7;--l:#0d1114"></i>Ice</button>
           <button data-way="night" aria-pressed="false"><i style="background:#101417;--l:#5fb0ec"></i>Night</button>
-        </div>
-        <dl class="mono"><dt>Map</dt><dd>An invented mountain, 36°S 148°E</dd><dt>Lines</dt><dd>Two, the run</dd><dt>Edges</dt><dd>Steel, all the way round</dd><dt>Status</dt><dd>Design concept, not for sale</dd></dl>
-      </div>
+        </div></div>
+      <div class="hud mono" aria-hidden="true"><span>36°S 148°E</span><span>Elev <b id="hElev">2,020 m</b></span><span class="hide-m">Run <b id="hRun">0.0 km</b></span><span class="bar"><i id="hBar"></i></span><span class="scale hide-m"><i></i>500 m</span></div>
     </div>
   </section>
 
   <section class="band" id="range" style="padding-top:0">
     <div class="wrap">
       <div class="head rv">
-        <div><p class="label mono"><b>03</b> &nbsp;The rest of the range</p><h2 class="h2">Ten more.<br>Nothing loud.</h2></div>
+        <div><p class="label mono"><b>02</b> &nbsp;The rest of the range</p><h2 class="h2">Ten more.<br>Nothing loud.</h2></div>
         <p class="lede">Flat ink, real wood and a lot of empty space. Pick a board to see it up close.</p>
       </div>
       <div class="wall rv" role="listbox" aria-label="Choose a board" id="wall"><div class="rack" id="rack"></div></div>
@@ -220,7 +220,7 @@
   <section class="band" id="where" style="padding-top:0">
     <div class="wrap">
       <div class="head rv">
-        <div><p class="label mono"><b>04</b> &nbsp;Where to ride</p><h2 class="h2">Where<br>Australia rides.</h2></div>
+        <div><p class="label mono"><b>03</b> &nbsp;Where to ride</p><h2 class="h2">Where<br>Australia rides.</h2></div>
         <div><div class="modes" role="group" aria-label="Snow or surf"><button data-mode="snow" aria-pressed="true">Snow</button><button data-mode="surf" aria-pressed="false">Surf</button></div><p class="lede" id="whereLede"></p></div>
       </div>
       <div class="mapwrap rv">
@@ -234,19 +234,96 @@
     </div>
   </section>
 
+
   <section class="close">
+    <svg class="topo" id="topo" viewBox="0 0 190 1000" preserveAspectRatio="none" aria-hidden="true"></svg>
     <div class="wrap">
-      <h2 class="h2"><span class="lines" aria-hidden="true"><i></i><i></i></span><br>Follow it.</h2>
-      <p>The Line Series is a design concept by Oceanalt, a design and technology studio in Sydney and Melbourne. It isn't a real product.</p>
+      <h2>Draw a line.<br>Follow it.</h2>
+      <p>The Run and the Line Series are a design concept by Oceanalt, a design and technology studio in Sydney and Melbourne. They aren't real products. The mountain on the board is invented.</p>
     </div>
   </section>
 </main>
 
-<footer><div class="wrap mono"><span>The Line Series · Design concept</span><span>By <a href="https://oceanalt.com.au">Oceanalt</a> · Not a real product, not for sale</span></div></footer>
+<footer><div class="wrap mono"><span>The Run · The Line Series · Design concept</span><span>By <a href="https://oceanalt.com.au">Oceanalt</a> · Not a real product, not for sale</span></div></footer>
+
+<script>
+/* shared: the board, the mountain and the run, all from one formula */
+window.RUN = (() => {
+  const W = 190, L = 1000;
+  const peaks = [[60, 210, 1, 95], [140, 330, .8, 75], [80, 520, .9, 110], [150, 690, .7, 70], [50, 800, .85, 85], [125, 900, .6, 65]];
+  const far = [[-210, 260, 1.15, 150], [400, 560, 1.05, 160], [-170, 860, .95, 140], [420, 140, .85, 120], [-330, 600, .8, 170], [520, 950, .9, 150]];
+  const H = (x, y) => {
+    let h = 0; for (const [px, py, a, r] of peaks) h += a * Math.exp(-((x - px) ** 2 + (y - py) ** 2) / (2 * r * r));
+    h += .06 * Math.sin(x * .05 + y * .021) + .05 * Math.sin(y * .043 - x * .03) + .03 * Math.sin((x + y) * .09);
+    const ox = Math.max(0, -x, x - W), oy = Math.max(0, -y, y - L), out = Math.min(1, Math.hypot(ox, oy) / 140);
+    if (out > 0) { let f = 0; for (const [px, py, a, r] of far) f += a * Math.exp(-((x - px) ** 2 + (y - py) ** 2) / (2 * r * r)); h += f * out * out * (3 - 2 * out); }
+    return h;
+  };
+  const runX = (t) => W / 2 + 28 * Math.sin(t * Math.PI * 3.2 + .4) * Math.sin(t * Math.PI), runY = (t) => 40 + t * (L - 80);
+  const outline = () => { const tip = 120, w = W / 2 - 3, waist = w - 7, cx = W / 2;
+    return `M${cx - w} ${tip} C${cx - w} 30 ${cx - w * .55} 6 ${cx} 6 C${cx + w * .55} 6 ${cx + w} 30 ${cx + w} ${tip} C${cx + waist} ${L * .4} ${cx + waist} ${L * .6} ${cx + w} ${L - tip} C${cx + w} ${L - 30} ${cx + w * .55} ${L - 6} ${cx} ${L - 6} C${cx - w * .55} ${L - 6} ${cx - w} ${L - 30} ${cx - w} ${L - tip} C${cx - waist} ${L * .6} ${cx - waist} ${L * .4} ${cx - w} ${tip} Z`; };
+  const runPath = (off) => { let d = ""; for (let i = 0; i <= 120; i++) { const t = i / 120, e = .001, x = runX(t), y = runY(t), dx = runX(t + e) - runX(t - e), dy = runY(t + e) - runY(t - e), n = Math.hypot(dx, dy); d += (i ? "L" : "M") + (x - dy / n * off).toFixed(1) + "," + (y + dx / n * off).toFixed(1); } return d; };
+  const contours = [{"k":0,"d":"M193,1002L193,2L192,0L2,0L0,2L0,1002L2,1003L192,1003Z"},{"k":1,"d":"M193,1002L193,2L192,0L2,0L0,2L0,1002L2,1003L192,1003Z"},{"k":2,"d":"M193,1002L193,84L192,82L186,83L184,80L183,78L186,70L193,59L193,11L191,8L188,0L119,0L117,11L110,23L100,32L92,35L89,35L86,34L83,32L81,26L80,14L79,11L77,9L59,7L54,5L53,2L50,0L2,0L0,2L0,1002L2,1003L17,1003L26,998L35,996L41,996L44,998L47,1003L192,1003Z"},{"k":3,"d":"M172,1002L182,985L188,978L193,974L193,93L186,94L179,93L176,90L174,84L175,74L179,64L192,48L193,47L193,26L186,23L182,20L180,14L182,2L179,0L131,0L120,20L110,32L101,38L95,41L83,43L78,41L75,38L71,26L68,21L62,18L46,14L43,11L41,8L40,2L38,0L4,0L4,2L0,5L0,1002L2,1003L8,1003L13,998L23,993L32,990L41,989L47,991L50,993L56,1003L170,1003Z"},{"k":4,"d":"M164,1002L179,980L192,968L193,965L193,102L176,100L170,96L168,90L167,84L168,74L172,56L172,50L170,48L158,46L155,44L155,41L156,38L171,14L175,2L173,0L140,0L123,26L115,35L101,44L92,48L83,50L77,49L72,47L70,44L64,32L58,26L41,21L35,17L32,14L28,5L23,0L20,0L20,2L2,9L0,11L0,989L4,992L8,992L32,985L44,984L50,985L53,987L65,1003L161,1003Z"},{"k":5,"d":"M158,1002L176,977L192,962L193,959L193,111L173,105L167,102L165,99L163,93L161,71L159,65L155,62L142,59L137,57L134,54L133,50L132,44L135,38L152,23L159,17L165,5L166,2L164,0L149,0L140,12L131,32L129,35L125,38L114,44L101,49L80,55L74,55L68,53L65,50L59,38L56,33L50,30L29,25L17,14L11,13L0,17L0,962L11,980L17,982L44,979L53,980L58,983L66,995L74,1003L155,1003Z"},{"k":6,"d":"M152,1002L176,971L185,962L193,956L193,123L186,116L167,108L163,105L158,96L155,78L152,73L149,70L131,65L126,62L119,56L113,54L104,54L77,60L71,61L65,60L61,56L55,44L50,38L41,35L20,32L8,26L2,26L0,29L0,956L5,959L14,971L20,975L29,976L50,975L59,977L63,980L71,992L74,996L89,1003L149,1003Z"},{"k":7,"d":"M146,1002L176,965L193,950L193,135L180,120L164,113L158,108L155,102L151,84L146,78L143,76L125,71L110,62L104,61L95,61L71,66L62,66L56,62L50,49L47,45L44,43L38,41L29,41L17,43L8,47L0,53L0,950L10,956L20,967L26,970L35,971L53,970L62,972L68,978L77,991L83,995L98,1000L100,1002L101,1003L146,1003Z"},{"k":8,"d":"M139,1002L149,991L172,962L193,944L193,144L186,138L176,125L161,117L155,112L152,105L146,87L143,83L140,80L119,76L104,68L98,67L89,67L62,72L53,71L49,68L43,53L41,50L35,48L23,49L11,55L0,65L0,944L12,950L24,962L29,965L38,967L59,966L66,968L70,971L77,983L83,989L89,992L104,996L110,1000L113,1003L137,1003Z"},{"k":9,"d":"M135,995L146,985L167,958L193,935L193,150L183,144L175,132L170,127L158,120L152,116L148,108L143,93L137,86L128,83L113,80L98,74L92,72L80,73L59,79L47,80L42,78L38,62L33,56L26,55L17,59L11,64L0,74L0,938L17,947L30,959L35,961L41,962L62,962L71,964L75,968L83,982L89,986L113,992L125,997L128,998L134,996Z"},{"k":10,"d":"M128,983L134,981L140,977L161,955L182,936L192,926L193,926L193,156L192,154L186,153L179,150L168,132L150,120L146,114L139,96L134,90L125,87L107,84L92,79L83,78L68,81L38,92L29,93L26,90L27,71L26,68L23,67L20,68L13,71L4,80L0,87L0,932L4,935L23,944L32,953L38,956L47,958L68,957L74,959L80,965L87,977L92,981L104,984L125,984Z"},{"k":11,"d":"M116,977L128,973L143,963L178,932L186,924L192,914L193,913L193,163L192,160L179,158L173,154L164,137L149,126L144,120L137,102L134,97L131,94L125,92L101,90L86,85L80,85L71,86L54,93L32,105L20,110L11,111L8,110L2,106L0,108L0,922L4,929L8,931L26,939L41,951L48,953L68,952L77,953L83,958L90,971L95,976L104,978L116,977Z"},{"k":12,"d":"M117,971L125,968L137,960L168,935L180,922L187,913L192,904L193,904L193,846L192,845L191,840L192,832L193,831L193,166L176,165L170,162L167,157L161,141L142,126L139,120L134,105L131,101L125,97L116,95L95,95L77,92L71,93L62,96L23,117L14,120L2,122L0,123L0,892L2,893L2,895L3,913L4,920L8,924L11,927L32,935L41,943L47,947L56,948L77,947L83,949L88,953L94,965L98,970L107,973L116,971Z"},{"k":13,"d":"M117,965L125,962L134,956L167,930L180,916L188,904L192,896L193,895L193,859L192,858L189,853L187,840L188,827L193,816L193,175L192,172L170,171L164,168L162,163L158,149L156,144L138,129L135,123L130,108L124,102L116,100L107,100L68,104L59,106L29,121L2,130L0,132L0,877L3,880L6,886L8,913L11,919L14,922L20,925L35,929L47,939L53,942L62,943L80,942L89,943L93,947L101,963L107,966L116,965Z"},{"k":14,"d":"M116,959L125,956L141,947L157,935L171,922L179,913L184,904L188,895L193,880L193,874L184,853L183,844L183,831L186,819L190,807L192,804L193,804L193,184L188,180L186,178L164,178L159,175L156,169L154,154L150,147L134,133L132,129L125,110L119,105L113,104L104,105L92,108L56,123L36,126L20,130L2,135L0,138L0,391L6,397L8,403L5,412L0,418L0,533L2,536L4,543L3,552L2,558L0,558L0,670L3,673L4,679L3,688L0,694L0,865L8,874L11,880L12,886L12,907L14,913L16,916L21,920L41,924L55,935L59,936L68,937L86,936L95,938L100,944L106,956L110,959L116,959Z"},{"k":15,"d":"M126,950L143,940L159,929L169,920L176,911L182,901L186,892L188,883L187,871L182,859L179,850L180,813L177,807L173,801L173,798L176,791L193,777L193,567L191,564L190,555L192,542L193,540L193,220L192,220L188,214L186,192L182,188L176,185L158,185L155,184L152,181L150,175L149,160L146,153L143,149L130,138L127,132L122,116L119,112L116,110L107,109L92,113L83,118L59,133L50,137L44,138L29,136L23,136L0,141L0,382L10,388L13,391L16,400L15,406L12,415L9,421L0,430L0,524L4,527L7,530L9,540L7,555L2,573L0,573L0,597L2,600L3,606L2,618L0,618L0,658L8,667L11,672L11,676L11,685L8,692L3,701L0,704L0,828L2,830L3,853L5,859L14,871L16,877L17,904L19,910L23,913L50,919L59,927L65,930L74,931L92,930L98,931L104,935L110,947L113,950L119,951L125,950Z"},{"k":16,"d":"M2,448L0,448L2,450ZM134,941L152,930L170,913L180,898L184,883L183,874L178,862L175,853L173,824L170,818L160,810L158,804L161,796L166,789L193,764L193,579L188,570L186,561L188,533L186,524L182,522L170,519L166,515L167,509L171,503L189,485L193,479L193,439L188,433L186,427L188,415L193,403L193,230L188,227L183,220L181,214L179,202L176,196L170,193L152,192L149,190L146,187L144,181L143,163L141,156L125,141L122,135L119,123L116,118L113,116L104,115L92,118L56,142L44,147L35,148L17,144L2,146L0,147L0,369L4,376L17,384L20,388L23,397L24,412L26,417L40,424L42,427L42,430L41,436L36,445L29,452L8,469L0,482L0,512L12,524L14,530L14,536L14,545L8,573L8,579L12,594L11,600L4,628L2,643L5,652L16,664L18,673L17,685L13,698L7,707L0,716L0,816L2,816L3,819L5,825L7,846L8,853L18,868L21,874L22,898L23,902L26,907L32,909L50,910L56,912L68,922L74,924L98,924L104,925L110,929L119,942L125,943L131,942Z"},{"k":17,"d":"M133,935L146,929L160,920L171,907L177,898L179,892L180,880L172,859L169,831L164,824L153,816L151,813L150,807L153,798L158,789L168,780L186,764L193,755L193,588L185,576L183,570L181,561L181,543L180,536L177,533L173,532L158,528L155,526L154,521L155,510L161,499L182,480L192,467L193,467L193,451L179,444L177,439L178,430L182,418L189,400L192,394L193,394L193,239L182,230L177,223L172,208L168,202L164,200L146,197L141,193L139,187L138,169L136,163L134,160L123,150L119,146L114,129L111,123L107,121L101,121L87,126L59,145L41,154L29,156L11,151L2,152L0,154L0,333L2,336L3,360L5,366L8,370L24,382L27,388L32,406L35,410L48,418L50,422L50,427L48,436L43,445L35,454L13,476L8,485L5,494L4,500L6,506L16,518L19,527L16,567L17,573L21,582L22,588L20,597L9,625L8,634L8,640L11,648L20,655L24,661L25,670L23,697L26,703L32,707L34,710L35,713L35,716L32,723L27,728L20,734L14,736L8,738L2,734L0,734L0,807L4,811L8,816L12,846L14,853L22,862L25,868L26,877L27,895L31,901L38,904L56,904L62,905L66,907L74,914L80,917L104,918L110,920L116,923L125,934L131,935Z"},{"k":18,"d":"M142,926L154,920L164,910L172,898L175,889L174,880L168,862L164,836L161,831L149,823L146,820L145,816L144,810L147,798L155,786L182,760L193,746L193,716L190,713L188,704L190,688L192,681L193,679L193,652L192,651L189,646L188,637L192,609L193,606L193,600L192,599L188,590L181,579L178,573L176,549L173,543L167,539L152,537L148,533L146,530L145,524L145,503L143,499L134,494L132,488L134,482L137,477L157,457L164,448L170,436L192,379L193,378L193,248L185,239L173,229L165,211L162,208L158,206L142,202L137,198L134,192L132,172L130,166L125,161L116,154L113,150L107,131L104,128L101,128L95,128L83,134L53,154L32,163L20,164L8,159L0,160L0,248L2,249L4,254L5,263L4,275L2,284L0,284L0,315L5,327L7,357L9,363L12,366L26,374L30,378L38,400L41,404L53,413L56,418L56,424L54,436L50,444L42,454L19,479L14,488L12,494L13,500L20,512L23,521L22,552L22,561L24,567L31,576L32,582L29,594L16,622L14,631L14,637L18,643L28,649L31,652L32,658L31,685L34,692L44,701L45,707L43,716L35,730L27,737L8,752L0,761L0,798L11,810L13,819L15,840L17,846L29,864L31,871L32,889L35,894L38,896L44,898L62,897L68,898L73,901L83,910L86,911L116,914L121,916L131,926L134,927L140,926Z"},{"k":19,"d":"M148,916L158,910L164,903L168,895L170,886L165,871L162,846L160,840L156,834L145,828L142,825L139,819L139,810L143,795L149,784L158,774L180,755L186,748L189,740L190,731L185,719L183,710L188,676L188,667L182,650L182,643L187,612L188,603L185,594L175,579L170,552L168,549L164,546L146,544L140,540L138,533L136,515L132,509L122,501L121,494L122,487L127,479L134,470L153,451L164,435L174,412L185,372L193,357L193,263L192,262L190,254L187,248L182,242L169,232L158,214L153,211L137,206L133,202L130,196L127,178L125,172L122,168L107,157L99,138L95,136L86,139L44,163L4,180L3,181L2,188L0,190L0,236L7,248L10,257L9,269L4,290L3,299L4,306L10,324L10,348L11,354L14,359L17,362L29,368L34,372L37,378L42,394L47,400L56,406L59,410L61,415L62,421L60,433L53,449L47,457L27,479L23,485L21,491L22,497L26,506L28,515L26,546L27,555L30,561L39,570L40,573L41,579L38,591L24,618L22,628L23,632L26,634L32,636L44,635L46,637L39,664L38,676L40,682L51,694L52,701L52,707L48,719L40,731L32,740L11,759L6,764L2,773L0,774L0,789L11,799L15,807L17,814L18,831L20,840L23,846L32,859L35,868L37,883L41,889L44,891L50,892L68,891L74,892L79,895L89,904L92,906L98,907L122,909L127,910L137,917L140,918L146,917ZM62,625L56,628L54,625L56,622L62,612L72,603L77,600L83,600L84,603L83,606L76,616L63,625Z"},{"k":20,"d":"M154,904L159,898L161,892L159,874L158,850L153,840L140,833L136,828L134,822L134,810L138,792L143,780L151,770L167,758L174,752L178,746L180,740L177,716L183,676L181,667L176,656L176,649L177,640L182,616L183,606L180,597L172,588L169,582L166,561L163,555L155,551L137,551L132,549L130,543L130,530L128,521L125,517L116,509L114,506L113,497L115,488L120,479L128,470L146,451L155,441L164,427L167,418L171,403L174,384L176,376L192,349L193,348L193,281L192,280L187,257L182,248L165,236L158,223L152,218L134,210L128,205L126,199L121,178L116,172L101,163L92,148L86,147L77,149L23,179L13,187L9,193L4,205L2,217L4,230L12,245L14,254L13,263L8,293L9,299L15,318L15,348L17,353L20,357L35,364L40,369L47,391L63,406L66,412L66,418L64,436L57,454L53,462L38,479L35,485L34,491L35,506L31,533L31,546L35,555L46,564L48,567L50,573L49,585L44,603L43,606L44,609L71,593L89,585L95,584L98,585L100,588L100,591L96,603L89,614L82,622L59,641L52,649L49,655L46,664L47,673L48,676L56,685L58,692L58,701L55,713L50,725L42,737L14,764L8,774L7,783L11,789L17,796L19,801L20,810L21,828L23,836L26,842L36,856L39,862L42,877L45,883L53,886L71,885L79,886L86,890L94,898L101,901L128,902L146,907L152,905Z"},{"k":21,"d":"M75,582L111,567L115,564L118,558L122,543L122,530L119,524L110,516L107,512L106,503L107,494L112,482L118,473L148,442L155,433L160,424L164,412L166,391L168,382L174,369L193,339L193,293L189,281L184,260L179,252L161,239L149,222L143,219L131,214L125,210L122,204L117,184L113,178L95,169L86,159L83,157L74,157L62,162L44,171L24,184L17,191L12,199L8,208L7,217L8,226L16,242L17,248L17,260L14,287L15,296L21,312L19,339L20,345L23,351L26,354L38,358L44,362L46,366L51,384L55,391L66,400L69,406L70,412L69,445L70,451L73,460L73,464L69,470L53,485L45,497L41,508L37,524L36,533L36,543L41,550L53,558L56,562L58,567L62,582L65,583L74,582ZM126,895L139,892L146,888L150,880L153,865L153,853L150,846L146,843L134,837L131,834L129,828L129,816L132,780L134,773L137,769L157,752L165,743L169,731L178,685L177,676L171,661L170,655L170,646L178,618L177,606L174,600L168,594L164,588L161,567L158,562L152,558L140,559L127,564L119,569L116,574L106,600L97,616L87,628L65,646L58,655L56,661L56,667L63,679L64,688L63,698L58,716L53,729L48,737L41,746L22,764L19,770L17,777L17,780L24,795L24,822L26,831L29,838L40,853L47,874L49,877L53,880L59,881L77,879L84,880L89,882L99,892L104,895L113,896L125,895Z"},{"k":22,"d":"M87,570L95,566L104,560L110,552L113,546L114,540L114,533L110,529L102,521L99,515L99,503L103,488L108,476L112,470L143,441L152,427L156,418L158,396L162,384L168,372L186,345L192,333L193,333L193,299L192,299L188,290L182,265L179,257L173,252L158,242L146,226L141,223L128,218L123,214L119,209L114,190L110,184L104,180L91,175L77,165L71,164L59,168L39,178L24,190L15,202L13,208L12,217L13,223L20,238L21,245L21,254L19,281L20,290L27,306L27,315L24,333L25,342L27,345L30,348L44,352L47,354L50,357L56,382L59,386L71,397L74,403L75,412L74,430L76,439L80,444L92,451L94,457L93,460L89,467L62,488L51,500L47,508L43,518L41,528L41,536L43,543L46,546L59,552L63,555L71,570L77,572L86,570ZM123,889L134,885L141,880L146,871L148,862L146,854L143,850L130,844L125,837L124,828L125,804L121,786L121,780L124,774L128,768L154,743L160,734L169,713L173,692L172,679L165,664L164,658L166,646L172,622L172,612L168,606L157,597L155,591L155,576L153,570L149,567L143,567L137,569L130,573L122,582L116,595L108,622L105,628L99,634L80,647L74,655L72,661L72,673L71,685L58,731L50,748L36,764L32,774L28,813L28,825L30,831L44,850L51,868L56,874L65,875L86,873L92,874L97,877L104,885L107,888L113,890L122,889Z"},{"k":23,"d":"M123,448L136,439L145,427L148,418L151,400L155,388L163,372L187,336L193,321L193,312L192,310L185,293L180,269L176,260L170,255L155,246L142,230L123,220L119,218L115,211L110,194L107,189L101,185L86,180L71,172L62,172L47,178L35,186L27,193L20,202L18,211L18,220L23,232L25,242L23,278L26,286L32,296L34,302L33,312L30,330L31,336L32,339L36,342L51,345L56,348L58,354L59,369L62,378L74,391L77,397L79,403L79,424L81,430L83,434L89,438L103,442L113,449L116,450L122,449ZM91,558L99,552L101,549L103,543L101,538L92,531L90,527L91,515L95,491L95,483L92,480L86,481L77,485L68,491L56,503L48,518L46,530L48,536L51,540L74,546L81,558L86,559L89,559ZM135,597L140,592L143,585L142,582L140,581L137,582L133,585L130,591L130,594L131,597L134,598ZM128,880L133,877L137,872L139,868L140,862L138,859L135,856L122,852L119,850L118,846L120,810L118,801L113,789L113,781L116,774L122,765L146,743L155,732L161,722L164,714L168,694L167,684L161,670L159,661L160,649L165,628L164,619L162,616L158,614L152,613L146,615L137,620L95,653L88,661L83,668L76,685L68,713L65,725L65,743L63,749L58,758L47,772L41,781L35,795L32,813L32,822L34,828L49,846L54,862L59,868L65,870L71,870L101,865L106,868L113,879L119,882L125,881Z"},{"k":24,"d":"M126,430L131,427L136,421L152,384L179,343L186,330L188,321L188,315L182,293L177,269L174,263L170,260L155,252L150,248L137,232L119,224L115,220L112,214L107,199L101,191L95,188L65,180L56,180L47,183L38,189L30,196L26,203L23,211L29,238L27,266L28,275L31,281L39,293L40,299L38,323L38,330L41,333L44,334L59,336L62,337L65,340L66,345L65,363L65,369L68,375L77,384L81,391L83,400L84,418L87,427L92,431L98,432L113,432L125,431ZM72,530L76,527L80,521L84,512L86,500L86,497L83,494L77,494L71,497L63,503L58,509L54,518L53,524L55,530L59,533L65,533L71,531ZM87,862L94,859L104,853L110,844L113,834L115,822L114,813L113,807L106,795L105,789L108,777L112,770L119,762L143,740L151,731L158,719L162,707L164,698L164,692L162,685L155,673L153,664L156,637L156,631L152,627L146,627L131,635L104,654L93,664L86,673L79,688L73,710L72,722L76,740L74,749L68,758L47,783L42,792L38,803L36,813L38,824L41,829L52,840L59,857L62,862L65,864L71,865L86,862Z"},{"k":25,"d":"M112,424L122,420L131,412L155,372L174,345L181,333L183,327L184,318L178,296L175,275L173,269L168,263L149,253L134,236L113,225L110,220L103,202L98,195L89,192L62,188L53,188L47,190L38,196L33,202L31,208L33,232L31,260L32,269L34,275L44,286L46,290L47,296L46,315L47,321L49,324L53,325L68,326L71,327L74,330L75,336L72,357L72,366L75,372L83,380L86,384L88,391L88,409L90,418L92,422L98,425L110,425ZM77,859L86,856L95,851L103,844L107,835L109,825L109,816L106,810L100,801L98,795L99,786L104,773L113,761L137,740L146,731L152,722L158,710L159,701L159,694L157,688L149,673L148,646L146,640L143,639L137,640L131,642L113,653L98,666L88,679L80,697L77,713L78,722L85,737L83,746L76,758L50,786L43,801L40,813L42,822L57,837L65,854L71,858L77,859Z"},{"k":26,"d":"M109,418L116,416L122,412L131,403L170,345L176,334L179,324L179,318L175,299L172,278L170,272L164,266L146,257L142,254L131,240L110,229L106,223L100,205L95,200L89,197L82,196L56,197L47,200L44,203L41,208L35,251L36,263L38,269L50,281L53,287L56,312L59,315L62,316L79,318L83,321L84,330L79,351L79,360L81,366L89,374L92,379L93,384L93,406L95,413L98,417L101,418L107,418ZM87,850L92,846L98,840L101,834L103,828L102,819L93,807L91,801L92,789L97,774L105,761L134,738L143,728L151,716L154,707L154,701L153,694L145,682L143,676L142,658L140,652L137,650L134,649L128,651L119,655L106,664L98,672L89,685L85,694L83,702L83,712L86,719L91,728L93,734L92,743L89,752L82,761L56,786L50,795L46,807L47,817L51,822L62,831L71,849L77,852L86,850Z"},{"k":27,"d":"M115,409L124,403L131,395L161,351L171,336L173,328L174,321L169,281L167,275L162,269L143,262L138,257L128,245L124,242L110,236L105,232L101,225L97,211L92,204L86,202L77,201L68,202L59,205L50,211L45,220L40,242L39,251L40,260L44,267L57,278L60,284L62,299L65,304L71,307L86,310L89,311L91,315L92,324L87,345L87,354L89,360L98,368L100,372L100,382L99,397L100,406L104,410L107,411L113,410ZM114,746L128,737L138,728L146,716L148,707L146,698L139,685L134,662L131,659L128,659L119,661L106,670L98,679L92,689L88,701L90,710L100,725L103,746L104,748L107,748L113,746ZM85,840L89,838L92,834L93,828L92,825L89,822L83,819L80,816L80,810L86,780L85,777L83,775L80,775L71,780L62,788L55,798L52,807L54,813L57,816L74,822L77,837L80,841L83,841Z"},{"k":28,"d":"M117,400L125,394L131,386L159,345L164,336L167,324L167,290L165,281L162,275L158,272L139,266L134,263L123,248L101,237L98,233L93,214L89,209L86,208L80,206L74,206L65,209L59,212L54,217L48,226L44,245L45,257L49,263L59,269L65,275L69,290L72,296L77,299L94,302L98,307L99,315L95,339L95,345L98,352L107,358L111,363L111,369L107,388L107,397L110,401L116,400ZM126,731L133,725L138,719L140,713L140,707L131,692L128,674L126,670L122,668L119,669L110,674L104,679L98,688L96,694L96,701L98,706L108,716L113,732L116,734L119,734L125,731Z"},{"k":29,"d":"M134,360L149,344L157,330L161,315L163,299L162,287L160,281L158,278L152,275L131,271L127,266L122,257L116,251L98,245L95,243L92,237L89,220L86,215L83,213L74,212L67,214L59,220L54,226L50,236L49,242L48,248L50,254L56,259L68,264L71,266L73,272L76,284L80,290L86,292L98,294L104,296L106,299L106,306L103,330L104,339L106,342L110,345L128,349L132,354L134,361ZM114,692L116,688L114,685L113,685L110,687L109,692L110,693L113,693Z"},{"k":30,"d":"M77,251L80,248L83,242L84,232L84,226L80,220L77,219L68,220L62,225L58,230L55,239L55,245L56,248L58,251L62,252L71,253L77,251ZM108,281L113,278L116,272L115,266L113,260L109,257L104,256L92,257L89,259L86,263L84,269L85,278L88,281L92,283L98,283L107,281ZM135,333L143,328L149,322L152,317L158,302L158,290L155,284L149,280L137,279L125,282L119,287L116,295L112,315L111,327L113,332L116,334L125,335L134,333Z"}];
+  // the flat board as SVG (used by the loader, the no-3D fallback and the closing section)
+  const svg = (el, opts = {}) => {
+    let s = `<defs><clipPath id="${el.id}c"><path d="${outline()}"/></clipPath></defs>`;
+    s += `<g clip-path="url(#${el.id}c)">${opts.fill ? `<rect class="fill" x="-20" y="-20" width="240" height="1040" id="${el.id}f"/>` : ""}`;
+    s += contours.map((c) => `<path class="c${c.k % 5 === 0 ? " b" : ""}" d="${c.d}" pathLength="1"/>`).join("");
+    s += `<path class="r" d="${runPath(-3.2)}" pathLength="1"/><path class="r" d="${runPath(3.2)}" pathLength="1"/>`;
+    s += `<circle class="dot" cx="${runX(0)}" cy="${runY(0)}" r="5.5"/><circle class="ring" cx="${runX(1)}" cy="${runY(1)}" r="5.5"/></g>`;
+    s += `<path class="edge" d="${outline()}" pathLength="1"/>`;
+    el.innerHTML = s;
+  };
+  return { W, L, H, runX, runY, outline, svg, contours };
+})();
+</script>
 
 <script>
 (() => {
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, root = document.documentElement;
+
+  /* loader: outline, contours, the run, then the colour floods in */
+  const ld = document.getElementById("ld"), loader = document.getElementById("loader"), pct = document.getElementById("ldPct"), txt = document.getElementById("ldTxt");
+  RUN.svg(ld, { fill: true });
+  const fill = document.getElementById("ldf"); fill.style.transform = "scaleY(0)"; fill.style.transformOrigin = "0 0";
+  const parts = [...ld.querySelectorAll(".edge, .c, .r")];
+  parts.forEach((p) => { p.style.strokeDasharray = "1 1"; p.style.strokeDashoffset = reduce ? "0" : "1"; });
+  ld.querySelectorAll(".dot, .ring").forEach((d) => d.style.opacity = reduce ? 1 : 0);
+  const t0 = performance.now(), TOTAL = reduce ? 200 : 3600;
+  let glReady = false, done = false; window.addEventListener("run-ready", () => glReady = true); setTimeout(() => glReady = true, 9000);
+  const edge = ld.querySelector(".edge"), cs = [...ld.querySelectorAll(".c")], rs = [...ld.querySelectorAll(".r")];
+  const clamp = (v) => Math.max(0, Math.min(1, v)), ease = (t) => 1 - Math.pow(1 - t, 3);
+  (function tick(now) {
+    const u = (now - t0) / TOTAL;
+    edge.style.strokeDashoffset = 1 - ease(clamp(u / .18));
+    cs.forEach((c, i) => c.style.strokeDashoffset = 1 - ease(clamp((u - .12 - i * .012) / .3)));
+    rs.forEach((r) => r.style.strokeDashoffset = 1 - ease(clamp((u - .5) / .22)));
+    ld.querySelector(".dot").style.opacity = clamp((u - .5) / .05); ld.querySelector(".ring").style.opacity = clamp((u - .7) / .05);
+    if (u > .72 && !loader.classList.contains("flood")) { loader.classList.add("flood"); txt.textContent = "Colouring the board"; }
+    fill.style.transform = `scaleY(${ease(clamp((u - .72) / .22))})`;
+    if (u > .3 && u < .72) txt.textContent = u < .5 ? "Drawing the mountain" : "Tracing the run";
+    pct.textContent = Math.round(clamp(u) * (glReady ? 100 : 96)) + "%";
+    if (u >= 1 && glReady && !done) { done = true; pct.textContent = "100%"; txt.textContent = "Ready"; setTimeout(() => { loader.classList.add("gone"); root.classList.remove("loading"); window.dispatchEvent(new Event("run-start")); }, reduce ? 0 : 350); return; }
+    requestAnimationFrame(tick);
+  })(t0);
+
+  /* the flat board for no-3D, and the faint contours in the close */
+  RUN.svg(document.getElementById("flat"), { fill: true });
+  document.getElementById("topo").innerHTML = RUN.contours.map((c) => `<path d="${c.d}"/>`).join("");
+
+  /* colourways: the whole page and the 3D follow */
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const setWay = (w) => { root.dataset.theme = w; document.querySelectorAll("[data-way]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.way === w))); meta.content = getComputedStyle(root).getPropertyValue("--bg").trim(); window.dispatchEvent(new CustomEvent("run-theme", { detail: w })); };
+  document.querySelectorAll("[data-way]").forEach((b) => b.addEventListener("click", () => setWay(b.dataset.way)));
+
+  /* captions follow scroll progress */
+  const ride = document.getElementById("top"), caps = [...document.querySelectorAll(".cap")];
+  const elev = document.getElementById("hElev"), run = document.getElementById("hRun"), bar = document.getElementById("hBar");
+  window.rideP = 0;
+  const onScroll = () => { const r = ride.getBoundingClientRect(), p = clamp(-r.top / (r.height - innerHeight)); window.rideP = p;
+    caps.forEach((c) => c.classList.toggle("on", p >= +c.dataset.a && p < +c.dataset.b));
+    const t = clamp((p - .33) / .45); elev.textContent = Math.round(2020 - t * 640).toLocaleString("en-AU") + " m"; run.textContent = (t * 3.1).toFixed(1) + " km"; bar.style.width = (t * 100) + "%"; };
+  addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); onScroll();
 
   /* the range */
   const B = [
@@ -332,86 +409,169 @@
   tabs.forEach((t) => t.addEventListener("click", () => { tabs.forEach((x) => x.setAttribute("aria-pressed", String(x === t))); draw(t.dataset.mode); }));
   draw("snow");
 
+
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll(".rv").forEach((el) => io.observe(el));
 })();
 </script>
+
 <script type="module">
 import * as THREE from "three";
-import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-const box = document.getElementById("viewer"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-let r; try { r = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { box.classList.add("no-gl"); throw e; }
-r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.toneMapping = THREE.NoToneMapping; r.outputColorSpace = THREE.SRGBColorSpace;
-box.prepend(r.domElement);
-const scene = new THREE.Scene(), pm = new THREE.PMREMGenerator(r);
-scene.environment = pm.fromScene(new RoomEnvironment(r), .04).texture; scene.environmentIntensity = .55;
-const key = new THREE.DirectionalLight(0xffffff, .9); key.position.set(-4, 6, 8); scene.add(key);
-const rim = new THREE.DirectionalLight(0xffffff, .7); rim.position.set(6, 2, -6); scene.add(rim);
+const { W, L, H, runX, runY } = window.RUN;
+const mount = document.getElementById("gl"), stage = document.getElementById("stage"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let r;
+try { r = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" }); if (!r.getContext()) throw 0; }
+catch (e) { stage.classList.add("no-gl"); window.dispatchEvent(new Event("run-ready")); throw e; }
+r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.outputColorSpace = THREE.SRGBColorSpace; mount.appendChild(r.domElement);
+const scene = new THREE.Scene();
 
-/* the board: 1.9 x 10 units, built as a fine grid so the tip and tail can curve up */
-const BW = 1.9, BL = 10, T = .07;
-const bend = (v) => { const t = v; const tip = Math.max(0, (.13 - t) / .13), tail = Math.max(0, (t - .87) / .13); return .55 * (tip * tip + tail * tail) + .05 * Math.sin(Math.PI * t); };
-function sheet(z, flip) {
-  const g = new THREE.PlaneGeometry(BW, BL, 24, 240), p = g.attributes.position;
-  if (flip) g.rotateY(Math.PI);   // face backwards first, then curve, so both sides bend the same way
-  for (let i = 0; i < p.count; i++) { const y = p.getY(i), v = .5 - y / BL; p.setZ(i, z + bend(v)); }
-  g.computeVertexNormals(); return g;
+/* the terrain: one big grid in board units; the board is the middle of it */
+const small = innerWidth < 760, X0 = -420, X1 = 610, Y0 = -170, Y1 = 1170, NX = small ? 150 : 220, NY = small ? 190 : 290, HS = 170;
+const g = new THREE.PlaneGeometry(X1 - X0, Y1 - Y0, NX, NY), pos = g.attributes.position, n = pos.count;
+const hA = new Float32Array(n), nrm = new Float32Array(n * 3), bxy = new Float32Array(n * 2);
+for (let i = 0; i < n; i++) {
+  const lx = pos.getX(i), ly = pos.getY(i), bx = lx + (X0 + X1) / 2, by = (Y0 + Y1) / 2 - ly;   // board coords: x right, y down from the tip
+  bxy[i * 2] = bx; bxy[i * 2 + 1] = by; const h = H(bx, by); hA[i] = h;
+  const e = 2, dx = (H(bx + e, by) - H(bx - e, by)) / (2 * e) * HS, dy = -(H(bx, by + e) - H(bx, by - e)) / (2 * e) * HS, m = Math.hypot(dx, dy, 1);
+  nrm[i * 3] = -dx / m; nrm[i * 3 + 1] = -dy / m; nrm[i * 3 + 2] = 1 / m;
+  pos.setX(i, bx - W / 2); pos.setY(i, L / 2 - by);
 }
-const loader = new THREE.TextureLoader(), mats = {};
-const BASE = { cream: ["#1f3a46", "#efe7d6"], ice: ["#f6f7f7", "#3d8fd1"], night: ["#101417", "#5fb0ec"] };
-function baseTex(img, way) {
-  const c = document.createElement("canvas"); c.width = img.width; c.height = img.height; const x = c.getContext("2d");
-  x.drawImage(img, 0, 0); x.globalCompositeOperation = "source-in"; x.fillStyle = BASE[way][0]; x.fillRect(0, 0, c.width, c.height);
-  x.globalCompositeOperation = "source-atop"; x.fillStyle = BASE[way][1]; const w = c.width * .012, gap = c.width * .035;
-  x.fillRect(c.width / 2 - gap / 2 - w, c.height * .04, w, c.height * .92); x.fillRect(c.width / 2 + gap / 2, c.height * .04, w, c.height * .92);
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
-}
-const topMat = new THREE.MeshPhysicalMaterial({ transparent: true, alphaTest: .5, roughness: .55, clearcoat: .25, clearcoatRoughness: .4, side: THREE.FrontSide });
-const baseMat = new THREE.MeshPhysicalMaterial({ transparent: true, alphaTest: .5, roughness: .25, clearcoat: .9, side: THREE.FrontSide });
-const board = new THREE.Group(); scene.add(board);
-board.add(new THREE.Mesh(sheet(T / 2), topMat), new THREE.Mesh(sheet(-T / 2, true), baseMat));
-// steel edge: a thin tube that follows the outline of the board
-function outlinePts() {
-  const W = 190, L = 1000, tip = 120, w = W / 2 - 3, waist = w - 7, cx = W / 2;
-  const d = `M${cx - w} ${tip} C${cx - w} 30 ${cx - w * .55} 6 ${cx} 6 C${cx + w * .55} 6 ${cx + w} 30 ${cx + w} ${tip} C${cx + waist} ${L * .4} ${cx + waist} ${L * .6} ${cx + w} ${L - tip} C${cx + w} ${L - 30} ${cx + w * .55} ${L - 6} ${cx} ${L - 6} C${cx - w * .55} ${L - 6} ${cx - w} ${L - 30} ${cx - w} ${L - tip} C${cx - waist} ${L * .6} ${cx - waist} ${L * .4} ${cx - w} ${tip} Z`;
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path"); path.setAttribute("d", d);
-  const n = 600, len = path.getTotalLength(), pts = [];
-  for (let i = 0; i < n; i++) { const q = path.getPointAtLength(len * i / n), v = q.y / L; pts.push(new THREE.Vector3((q.x / W - .5) * BW, (.5 - v) * BL, bend(v))); }
-  return pts;
-}
-const edgeMat = new THREE.MeshStandardMaterial({ color: 0xc9cdd1, metalness: 1, roughness: .3 });
-board.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(outlinePts(), true), 600, T * .55, 8, true), edgeMat));
-// soft shadow
-const sc = document.createElement("canvas"); sc.width = sc.height = 128; const sg = sc.getContext("2d"), gr = sg.createRadialGradient(64, 64, 0, 64, 64, 64);
-gr.addColorStop(0, "rgba(20,30,40,.35)"); gr.addColorStop(1, "rgba(20,30,40,0)"); sg.fillStyle = gr; sg.fillRect(0, 0, 128, 128);
-const sh = new THREE.Mesh(new THREE.PlaneGeometry(4.5, 1.6), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false }));
-sh.rotation.x = -Math.PI / 2; sh.position.y = -BL / 2 - .5; scene.add(sh);
+g.setAttribute("aH", new THREE.BufferAttribute(hA, 1)); g.setAttribute("aN", new THREE.BufferAttribute(nrm, 3)); g.setAttribute("aB", new THREE.BufferAttribute(bxy, 2));
 
-function setWay(way) {
-  const done = (top, base) => { topMat.map = top; baseMat.map = base; topMat.needsUpdate = baseMat.needsUpdate = true; };
-  if (mats[way]) return done(...mats[way]);
-  loader.load(`run/${way}.webp`, (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; mats[way] = [t, baseTex(t.image, way)]; done(...mats[way]); document.getElementById("fallback").src = `run/${way}.webp`; });
-}
-setWay("cream");
-const ways = [...document.querySelectorAll(".ways button")];
-ways.forEach((b) => b.addEventListener("click", () => { ways.forEach((x) => x.setAttribute("aria-pressed", String(x === b))); setWay(b.dataset.way); idle = 0; }));
+const U = { uRise: { value: 0 }, uMask: { value: 0 }, uProg: { value: 0 }, uBack: { value: 0 },
+  uPaper: { value: new THREE.Color() }, uInk: { value: new THREE.Color() }, uRun: { value: new THREE.Color() }, uBg: { value: new THREE.Color() }, uBase: { value: new THREE.Color() }, uBaseLine: { value: new THREE.Color() } };
+const vert = `
+  attribute float aH; attribute vec3 aN; attribute vec2 aB;
+  uniform float uRise, uBack; varying float vH; varying vec2 vB; varying vec3 vN; varying float vDist;
+  float bend(float v) { float tip = max(0., (.13 - v) / .13), tail = max(0., (v - .87) / .13); return 55. * (tip * tip + tail * tail) + 5. * sin(3.14159 * v); }
+  void main() {
+    vH = aH; vB = aB; vN = normalize(mix(vec3(0., 0., 1.), aN, uRise));
+    vec3 p = position; float v = clamp(aB.y / ${L}.0, 0., 1.);
+    p.z = aH * ${HS}.0 * uRise + bend(v) * (1. - uRise) - uBack * 2.2;
+    vec4 mv = modelViewMatrix * vec4(p, 1.); vDist = -mv.z; gl_Position = projectionMatrix * mv;
+  }`;
+const frag = `
+  uniform float uRise, uMask, uProg, uBack; uniform vec3 uPaper, uInk, uRun, uBg, uBase, uBaseLine;
+  varying float vH; varying vec2 vB; varying vec3 vN; varying float vDist;
+  float boardSD(vec2 p) {   // rounded board with a little sidecut, in board units
+    float hw = 92. - 7. * sin(3.14159 * clamp(p.y / ${L}.0, 0., 1.));
+    vec2 q = abs(p - vec2(${W / 2}.0, ${L / 2}.0)) - vec2(hw - 86., ${L / 2 - 6}.0 - 86.);
+    return length(max(q, 0.)) + min(max(q.x, q.y), 0.) - 86.;
+  }
+  float lineAA(float d, float w) { float f = fwidth(d); return 1. - smoothstep(w - f, w + f, abs(d)); }
+  float runX(float t) { return ${W / 2}.0 + 28. * sin(t * 3.14159 * 3.2 + .4) * sin(t * 3.14159); }
+  void main() {
+    float sd = boardSD(vB);
+    float aBoard = 1. - smoothstep(-.6, .6, sd);
+    vec2 c = (vB - vec2(${W / 2}.0, ${L / 2}.0)) / vec2(500., 640.);
+    float aWide = 1. - smoothstep(.78, 1., length(c));
+    float a = mix(aBoard, aWide, uMask);
+    if (a < .01) discard;
+    if (uBack > .5) {   // the base: solid colour, two straight lines
+      vec3 col = uBase; float lx = abs(vB.x - ${W / 2}.0);
+      col = mix(col, uBaseLine, lineAA(lx - 7., 1.4) * step(40., vB.y) * step(vB.y, ${L - 40}.0));
+      gl_FragColor = vec4(col, a); return;
+    }
+    // contour lines, the same thresholds as the printed board
+    float band = (vH + .05) / .045, fb = fwidth(band), k = floor(band + .5), d = abs(band - k);
+    float bold = step(abs(mod(k, 5.)), .5);
+    float wpx = mix(.32, .7, bold) * (1. + uRise * .6);
+    float ln = 1. - smoothstep(fb * (wpx - .6), fb * (wpx + .6), d);
+    float light = .82 + .3 * max(dot(vN, normalize(vec3(-.45, .55, .75))), 0.);
+    vec3 paper = uPaper * mix(1., light, uRise);
+    vec3 col = mix(paper, uInk, ln * mix(.42, .95, bold));
+    // the run: two lines either side of the path, the start dot and the finish ring
+    float t = (vB.y - 40.) / ${L - 80}.0;
+    if (t > -.02 && t < 1.02) {
+      float tc = clamp(t, 0., 1.), x = runX(tc), e = .002, s = (runX(tc + e) - runX(tc - e)) / (2. * e * ${L - 80}.0);
+      float dr = (vB.x - x) / sqrt(1. + s * s);
+      float on = step(0., t) * step(t, 1.);
+      float wr = mix(.38, 1.05, smoothstep(60., 420., vDist)) + step(t, uProg) * .25 * uRise;
+      float rl = max(lineAA(abs(dr) - 3.2, wr), 0.) * on;
+      float glow = step(t, uProg) * uRise * exp(-abs(dr) * .35) * .18 * on;
+      col = mix(col, uRun, clamp(rl + glow, 0., 1.));
+    }
+    float dS = length(vB - vec2(runX(0.), 40.)), dF = length(vB - vec2(runX(1.), ${L - 40}.0));
+    col = mix(col, uRun, 1. - smoothstep(5., 6., dS));
+    col = mix(col, uRun, lineAA(dF - 5.5, 1.));
+    // haze in the distance while it's a mountain
+    float fog = smoothstep(420., 1500., vDist) * uRise;
+    col = mix(col, uBg, fog * .85);
+    gl_FragColor = vec4(col, a);
+  }`;
+const mat = new THREE.ShaderMaterial({ uniforms: U, vertexShader: vert, fragmentShader: frag, transparent: true, side: THREE.FrontSide, extensions: { derivatives: true } });
+const back = mat.clone(); back.uniforms = { ...U, uBack: { value: 1 } }; back.side = THREE.BackSide;
+const group = new THREE.Group(); scene.add(group);
+const top = new THREE.Mesh(g, mat), base = new THREE.Mesh(g, back); group.add(top, base);
 
-const cam = new THREE.PerspectiveCamera(26, 1, .1, 100); cam.position.set(0, .6, 26); cam.lookAt(0, 0, 0);
-function size() { const w = box.clientWidth, h = box.clientHeight; r.setSize(w, h, false); cam.aspect = w / h; const half = Math.tan(THREE.MathUtils.degToRad(13)); cam.position.z = Math.max(11.4 / (2 * half), 3.2 / (2 * half * cam.aspect)); cam.updateProjectionMatrix(); }
+// steel edge around the board: visible only while it's a board
+const outl = document.createElementNS("http://www.w3.org/2000/svg", "path"); outl.setAttribute("d", window.RUN.outline());
+const len = outl.getTotalLength(), ep = [];
+const bend = (v) => { const tip = Math.max(0, (.13 - v) / .13), tail = Math.max(0, (v - .87) / .13); return 55 * (tip * tip + tail * tail) + 5 * Math.sin(Math.PI * v); };
+for (let i = 0; i < 700; i++) { const q = outl.getPointAtLength(len * i / 700); ep.push(new THREE.Vector3(q.x - W / 2, L / 2 - q.y, bend(q.y / L) - 1.1)); }
+const edgeMat = new THREE.MeshBasicMaterial({ color: 0xb9bec2, transparent: true });
+const edge = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(ep, true), 700, 1.6, 6, true), edgeMat); group.add(edge);
+
+/* colours from the page's colourway */
+const THEMES = {
+  cream: { paper: "#efe7d6", ink: "#1f3a46", run: "#c8402a", bg: "#f4efe4", base: "#1f3a46", baseLine: "#efe7d6", edge: "#b9b2a4" },
+  ice:   { paper: "#f8f9f9", ink: "#3d8fd1", run: "#0d1114", bg: "#f2f4f5", base: "#f8f9f9", baseLine: "#3d8fd1", edge: "#c3c9cd" },
+  night: { paper: "#101417", ink: "#e9e6de", run: "#5fb0ec", bg: "#0b0e10", base: "#101417", baseLine: "#5fb0ec", edge: "#3e464b" },
+};
+const setTheme = (w) => { const T = THEMES[w]; U.uPaper.value.set(T.paper); U.uInk.value.set(T.ink); U.uRun.value.set(T.run); U.uBg.value.set(T.bg); U.uBase.value.set(T.base); U.uBaseLine.value.set(T.baseLine); edgeMat.color.set(T.edge);
+  for (const k of ["uPaper", "uInk", "uRun", "uBg", "uBase", "uBaseLine"]) back.uniforms[k] = U[k]; };
+setTheme(document.documentElement.dataset.theme || "cream");
+addEventListener("run-theme", (e) => setTheme(e.detail));
+
+/* camera */
+const cam = new THREE.PerspectiveCamera(32, 1, 1, 6000);
+let boardDist = 2000, narrow = false;
+function size() { const w = stage.clientWidth, h = stage.clientHeight; r.setSize(w, h, false); cam.aspect = w / h;
+  const half = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)); narrow = w < 760; const fitH = narrow ? .5 : Math.min(.74, 760 / h); /* same size as the loader drawing */ boardDist = Math.max(1000 / (fitH * 2 * half), 230 / (2 * half * cam.aspect)); cam.updateProjectionMatrix(); }
 addEventListener("resize", size); size();
 
-let rotY = .5, vel = 0, drag = false, lx = 0, idle = 0, vis = true, last = performance.now();
-box.addEventListener("pointerdown", (e) => { drag = true; lx = e.clientX; vel = 0; idle = 0; });
-addEventListener("pointermove", (e) => { if (!drag) return; const dx = e.clientX - lx; lx = e.clientX; vel = dx * .01; rotY += vel; });
-addEventListener("pointerup", () => drag = false); addEventListener("pointercancel", () => drag = false);
-new IntersectionObserver(([e]) => vis = e.isIntersecting).observe(box);
-board.rotation.z = -.08;
-(function loop(now) {
-  requestAnimationFrame(loop); const dt = Math.min(.05, (now - last) / 1000); last = now; if (!vis) return;
-  if (!drag) { vel *= .94; rotY += vel; idle += dt; if (!reduce && idle > 1.2) rotY += dt * .45; }
-  board.rotation.y = rotY; board.position.y = reduce ? 0 : Math.sin(now / 1400) * .08;
+/* the run in world space, for the ride */
+const toWorld = (bx, by, h, rise) => new THREE.Vector3(-(bx - W / 2), h * HS * rise, L / 2 - by);   // the board lies down tip-first towards the camera
+const runPoint = (t, lift) => { t = Math.min(1, Math.max(0, t)); const x = runX(t), y = runY(t); return toWorld(x, y, H(x, y) + lift / HS, 1); };
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), sm = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
+const lerpV = (a, b, t) => a.clone().lerp(b, t);
+let p = 0, last = performance.now(), dragY = 0, vel = 0, dragging = false, lx = 0, started = false;
+mount.addEventListener("pointerdown", (e) => { dragging = true; lx = e.clientX; vel = 0; });
+addEventListener("pointermove", (e) => { if (!dragging) return; const dx = e.clientX - lx; lx = e.clientX; vel = dx * .008; dragY += vel; });
+addEventListener("pointerup", () => dragging = false); addEventListener("pointercancel", () => dragging = false);
+addEventListener("run-start", () => started = true);
+const look = new THREE.Vector3(), camPos = new THREE.Vector3();
+let vis = true; new IntersectionObserver(([e]) => vis = e.isIntersecting).observe(stage);
+
+function frame(now) {
+  requestAnimationFrame(frame);
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  if (!vis) return;
+  p += (window.rideP - p) * (reduce ? 1 : Math.min(1, dt * 5));
+  // phases: board (A), rises into a mountain (B), the ride (C), back to the board (D), turn and colourways (E)
+  const rise = sm(.15, .3, p) * (1 - sm(.79, .86, p)), mask = sm(.16, .31, p) * (1 - sm(.79, .86, p)), lay = sm(.09, .2, p) * (1 - sm(.85, .91, p));
+  base.visible = lay < .02;
+  U.uRise.value = rise; U.uMask.value = mask; back.uniforms.uRise = U.uRise; back.uniforms.uMask = U.uMask;
+  const ride = clamp((p - .33) / .45); U.uProg.value = ride * (p > .3 ? 1 : 0) + (p > .79 ? 1 : 0) * rise;
+  edgeMat.opacity = 1 - sm(.1, .16, p) + sm(.86, .9, p); edge.visible = edgeMat.opacity > .02;
+  // spin: drag any time on the board, plus a full turn at the end to show the base
+  if (!dragging) { vel *= .93; dragY += vel; }
+  const endTurn = sm(.9, 1, p) * Math.PI * 2, idle = reduce || !started ? 0 : Math.sin(now / 2600) * .12 * (1 - lay);
+  group.rotation.order = "YXZ"; group.rotation.set(-Math.PI / 2 * lay, Math.PI * lay + (dragY + endTurn + idle) * (1 - lay), 0);
+  // camera
+  const lift = narrow ? -230 : 0, front = new THREE.Vector3(0, lift, boardDist), frontLook = new THREE.Vector3(0, lift, 0);   // on phones the board sits in the top half, above the words
+  const over = new THREE.Vector3(0, 430, 820), overLook = new THREE.Vector3(0, 50, -40);
+  const rideIn = sm(.3, .38, p), rideOut = sm(.74, .8, p);
+  const rp = runPoint(ride, 44), rl = runPoint(ride + .1, 4);
+  if (p < .3) { camPos.copy(lerpV(front, over, sm(.1, .28, p))); look.copy(lerpV(frontLook, overLook, sm(.1, .28, p))); }
+  else if (p < .8) { const a = rideIn * (1 - rideOut); camPos.copy(lerpV(over, rp, a)); look.copy(lerpV(overLook, rl, a)); if (rideOut > 0) { const high = new THREE.Vector3(0, 900, 1250); camPos.lerp(high, rideOut * .6); } }
+  else { const high = new THREE.Vector3(0, 540, 1250); const t = sm(.8, .9, p); camPos.copy(lerpV(high, front, t)); look.copy(lerpV(overLook, frontLook, t)); }
+  cam.position.copy(camPos); cam.lookAt(look);
   r.render(scene, cam);
-})(last);
+}
+r.compile(scene, cam); requestAnimationFrame(frame);
+window.dispatchEvent(new Event("run-ready"));
 </script>
 </body>
 </html>

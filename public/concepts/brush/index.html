@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <style>
   :root {
     --bg: #050505; --ink: #111; --paper: #f2f2f0; --card: #fff; --grey: #8b8b8b; --line: rgba(255,255,255,.12); --line-d: rgba(0,0,0,.09);
@@ -62,35 +61,18 @@
   .tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
   @media (max-width: 760px) { .nav ul { display: none; } }
 
-  /* 01 hero: the 3D brush */
-  .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: #070707; }
-  #stage { position: absolute; inset: 0; touch-action: pan-y; cursor: grab; }
-  #stage:active { cursor: grabbing; }
-  #stage canvas { display: block; width: 100% !important; height: 100% !important; }
-  .hero .copy { position: absolute; z-index: 2; left: var(--gut); top: 50%; transform: translateY(-46%); width: min(520px, 42vw); pointer-events: none; }
-  .hero .copy > * { pointer-events: auto; }
+  /* 01 hero: the product photograph, slow push in */
+  .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: #0d0f11; }
+  .hero .ph { position: absolute; left: 0; right: 0; bottom: 0; top: 64px; width: 100%; height: calc(100% - 64px); object-fit: cover; object-position: 50% 50%; transform: translateX(14%) scale(1.04); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%); mask-image: linear-gradient(90deg, transparent 0, #000 22%); animation: push 18s var(--out) both; }
+  @keyframes push { from { transform: translateX(14%) scale(1.12); opacity: 0; } 12% { opacity: 1; } to { transform: translateX(14%) scale(1.04); } }
+  .hero .copy { position: absolute; z-index: 2; left: var(--gut); top: 50%; transform: translateY(-46%); width: min(520px, 44vw); }
   .hero .t-hero { height: clamp(40px, 5.4vw, 78px); }
   .hero .sub { margin: 26px 0 30px; color: #bdbdbd; max-width: 40ch; font-size: 17px; }
   .hero .row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .hint { position: absolute; z-index: 2; right: var(--gut); bottom: 28px; margin: 0; color: #777; display: flex; align-items: center; gap: 10px; pointer-events: none; }
-  .hint i { width: 22px; height: 1px; background: #555; }
-  .tags { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-  .tags span { position: absolute; left: 0; top: 0; white-space: nowrap; color: #e6e6e6; display: flex; align-items: center; gap: 10px; opacity: 0; transition: opacity .5s; }
-  .tags span::before { content: ""; width: 34px; height: 1px; background: rgba(255,255,255,.45); }
-  .tags span em { font-style: normal; color: var(--red); }
-  .tags b { font-weight: 400; } .tags .short { display: none; }
-  .apart .tags span { opacity: 1; }
-  .apart .hint { opacity: 0; } .hint { transition: opacity .4s; }
-  .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
-  .no-gl .fallback { display: block; } .no-gl #stage, .no-gl .hint, .no-gl #apart { display: none; }
   @media (max-width: 860px) {
     .hero { height: auto; min-height: 0; padding-top: 76px; }
-    #stage { position: relative; height: 66svh; }
-    .hero .copy { position: relative; left: auto; top: auto; transform: none; width: auto; padding: 8px var(--gut) 56px; }
-    .hint { top: calc(76px + 66svh - 34px); bottom: auto; }
-    .tags span::before { width: 14px; }
-    .tags span { font-size: 10px; letter-spacing: .1em; gap: 6px; }
-    .tags .long { display: none; } .tags .short { display: inline; }
+    .hero .ph { position: relative; display: block; height: 62svh; transform: none; -webkit-mask-image: linear-gradient(0deg, transparent 0, #000 20%); mask-image: linear-gradient(0deg, transparent 0, #000 20%); animation: none; }
+    .hero .copy { position: relative; left: auto; top: auto; transform: none; width: auto; padding: 0 var(--gut) 56px; }
   }
 
   /* 02 film, shot by shot */
@@ -147,7 +129,8 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .rv { opacity: 1; transform: none; transition: none; }
-    .stage2 video, .chap > *, .btn::before, .btn .c, .photo img, .tags span { transition: none; }
+    .stage2 video, .chap > *, .btn::before, .btn .c, .photo img { transition: none; }
+    .hero .ph { animation: none; }
   }
 </style>
 </head>
@@ -163,20 +146,17 @@
 </header>
 
 <main id="main">
-  <section class="hero" id="top" aria-label="Brush 01 in 3D">
-    <img class="fallback" src="hero.jpg" alt="Brush 01 on its dock with the clear refill reservoir, on a dark backdrop." />
-    <div id="stage" aria-label="3D model of Brush 01. Drag sideways, or use the arrow keys, to turn it." role="img" tabindex="0"></div>
-    <div class="tags mono" id="tags" aria-hidden="true"></div>
+  <section class="hero" id="top" aria-label="Brush 01">
+    <img class="ph" src="hero.jpg" alt="Brush 01 standing on its round white dock beside the clear refill reservoir, on a dark backdrop. The clear handle shows the battery, the timer board and the copper coil." />
     <div class="copy">
       <p class="label mono"><b>01</b> &nbsp;Brush 01 · Design concept</p>
       <h1 style="margin:0"><svg class="dots t-hero" data-dots="EVERYTHING" role="img" aria-label="Everything on show."></svg><svg class="dots t-hero" data-dots="ON SHOW." data-red="1" aria-hidden="true" style="margin-top:10px"></svg></h1>
       <p class="sub">A clear electric toothbrush with a gap camera and a rinse jet. Every part that does the work is in plain sight.</p>
       <div class="row">
-        <button class="btn" id="apart" aria-pressed="false"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></span><span id="apartTxt">Take it apart</span></button>
+        <a class="btn" href="#reel"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></span>See it up close</a>
         <a class="btn ghost" href="#watch"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg></span>Watch the film</a>
       </div>
     </div>
-    <p class="hint mono" aria-hidden="true"><i></i>Drag to turn</p>
   </section>
 
   <section class="reel" id="reel" aria-label="The film, shot by shot">
@@ -295,191 +275,5 @@
 })();
 </script>
 
-<script type="module">
-import * as THREE from "three";
-import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
-
-const hero = document.querySelector(".hero"), mount = document.getElementById("stage"), tagsEl = document.getElementById("tags");
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-let r;
-try { r = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" }); } catch (e) { hero.classList.add("no-gl"); throw e; }
-r.setPixelRatio(Math.min(devicePixelRatio, 2));
-r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.05; r.outputColorSpace = THREE.SRGBColorSpace;
-mount.appendChild(r.domElement);
-
-const scene = new THREE.Scene(); scene.background = new THREE.Color(0x070707);
-const pm = new THREE.PMREMGenerator(r); scene.environment = pm.fromScene(new RoomEnvironment(r), .04).texture; scene.environmentIntensity = .5;
-
-/* materials: the same ones as the product renders */
-const M = {
-  shell: new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .06, transmission: 1, thickness: .9, ior: 1.5, clearcoat: 1, clearcoatRoughness: .03, envMapIntensity: 2.2, attenuationColor: 0xeef1f2, attenuationDistance: 6 }),
-  clear: new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .05, transmission: 1, thickness: .5, ior: 1.49, clearcoat: 1, clearcoatRoughness: .02, envMapIntensity: 2.4 }),
-  water: new THREE.MeshPhysicalMaterial({ color: 0xd2ecf4, roughness: .02, transmission: .9, thickness: 1.6, ior: 1.33, attenuationColor: 0x5fb3cc, attenuationDistance: .9 }),
-  white: new THREE.MeshPhysicalMaterial({ color: 0xf4f4f2, roughness: .42, clearcoat: .35, clearcoatRoughness: .3 }),
-  whiteMatte: new THREE.MeshStandardMaterial({ color: 0xf1f1ef, roughness: .75 }),
-  black: new THREE.MeshPhysicalMaterial({ color: 0x111111, roughness: .38, clearcoat: .4 }),
-  pcb: new THREE.MeshStandardMaterial({ color: 0x141414, roughness: .55 }),
-  chip: new THREE.MeshStandardMaterial({ color: 0x262626, roughness: .3, metalness: .2 }),
-  metal: new THREE.MeshStandardMaterial({ color: 0xd9dbdd, metalness: 1, roughness: .28 }),
-  steel: new THREE.MeshStandardMaterial({ color: 0x9a9da1, metalness: 1, roughness: .35 }),
-  copper: new THREE.MeshStandardMaterial({ color: 0xc8743c, metalness: 1, roughness: .32 }),
-  red: new THREE.MeshPhysicalMaterial({ color: 0xd71921, roughness: .35, clearcoat: .5 }),
-  redGlow: new THREE.MeshStandardMaterial({ color: 0xd71921, emissive: 0xff2a2a, emissiveIntensity: 1.6 }),
-  led: new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 3.2 }),
-  ledOff: new THREE.MeshStandardMaterial({ color: 0x2a2a2a, emissive: 0xffffff, emissiveIntensity: .12 }),
-  glass: new THREE.MeshPhysicalMaterial({ color: 0x050607, roughness: .02, metalness: .1, clearcoat: 1 }),
-  hole: new THREE.MeshBasicMaterial({ color: 0x050505 }),
-  bristle: new THREE.MeshPhysicalMaterial({ color: 0xf6f6f4, roughness: .5, sheen: 1, sheenColor: 0xffffff }),
-};
-function dotTex(text) {
-  const c = document.createElement("canvas"); c.width = c.height = 512; const x = c.getContext("2d");
-  x.fillStyle = "#121212"; x.fillRect(0, 0, 512, 512);
-  const t = document.createElement("canvas"), tx = t.getContext("2d"); t.width = 200; t.height = 16; tx.font = "700 12px monospace"; tx.textBaseline = "top"; tx.fillText(text, 0, 2);
-  const d = tx.getImageData(0, 0, 200, 16).data; x.fillStyle = "#ededea";
-  for (let yy = 0; yy < 16; yy++) for (let xx = 0; xx < 200; xx++) if (d[(yy * 200 + xx) * 4 + 3] > 120) { x.beginPath(); x.arc(16 + xx * 1.3, 232 + yy * 1.3, .5, 0, 7); x.fill(); }
-  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8; return tex;
-}
-
-/* the brush, built in parts so it can come apart (units: cm, front faces +z) */
-const parts = {}; let part = "shell";
-const root = new THREE.Group(); scene.add(root);
-const P = (k) => (parts[k] ||= (() => { const g = new THREE.Group(); root.add(g); return g; })());
-const add = (geo, mat, x = 0, y = 0, z = 0, setup) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); setup && setup(m); P(part).add(m); return m; };
-const HL = 15.5, R = 1.45, y0 = .87;
-part = "shell"; add(new THREE.CapsuleGeometry(R, HL - 2 * R, 16, 64), M.shell, 0, y0 + HL / 2, 0, (m) => { m.renderOrder = 10; });
-add(new THREE.CylinderGeometry(.42, .42, .16, 40), M.white, 0, y0 + 11.6, R - .02, (m) => { m.rotation.x = Math.PI / 2; });
-add(new THREE.CylinderGeometry(.14, .14, .18, 24), M.red, 0, y0 + 11.6, R + .02, (m) => { m.rotation.x = Math.PI / 2; });
-part = "frame"; for (const s of [-1, 1]) add(new RoundedBoxGeometry(.22, HL - 3.2, .5, 2, .08), M.whiteMatte, s * 1.02, y0 + HL / 2, -.25);
-add(new RoundedBoxGeometry(2.2, .3, 1.6, 2, .1), M.whiteMatte, 0, y0 + 1.5, 0);
-part = "coil"; for (let i = 0; i < 5; i++) add(new THREE.TorusGeometry(.95 - i * .1, .045, 10, 64), M.copper, 0, y0 + .95 + i * .09, 0, (m) => { m.rotation.x = Math.PI / 2; });
-part = "battery"; add(new THREE.CylinderGeometry(.82, .82, 5.2, 48), new THREE.MeshPhysicalMaterial({ map: dotTex("LI-ION 3.7V"), roughness: .5, clearcoat: .25 }), 0, y0 + 4.6, 0, (m) => { m.rotation.y = -Math.PI / 2 - .3; });
-add(new THREE.CylinderGeometry(.83, .83, .25, 48), M.steel, 0, y0 + 7.3, 0);
-add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(.6, y0 + 7.2, .5), new THREE.Vector3(1.0, y0 + 7.6, .6), new THREE.Vector3(.7, y0 + 8.0, .35)]), 20, .07, 8), M.red);
-part = "board"; add(new RoundedBoxGeometry(1.7, 3.6, .14, 2, .04), M.pcb, 0, y0 + 9.6, .35);
-[[-.45, 8.3, .55, .35], [.4, 8.25, .35, .3], [0, 10.95, 1.0, .35]].forEach(([x, y, w, h]) => add(new THREE.BoxGeometry(w, h, .12), M.chip, x, y0 + y, .48));
-const LED = [0, 1, 2, 3].map((i) => add(new RoundedBoxGeometry(.24, .62, .1, 2, .05), i < 3 ? M.led : M.ledOff, 0, y0 + 8.75 + i * .74, .47));
-add(new THREE.BoxGeometry(.18, .12, .1), M.redGlow, .55, y0 + 10.2, .47);
-const glow = new THREE.PointLight(0xffffff, 2, 4, 2); glow.position.set(0, y0 + 9.6, 1.2); P("board").add(glow);
-part = "motor"; add(new THREE.CylinderGeometry(.68, .68, 1.3, 48), M.metal, 0, y0 + 12.0, 0);
-add(new THREE.CylinderGeometry(.7, .7, .14, 48), M.steel, 0, y0 + 11.35, 0); add(new THREE.CylinderGeometry(.7, .7, .14, 48), M.steel, 0, y0 + 12.65, 0);
-part = "tank"; add(new RoundedBoxGeometry(2.2, .2, 1.6, 2, .08), M.whiteMatte, 0, y0 + 12.78, 0);
-add(new THREE.CylinderGeometry(1.0, 1.0, 1.9, 64, 1, true), M.clear, 0, y0 + 13.85, 0, (m) => { m.renderOrder = 8; });
-add(new THREE.CylinderGeometry(1.02, 1.02, .1, 64), M.steel, 0, y0 + 12.9, 0); add(new THREE.CylinderGeometry(1.02, 1.02, .1, 64), M.steel, 0, y0 + 14.8, 0);
-add(new THREE.CylinderGeometry(.93, .93, 1.25, 64), M.water, 0, y0 + 13.6, 0, (m) => { m.renderOrder = 7; });
-for (let i = 0; i < 7; i++) add(new THREE.BoxGeometry(.18, .025, .05), M.black, 0, y0 + 13.1 + i * .24, 1.0);
-add(new THREE.CylinderGeometry(.3, .3, .5, 24), M.steel, .45, y0 + 15.05, 0);
-const yc = y0 + HL + .05;
-part = "neck"; add(new THREE.CylinderGeometry(1.15, 1.25, .7, 64), M.black, 0, yc + .35, 0);
-add(new THREE.TorusGeometry(1.2, .045, 12, 80), M.red, 0, yc + .42, 0, (m) => { m.rotation.x = Math.PI / 2; });
-const prof = []; for (let i = 0; i <= 24; i++) { const t = i / 24; prof.push(new THREE.Vector2(.95 - .55 * Math.pow(t, .8) + .05 * Math.sin(t * Math.PI), t * 6)); }
-add(new THREE.LatheGeometry(prof, 64), M.clear, 0, yc + .7, 0, (m) => { m.scale.z = .78; m.renderOrder = 9; });
-add(new THREE.CylinderGeometry(.11, .11, 6.4, 16), M.metal, 0, yc + .7 + 3.2, -.08);
-const line = new THREE.CatmullRomCurve3([new THREE.Vector3(.45, yc + .1, 0), new THREE.Vector3(.5, yc + 1.2, .15), new THREE.Vector3(.28, yc + 4, .18), new THREE.Vector3(.12, yc + 6.4, .14), new THREE.Vector3(0, yc + 7.3, .12)]);
-add(new THREE.TubeGeometry(line, 64, .085, 12), M.clear); add(new THREE.TubeGeometry(line, 64, .06, 12), M.water);
-const yl = yc + .7 + 5.35;
-add(new THREE.CylinderGeometry(.2, .2, .1, 40), M.steel, 0, yl, .38, (m) => { m.rotation.x = Math.PI / 2; });
-add(new THREE.CylinderGeometry(.14, .14, .12, 40), M.glass, 0, yl, .4, (m) => { m.rotation.x = Math.PI / 2; });
-add(new THREE.CylinderGeometry(.03, .03, .13, 12), M.redGlow, .13, yl + .2, .36, (m) => { m.rotation.x = Math.PI / 2; });
-part = "head"; const yh = yc + .7 + 6 + 1.25;
-add(new RoundedBoxGeometry(1.25, 2.9, .62, 4, .3), M.white, 0, yh, -.05);
-add(new THREE.CylinderGeometry(.07, .07, .02, 20), M.hole, 0, yh + .05, .265, (m) => { m.rotation.x = Math.PI / 2; });   // the rinse opening, no nozzle
-const tuft = new THREE.CylinderGeometry(.115, .1, 1, 12); tuft.translate(0, .5, 0); tuft.rotateX(Math.PI / 2);
-for (let row = 0; row < 10; row++) for (let col = 0; col < 4; col++) {
-  if ((row === 4 || row === 5) && (col === 1 || col === 2)) continue;
-  const edge = row === 0 || row === 9 || col === 0 || col === 3;
-  add(tuft, row === 0 ? M.red : M.bristle, -.39 + col * .26, yh - 1.2 + row * .265, .24, (m) => { m.scale.set(1, 1, edge ? .86 : 1); });
-}
-// the dock and its refill reservoir
-part = "dock";
-const dprof = [[0, 0], [3.9, 0], [4.2, .15], [4.3, .5], [4.2, 1.05], [3.9, 1.2], [1.75, 1.2], [1.62, 1.05], [1.6, .6], [0, .6]].map(([a, b]) => new THREE.Vector2(a, b));
-add(new THREE.LatheGeometry(dprof, 96), M.white);
-const dotOn = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1.4 }), dotOff = new THREE.MeshStandardMaterial({ color: 0x2b2b2b, roughness: .5 });
-const ring = []; for (let i = 0; i < 36; i++) { const a = i / 36 * Math.PI * 2; ring.push(add(new THREE.CylinderGeometry(.075, .075, .04, 16), dotOff, Math.cos(a) * 2.85, 1.205, Math.sin(a) * 2.85)); }
-const tx = -5.2, tz = -2.6;
-add(new THREE.CylinderGeometry(2.0, 2.1, .9, 80), M.white, tx, .45, tz); add(new RoundedBoxGeometry(2.6, .7, 1.6, 3, .3), M.white, -3.6, .35, -1.6);
-add(new THREE.CylinderGeometry(1.7, 1.7, 7.2, 80, 1, true), M.clear, tx, 4.5, tz, (m) => { m.renderOrder = 9; });
-add(new THREE.CylinderGeometry(1.6, 1.6, 4.6, 80), M.water, tx, 3.2, tz, (m) => { m.renderOrder = 8; });
-add(new THREE.CylinderGeometry(1.78, 1.78, .5, 80), M.white, tx, 8.35, tz); add(new THREE.CylinderGeometry(.22, .22, .12, 32), M.red, tx, 8.65, tz);
-// soft contact shadow
-const sc = document.createElement("canvas"); sc.width = sc.height = 128; const sg = sc.getContext("2d"), gr = sg.createRadialGradient(64, 64, 0, 64, 64, 64);
-gr.addColorStop(0, "rgba(0,0,0,.85)"); gr.addColorStop(1, "rgba(0,0,0,0)"); sg.fillStyle = gr; sg.fillRect(0, 0, 128, 128);
-const shadow = new THREE.Mesh(new THREE.PlaneGeometry(16, 13), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false }));
-shadow.rotation.x = -Math.PI / 2; shadow.position.set(-1.5, .01, -1); root.add(shadow);
-
-/* taking it apart: the shell slides off to the side, the insides stack up with gaps, each part labelled */
-const plan = {
-  shell:   { x: -9.6, y: 1.4, label: "Clear shell", n: "01" },
-  frame:   { y: 0 },
-  coil:    { y: .6, label: "Wireless coil", n: "02" },
-  battery: { y: 1.8, label: "Battery", n: "03" },
-  board:   { y: 3.2, label: "Timer board", n: "04" },
-  motor:   { y: 4.4, label: "Sonic motor", n: "05" },
-  tank:    { y: 5.6, label: "Rinse tank, 12 ml", n: "06" },
-  neck:    { y: 7.0, label: "Gap camera, rinse line", n: "07" },
-  head:    { y: 8.4, label: "Head, rinse opening", n: "08" },
-  dock:    { y: 0, label: "Dock, 36-dot ring", n: "09" },
-};
-const anchor = { shell: [-1.4, y0 + 9, 0], coil: [1, y0 + 1.1, 0], battery: [.85, y0 + 4.6, 0], board: [.9, y0 + 9.6, .35], motor: [.7, y0 + 12, 0], tank: [1, y0 + 13.9, 0], neck: [.6, yc + 4.5, 0], head: [.65, yh + .4, 0], dock: [4.3, .7, 0] };
-const tags = {};
-const short = { shell: "Shell", coil: "Coil", battery: "Battery", board: "Timer", motor: "Motor", tank: "Tank", neck: "Camera", head: "Head", dock: "Dock" };
-for (const [k, v] of Object.entries(plan)) if (v.label) { const s = document.createElement("span"); s.innerHTML = `<em>${v.n}</em><b class="long">${v.label}</b><b class="short">${short[k]}</b>`; if (k === "shell") s.style.flexDirection = "row-reverse"; tagsEl.appendChild(s); tags[k] = s; }
-let apart = 0, target = 0;
-
-/* lights */
-const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(-10, 30, 18); scene.add(key);
-const rim = new THREE.DirectionalLight(0xffffff, 2.4); rim.position.set(18, 14, -16); scene.add(rim);
-const fill = new THREE.DirectionalLight(0xffffff, .35); fill.position.set(10, 6, 20); scene.add(fill);
-
-const cam = new THREE.PerspectiveCamera(24, 1, .1, 400);
-let narrow = false;
-function resize() {
-  const w = mount.clientWidth, h = mount.clientHeight; r.setSize(w, h, false); cam.aspect = w / h;
-  narrow = w < 860; cam.fov = narrow ? 34 : 24; cam.updateProjectionMatrix();
-}
-addEventListener("resize", resize); resize();
-
-/* drag to turn (sideways only, so the page still scrolls on phones), with a slow idle spin */
-let rotY = -.45, vel = 0, dragging = false, lastX = 0, idle = 0;
-mount.addEventListener("pointerdown", (e) => { dragging = true; lastX = e.clientX; idle = 0; vel = 0; });
-addEventListener("pointermove", (e) => { if (!dragging) return; const dx = e.clientX - lastX; lastX = e.clientX; vel = dx * .008; rotY += vel; });
-const end = () => { dragging = false; }; addEventListener("pointerup", end); addEventListener("pointercancel", end);
-mount.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") { rotY -= .25; idle = 0; } if (e.key === "ArrowRight") { rotY += .25; idle = 0; } });
-
-const btn = document.getElementById("apart"), btxt = document.getElementById("apartTxt");
-btn.addEventListener("click", () => { target = target ? 0 : 1; btn.setAttribute("aria-pressed", String(!!target)); btxt.textContent = target ? "Put it back" : "Take it apart"; hero.classList.toggle("apart", !!target); idle = 0; });
-
-const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-const v3 = new THREE.Vector3(); let visible = true, last = performance.now(), charge = 0;
-new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 }).observe(hero);
-
-function frame(now) {
-  requestAnimationFrame(frame);
-  const dt = Math.min(.05, (now - last) / 1000); last = now;
-  if (!visible) return;
-  if (!dragging) { vel *= .94; rotY += vel; idle += dt; if (!reduce && idle > 1.5) rotY += dt * .22; }
-  apart = reduce ? target : apart + (target - apart) * Math.min(1, dt * 2.6);
-  const a = ease(Math.min(1, Math.max(0, apart)));
-  root.rotation.y = rotY;
-  for (const [k, g] of Object.entries(parts)) { const p = plan[k] || {}; g.position.y = (p.y || 0) * a; g.position.x = (p.x || 0) * a; }
-  // framing: brush on the right on wide screens, centred on phones; pull back a little when apart
-  const dist = (narrow ? 72 : 80) + a * 30, lookY = 13 + a * 4.6;
-  root.position.x = narrow ? 1.2 : -.2;
-  const sx = narrow ? 1.6 * a : -12 - 2 * a; cam.position.set(sx, lookY + 3, dist); cam.lookAt(sx, lookY, 0);
-  // the dock's ring fills, the last timer bar blinks
-  charge = (charge + dt * 6) % 46; ring.forEach((d, i) => { d.material = i < Math.min(36, charge) ? dotOn : dotOff; });
-  LED[3].material = (Math.floor(now / 700) % 2) ? M.led : M.ledOff;
-  r.render(scene, cam);
-  if (a > .02) {
-    const w = mount.clientWidth, h = mount.clientHeight, ox = mount.offsetLeft, oy = mount.offsetTop;
-    for (const [k, s] of Object.entries(tags)) {
-      const an = anchor[k]; v3.set(an[0], an[1] - (narrow && k === "dock" ? 1.4 : 0), an[2]); P(k).localToWorld(v3); v3.project(cam);
-      const sx = ox + (v3.x * .5 + .5) * w, sy = oy + (-v3.y * .5 + .5) * h;
-      s.style.transform = `translate(${Math.round(k === "shell" ? sx - s.offsetWidth - 6 : sx + 6)}px, ${Math.round(sy - 8)}px)`;
-    }
-  }
-}
-requestAnimationFrame(frame);
-</script>
 </body>
 </html>

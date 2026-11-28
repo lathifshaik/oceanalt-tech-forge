@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <style>
   :root {
     --ink: #0d1114; --soft: #f3f4f4; --line: #e3e6e8; --grey: #6f787f; --ice: #3d8fd1; --ice-2: #9cc8ec; --wall: #dcdbdb;
@@ -64,6 +65,23 @@
   .head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
   .head p.lede { margin: 0; color: #44505a; font-size: 18px; max-width: 44ch; }
   @media (max-width: 860px) { .head { grid-template-columns: 1fr; } }
+
+  /* the run: 3D */
+  .run { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; }
+  .viewer { position: relative; height: min(82vh, 860px); min-height: 520px; border-radius: 28px; overflow: hidden; background: radial-gradient(80% 70% at 50% 45%, #ffffff 0%, #eceef0 70%, #e4e7e9 100%); touch-action: pan-y; cursor: grab; }
+  .viewer:active { cursor: grabbing; }
+  .viewer canvas { display: block; width: 100% !important; height: 100% !important; }
+  .viewer .fallback { position: absolute; inset: 0; margin: auto; height: 86%; display: none; }
+  .no-gl .viewer .fallback { display: block; } .no-gl .viewer canvas { display: none; }
+  .viewer .hint { position: absolute; left: 22px; bottom: 18px; margin: 0; color: var(--grey); pointer-events: none; }
+  .ways { display: flex; gap: 8px; margin: 30px 0 0; flex-wrap: wrap; }
+  .ways button { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--line); font-weight: 500; transition: box-shadow .3s, background .3s; }
+  .ways button i { width: 26px; height: 26px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); position: relative; overflow: hidden; }
+  .ways button i::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; margin-left: -3px; border-left: 1.5px solid var(--l); border-right: 1.5px solid var(--l); }
+  .ways button[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--ink); background: #fff; }
+  .run dl { margin: 30px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 28px; border-top: 1px solid var(--line); padding-top: 22px; }
+  .run dt { color: var(--grey); } .run dd { margin: 0; }
+  @media (max-width: 900px) { .run { grid-template-columns: 1fr; } .viewer { height: 70svh; min-height: 460px; } }
 
   /* the wall of boards */
   .wall { background: var(--wall); border-radius: 28px; padding: clamp(24px, 3vw, 40px) clamp(12px, 2vw, 28px) 20px; overflow-x: auto; scrollbar-width: none; }
@@ -140,7 +158,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav">
   <a class="brand" href="#top" aria-label="The Line Series, back to top"><span class="lines" aria-hidden="true"><i></i><i></i></span>The Line Series</a>
-  <nav aria-label="Sections"><ul class="mono"><li><a href="#range">The range</a></li><li><a href="#where">Snow and surf</a></li></ul></nav>
+  <nav aria-label="Sections"><ul class="mono"><li><a href="#the-run">The Run</a></li><li><a href="#range">The range</a></li><li><a href="#where">Snow and surf</a></li></ul></nav>
   <span class="tag mono"><i></i>Concept</span>
 </header>
 
@@ -150,18 +168,38 @@
     <div class="copy">
       <p class="label mono"><b>01</b> &nbsp;Snowboards · Design concept</p>
       <h1>Draw<br>a line.</h1>
-      <p class="sub">Then follow it. Ten classic snowboards, one simple idea, and where to ride, on snow and surf, in Australia.</p>
+      <p class="sub">Then follow it. A snowboard that's a map, ten more classics, and where to ride, on snow and surf, in Australia.</p>
       <div class="row">
-        <a class="btn" href="#range"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></span>See the range</a>
+        <a class="btn" href="#the-run"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></span>See the range</a>
         <a class="btn ghost" href="#where"><span class="c"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="6" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M7 9v4" stroke="currentColor" stroke-width="1.6"/></svg></span>Where to ride</a>
       </div>
     </div>
   </section>
 
-  <section class="band" id="range">
+  <section class="band" id="the-run">
+    <div class="wrap run">
+      <div class="viewer rv" id="viewer" role="img" aria-label="3D model of The Run snowboard. Drag sideways to turn it.">
+        <img class="fallback" id="fallback" src="run/cream.webp" alt="" />
+        <p class="hint mono">Drag to turn</p>
+      </div>
+      <div class="rv">
+        <p class="label mono"><b>02</b> &nbsp;The signature board</p>
+        <h2 class="h2">The Run.</h2>
+        <p class="lede" style="margin:22px 0 0;color:#44505a;font-size:18px;max-width:40ch">Every board is a map. The contour lines are a mountain, and the two lines are the run down it, from the start dot at the tip to the finish at the tail.</p>
+        <div class="ways" role="group" aria-label="Colourway">
+          <button data-way="cream" aria-pressed="true"><i style="background:#efe7d6;--l:#c8402a"></i>Cream</button>
+          <button data-way="ice" aria-pressed="false"><i style="background:#f6f7f7;--l:#0d1114"></i>Ice</button>
+          <button data-way="night" aria-pressed="false"><i style="background:#101417;--l:#5fb0ec"></i>Night</button>
+        </div>
+        <dl class="mono"><dt>Map</dt><dd>An invented mountain, 36°S 148°E</dd><dt>Lines</dt><dd>Two, the run</dd><dt>Edges</dt><dd>Steel, all the way round</dd><dt>Status</dt><dd>Design concept, not for sale</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="range" style="padding-top:0">
     <div class="wrap">
       <div class="head rv">
-        <div><p class="label mono"><b>02</b> &nbsp;The range</p><h2 class="h2">Ten boards.<br>Nothing loud.</h2></div>
+        <div><p class="label mono"><b>03</b> &nbsp;The rest of the range</p><h2 class="h2">Ten more.<br>Nothing loud.</h2></div>
         <p class="lede">Flat ink, real wood and a lot of empty space. Pick a board to see it up close.</p>
       </div>
       <div class="wall rv" role="listbox" aria-label="Choose a board" id="wall"><div class="rack" id="rack"></div></div>
@@ -182,7 +220,7 @@
   <section class="band" id="where" style="padding-top:0">
     <div class="wrap">
       <div class="head rv">
-        <div><p class="label mono"><b>03</b> &nbsp;Where to ride</p><h2 class="h2">Where<br>Australia rides.</h2></div>
+        <div><p class="label mono"><b>04</b> &nbsp;Where to ride</p><h2 class="h2">Where<br>Australia rides.</h2></div>
         <div><div class="modes" role="group" aria-label="Snow or surf"><button data-mode="snow" aria-pressed="true">Snow</button><button data-mode="surf" aria-pressed="false">Surf</button></div><p class="lede" id="whereLede"></p></div>
       </div>
       <div class="mapwrap rv">
@@ -297,6 +335,83 @@
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll(".rv").forEach((el) => io.observe(el));
 })();
+</script>
+<script type="module">
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+const box = document.getElementById("viewer"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let r; try { r = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { box.classList.add("no-gl"); throw e; }
+r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.toneMapping = THREE.NoToneMapping; r.outputColorSpace = THREE.SRGBColorSpace;
+box.prepend(r.domElement);
+const scene = new THREE.Scene(), pm = new THREE.PMREMGenerator(r);
+scene.environment = pm.fromScene(new RoomEnvironment(r), .04).texture; scene.environmentIntensity = .55;
+const key = new THREE.DirectionalLight(0xffffff, .9); key.position.set(-4, 6, 8); scene.add(key);
+const rim = new THREE.DirectionalLight(0xffffff, .7); rim.position.set(6, 2, -6); scene.add(rim);
+
+/* the board: 1.9 x 10 units, built as a fine grid so the tip and tail can curve up */
+const BW = 1.9, BL = 10, T = .07;
+const bend = (v) => { const t = v; const tip = Math.max(0, (.13 - t) / .13), tail = Math.max(0, (t - .87) / .13); return .55 * (tip * tip + tail * tail) + .05 * Math.sin(Math.PI * t); };
+function sheet(z, flip) {
+  const g = new THREE.PlaneGeometry(BW, BL, 24, 240), p = g.attributes.position;
+  if (flip) g.rotateY(Math.PI);   // face backwards first, then curve, so both sides bend the same way
+  for (let i = 0; i < p.count; i++) { const y = p.getY(i), v = .5 - y / BL; p.setZ(i, z + bend(v)); }
+  g.computeVertexNormals(); return g;
+}
+const loader = new THREE.TextureLoader(), mats = {};
+const BASE = { cream: ["#1f3a46", "#efe7d6"], ice: ["#f6f7f7", "#3d8fd1"], night: ["#101417", "#5fb0ec"] };
+function baseTex(img, way) {
+  const c = document.createElement("canvas"); c.width = img.width; c.height = img.height; const x = c.getContext("2d");
+  x.drawImage(img, 0, 0); x.globalCompositeOperation = "source-in"; x.fillStyle = BASE[way][0]; x.fillRect(0, 0, c.width, c.height);
+  x.globalCompositeOperation = "source-atop"; x.fillStyle = BASE[way][1]; const w = c.width * .012, gap = c.width * .035;
+  x.fillRect(c.width / 2 - gap / 2 - w, c.height * .04, w, c.height * .92); x.fillRect(c.width / 2 + gap / 2, c.height * .04, w, c.height * .92);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+const topMat = new THREE.MeshPhysicalMaterial({ transparent: true, alphaTest: .5, roughness: .55, clearcoat: .25, clearcoatRoughness: .4, side: THREE.FrontSide });
+const baseMat = new THREE.MeshPhysicalMaterial({ transparent: true, alphaTest: .5, roughness: .25, clearcoat: .9, side: THREE.FrontSide });
+const board = new THREE.Group(); scene.add(board);
+board.add(new THREE.Mesh(sheet(T / 2), topMat), new THREE.Mesh(sheet(-T / 2, true), baseMat));
+// steel edge: a thin tube that follows the outline of the board
+function outlinePts() {
+  const W = 190, L = 1000, tip = 120, w = W / 2 - 3, waist = w - 7, cx = W / 2;
+  const d = `M${cx - w} ${tip} C${cx - w} 30 ${cx - w * .55} 6 ${cx} 6 C${cx + w * .55} 6 ${cx + w} 30 ${cx + w} ${tip} C${cx + waist} ${L * .4} ${cx + waist} ${L * .6} ${cx + w} ${L - tip} C${cx + w} ${L - 30} ${cx + w * .55} ${L - 6} ${cx} ${L - 6} C${cx - w * .55} ${L - 6} ${cx - w} ${L - 30} ${cx - w} ${L - tip} C${cx - waist} ${L * .6} ${cx - waist} ${L * .4} ${cx - w} ${tip} Z`;
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path"); path.setAttribute("d", d);
+  const n = 600, len = path.getTotalLength(), pts = [];
+  for (let i = 0; i < n; i++) { const q = path.getPointAtLength(len * i / n), v = q.y / L; pts.push(new THREE.Vector3((q.x / W - .5) * BW, (.5 - v) * BL, bend(v))); }
+  return pts;
+}
+const edgeMat = new THREE.MeshStandardMaterial({ color: 0xc9cdd1, metalness: 1, roughness: .3 });
+board.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(outlinePts(), true), 600, T * .55, 8, true), edgeMat));
+// soft shadow
+const sc = document.createElement("canvas"); sc.width = sc.height = 128; const sg = sc.getContext("2d"), gr = sg.createRadialGradient(64, 64, 0, 64, 64, 64);
+gr.addColorStop(0, "rgba(20,30,40,.35)"); gr.addColorStop(1, "rgba(20,30,40,0)"); sg.fillStyle = gr; sg.fillRect(0, 0, 128, 128);
+const sh = new THREE.Mesh(new THREE.PlaneGeometry(4.5, 1.6), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false }));
+sh.rotation.x = -Math.PI / 2; sh.position.y = -BL / 2 - .5; scene.add(sh);
+
+function setWay(way) {
+  const done = (top, base) => { topMat.map = top; baseMat.map = base; topMat.needsUpdate = baseMat.needsUpdate = true; };
+  if (mats[way]) return done(...mats[way]);
+  loader.load(`run/${way}.webp`, (t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; mats[way] = [t, baseTex(t.image, way)]; done(...mats[way]); document.getElementById("fallback").src = `run/${way}.webp`; });
+}
+setWay("cream");
+const ways = [...document.querySelectorAll(".ways button")];
+ways.forEach((b) => b.addEventListener("click", () => { ways.forEach((x) => x.setAttribute("aria-pressed", String(x === b))); setWay(b.dataset.way); idle = 0; }));
+
+const cam = new THREE.PerspectiveCamera(26, 1, .1, 100); cam.position.set(0, .6, 26); cam.lookAt(0, 0, 0);
+function size() { const w = box.clientWidth, h = box.clientHeight; r.setSize(w, h, false); cam.aspect = w / h; const half = Math.tan(THREE.MathUtils.degToRad(13)); cam.position.z = Math.max(11.4 / (2 * half), 3.2 / (2 * half * cam.aspect)); cam.updateProjectionMatrix(); }
+addEventListener("resize", size); size();
+
+let rotY = .5, vel = 0, drag = false, lx = 0, idle = 0, vis = true, last = performance.now();
+box.addEventListener("pointerdown", (e) => { drag = true; lx = e.clientX; vel = 0; idle = 0; });
+addEventListener("pointermove", (e) => { if (!drag) return; const dx = e.clientX - lx; lx = e.clientX; vel = dx * .01; rotY += vel; });
+addEventListener("pointerup", () => drag = false); addEventListener("pointercancel", () => drag = false);
+new IntersectionObserver(([e]) => vis = e.isIntersecting).observe(box);
+board.rotation.z = -.08;
+(function loop(now) {
+  requestAnimationFrame(loop); const dt = Math.min(.05, (now - last) / 1000); last = now; if (!vis) return;
+  if (!drag) { vel *= .94; rotY += vel; idle += dt; if (!reduce && idle > 1.2) rotY += dt * .45; }
+  board.rotation.y = rotY; board.position.y = reduce ? 0 : Math.sin(now / 1400) * .08;
+  r.render(scene, cam);
+})(last);
 </script>
 </body>
 </html>
